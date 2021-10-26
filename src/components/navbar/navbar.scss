@@ -1,0 +1,57 @@
+@import '../../assets/sass/variabili';
+
+.top-menu{
+    background-color: $lightBrown;
+ .container{
+     max-width: $container;
+     margin: 0 auto;
+     display: flex;
+     justify-content: flex-end;
+ }
+ ul{
+     list-style: disc;
+     li{
+         display: inline-block;
+         margin: 0 1rem
+     };
+ }
+ a{
+     color: white;
+     text-transform: uppercase;
+   
+     &:hover{
+         text-decoration: underline;
+     }
+ }
+ .langbox{
+     margin-left: 2rem;
+ }
+}
+
+.mainmenu{
+    margin-top: 20px;
+  .container{
+      justify-content: space-between;
+      align-items: center;
+  }
+    ul{
+        li{
+        display: inline-block;
+        margin: 0 1.5rem;    
+    }
+        
+    }
+    a{
+        color: $brown;
+        text-transform: uppercase;
+        font-size: 24px;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+
+.main-logo {
+    max-width: 362px;
+   
+}

@@ -6,6 +6,8 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    "gatsby-plugin-sass",
+    "gatsby-plugin-sitemap",
     {
       resolve: `gatsby-source-wordpress`,
       options: {
@@ -47,5 +49,19 @@ module.exports = {
         contentTypeTemplateDirectory: `./src/templates`, // default
       },
     },
+    {
+      resolve: `gatsby-plugin-google-fonts-with-attributes`,
+      options: {
+        fonts: [
+          `Open Sans\:300,400,700`,
+          `Oswald\:300,400,600` // you can also specify font weights and styles
+        ],
+        display: 'swap',
+        attributes: {
+          rel: "stylesheet preload prefetch",
+        }
+      }
+    }
   ],
+  
 }

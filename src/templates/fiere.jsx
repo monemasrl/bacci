@@ -1,12 +1,12 @@
 import React from "react";
-import LangSwitcher from "../components/langSwitcher";
 import Layout from "../components/layout"
 const Fiere = ({ pageContext }) => {
 
+    const {locale, translations} = pageContext
 
     return (
         <>
-        <Layout locale = {pageContext.locale} translations = {pageContext.translations} >
+        <Layout locale = {locale} translations = {translations} >
        
             <h1>{JSON.stringify(pageContext)}</h1>
         </Layout>

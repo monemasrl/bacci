@@ -1,0 +1,74 @@
+@import "normalize.scss";
+@import "./variabili";
+
+html {
+  font-size: 100%;
+  font-family: $text;
+}
+a {
+  text-decoration: none;
+}
+h1,
+h2 {
+  font-family: "Oswald", sans-serif;
+}
+.container {
+  max-width: $container;
+  margin: 0 auto;
+  display: flex;
+}
+.container-fluid {
+  width: 100%;
+}
+
+ul {
+  padding: 0;
+}
+/* HOMEPAGE */
+.jumbo-home{
+    text-align: center;
+}
+.jumbo-image {
+  margin: 1.5rem auto;
+  display: block;
+}
+.sezione-1 {
+  margin: 147px auto;
+  h1 {
+    color: $brown;
+    text-transform: uppercase;
+    font-size: 72px;
+    line-height: 100px;
+    &::first-line {
+      line-height: 20px;
+    }
+    strong {
+      font-size: 120px;
+    }
+  }
+  .home-sx {
+    max-width: 751px;
+    p {
+      font-size: 28px;
+      color: $textColor;
+      line-height: 38px;
+    }
+  }
+  .home-dx {
+    padding-left: 2rem;
+  }
+  .button-sezione {
+    height: 45px;
+    border: 1px solid $lightBrown;
+    display: inline-block;
+    padding: 0.2rem 5rem;
+    border-radius: 30px;
+    margin-top: 20%;
+    a {
+      text-transform: uppercase;
+      vertical-align: middle;
+      line-height: 45px;
+      color: $brown;
+    }
+  }
+}
