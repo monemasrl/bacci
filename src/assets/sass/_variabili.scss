@@ -1,11 +1,10 @@
-$lightBrown: #C8BCB0;
-$brown:#A4917D;
-$textColor: #7B8288;
-$text: 'open sans', sans-serif;
-$link: 'open sans', sans-serif;
+$lightBrown: #c8bcb0;
+$brown: #a4917d;
+$textColor: #7b8288;
+$text: "open sans", sans-serif;
+$link: "open sans", sans-serif;
+$title: "Oswald";
 $container: 1620px;
-
-
 
 $phone: "only screen and (max-width : 460px)";
 $tablet: "only screen and (max-width : 720px)";
@@ -13,4 +12,29 @@ $landscape: "only screen and (max-width : 1024px)";
 $desktop: "only screen and (max-width : 1200px)";
 $wide: "only screen and (max-width : 1620px)";
 $big: "only screen and (max-width : 1900px)";
- 
+@mixin h1-sezioni($size) {
+  color: $brown;
+  text-transform: uppercase;
+  font-size: $size;
+  line-height: 100px;
+}
+
+@mixin button-sezione($padding, $margin) {
+  height: 45px;
+  border: 1px solid $lightBrown;
+  display: inline-block;
+  padding: 0.2rem $padding;
+  border-radius: 30px;
+  margin-top: $margin;
+  font-size: 24px;
+  color: white;
+  text-transform: uppercase;
+  vertical-align: middle;
+  line-height: 45px;
+  color: $brown;
+  &:hover {
+    cursor: pointer;
+    background-color: $lightBrown;
+    color: white;
+  }
+}

@@ -52,6 +52,69 @@ export const query = graphql`
               }
             }
           }
+          sezione2 {
+            paragrafo
+            titolo
+            link {
+              target
+              title
+              url
+            }
+            immagine {
+              altText
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 800
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP, AVIF]
+                  )
+                }
+              }
+            }
+          }
+          sezione3 {
+            paragrafo
+            titolo
+            link {
+              target
+              title
+              url
+            }
+            immagine {
+              altText
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 1620
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP, AVIF]
+                  )
+                }
+              }
+            }
+          }
+          sezione4 {
+            paragrafo
+            titolo
+            link {
+              target
+              title
+              url
+            }
+            immagine {
+              altText
+              localFile {
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 1060
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP, AVIF]
+                  )
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -73,17 +136,59 @@ const IndexPage = ({ data }) => {
         </section>
         <section className="container sezione-1">
           <div className="home-sx">
-            <h1 dangerouslySetInnerHTML={{__html: dataHome.home.sezione1.titolo}} />
+            <h1 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
             <p>{dataHome.home.sezione1.paragrafo}</p>
-            <div className="button-sezione">
-              <Link to="#">Mission</Link>
-            </div>
+            
+              <Link className="button-sezione" to={dataHome.home.sezione1.link.url}>{dataHome.home.sezione1.link.title}</Link>
+            
           </div>
           <div className="home-dx">
             <GatsbyImage image={dataHome.home.sezione1.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione1.immagine.altText} />
           </div>
         </section>
+        <section className="container sezione-2">
+          <div className="home-sx">
+            <div className="novita">
+              Novità
+            </div>
+            <h1 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.titolo }} />
+            <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.paragrafo }} />
+            
+              <Link className="button-sezione" to={dataHome.home.sezione2.link.url}>{dataHome.home.sezione2.link.title}</Link>
+            
+          </div>
 
+          <div className="home-dx">
+            <GatsbyImage image={dataHome.home.sezione2.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione1.immagine.altText} />
+
+          </div>
+        </section>
+        <section className="container sezione-3">
+          <div className="home-sx">
+            <h1 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.titolo }} />
+            <GatsbyImage image={dataHome.home.sezione3.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione1.immagine.altText} />
+
+          </div>
+
+          <div className="home-dx">
+            <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.paragrafo }} />
+           
+              <Link className="button-sezione" to={dataHome.home.sezione2.link.url}>{dataHome.home.sezione3.link.title}</Link>
+           
+          </div>
+        </section>
+        <section className="container sezione-4">
+          <div className="home-sx">
+            <h1 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
+            <p>{dataHome.home.sezione4.paragrafo}</p>
+            
+              <Link className="button-sezione" to={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</Link>
+            
+          </div>
+          <div className="home-dx">
+            <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione4.immagine.altText} />
+          </div>
+        </section>
       </Layout>
     </>
   )

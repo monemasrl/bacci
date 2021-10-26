@@ -39,7 +39,7 @@ const NavBar = (props) => {
 
                     <ul>
                         {menuFilter[1].node.menuItems.nodes.map((item) => {
-                            console.log(item);
+                
                             const menuPath = slugify(item.label)
 
                             return (
