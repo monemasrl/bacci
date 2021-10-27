@@ -29,7 +29,7 @@ const Layout = ({ children, locale, translations, pageTitle, pathName }) => {
       <div className="container-fluid" >
         <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={pathName} />
       </div>
-      <div className={`container-fluid ${slugify(pageTitle.toLowerCase())}`} >
+      <div className={`container-fluid ${pageTitle ? slugify(pageTitle.toLowerCase()) : '' }`} >
 
         <main>{children}</main>
 
