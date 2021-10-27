@@ -4,6 +4,7 @@ import Img from 'gatsby-plugin-image'
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { AnimationOnScroll } from 'react-animation-on-scroll';
 
 export const query = graphql`
    {
@@ -127,14 +128,17 @@ const IndexPage = ({ data }) => {
     return (item.node.locale.locale === 'it_IT')
   })[0].node
   const dataHome = langFilter
-  console.log(dataHome.home);
+  console.log(dataHome.home)
   return (
     <>
       <Layout pageTitle={dataHome.title} locale={'it_IT'} translations={dataHome.translations} >
         <Seo title="Home" />
+        <AnimationOnScroll duration="0.3" animateIn="animate__fadeIn">
         <section className="jumbo-home">
           <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />
         </section>
+        </AnimationOnScroll>
+        <AnimationOnScroll  duration="0.3" animateIn="animate__fadeIn">
         <section className="container sezione-1">
           <div className="box-sx">
             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
@@ -147,6 +151,8 @@ const IndexPage = ({ data }) => {
             <GatsbyImage image={dataHome.home.sezione1.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione1.immagine.altText} />
           </div>
         </section>
+        </AnimationOnScroll>
+        <AnimationOnScroll duration="0.3" animateIn="animate__fadeIn"> 
         <section className="container sezione-2">
           <div className="box-sx">
             <div className="novita">
@@ -165,6 +171,8 @@ const IndexPage = ({ data }) => {
 
           </div>
         </section>
+        </AnimationOnScroll>
+        <AnimationOnScroll duration="0.3" animateIn="animate__fadeIn"> 
         <section className="container sezione-3">
           <div className="box-sx">
             <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.titolo }} />
@@ -179,6 +187,8 @@ const IndexPage = ({ data }) => {
            
           </div>
         </section>
+        </AnimationOnScroll>
+        <AnimationOnScroll duration="0.3" animateIn="animate__fadeIn"> 
         <section className="container sezione-4">
           <div className="box-sx">
             <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
@@ -191,6 +201,7 @@ const IndexPage = ({ data }) => {
             <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione4.immagine.altText} />
           </div>
         </section>
+        </AnimationOnScroll>
       </Layout>
     </>
   )
