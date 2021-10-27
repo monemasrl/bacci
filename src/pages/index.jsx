@@ -1,10 +1,9 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
-import Img from 'gatsby-plugin-image'
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-
+import { useInView } from 'react-intersection-observer';
 
 export const query = graphql`
    {
@@ -123,12 +122,16 @@ export const query = graphql`
   }
   }`
 
+
+
 const IndexPage = ({ data }) => {
   const langFilter = data.allWpPage.edges.filter((item) => {
     return (item.node.locale.locale === 'it_IT')
   })[0].node
   const dataHome = langFilter
   console.log(dataHome.home)
+  const [ref, inView] = useInView();
+  const [ref2, inView2] = useInView();
   return (
     <>
       <Layout pageTitle={dataHome.title} locale={'it_IT'} translations={dataHome.translations} >
@@ -138,7 +141,7 @@ const IndexPage = ({ data }) => {
           <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />
         </section>
       
-        <section className="container sezione-1">
+        <section ref={ref} className={`container sezione-1 ${inView ? 'open' : ''}`}>
           <div className="box-sx">
             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
             <p>{dataHome.home.sezione1.paragrafo}</p>
