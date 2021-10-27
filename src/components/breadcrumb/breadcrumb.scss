@@ -1,0 +1,25 @@
+@import "../../assets/sass/variabili";
+
+
+.breadcrumb{
+    background-color: $lightBrown;
+    margin-top: 1rem;
+    .container{
+        padding-left: 2rem;
+    }
+    h2{
+        font-family: $title;
+        font-size: 72px;
+        text-transform: uppercase;
+        color:white;
+        font-weight: 400;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        &::first-line{
+            line-height: 10px;
+        }
+        span{
+            font-size: 36px;
+        }
+    }
+}

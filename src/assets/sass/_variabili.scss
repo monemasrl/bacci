@@ -12,6 +12,13 @@ $landscape: "only screen and (max-width : 1024px)";
 $desktop: "only screen and (max-width : 1200px)";
 $wide: "only screen and (max-width : 1620px)";
 $big: "only screen and (max-width : 1900px)";
+@mixin h2-sezioni($size) {
+  color: $brown;
+  text-transform: uppercase;
+  font-size: $size;
+  line-height: 100px;
+}
+
 @mixin h1-sezioni($size) {
   color: $brown;
   text-transform: uppercase;

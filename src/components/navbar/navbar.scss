@@ -37,7 +37,24 @@
     ul{
         li{
         display: inline-block;
-        margin: 0 2rem;    
+        margin: 0 2rem;
+        &:hover{
+            ul{
+                opacity: 1;
+            }
+        }    
+        ul{
+        position: absolute;
+        opacity: 0;
+        transition: all ease-in-out 0.3s;
+        background-color: white;
+        li{
+           a{ font-size: 1rem;}
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+        }
     }
         
     }

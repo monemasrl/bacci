@@ -4,7 +4,10 @@ import { langTag } from '../../../data-translations'
 import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
 import './navbar.scss'
-var slugify = require('slugify')
+let slugify = require('slugify')
+
+
+
 const NavBar = (props) => {
     const data = useStaticQuery(graphql`
     query datimenu{
@@ -15,6 +18,16 @@ const NavBar = (props) => {
                     menuItems {
                     nodes {
                         label
+                        parentId
+                        childItems {
+                          nodes {
+                            label
+                            path
+                            parent{
+                                id
+                            }
+                          }
+                        }
                         menu {
                         node {
                             language
@@ -39,7 +52,7 @@ const NavBar = (props) => {
 
                     <ul>
                         {menuFilter[1].node.menuItems.nodes.map((item) => {
-                
+
                             const menuPath = slugify(item.label)
 
                             return (
@@ -58,7 +71,13 @@ const NavBar = (props) => {
                 <div className="container">
 
                     <div className="main-logo">
-                        <StaticImage src="../../images/logo.png" alt="Bacci logo" />
+
+                        <StaticImage
+                            placeholder="none"
+                            layout="fixed"
+                            width={362}
+                            height={77} src="../../images/logo.png" alt="Bacci logo" />
+
                     </div>
                     <ul>
                         {menuFilter[0].node.menuItems.nodes.map((item) => {
@@ -66,10 +85,30 @@ const NavBar = (props) => {
                             const menuPath = slugify(item.label)
 
                             return (
-                                <li key={item.label}>
-                                    <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath}`}>{item.label}</Link>
-                                </li>
+                                <>
+                                    {!item.parentId ?
+                                        <li key={item.label}>
+                                            <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath}`}>{item.label}
 
+                                                {item.childItems ?
+                                                    <ul>
+                                                        {item.childItems.nodes.map((subitem)=>{
+                                                            return <li>
+                                                                
+                                                                
+                                    <Link to={`/${item.label.toLowerCase()}/${subitem.label.toLowerCase()}`}>
+
+                                                                {subitem.label}
+                                                                </Link>
+                                                                </li>
+                                                        })}
+                                                    </ul>
+                                                    : ''}
+
+                                            </Link>
+                                        </li> : ''
+                                    }
+                                </>
                             )
                         })}
                     </ul>

@@ -11,7 +11,9 @@ import { useStaticQuery, graphql } from "gatsby"
 import "../assets/sass/globale.scss"
 import Header from "./header"
 import Footer from "./footer/footer"
-const Layout = ({ children, locale, translations }) => {
+let slugify = require('slugify')
+
+const Layout = ({ children, locale, translations, pageTitle, pathName }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -24,18 +26,17 @@ const Layout = ({ children, locale, translations }) => {
 
   return (
     <>
-      <div className="container-fluid">
-        <Header translations={translations} locale={locale} siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <div className="container-fluid" >
+        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={pathName} />
+      </div>
+      <div className={`container-fluid ${slugify(pageTitle.toLowerCase())}`} >
+
+        <main>{children}</main>
+
 
       </div>
       <div className="container-fluid">
-        <div className="row">
-          <main>{children}</main>
-          
-        </div>
-      </div>
-      <div className="container-fluid">
- <Footer translations={translations} locale={locale} />
+        <Footer translations={translations} locale={locale} />
       </div>
     </>
   )

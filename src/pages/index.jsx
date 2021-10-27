@@ -17,6 +17,7 @@ export const query = graphql`
           locale
           post_title
         }
+        title
         featuredImage {
           node {
             localFile {
@@ -129,48 +130,49 @@ const IndexPage = ({ data }) => {
   console.log(dataHome.home);
   return (
     <>
-      <Layout locale={'it_IT'} translations={dataHome.translations} >
+      <Layout pageTitle={dataHome.title} locale={'it_IT'} translations={dataHome.translations} >
         <Seo title="Home" />
         <section className="jumbo-home">
           <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />
         </section>
         <section className="container sezione-1">
-          <div className="home-sx">
-            <h1 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
+          <div className="box-sx">
+            <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
             <p>{dataHome.home.sezione1.paragrafo}</p>
             
               <Link className="button-sezione" to={dataHome.home.sezione1.link.url}>{dataHome.home.sezione1.link.title}</Link>
             
           </div>
-          <div className="home-dx">
+          <div className="box-dx">
             <GatsbyImage image={dataHome.home.sezione1.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione1.immagine.altText} />
           </div>
         </section>
         <section className="container sezione-2">
-          <div className="home-sx">
+          <div className="box-sx">
             <div className="novita">
               Novità
             </div>
-            <h1 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.titolo }} />
+            <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.titolo }} />
             <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.paragrafo }} />
             
-              <Link className="button-sezione" to={dataHome.home.sezione2.link.url}>{dataHome.home.sezione2.link.title}</Link>
+              <Link className="button-sezione" to={dataHome.home.sezione2.link.url}>{dataHome.home.sezione2.link.title}
+              </Link>
             
           </div>
 
-          <div className="home-dx">
+          <div className="box-dx">
             <GatsbyImage image={dataHome.home.sezione2.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione1.immagine.altText} />
 
           </div>
         </section>
         <section className="container sezione-3">
-          <div className="home-sx">
-            <h1 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.titolo }} />
+          <div className="box-sx">
+            <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.titolo }} />
             <GatsbyImage image={dataHome.home.sezione3.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione1.immagine.altText} />
 
           </div>
 
-          <div className="home-dx">
+          <div className="box-dx">
             <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.paragrafo }} />
            
               <Link className="button-sezione" to={dataHome.home.sezione2.link.url}>{dataHome.home.sezione3.link.title}</Link>
@@ -178,14 +180,14 @@ const IndexPage = ({ data }) => {
           </div>
         </section>
         <section className="container sezione-4">
-          <div className="home-sx">
-            <h1 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
+          <div className="box-sx">
+            <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
             <p>{dataHome.home.sezione4.paragrafo}</p>
             
               <Link className="button-sezione" to={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</Link>
             
           </div>
-          <div className="home-dx">
+          <div className="box-dx">
             <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione4.immagine.altText} />
           </div>
         </section>
