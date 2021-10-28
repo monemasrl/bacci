@@ -63,7 +63,8 @@ const NavBar = (props) => {
                             )
                         })}
                     </ul>
-                    <div className='langbox' >  <LangSwitcher locale={props.locale} translations={props.translations} /></div>
+                    <div className='langbox' >  
+                    <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} /></div>
                 </div>
 
             </nav>
@@ -81,26 +82,24 @@ const NavBar = (props) => {
                     </div>
                     <ul>
                         {menuFilter[0].node.menuItems.nodes.map((item) => {
-                            console.log(item);
+
                             const menuPath = slugify(item.label)
 
                             return (
-                                <>
+                                <React.Fragment key={item.label}>
                                     {!item.parentId ?
-                                        <li key={item.label}>
+                                        <li >
                                             <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath}`}>{item.label}
 
                                                 {item.childItems ?
                                                     <ul>
-                                                        {item.childItems.nodes.map((subitem)=>{
-                                                            return <li>
-                                                                
-                                                                
-                                    <Link to={`/${item.label.toLowerCase()}/${subitem.label.toLowerCase()}`}>
+                                                        {item.childItems.nodes.map((subitem) => {
+                                                            return <li key={subitem.label}>
+                                                                <Link to={`/${item.label.toLowerCase()}/${subitem.label.toLowerCase()}`}>
 
-                                                                {subitem.label}
+                                                                    {subitem.label}
                                                                 </Link>
-                                                                </li>
+                                                            </li>
                                                         })}
                                                     </ul>
                                                     : ''}
@@ -108,7 +107,7 @@ const NavBar = (props) => {
                                             </Link>
                                         </li> : ''
                                     }
-                                </>
+                                </React.Fragment>
                             )
                         })}
                     </ul>

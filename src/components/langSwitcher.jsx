@@ -7,7 +7,7 @@ const LangSwitcher = (props) => {
 
   const url = props.translations.length !== 0 ? slugify(props.translations[0].post_title) : ''
  
-
+  console.log(props);
   return (
     <>{
       <ul className="languages">

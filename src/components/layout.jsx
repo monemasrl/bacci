@@ -11,6 +11,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import "../assets/sass/globale.scss"
 import Header from "./header"
 import Footer from "./footer/footer"
+import Seo from "../components/seo"
+
 let slugify = require('slugify')
 
 const Layout = ({ children, locale, translations, pageTitle, pathName }) => {
@@ -21,11 +23,53 @@ const Layout = ({ children, locale, translations, pageTitle, pathName }) => {
           title
         }
       }
+      allWpPage{
+        edges {
+          node {
+            locale{
+              locale
+            }
+            title
+            seo {
+              canonical
+              cornerstone
+              focuskw
+              fullHead
+              metaDesc
+              metaKeywords
+              metaRobotsNofollow
+              metaRobotsNoindex
+              opengraphAuthor
+              opengraphDescription
+              opengraphImage {
+                sourceUrl
+              }
+              title
+              twitterDescription
+              twitterTitle
+              opengraphModifiedTime
+              opengraphPublishedTime
+              opengraphPublisher
+              opengraphSiteName
+              opengraphTitle
+              opengraphType
+              opengraphUrl
+              readingTime
+            }
+          }
+        }
+      }
     }
   `)
-
+  const langFilter = data.allWpPage.edges.filter((item) => {
+    
+  
+    return (((item.node.locale.locale === locale)&&(item.node.title === pageTitle)))
+  })[0].node
+ 
   return (
     <>
+      <Seo title="Mission" seo={langFilter.seo}  />
       <div className="container-fluid" >
         <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={pathName} />
       </div>

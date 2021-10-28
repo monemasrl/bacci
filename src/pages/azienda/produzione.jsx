@@ -1,9 +1,8 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
-import Img from 'gatsby-plugin-image'
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../../components/layout"
-import Seo from "../../components/seo"
+
 
 export const query = graphql`
  {
@@ -24,6 +23,7 @@ export const query = graphql`
             paragrafo
             titolo
             immagine {
+              altText
               id
               localFile {
                 childImageSharp {
@@ -39,6 +39,7 @@ export const query = graphql`
           }
           sezioneProduzione2 {
             immagine {
+              altText
               localFile {
                 childImageSharp {
                   gatsbyImageData(
@@ -69,6 +70,7 @@ export const query = graphql`
             sottotitolo
             titolo
             immagine {
+              altText
               localFile {
                 childImageSharp {
                   gatsbyImageData(
@@ -92,25 +94,25 @@ const Produzione = ({ data, location }) => {
     return (item.node.locale.locale === 'it_IT')
   })[0].node
   const dataFilter = langFilter
-  console.log('location', location);
+ 
   return (
     <>
       <Layout pageTitle={dataFilter.title} locale={'it_IT'} translations={dataFilter.translations} pathName = {location.pathname}  >
-        <Seo title="paginaProduzione" />
-        <section className="container sezione-1">
+       
+        <section className="container-fluid sezione-interne">
           <div className="box-sx">
             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.paginaProduzione.sezioneProduzione1.titolo }} />
             <p>{dataFilter.paginaProduzione.sezioneProduzione1.paragrafo}</p>
           </div>
           <div className="box-dx">
-            <GatsbyImage image={dataFilter.paginaProduzione.sezioneProduzione1.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataFilter.paginaProduzione.sezioneProduzione1.immagine.altText} />
+            <GatsbyImage image={dataFilter.paginaProduzione.sezioneProduzione1.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.paginaProduzione.sezioneProduzione1.immagine.altText} />
           </div>
         </section>
         <section className="container sezione-3">
           <div className="box-sx">
             <h2 dangerouslySetInnerHTML={{ __html: dataFilter.paginaProduzione.sezioneProduzione2.titolo }} />
             <p dangerouslySetInnerHTML={{ __html: dataFilter.paginaProduzione.sezioneProduzione2.paragrafo }} />
-            <GatsbyImage image={dataFilter.paginaProduzione.sezioneProduzione2.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataFilter.paginaProduzione.sezioneProduzione2.immagine.altText} />
+            <GatsbyImage image={dataFilter.paginaProduzione.sezioneProduzione2.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.paginaProduzione.sezioneProduzione2.immagine.altText} />
 
           </div>
 
@@ -142,7 +144,7 @@ const Produzione = ({ data, location }) => {
         <section className="container sezione-3">
           <div className="box-sx">
             <h2 dangerouslySetInnerHTML={{ __html: dataFilter.paginaProduzione.sezioneProduzione4.titolo }} />
-            <GatsbyImage image={dataFilter.paginaProduzione.sezioneProduzione4.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataFilter.paginaProduzione.sezioneProduzione4.immagine.altText} />
+            <GatsbyImage image={dataFilter.paginaProduzione.sezioneProduzione4.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.paginaProduzione.sezioneProduzione4.immagine.altText} />
 
           </div>
 

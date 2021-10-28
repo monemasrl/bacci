@@ -4,7 +4,7 @@ import Layout from "../../../../components/layout"
 
 const Fiere = ({ pageContext, location, data }) => {
 
-console.log(data);
+
     return (
         <>
           

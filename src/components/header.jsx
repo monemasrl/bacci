@@ -6,7 +6,7 @@ const Header = ({ locale, translations, pageTitle, pathName }) => (
 
   <header>
 
-    <NavBar locale={locale} translations={translations} />
+    <NavBar locale={locale} translations={translations} pathName={pathName}  />
 
     {pageTitle != 'Home' ? <Breadcrumb pageTitle = {pageTitle} pathName = {pathName} /> : ''}
 

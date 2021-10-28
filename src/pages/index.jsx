@@ -10,6 +10,7 @@ export const query = graphql`
     allWpPage(filter: {title: {eq: "Home"}}) {
     edges {
       node {
+
         locale {
           locale
         }
@@ -129,13 +130,13 @@ const IndexPage = ({ data }) => {
     return (item.node.locale.locale === 'it_IT')
   })[0].node
   const dataHome = langFilter
-  console.log(dataHome.home)
+ 
   const [ref, inView] = useInView();
   const [ref2, inView2] = useInView();
   return (
     <>
       <Layout pageTitle={dataHome.title} locale={'it_IT'} translations={dataHome.translations} >
-        <Seo title="Home" />
+        
       
         <section className="jumbo-home">
           <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />
@@ -150,7 +151,7 @@ const IndexPage = ({ data }) => {
             
           </div>
           <div className="box-dx">
-            <GatsbyImage image={dataHome.home.sezione1.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione1.immagine.altText} />
+            <GatsbyImage image={dataHome.home.sezione1.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione1.immagine.altText} />
           </div>
         </section>
       
@@ -168,7 +169,7 @@ const IndexPage = ({ data }) => {
           </div>
 
           <div className="box-dx">
-            <GatsbyImage image={dataHome.home.sezione2.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione1.immagine.altText} />
+            <GatsbyImage image={dataHome.home.sezione2.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione1.immagine.altText} />
 
           </div>
         </section>
@@ -176,7 +177,7 @@ const IndexPage = ({ data }) => {
         <section className="container sezione-3">
           <div className="box-sx">
             <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.titolo }} />
-            <GatsbyImage image={dataHome.home.sezione3.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione1.immagine.altText} />
+            <GatsbyImage image={dataHome.home.sezione3.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione1.immagine.altText} />
 
           </div>
 
@@ -197,7 +198,7 @@ const IndexPage = ({ data }) => {
             
           </div>
           <div className="box-dx">
-            <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData} width='400' alt={dataHome.home.sezione4.immagine.altText} />
+            <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione4.immagine.altText} />
           </div>
         </section>
        
