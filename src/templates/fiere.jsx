@@ -6,10 +6,10 @@ const Fiere = ({ pageContext }) => {
 
     return (
         <>
-        <Layout locale = {locale} translations = {translations} >
+       
        
             <h1>{JSON.stringify(pageContext)}</h1>
-        </Layout>
+     
         </>
 
     )

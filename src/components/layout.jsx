@@ -74,7 +74,7 @@ const Layout = ({ children, locale, translations, pageTitle }) => {
     <>
       <Seo title="Mission" seo={langFilter.seo}  />
       <div className="container-fluid" >
-        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={langFilter.translated[0].pathPagine.path} />
+        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path:''} />
       </div>
       <div className={`container-fluid ${pageTitle ? slugify(pageTitle.toLowerCase()) : '' }`} >
 
