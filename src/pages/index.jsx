@@ -133,6 +133,7 @@ const IndexPage = ({ data }) => {
  
   const [ref, inView] = useInView();
   const [ref2, inView2] = useInView();
+  const [ref3, inView3] = useInView();
   return (
     <>
       <Layout pageTitle={dataHome.title} locale={'it_IT'} translations={dataHome.translations} >
@@ -142,7 +143,7 @@ const IndexPage = ({ data }) => {
           <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />
         </section>
       
-        <section ref={ref} className={`container sezione-1 ${inView ? 'open' : ''}`}>
+        <section ref={ref} className={`container sezione-1 animate ${inView ? 'show' : 'hidden'}`}>
           <div className="box-sx">
             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
             <p>{dataHome.home.sezione1.paragrafo}</p>
@@ -155,7 +156,7 @@ const IndexPage = ({ data }) => {
           </div>
         </section>
       
-        <section className="container sezione-2">
+        <section ref={ref2} className={`container sezione-2 animate ${inView2 ? 'show' : 'hidden'}`}>
           <div className="box-sx">
             <div className="novita">
               Novità
@@ -174,7 +175,7 @@ const IndexPage = ({ data }) => {
           </div>
         </section>
       
-        <section className="container sezione-3">
+        <section ref={ref3} className={`container sezione-3 animate ${inView3 ? 'show' : 'hidden'}`}>
           <div className="box-sx">
             <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.titolo }} />
             <GatsbyImage image={dataHome.home.sezione3.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione1.immagine.altText} />

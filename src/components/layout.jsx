@@ -15,7 +15,7 @@ import Seo from "../components/seo"
 
 let slugify = require('slugify')
 
-const Layout = ({ children, locale, translations, pageTitle, pathName }) => {
+const Layout = ({ children, locale, translations, pageTitle }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -30,6 +30,11 @@ const Layout = ({ children, locale, translations, pageTitle, pathName }) => {
               locale
             }
             title
+            translated {
+                pathPagine {
+                    path
+                }
+            }
             seo {
               canonical
               cornerstone
@@ -62,16 +67,14 @@ const Layout = ({ children, locale, translations, pageTitle, pathName }) => {
     }
   `)
   const langFilter = data.allWpPage.edges.filter((item) => {
-    
-  
     return (((item.node.locale.locale === locale)&&(item.node.title === pageTitle)))
   })[0].node
- 
+ console.log(langFilter);
   return (
     <>
       <Seo title="Mission" seo={langFilter.seo}  />
       <div className="container-fluid" >
-        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={pathName} />
+        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={langFilter.translated[0].pathPagine.path} />
       </div>
       <div className={`container-fluid ${pageTitle ? slugify(pageTitle.toLowerCase()) : '' }`} >
 
