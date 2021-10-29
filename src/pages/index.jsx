@@ -131,9 +131,13 @@ const IndexPage = ({ data }) => {
   })[0].node
   const dataHome = langFilter
  
+  {/* Variabili di aniazione */}
   const [ref, inView] = useInView();
   const [ref2, inView2] = useInView();
   const [ref3, inView3] = useInView();
+  const [ref4, inView4] = useInView();
+  const [ref5, inView5] = useInView();
+
   return (
     <>
     
@@ -193,14 +197,14 @@ const IndexPage = ({ data }) => {
         </section>
        
         <section className="container sezione-4">
-          <div className="box-sx">
+          <div ref={ref4} className={`box-sx animate ${inView4 ? 'show' : 'hidden'}`} >
             <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
             <p>{dataHome.home.sezione4.paragrafo}</p>
             
               <Link className="button-sezione" to={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</Link>
             
           </div>
-          <div className="box-dx">
+          <div ref={ref5} className={`box-dx animate-long ${inView5 ? 'show-rx' : 'hidden-rx'}`}>
             <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione4.immagine.altText} />
           </div>
         </section>
