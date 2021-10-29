@@ -6,6 +6,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         edges {
           node {
             slug
+        
             content
             locale {
               locale
@@ -18,6 +19,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             }
             fiere {
               note
+              path
            
             }
           }
@@ -38,12 +40,14 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
 
     createPage({
-      path: `${urlBase}${entry.node.slug}`,
+      path: `${urlBase}${entry.node.fiere.path}/${entry.node.slug}`,
       component: require.resolve('./src/templates/fiere.jsx'),
       context: {
         content: entry.node.content,
         locale: entry.node.locale.locale,
-        translations: entry.node.translations
+        translations: entry.node.translations,
+        slug: entry.node.slug,
+        parentPath: entry.node.fiere.path
       }
     })
 

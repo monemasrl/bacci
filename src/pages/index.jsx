@@ -136,9 +136,11 @@ const IndexPage = ({ data }) => {
   const [ref3, inView3] = useInView();
   return (
     <>
+    
+
+  
       <Layout pageTitle={dataHome.title} locale={'it_IT'} translations={dataHome.translations} >
-        
-      
+      <div className="container-fluid home">
         <section className="jumbo-home">
           <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />
         </section>
@@ -202,7 +204,7 @@ const IndexPage = ({ data }) => {
             <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione4.immagine.altText} />
           </div>
         </section>
-       
+        </div>
       </Layout>
     </>
   )

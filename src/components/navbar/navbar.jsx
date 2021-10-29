@@ -89,13 +89,13 @@ const NavBar = (props) => {
                                 <React.Fragment key={item.label}>
                                     {!item.parentId ?
                                         <li >
-                                            <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath}`}>{item.label}
+                                            <Link to={'#'}>{item.label}
 
                                                 {item.childItems ?
                                                     <ul>
                                                         {item.childItems.nodes.map((subitem) => {
                                                             return <li key={subitem.label}>
-                                                                <Link to={`/${item.label.toLowerCase()}/${subitem.label.toLowerCase()}`}>
+                                                                <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
 
                                                                     {subitem.label}
                                                                 </Link>

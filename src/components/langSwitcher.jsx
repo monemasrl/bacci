@@ -7,13 +7,16 @@ const LangSwitcher = (props) => {
 
   const url = props.translations.length !== 0 ? slugify(props.translations[0].post_title) : ''
  
-  console.log(props);
+  console.log(url.toLowerCase());
   return (
     <>{
       <ul className="languages">
 
         <li>{props.locale}</li>
-       { props.translations.length !== 0 ? <li><Link to={`${langTag[props.translations[0].locale] === 'it' ? '' : '/' + langTag[props.translations[0].locale]}/${url === 'Home' ? '' : props.pathName ? props.pathName:'' +'/'+ url.toLowerCase()}`}>{props.translations[0].locale}</Link></li>
+       { props.translations.length !== 0 ? 
+       (<li>
+         <Link to={`${langTag[props.translations[0].locale] === 'it' ? '' : '/' + langTag[props.translations[0].locale]}/${url === 'Home' ? '' : (props.pathName ? props.pathName:'') +'/'+ url.toLowerCase()}`}>{props.translations[0].locale}</Link>
+         </li>)
         : ''}
 
 

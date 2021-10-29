@@ -150,6 +150,8 @@ const GruppoBacci = ({ data, location }) => {
   return (
     <>
       <Layout pageTitle={dataFilter.title} locale={'en_US'} translations={dataFilter.translations} pathName={location.pathname}  >
+       <div className="container-fluid gruppo-bacci">
+
         <section className="container-fluid sezione-interne">
           <div className="box-sx">
             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.gruppoBacci.sezioneGruppo1.titolo }} />
@@ -233,6 +235,7 @@ const GruppoBacci = ({ data, location }) => {
 
           </div>
         </section>
+       </div>
       </Layout>
     </>
   )

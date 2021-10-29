@@ -1,12 +1,11 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import Layout from "../../components/layout"
-
+import Layout from "../../../components/layout"
 
 export const query = graphql`
  {
-  allWpPage(filter: {title: {eq: "Produzione"}}) {
+  allWpPage(filter: {title: {eq: "Production"}}) {
     edges {
       node {
         locale {
@@ -91,13 +90,13 @@ export const query = graphql`
 
 const Produzione = ({ data, location }) => {
   const langFilter = data.allWpPage.edges.filter((item) => {
-    return (item.node.locale.locale === 'it_IT')
+    return (item.node.locale.locale === 'en_US')
   })[0].node
   const dataFilter = langFilter
  
   return (
     <>
-      <Layout pageTitle={dataFilter.title} locale={'it_IT'} translations={dataFilter.translations} pathName = {location.pathname}  >
+      <Layout pageTitle={dataFilter.title} locale={'en_US'} translations={dataFilter.translations} pathName = {location.pathname}  >
        <div className="container-fluid produzione">
 
 

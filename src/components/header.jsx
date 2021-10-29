@@ -5,7 +5,7 @@ import Breadcrumb from "./breadcrumb/breadCrumb"
 const Header = ({ locale, translations, pageTitle, pathName }) => (
 
   <header>
-
+{console.log(locale, translations, pageTitle, pathName)}
     <NavBar locale={locale} translations={translations} pathName={pathName}  />
 
     {pageTitle != 'Home' ? <Breadcrumb pageTitle = {pageTitle} pathName = {pathName} /> : ''}

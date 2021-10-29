@@ -325,7 +325,8 @@ const Produzione = ({ data, location }) => {
   return (
     <>
       <Layout pageTitle={dataFilter.title} locale={'en_US'} translations={dataFilter.translations} pathName = {location.pathname}  >
-        
+        <div className="container-fluid storia">
+
         <section className="container-fluid sezione-interne">
           <div className="box-sx">
           <GatsbyImage image={dataFilter.storia.sezioneStoria1.logoStoria.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.storia.sezioneStoria1.logoStoria.altText} />
@@ -481,8 +482,8 @@ const Produzione = ({ data, location }) => {
             <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.storia.sezioneStoria17.titolo }} />
             <p>{dataFilter.storia.sezioneStoria17.paragrafo}</p>
           </div>
-      
         </section>
+        </div>
       </Layout>
     </>
   )

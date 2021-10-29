@@ -23,6 +23,7 @@ const Layout = ({ children, locale, translations, pageTitle }) => {
           title
         }
       }
+
       allWpPage{
         edges {
           node {
@@ -67,21 +68,18 @@ const Layout = ({ children, locale, translations, pageTitle }) => {
     }
   `)
   const langFilter = data.allWpPage.edges.filter((item) => {
-    return (((item.node.locale.locale === locale)&&(item.node.title === pageTitle)))
+    return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node
- console.log(langFilter);
+
   return (
     <>
-      <Seo title="Mission" seo={langFilter.seo}  />
+      <Seo title="Mission" seo={langFilter.seo} />
       <div className="container-fluid" >
-        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path:''} />
+        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''} />
       </div>
-      <div className={`container-fluid ${pageTitle ? slugify(pageTitle.toLowerCase()) : '' }`} >
 
-        <main>{children}</main>
+      <main>{children}</main>
 
-
-      </div>
       <div className="container-fluid">
         <Footer translations={translations} locale={locale} />
       </div>

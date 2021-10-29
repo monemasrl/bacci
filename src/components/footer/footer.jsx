@@ -8,7 +8,7 @@ var slugify = require('slugify')
 const Footer = () =>{
 
     return(
-        <h1>puppa</h1>
+        <h1>fooooter</h1>
     )
 
 }
