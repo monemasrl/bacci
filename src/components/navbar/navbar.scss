@@ -12,7 +12,10 @@
      list-style: disc;
      li{
          display: inline-block;
-         margin: 0 1rem
+         margin: 0 1rem;
+         @media #{$landscape} {
+            display: block;
+           }
      };
  }
  a{
