@@ -38,6 +38,9 @@
         li{
         display: inline-block;
         margin: 0 2rem;
+        @media #{$landscape} {
+            display: block;
+           }
         &:hover{
             ul{
                 opacity: 1;
@@ -48,6 +51,7 @@
         opacity: 0;
         transition: all ease-in-out 0.3s;
         background-color: white;
+        z-index: 100;
         li{
            a{ font-size: 1rem;}
             &:hover{
