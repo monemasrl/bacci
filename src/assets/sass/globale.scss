@@ -2,112 +2,118 @@
 @import "./variabili";
 
 html {
-    font-size: 100%;
-    font-family: $text;
+  font-size: 100%;
+  font-family: $text;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 h1,
 h2 {
-    font-family: "Oswald", sans-serif;
+  font-family: "Oswald", sans-serif;
 }
+div[class^='box'] h2 strong,
+div[class^='box'] h1.titolo strong{
 
-.animate{
-    transition: all ease 1s;
-    position: relative;
+    @media #{$landscape} {
+       font-size: 30px;
+      }
 }
-.animate-long{
-    transition: all ease 1.7s;
-    position: relative;
+.animate {
+  transition: all ease 1s;
+  position: relative;
 }
-.hidden{
-    opacity: 0;
-   top: 100px;
-   @media #{$landscape} {
+.animate-long {
+  transition: all ease 1.7s;
+  position: relative;
+}
+.hidden {
+  opacity: 0;
+  top: 100px;
+  @media #{$landscape} {
     opacity: 1;
     top: 0px;
+  }
 }
+.show {
+  opacity: 1;
+  top: 0;
 }
-.show{
-    opacity: 1;
-    top:0;
-
-}
-.hidden-rx{
-    opacity: 0;
-    right: 100px;
-   @media #{$landscape} {
-    opacity: 1;
-    right: 0px;
-}
-}
-.show-rx{
+.hidden-rx {
+  opacity: 0;
+  right: 100px;
+  @media #{$landscape} {
     opacity: 1;
     right: 0px;
-
+  }
 }
-
-
+.show-rx {
+  opacity: 1;
+  right: 0px;
+}
 
 .container {
-    max-width: $container;
-    margin: 0 auto;
-    display: flex;
+  max-width: $container;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  @media #{$landscape} {
+    flex-direction: column;
+  }
 }
 
 .container-fluid {
-    width: 100%;
+  width: 100%;
 }
 
 ul {
-    padding: 0;
+  padding: 0;
 }
 
 .sottotitolo {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 section.container.repeater {
-    flex-wrap: wrap;
-    justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: space-around;
 
-    .box-repeater {
-        max-width: 600px;
+  .box-repeater {
+    max-width: 600px;
 
-        h3 {
-            color: $brown;
-            text-transform: uppercase;
-            font-family: $title;
-            font-size: 32px;
-            margin-bottom: 0;
+    h3 {
+      color: $brown;
+      text-transform: uppercase;
+      font-family: $title;
+      font-size: 32px;
+      margin-bottom: 0;
 
-            &::before {
-                content: '';
-                position: relative;
-                display: inline-block;
-                width: 36px;
-                height: 36px;
-                margin-left: -45px;
-                margin-right: 10px;
-                top: 5px;
-                background-image: url(../../images/check_icon.png);
-            }
-        }
-
-        p {
-            color: $textColor;
-            font-family: $text;
-            font-size: 20px;
-            line-height: 30px;
-        }
+      &::before {
+        content: "";
+        position: relative;
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        margin-left: -45px;
+        margin-right: 10px;
+        top: 5px;
+        background-image: url(../../images/check_icon.png);
+      }
     }
+
+    p {
+      color: $textColor;
+      font-family: $text;
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
 }
 
 .jumbo-home {
-    text-align: center;
+  text-align: center;
 }
 
 /* ANCHOR: sezione-interne */
@@ -115,457 +121,470 @@ section.container.repeater {
 /* ANCHOR: sezione1 */
 
 .gatsby-image-wrapper-constrained.jumbo-image {
-    margin: 1.5rem auto;
-    display: block;
+  margin: 1.5rem auto;
+  display: block;
 }
 
 .sezione-1 {
-    margin: 140px auto 50px auto;
+  margin: 140px auto 50px auto;
+  @media #{$landscape} {
+    flex-direction: column;
+  }
+  .button-sezione {
+    @include button-sezione(5rem, 17%);
+  }
 
-    .button-sezione {
-        @include button-sezione(5rem, 17%);
+  h2 {
+    @include h2-sezioni(72px);
+
+    &::first-line {
+      line-height: 20px;
     }
 
-    h2 {
-        @include h2-sezioni(72px);
+    font-weight: 400;
 
-        &::first-line {
-            line-height: 20px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-        }
+    strong {
+      font-size: 120px;
+      font-weight: 600;
     }
+  }
 
-    .box-sx {
-        max-width: 751px;
-        padding-left: 2rem;
+  .box-sx {
+    max-width: 751px;
+    padding-left: 2rem;
 
-        p {
-            font-size: 28px;
-            color: $textColor;
-            line-height: 38px;
-        }
+    p {
+      font-size: 28px;
+      color: $textColor;
+      line-height: 38px;
     }
+  }
 
-    .box-dx {
-        padding-left: 2rem;
-    }
+  .box-dx {
+    padding-left: 2rem;
+  }
 }
 
 /* ANCHOR: sezione2 */
 .sezione-2 {
-    border-top: 3px solid $lightBrown;
-    border-bottom: 3px solid $lightBrown;
-    justify-content: space-between;
+  border-top: 3px solid $lightBrown;
+  border-bottom: 3px solid $lightBrown;
+  justify-content: space-between;
+  @media #{$landscape} {
+    flex-direction: column;
+  }
+  .button-sezione {
+    @include button-sezione(5rem, 5%);
+  }
 
-    .button-sezione {
-        @include button-sezione(5rem, 5%);
-    }
+  h2 {
+    @include h2-sezioni(120px);
 
-    h2 {
-        @include h2-sezioni(120px);
+    margin-bottom: 0;
+    margin-top: 3rem;
+  }
 
-        margin-bottom: 0;
-        margin-top: 3rem;
-    }
+  p {
+    margin-top: 2rem;
+    font-size: 44px;
+    font-family: $title;
+    color: $brown;
+  }
 
-    p {
-        margin-top: 2rem;
-        font-size: 44px;
-        font-family: $title;
-        color: $brown;
-    }
+  .novita {
+    text-transform: uppercase;
+    padding: 0.4rem 4rem;
+    background-color: $lightBrown;
+    color: white;
+    display: inline-block;
+    font-family: $title;
+    font-size: 36px;
+  }
 
-    .novita {
-        text-transform: uppercase;
-        padding: 0.4rem 4rem;
-        background-color: $lightBrown;
-        color: white;
-        display: inline-block;
-        font-family: $title;
-        font-size: 36px;
-    }
-
-    .box-sx {
-        padding-left: 2rem;
-    }
+  .box-sx {
+    padding-left: 2rem;
+  }
 }
 
 /* ANCHOR: sezione 3 */
 .sezione-3 {
-    flex-direction: column;
+  flex-direction: column;
+  margin-top: 3rem;
+
+  .button-sezione {
+    @include button-sezione(5rem, 1%);
+  }
+
+  h2 {
+    @include h2-sezioni(74px);
+
+    margin-bottom: 2rem;
     margin-top: 3rem;
+    text-align: center;
+    font-weight: 400;
 
-    .button-sezione {
-        @include button-sezione(5rem, 1%);
+    strong {
+      @include h2-sezioni(120px);
+
+      display: block;
+      font-weight: 600;
     }
+  }
 
-    h2 {
-        @include h2-sezioni(74px);
+  p {
+    margin-top: 2rem;
+    font-size: 28px;
+    font-family: $text;
+    color: $textColor;
+    text-align: center;
+    max-width: 1349px;
+    margin: 2rem auto;
+    line-height: 38px;
+  }
 
-        margin-bottom: 2rem;
-        margin-top: 3rem;
-        text-align: center;
-        font-weight: 400;
-
-        strong {
-            @include h2-sezioni(120px);
-
-            display: block;
-            font-weight: 600;
-        }
-    }
-
-    p {
-        margin-top: 2rem;
-        font-size: 28px;
-        font-family: $text;
-        color: $textColor;
-        text-align: center;
-        max-width: 1349px;
-        margin: 2rem auto;
-        line-height: 38px;
-    }
-
-    .box-dx {
-        text-align: center;
-    }
+  .box-dx {
+    text-align: center;
+  }
 }
 
 .sezione-4 {
-    margin: 120px auto 50px auto;
+  margin: 120px auto 50px auto;
+  @media #{$landscape} {
+    flex-direction: column;
+  }
+  .button-sezione {
+    @include button-sezione(5rem, 6%);
+  }
 
-    .button-sezione {
-        @include button-sezione(5rem, 6%);
+  h2 {
+    @include h2-sezioni(72px);
+
+    &::first-line {
+      line-height: 60px;
     }
 
-    h2 {
-        @include h2-sezioni(72px);
+    font-weight: 400;
 
-        &::first-line {
-            line-height: 60px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-        }
+    strong {
+      font-size: 120px;
+      font-weight: 600;
     }
+  }
 
-    .box-sx {
-        max-width: 550px;
-        padding-left: 2rem;
+  .box-sx {
+    max-width: 550px;
+    padding-left: 2rem;
 
-        p {
-            font-size: 28px;
-            color: $textColor;
-            line-height: 38px;
-            max-width: 520px;
-        }
+    p {
+      font-size: 28px;
+      color: $textColor;
+      line-height: 38px;
+      max-width: 520px;
     }
+  }
 
-    .box-dx {
-        padding-left: 2rem;
-    }
+  .box-dx {
+    padding-left: 2rem;
+  }
 }
 
 /* ANCHOR: HOMEPAGE */
 .home {
-    .sezione-4 h2 {
-        line-height: 6.4rem;
-        margin-bottom: 2rem;
-    }
-    h2{
-        margin-top: 1rem
-    }
-    .titolo {
-        @include h2-sezioni(72px);
-       
-        &::first-line {
-            line-height: 20px;
-        }
+  .sezione-4 h2 {
+    line-height: 6.4rem;
+    margin-bottom: 2rem;
+  }
+  h2 {
+    margin-top: 1rem;
+  }
+  .titolo {
+    @include h2-sezioni(72px);
 
-        font-weight: 400;
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-        }
+    &::first-line {
+      line-height: 20px;
     }
+
+    font-weight: 400;
+
+    strong {
+      font-size: 120px;
+      font-weight: 600;
+    }
+  }
 }
 
 /* ANCHOR: PAG-Produzione */
 
 .produzione {
-    @include sezione-interne;
+  @include sezione-interne;
 
-    .titolo {
-        @include h2-sezioni(72px);
+  .titolo {
+    @include h2-sezioni(72px);
 
-        font-weight: 400;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    &::first-line {
+      line-height: 70px;
+    }
+
+    strong {
+      font-size: 120px;
+      font-weight: 600;
+      display: block;
+      line-height: 120px;
+      margin-top: 5px;
+    }
+  }
+
+  .sezione-1 {
+    margin: 140px auto 50px auto;
+
+    .button-sezione {
+      @include button-sezione(5rem, 17%);
+    }
+
+    h2 {
+      @include h2-sezioni(72px);
+
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 0;
+
+      &::first-line {
+        line-height: 70px;
+      }
+
+      strong {
+        font-size: 120px;
+        font-weight: 600;
+      }
+    }
+
+    .box-sx {
+      max-width: 609px;
+      padding-left: 2rem;
+
+      p {
+        font-size: 28px;
+        color: $textColor;
+        line-height: 38px;
+      }
+    }
+
+    .box-dx {
+      padding-left: 2rem;
+    }
+  }
+
+  .sezione-3 {
+    .box-sx {
+      h2 {
+        margin-bottom: 2rem;
+      }
+
+      h2 ~ p {
         margin-top: 0;
-        margin-bottom: 0;
-
-        &::first-line {
-            line-height: 70px;
-        }
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-            display: block;
-            line-height: 120px;
-            margin-top: 5px;
-        }
+        margin-bottom: 3rem;
+        text-transform: uppercase;
+      }
     }
-
-    .sezione-1 {
-        margin: 140px auto 50px auto;
-
-        .button-sezione {
-            @include button-sezione(5rem, 17%);
-        }
-
-        h2 {
-            @include h2-sezioni(72px);
-
-            font-weight: 400;
-            margin-top: 0;
-            margin-bottom: 0;
-
-            &::first-line {
-                line-height: 70px;
-            }
-
-            strong {
-                font-size: 120px;
-                font-weight: 600;
-            }
-        }
-
-        .box-sx {
-            max-width: 609px;
-            padding-left: 2rem;
-
-            p {
-                font-size: 28px;
-                color: $textColor;
-                line-height: 38px;
-            }
-        }
-
-        .box-dx {
-            padding-left: 2rem;
-        }
-    }
-
-    .sezione-3 {
-        .box-sx {
-            h2 {
-                margin-bottom: 2rem;
-            }
-
-            h2 ~ p {
-                margin-top: 0;
-                margin-bottom: 3rem;
-                text-transform: uppercase;
-            }
-        }
-    }
+  }
 }
 
 /* ANCHOR: PAG-Gruppo */
-.gruppo-bacci, .bacci-group {
-    @include sezione-interne;
+.gruppo-bacci,
+.bacci-group {
+  @include sezione-interne;
 
-    .titolo {
-        @include h2-sezioni(72px);
+  .titolo {
+    @include h2-sezioni(72px);
 
+    margin-top: 0;
+
+    &::first-line {
+      line-height: 60px;
+    }
+
+    font-weight: 400;
+
+    strong {
+      display: block;
+      font-size: 120px;
+      font-weight: 600;
+    }
+  }
+
+  .sezione-1 {
+    margin: 140px auto 50px auto;
+
+    .button-sezione {
+      @include button-sezione(5rem, 17%);
+    }
+
+    h2 {
+      @include h2-sezioni(72px);
+
+      font-weight: 400;
+      margin-top: 0;
+      margin-bottom: 0;
+
+      &::first-line {
+        line-height: 70px;
+      }
+
+      strong {
+        font-size: 120px;
+        font-weight: 600;
+      }
+    }
+
+    .box-sx {
+      max-width: 609px;
+      padding-left: 2rem;
+
+      p {
+        font-size: 28px;
+        color: $textColor;
+        line-height: 38px;
+      }
+    }
+
+    .box-dx {
+      padding-left: 2rem;
+    }
+  }
+
+  .planisfero {
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    h2 {
+      font-family: $text;
+      color: $textColor;
+      font-size: 36px;
+      text-align: center;
+      font-weight: 400;
+      text-transform: uppercase;
+      margin-bottom: 0;
+      width: 100%;
+    }
+  }
+
+  .box-planisfero {
+    height: 676px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
+      position: absolute;
+      z-index: -1;
+    }
+
+    .box-lista-gruppo {
+      background-color: #c8bcb091;
+      padding: 3rem 5rem;
+
+      ul {
+        font-size: 36px;
+        text-transform: uppercase;
+        list-style: none;
+        padding: 0;
+
+        li {
+          a {
+            color: $brown;
+          }
+        }
+      }
+    }
+  }
+
+  .sezione-3 {
+    .box-sx {
+      h2 {
+        margin-bottom: 1rem;
+      }
+
+      h2 ~ p {
         margin-top: 0;
-
-        &::first-line {
-            line-height: 60px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            display: block;
-            font-size: 120px;
-            font-weight: 600;
-        }
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+      }
     }
-
-    .sezione-1 {
-        margin: 140px auto 50px auto;
-
-        .button-sezione {
-            @include button-sezione(5rem, 17%);
-        }
-
-        h2 {
-            @include h2-sezioni(72px);
-
-            font-weight: 400;
-            margin-top: 0;
-            margin-bottom: 0;
-
-            &::first-line {
-                line-height: 70px;
-            }
-
-            strong {
-                font-size: 120px;
-                font-weight: 600;
-            }
-        }
-
-        .box-sx {
-            max-width: 609px;
-            padding-left: 2rem;
-
-            p {
-                font-size: 28px;
-                color: $textColor;
-                line-height: 38px;
-            }
-        }
-
-        .box-dx {
-            padding-left: 2rem;
-        }
-    }
-
-    .planisfero {
-        flex-wrap: wrap;
-        flex-direction: column;
-
-        h2 {
-            font-family: $text;
-            color: $textColor;
-            font-size: 36px;
-            text-align: center;
-            font-weight: 400;
-            text-transform: uppercase;
-            margin-bottom: 0;
-            width: 100%;
-        }
-    }
-
-    .box-planisfero {
-        height: 676px;
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-
-        .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
-            position: absolute;
-            z-index: -1;
-        }
-
-        .box-lista-gruppo {
-            background-color: #c8bcb091;
-            padding: 3rem 5rem;
-
-            ul {
-                font-size: 36px;
-                text-transform: uppercase;
-                list-style: none;
-                padding: 0;
-
-                li {
-                    a {
-                        color: $brown;
-                    }
-                }
-            }
-        }
-    }
-
-    .sezione-3 {
-        .box-sx {
-            h2 {
-                margin-bottom: 1rem;
-            }
-
-            h2 ~ p {
-                margin-top: 0;
-                margin-bottom: 2rem;
-                text-transform: uppercase;
-            }
-        }
-    }
+  }
 }
 
 /* ANCHOR: Mission */
 
 .mission {
-    @include sezione-interne;
-    @include sezione-testo-sx;
-    @include sezione-testo-dx;
+  @include sezione-interne;
+  @include sezione-testo-sx;
+  @include sezione-testo-dx;
 
-    .titolo {
-        @include h2-sezioni(72px);
+  .titolo {
+    @include h2-sezioni(72px);
 
-        line-height: 100px;
-        margin-bottom: 2rem;
-        margin-top: 20px;
+    line-height: 100px;
+    margin-bottom: 2rem;
+    margin-top: 20px;
 
-        &::first-line {
-            line-height: 20px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-        }
+    &::first-line {
+      line-height: 20px;
     }
+
+    font-weight: 400;
+
+    strong {
+      font-size: 120px;
+      font-weight: 600;
+    }
+  }
 }
 
 /* ANCHOR: Storia */
-.storia, .history {
-    @include sezione-interne;
-    @include sezione-testo-sx;
-    @include sezione-testo-no-immagine;
+.storia,
+.history {
+  @include sezione-interne;
+  @include sezione-testo-sx;
+  @include sezione-testo-no-immagine;
 
+  h2 {
+    line-height: 61px;
+    margin-top: 1rem;
+  }
 
+  h2 strong {
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .titolo {
+    @include h2-sezioni(60px);
+
+    margin-bottom: 0rem;
+    margin-top: 20px;
+
+    &::first-line {
+      line-height: 40px;
+    }
+
+    font-weight: 400;
+  }
+  .sezione-testo-sx,
+  .sezione-testo-no-immagine {
     h2 {
-        line-height: 61px;
-        margin-top: 1rem;
+      line-height: 63px;
     }
-
-    h2 strong {
-        display: block;
-        margin-bottom: 20px;
+  }
+  .sezione-testo-sx,
+  .sezione-testo-no-immagine {
+    .box-sx p {
+      margin-top: 1rem;
     }
-
-    .titolo {
-        @include h2-sezioni(60px);
-
-        margin-bottom: 0rem;
-        margin-top: 20px;
-
-        &::first-line {
-            line-height: 40px;
-        }
-
-        font-weight: 400;
-    }
-    .sezione-testo-sx, .sezione-testo-no-immagine {h2{
-        line-height: 63px;
-    }}
-    .sezione-testo-sx, .sezione-testo-no-immagine {.box-sx p {
-        margin-top: 1rem;
-    }}
+  }
 }
