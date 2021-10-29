@@ -8,7 +8,6 @@ module.exports = {
   plugins: [
     "gatsby-plugin-sass",
     "gatsby-plugin-sitemap",
-    "gatsby-plugin-preact",
     {
       resolve: `gatsby-source-wordpress`,
       options: {
