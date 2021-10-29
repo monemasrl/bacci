@@ -1,6 +1,9 @@
 @import '../../assets/sass/variabili';
 
 .top-menu{
+    @media #{$landscape}{
+        display: none;
+    }
     background-color: $lightBrown;
  .container{
      max-width: $container;
@@ -32,6 +35,9 @@
 }
 
 .mainmenu{
+    @media #{$landscape}{
+        display: none;
+    }
     margin-top: 20px;
   .container{
       justify-content: space-between;
@@ -55,6 +61,7 @@
         transition: all ease-in-out 0.3s;
         background-color: white;
         z-index: 100;
+     
         li{
            a{ font-size: 1rem;}
             &:hover{
