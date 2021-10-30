@@ -9,7 +9,7 @@ module.exports = {
     "gatsby-plugin-sass",
     "gatsby-plugin-sitemap",
     `gatsby-plugin-preact`,
-
+    `gatsby-plugin-transition-link`,
     {
       resolve: `gatsby-source-wordpress`,
       options: {

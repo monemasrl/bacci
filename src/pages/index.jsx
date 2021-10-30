@@ -132,11 +132,11 @@ const IndexPage = ({ data }) => {
   const dataHome = langFilter
  
   {/* Variabili di aniazione */}
-  const [ref, inView] = useInView();
-  const [ref2, inView2] = useInView();
-  const [ref3, inView3] = useInView();
-  const [ref4, inView4] = useInView();
-  const [ref5, inView5] = useInView();
+  const [ref, inView] = useInView({delay:500,   triggerOnce:true});
+  const [ref2, inView2] = useInView({delay:500, triggerOnce:true});
+  const [ref3, inView3] = useInView({delay:500, triggerOnce:true});
+  const [ref4, inView4] = useInView({delay:500, triggerOnce:true});
+  const [ref5, inView5] = useInView({delay:500, triggerOnce:true});
 
   return (
     <>
@@ -146,7 +146,7 @@ const IndexPage = ({ data }) => {
       <Layout pageTitle={dataHome.title} locale={'it_IT'} translations={dataHome.translations} >
       <div className="container-fluid home">
         <section className="jumbo-home">
-          <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />
+          <GatsbyImage  image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />
         </section>
       
         <section ref={ref} className={`container sezione-1 animate ${inView ? 'show' : 'hidden'}`}>

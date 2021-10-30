@@ -125,6 +125,11 @@ section.container.repeater {
 .gatsby-image-wrapper-constrained.jumbo-image {
   margin: 1.5rem auto;
   display: block;
+  background-color: $lightBrown;
+  background-image: url(../../images/logo.png);
+  background-repeat: no-repeat;
+  background-position-x: 50%;
+  background-position-y: 50%;
 
 }
 
@@ -212,7 +217,7 @@ section.container.repeater {
 /* ANCHOR: sezione 3 */
 .sezione-3 {
   flex-direction: column;
-  margin-top: 3rem;
+  margin-top: 5rem;
 
   .button-sezione {
     @include button-sezione(5rem, 1%);

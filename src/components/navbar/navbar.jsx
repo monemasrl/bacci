@@ -3,6 +3,7 @@ import { Link, graphql, useStaticQuery } from 'gatsby'
 import { langTag } from '../../../data-translations'
 import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 import './navbar.scss'
 let slugify = require('slugify')
 
@@ -95,10 +96,10 @@ const NavBar = (props) => {
                                                     <ul>
                                                         {item.childItems.nodes.map((subitem) => {
                                                             return <li key={subitem.label}>
-                                                                <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
+                                                                <AniLink paintDrip to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
 
                                                                     {subitem.label}
-                                                                </Link>
+                                                                </AniLink>
                                                             </li>
                                                         })}
                                                     </ul>
