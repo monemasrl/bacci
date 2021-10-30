@@ -131,7 +131,7 @@ const IndexPage = ({ data }) => {
   })[0].node
   const dataHome = langFilter
  
-  {/* Variabili di aniazione */}
+
   const [ref, inView] = useInView({delay:500,   triggerOnce:true});
   const [ref2, inView2] = useInView({delay:500, triggerOnce:true});
   const [ref3, inView3] = useInView({delay:500, triggerOnce:true});

@@ -8,7 +8,7 @@ const Header = ({ locale, translations, pageTitle, pathName }) => (
 {console.log(pathName)}
     <NavBar locale={locale} translations={translations} pathName={pathName}  />
 
-    {pageTitle != 'Home' ? <Breadcrumb pageTitle = {pageTitle} pathName = {pathName} /> : ''}
+    {pageTitle !== 'Home' ? <Breadcrumb pageTitle = {pageTitle} pathName = {pathName} /> : ''}
 
   </header>
 )
