@@ -8,7 +8,7 @@ const Breadcrumb = ({ pageTitle, pathName }) => {
         <div className="container-fluid breadcrumb">
 
             <div className="container">
-                <h2><span>{parentFolder}</span><br />{pageTitle}</h2>
+                <h2><span>/{parentFolder}</span><br />{pageTitle}</h2>
             </div>
 
         </div>
