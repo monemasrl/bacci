@@ -2,13 +2,13 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import NavBar from "./navbar/navbar"
 import Breadcrumb from "./breadcrumb/breadCrumb"
-const Header = ({ locale, translations, pageTitle, pathName }) => (
+const Header = ({ locale, translations, pageTitle, pathName, currentPath }) => (
 
   <header>
-{console.log(pathName)}
+
     <NavBar locale={locale} translations={translations} pathName={pathName}  />
 
-    {pageTitle !== 'Home' ? <Breadcrumb pageTitle = {pageTitle} pathName = {pathName} /> : ''}
+    {pageTitle !== 'Home' ? <Breadcrumb pageTitle = {pageTitle} pathName = {currentPath} /> : ''}
 
   </header>
 )

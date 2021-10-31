@@ -14,12 +14,19 @@ h1,
 h2 {
   font-family: "Oswald", sans-serif;
 }
-div[class^='box'] h2 strong,
-div[class^='box'] h1.titolo strong{
+h3 {
+  color: $textColor;
+  font-size: 36px;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-family: $title;
+}
 
-    @media #{$landscape} {
-       font-size: 30px;
-      }
+div[class^="box"] h2 strong,
+div[class^="box"] h1.titolo strong {
+  @media #{$landscape} {
+    font-size: 30px;
+  }
 }
 .animate {
   transition: all ease 1s;
@@ -112,10 +119,33 @@ section.container.repeater {
     }
   }
 }
+section.container.repeater.no-flag {
+  .box-repeater {
+    max-width: 600px;
 
+    h3 {
+      color: $textColor;
+      text-transform: uppercase;
+      font-family: $title;
+      font-size: 24px;
+      margin-bottom: 0;
+
+      &::before {
+        content: "";
+        display: none;
+      }
+    }
+
+    p {
+      color: $textColor;
+      font-family: $text;
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+}
 .jumbo-home {
   text-align: center;
-
 }
 
 /* ANCHOR: sezione-interne */
@@ -130,7 +160,6 @@ section.container.repeater {
   background-repeat: no-repeat;
   background-position-x: 50%;
   background-position-y: 50%;
-
 }
 
 .sezione-1 {
@@ -595,4 +624,189 @@ section.container.repeater {
       margin-top: 1rem;
     }
   }
+}
+/* ANCHOR: ricerca */
+
+.ricerca {
+  @include sezione-interne;
+  @include sezione-testo-sx;
+  @include sezione-testo-dx;
+  .sezione-testo-sx {
+    p {
+      margin-top: 2rem;
+    }
+  }
+  .titolo {
+    @include h2-sezioni(72px);
+    line-height: 100px;
+    margin-bottom: 2rem;
+    margin-top: 20px;
+    font-weight: 400;
+    &::first-line {
+      line-height: 20px;
+    }
+
+    strong {
+      font-size: 120px;
+      font-weight: 600;
+      display: block;
+      line-height: 1;
+      margin-top: 1.7rem;
+    }
+  }
+}
+
+/*ANCHOR: Componenti*/
+.componenti {
+  @include sezione-interne;
+  .sezione-interne {
+    .box-sx {
+      max-width: 700px;
+    }
+  }
+  @include sezione-testo-sx;
+  .sezione-testo-sx {
+    p {
+      margin-top: 2rem;
+    }
+  }
+  @include sezione-testo-dx;
+  .titolo {
+    @include h2-sezioni(72px);
+    line-height: 100px;
+    margin-bottom: 2rem;
+    margin-top: 20px;
+    font-weight: 400;
+    &::first-line {
+      line-height: 20px;
+    }
+    strong:nth-child(1) {
+      font-size: 120px;
+      font-weight: 600;
+      display: block;
+      line-height: 1;
+      margin-top: 1.7rem;
+      margin-bottom: 3rem;
+    }
+    strong:nth-child(2) {
+      font-size: 120px;
+      font-weight: 600;
+      display: block;
+      line-height: 1;
+      margin-top: 0rem;
+      margin-bottom: 2rem;
+    }
+  }
+  section.container.repeater {
+    justify-content: center;
+    .box-repeater {
+      max-width: 372px;
+      margin: 0rem 2rem;
+    }
+  }
+}
+/*ANCHOR: software*/
+.software {
+  @include sezione-interne;
+  @include sezione-testo-sx;
+  @include sezione-testo-dx;
+  .sezione-testo-sx {
+    p {
+      margin-top: 2rem;
+    }
+  }
+  .titolo {
+    @include h2-sezioni(72px);
+    line-height: 100px;
+    margin-bottom: 2rem;
+    margin-top: 20px;
+    font-weight: 400;
+    &::first-line {
+      line-height: 20px;
+    }
+
+    strong {
+      font-size: 120px;
+      font-weight: 600;
+      display: block;
+      line-height: 1;
+      margin-top: 0rem;
+    }
+  }
+
+  .sezione-3.pitagora {
+    h2 {
+      font-size: 120px;
+      margin: 0;
+      font-weight: bold;
+    }
+    h3 {
+      font-size: 72px;
+      color: $brown;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+  }
+}
+/* ANCHOR: Prevendita */
+.prevendita{
+    @include sezione-interne;
+    .sezione-interne {
+      .box-sx {
+        max-width: 700px;
+      }
+    }
+    @include sezione-testo-sx;
+    .sezione-testo-sx {
+      p {
+        margin-top: 2rem;
+      }
+    }
+    @include sezione-testo-dx;
+    .titolo {
+      @include h2-sezioni(72px);
+      line-height: 100px;
+      margin-bottom: 2rem;
+      margin-top: 20px;
+      font-weight: 400;
+      &::first-line {
+        line-height: 20px;
+      }
+      strong:nth-child(1) {
+        font-size: 120px;
+        font-weight: 600;
+        display: block;
+        line-height: 1;
+        margin-top: 1.7rem;
+        margin-bottom: 3rem;
+      }
+      strong:nth-child(2) {
+        font-size: 120px;
+        font-weight: 600;
+        display: block;
+        line-height: 1;
+        margin-top: 0rem;
+        margin-bottom: 2rem;
+      }
+    }
+    section.container.repeater {
+      justify-content: center;
+      .box-repeater {
+        max-width: 372px;
+        margin: 0rem 2rem;
+      }
+    }
+    .titolo-3{
+        font-size: 120px;
+        font-weight: bold;
+        margin-top: 0;
+    }
+    .pretitolo{
+        text-align: center;
+        color: $brown;
+        font-size: 72px;
+        font-family: $title;
+        margin: 0;
+    }
 }

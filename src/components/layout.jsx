@@ -31,6 +31,9 @@ const Layout = ({ children, locale, translations, pageTitle }) => {
               locale
             }
             title
+            pathPagine {
+                    path
+                }
             translated {
                 pathPagine {
                     path
@@ -76,7 +79,12 @@ const Layout = ({ children, locale, translations, pageTitle }) => {
  
       <Seo title="Mission" seo={langFilter.seo} />
       <div className="container-fluid" >
-        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''} />
+        <Header 
+        translations={translations} 
+        locale={locale} 
+        pageTitle={pageTitle} 
+        pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''} 
+        currentPath={langFilter.pathPagine.path}/>
       </div>
 
       <main>{children}</main>

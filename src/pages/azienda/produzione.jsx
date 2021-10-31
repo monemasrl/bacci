@@ -99,8 +99,6 @@ const Produzione = ({ data, location }) => {
     <>
       <Layout pageTitle={dataFilter.title} locale={'it_IT'} translations={dataFilter.translations} pathName = {location.pathname}  >
        <div className="container-fluid produzione">
-
-
         <section className="container-fluid sezione-interne">
           <div className="box-sx">
             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.paginaProduzione.sezioneProduzione1.titolo }} />
@@ -115,12 +113,10 @@ const Produzione = ({ data, location }) => {
             <h2 dangerouslySetInnerHTML={{ __html: dataFilter.paginaProduzione.sezioneProduzione2.titolo }} />
             <p dangerouslySetInnerHTML={{ __html: dataFilter.paginaProduzione.sezioneProduzione2.paragrafo }} />
             <GatsbyImage image={dataFilter.paginaProduzione.sezioneProduzione2.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.paginaProduzione.sezioneProduzione2.immagine.altText} />
-
           </div>
 
           <div className="box-dx">
             <p dangerouslySetInnerHTML={{ __html: dataFilter.paginaProduzione.sezioneProduzione2.paragrafo2 }} />
-
           </div>
         </section>
 
@@ -147,7 +143,6 @@ const Produzione = ({ data, location }) => {
           <div className="box-sx">
             <h2 dangerouslySetInnerHTML={{ __html: dataFilter.paginaProduzione.sezioneProduzione4.titolo }} />
             <GatsbyImage image={dataFilter.paginaProduzione.sezioneProduzione4.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.paginaProduzione.sezioneProduzione4.immagine.altText} />
-
           </div>
 
           <div className="box-dx">
