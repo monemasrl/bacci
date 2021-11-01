@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
-import { useInView} from 'react-intersection-observer';
+import Fade from 'react-reveal/Fade';
 
 export const query = graphql`
    {
@@ -132,11 +132,7 @@ const IndexPage = ({ data }) => {
   const dataHome = langFilter
  
 
-  const [ref, inView] = useInView({delay:500,   triggerOnce:true});
-  const [ref2, inView2] = useInView({delay:500, triggerOnce:true});
-  const [ref3, inView3] = useInView({delay:500, triggerOnce:true});
-  const [ref4, inView4] = useInView({delay:500, triggerOnce:true});
-  const [ref5, inView5] = useInView({delay:500, triggerOnce:true});
+
 
   return (
     <>
@@ -148,9 +144,9 @@ const IndexPage = ({ data }) => {
         <section className="jumbo-home">
           <GatsbyImage  image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />
         </section>
-      
-        <section ref={ref} className={`container sezione-1 animate ${inView ? 'show' : 'hidden'}`}>
-          <div className="box-sx">
+      <Fade bottom>
+        <section  className={`container sezione-1 `}>
+          <div className={`box-sx`} >
             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
             <p>{dataHome.home.sezione1.paragrafo}</p>
             
@@ -161,9 +157,9 @@ const IndexPage = ({ data }) => {
             <GatsbyImage image={dataHome.home.sezione1.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione1.immagine.altText} />
           </div>
         </section>
-      
-        <section ref={ref2} className={`container sezione-2 animate ${inView2 ? 'show' : 'hidden'}`}>
-          <div className="box-sx">
+        </Fade>
+        <section className={`container sezione-2 `}>
+          <div className={`box-sx`} >
             <div className="novita">
               Novità
             </div>
@@ -181,8 +177,8 @@ const IndexPage = ({ data }) => {
           </div>
         </section>
       
-        <section ref={ref3} className={`container sezione-3 animate ${inView3 ? 'show' : 'hidden'}`}>
-          <div className="box-sx">
+        <section className={`container sezione-3 `}>
+          <div className={`box-sx `} >
             <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.titolo }} />
             <GatsbyImage image={dataHome.home.sezione3.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione1.immagine.altText} />
 
@@ -197,14 +193,14 @@ const IndexPage = ({ data }) => {
         </section>
        
         <section className="container sezione-4">
-          <div ref={ref4} className={`box-sx animate ${inView4 ? 'show' : 'hidden'}`} >
+          <div  className={`box-sx `} >
             <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
             <p>{dataHome.home.sezione4.paragrafo}</p>
             
               <Link className="button-sezione" to={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</Link>
             
           </div>
-          <div ref={ref5} className={`box-dx animate-long ${inView5 ? 'show-rx' : 'hidden-rx'}`}>
+          <div  className={`box-dx`}>
             <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione4.immagine.altText} />
           </div>
         </section>
