@@ -55,7 +55,6 @@ const NavBar = (props) => {
                         {menuFilter[1].node.menuItems.nodes.map((item) => {
 
                             const menuPath = slugify(item.label)
-console.log('pathitem',item);
                             return (
                                 <li key={item.label}>
                                     <Link disabled={item.path === "#"} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath}`}>{item.label}</Link>
@@ -64,8 +63,8 @@ console.log('pathitem',item);
                             )
                         })}
                     </ul>
-                    <div className='langbox' >  
-                    <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} /></div>
+                    <div className='langbox' >
+                        <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} /></div>
                 </div>
 
             </nav>
@@ -73,12 +72,12 @@ console.log('pathitem',item);
                 <div className="container">
 
                     <div className="main-logo">
-
-                        <StaticImage
-                            placeholder="none"
-                            
-                            width={362}
-                            height={77} src="../../images/logo.png" alt="Bacci logo" />
+                        <Link to={`${langTag[props.locale] === 'it' ? '/' : '/'+langTag[props.locale] + '/'}`}>
+                            <StaticImage
+                                placeholder="none"
+                                width={362}
+                                height={77} src="../../images/logo.png" alt="Bacci logo" />
+                        </Link>
 
                     </div>
                     <ul>
@@ -97,9 +96,9 @@ console.log('pathitem',item);
                                                         {item.childItems.nodes.map((subitem) => {
                                                             return (
                                                                 <LinkFade url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
-                                                                 <li key={subitem.label}>   {subitem.label}</li>
+                                                                    <li key={subitem.label}>   {subitem.label}</li>
                                                                 </LinkFade>)
-                                                            
+
                                                         })}
                                                     </ul>
                                                     : ''}

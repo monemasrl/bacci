@@ -158,6 +158,7 @@ const IndexPage = ({ data }) => {
           </div>
         </section>
         </Fade>
+        <Fade bottom>
         <section className={`container sezione-2 `}>
           <div className={`box-sx`} >
             <div className="novita">
@@ -176,7 +177,8 @@ const IndexPage = ({ data }) => {
 
           </div>
         </section>
-      
+        </Fade>
+        <Fade bottom>
         <section className={`container sezione-3 `}>
           <div className={`box-sx `} >
             <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.titolo }} />
@@ -191,8 +193,9 @@ const IndexPage = ({ data }) => {
            
           </div>
         </section>
-       
+        </Fade>
         <section className="container sezione-4">
+          <Fade left>
           <div  className={`box-sx `} >
             <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
             <p>{dataHome.home.sezione4.paragrafo}</p>
@@ -200,9 +203,12 @@ const IndexPage = ({ data }) => {
               <Link className="button-sezione" to={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</Link>
             
           </div>
+          </Fade>
+          <Fade right>
           <div  className={`box-dx`}>
             <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataHome.home.sezione4.immagine.altText} />
           </div>
+          </Fade>
         </section>
         </div>
       </Layout>
