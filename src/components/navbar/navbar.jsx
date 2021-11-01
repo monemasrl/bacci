@@ -55,10 +55,10 @@ const NavBar = (props) => {
                         {menuFilter[1].node.menuItems.nodes.map((item) => {
 
                             const menuPath = slugify(item.label)
-
+console.log('pathitem',item);
                             return (
                                 <li key={item.label}>
-                                    <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath}`}>{item.label}</Link>
+                                    <Link disabled={item.path === "#"} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath}`}>{item.label}</Link>
                                 </li>
 
                             )
@@ -90,16 +90,16 @@ const NavBar = (props) => {
                                 <React.Fragment key={item.label}>
                                     {!item.parentId ?
                                         <li >
-                                            <Link to={'#'}>{item.label}
+                                            <Link disabled={item.path === "#"} to={item.path}>{item.label}
 
                                                 {item.childItems ?
                                                     <ul>
                                                         {item.childItems.nodes.map((subitem) => {
-                                                            return <li key={subitem.label}>
+                                                            return (
                                                                 <LinkFade url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
-                                                                    {subitem.label}
-                                                                </LinkFade>
-                                                            </li>
+                                                                 <li key={subitem.label}>   {subitem.label}</li>
+                                                                </LinkFade>)
+                                                            
                                                         })}
                                                     </ul>
                                                     : ''}

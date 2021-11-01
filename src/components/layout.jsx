@@ -12,6 +12,7 @@ import "../assets/sass/globale.scss"
 import Header from "./header"
 import Footer from "./footer/footer"
 import Seo from "../components/seo"
+import ScrollTo from "../components/scrollTo"
 
 let slugify = require('slugify')
 
@@ -92,6 +93,7 @@ const Layout = ({ children, locale, translations, pageTitle }) => {
       <div className="container-fluid">
         <Footer translations={translations} locale={locale} />
       </div>
+      <ScrollTo />
     </>
   )
 }

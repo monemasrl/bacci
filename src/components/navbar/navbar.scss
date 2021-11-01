@@ -54,6 +54,7 @@
         ul {
           opacity: 1;
           z-index: 2;
+          box-shadow:4px 4px 0px #c8bbaf85;
         }
       }
       ul {
@@ -62,21 +63,26 @@
         z-index: -1;
         transition: all ease-in-out 0.3s;
         background-color: white;
-        
-        padding: 0;
-        li {
-          margin: 0;
 
+        padding: 0;
+        a {
+          margin: 0;
+          transition: all 0.2s ease-in-out;
+          display: block;
+          padding: 0.7rem 2rem;
+          li {
+            margin: 0;
+          }
           &:hover {
             background-color: $lightBrown;
-            a {
+            
+            li {
               color: white;
             }
           }
 
-          display: block;
-          padding: 1rem 2rem;
-          a {
+       
+          li {
             font-size: 1rem;
           }
           &:hover {
@@ -90,6 +96,7 @@
     color: $brown;
     text-transform: uppercase;
     font-size: 24px;
+    cursor: pointer;
     &:hover {
       text-decoration: underline;
     }
@@ -97,5 +104,5 @@
 }
 
 .main-logo {
-  max-width: 362px;
+  width: 362px;
 }
