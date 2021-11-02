@@ -16,7 +16,7 @@ import ScrollTo from "../components/scrollTo"
 
 let slugify = require('slugify')
 
-const Layout = ({ children, locale, translations, pageTitle }) => {
+const Layout = ({ children, locale, translations, pageTitle,linkState }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -85,7 +85,10 @@ const Layout = ({ children, locale, translations, pageTitle }) => {
         locale={locale} 
         pageTitle={pageTitle} 
         pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''} 
-        currentPath={langFilter.pathPagine.path}/>
+        currentPath={langFilter.pathPagine.path}
+       
+        />
+    
       </div>
 
       <main>{children}</main>

@@ -57,22 +57,21 @@ const NavBar = (props) => {
                             const menuPath = slugify(item.label)
                             return (
                                 <li key={item.label}>
-                                    <Link disabled={item.path === "#"} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath}`}>{item.label}</Link>
+                                    <Link disabled={item.path === "#"} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath.toLowerCase()}`}>{item.label}</Link>
                                 </li>
-
                             )
                         })}
                     </ul>
                     <div className='langbox' >
                         <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} /></div>
-                </div>
+                    </div>
 
             </nav>
             <nav className='container-fluid mainmenu'>
                 <div className="container">
 
                     <div className="main-logo">
-                        <Link to={`${langTag[props.locale] === 'it' ? '/' : '/'+langTag[props.locale] + '/'}`}>
+                        <Link  to={`${langTag[props.locale] === 'it' ? '/' : '/'+langTag[props.locale] + '/'}`}>
                             <StaticImage
                                 placeholder="none"
                                 width={362}
@@ -81,6 +80,7 @@ const NavBar = (props) => {
 
                     </div>
                     <ul>
+   
                         {menuFilter[0].node.menuItems.nodes.map((item) => {
 
                             const menuPath = slugify(item.label)
@@ -95,15 +95,18 @@ const NavBar = (props) => {
                                                     <ul>
                                                         {item.childItems.nodes.map((subitem) => {
                                                             return (
-                                                                <LinkFade url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
-                                                                    <li key={subitem.label}>   {subitem.label}</li>
-                                                                </LinkFade>)
+                                                                <>
+                                                                <LinkFade  key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
+                                                                    <li>   {subitem.label}</li>
+                                                                </LinkFade>
+                                                                
+                                                                </>)
 
                                                         })}
                                                     </ul>
                                                     : ''}
 
-                                            </Link>
+                                                    </Link>
                                         </li> : ''
                                     }
                                 </React.Fragment>

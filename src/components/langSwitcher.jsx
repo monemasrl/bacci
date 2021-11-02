@@ -6,8 +6,7 @@ var slugify = require('slugify')
 const LangSwitcher = (props) => {
 
   const url = props.translations.length !== 0 ? slugify(props.translations[0].post_title) : ''
- 
-  console.log(url.toLowerCase());
+
   return (
     <>{
       <ul className="languages">

@@ -4,7 +4,6 @@ import LayoutFiere from "../components/layout-fiere";
 const Fiere = ({ pageContext }) => {
 
     const {locale, translations, slug, parentPath} = pageContext
-    console.log('langFilter');
 
     return (
         <>

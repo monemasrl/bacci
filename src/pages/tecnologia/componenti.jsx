@@ -148,7 +148,14 @@ const Produzione = ({ data, location }) => {
 
   return (
     <>
-      <Layout pageTitle={dataFilter.title} locale={'it_IT'} translations={dataFilter.translations} pathName={location.pathname}  >
+      <Layout 
+      pageTitle={dataFilter.title} 
+      locale={'it_IT'} 
+      translations={dataFilter.translations} 
+      pathName={location.pathname}  
+    
+      >
+
         <div className="container-fluid componenti">
           <section className="container-fluid sezione-interne">
             <div className="box-sx">

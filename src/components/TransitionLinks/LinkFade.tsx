@@ -5,9 +5,10 @@ interface IProps {
   children: ReactNode;
   node?: ReactNode;
   url: string;
+  linkState:number;
 }
 
-export const LinkFade = ({ children, url }: IProps) => {
+export const LinkFade = ({ children, url, linkState }: IProps) => {
   const exitTransition = {
     length: 0.8,
     zIndex: 2,
