@@ -3,12 +3,12 @@ import './breadcrumb.scss'
 const Breadcrumb = ({ pageTitle, pathName }) => {
     const parentFolder= pathName ? pathName : ''
   
+ 
     return (
-
         <div className="container-fluid breadcrumb">
 
             <div className="container">
-                <h2><span>/{parentFolder}</span><br />{pageTitle}</h2>
+                <h2><span>{pageTitle.toLowerCase() === parentFolder.toLowerCase() ? '' : '/'+parentFolder}</span><br />{pageTitle}</h2>
             </div>
 
         </div>

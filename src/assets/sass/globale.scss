@@ -21,6 +21,10 @@ h3 {
   text-transform: uppercase;
   font-family: $title;
 }
+.tl-edges {
+
+  overflow-x: visible;
+}
 
 div[class^="box"] h2 strong,
 div[class^="box"] h1.titolo strong {
@@ -892,7 +896,46 @@ section.container.repeater.no-flag {
 
     margin-bottom: 2rem;
     margin-top: 20px;
+   
+    &::first-line {
+      line-height: 20px;
+    }
 
+    font-weight: 400;
+
+    strong {
+      display: block;
+      margin-top: 1rem;
+      font-size: 120px;
+      font-weight: 600;
+    }
+  }
+}
+/* ANCHOR: china */
+.china{
+  @include sezione-interne;
+  @include sezione-testo-sx;
+  @include sezione-testo-dx;
+  .sezione-3 {
+    p {
+      margin: 1rem auto 2rem auto;
+    }
+    h2 {
+      margin-bottom: 0;
+    }
+    .gatsby-image-wrapper-constrained{
+      margin: 2rem 0;
+    }
+  }
+  .sezione-testo-sx h2{
+    text-align: left
+  }
+  .titolo {
+    @include h2-sezioni(72px);
+
+    margin-bottom: 3rem;
+    margin-top: 20px;
+    text-align: center;
     &::first-line {
       line-height: 20px;
     }

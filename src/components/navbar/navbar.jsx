@@ -57,7 +57,7 @@ const NavBar = (props) => {
                             const menuPath = slugify(item.label)
                             return (
                                 <li key={item.label}>
-                                    <Link disabled={item.path === "#"} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath.toLowerCase()}`}>{item.label}</Link>
+                                    <LinkFade disabled={item.path === "#"} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath.toLowerCase()}`}>{item.label}</LinkFade>
                                 </li>
                             )
                         })}

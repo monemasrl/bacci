@@ -11,34 +11,39 @@ import { useStaticQuery, graphql } from "gatsby"
 import "../assets/sass/globale.scss"
 import Header from "./header"
 import Footer from "./footer/footer"
-import Seo from "../components/seo"
-import ScrollTo from "../components/scrollTo"
+
 
 let slugify = require('slugify')
 
-const Layout = ({ children, locale, translations, pageTitle,linkState }) => {
+const LayoutFiere = ({ children, locale, translations, pageTitle, pathName}) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+    {
       site {
         siteMetadata {
           title
         }
       }
 
-      allWpPage{
+      allWpFiliale {
         edges {
           node {
-            locale{
+          title
+          pathPagine{
+            path
+          }
+            locale {
               locale
             }
-            title
-            pathPagine {
-                    path
-                }
             translated {
                 pathPagine {
                     path
                 }
+            }
+            translations {
+              href
+              id
+              locale
+              post_title
             }
             seo {
               canonical
@@ -71,38 +76,32 @@ const Layout = ({ children, locale, translations, pageTitle,linkState }) => {
       }
     }
   `)
-  const langFilter = data.allWpPage.edges.filter((item) => {
+  const langFilter = data.allWpFiliale.edges.filter((item) => {
     return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node
 
   return (
     <>
- 
-      <Seo title="Mission" seo={langFilter.seo} />
+  
       <div className="container-fluid" >
-        <Header 
-        translations={translations} 
+        <Header translations={translations} 
         locale={locale} 
         pageTitle={pageTitle} 
-        pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''} 
-        currentPath={langFilter.pathPagine.path}
-       
-        />
-    
+        pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''}
+        currentPath={langFilter.pathPagine.path}  />
       </div>
+
 
       <main>{children}</main>
 
-   
+
+
+      <div className="container-fluid">
         <Footer translations={translations} locale={locale} />
-  
-      <ScrollTo />
+      </div>
     </>
   )
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
-export default Layout
+export default LayoutFiere

@@ -84,7 +84,7 @@ const Produzione = ({ data, location }) => {
     return (item.node.locale.locale === 'it_IT')
   })[0].node
   const dataFilter = langFilter
-  
+  console.log(location);
   return (
     <>
       <Layout pageTitle={dataFilter.title} locale={'it_IT'} translations={dataFilter.translations} pathName = {location.pathname}  >
@@ -98,7 +98,7 @@ const Produzione = ({ data, location }) => {
             <GatsbyImage image={dataFilter.filialeIndex.sezioneFilialeindex1.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.filialeIndex.sezioneFilialeindex1.immagine.altText} />
           </div>
         </section>
-        <section className="container sezione-3">
+{/*         <section className="container sezione-3">
           <div className="box-sx">
          <Link to="america">   <h2 dangerouslySetInnerHTML={{ __html: dataFilter.filialeIndex.sezioneFilialeindex2.titolo }} /></Link>
             <p className="sottotitolo">{dataFilter.filialeIndex.sezioneFilialeindex2.sottotitolo}</p>
@@ -111,10 +111,12 @@ const Produzione = ({ data, location }) => {
             <p dangerouslySetInnerHTML={{ __html: dataFilter.filialeIndex.sezioneFilialeindex2.paragrafo2 }} />
 
           </div>
-        </section>
+        </section> */}
         <section className="container sezione-3">
           <div className="box-sx">
+          <Link to="bacci-china"> 
             <h2 dangerouslySetInnerHTML={{ __html: dataFilter.filialeIndex.sezioneFilialeindex3.titolo }} />
+            </Link>
             <p className="sottotitolo">{dataFilter.filialeIndex.sezioneFilialeindex3.sottotitolo}</p>
             <GatsbyImage image={dataFilter.filialeIndex.sezioneFilialeindex3.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.filialeIndex.sezioneFilialeindex3.immagine.altText} />
             <p dangerouslySetInnerHTML={{ __html: dataFilter.filialeIndex.sezioneFilialeindex3.paragrafo }} />
@@ -127,7 +129,6 @@ const Produzione = ({ data, location }) => {
           </div>
         </section>
 
-  
 
         </div>
       </Layout>

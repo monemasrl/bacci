@@ -108,6 +108,7 @@ $big: "only screen and (max-width : 1900px)";
         &::first-line {
             line-height: 20px;
         }
+        line-height: 1.5;
         &::before{
           content:'';
           position: absolute;
