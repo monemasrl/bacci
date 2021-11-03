@@ -2,7 +2,8 @@ module.exports = {
   siteMetadata: {
     title: `Bacci 1918`,
     description: `lorem ipsum`,
-    author: 'Tesecom.it'
+    author: 'Tesecom.it',
+    siteUrl: 'https://bacci.com'
   },
   plugins: [
     "gatsby-plugin-sass",
