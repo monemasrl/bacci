@@ -141,7 +141,7 @@ const Footer = () => {
                     </div>
                     <div className="footer-col">
                         <ul>
-                            <li>Cap. Sociale 1.500.000,00 i.v. - Partita iva / codice fiscale 022456588996365</li>
+                            <li>Cap. Sociale 1.500.000,00 i.v. <br/> Partita iva / codice fiscale 022456588996365</li>
                             <li>
                                 <Link to="/"> Privacy Policy</Link>	<Link to="/">Termini e condizioni</Link>	</li>
                         </ul>
