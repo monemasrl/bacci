@@ -4,6 +4,7 @@
 @import "@fontsource/oswald/300.css";
 @import "@fontsource/oswald/400.css";
 @import "@fontsource/oswald/600.css";
+
 $lightBrown: #c8bcb0;
 $brown: #a4917d;
 $textColor: #7b8288;
@@ -20,229 +21,245 @@ $wide: "only screen and (max-width : 1620px)";
 $big: "only screen and (max-width : 1900px)";
 
 @mixin h2-sezioni($size) {
-  color: $brown;
-  text-transform: uppercase;
-  font-size: $size;
-  @media #{$landscape} {
-    font-size: 50px;
-  }
+    color: $brown;
+    text-transform: uppercase;
+    font-size: $size;
+
+    @media #{$landscape} {
+        font-size: 50px;
+    }
 }
 
 @mixin h1-sezioni($size) {
-  color: $brown;
-  text-transform: uppercase;
-  font-size: $size;
-  line-height: 100px;
+    color: $brown;
+    text-transform: uppercase;
+    font-size: $size;
+    line-height: 100px;
 }
 
 @mixin button-sezione($padding, $margin) {
-  height: 45px;
-  border: 1px solid $lightBrown;
-  display: inline-block;
-  padding: 0.2rem $padding;
-  border-radius: 30px;
-  margin-top: $margin;
-  font-size: 24px;
-  color: white;
-  text-transform: uppercase;
-  vertical-align: middle;
-  line-height: 45px;
-  color: $brown;
-  &:hover {
-    cursor: pointer;
-    background-color: $lightBrown;
+    border: 1px solid $lightBrown;
+    display: inline-block;
+    padding: 0.2rem $padding;
+    border-radius: 30px;
+    margin-top: $margin;
+    font-size: 24px;
     color: white;
-  }
+    text-transform: uppercase;
+    vertical-align: middle;
+    line-height: 45px;
+    color: $brown;
+    text-align: center;
+
+    @media #{$landscape} {
+        display: block;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: $lightBrown;
+        color: white;
+    }
 }
+
 @mixin sezione-interne {
-  .sezione-interne {
-    margin: 140px auto 50px auto;
-    display: flex;
-    justify-content: flex-end;
-    .button-sezione {
-        @include button-sezione(5rem, 17%);
-    }
+    .sezione-interne {
+        margin: 140px auto 50px auto;
+        display: flex;
+        justify-content: flex-end;
 
-    h2 {
-        @include h2-sezioni(72px);
-
-        &::first-line {
-            line-height: 20px;
+        .button-sezione {
+            @include button-sezione(5rem, 17%);
         }
 
-        font-weight: 400;
+        h2 {
+            @include h2-sezioni(72px);
 
-        strong {
-            font-size: 120px;
-            font-weight: 600;
+            &::first-line {
+                line-height: 20px;
+            }
+
+            font-weight: 400;
+
+            strong {
+                font-size: 120px;
+                font-weight: 600;
+            }
         }
-    }
 
-    .box-sx {
-        max-width: 660px;
-        padding-left: 2rem;
-    
+        .box-sx {
+            max-width: 660px;
+            padding-left: 2rem;
 
-        p {
-            font-size: 28px;
-            color: $textColor;
-            line-height: 38px;
+            p {
+                font-size: 28px;
+                color: $textColor;
+                line-height: 38px;
+            }
         }
-    }
 
-    .box-dx {
-        padding-left: 2rem;
+        .box-dx {
+            padding-left: 2rem;
+        }
     }
 }
-}
 
-@mixin sezione-testo-sx{
-  .sezione-testo-sx {
-    margin: 140px auto 50px auto;
-    justify-content: space-around;
-
-    h2 {
-        @include h2-sezioni(60px);
-        color: $textColor;
-        position: relative;
-        &::first-line {
-            line-height: 20px;
-        }
-        line-height: 1.5;
-        &::before{
-          content:'';
-          position: absolute;
-          background-color: $brown;
-          width: 10px;
-          height: 120px;
-          left: -30px;
-          top: -20px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            
-            font-size: 60px;
-            font-weight: 600;
-        }
-    }
-
-    .box-sx {
-        max-width: 660px;
-        padding-left: 2rem;
-  
-
-        p {
-            font-size: 28px;
-            color: $textColor;
-            line-height: 38px;
-            margin-top: 3rem;
-        }
-    }
-
-    .box-dx {
-        padding-left: 2rem;
-    }
-}
-}
-
-@mixin sezione-testo-dx{
-  .sezione-testo-dx {
-    margin: 140px auto 50px auto;
-    justify-content: space-around;
-
-    h2 {
-        @include h2-sezioni(60px);
-        color: $textColor;
-        position: relative;
-        &::first-line {
-            line-height: 20px;
-        }
-        &::before{
-          content:'';
-          position: absolute;
-          background-color: $brown;
-          width: 10px;
-          height: 120px;
-          left: -30px;
-          top: -20px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-        }
-    }
-
-    .box-dx {
-      flex: 1;
-        padding-right: 2rem;
-  
-
-        p {
-            font-size: 28px;
-            color: $textColor;
-            line-height: 38px;
-            margin-top: 2rem;
-        }
-    }
-
-    .box-sx {
-      flex: 0 1 793px;
- margin-right: 3rem;
+@mixin sezione-testo-sx {
+    .sezione-testo-sx {
         
-    }
-}
-}
+        justify-content:space-between;
 
+        h2 {
+            @include h2-sezioni(60px);
 
-@mixin sezione-testo-no-immagine{
-  .sezione-testo-no-immagine {
-    margin: 140px auto 50px auto;
-    justify-content: space-around;
-
-    h2 {
-        @include h2-sezioni(60px);
-        color: $textColor;
-        position: relative;
-        &::first-line {
-            line-height: 20px;
-        }
-        &::before{
-          content:'';
-          position: absolute;
-          background-color: $brown;
-          width: 10px;
-          height: 120px;
-          left: -30px;
-          top: -20px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            
-            font-size: 60px;
-            font-weight: 600;
-        }
-    }
-
-    .box-sx {
-        
-        padding-left: 2rem;
-  
-
-        p {
-            font-size: 28px;
             color: $textColor;
-            line-height: 38px;
-            margin-top: 3rem;
+            position: relative;
+
+            &::first-line {
+                line-height: 20px;
+            }
+
+            line-height: 1.5;
+
+            &::before {
+                content: '';
+                position: absolute;
+                background-color: $brown;
+                width: 10px;
+                height: 120px;
+                left: -30px;
+                top: -20px;
+            }
+
+            font-weight: 400;
+
+            strong {
+                font-size: 60px;
+                font-weight: 600;
+            }
+        }
+
+        .box-sx {
+            max-width: 660px;
+            padding-left: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 0;
+
+            p {
+                font-size: 28px;
+                color: $textColor;
+                line-height: 38px;
+                margin-top: 2rem;
+                margin-bottom: 0;
+            } 
+        }
+
+        .box-dx {
+            padding-left: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 0;
         }
     }
-
-
 }
+
+@mixin sezione-testo-dx {
+    .sezione-testo-dx {
+        
+        justify-content: space-between;
+
+        h2 {
+            @include h2-sezioni(60px);
+
+            color: $textColor;
+            position: relative;
+
+            &::first-line {
+                line-height: 20px;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                background-color: $brown;
+                width: 10px;
+                height: 120px;
+                left: -30px;
+                top: -20px;
+            }
+
+            font-weight: 400;
+
+            strong {
+                font-size: 120px;
+                font-weight: 600;
+            }
+        }
+
+        .box-dx {
+            flex: 1;
+            padding-right: 2rem;
+            margin-top: 4rem;
+            p {
+                font-size: 28px;
+                color: $textColor;
+                line-height: 38px;
+                margin-top: 2rem;
+            }
+        }
+
+        .box-sx {
+            flex: 0 1 793px;
+            margin-right: 3rem;
+            margin-top: 4rem;
+        }
+    }
+}
+
+@mixin sezione-testo-no-immagine {
+    .container.sezione-testo-no-immagine {
+     
+        justify-content: space-around;
+
+        h2 {
+            @include h2-sezioni(60px);
+
+            color: $textColor;
+            position: relative;
+
+            &::first-line {
+                line-height: 20px;
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                background-color: $brown;
+                width: 10px;
+                height: 120px;
+                left: -30px;
+                top: 0px;
+            }
+
+            font-weight: 400;
+
+            strong {
+                font-size: 60px;
+                font-weight: 600;
+            }
+        }
+
+        .box-sx {
+            padding-left: 2rem;
+            margin-top: 4rem;
+
+            p {
+                font-size: 28px;
+                color: $textColor;
+                line-height: 38px;
+                margin-top: 3rem;
+            }
+        }
+    }
 }

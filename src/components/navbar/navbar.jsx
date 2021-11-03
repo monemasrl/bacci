@@ -76,7 +76,7 @@ const NavBar = (props) => {
                             <StaticImage
                                 placeholder="none"
                                 width={362}
-                                height={77} src="../../images/logo.png" alt="Bacci logo" />
+                                src="../../images/logo.png" alt="Bacci logo" />
                         </Link>
 
                     </div>

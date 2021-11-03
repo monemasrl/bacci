@@ -2,6 +2,7 @@
 
 footer {
     display: block;
+    margin-top: 4rem;
 
     a {
         color: white;
@@ -27,9 +28,25 @@ footer {
             color: white;
             margin: 0;
 
+            @media #{$landscape} {
+                font-size: 40px;
+            }
+
+            @media #{$landscape} {
+                font-size: 30px;
+            }
+
             strong {
                 display: block;
                 font-size: 90px;
+
+                @media #{$landscape} {
+                    font-size: 60px;
+                }
+
+                @media #{$landscape} {
+                    font-size: 40px;
+                }
             }
         }
 
@@ -43,11 +60,25 @@ footer {
         .box-sx {
             flex: 1;
             max-width: 610px;
+
+            @media #{$landscape} {
+                padding: 2rem;
+                max-width: 100%;
+                text-align: center;
+            }
+
+            @media #{$landscape} {
+                padding: 1rem;
+            }
         }
 
         .box-dx {
             .form-contatti {
                 max-width: 800px;
+
+                @media #{$landscape} {
+                    max-width: 100%;
+                }
 
                 label[for="privacy"] {
                     display: block;
@@ -71,6 +102,10 @@ footer {
                         height: 20px;
                         width: 20px;
                     }
+
+                    @media #{$landscape} {
+                        width: 330px;
+                    }
                 }
 
                 textarea {
@@ -79,11 +114,26 @@ footer {
                     padding: 5px;
                     box-sizing: border-box;
                     border: 0;
+
+                    @media #{$landscape} {
+                        width: 98%;
+                    }
+                }
+
+                .box-form-message {
+                    @media #{$landscape} {
+                        max-width: 680px;
+                        margin: 0 auto;
+                    }
                 }
 
                 .box-submit {
                     text-align: right;
                     margin: 2rem 0;
+
+                    @media #{$landscape} {
+                        text-align: center;
+                    }
 
                     .button-sezione {
                         @include button-sezione(6rem, 1%);
@@ -106,6 +156,11 @@ footer {
 
         .footer-col {
             width: 15%;
+
+            @media #{$landscape} {
+                width: 100%;
+                text-align: center;
+            }
 
             ul {
                 list-style: none;
@@ -152,6 +207,11 @@ footer {
 
         .footer-col {
             width: 33%;
+
+            @media #{$landscape} {
+                width: 100%;
+                text-align: center;
+            }
         }
     }
 
@@ -159,5 +219,9 @@ footer {
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+
+        @media #{$landscape} {
+            justify-content: center;
+        }
     }
 }
