@@ -1,13 +1,20 @@
 import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
-import { langTag } from '../../../data-translations'
-import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
 import './footer.scss'
-var slugify = require('slugify')
+
 
 const Footer = () => {
+    const data = useStaticQuery(graphql`
+    {
+      site {
+        siteMetadata {
+          title
+        }
+      }
 
+    }
+  `)
     return (
         <footer>
             <section className='container-fuid footer1 '>
@@ -61,14 +68,87 @@ const Footer = () => {
                 </div>
             </section>
             <section className='container footer2'>
-                <div className="footer-col">test</div>
-                <div className="footer-col">test</div>
-                <div className="footer-col">test</div>
-                <div className="footer-col">test</div>
-                <div className="footer-col">test</div>
-                <div className="footer-col">test</div>
+                <div className="footer-col">
+                    <ul>
+                        <li>Azienda</li>
+                        <li>GRUPPO</li>
+                        <li>MISSION</li>
+                        <li>PRODUZIONE</li>
+                        <li>STORIA</li>
+                    </ul>
+                </div>
+                <div className="footer-col">
+                    <ul>
+                        <li>macchine</li>
+                        <li>FORATRICI</li>
+                        <li>TORNITURA</li>
+                        <li>FRESATURA</li>
+                        <li>MORTASA/TELONE</li>
+                        <li>DOPPIE TESTE</li>
+                        <li>SPECIALI</li>
+                        <li>MATERIALI COMPOSITI</li>
+
+                    </ul>
+                </div>
+                <div className="footer-col">
+                    <ul>
+                        <li>tecnologia</li>
+                        <li>RICERCA E SVILUPPO</li>
+                        <li>TECNOLOGIE DISTINTIVE</li>
+                        <li>COMPONENTI</li>
+                        <li>PERSONALIZZAZIONE</li>
+                        <li>SERVICE</li>
+                        <li>SOFTWARE</li>
+                    </ul>
+                </div>
+                <div className="footer-col">
+                    <ul>
+                        <li>filiali</li>
+                        <li>BACCI AMERICA</li>
+                        <li>BACCI CHINA</li>
+
+                    </ul>
+                </div>
+                <div className="footer-col">
+                    <ul>
+                        <li>contatti</li>
+                        <li>richiedi informazioni</li>
+                    </ul>
+                </div>
+                <div className="footer-col">
+                    <ul>
+                        <li>seguici su</li>
+                        <li>Facebook</li>
+                        <li>YouTube</li>
+                    </ul>
+                </div>
             </section>
-            <section className='container footer3'></section>
+            <section className='container-fluid footer3'>
+
+                <div className="container">
+                    <div className="footer-col">
+                        <StaticImage
+                            placeholder="none"
+                            width={239}
+                            src="../../images/logo-footer.png" alt="Bacci logo" />
+                    </div>
+                    <div className="footer-col">
+                        <ul>
+                            <li>Paolino Bacci S.r.l.</li>
+                            <li>VIA PALERMO, 32, 56021, Cascina, Pisa - ITALY</li>
+                            <li>Tel. + 39 050 252525</li>
+                        </ul>
+                    </div>
+                    <div className="footer-col">
+                        <ul>
+                            <li>Cap. Sociale 1.500.000,00 i.v. - Partita iva / codice fiscale 022456588996365</li>
+                            <li>
+                                <Link to="/"> Privacy Policy</Link>	<Link to="/">Termini e condizioni</Link>	</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
         </footer>
     )
 
