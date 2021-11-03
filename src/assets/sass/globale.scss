@@ -27,9 +27,16 @@ h3 {
 }
 
 div[class^="box"] h2 strong,
-div[class^="box"] h1.titolo strong {
+
+ h1.titolo strong {
   @media #{$landscape} {
-    font-size: 30px;
+    font-size: 70px;
+  }
+}
+
+ h1.titolo{
+  @media #{$landscape} {
+    font-size: 50px;
   }
 }
 .animate {

@@ -189,7 +189,7 @@ const IndexPage = ({ data, location }) => {
               <div className="box-dx">
                 <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.paragrafo }} />
 
-                <Link className="button-sezione" to={dataHome.home.sezione2.link.url}>{dataHome.home.sezione3.link.title}</Link>
+                <Link className="button-sezione" to={dataHome.home.sezione3.link.url}>{dataHome.home.sezione3.link.title}</Link>
 
               </div>
             </section>

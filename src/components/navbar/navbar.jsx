@@ -62,16 +62,17 @@ const NavBar = (props) => {
                             )
                         })}
                     </ul>
-                    <div className='langbox' >
-                        <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} /></div>
-                    </div>
+                  
+                        <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} />
+              
+                </div>
 
             </nav>
             <nav className='container-fluid mainmenu'>
                 <div className="container">
 
                     <div className="main-logo">
-                        <Link  to={`${langTag[props.locale] === 'it' ? '/' : '/'+langTag[props.locale] + '/'}`}>
+                        <Link to={`${langTag[props.locale] === 'it' ? '/' : '/' + langTag[props.locale] + '/'}`}>
                             <StaticImage
                                 placeholder="none"
                                 width={362}
@@ -80,7 +81,7 @@ const NavBar = (props) => {
 
                     </div>
                     <ul>
-   
+
                         {menuFilter[0].node.menuItems.nodes.map((item) => {
 
                             const menuPath = slugify(item.label)
@@ -96,17 +97,17 @@ const NavBar = (props) => {
                                                         {item.childItems.nodes.map((subitem) => {
                                                             return (
                                                                 <>
-                                                                <LinkFade  key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
-                                                                    <li>   {subitem.label}</li>
-                                                                </LinkFade>
-                                                                
+                                                                    <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
+                                                                        <li>   {subitem.label}</li>
+                                                                    </LinkFade>
+
                                                                 </>)
 
                                                         })}
                                                     </ul>
                                                     : ''}
 
-                                                    </Link>
+                                            </Link>
                                         </li> : ''
                                     }
                                 </React.Fragment>

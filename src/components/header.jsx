@@ -4,7 +4,6 @@ import NavBar from "./navbar/navbar"
 import Breadcrumb from "./breadcrumb/breadCrumb"
 const Header = ({ locale, translations, pageTitle, pathName, currentPath }) => (
   <header>
-    {   console.log(currentPath)}
 
     <NavBar locale={locale} translations={translations} pathName={pathName}  />
 

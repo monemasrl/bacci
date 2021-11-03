@@ -24,7 +24,7 @@ $big: "only screen and (max-width : 1900px)";
   text-transform: uppercase;
   font-size: $size;
   @media #{$landscape} {
-    font-size: 30px;
+    font-size: 50px;
   }
 }
 
