@@ -8,37 +8,39 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import "../assets/sass/globale.scss"
-import Header from "./header"
-import Footer from "./footer/footer"
-import Seo from "../components/seo"
-import ScrollTo from "../components/scrollTo"
+import "../../assets/sass/globale.scss"
+import Header from "../header"
+import Footer from "../footer/footer"
+import Seo from "../seo"
+import ScrollTo from "../scrollTo"
 
 let slugify = require('slugify')
 
-const Layout = ({ children, locale, translations, pageTitle,linkState }) => {
+const LayoutNews = ({ children, locale, translations, pageTitle }) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
+    {
       site {
         siteMetadata {
           title
         }
       }
 
-      allWpPage{
+      allWpPost {
         edges {
           node {
-            locale{
+            title
+            slug
+            content
+            nodeType
+            locale {
               locale
             }
-            title
-            pathPagine {
-                    path
-                }
-            translated {
-                pathPagine {
-                    path
-                }
+        
+            translations {
+              href
+              id
+              locale
+              post_title
             }
             seo {
               canonical
@@ -71,38 +73,28 @@ const Layout = ({ children, locale, translations, pageTitle,linkState }) => {
       }
     }
   `)
-  const langFilter = data.allWpPage.edges.filter((item) => {
+  console.log('pagetitle',pageTitle);
+   const langFilter = data.allWpPost.edges.filter((item) => {
     return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node
 
   return (
     <>
- 
-      <Seo title="Mission" seo={langFilter.seo} />
+      <Seo title={pageTitle} seo={langFilter.seo} />
       <div className="container-fluid" >
-        <Header 
-        translations={translations} 
-        locale={locale} 
-        pageTitle={pageTitle} 
-        pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''} 
-        currentPath={langFilter.pathPagine.path}
-       
-        />
-    
+        <Header translations={translations} locale={locale} pageTitle={pageTitle}  nodeType={langFilter.nodeType}/>
       </div>
+
 
       <main>{children}</main>
 
-   
-        <Footer translations={translations} locale={locale} />
-  
+
+
+      <Footer translations={translations} locale={locale} />
       <ScrollTo />
     </>
   )
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
-export default Layout
+export default LayoutNews

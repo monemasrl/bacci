@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import Layout from "../../components/layout"
+import Layout from "../../components/layout/layout"
 
 
 export const query = graphql`
@@ -146,7 +146,7 @@ const Produzione = ({ data, location }) => {
 
         <section className="container sezione-testo-sx">
           <div className="box-sx">
-            <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission3.titolo }} />
+                      <h2 className="titoli" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission3.titolo }} />
             <p>{dataFilter.mission.sezioneMission3.paragrafo}</p>
           </div>
           <div className="box-dx">
@@ -159,13 +159,13 @@ const Produzione = ({ data, location }) => {
           <GatsbyImage image={dataFilter.mission.sezioneMission4.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.mission.sezioneMission4.immagine.altText} />
           </div>
           <div className="box-dx">
-          <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission4.titolo }} />
+                    <h2 className="titoli" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission4.titolo }} />
           <p>{dataFilter.mission.sezioneMission4.paragrafo}</p>
           </div>
         </section>
         <section className="container sezione-testo-sx">
           <div className="box-sx">
-            <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission5.titolo }} />
+                      <h2 className="titoli" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission5.titolo }} />
             <p>{dataFilter.mission.sezioneMission5.paragrafo}</p>
           </div>
           <div className="box-dx">

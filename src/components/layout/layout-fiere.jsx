@@ -8,9 +8,11 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import "../assets/sass/globale.scss"
-import Header from "./header"
-import Footer from "./footer/footer"
+import "../../assets/sass/globale.scss"
+import Header from "../header"
+import Footer from "../footer/footer"
+import Seo from "../seo"
+import ScrollTo from "../scrollTo"
 
 
 let slugify = require('slugify')
@@ -60,9 +62,9 @@ const LayoutFiere = ({ children, locale, translations, pageTitle, pathName}) => 
 
 
 
-      <div className="container-fluid">
+ 
         <Footer translations={translations} locale={locale} />
-      </div>
+        <ScrollTo />
     </>
   )
 }

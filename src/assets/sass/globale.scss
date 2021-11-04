@@ -12,6 +12,29 @@ html {
     font-family: $text;
 }
 
+h1.titolo {
+    @include h2-sezioni(60px);
+
+    color: $textColor;
+    margin-top: 0;
+    display: block;
+    line-height: 1.2;
+    font-weight: 400;
+    color: $brown;
+
+    span {
+        display: block;
+    }
+
+    strong {
+        display: block;
+        font-size: 120px;
+        font-weight: 600;
+        line-height: 1;
+        margin-top: 0;
+    }
+}
+
 a {
     text-decoration: none;
 }
@@ -464,6 +487,10 @@ section.container.repeater.no-flag {
         line-height: 6.4rem;
         margin-bottom: 2rem;
 
+        strong {
+            line-height: 1;
+        }
+
         @media #{$landscape} {
             line-height: 4.4rem;
         }
@@ -472,50 +499,11 @@ section.container.repeater.no-flag {
     h2 {
         margin-top: 1rem;
     }
-
-    .titolo {
-        @include h2-sezioni(72px);
-
-        &::first-line {
-            line-height: 20px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-
-            @media #{$landscape} {
-                font-size: 66px;
-            }
-        }
-    }
 }
 
 /* ANCHOR: PAG-Produzione */
 
 .produzione {
-    .titolo {
-        @include h2-sezioni(72px);
-
-        font-weight: 400;
-        margin-top: 0;
-        margin-bottom: 0;
-
-        &::first-line {
-            line-height: 70px;
-        }
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-            display: block;
-            line-height: 120px;
-            margin-top: 5px;
-        }
-    }
-
     .sezione-1 {
         margin: 140px auto 50px auto;
 
@@ -574,24 +562,6 @@ section.container.repeater.no-flag {
 /* ANCHOR: PAG-Gruppo */
 .gruppo-bacci,
 .bacci-group {
-    .titolo {
-        @include h2-sezioni(72px);
-
-        margin-top: 0;
-
-        &::first-line {
-            line-height: 60px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            display: block;
-            font-size: 120px;
-            font-weight: 600;
-        }
-    }
-
     .sezione-1 {
         margin: 140px auto 50px auto;
 
@@ -698,22 +668,25 @@ section.container.repeater.no-flag {
 /* ANCHOR: Mission */
 
 .mission {
-    .titolo {
-        @include h2-sezioni(72px);
+    .titoli {
+        @include h2-sezioni(60px);
 
-        line-height: 100px;
-        margin-bottom: 2rem;
-        margin-top: 20px;
-
-        &::first-line {
-            line-height: 20px;
-        }
-
+        color: $textColor;
+        margin-top: 0;
+        display: block;
+        line-height: 1;
         font-weight: 400;
 
         strong {
+            &::first-line {
+                line-height: 0;
+            }
+
+            display: block;
             font-size: 120px;
             font-weight: 600;
+            line-height: 1;
+            margin-top: 0;
         }
     }
 }
@@ -747,6 +720,7 @@ section.container.repeater.no-flag {
     .sezione-testo-sx,
     .sezione-testo-no-immagine {
         margin-top: 3rem;
+
         h2 {
             margin-top: 0;
             line-height: 63px;
@@ -774,27 +748,6 @@ section.container.repeater.no-flag {
             margin-top: 2rem;
         }
     }
-
-    .titolo {
-        @include h2-sezioni(72px);
-
-        line-height: 100px;
-        margin-bottom: 2rem;
-        margin-top: 20px;
-        font-weight: 400;
-
-        &::first-line {
-            line-height: 20px;
-        }
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-            display: block;
-            line-height: 1;
-            margin-top: 1.7rem;
-        }
-    }
 }
 
 /*ANCHOR: Componenti*/
@@ -815,37 +768,6 @@ section.container.repeater.no-flag {
 
     @include sezione-testo-dx;
 
-    .titolo {
-        @include h2-sezioni(72px);
-
-        line-height: 100px;
-        margin-bottom: 2rem;
-        margin-top: 20px;
-        font-weight: 400;
-
-        &::first-line {
-            line-height: 20px;
-        }
-
-        strong:nth-child(1) {
-            font-size: 120px;
-            font-weight: 600;
-            display: block;
-            line-height: 1;
-            margin-top: 1.7rem;
-            margin-bottom: 3rem;
-        }
-
-        strong:nth-child(2) {
-            font-size: 120px;
-            font-weight: 600;
-            display: block;
-            line-height: 1;
-            margin-top: 0rem;
-            margin-bottom: 2rem;
-        }
-    }
-
     section.container.repeater {
         justify-content: center;
 
@@ -861,27 +783,6 @@ section.container.repeater.no-flag {
     .sezione-testo-sx {
         p {
             margin-top: 2rem;
-        }
-    }
-
-    .titolo {
-        @include h2-sezioni(72px);
-
-        line-height: 100px;
-        margin-bottom: 2rem;
-        margin-top: 20px;
-        font-weight: 400;
-
-        &::first-line {
-            line-height: 20px;
-        }
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-            display: block;
-            line-height: 1;
-            margin-top: 0rem;
         }
     }
 
@@ -919,37 +820,6 @@ section.container.repeater.no-flag {
     }
 
     @include sezione-testo-dx;
-
-    .titolo {
-        @include h2-sezioni(72px);
-
-        line-height: 100px;
-        margin-bottom: 2rem;
-        margin-top: 20px;
-        font-weight: 400;
-
-        &::first-line {
-            line-height: 20px;
-        }
-
-        strong:nth-child(1) {
-            font-size: 120px;
-            font-weight: 600;
-            display: block;
-            line-height: 1;
-            margin-top: 1.7rem;
-            margin-bottom: 0rem;
-        }
-
-        strong:nth-child(2) {
-            font-size: 120px;
-            font-weight: 600;
-            display: block;
-            line-height: 1;
-            margin-top: 0rem;
-            margin-bottom: 2rem;
-        }
-    }
 
     section.container.repeater {
         justify-content: center;
@@ -993,28 +863,6 @@ section.container.repeater.no-flag {
 
     @include sezione-testo-dx;
 
-    .titolo {
-        @include h2-sezioni(72px);
-
-        line-height: 100px;
-        margin-bottom: 2rem;
-        margin-top: 20px;
-        font-weight: 400;
-
-        &::first-line {
-            line-height: 20px;
-        }
-
-        strong {
-            font-size: 120px;
-            font-weight: 600;
-            display: block;
-            line-height: 1;
-            margin-top: 1.7rem;
-            margin-bottom: 3rem;
-        }
-    }
-
     section.container.repeater {
         justify-content: center;
 
@@ -1039,26 +887,6 @@ section.container.repeater.no-flag {
 
         h2 {
             margin-bottom: 0;
-        }
-    }
-
-    .titolo {
-        @include h2-sezioni(72px);
-
-        margin-bottom: 2rem;
-        margin-top: 20px;
-
-        &::first-line {
-            line-height: 20px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            display: block;
-            margin-top: 1rem;
-            font-size: 120px;
-            font-weight: 600;
         }
     }
 }
@@ -1086,25 +914,10 @@ section.container.repeater.no-flag {
     .sezione-testo-sx h2 {
         text-align: left;
     }
+}
 
-    .titolo {
-        @include h2-sezioni(72px);
+/*ANCHOR: newsIndex */
 
-        margin-bottom: 3rem;
-        margin-top: 20px;
-        text-align: center;
-
-        &::first-line {
-            line-height: 20px;
-        }
-
-        font-weight: 400;
-
-        strong {
-            display: block;
-            margin-top: 1rem;
-            font-size: 120px;
-            font-weight: 600;
-        }
-    }
+.col-news {
+    max-width: 33%;
 }

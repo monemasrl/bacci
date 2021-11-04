@@ -82,10 +82,13 @@ footer {
 
                 label[for="privacy"] {
                     display: block;
-
+                    @media #{$phone}{
+                        padding: 1rem;
+                    }
                     span {
                         color: white;
                     }
+                    
                 }
 
                 input {
@@ -124,6 +127,9 @@ footer {
                     @media #{$landscape} {
                         max-width: 680px;
                         margin: 0 auto;
+                    }
+                    @media #{$phone}{
+                        padding: 1rem;
                     }
                 }
 

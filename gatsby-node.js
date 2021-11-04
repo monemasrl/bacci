@@ -1,5 +1,5 @@
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
- 
+
   const result = await graphql(` 
    { 
        allWpFiera {
@@ -25,6 +25,25 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           }
         }
       }
+      allWpPost {
+        edges {
+          node {
+            content
+            title
+            slug
+            locale {
+              locale
+            }
+            translations {
+              href
+              id
+              locale
+              post_title
+            }
+          }
+        }
+      }
+
     }
     `);
 
@@ -47,7 +66,31 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         locale: entry.node.locale.locale,
         translations: entry.node.translations,
         slug: entry.node.slug,
-        parentPath: entry.node.fiere.path
+        parentPath: entry.node.fiere.path,
+      }
+    })
+
+
+  })
+
+  const news = result.data.allWpPost.edges
+
+  news.forEach((entry) => {
+
+    const urlBase = langTag[entry.node.locale.locale] === 'it' ? '/' : `/${langTag[entry.node.locale.locale]}/`
+
+
+
+    createPage({
+      path: `${urlBase}news/${entry.node.slug}`,
+      component: require.resolve('./src/templates/news.jsx'),
+      context: {
+        content: entry.node.content,
+        locale: entry.node.locale.locale,
+        translations: entry.node.translations,
+        slug: entry.node.slug,
+        title: entry.node.title,
+       
       }
     })
 

@@ -1,5 +1,5 @@
 import React from "react";
-import LayoutFiere from "../components/layout-fiere";
+import LayoutFiere from "../components/layout/layout-fiere";
 
 const Fiere = ({ pageContext }) => {
 

@@ -13,13 +13,14 @@ const LangSwitcher = (props) => {
         (
           <div className='langbox' >
             <ul className="languages">
-             
+
               <li>{langTag[props.locale].toUpperCase()}</li>
-                <li>
-                  <Link to={`${langTag[props.translations[0].locale] === 'it' ? '' : '/' + langTag[props.translations[0].locale]}/${url === 'Home' ? '' : (props.pathName ? props.pathName : '') + '/' + url.toLowerCase()}`}>{langTag[props.translations[0].locale]}</Link>
-                </li>
-            </ul> 
-            </div>)
+              <li>
+                <Link to={`${langTag[props.translations[0].locale] === 'it' ? '' : '/'
+                  + langTag[props.translations[0].locale]}/${url === 'Home' ? '' : (props.pathName ? props.pathName : '') + '/' + url.toLowerCase()}`}>{langTag[props.translations[0].locale]}</Link>
+              </li>
+            </ul>
+          </div>)
         : ''}
 
     </>
