@@ -1,0 +1,26 @@
+@import '../../assets/sass/variabili';
+
+.wrapper-megamenu{
+    height: auto;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    opacity: 1;
+    transition: opacity .2s linear;
+    background-color: #fff;
+    display: block;
+    overflow: hidden;
+   z-index: 100;
+    .mega{
+        
+    }
+}
+   
+
+.main-mega{
+    position: relative;
+    height: 45px;
+    display: block;
+    
+}
