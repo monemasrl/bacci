@@ -14,9 +14,12 @@ import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
 
+
 let slugify = require('slugify')
 
-const Layout = ({ children, locale, translations, pageTitle }) => {
+
+const Layout = ({ children, locale, translations, pageTitle }, props) => {
+
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -71,13 +74,17 @@ const Layout = ({ children, locale, translations, pageTitle }) => {
       }
     }
   `)
+
   const langFilter = data.allWpPage.edges.filter((item) => {
     return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node
-console.log(langFilter);
+
+
+
+
   return (
     <>
-
+    
       <Seo title="Mission" seo={langFilter.seo} />
       <div className="container-fluid" >
         <Header
@@ -86,6 +93,7 @@ console.log(langFilter);
           pageTitle={pageTitle} 
           pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''} 
           currentPath={langFilter.pathPagine.path}
+          
         />
     
       </div>
@@ -96,6 +104,7 @@ console.log(langFilter);
         <Footer translations={translations} locale={locale} />
   
       <ScrollTo />
+  
     </>
   )
 }

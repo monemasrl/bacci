@@ -84,7 +84,7 @@ const Produzione = ({ data, location }) => {
     return (item.node.locale.locale === 'it_IT')
   })[0].node
   const dataFilter = langFilter
-  console.log(location);
+ 
   return (
     <>
       <Layout pageTitle={dataFilter.title} locale={'it_IT'} translations={dataFilter.translations} pathName = {location.pathname}  >

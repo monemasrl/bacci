@@ -9,15 +9,28 @@ const Breadcrumb = ({ pageTitle, pathName, nodeType }) => {
 
             <div className="container">
 
-                <h2>
 
-                    {(pageTitle.toLowerCase() === parentFolder.toLowerCase())  ?
-                       
-                       '' : pageTitle === 'post' ? <span>News<br /></span> :
-                        
-                        <span>/{parentFolder}  <br /></span>}
 
-                    {pageTitle}</h2>
+                {(nodeType === 'Post') ?
+                    <h2>
+                        <span>/News<br /></span>
+                        <span>{pageTitle}</span>
+                    </h2>
+
+                    :
+
+                    (pageTitle.toLowerCase() === parentFolder.toLowerCase()) || !parentFolder ?
+
+                        <h2>{pageTitle}</h2>
+
+                        :
+
+                        <h2>
+                            <span>/{parentFolder}  <br /></span>
+                            <span>{pageTitle}</span>
+                        </h2>
+                }
+
 
             </div>
 

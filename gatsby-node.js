@@ -31,6 +31,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             content
             title
             slug
+            date(formatString: "DD.MM.YYYY")
+            articoli {
+              sottotitolo
+            }
             locale {
               locale
             }
@@ -87,9 +91,11 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       context: {
         content: entry.node.content,
         locale: entry.node.locale.locale,
+        sottotitolo: entry.node.articoli.sottotitolo,
         translations: entry.node.translations,
         slug: entry.node.slug,
         title: entry.node.title,
+        date: entry.node.date
        
       }
     })

@@ -11,7 +11,8 @@ export const query = graphql`
     allWpPage(filter: {title: {eq: "News"}}) {
         edges {
         node {
-                title
+            title
+       
             locale {
             locale
             }
@@ -30,7 +31,7 @@ export const query = graphql`
             content
             title
             slug
-            date
+            date(formatString: "DD.MM.YYYY")
             excerpt
             locale {
               locale
@@ -61,44 +62,45 @@ export const query = graphql`
       }
 }
 `
-const News = ({ data, location }) => {
-    const langFilter = data.allWpPage.edges.filter((item) => {
-        return (item.node.locale.locale === 'it_IT')
-    })[0].node
+const News = ({ data, location }, props) => {
+  const langFilter = data.allWpPage.edges.filter((item) => {
+    return (item.node.locale.locale === 'it_IT')
+  })[0].node
 
-    const langFilterData = data.allWpPost.edges.filter((item) => {
-        return (item.node.locale.locale === 'it_IT')
-    })
+  const langFilterData = data.allWpPost.edges.filter((item) => {
+    return (item.node.locale.locale === 'it_IT')
+  })
 
-    const datapage = langFilter
-    console.log(datapage.translations);
-    return (
-        <Layout
-            pageTitle={datapage.title}
-            locale={'it_IT'}
-            translations={datapage.translations}
-            news
-        >
-            <section className="container news">
-                {langFilterData.map((item) => {
-                    console.log(item)
-                    return (<div className="col-news">
-                        <div className="box-single-news">
-                            <GatsbyImage image={item.node.featuredImage.node.localFile.childImageSharp.gatsbyImageData} alt={item.node.featuredImage.node.altText} />
-                            <div className="date">
-                            {item.node.date}
-                            </div>
-                            <h2>{item.node.title}</h2>
-                            <p dangerouslySetInnerHTML={{__html:item.node.excerpt}} />
-                            <Link to={`${langTag[item.node.locale.locale]=== "it" ? '' : langTag[item.node.locale.locale]}/news/${item.node.slug}`}>leggi tutto</Link>
-                        </div>
+  const datapage = langFilter
 
-                    </div>)
-                })}
-            </section>
+  return (
+    <Layout
+      pageTitle={datapage.title}
+      locale={'it_IT'}
+      translations={datapage.translations}
+      news
+    >
+      <section className="container news">
+        {langFilterData.map((item) => {
+         
+          return (
+          <div className="col-news">
+            <div className="box-single-news">
+              <GatsbyImage image={item.node.featuredImage.node.localFile.childImageSharp.gatsbyImageData} alt={item.node.featuredImage.node.altText} />
+              <div className="date">
+                {item.node.date}
+              </div>
+              <h2>{item.node.title}</h2>
+              <div dangerouslySetInnerHTML={{ __html: item.node.excerpt }} />
+              <Link to={`${langTag[item.node.locale.locale] === "it" ? '' : langTag[item.node.locale.locale]}/news/${item.node.slug}`}>leggi tutto</Link>
+            </div>
 
-        </Layout>
-    )
+          </div>)
+        })}
+      </section>
+
+    </Layout>
+  )
 
 
 

@@ -15,11 +15,13 @@
         font-weight: 400;
         margin-top: 2rem;
         margin-bottom: 2rem;
-        &::first-line{
-            line-height: 10px;
-        }
+     
         span{
             font-size: 36px;
+            display: block;
+            &:nth-child(2){
+                font-size: 72px;
+            }
         }
     }
 }

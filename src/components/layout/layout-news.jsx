@@ -73,7 +73,7 @@ const LayoutNews = ({ children, locale, translations, pageTitle }) => {
       }
     }
   `)
-  console.log('pagetitle',pageTitle);
+  
    const langFilter = data.allWpPost.edges.filter((item) => {
     return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node

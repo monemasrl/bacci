@@ -3,7 +3,6 @@ import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout/layout"
 import Fade from 'react-reveal/Fade';
-
 export const query = graphql`
    {
     allWpPage(filter: {title: {eq: "Home"}}) {
@@ -125,7 +124,7 @@ export const query = graphql`
 
 
 
-const IndexPage = ({ data, location }) => {
+const IndexPage = ({ data, location }, props) => {
   const langFilter = data.allWpPage.edges.filter((item) => {
     return (item.node.locale.locale === 'it_IT')
   })[0].node
@@ -133,16 +132,16 @@ const IndexPage = ({ data, location }) => {
 
 
 
-
   return (
     <>
+
       <Layout pageTitle={dataHome.title} locale={'it_IT'} translations={dataHome.translations} >
         <div className="container-fluid home">
           <section className="jumbo-home">
             <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />
           </section>
-       
-            <section className={`container sezione-1 `}>   
+
+          <section className={`container sezione-1 `}>
             <Fade left>
               <div className={`box-sx`} >
                 <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
@@ -151,16 +150,16 @@ const IndexPage = ({ data, location }) => {
                 <Link className="button-sezione" to={dataHome.home.sezione1.link.url}>{dataHome.home.sezione1.link.title}</Link>
 
               </div>
-              </Fade>
-              <div className="box-dx">
-                <GatsbyImage image={dataHome.home.sezione1.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataHome.home.sezione1.immagine.altText} />
-              </div>
-            </section>
-          
-          
-            <section className={`container sezione-2 `}>
-           <Fade left>   
-           <div className={`box-sx`} >
+            </Fade>
+            <div className="box-dx">
+              <GatsbyImage image={dataHome.home.sezione1.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataHome.home.sezione1.immagine.altText} />
+            </div>
+          </section>
+
+
+          <section className={`container sezione-2 `}>
+            <Fade left>
+              <div className={`box-sx`} >
                 <div className="novita">
                   Novità
                 </div>
@@ -171,13 +170,13 @@ const IndexPage = ({ data, location }) => {
                 </Link>
 
               </div>
-</Fade>
-              <div className="box-dx">
-                <GatsbyImage image={dataHome.home.sezione2.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataHome.home.sezione1.immagine.altText} />
+            </Fade>
+            <div className="box-dx">
+              <GatsbyImage image={dataHome.home.sezione2.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataHome.home.sezione1.immagine.altText} />
 
-              </div>
-            </section>
-          
+            </div>
+          </section>
+
           <Fade bottom>
             <section className={`container sezione-3 `}>
               <div className={`box-sx `} >

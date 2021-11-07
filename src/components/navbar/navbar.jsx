@@ -4,12 +4,15 @@ import { langTag } from '../../../data-translations'
 import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
 import LinkFade from "../TransitionLinks/LinkFade"
+import Megamenu from '../megamenu/megamenu'
 import './navbar.scss'
 let slugify = require('slugify')
 
 
 
 const NavBar = (props) => {
+
+
     const data = useStaticQuery(graphql`
     query datimenu{
         allWpMenu {
@@ -52,19 +55,23 @@ const NavBar = (props) => {
                 <div className="container">
 
                     <ul>
-                        {menuFilter[1].node.menuItems.nodes.map((item) => {
+                        {menuFilter[1].node.menuItems.nodes.map((item, index) => {
 
                             const menuPath = slugify(item.label)
+
                             return (
                                 <li key={item.label}>
                                     <LinkFade disabled={item.path === "#"} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath.toLowerCase()}`}>{item.label}</LinkFade>
                                 </li>
                             )
-                        })}
+                        })
+
+
+                        }
                     </ul>
-                  
-                        <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} />
-              
+
+                    <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} />
+
                 </div>
 
             </nav>
@@ -82,33 +89,42 @@ const NavBar = (props) => {
                     </div>
                     <ul>
 
-                        {menuFilter[0].node.menuItems.nodes.map((item) => {
+                        {menuFilter[0].node.menuItems.nodes.map((item, index) => {
 
                             const menuPath = slugify(item.label)
 
                             return (
                                 <React.Fragment key={item.label}>
                                     {!item.parentId ?
-                                        <li >
-                                            <Link disabled={item.path === "#"} to={item.path}>{item.label}
 
-                                                {item.childItems ?
-                                                    <ul>
-                                                        {item.childItems.nodes.map((subitem) => {
-                                                            return (
-                                                                <>
-                                                                    <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
-                                                                        <li>   {subitem.label}</li>
-                                                                    </LinkFade>
+                                        index === 0 ?
+                                            <li
+                                                onMouseOver={() => props.setMega(true)}
+                                                onMouseOut={() => props.setMega(false)}>
+                                                <a className='main-mega'
 
-                                                                </>)
+                                                    href="#">{item.label}</a>
+                                                <Megamenu mega={props.mega} setMega={props.setMega} /></li> :
+                                            <li >
+                                                <Link disabled={item.path === "#"} to={item.path}>{item.label}
 
-                                                        })}
-                                                    </ul>
-                                                    : ''}
+                                                    {item.childItems ?
+                                                        <ul>
+                                                            {item.childItems.nodes.map((subitem) => {
+                                                                return (
+                                                                    <>
+                                                                        <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
+                                                                            <li>   {subitem.label}</li>
+                                                                        </LinkFade>
 
-                                            </Link>
-                                        </li> : ''
+                                                                    </>)
+
+                                                            })}
+                                                        </ul>
+                                                        : ''}
+
+                                                </Link>
+                                            </li> : ''
                                     }
                                 </React.Fragment>
                             )
