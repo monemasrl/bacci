@@ -17,6 +17,32 @@ export const query = graphql`
           locale
           post_title
         }
+        seo {
+              canonical
+              cornerstone
+              focuskw
+              fullHead
+              metaDesc
+              metaKeywords
+              metaRobotsNofollow
+              metaRobotsNoindex
+              opengraphAuthor
+              opengraphDescription
+              opengraphImage {
+                sourceUrl
+              }
+              title
+              twitterDescription
+              twitterTitle
+              opengraphModifiedTime
+              opengraphPublishedTime
+              opengraphPublisher
+              opengraphSiteName
+              opengraphTitle
+              opengraphType
+              opengraphUrl
+              readingTime
+            }
         postvendita {
           sezionePostvendita1 {
             paragrafo
@@ -109,7 +135,12 @@ const Produzione = ({ data, location }) => {
 
   return (
     <>
-      <Layout pageTitle={dataFilter.title} locale={'it_IT'} translations={dataFilter.translations} pathName={location.pathname}  >
+      <Layout 
+      pageTitle={dataFilter.title} 
+      locale={'it_IT'} 
+      translations={dataFilter.translations} 
+      pathName={location.pathname} 
+      seo={dataFilter.seo} >
         <div className="container-fluid postvendita">
           <section className="container-fluid sezione-interne">
             <div className="box-sx">

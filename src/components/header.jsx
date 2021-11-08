@@ -2,7 +2,7 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import NavBar from "./navbar/navbar"
 import Breadcrumb from "./breadcrumb/breadCrumb"
-import Megamenu from "./megamenu/megamenu"
+
 
 
 const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeType }) => {

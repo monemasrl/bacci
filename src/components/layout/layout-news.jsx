@@ -6,7 +6,7 @@
  */
 
 import * as React from "react"
-import PropTypes from "prop-types"
+
 import { useStaticQuery, graphql } from "gatsby"
 import "../../assets/sass/globale.scss"
 import Header from "../header"
@@ -14,7 +14,7 @@ import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
 
-let slugify = require('slugify')
+
 
 const LayoutNews = ({ children, locale, translations, pageTitle }) => {
   const data = useStaticQuery(graphql`

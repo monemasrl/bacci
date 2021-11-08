@@ -117,6 +117,32 @@ export const query = graphql`
             }
           }
         }
+        seo {
+              canonical
+              cornerstone
+              focuskw
+              fullHead
+              metaDesc
+              metaKeywords
+              metaRobotsNofollow
+              metaRobotsNoindex
+              opengraphAuthor
+              opengraphDescription
+              opengraphImage {
+                sourceUrl
+              }
+              title
+              twitterDescription
+              twitterTitle
+              opengraphModifiedTime
+              opengraphPublishedTime
+              opengraphPublisher
+              opengraphSiteName
+              opengraphTitle
+              opengraphType
+              opengraphUrl
+              readingTime
+            }
       }
     }
   }
@@ -135,7 +161,7 @@ const IndexPage = ({ data, location }, props) => {
   return (
     <>
 
-      <Layout pageTitle={dataHome.title} locale={'it_IT'} translations={dataHome.translations} >
+      <Layout pageTitle={dataHome.title} seo={dataHome.seo} locale={'it_IT'} translations={dataHome.translations} >
         <div className="container-fluid home">
           <section className="jumbo-home">
             <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />

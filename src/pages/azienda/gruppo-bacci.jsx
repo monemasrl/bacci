@@ -16,6 +16,32 @@ export const query = graphql`
           locale
           post_title
         }
+        seo {
+              canonical
+              cornerstone
+              focuskw
+              fullHead
+              metaDesc
+              metaKeywords
+              metaRobotsNofollow
+              metaRobotsNoindex
+              opengraphAuthor
+              opengraphDescription
+              opengraphImage {
+                sourceUrl
+              }
+              title
+              twitterDescription
+              twitterTitle
+              opengraphModifiedTime
+              opengraphPublishedTime
+              opengraphPublisher
+              opengraphSiteName
+              opengraphTitle
+              opengraphType
+              opengraphUrl
+              readingTime
+            }
         gruppoBacci {
           sezioneGruppo1 {
             fieldGroupName
@@ -149,7 +175,13 @@ const GruppoBacci = ({ data, location }) => {
 
   return (
     <>
-      <Layout pageTitle={dataFilter.title} locale={'it_IT'} translations={dataFilter.translations} pathName={location.pathname}  >
+      <Layout 
+      pageTitle={dataFilter.title} 
+      locale={'it_IT'} 
+      translations={dataFilter.translations} 
+      pathName={location.pathname}  
+      seo={dataFilter.seo}
+      >
         <div className="container-fluid gruppo-bacci">
         <section className="container-fluid sezione-interne">
           <div className="box-sx">

@@ -15,10 +15,10 @@ import Seo from "../seo"
 import ScrollTo from "../scrollTo"
 
 
-let slugify = require('slugify')
 
 
-const Layout = ({ children, locale, translations, pageTitle }, props) => {
+
+const Layout = ({ children, locale, translations, pageTitle, seo }, props) => {
 
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -43,32 +43,7 @@ const Layout = ({ children, locale, translations, pageTitle }, props) => {
                     path
                 }
             }
-            seo {
-              canonical
-              cornerstone
-              focuskw
-              fullHead
-              metaDesc
-              metaKeywords
-              metaRobotsNofollow
-              metaRobotsNoindex
-              opengraphAuthor
-              opengraphDescription
-              opengraphImage {
-                sourceUrl
-              }
-              title
-              twitterDescription
-              twitterTitle
-              opengraphModifiedTime
-              opengraphPublishedTime
-              opengraphPublisher
-              opengraphSiteName
-              opengraphTitle
-              opengraphType
-              opengraphUrl
-              readingTime
-            }
+
           }
         }
       }
@@ -85,7 +60,7 @@ const Layout = ({ children, locale, translations, pageTitle }, props) => {
   return (
     <>
     
-      <Seo title="Mission" seo={langFilter.seo} />
+      <Seo title={pageTitle} seo={seo} />
       <div className="container-fluid" >
         <Header
           translations={translations} 

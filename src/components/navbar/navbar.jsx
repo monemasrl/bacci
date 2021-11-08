@@ -96,10 +96,10 @@ const NavBar = (props) => {
                         {menuFilter[0].node.menuItems.nodes.map((item, index) => {
 
                             const menuPath = slugify(item.label)
-console.log('path', props.mega);
+                            console.log('path', props.mega);
                             return (
                                 <React.Fragment key={item.label}>
-                                    
+
                                     {!item.parentId ?
 
                                         item.menuCampi.megamenu ?
@@ -109,8 +109,8 @@ console.log('path', props.mega);
                                                 <a className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
 
                                                     href="#">{item.label}</a>
-                                                <Megamenu mega={props.mega} setMega={props.setMega} /></li> 
-                                                :
+                                                <Megamenu mega={props.mega} setMega={props.setMega} /></li>
+                                            :
                                             <li >
                                                 <Link className={`${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} disabled={item.path === "#"} to={item.path}>{item.label}
 
