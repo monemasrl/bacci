@@ -96,7 +96,7 @@ const NavBar = (props) => {
                         {menuFilter[0].node.menuItems.nodes.map((item, index) => {
 
                             const menuPath = slugify(item.label)
-console.log('path', item.label);
+console.log('path', props.mega);
                             return (
                                 <React.Fragment key={item.label}>
                                     
@@ -105,8 +105,8 @@ console.log('path', item.label);
                                         item.menuCampi.megamenu ?
                                             <li
                                                 onMouseOver={() => props.setMega(true)}
-                                                onMouseLeave={() => props.setMega(false )}>
-                                                <a className={`main-mega ${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
+                                                onMouseLeave={() => props.setMega(true)}>
+                                                <a className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
 
                                                     href="#">{item.label}</a>
                                                 <Megamenu mega={props.mega} setMega={props.setMega} /></li> 
