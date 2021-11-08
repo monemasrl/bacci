@@ -105,7 +105,7 @@ console.log('path', props.mega);
                                         item.menuCampi.megamenu ?
                                             <li
                                                 onMouseOver={() => props.setMega(true)}
-                                                onMouseLeave={() => props.setMega(true)}>
+                                                onMouseLeave={() => props.setMega(false)}>
                                                 <a className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
 
                                                     href="#">{item.label}</a>
