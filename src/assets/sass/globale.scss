@@ -6,7 +6,9 @@
 @include sezione-testo-sx;
 @include sezione-testo-dx;
 @include sezione-testo-no-immagine;
-
+*{
+  box-sizing: border-box;
+}
 html {
   font-size: 100%;
   font-family: $text;

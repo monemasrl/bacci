@@ -34,7 +34,7 @@ export const LinkFade = ({ children, url, linkState }: IProps) => {
 
   return (
     <>
-      <TransitionLink to={url} exit={exitTransition} entry={entryTransition}>
+      <TransitionLink activeClassName="active" to={url} exit={exitTransition} entry={entryTransition}>
         {children}
       </TransitionLink>
     </>

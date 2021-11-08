@@ -31,21 +31,20 @@
   }
   .langbox {
     margin-left: 2rem;
-    ul{
-        li{
-            margin: 0;
-            color: white;
-            text-decoration: underline;
-            &:first-child{
-                text-decoration: none;
-            }
-            &:first-child::after{
-                position: relative;
-                content: '-';
-                margin: 0 3px;
-                
-            }
+    ul {
+      li {
+        margin: 0;
+        color: white;
+        text-decoration: underline;
+        &:first-child {
+          text-decoration: none;
         }
+        &:first-child::after {
+          position: relative;
+          content: "-";
+          margin: 0 3px;
+        }
+      }
     }
   }
 }
@@ -59,6 +58,10 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  a.active  {
+    text-decoration: underline;
+  }
   ul {
     li {
       display: inline-block;
@@ -66,13 +69,21 @@
       @media #{$landscape} {
         display: block;
       }
+    
       &:hover {
         ul {
           opacity: 1;
           z-index: 2;
           box-shadow: 0px 5px 0px #81746985;
+          a.active {
+            background-color: $lightBrown;
+          }
+          a.active li {
+            color: white;
+          }
         }
-        .wrapper-megamenu{
+
+        .wrapper-megamenu {
           opacity: 1;
           z-index: 100;
         }
@@ -99,17 +110,15 @@
           }
           &:hover {
             background-color: $lightBrown;
-            
+
             li {
               color: white;
             }
           }
 
-       
           li {
             font-size: 1rem;
           }
-        
         }
       }
     }

@@ -1,43 +1,113 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion"
+import { StaticImage } from "gatsby-plugin-image";
 import './megamenu.scss'
 
-const Megamenu = ({mega, setMega})=>{
+const Megamenu = ({ mega, setMega }) => {
 
-    return(
+    return (
 
 
         <AnimatePresence>
-        {mega && (
-      
-            <motion.div
-             className="wrapper-megamenu" onMouseOut={()=>setMega(false)}  
-            
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            {mega && (
 
-            >
-                 <div className="mega">
-                     Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. C
-                     urabitur aliquet quam id dui posuere blandit. Curabitur arcu erat, 
-                     accumsan id imperdiet et, porttitor at sem. Curabitur non nulla sit amet ni
-                     sl tempus convallis quis ac lectus. Vestibulum ante ipsum primis in faucibus orc
-                     i luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet a
-                     liquam vel, ullamcorper sit amet ligula. Vivamus magna justo, lacinia eget conse
-                     ctetur sed, convallis at tellus. Vestibulum ante ipsum primis in faucibus orci l
-                     uctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliq
-                     uam vel, ullamcorper sit amet ligula. Sed porttitor lectus nibh. Vestibulum ante
-                      ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec v
-                      elit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Curabitur
-                       non nulla sit amet nisl tempus convallis quis ac lectus.
+                <motion.div
+                    className="wrapper-megamenu" onMouseLeave={() => setMega(false)}
 
-Vivamus suscipit tortor eget felis porttitor volutpat. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Cras ultricies ligula sed magna dictum porta. Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus. Donec sollicitudin molestie malesuada. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Pellentesque in ipsum id orci porta dapibus. Donec rutrum congue leo eget malesuada.</div> 
-              </motion.div> 
-              
-        )}
-      </AnimatePresence>
-       
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+
+                >
+                   
+                        <div className="mega-box">
+                            <div className="col-mega">
+                                <div className="box-prodotto">
+                                    <div className="titolo-col-mega">
+                                        NOVITA’
+                                    </div>
+                                    <div>
+                                        <h2>Master Max</h2>
+                                        <p>Centro di lavoro a 6 assi con struttura a portale</p>
+                                        <StaticImage
+                                            src="../../images/test-megamenu.jpg"
+                                            width={422}
+                                            placeholder="none"
+                                            alt="test-megamenu"
+                                        />
+                                        <p>
+                                            <strong>Indicata per la produzione di:</strong>
+                                            elementi di sedie, tavoli, letti, scocche, componenti di scale e strumenti musicali.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-mega">
+                                <div className="box-prodotto">
+                                    <div className="titolo-col-mega">
+                                        IN EVIDENZA
+                                    </div>
+                                    <div>
+                                        <h2>Master Max</h2>
+                                        <p>Centro di lavoro a 6 assi con struttura a portale</p>
+                                        <StaticImage
+                                            src="../../images/test-megamenu.jpg"
+                                            width={422}
+                                            placeholder="none"
+                                            alt="test-megamenu"
+                                        />
+                                        <p>
+                                            <strong>Indicata per la produzione di:</strong>
+                                            elementi di sedie, tavoli, letti, scocche, componenti di scale e strumenti musicali.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-mega">
+                                <div className="titolo-col-mega">
+                                    NOVITA’
+                                </div>
+                                <ul className="mega-list">
+                                    <li>Fresatura</li>
+                                    <li>Mortasa | Telone</li>
+                                    <li>Doppie teste</li>
+                                    <li>Tornitura</li>
+                                    <li>TAVOLI E PANNELLI</li>
+                                    <li>DIVANI</li>
+                                    <li>ANTINE</li>
+                                    <li>PORTE E FINESTRE</li>
+                                    <li>ARTICOLI SPORTIVI</li>
+                                    <li>STRUMENTI MUSICALI</li>
+                                    <li>COFANI</li>
+                                    <li>TORNITURA</li>
+                                    <li>LETTINI</li>
+                                </ul>
+                            </div>
+                            <div className="col-mega">
+                                <div className="titolo-col-mega">
+                                    NOVITA’
+                                </div>
+                                <ul className="mega-list">
+                                    <li>CENTRI DI LAVORO DOPPIA TESTA</li>
+                                    <li>CENTRI DI LAVORO A PORTALE</li>
+                                    <li>CENTRI DI LAVORO A MONTANTE MOBILE</li>
+                                    <li>CENTRI DI LAVORO A PORTALE EVOLUTI</li>
+                                    <li>CENTRI DI LAVORO PER COMPOSITI</li>
+                                    <li>MACCHINE PER ANTINE</li>
+                                    <li>MACCHINE PER PORTE E FINESTRE</li>
+                                    <li>FRESATRICI LINEARI</li>
+                                    <li>TORNITURA</li>
+                                    <li>CONVENZIONALI</li>
+                                    <li>SEGHE</li>
+                                </ul>
+                            </div>
+                        </div>
+                  
+                </motion.div>
+
+            )}
+        </AnimatePresence>
+
     )
 }
 

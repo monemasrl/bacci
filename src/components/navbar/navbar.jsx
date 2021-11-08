@@ -23,6 +23,7 @@ const NavBar = (props) => {
                     nodes {
                         label
                         parentId
+                        path
                         childItems {
                           nodes {
                             label
@@ -37,6 +38,9 @@ const NavBar = (props) => {
                             language
                         }
                         }
+                        menuCampi {
+                              megamenu
+                            }
                     }
                     }
                 }
@@ -92,21 +96,23 @@ const NavBar = (props) => {
                         {menuFilter[0].node.menuItems.nodes.map((item, index) => {
 
                             const menuPath = slugify(item.label)
-
+console.log('path', item.label);
                             return (
                                 <React.Fragment key={item.label}>
+                                    
                                     {!item.parentId ?
 
-                                        index === 0 ?
+                                        item.menuCampi.megamenu ?
                                             <li
                                                 onMouseOver={() => props.setMega(true)}
-                                                onMouseOut={() => props.setMega(false)}>
-                                                <a className='main-mega'
+                                                onMouseLeave={() => props.setMega(false )}>
+                                                <a className={`main-mega ${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
 
                                                     href="#">{item.label}</a>
-                                                <Megamenu mega={props.mega} setMega={props.setMega} /></li> :
+                                                <Megamenu mega={props.mega} setMega={props.setMega} /></li> 
+                                                :
                                             <li >
-                                                <Link disabled={item.path === "#"} to={item.path}>{item.label}
+                                                <Link className={`${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} disabled={item.path === "#"} to={item.path}>{item.label}
 
                                                     {item.childItems ?
                                                         <ul>

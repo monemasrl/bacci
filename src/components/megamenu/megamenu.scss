@@ -12,8 +12,45 @@
     display: block;
     overflow: hidden;
    z-index: 100;
-    .mega{
-        
+   width: 100%;
+ 
+    .mega-box{
+        display: flex;
+        flex-wrap: wrap;
+       max-width: 1620px;
+       margin: 3rem auto;
+       justify-content:space-between ;    
+    }
+    .box-prodotto{
+        flex: 1;
+        max-width: 422px;
+        h2{
+            color: $brown;
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: 0;
+        }
+        p{
+            font-size: 18px;
+            color: $textColor;
+            margin-top: 10px;
+            &:first-of-type{
+                text-transform: uppercase;
+            }
+        }
+    }
+    .titolo-col-mega {
+        font-size: 30px;
+        font-weight: bold;
+        color: $textColor;
+    }
+    ul.mega-list{
+        flex: 1;
+        position: relative;
+        opacity: 1;
+        li{
+            display: block;
+        }
     }
 }
    
