@@ -108,7 +108,7 @@ const NavBar = (props) => {
                                                 onMouseLeave={() => props.setMega(false)}>
                                                 <a className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
 
-                                                    href="#">{item.label}</a>
+                                                    href="#"><Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${'prodotti'}`}>{item.label}</Link></a>
                                                 <Megamenu mega={props.mega} setMega={props.setMega} /></li>
                                             :
                                             <li >

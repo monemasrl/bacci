@@ -5,6 +5,49 @@ import Layout from "../components/layout/layout"
 
 export const query = graphql`
 {
+
+  allWpPage(filter: {title: {eq: "Prodotti"}}) {
+        edges {
+        node {
+            title
+       
+            locale {
+            locale
+            }
+            translations {
+            locale
+            post_title
+            }
+            seo {
+            canonical
+            cornerstone
+            focuskw
+            fullHead
+            metaDesc
+            metaKeywords
+            metaRobotsNofollow
+            metaRobotsNoindex
+            opengraphAuthor
+            opengraphDescription
+            opengraphImage {
+              sourceUrl
+            }
+            title
+            twitterDescription
+            twitterTitle
+            opengraphModifiedTime
+            opengraphPublishedTime
+            opengraphPublisher
+            opengraphSiteName
+            opengraphTitle
+            opengraphType
+            opengraphUrl
+            readingTime
+          }
+        }
+        }
+    }
+
     allWpProdotto {
     edges {
       node {
@@ -16,7 +59,17 @@ export const query = graphql`
           paragrafo
           sottotitolo
           immagine {
-            id
+            altText
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 476
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+
+                )
+              }
+            }
           }
         }
         prodottiCategorie {
@@ -56,90 +109,191 @@ export const query = graphql`
 
 `
 const Prodotti = ({ data }) => {
+  const langFilter = data.allWpPage.edges.filter((item) => {
+    return (item.node.locale.locale === 'it_IT')
+  })[0].node
 
-    const langFilterProdotto = data.allWpProdotto.edges.filter((item) => {
-        return (item.node.locale.locale === 'it_IT')
-    })
+  const langFilterProdotto = data.allWpProdotto.edges.filter((item) => {
+    return (item.node.locale.locale === 'it_IT')
+  })
 
+  // lista delle applicazioni da lista prodotto
+  let listaApplicazioni = langFilterProdotto.map((item) => item.node.prodottiApplicazioni.nodes)
+  listaApplicazioni = listaApplicazioni.reduce((a, b) => { return a.concat(b) })
 
-    const onChangeCheckboxCategorie = (evt) => {
+  listaApplicazioni = listaApplicazioni.map((item) => { return item.name })
+  listaApplicazioni = listaApplicazioni.reduce(function (a, b) {
+    if (a.indexOf(b) < 0) a.push(b);
+    return a;
+  }, []);
 
-        return setFiltersCat([evt.target.value])
+  // lista delle categorie da lista prodotto
+  let listaCategorie = langFilterProdotto.map((item) => item.node.prodottiCategorie.nodes)
+  listaCategorie = listaCategorie.reduce((a, b) => { return a.concat(b) })
+
+  listaCategorie = listaCategorie.map((item) => { return item.name })
+  listaCategorie = listaCategorie.reduce(function (a, b) {
+    if (a.indexOf(b) < 0) a.push(b);
+    return a;
+  }, []);
+
+  // variabili stato
+  const [filtersCat, setFiltersCat] = React.useState([])
+  const [filtersApp, setFiltersApp] = React.useState([])
+  const [toggleFilterTag, setToggleFilterTag] = React.useState(false)
+  const [toggleFilterCat, setToggleFilterCat] = React.useState(false)
+
+  //setta il valore del campo nella variabile di stato
+  const onChangeCheckboxCategorie = (evt) => {
+    setToggleFilterTag(false)
+    setToggleFilterCat(true)
+    toggleFilterCat === true ? setFiltersCat([evt.target.value]) : setFiltersCat([])
+  }
+  //setta il valore del campo nella variabile di stato
+  const onChangeCheckboxApplicazioni = (evt) => {
+    setToggleFilterTag(true)
+    setToggleFilterCat(false)
+
+    // se il filtro è check crea l'array
+    if (evt.target.checked) {
+      setFiltersApp([...filtersApp, evt.target.value])
+    } else {
+
+      // se il filtro è uncheck togli il record dall'array
+      const filterUnchecked = filtersApp.filter((item) => {
+        return item !== evt.target.value
+      })
+
+      setFiltersApp([...filterUnchecked])
     }
 
-    const onChangeCheckboxApplicazioni = (evt) => {
+  }
 
-        return setFiltersApp([evt.target.value])
+
+  // filtra i prodotti per le categorie dentro la variabile di stato
+
+
+  const Categorie = () => {
+
+    let filteredCat = langFilterProdotto.filter((prodotto) => {
+      const filterResultCat = prodotto.node.prodottiCategorie.nodes[0].name === filtersCat[0]
+
+      return filterResultCat
+    });
+
+
+
+    // filtra i prodotti per applicazioni dentro la variabile di stato
+
+
+
+    return filteredCat
+  }
+
+  const Applicazioni = () => {
+
+    const filterProductApp = () => {
+      const result = langFilterProdotto.filter((item) => {
+        return item.node.prodottiApplicazioni.nodes.some((item) => {
+
+          return filtersApp.includes(item.name)
+        })
+      })
+      return result
     }
 
-    const [filtersCat, setFiltersCat] = React.useState([])
-    const [filtersApp, setFiltersApp] = React.useState([])
 
- 
-    const filtered = () => {
-        let filteredArr = langFilterProdotto.filter((prodotto) => {
-           console.log(filtersCat[0]);
-           const filterResult = filtersCat.length === 0 ||  filtersCat[0] === 'reset' ? prodotto : prodotto.node.prodottiCategorie.nodes[0].name === filtersCat[0]
-            return  filterResult
-    
-        });
+    return filterProductApp()
 
-        return filteredArr
-    }
-
-    const filterListaCategorie = () => {
-        // prende i prodotti filtrati per categoria e ritorna array gli con le categorie
-        let arrayNomiCategorie = langFilterProdotto.map((item)=>{return item.node.prodottiCategorie.nodes})
-        
-        // riduce ad un array gli array con i nomi
-        arrayNomiCategorie = arrayNomiCategorie.reduce(function (a, b) {
-                    return a.concat(b);
-                }, [])
-        // Controlla se ci sono dei prodotti filtrati altrimenti ritorna l'array con tutte le categorie
-                let arrayFiltrato = arrayNomiCategorie.map((item) => {
-                    return item.name
-                }) 
-                arrayFiltrato = arrayFiltrato.reduce(function(a,b){
-                    if (a.indexOf(b) < 0 ) a.push(b);
-                    return a;
-                  },[]);
-                
-          
-                return arrayFiltrato
-            }
-        
-        
-
-    return (
-        <>
-            <div style={{ display: 'flex' }}>
-                <div className="containter">
-                
-                    <ul onChange={(e) => onChangeCheckboxCategorie(e)}>
-                    <li>  <input type="radio" value={'reset'} name="categorie"/>
-                                    <label for="categorie">all</label></li>
-                        {filterListaCategorie().map((item) => {
-                            return (
-                                <li>
-                                    <input type="radio" value={item} name="categorie"
-                                        checked={item === filtersCat[0]} />
-                                    <label for="categorie">{item}</label>
-
-                                </li>)
+  }
 
 
-                        })}
-                    </ul>
 
-                </div>
-                <div className="containter">
-                    {filtered().map((item) => {
-                        return <h1>{item.node.title} - {item.node.prodottiCategorie.nodes[0].name}</h1>
-                    })}
-                </div>
-            </div>
-        </>
-    )
+  return (
+    <>
+      <Layout pageTitle={langFilter.title} seo={langFilter.seo} locale={'it_IT'} translations={langFilter.translations} >
+
+        <div className="container prodotti">
+          <div className="container col-sx">
+            <h2>affina la ricerca</h2>
+            <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)}>
+              <ul >
+                <li>  <input type="radio" value={'reset'} name="categorie" />
+                  <label for="categorie">all</label></li>
+                {listaCategorie.map((item) => {
+                  return (
+                    <li>
+                      <input type="radio" value={item} name="categorie"
+                        checked={item === filtersCat[0]} />
+                      <label for="categorie">{item}</label>
+
+                    </li>)
+
+
+                })}
+              </ul>
+            </form>
+
+            <form className="filters" onChange={(e) => onChangeCheckboxApplicazioni(e)}>
+              <ul  >
+
+                {listaApplicazioni.map((item, index) => {
+
+                  return (
+                    <li>
+                      <input type="checkbox" value={item} name="applicazioni" />
+                      <label for="applicazioni">{item}</label>
+
+                    </li>)
+
+                })}
+              </ul>
+            </form>
+
+          </div>
+          <div className="container col-dx">
+
+
+            {toggleFilterTag ?
+
+              Applicazioni().map((item) => {
+                return (
+                  <div className="box-prodotto">
+                  <GatsbyImage image={item.node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData}  alt={item.node.prodotto.immagine.altText} />
+                 <h2>{item.node.title}</h2>
+                 <p>{item.node.prodotto.paragrafo}</p>
+                 <div className="button"><Link to={item.node.title}>scopri</Link></div>
+               </div>
+                )
+              }) :
+
+              !toggleFilterTag && !toggleFilterCat ?
+                langFilterProdotto.map((item) => {
+                  return (
+                  <div className="box-prodotto">
+                     <GatsbyImage image={item.node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData}  alt={item.node.prodotto.immagine.altText} />
+                    <h2>{item.node.title}</h2>
+                    <p>{item.node.prodotto.paragrafo}</p>
+                    <div className="button"><Link to={item.node.title}>scopri</Link></div>
+                  </div>
+                  
+                  )
+                }) :
+
+                Categorie().map((item) => {
+                  return(
+                    <div className="box-prodotto">
+                    <GatsbyImage image={item.node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData}  alt={item.node.prodotto.immagine.altText} />
+                   <h2>{item.node.title}</h2>
+                   <p>{item.node.prodotto.paragrafo}</p>
+                   <div className="button"><Link to={item.node.title}>scopri</Link></div>
+                 </div>)
+                })}
+          </div>
+        </div>
+      </Layout>
+    </>
+  )
 
 }
 
@@ -147,59 +301,5 @@ export default Prodotti
 
 
 
-/* 
-const filtered = () => {
-    let filteredArr = langFilterProdotto.filter((prodotto) => {
-        let tags = prodotto.node.prodottiCategorie.nodes.concat(prodotto.node.prodottiApplicazioni.nodes);
-        tags = tags.map((item) => item.name)
-        //prende il valore dai filtri nel form
-        const filtersForm = filtersApp.concat(filtersCat)
-        console.log(filtersForm);
-
-        return filtersForm.length == 0  ? prodotto : filtersForm.every(f => tags.includes(f));
-    });
-    return filteredArr
-} */
-
-{/* <ul onChange={(e) => onChangeCheckboxApplicazioni(e)}>
-                    
-{filterListaTag().map((item) => {
-  
-    return (
-        <li>
-            <input type="checkbox" value={item} name="applicazioni"
-                />
-            <label for="applicazioni">{item}</label>
-
-        </li>)
 
 
-})}
-</ul> */}
-
-
-
-
-/* const filterListaTag = () => {
-    // prende i prodotti filtrati per categoria e ritorna array gli con le applicazioni
-            let arrayNomiApplicazioni = filtered().map(
-                (item) => {
-                    return item.node.prodottiApplicazioni.nodes
-                })
-    // riduce ad un array gli array con i nomi
-            arrayNomiApplicazioni = arrayNomiApplicazioni.reduce(function (a, b) {
-                return a.concat(b);
-            }, [])
-     
-    
-    // Controlla se ci sono dei prodotti filtrati altrimenti ritorna l'array con tutte le applicazioni
-            let arrayFiltrato = arrayNomiApplicazioni.map((item) => {
-                return item.name
-            }) 
-            arrayFiltrato = arrayFiltrato.reduce(function(a,b){
-                if (a.indexOf(b) < 0 ) a.push(b);
-                return a;
-              },[]);
-            return arrayFiltrato
-        }
-     */

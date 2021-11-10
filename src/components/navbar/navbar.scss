@@ -68,6 +68,9 @@
     display: block;
     padding: 5px 10px;
     transition: all ease-in-out 0.5s;
+    &:hover{
+      color: white;
+    }
     &.open {
       background: $lightBrown;
       color: white;
