@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout/layout"
-
+import GridPagination from "../components/grid-pagination"
 export const query = graphql`
 {
 
@@ -252,10 +252,12 @@ const Prodotti = ({ data }) => {
 
           </div>
           <div className="container col-dx">
-
+<GridPagination archivio={Applicazioni()} loading={false} /> 
+ 
 
             {toggleFilterTag ?
-
+            
+              
               Applicazioni().map((item) => {
                 return (
                   <div className="box-prodotto">
