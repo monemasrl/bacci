@@ -105,6 +105,7 @@ const News = ({ data, location }, props) => {
       locale={'it_IT'}
       translations={datapage.translations}
       news
+      seo={langFilter.seo}
     >
       <section className="container news">
         {langFilterData.map((item) => {
