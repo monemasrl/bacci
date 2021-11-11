@@ -1,12 +1,54 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { StaticImage } from "gatsby-plugin-image";
+import Tassonomie from "../tassonomie";
+import {  useStaticQuery, Link, graphql } from "gatsby";
+
 import './megamenu.scss'
 
 const Megamenu = ({ mega, setMega }) => {
+ 
+    const dataMega = useStaticQuery(graphql`
+    query datimmegamenu{
+
+        allWpMenu {
+            edges {
+            node {
+                language
+                menuItems {
+                nodes {
+                    label
+                    parentId
+                    path
+                    childItems {
+                      nodes {
+                        label
+                        path
+                        parent{
+                            id
+                        }
+                      }
+                    }
+                    menu {
+                    node {
+                        language
+                    }
+                    }
+                    menuCampi {
+                          megamenu
+                        }
+                }
+                }
+            }
+            }
+        }
+
+    }`)
+
+
+    const tassonomie = Tassonomie('it_IT')
 
     return (
-
 
         <AnimatePresence>
             {mega && (
@@ -60,7 +102,7 @@ const Megamenu = ({ mega, setMega }) => {
                                 <div className="titolo-col-mega">
                                     IN EVIDENZA
                                 </div>
-                                <div  className="content-mega">
+                                <div className="content-mega">
                                     <h2>Master Max</h2>
                                     <p>Centro di lavoro a 6 assi con struttura a portale</p>
                                     <StaticImage
@@ -116,17 +158,10 @@ const Megamenu = ({ mega, setMega }) => {
                                 TIPOLOGIA
                             </div>
                             <ul className="mega-list">
-                                <li>CENTRI DI LAVORO DOPPIA TESTA</li>
-                                <li>CENTRI DI LAVORO A PORTALE</li>
-                                <li>CENTRI DI LAVORO A MONTANTE MOBILE</li>
-                                <li>CENTRI DI LAVORO A PORTALE EVOLUTI</li>
-                                <li>CENTRI DI LAVORO PER COMPOSITI</li>
-                                <li>MACCHINE PER ANTINE</li>
-                                <li>MACCHINE PER PORTE E FINESTRE</li>
-                                <li>FRESATRICI LINEARI</li>
-                                <li>TORNITURA</li>
-                                <li>CONVENZIONALI</li>
-                                <li>SEGHE</li>
+                                {tassonomie.categorie.map((item) => <li>
+                                    <Link to={'/prodotti'} state={{categoria: item}} 
+                                    className="mega-item">{item}</Link></li>
+                                )}
                             </ul>
                         </motion.div>
                     </div>

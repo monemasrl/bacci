@@ -54,32 +54,39 @@ const Layout = ({ children, locale, translations, pageTitle, seo }, props) => {
     return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node
 
+  const [windowWidth, setWindowWidth] = React.useState()
 
+  React.useEffect(() => {
 
+    window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
+
+  })
+
+  const finestraMobile = (windowWidth <= 1024) && true
 
   return (
     <>
-    {seo && <Seo title={pageTitle} seo={seo} /> }
-      
+      {seo && <Seo title={pageTitle} seo={seo} />}
+
       <div className="container-fluid" >
         <Header
-          translations={translations} 
-          locale={locale} 
-          pageTitle={pageTitle} 
-          pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''} 
+          translations={translations}
+          locale={locale}
+          pageTitle={pageTitle}
+          pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''}
           currentPath={langFilter.pathPagine.path}
-          
+          finestraMobile={finestraMobile}
         />
-    
+
       </div>
 
       <main>{children}</main>
 
-   
-        <Footer translations={translations} locale={locale} />
-  
+
+      <Footer translations={translations} locale={locale} />
+
       <ScrollTo />
-  
+
     </>
   )
 }

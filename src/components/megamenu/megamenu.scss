@@ -78,6 +78,13 @@
       display: block;
       margin: 0.5rem 0;
       color: $brown;
+      text-transform: uppercase;
+      a{
+        color: $brown;
+        &:hover{
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

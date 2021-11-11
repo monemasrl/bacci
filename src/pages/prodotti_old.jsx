@@ -210,7 +210,7 @@ const filtered = () => {
         tags = tags.map((item) => item.name)
         //prende il valore dai filtri nel form
         const filtersForm = filtersApp.concat(filtersCat)
-        console.log(filtersForm);
+        
 
         return filtersForm.length == 0  ? prodotto : filtersForm.every(f => tags.includes(f));
     });

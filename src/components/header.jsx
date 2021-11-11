@@ -5,10 +5,10 @@ import Breadcrumb from "./breadcrumb/breadCrumb"
 
 
 
-const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeType }) => {
+const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeType, finestraMobile }) => {
 
   const [mega, setMega] = React.useState(false)
-
+console.log(finestraMobile);
   return (
     <header>
 

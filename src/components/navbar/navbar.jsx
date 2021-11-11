@@ -96,7 +96,7 @@ const NavBar = (props) => {
                         {menuFilter[0].node.menuItems.nodes.map((item, index) => {
 
                             const menuPath = slugify(item.label)
-                            console.log('path', props.mega);
+
                             return (
                                 <React.Fragment key={item.label}>
 
@@ -104,32 +104,38 @@ const NavBar = (props) => {
 
                                         item.menuCampi.megamenu ?
                                             <li
-                                                onMouseOver={() => props.setMega(true)}
+                                                onMouseEnter={() => props.setMega(true)}
                                                 onMouseLeave={() => props.setMega(false)}>
-                                                <a className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
+                                                <div className={`main-mega  ${props.mega ? 'open' : ''}${
+                                                    props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
 
-                                                    href="#"><Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${'prodotti'}`}>{item.label}</Link></a>
+                                                    href="#"><Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${'prodotti'}`}>{item.label}</Link>
+                                                </div>
                                                 <Megamenu mega={props.mega} setMega={props.setMega} /></li>
                                             :
                                             <li >
-                                                <Link className={`${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} disabled={item.path === "#"} to={item.path}>{item.label}
+                                                {item.path === "#" ?
 
-                                                    {item.childItems ?
-                                                        <ul>
-                                                            {item.childItems.nodes.map((subitem) => {
-                                                                return (
-                                                                    <>
-                                                                        <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
-                                                                            <li>   {subitem.label}</li>
-                                                                        </LinkFade>
+                                                    <a className={`${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} disabled={item.path === "#"} to={item.path}>{item.label}
 
-                                                                    </>)
+                                                        {item.childItems ?
+                                                            <ul>
+                                                                {item.childItems.nodes.map((subitem) => {
+                                                                    return (
+                                                                        <>
+                                                                            <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
+                                                                                <li>   {subitem.label}</li>
+                                                                            </LinkFade>
 
-                                                            })}
-                                                        </ul>
-                                                        : ''}
+                                                                        </>)
 
-                                                </Link>
+                                                                })}
+                                                            </ul>
+                                                            : ''}
+
+                                                    </a> : <Link to="/"> {item.label} </Link>
+                                                }
+
                                             </li> : ''
                                     }
                                 </React.Fragment>

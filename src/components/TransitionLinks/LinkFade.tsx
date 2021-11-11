@@ -6,9 +6,10 @@ interface IProps {
   node?: ReactNode;
   url: string;
   linkState:number;
+  stileClasse:string;
 }
 
-export const LinkFade = ({ children, url, linkState }: IProps) => {
+export const LinkFade = ({ children, url, linkState, stileClasse  }: IProps) => {
   const exitTransition = {
     length: 0.8,
     zIndex: 2,
@@ -34,7 +35,7 @@ export const LinkFade = ({ children, url, linkState }: IProps) => {
 
   return (
     <>
-      <TransitionLink activeClassName="active" to={url} exit={exitTransition} entry={entryTransition}>
+      <TransitionLink className={stileClasse} activeClassName="active" to={url} exit={exitTransition} entry={entryTransition}>
         {children}
       </TransitionLink>
     </>

@@ -1039,17 +1039,20 @@ section.container.repeater.no-flag {
 /* ANCHOR: Prodotti */
 .prodotti {
     justify-content: space-between;
-padding-top: 3rem;
+    padding-top: 3rem;
+    min-height: 970px;
+
     .container.col-sx {
-      flex: 1 1 550px;
-          display: flex;
-          flex-direction: column;
-          h2{
-             font-size: 48px;
-             color: $textColor;
-             text-transform: uppercase;
-             margin-bottom: 0;
-          }
+        flex: 1 1 550px;
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            font-size: 48px;
+            color: $textColor;
+            text-transform: uppercase;
+            margin-bottom: 0;
+        }
     }
 
     .container.col-dx {
@@ -1057,27 +1060,64 @@ padding-top: 3rem;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        .box-prodotto{
-          max-width:480px;
-          text-align: center;
-          margin-bottom: 2rem ;
-          h2{
-            text-transform: uppercase;
-            color: $brown;
-            font-weight: bold;
-            font-size: 48px;
-            margin-bottom: 0;
-          }
-          p{
-            font-size: 24px;
-            color: $textColor;
-            
-          }
-          .button{
-            @include button-sezione(2rem,2rem);
-            width: 60%;
-          a { color: $brown;}
-          }
+
+        .break {
+            flex-basis: 100%;
+            width: 0;
+        }
+
+        .box-prodotto {
+            max-width: 480px;
+            text-align: center;
+            margin-bottom: 2rem;
+
+            h2 {
+                text-transform: uppercase;
+                color: $brown;
+                font-weight: bold;
+                font-size: 48px;
+                margin-bottom: 0;
+            }
+
+            p {
+                font-size: 24px;
+                color: $textColor;
+            }
+
+            .button {
+                @include button-sezione(2rem, 2rem);
+
+                width: 60%;
+
+                a {
+                    color: $brown;
+                }
+            }
+        }
+
+        .wrapperpagination {
+            width: 100%;
+            text-align: center;
+
+            ul {
+                list-style: none;
+            }
+
+            li {
+                display: inline-block;
+                cursor: pointer;
+                width: 30px;
+                height: 30px;
+                background-color: $lightBrown;
+                text-align: center;
+                color: white;
+                line-height: 30px;
+                margin: 0.5rem;
+
+                &.active {
+                    background-color: $brown;
+                }
+            }
         }
     }
 
