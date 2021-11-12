@@ -57,7 +57,7 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
                     className="wrapper-megamenu" onMouseLeave={() => setMega(false)}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, duration: 2 }}
+                    exit={{ opacity: 0 }}
                 
                 >
 

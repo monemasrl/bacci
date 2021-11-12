@@ -11,10 +11,12 @@ const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeTy
   const [mega, setMega] = React.useState(false)
 
   //gestione menu per il mobile
-  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
+  const [windowWidth, setWindowWidth] = React.useState()
 
   React.useEffect(() => {
-    window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
+    windowWidth ?
+    window.addEventListener('resize', () => setWindowWidth(window.innerWidth)) :
+    setWindowWidth(window.innerWidth)
   })
 
   const finestraMobile = (windowWidth <= 1024) && true
