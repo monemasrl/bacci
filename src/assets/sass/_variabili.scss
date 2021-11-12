@@ -55,7 +55,10 @@ $big: "only screen and (max-width : 1900px)";
         display: block;
         max-width: 300px;
         margin: 0 auto;
+        padding: 0;
     }
+
+
 
     &:hover {
         cursor: pointer;

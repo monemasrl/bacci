@@ -36,7 +36,7 @@ const GridPagination = ({ archivio, topArchivio }) => {
                         <GatsbyImage image={item.node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.node.prodotto.immagine.altText} />
                         <h2>{item.node.title}</h2>
                         <p>{item.node.prodotto.paragrafo}</p>
-                        <div className="button"><Link to={item.node.title}>scopri</Link></div>
+                       <Link className="button" to={item.node.title}>scopri</Link>
                     </div>
                 )
             })}

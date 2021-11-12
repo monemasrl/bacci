@@ -1,0 +1,104 @@
+@import "../../assets/sass/variabili";
+.mobile {
+  .top-box {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    .main-logo {
+      width: 272px;
+    }
+    .hamburger {
+   
+      height: 30px;
+      align-self: center;
+  }
+  }
+  .top-menu-mobile {
+    background-color: $lightBrown;
+    .languages {
+      margin: 0;
+      background-color: #b3a495;
+      padding: 10px;
+      li {
+        display: inline-block;
+        font-weight: bold;
+        font-size: 20px;
+        a {
+          font-weight: normal;
+        }
+      }
+    }
+    ul {
+      list-style: none;
+      text-align: center;
+      margin: 1rem;
+      li {
+        color: white;
+        text-transform: uppercase;
+        font-size: 1rem;
+        margin: 10px;
+        a {
+          color: white;
+        }
+      }
+    }
+  }
+  .mainmobile {
+    ul {
+      text-align: center;
+      text-transform: uppercase;
+      color: $brown;
+      list-style: none;
+      a {
+        color: $brown;
+        text-decoration: underline;
+      }
+      li {
+        font-size: 24px;
+        margin: 2rem 0;
+        font-weight: bold;
+        a[disabled="true"]{
+          display:inline-block;
+          text-decoration: none;
+          &::before{
+            content:'\203A';
+            position: relative;
+            font-size: 15px;
+            display: inline-block;
+            bottom: 5px;
+          }
+        }
+        &:first-child{
+          margin-top:0;
+        }
+        ul {
+          margin-top: 1rem;
+          li {
+            font-size: 1rem;
+            margin: 0.7rem;
+            font-weight: normal;
+            a{text-decoration: none;}
+          }
+        }
+      }
+    }
+  }
+}
+
+.container-mobile {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  box-shadow: 1px 10px 16px #00000063;
+  background-color: white;
+  left: -1000px;
+  transition: all ease-in-out 0.5s;
+  border-bottom: 10px solid $brown;
+  &.open{
+    opacity: 1;
+    z-index: 100;
+    left:0px;
+   
+  }
+}

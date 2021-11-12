@@ -129,7 +129,8 @@ const Prodotti = ({ data, location }) => {
 
 
   React.useEffect(() => {
-    if (location.state.categoria) {
+     
+    if (location.state && location.state.categoria) {
       setFiltersCat([location.state.categoria])
     }
 
@@ -158,7 +159,7 @@ const Prodotti = ({ data, location }) => {
 
 
   let fromMegaMenu = location.state && location.state.categoria
-  console.log(fromMegaMenu);
+
 
   const Categorie = () => {
 

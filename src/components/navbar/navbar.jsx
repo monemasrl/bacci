@@ -5,12 +5,13 @@ import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
 import LinkFade from "../TransitionLinks/LinkFade"
 import Megamenu from '../megamenu/megamenu'
+import { Termini } from '../../../data-translations'
 import './navbar.scss'
 let slugify = require('slugify')
 
 
-
 const NavBar = (props) => {
+
 
 
     const data = useStaticQuery(graphql`
@@ -52,6 +53,7 @@ const NavBar = (props) => {
     const menuFilter = data.allWpMenu.edges.filter((lang) => {
         return lang.node.language === langTag[props.locale]
     })
+    const terminiTraduzione = Termini[props.locale]
 
     return (
         <>
@@ -106,12 +108,11 @@ const NavBar = (props) => {
                                             <li
                                                 onMouseEnter={() => props.setMega(true)}
                                                 onMouseLeave={() => props.setMega(false)}>
-                                                <div className={`main-mega  ${props.mega ? 'open' : ''}${
-                                                    props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
+                                                <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
 
-                                                    href="#"><Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${'prodotti'}`}>{item.label}</Link>
+                                                    href="#"><a href="#">{item.label}</a>
                                                 </div>
-                                                <Megamenu mega={props.mega} setMega={props.setMega} /></li>
+                                                <Megamenu terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={item.menu.node.language} /></li>
                                             :
                                             <li >
                                                 {item.path === "#" ?
@@ -123,10 +124,10 @@ const NavBar = (props) => {
                                                                 {item.childItems.nodes.map((subitem) => {
                                                                     return (
                                                                         <>
-                                                                            <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
-                                                                                <li>   {subitem.label}</li>
+                                                                            <li> <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
+                                                                                {subitem.label}
                                                                             </LinkFade>
-
+                                                                            </li>
                                                                         </>)
 
                                                                 })}

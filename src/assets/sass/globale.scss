@@ -1084,14 +1084,11 @@ section.container.repeater.no-flag {
                 color: $textColor;
             }
 
-            .button {
+            a.button {
                 @include button-sezione(2rem, 2rem);
 
                 width: 60%;
-
-                a {
-                    color: $brown;
-                }
+            
             }
         }
 

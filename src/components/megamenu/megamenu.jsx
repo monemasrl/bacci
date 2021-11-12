@@ -2,11 +2,12 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { StaticImage } from "gatsby-plugin-image";
 import Tassonomie from "../tassonomie";
+
 import {  useStaticQuery, Link, graphql } from "gatsby";
 
 import './megamenu.scss'
 
-const Megamenu = ({ mega, setMega }) => {
+const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
  
     const dataMega = useStaticQuery(graphql`
     query datimmegamenu{
@@ -46,7 +47,7 @@ const Megamenu = ({ mega, setMega }) => {
     }`)
 
 
-    const tassonomie = Tassonomie('it_IT')
+    const tassonomie = Tassonomie(locale)
 
     return (
 
@@ -56,7 +57,8 @@ const Megamenu = ({ mega, setMega }) => {
                     className="wrapper-megamenu" onMouseLeave={() => setMega(false)}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    exit={{ opacity: 0, duration: 2 }}
+                
                 >
 
                     <div className="mega-box" >
@@ -159,10 +161,19 @@ const Megamenu = ({ mega, setMega }) => {
                             </div>
                             <ul className="mega-list">
                                 {tassonomie.categorie.map((item) => <li>
-                                    <Link to={'/prodotti'} state={{categoria: item}} 
+                                    <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`} state={{categoria: item}} 
                                     className="mega-item">{item}</Link></li>
                                 )}
                             </ul>
+                          
+
+                                <Link className="tutti-prodotti" to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`}>{terminiTraduzione.tutti_prodotti}</Link>
+
+                           
+                            <div>
+                                <Link to="">
+                                </Link>
+                            </div>
                         </motion.div>
                     </div>
 

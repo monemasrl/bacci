@@ -54,15 +54,7 @@ const Layout = ({ children, locale, translations, pageTitle, seo }, props) => {
     return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node
 
-  const [windowWidth, setWindowWidth] = React.useState()
 
-  React.useEffect(() => {
-
-    window.addEventListener('resize', () => setWindowWidth(window.innerWidth))
-
-  })
-
-  const finestraMobile = (windowWidth <= 1024) && true
 
   return (
     <>
@@ -75,7 +67,7 @@ const Layout = ({ children, locale, translations, pageTitle, seo }, props) => {
           pageTitle={pageTitle}
           pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''}
           currentPath={langFilter.pathPagine.path}
-          finestraMobile={finestraMobile}
+          
         />
 
       </div>
