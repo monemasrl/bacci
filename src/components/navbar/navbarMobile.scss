@@ -1,5 +1,9 @@
 @import "../../assets/sass/variabili";
 .mobile {
+  display: none;
+  @media #{$landscape}{
+    display: inherit;
+  }
   .top-box {
     display: flex;
     justify-content: space-between;
@@ -14,6 +18,9 @@
   }
   }
   .top-menu-mobile {
+    @media #{$landscape}{
+      display: inherit;
+    }
     background-color: $lightBrown;
     .languages {
       margin: 0;
