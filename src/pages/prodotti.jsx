@@ -129,7 +129,7 @@ const Prodotti = ({ data, location }) => {
 
 
   React.useEffect(() => {
-     
+
     if (location.state && location.state.categoria) {
       setFiltersCat([location.state.categoria])
     }
@@ -140,12 +140,13 @@ const Prodotti = ({ data, location }) => {
 
   // variabili stato
   const [filtersCat, setFiltersCat] = React.useState(() => [])
-  const [filtersApp, setFiltersApp] = React.useState([])
-  const [toggleFilterCat, setToggleFilterCat] = React.useState(false)
+  const [filtersApp, setFiltersApp] = React.useState(() => [])
+
+
 
   //setta il valore del campo nella variabile di stato
   const onChangeCheckboxCategorie = (evt) => {
-    setToggleFilterCat(true)
+
 
     if (evt.target.value === 'reset') {
       setFiltersCat([])
@@ -155,22 +156,59 @@ const Prodotti = ({ data, location }) => {
 
   }
 
+  const onChangeCheckboxApplicazioni = (evt) => {
 
+
+    // se il filtro è check crea l'array
+    if (evt.target.checked) {
+      setFiltersApp([...filtersApp, evt.target.value])
+    } else {
+
+      // se il filtro è uncheck togli il record dall'array
+      const filterUnchecked = filtersApp.filter((item) => {
+        return item !== evt.target.value
+      })
+
+      setFiltersApp([...filterUnchecked])
+    }
+
+  }
 
 
   let fromMegaMenu = location.state && location.state.categoria
 
 
   const Categorie = () => {
-
+    // filtra prodotti per tag applicazioni
+    const filtersResultApp = langFilterProdotto.filter((item) => {
+      return filtersApp.length > 0 && item.node.prodottiApplicazioni.nodes.some((item) => {
+        return filtersApp.includes(item.name)
+      })
+    })
+    // filtra prodotti per categorie
     let filteredCat = langFilterProdotto.filter((prodotto) => {
-      const filterResultCat = filtersCat.length === 0 ? prodotto.node.prodottiCategorie.nodes : prodotto.node.prodottiCategorie.nodes[0].name === filtersCat[0]
-      return filterResultCat
+      const filterResultCat = prodotto.node.prodottiCategorie.nodes[0].name === filtersCat[0]
+      return filtersCat.length > 0 && filterResultCat
     });
 
+    // se i filtri sono vuoti renderizza tutti i prodotti altrimenti concatena i due array
+    // elimina gli elementi duplicati e ritorna l'array
 
-    return filteredCat
+    if (filtersApp.length === 0 && filtersCat.length === 0) {
+      return langFilterProdotto
+    } else {
+      let concatArray = filteredCat.concat(filtersResultApp)
+
+      concatArray = concatArray.filter((thing, index, self) =>
+        index === self.findIndex((t) => (
+          t.node.title === thing.node.title
+        ))
+      )
+
+      return concatArray
+    }
   }
+
 
 
   const topArchivio = React.useRef()
@@ -195,11 +233,22 @@ const Prodotti = ({ data, location }) => {
                       <label for="categorie">{item}</label>
                     </li>)
 
+                })}
+              </ul>
+            </form>
+            <form className="filters" onChange={(e) => onChangeCheckboxApplicazioni(e)}>
+              <ul>
+
+                {listaApplicazioni.map((item, index) => {
+                  return (
+                    <li>
+                      <input type="checkbox" value={item} name="applicazioni" />
+                      <label for="applicazioni">{item}</label>
+                    </li>)
 
                 })}
               </ul>
             </form>
-
 
           </div>
           <div className="container col-dx">
