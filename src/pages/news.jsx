@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { langTag } from "../../data-translations"
 import Layout from "../components/layout/layout"
-
+import LinkFade from "../components/TransitionLinks/LinkFade"
 
 export const query = graphql`
 {
@@ -119,7 +119,7 @@ const News = ({ data, location }, props) => {
               </div>
               <h2>{item.node.title}</h2>
               <div dangerouslySetInnerHTML={{ __html: item.node.excerpt }} />
-              <Link to={`${langTag[item.node.locale.locale] === "it" ? '' : langTag[item.node.locale.locale]}/news/${item.node.slug}`}>leggi tutto</Link>
+              <LinkFade url={`${langTag[item.node.locale.locale] === "it" ? '' : langTag[item.node.locale.locale]}/news/${item.node.slug}`}>leggi tutto</LinkFade>
             </div>
 
           </div>)

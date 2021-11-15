@@ -4,6 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
 import Tassonomie from "../components/tassonomie"
+import { Termini } from "../../data-translations"
 export const query = graphql`
 {
 
@@ -107,6 +108,7 @@ const Prodotti = ({ data, location }) => {
   })
 
   const tassonomie = Tassonomie('it_IT')
+  const termini = Termini.it_IT
   // lista delle applicazioni da lista prodotto
   let listaApplicazioni = langFilterProdotto.map((item) => item.node.prodottiApplicazioni.nodes)
   listaApplicazioni = listaApplicazioni.reduce((a, b) => { return a.concat(b) })
@@ -203,7 +205,7 @@ const Prodotti = ({ data, location }) => {
       return filterResultSearch && filterResultSearch
     })
 
-console.log(campoRicerca.length);
+
     // se i filtri sono vuoti renderizza tutti i prodotti altrimenti concatena i due array
     // elimina gli elementi duplicati e ritorna l'array
     if (campoRicerca.length > 0) {
@@ -236,15 +238,15 @@ console.log(campoRicerca.length);
         <div className="container prodotti" ref={topArchivio}>
           <div className="container col-sx">
             <h2>affina la ricerca</h2>
-            <div className="filters">
-              <input onKeyUp={(e) => onChangeText(e)} type="text" />
+            <div className="filters search">
+              <input onKeyUp={(e) => onChangeText(e)} type="text" placeholder={termini.tasto_ricerca}/>
             </div>
 
-            <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
+            <form  className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
               <ul>
                 <li>
                   <input type="radio" value={'reset'} name="categorie" />
-                  <label for="categorie">all</label></li>
+                  <label for="categorie">{termini.tutti_prodotti}</label></li>
                 {tassonomie.categorie.map((item) => {
                   return (
                     <li>
@@ -257,6 +259,7 @@ console.log(campoRicerca.length);
               </ul>
             </form>
             <form className="filters" onChange={(e) => onChangeCheckboxApplicazioni(e)}>
+              <h3>Applicazioni</h3>
               <ul>
 
                 {listaApplicazioni.map((item, index) => {

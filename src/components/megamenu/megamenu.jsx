@@ -2,53 +2,77 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion"
 import { StaticImage } from "gatsby-plugin-image";
 import Tassonomie from "../tassonomie";
-
-import {  useStaticQuery, Link, graphql } from "gatsby";
+import { GatsbyImage } from "gatsby-plugin-image"
+import { useStaticQuery, Link, graphql } from "gatsby";
 
 import './megamenu.scss'
 
 const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
- 
-    const dataMega = useStaticQuery(graphql`
-    query datimmegamenu{
 
-        allWpMenu {
-            edges {
-            node {
-                language
-                menuItems {
-                nodes {
-                    label
-                    parentId
-                    path
-                    childItems {
-                      nodes {
-                        label
-                        path
-                        parent{
+    const dataMega = useStaticQuery(graphql`
+        query megamenu {
+                allWpProdotto {
+                    edges {
+                    node {
+                        prodotto {
+                        paragrafo
+                        sottotitolo
+                        testoAnteprima
+                        sezioniProdotto {
+                            paragrafo 
+                            titolo
+                        }
+                        inEvidenza
+                        immagine{
+                            altText
+                            localFile {
+                            childImageSharp {
+                                gatsbyImageData(
+                                width: 422
+                                placeholder: BLURRED
+                                formats: [AUTO, WEBP, AVIF]
+
+                                )
+                            }
+                            }
+                        }
+                        }
+                        locale{locale}
+                        title
+                        translated {
+                        prodottiApplicazioni {
+                            nodes {
+                            name
+                            }
+                        }
+                        translations {
                             id
                         }
-                      }
-                    }
-                    menu {
-                    node {
-                        language
-                    }
-                    }
-                    menuCampi {
-                          megamenu
+                        translated {
+                            prodotto {
+                            sezioniProdotto {
+                                paragrafo
+                                titolo
+                            }
+                            }
                         }
+                        }
+                    }
+                    }
                 }
-                }
-            }
-            }
-        }
 
-    }`)
+            }`)
 
 
     const tassonomie = Tassonomie(locale)
+    const langFilterProdotto = dataMega.allWpProdotto.edges.filter((item) => {
+        return (item.node.locale.locale === locale)
+    })
 
+const novita  = langFilterProdotto[langFilterProdotto.length - 1].node
+const inEvidenza  = langFilterProdotto.filter((item)=>item.node.prodotto.inEvidenza[0] === 'si' )
+
+console.log(inEvidenza);
     return (
 
         <AnimatePresence>
@@ -58,7 +82,7 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                
+
                 >
 
                     <div className="mega-box" >
@@ -76,18 +100,17 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
                                     NOVITA’
                                 </div>
                                 <div className="content-mega">
-                                    <h2>Master Max</h2>
-                                    <p>Centro di lavoro a 6 assi con struttura a portale</p>
-                                    <StaticImage
-                                        src="../../images/test-megamenu.jpg"
-                                        width={422}
-                                        placeholder="none"
-                                        alt="test-megamenu"
-                                    />
-                                    <p>
-                                        <strong>Indicata per la produzione di: </strong>
-                                        elementi di sedie, tavoli, letti, scocche, componenti di scale e strumenti musicali.
-                                    </p>
+
+                                        <>
+                                            <h2>{novita.title}</h2>
+                                            <p>{novita.prodotto.sottotitolo}</p>
+                                            <GatsbyImage image={novita.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={novita.prodotto.immagine.altText} />
+
+                                            <p dangerouslySetInnerHTML={{__html:novita.prodotto.testoAnteprima}} />
+                                        </>
+                                        
+                                    
+
                                 </div>
                             </div>
                         </motion.div>
@@ -104,19 +127,15 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
                                 <div className="titolo-col-mega">
                                     IN EVIDENZA
                                 </div>
+
                                 <div className="content-mega">
-                                    <h2>Master Max</h2>
-                                    <p>Centro di lavoro a 6 assi con struttura a portale</p>
-                                    <StaticImage
-                                        src="../../images/test-megamenu.jpg"
-                                        width={422}
-                                        placeholder="none"
-                                        alt="test-megamenu"
-                                    />
-                                    <p>
-                                        <strong>Indicata per la produzione di:<br /></strong>
-                                        elementi di sedie, tavoli, letti, scocche, componenti di scale e strumenti musicali.
-                                    </p>
+                                    <h2>{inEvidenza[0].node.title}</h2>
+                                    <p>{inEvidenza[0].node.prodotto.sottotitolo}</p>
+                                    <GatsbyImage image={inEvidenza[0].node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={novita.prodotto.immagine.altText} />
+
+                                    <p dangerouslySetInnerHTML={{__html:inEvidenza[0].node.prodotto.testoAnteprima}} />
+                                      
+                                    
                                 </div>
                             </div>
                         </motion.div>
@@ -161,15 +180,15 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
                             </div>
                             <ul className="mega-list">
                                 {tassonomie.categorie.map((item) => <li>
-                                    <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`} state={{categoria: item}} 
-                                    className="mega-item">{item}</Link></li>
+                                    <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`} state={{ categoria: item }}
+                                        className="mega-item">{item}</Link></li>
                                 )}
                             </ul>
-                          
 
-                                <Link className="tutti-prodotti" to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`}>{terminiTraduzione.tutti_prodotti}</Link>
 
-                           
+                            <Link className="tutti-prodotti" to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`}>{terminiTraduzione.tutti_prodotti}</Link>
+
+
                             <div>
                                 <Link to="">
                                 </Link>

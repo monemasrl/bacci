@@ -149,6 +149,9 @@ footer {
                         border: 1px solid white;
                         color: white;
                         width: auto;
+                        @media #{$landscape}{
+                            width: 300px;
+                        }
                     }
                 }
             }
