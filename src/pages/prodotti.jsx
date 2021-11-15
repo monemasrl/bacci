@@ -141,12 +141,20 @@ const Prodotti = ({ data, location }) => {
   // variabili stato
   const [filtersCat, setFiltersCat] = React.useState(() => [])
   const [filtersApp, setFiltersApp] = React.useState(() => [])
+  const [filtersSearch, setFiltersSearch] = React.useState()
+
+  // setta il valore del campo ricerca nello stato  
+  const onChangeText = (evt) => {
+    if (evt.target.value === '') {
+      setFiltersSearch()
+    } else {
+      setFiltersSearch([evt.target.value])
+    }
+  }
 
 
-
-  //setta il valore del campo nella variabile di stato
+  // setta il valore dei filtri nello stato
   const onChangeCheckboxCategorie = (evt) => {
-
 
     if (evt.target.value === 'reset') {
       setFiltersCat([])
@@ -157,7 +165,6 @@ const Prodotti = ({ data, location }) => {
   }
 
   const onChangeCheckboxApplicazioni = (evt) => {
-
 
     // se il filtro è check crea l'array
     if (evt.target.checked) {
@@ -175,8 +182,6 @@ const Prodotti = ({ data, location }) => {
   }
 
 
-  let fromMegaMenu = location.state && location.state.categoria
-
 
   const Categorie = () => {
     // filtra prodotti per tag applicazioni
@@ -190,11 +195,22 @@ const Prodotti = ({ data, location }) => {
       const filterResultCat = prodotto.node.prodottiCategorie.nodes[0].name === filtersCat[0]
       return filtersCat.length > 0 && filterResultCat
     });
+    // filtra prodotti per campo di ricerca
 
+    let campoRicerca = langFilterProdotto.filter((prodotto) => {
+      let filterResultSearch = prodotto.node.title.toLowerCase()
+      filterResultSearch = filterResultSearch.includes(filtersSearch)
+      return filterResultSearch && filterResultSearch
+    })
+
+console.log(campoRicerca.length);
     // se i filtri sono vuoti renderizza tutti i prodotti altrimenti concatena i due array
     // elimina gli elementi duplicati e ritorna l'array
+    if (campoRicerca.length > 0) {
+      return campoRicerca
 
-    if (filtersApp.length === 0 && filtersCat.length === 0) {
+    }
+    else if (filtersApp.length === 0 && filtersCat.length === 0) {
       return langFilterProdotto
     } else {
       let concatArray = filteredCat.concat(filtersResultApp)
@@ -220,6 +236,10 @@ const Prodotti = ({ data, location }) => {
         <div className="container prodotti" ref={topArchivio}>
           <div className="container col-sx">
             <h2>affina la ricerca</h2>
+            <div className="filters">
+              <input onKeyUp={(e) => onChangeText(e)} type="text" />
+            </div>
+
             <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
               <ul>
                 <li>
