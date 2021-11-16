@@ -111,7 +111,7 @@ const News = ({ data, location }, props) => {
         {langFilterData.map((item) => {
          
           return (
-          <div className="col-news">
+          <div className="col-3">
             <div className="box-single-news">
               <GatsbyImage image={item.node.featuredImage.node.localFile.childImageSharp.gatsbyImageData} alt={item.node.featuredImage.node.altText} />
               <div className="date">

@@ -63,7 +63,9 @@ h3 {
   text-transform: uppercase;
   font-family: $title;
 }
-
+p{
+    font-weight: lighter;
+}
 .tl-edges {
   overflow-x: auto;
 }
@@ -293,7 +295,7 @@ section.container.repeater.no-flag {
     }
 
     p {
-      font-size: 28px;
+      font-size: 27px;
       color: $textColor;
       line-height: 38px;
 
@@ -365,6 +367,9 @@ section.container.repeater.no-flag {
     @media #{$landscape} {
       padding-left: 1rem;
     }
+  }
+  .box-dx{
+      flex: 1 1;
   }
 }
 
@@ -935,7 +940,7 @@ section.container.repeater.no-flag {
   margin-top: 3rem;
   justify-content: space-between;
 
-  .col-news {
+  .col-3 {
     max-width: 487px;
     margin-top: 1rem;
   }
@@ -1118,14 +1123,14 @@ section.container.repeater.no-flag {
   }
 
   .filters {
-      h3{
-          margin: 1rem 0 0 0;
-      }
+    h3 {
+      margin: 1rem 0 0 0;
+    }
     ul {
       list-style: none;
-li{
-    margin: 10px 0;
-};
+      li {
+        margin: 10px 0;
+      }
       label {
         font-size: 22px;
         text-transform: uppercase;
@@ -1139,13 +1144,66 @@ li{
         border-bottom: 1px solid $brown;
         width: 100%;
         max-width: 300px;
-        height: 40px  ;
+        height: 40px;
         margin: 1rem 1rem 1rem 0rem;
-        outline:none;
-        &:active{
-            outline: none;
+        outline: none;
+        &:active {
+          outline: none;
         }
       }
+    }
+  }
+}
+.fiere {
+  .box-single-fiera {
+    border: 1px solid $brown;
+    margin: 10px;
+    padding: 1rem;
+    max-width: 488px;
+    width: 100%;
+    .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 36px;
+      color: $brown;
+      font-weight: 600;
+      font-family: "open sans";
+      margin-bottom: 0;
+      margin-top: 0;
+      padding: 0 ;
+    }
+
+    .data {
+      padding: 0 ;
+      font-size: 18px;
+      color: $textColor;
+      font-size: 36px;
+      margin-bottom: 1rem;
+    }
+    .luogo {
+      font-size: 24px;
+    }
+    .link{
+        padding: 0;
+    }
+    p {
+      color: $textColor;
+      line-height: 34px;
+      font-size: 24px;
+      margin-top: 1rem;
+      
+      padding: 0 10px;
+    }
+
+    a {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 24px;
+      font-style: italic;
+      color: $brown;
+      padding: 0 10px;
     }
   }
 }

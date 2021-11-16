@@ -40,10 +40,7 @@ const LayoutFiere = ({ children, locale, translations, pageTitle, pathName}) => 
               locale
               post_title
             }
-            fiere {
-              note
-           
-            }
+
           }
         }
       }

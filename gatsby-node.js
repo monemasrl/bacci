@@ -18,7 +18,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
               post_title
             }
             fiere {
-              note
+
               path
            
             }
