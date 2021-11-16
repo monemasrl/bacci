@@ -81,10 +81,7 @@ $big: "only screen and (max-width : 1900px)";
         h2 {
             @include h2-sezioni(72px);
 
-            &::first-line {
-                line-height: 20px;
-            }
-
+        
             font-weight: 400;
 
             strong {
@@ -117,15 +114,10 @@ $big: "only screen and (max-width : 1900px)";
 
         h2 {
             @include h2-sezioni(50px);
-
+            margin: 0;
             color: $textColor;
             position: relative;
-
-            &::first-line {
-                line-height: 20px;
-            }
-
-            line-height: 1.5;
+          
 
             &::before {
                 content: '';
@@ -134,7 +126,7 @@ $big: "only screen and (max-width : 1900px)";
                 width: 10px;
                 height: 120px;
                 left: -30px;
-                top: -20px;
+                top: 0px;
             }
 
             font-weight: 400;
@@ -144,7 +136,9 @@ $big: "only screen and (max-width : 1900px)";
                 font-weight: 600;
             }
         }
-
+h3{
+    margin: 0;
+}
         .box-sx {
             max-width: 660px;
             padding-left: 2rem;
@@ -176,13 +170,11 @@ $big: "only screen and (max-width : 1900px)";
 
         h2 {
             @include h2-sezioni(50px);
-
+            margin: 0;
             color: $textColor;
             position: relative;
 
-            &::first-line {
-                line-height: 20px;
-            }
+       
 
             &::before {
                 content: '';
@@ -191,7 +183,7 @@ $big: "only screen and (max-width : 1900px)";
                 width: 10px;
                 height: 120px;
                 left: -30px;
-                top: -20px;
+                top: 0px;
             }
 
             font-weight: 400;
@@ -201,7 +193,9 @@ $big: "only screen and (max-width : 1900px)";
                 font-weight: 600;
             }
         }
-
+        h3{
+            margin: 0;
+        }
         .box-dx {
             flex: 1;
             padding-right: 2rem;

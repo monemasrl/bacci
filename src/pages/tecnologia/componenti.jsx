@@ -233,7 +233,6 @@ const Produzione = ({ data, location }) => {
           <section className="container sezione-testo-sx">
           <div className="box-sx">
             <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti5.titolo }} />
-            <h3 dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti5.sottotitolo }} />
             <p dangerouslySetInnerHTML={{__html:dataFilter.componenti.sezioneComponenti5.paragrafo}} />
           </div>
           <div className="box-dx">
@@ -246,14 +245,12 @@ const Produzione = ({ data, location }) => {
           </div>
           <div className="box-dx">
           <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti6.titolo }} />
-          <h3 dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti6.sottotitolo }} />
           <p dangerouslySetInnerHTML={{__html:dataFilter.componenti.sezioneComponenti6.paragrafo}} />
           </div>
         </section>
         <section className="container sezione-testo-sx">
           <div className="box-sx">
             <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti7.titolo }} />
-            <h3 dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti7.sottotitolo }} />
             <p dangerouslySetInnerHTML={{__html:dataFilter.componenti.sezioneComponenti7.paragrafo}} />
           </div>
           <div className="box-dx">

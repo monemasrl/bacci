@@ -403,7 +403,7 @@ section.container.repeater.no-flag {
     font-weight: 400;
 
     strong {
-      @include h2-sezioni(120px);
+      @include h2-sezioni(105px);
 
       display: block;
       font-weight: 600;
@@ -1051,9 +1051,11 @@ section.container.repeater.no-flag {
   justify-content: space-between;
   padding-top: 3rem;
   min-height: 970px;
-
+  padding: 0 1rem;
   .container.col-sx {
-    flex: 1 1 550px;
+    flex: 1 1;
+    max-width: 550px;
+ 
     display: flex;
     flex-direction: column;
 
@@ -1066,10 +1068,11 @@ section.container.repeater.no-flag {
   }
 
   .container.col-dx {
-    flex: 1 1 1070px;
+    flex: 1 1;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-top: 2rem;
 
     .break {
       flex-basis: 100%;
@@ -1077,7 +1080,7 @@ section.container.repeater.no-flag {
     }
 
     .box-prodotto {
-      max-width: 480px;
+      max-width: 380px;
       text-align: center;
       margin-bottom: 2rem;
 
@@ -1090,8 +1093,9 @@ section.container.repeater.no-flag {
       }
 
       p {
-        font-size: 24px;
+        font-size: 18px;
         color: $textColor;
+        font-weight: normal;
       }
 
       a.button {
