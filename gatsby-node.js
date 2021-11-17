@@ -2,29 +2,74 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
   const result = await graphql(` 
    { 
-       allWpFiera {
-        edges {
-          node {
-            slug
-        
-            content
-            locale {
-              locale
-            }
-            translations {
-              href
+    allWpFiera {
+      edges {
+      node {
+        content
+          fiere {
+          dataDa
+          dataA
+          luogo
+          link
+          sottotitolo
+          descrizione
+          personale {
+            ... on WpPersonale {
               id
-              locale
-              post_title
-            }
-            fiere {
+              title
+              personale {
+                immagine{
+                  altText
+                  localFile {
+                  childImageSharp {
+                      gatsbyImageData(
+                      width: 238
+                      placeholder: BLURRED
+                      formats: [AUTO, WEBP, AVIF]
 
-              path
-           
+                      )
+                  }
+                  }
+              }
+                link
+                nome
+                professione
+                cognome
+              }
             }
           }
-        }
+          callToAction {
+            paragrafo
+          }
+  
+          }
+          title
+          slug
+          locale {
+        locale
       }
+      translations {
+        href
+        id
+        locale
+        post_title
+      }
+      }
+      }
+}
+        wpPersonale {
+          id
+          title
+          personale {
+            immagine {
+              id
+            }
+            link
+            nome
+            professione
+            cognome
+          }
+        }
       allWpPost {
         edges {
           node {
@@ -63,10 +108,10 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
 
     createPage({
-      path: `${urlBase}${entry.node.fiere.path}/${entry.node.slug}`,
+      path: `${urlBase}fiere/${entry.node.slug}`,
       component: require.resolve('./src/templates/fiere.jsx'),
       context: {
-        content: entry.node.content,
+        content: entry.node,
         locale: entry.node.locale.locale,
         translations: entry.node.translations,
         slug: entry.node.slug,

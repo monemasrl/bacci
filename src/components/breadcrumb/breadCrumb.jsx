@@ -1,6 +1,9 @@
 import React from "react";
-import './breadcrumb.scss'
-const Breadcrumb = ({ pageTitle, pathName, nodeType }) => {
+import './breadcrumb.scss';
+import {Termini} from "../../../data-translations"
+
+const Breadcrumb = ({ pageTitle, pathName, nodeType, fiere, locale }) => {
+    console.log(pathName);
     const parentFolder = pathName ? pathName : ''
 
 
@@ -17,18 +20,23 @@ const Breadcrumb = ({ pageTitle, pathName, nodeType }) => {
                         <span>{pageTitle}</span>
                     </h2>
 
-                    :
-
-                    (pageTitle.toLowerCase() === parentFolder.toLowerCase()) || !parentFolder ?
-
-                        <h2>{pageTitle}</h2>
+                    : fiere ?
+                        <h2>
+                            {Termini[locale].eventi}
+                        </h2>
 
                         :
 
-                        <h2>
-                            <span>/{parentFolder}  <br /></span>
-                            <span>{pageTitle}</span>
-                        </h2>
+                        (pageTitle.toLowerCase() === parentFolder.toLowerCase()) || !parentFolder ?
+
+                            <h2>{pageTitle}</h2>
+
+                            :
+
+                            <h2>
+                                <span>/{parentFolder}  <br /></span>
+                                <span>{pageTitle}</span>
+                            </h2>
                 }
 
 

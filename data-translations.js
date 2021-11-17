@@ -6,11 +6,15 @@ export const Termini = {
     en_US: {azienda: 'company',
             prodotti: 'products',
             tutti_prodotti: 'all products',
-            tasto_ricerca: 'Search for model'                 
+            tasto_ricerca: 'Search for model',
+            eventi: 'fair and events',
+            accoglienza: 'Our..'        
     },
     it_IT: {azienda: 'azienda',
             prodotti: 'prodotti',
             tutti_prodotti: 'tutti i prodotti',
-            tasto_ricerca: 'Ricerca Modello'
+            tasto_ricerca: 'Ricerca Modello',
+            eventi: 'eventi e fiere',
+            accoglienza: "il nostro personale è pronto ad accoglierti" 
               },
   }
