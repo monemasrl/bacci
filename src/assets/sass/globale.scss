@@ -163,6 +163,7 @@ h1.titolo {
 
   @media #{$large} {
     flex-direction: column;
+    align-items: center;
   }
 }
 
@@ -420,11 +421,15 @@ section.container.repeater.no-flag {
     margin: 2rem auto;
     line-height: 38px;
 
-    @media #{$large} {
+    @media #{$large}{
+      text-align: center;
+    }
+    @media #{$phone} {
       font-size: 18px;
       line-height: 30px;
-      text-align: left;
+      
       padding-left: 1rem;
+
     }
   }
 
@@ -746,9 +751,7 @@ section.container.repeater.no-flag {
       line-height: 63px;
       color: $textColor;
 
-      &::before {
-        top: 9px;
-      }
+   
     }
   }
 
@@ -1096,10 +1099,11 @@ section.container.repeater.no-flag {
         font-size: 18px;
         color: $textColor;
         font-weight: normal;
+line-height: 1.5
       }
 
       a.button {
-        @include button-sezione(2rem, 2rem);
+        @include button-sezione(2rem, 1rem);
 
         width: 60%;
       }

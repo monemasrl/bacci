@@ -15,6 +15,9 @@
         font-weight: 400;
         margin-top: 2rem;
         margin-bottom: 2rem;
+        @media #{$large}{
+            align-self: flex-start;
+        }
      
         span{
             font-size: 36px;
