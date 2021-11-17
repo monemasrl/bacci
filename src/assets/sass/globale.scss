@@ -36,7 +36,7 @@ h1.titolo {
 
   strong {
     display: block;
-    font-size: 105px;
+    font-size: 95px;
     font-weight: 600;
     line-height: 1;
     margin-top: 0;
@@ -512,7 +512,9 @@ section.container.repeater.no-flag {
   .sezione-4 h2 {
     line-height: 6.4rem;
     margin-bottom: 2rem;
-
+h1.titolo strong{
+  font-size: 105px;
+}
     strong {
       line-height: 1;
     }
@@ -1099,7 +1101,7 @@ section.container.repeater.no-flag {
         font-size: 18px;
         color: $textColor;
         font-weight: normal;
-line-height: 1.5
+line-height: 1.5;
       }
 
       a.button {
