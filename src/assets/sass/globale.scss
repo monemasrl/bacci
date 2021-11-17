@@ -1227,12 +1227,11 @@ section.container.repeater.no-flag {
         flex-direction: column;
     }
 
-    .button-fiere{
-      @include button-sezione(2rem, 2rem);
+    .button-fiere {
+        @include button-sezione(2rem, 2rem);
 
-      width: 40%;
-
-      margin: 4rem auto;
+        width: 40%;
+        margin: 4rem auto;
     }
 
     .topfiera {
@@ -1362,6 +1361,7 @@ section.container.repeater.no-flag {
             display: flex;
             flex-wrap: wrap;
             list-style: none;
+
             li {
                 flex: 1 1;
                 max-width: 500px;
