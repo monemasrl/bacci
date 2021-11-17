@@ -51,7 +51,7 @@ const LayoutFiere = ({ children, locale, translations, pageTitle, pathName}) => 
     <>
   
       <div className="container-fluid" >
-        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={pathName} />
+        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={pathName}  />
       </div>
 
 
