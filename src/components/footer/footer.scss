@@ -20,6 +20,9 @@ footer {
         .container {
             width: 100%;
             justify-content: space-evenly;
+            @media #{$large}{
+                align-items: center;
+            }
         }
 
         h2 {
@@ -28,11 +31,11 @@ footer {
             color: white;
             margin: 0;
 
-            @media #{$landscape} {
+            @media #{$large} {
                 font-size: 40px;
             }
 
-            @media #{$landscape} {
+            @media #{$large} {
                 font-size: 30px;
             }
 
@@ -40,11 +43,11 @@ footer {
                 display: block;
                 font-size: 90px;
 
-                @media #{$landscape} {
+                @media #{$large} {
                     font-size: 60px;
                 }
 
-                @media #{$landscape} {
+                @media #{$large} {
                     font-size: 40px;
                 }
             }
@@ -61,22 +64,20 @@ footer {
             flex: 1;
             max-width: 610px;
 
-            @media #{$landscape} {
+            @media #{$large} {
                 padding: 2rem;
-                max-width: 100%;
+                max-width: 700px;
                 text-align: center;
             }
 
-            @media #{$landscape} {
-                padding: 1rem;
-            }
+       
         }
 
         .box-dx {
             .form-contatti {
                 max-width: 800px;
 
-                @media #{$landscape} {
+                @media #{$large} {
                     max-width: 100%;
                 }
 
@@ -106,7 +107,7 @@ footer {
                         width: 20px;
                     }
 
-                    @media #{$landscape} {
+                    @media #{$large} {
                         width: 330px;
                     }
                 }
@@ -118,13 +119,13 @@ footer {
                     box-sizing: border-box;
                     border: 0;
 
-                    @media #{$landscape} {
+                    @media #{$large} {
                         width: 98%;
                     }
                 }
 
                 .box-form-message {
-                    @media #{$landscape} {
+                    @media #{$large} {
                         max-width: 680px;
                         margin: 0 auto;
                     }
@@ -137,7 +138,7 @@ footer {
                     text-align: right;
                     margin: 2rem 0;
 
-                    @media #{$landscape} {
+                    @media #{$large} {
                         text-align: center;
                     }
 
@@ -149,7 +150,7 @@ footer {
                         border: 1px solid white;
                         color: white;
                         width: auto;
-                        @media #{$landscape}{
+                        @media #{$large}{
                             width: 300px;
                         }
                     }
@@ -166,7 +167,7 @@ footer {
         .footer-col {
             width: 15%;
 
-            @media #{$landscape} {
+            @media #{$large} {
                 width: 100%;
                 text-align: center;
             }
@@ -176,13 +177,13 @@ footer {
 
                 li {
                     text-transform: uppercase;
-                    font-size: 18px;
+                    font-size: 16px;
                     margin: 1rem 0;
                     color: $brown;
 
                     &:first-child {
                         margin-bottom: 2rem;
-                        font-size: 24px;
+                        font-size: 18px;
                         color: $textColor;
                     }
                 }
@@ -217,7 +218,7 @@ footer {
         .footer-col {
             width: 33%;
 
-            @media #{$landscape} {
+            @media #{$large} {
                 width: 100%;
                 text-align: center;
             }
@@ -229,7 +230,7 @@ footer {
         justify-content: space-between;
         flex-wrap: wrap;
 
-        @media #{$landscape} {
+        @media #{$large} {
             justify-content: center;
         }
     }

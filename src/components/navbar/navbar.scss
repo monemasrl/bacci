@@ -11,6 +11,10 @@
     margin: 0 auto;
     display: flex;
     justify-content: flex-end;
+    @media #{$large}{
+      flex-direction: column-reverse;
+      align-items: center;
+    }
   }
 
   ul {
@@ -77,6 +81,10 @@
   .container {
     justify-content: space-between;
     align-items: center;
+    @media #{$large}{
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   a.active {
@@ -114,7 +122,9 @@
   ul {
     align-self: flex-end;
     margin: 0;
-
+    @media #{$large}{
+      align-self: center;
+    }
     li {
       display: inline-block;
       margin: 0 2rem;
@@ -179,4 +189,7 @@
 
 .main-logo {
   width: 362px;
+  @media #{$large}{
+    margin-bottom: 1rem;
+  }
 }

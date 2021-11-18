@@ -104,7 +104,7 @@ console.log(langFilterFiera);
                                <div className="luogo">
                                {item.node.fiere.luogo}
                                </div> 
-                                <a href={item.node.fiere.link} target="_blank" rel="nofollow" className="link">{item.node.fiere.link.slice(8)}</a>
+                                <a href={item.node.fiere.link} className="link" targe="_blank" rel="nofollow" >{item.node.fiere.link.slice(8)}</a>
                             </div>
                         )
                     })}

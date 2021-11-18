@@ -7,16 +7,17 @@
 
 $lightBrown: #c8bcb0;
 $brown: #a4917d;
-$textColor: #707173;
+$textColor: #5f6062;
 $text: "open sans", sans-serif;
 $link: "open sans", sans-serif;
 $title: "Oswald";
-$container: 1620px;
-
+$container: 1420px;
+$paragraph: 24px;
 $phone: "only screen and (max-width : 460px)";
 $tablet: "only screen and (max-width : 720px)";
 $landscape: "only screen and (max-width : 1024px)";
 $desktop: "only screen and (max-width : 1200px)";
+$large: "only screen and (max-width: 1340px)";
 $wide: "only screen and (max-width : 1620px)";
 $big: "only screen and (max-width : 1900px)";
 
@@ -72,7 +73,10 @@ $big: "only screen and (max-width : 1900px)";
         margin: 140px auto 50px auto;
         display: flex;
         justify-content: flex-end;
-
+        @media #{$large}{
+         flex-direction: column;
+         align-items: center;       
+        }
         .button-sezione {
             @include button-sezione(5rem, 17%);
         }
@@ -80,10 +84,7 @@ $big: "only screen and (max-width : 1900px)";
         h2 {
             @include h2-sezioni(72px);
 
-            &::first-line {
-                line-height: 20px;
-            }
-
+        
             font-weight: 400;
 
             strong {
@@ -95,9 +96,15 @@ $big: "only screen and (max-width : 1900px)";
         .box-sx {
             max-width: 660px;
             padding-left: 2rem;
-
+            flex: 1 1 500px;
+            @media #{$large}{
+                max-width: 90%;
+                text-align: center;
+                padding: 0;
+                flex: 0;
+            }
             p {
-                font-size: 28px;
+                font-size: $paragraph;
                 color: $textColor;
                 line-height: 38px;
             }
@@ -105,6 +112,10 @@ $big: "only screen and (max-width : 1900px)";
 
         .box-dx {
             padding-left: 2rem;
+            @media #{$large}{
+                max-width: 90%;
+                padding: 0;
+            }
         }
     }
 }
@@ -115,25 +126,20 @@ $big: "only screen and (max-width : 1900px)";
         justify-content:space-between;
 
         h2 {
-            @include h2-sezioni(60px);
-
+            @include h2-sezioni(50px);
+            margin: 0;
             color: $textColor;
             position: relative;
-
-            &::first-line {
-                line-height: 20px;
-            }
-
-            line-height: 1.5;
+          
 
             &::before {
                 content: '';
                 position: absolute;
                 background-color: $brown;
                 width: 10px;
-                height: 120px;
+                height: 100%;
                 left: -30px;
-                top: -20px;
+                top: 0px;
             }
 
             font-weight: 400;
@@ -143,15 +149,22 @@ $big: "only screen and (max-width : 1900px)";
                 font-weight: 600;
             }
         }
-
+h3{
+    margin: 0;
+}
         .box-sx {
             max-width: 660px;
             padding-left: 2rem;
             margin-top: 5rem;
             margin-bottom: 0;
+            @media #{$large}{
+                max-width: 90%;
+                padding-left:0px;
+                
+            }
 
             p {
-                font-size: 28px;
+                font-size: $paragraph;
                 color: $textColor;
                 line-height: 38px;
                 margin-top: 2rem;
@@ -163,6 +176,16 @@ $big: "only screen and (max-width : 1900px)";
             padding-left: 2rem;
             margin-top: 5rem;
             margin-bottom: 0;
+            flex: 1 1;
+            .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
+                margin-top: 9px
+            }
+            @media #{$large}{
+                max-width: 90%;
+            }
+            @media #{$phone} {
+                padding-left:0px;
+            }
         }
     }
 }
@@ -173,23 +196,21 @@ $big: "only screen and (max-width : 1900px)";
         justify-content: space-between;
 
         h2 {
-            @include h2-sezioni(60px);
-
+            @include h2-sezioni(50px);
+            margin: 0;
             color: $textColor;
             position: relative;
 
-            &::first-line {
-                line-height: 20px;
-            }
+       
 
             &::before {
                 content: '';
                 position: absolute;
                 background-color: $brown;
                 width: 10px;
-                height: 120px;
+                height: 100%;
                 left: -30px;
-                top: -20px;
+                top: 0px;
             }
 
             font-weight: 400;
@@ -199,13 +220,18 @@ $big: "only screen and (max-width : 1900px)";
                 font-weight: 600;
             }
         }
-
+        h3{
+            margin: 0;
+        }
         .box-dx {
             flex: 1;
             padding-right: 2rem;
             margin-top: 5rem;
+            @media #{$large}{
+                max-width: 90%;
+            }
             p {
-                font-size: 28px;
+                font-size: $paragraph;
                 color: $textColor;
                 line-height: 38px;
                 margin-top: 2rem;
@@ -216,6 +242,17 @@ $big: "only screen and (max-width : 1900px)";
             flex: 0 1 793px;
             margin-right: 3rem;
             margin-top: 5rem;
+            .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
+                margin-top: 9px
+            }
+            @media #{$large}{
+                max-width: 90%;
+                flex: 0 ;
+                padding-left:0px;
+            }
+            @media #{$phone} {
+                padding-left:0px;
+            }
         }
     }
 }
@@ -256,9 +293,16 @@ $big: "only screen and (max-width : 1900px)";
         .box-sx {
             padding-left: 2rem;
             margin-top: 4rem;
-
+            @media #{$large} {
+                max-width: 660px;
+                padding-left:0px;
+                
+            }
+            @media #{$phone} {
+                padding-left:0px;
+            }
             p {
-                font-size: 28px;
+                font-size: $paragraph;
                 color: $textColor;
                 line-height: 38px;
                 margin-top: 3rem;
