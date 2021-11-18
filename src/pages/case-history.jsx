@@ -139,7 +139,7 @@ const CaseHistory = ({ data, location }, props) => {
             <section className="container sezione-3">
               <div className="box-sx">
                 <h2 dangerouslySetInnerHTML={{ __html: item.node.title }} />
-                <p dangerouslySetInnerHTML={{ __html: item.node.caseHistorySingle.paragrafo }} />
+                <p className="sottotitolo" dangerouslySetInnerHTML={{ __html: item.node.caseHistorySingle.sottotitolo }} />
                 <GatsbyImage image={item.node.caseHistorySingle.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.node.caseHistorySingle.immagine.altText} />
                 <LinkFade stileClasse="button-sezione" className="button-sezione">{Termini['it_IT'].scopri}</LinkFade>
               </div>
