@@ -1236,3 +1236,153 @@ section.container.repeater.no-flag {
         }
     }
 }
+
+/* ANCHOR: Fiera */
+.fiera {
+    &.container {
+        max-width: 1068px;
+        flex-direction: column;
+    }
+
+    .button-fiere {
+        @include button-sezione(2rem, 2rem);
+
+        width: 40%;
+        margin: 4rem auto;
+    }
+
+    .topfiera {
+        h1 {
+            font-size: 72px;
+            text-transform: uppercase;
+            color: $brown;
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 42px;
+            text-transform: uppercase;
+            color: $brown;
+        }
+
+        p {
+            font-size: 24px;
+            line-height: 1.5;
+            color: $textColor;
+
+            strong {
+                font-weight: bold;
+            }
+        }
+
+        span.datafiera {
+            font-size: 35px;
+            text-transform: uppercase;
+            color: $textColor;
+        }
+
+        .calltoaction {
+            border: 2px solid $brown;
+            padding: 2rem;
+            text-align: center;
+
+            h2 {
+                color: $textColor;
+                font-weight: normal;
+            }
+
+            h3 {
+                color: $brown;
+            }
+
+            .wrapper-form {
+                background-color: $lightBrown;
+                padding: 1rem;
+            }
+
+            form {
+                max-width: 789px;
+                margin: 0 auto;
+
+                .box-form {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+                }
+
+                .box-form-message {
+                    margin: 10px 0;
+                }
+
+                label {
+                    max-width: 376px;
+                    width: 100%;
+                    flex: 1;
+                    margin: 10px 0;
+
+                    input {
+                        border: 0;
+                        height: 40px;
+                        width: 100%;
+                        max-width: none;
+
+                        &[type="checkbox"] {
+                            height: 20px;
+                            width: 20px;
+                            margin-right: 10px;
+                        }
+                    }
+                }
+
+                .button-sezione {
+                    @include button-sezione(6rem, 1%);
+
+                    margin-top: 2rem;
+                    height: 55px;
+                    background-color: transparent;
+                    border: 1px solid white;
+                    color: white;
+                    width: auto;
+
+                    @media #{$landscape} {
+                        width: 300px;
+                    }
+                }
+
+                textarea {
+                    border: 0;
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .box-content-fiera {
+        p {
+            font-size: 24px;
+            line-height: 1.5;
+            color: $textColor;
+
+            strong {
+                font-weight: bold;
+            }
+        }
+
+        h2 {
+            text-transform: uppercase;
+            font-size: 38px;
+            color: $textColor;
+        }
+
+        .blocks-gallery-grid {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+
+            li {
+                flex: 1 1;
+                max-width: 500px;
+            }
+        }
+    }
+}
