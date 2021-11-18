@@ -914,7 +914,7 @@ section.container.repeater.no-flag {
 }
 
 /* ANCHOR: china */
-.china {
+.filiale {
     @include sezione-interne;
     @include sezione-testo-sx;
     @include sezione-testo-dx;
@@ -926,6 +926,10 @@ section.container.repeater.no-flag {
 
         h2 {
             margin-bottom: 0;
+        }
+
+        h1.titolo {
+            text-align: center;
         }
 
         .gatsby-image-wrapper-constrained {
@@ -1164,10 +1168,12 @@ section.container.repeater.no-flag {
 }
 
 .fiere {
+    margin-top: 2rem;
+
     .box-single-fiera {
-        border: 1px solid $brown;
+        border: 5px solid $brown;
         margin: 10px;
-        padding: 1rem;
+        padding: 2rem 1rem;
         max-width: 488px;
         width: 100%;
 
@@ -1179,10 +1185,11 @@ section.container.repeater.no-flag {
             font-size: 36px;
             color: $brown;
             font-weight: 600;
-            font-family: "open sans";
+            font-family: $title;
             margin-bottom: 0;
             margin-top: 0;
             padding: 0;
+            font-style: normal;
         }
 
         .data {
@@ -1215,7 +1222,7 @@ section.container.repeater.no-flag {
             font-size: 24px;
             font-style: italic;
             color: $brown;
-            padding: 0 10px;
+            padding: 0;
         }
     }
 }
@@ -1243,9 +1250,11 @@ section.container.repeater.no-flag {
         }
 
         h2 {
-            font-size: 42px;
+            font-size: 53px;
             text-transform: uppercase;
-            color: $brown;
+            color: #a4917d;
+            font-weight: 500;
+            margin: 1rem 0;
         }
 
         p {
@@ -1272,6 +1281,8 @@ section.container.repeater.no-flag {
             h2 {
                 color: $textColor;
                 font-weight: normal;
+                font-size: 42px;
+                line-height: 1;
             }
 
             h3 {
@@ -1368,4 +1379,13 @@ section.container.repeater.no-flag {
             }
         }
     }
+}
+.case-history{
+
+.button-sezione{
+    display: block;
+    max-width: 320px;
+    margin: 2rem auto ;
+}
+
 }

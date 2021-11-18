@@ -114,7 +114,7 @@ const NavBar = (props) => {
                                                 </div>
                                                 <Megamenu terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={item.menu.node.language} /></li>
                                             :
-                                            <li >
+                                            <li>
                                                 {item.path === "#" ?
 
                                                     <a className={`${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} disabled={item.path === "#"} to={item.path}>{item.label}
@@ -122,6 +122,7 @@ const NavBar = (props) => {
                                                         {item.childItems ?
                                                             <ul>
                                                                 {item.childItems.nodes.map((subitem) => {
+                                                                    console.log('subitem', subitem);
                                                                     return (
                                                                         <>
                                                                             <li> <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
@@ -134,10 +135,14 @@ const NavBar = (props) => {
                                                             </ul>
                                                             : ''}
 
-                                                    </a> : <Link to="/"> {item.label} </Link>
+                                                    </a> : 
+                                                    <LinkFade url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${slugify(item.label.toLowerCase())}`}>
+                                                        {item.label}
+                                                    </LinkFade>
                                                 }
 
                                             </li> : ''
+
                                     }
                                 </React.Fragment>
                             )

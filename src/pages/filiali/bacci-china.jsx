@@ -119,7 +119,7 @@ const Produzione = ({ data, location }) => {
   return (
     <>
       <Layout pageTitle={dataFilter.title} locale={'it_IT'} translations={dataFilter.translations} pathName={location.pathname}  >
-        <div className="container-fluid china">
+        <div className="container-fluid filiale">
           <section className="container sezione-3">
             <div className="box-sx">
               <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.filiali.sezioneFiliale1.titolo }} />

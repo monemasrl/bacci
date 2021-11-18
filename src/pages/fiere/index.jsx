@@ -1,10 +1,8 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image"
-
 import Layout from "../../components/layout/layout"
 import LinkFade from "../../components/TransitionLinks/LinkFade"
-
+import { langTag } from "../../../data-translations"
 
 export const query = graphql`
 {
@@ -61,7 +59,7 @@ export const query = graphql`
             link
             }
             title
-
+            slug
             locale {
           locale
         }
@@ -95,10 +93,10 @@ console.log(langFilterFiera);
             >
                 <section className="container fiere">
                     {langFilterFiera.map((item) => {
-                      
+                     const slug=`${langTag[item.node.locale.locale] === "it" ? '' : langTag[item.node.locale.locale]}/fiere/${item.node.slug}`
                         return (
                             <div className="box-single-fiera">
-                              <h2>{item.node.title}</h2>  
+                             <LinkFade  url={slug}><h2>{item.node.title}</h2>   </LinkFade>  
                               <div className="data">
                                 {item.node.fiere.dataDa.slice(0,2)}-
                                 {item.node.fiere.dataA}
