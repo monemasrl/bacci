@@ -112,6 +112,7 @@ $big: "only screen and (max-width : 1900px)";
 
         .box-dx {
             padding-left: 2rem;
+            max-width: 980px;
             @media #{$large}{
                 max-width: 90%;
                 padding: 0;
