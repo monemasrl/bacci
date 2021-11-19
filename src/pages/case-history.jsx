@@ -21,7 +21,7 @@ export const query = graphql`
                   localFile {
                     childImageSharp {
                       gatsbyImageData(
-                        width: 948
+                        width: 1000
                         placeholder: BLURRED
                         formats: [AUTO, WEBP, AVIF]
                       )
@@ -125,7 +125,7 @@ const CaseHistory = ({ data, location }, props) => {
       <section className="container case-history">
         <section className="container sezione-4">
           <div className="box-sx">
-            <h2 className="titolo" dangerouslySetInnerHTML={{ __html: langFilter.caseHistory.caseHistorySezione1.titolo }} />
+            <h1 className="titolo" dangerouslySetInnerHTML={{ __html: langFilter.caseHistory.caseHistorySezione1.titolo }} />
             <p>{langFilter.caseHistory.caseHistorySezione1.paragrafo}</p>
           </div>
           <div className="box-dx">

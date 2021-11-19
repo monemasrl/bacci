@@ -95,13 +95,14 @@ $big: "only screen and (max-width : 1900px)";
 
         .box-sx {
             max-width: 660px;
-            padding-left: 2rem;
+        margin-left: 2rem;
             flex: 1 1 500px;
             @media #{$large}{
                 max-width: 90%;
                 text-align: center;
                 padding: 0;
                 flex: 0;
+           
             }
             p {
                 font-size: $paragraph;
@@ -111,8 +112,8 @@ $big: "only screen and (max-width : 1900px)";
         }
 
         .box-dx {
-            padding-left: 2rem;
-            max-width: 980px;
+            margin-left: 2rem;
+            max-width: 1000px;
             @media #{$large}{
                 max-width: 90%;
                 padding: 0;
@@ -278,7 +279,7 @@ h3{
                 position: absolute;
                 background-color: $brown;
                 width: 10px;
-                height: 120px;
+                height: 100%;
                 left: -30px;
                 top: 0px;
             }
