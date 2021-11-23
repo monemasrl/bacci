@@ -53,6 +53,7 @@ export const query = graphql`
     allWpProdotto {
     edges {
       node {
+        slug
         title
         locale {
               locale

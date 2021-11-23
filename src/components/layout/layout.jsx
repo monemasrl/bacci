@@ -57,10 +57,10 @@ const Layout = ({ children, locale, translations, pageTitle, seo }, props) => {
 
 
   return (
-    <>
+    <div className="mainwrapper">
       {seo && <Seo title={pageTitle} seo={seo} />}
 
-      <div className="container-fluid" >
+      <div className="container-fluid " >
         <Header
           translations={translations}
           locale={locale}
@@ -79,7 +79,7 @@ const Layout = ({ children, locale, translations, pageTitle, seo }, props) => {
 
       <ScrollTo />
 
-    </>
+    </div>
   )
 }
 

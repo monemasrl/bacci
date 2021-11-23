@@ -1,12 +1,4 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import * as React from "react"
-import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import "../../assets/sass/globale.scss"
 import Header from "../header"
@@ -17,7 +9,7 @@ import ScrollTo from "../scrollTo"
 
 let slugify = require('slugify')
 
-const LayoutFiere = ({ children, locale, translations, pageTitle, pathName}) => {
+const LayoutProdotto = ({ children, locale, translations, pageTitle, pathName, tipo }) => {
   const data = useStaticQuery(graphql`
     {
       site {
@@ -26,9 +18,10 @@ const LayoutFiere = ({ children, locale, translations, pageTitle, pathName}) => 
         }
       }
 
-      allWpFiera {
+      allWpProdotto {
         edges {
           node {
+            title
             slug
             content
             locale {
@@ -40,18 +33,30 @@ const LayoutFiere = ({ children, locale, translations, pageTitle, pathName}) => 
               locale
               post_title
             }
-
+            translated {
+               id
+            }
           }
         }
       }
     }
   `)
- 
+  const langFilter = data.allWpProdotto.edges.filter((item) => {
+
+    return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
+  })[0].node
+
   return (
     <div className="mainwrapper">
-  
+
       <div className="container-fluid " >
-        <Header translations={translations} locale={locale} pageTitle={pageTitle} pathName={pathName}  />
+        <Header 
+        translations={translations} 
+        locale={locale} 
+        pageTitle={pageTitle} 
+        pathName={pathName} 
+        tipo={tipo}
+        />
       </div>
 
 
@@ -59,12 +64,12 @@ const LayoutFiere = ({ children, locale, translations, pageTitle, pathName}) => 
 
 
 
- 
-        <Footer translations={translations} locale={locale} />
-        <ScrollTo />
+
+      <Footer translations={translations} locale={locale} />
+      <ScrollTo />
     </div>
   )
 }
 
 
-export default LayoutFiere
+export default LayoutProdotto

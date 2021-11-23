@@ -1,0 +1,111 @@
+@import "../../assets/sass/variabili";
+
+.widget-fiere {
+  margin-top: 3rem;
+  flex-direction: column;
+  align-items: flex-start;
+  > h2 {
+    color: $brown;
+    text-transform: uppercase;
+    text-align: center;
+    margin-left: 2rem;
+    font-size: 70px;
+    margin-bottom: 0;
+    font-weight: normal;
+  }
+}
+.widget-fiere-wrapper {
+  display: flex;
+  width: 100%;
+
+.box-single-fiera {
+    border: 5px solid #a4917d;
+    margin: 10px;
+    padding: 2rem 3rem;
+    flex: 1;
+
+
+    .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 36px;
+      color: $brown;
+      font-weight: 600;
+      font-family: $title;
+      margin-bottom: 0;
+      margin-top: 0;
+      padding: 0;
+      font-style: normal;
+    }
+
+    .data {
+      padding: 0;
+      font-size: 18px;
+      color: $textColor;
+      font-size: 32px;
+      margin-bottom: 1rem;
+    }
+
+    .luogo {
+      font-size: 24px;
+    }
+
+    .link {
+      padding: 0;
+    }
+
+    p {
+      color: $textColor;
+      line-height: 34px;
+      font-size: 24px;
+      margin-top: 1rem;
+      padding: 0 10px;
+    }
+
+    a {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 24px;
+      font-style: italic;
+      color: $brown;
+      padding: 0;
+    }
+  }
+}
+.box-fiere {
+  margin: 2rem 1rem 1rem 1rem;
+  border: 1px solid $brown;
+  padding: 1rem;
+  h2 {
+    color: $brown;
+    text-align: left;
+    margin-top: 5px;
+  }
+  h3 {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+  p {
+    text-align: left;
+  }
+  .button-sezione {
+    @include button-sezione(2rem, 5rem);
+    display: block;
+    margin: 2rem auto 0 auto;
+  }
+  .immagine-widget {
+    max-width: 450px;
+    display: block;
+    margin: 0 auto;
+  }
+  .leggi-tutto {
+    color: $brown;
+    font-style: italic;
+    font-weight: medium;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -16,11 +16,18 @@ html {
   font-family: $text;
 }
 
+.mainwrapper {
+  max-width: 2033px;
+  margin: 0 auto;
+  box-shadow: 0px 0px 11px #dfdfdf;
+}
+
 header {
   position: relative;
 }
 
-h1.titolo {
+h1.titolo,
+h2.titolo {
   @include h2-sezioni(60px);
 
   color: $textColor;
@@ -515,6 +522,10 @@ section.container.repeater.no-flag {
 
 /* ANCHOR: HOMEPAGE */
 .home {
+  .col-3 {
+    max-width: 467px;
+    margin-top: 1rem;
+  }
   .sezione-4 h2 {
     line-height: 6.4rem;
     margin-bottom: 2rem;
@@ -815,7 +826,6 @@ section.container.repeater.no-flag {
 
 /*ANCHOR: software*/
 .software {
-
   .sezione-testo-sx {
     p {
       margin-top: 2rem;
@@ -1099,7 +1109,10 @@ section.container.repeater.no-flag {
       max-width: 380px;
       text-align: center;
       margin-bottom: 2rem;
-
+      .button-sezione {
+        @include button-sezione(2rem, 4rem);
+        margin: 0;
+      }
       h2 {
         text-transform: uppercase;
         color: $brown;
@@ -1405,5 +1418,43 @@ section.container.repeater.no-flag {
     display: block;
     max-width: 320px;
     margin: 2rem auto;
+  }
+}
+
+/* ANCHOR: prodotto singolo */
+.prodotto {
+  .col-3 {
+    max-width: 467px;
+    margin-top: 1rem;
+  }
+  h1.titolo {
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    font-size: 95px;
+  }
+  h2 {
+    margin: 1rem 0 0 0;
+    font-size: 3rem;
+  }
+  .mainprodotto {
+    max-width: 900px;
+    margin: 0 auto;
+    display: block;
+  }
+  .sezione-testo-sx {
+    h2.titolo {
+      color: $textColor;
+    }
+  }
+  .pitagora {
+    h2 {
+      margin: 2rem 0;
+    }
+  }
+  .button-sezione {
+    display: block;
+    margin: 0 auto;
+    max-width: 340px;
   }
 }

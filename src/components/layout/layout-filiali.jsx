@@ -81,9 +81,9 @@ const LayoutFiere = ({ children, locale, translations, pageTitle, pathName}) => 
   })[0].node
 
   return (
-    <>
+    <div className="mainwrapper">
       <Seo title={pageTitle} seo={langFilter.seo} />
-      <div className="container-fluid" >
+      <div className="container-fluid " >
         <Header translations={translations} 
         locale={locale} 
         pageTitle={pageTitle} 
@@ -99,7 +99,7 @@ const LayoutFiere = ({ children, locale, translations, pageTitle, pathName}) => 
      
         <Footer translations={translations} locale={locale} />
         <ScrollTo />
-    </>
+    </div>
   )
 }
 

@@ -56,7 +56,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       }
       }
       }
-}
+    }   
         wpPersonale {
           id
           title
@@ -92,8 +92,68 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           }
         }
       }
+      allWpProdotto {
+        edges {
+          node {
+            prodottiApplicazioni {
+              nodes {
+                name
+              }
+            }
+            prodotto {
+    
+              inEvidenza
+              paragrafo
+              software
+              sottotitolo
+              testoAnteprima
+              immagine{
+                altText
+                localFile {
+                childImageSharp {
+                    gatsbyImageData(
+                    width: 900
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP, AVIF]
 
-    }
+                    )
+                }
+                }
+            }
+              sezioniProdotto {
+                immagine{
+                  altText
+                  localFile {
+                  childImageSharp {
+                      gatsbyImageData(
+                      width: 728
+                      placeholder: BLURRED
+                      formats: [AUTO, WEBP, AVIF]
+
+                      )
+                  }
+                  }
+              }
+                paragrafo
+                titolo
+              }
+            }
+            title
+            slug
+            translations {
+              href
+              id
+              locale
+              post_title
+            }
+            locale {
+              id
+              locale
+            }
+          }
+        }
+      }
+  }
     `);
 
   const fiere = result.data.allWpFiera.edges
@@ -101,6 +161,17 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     en_US: 'en',
     it_IT: 'it'
   }
+  const Termini = {
+    en_US: {
+            prodotti: 'products'   
+    },
+    it_IT: {
+            prodotti: 'prodotti' 
+              },
+  }
+
+
+
   fiere.forEach((entry) => {
 
     const urlBase = langTag[entry.node.locale.locale] === 'it' ? '/' : `/${langTag[entry.node.locale.locale]}/`
@@ -147,4 +218,23 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
 
 
   })
+
+
+  result.data.allWpProdotto.edges.forEach((entry) => {
+    const urlBase = langTag[entry.node.locale.locale] === 'it' ? '/' : `/${langTag[entry.node.locale.locale]}/`
+
+    createPage({
+      path: `${urlBase}${Termini[entry.node.locale.locale].prodotti}/${entry.node.slug}`,
+      component: require.resolve('./src/templates/prodotto.jsx'),
+      context: {
+        content: entry.node,
+        locale: entry.node.locale.locale,
+        translations: entry.node.translations,
+        slug: entry.node.slug,
+        title: entry.node.title,
+
+      },
+    })
+  })
+
 }

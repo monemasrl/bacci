@@ -4,7 +4,8 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout/layout"
 import Fade from 'react-reveal/Fade';
 import LinkFade from "../components/TransitionLinks/LinkFade";
-
+import LastNews from "../components/widgets/lastNews";
+import LastFiere from "../components/widgets/lastFiere";
 export const query = graphql`
    {
     allWpPage(filter: {title: {eq: "Home"}}) {
@@ -237,6 +238,8 @@ const IndexPage = ({ data, location }, props) => {
               </div>
             </Fade>
           </section>
+          <LastFiere locale={dataHome.locale.locale} limiteVisualizzazione={3}/>
+          <LastNews locale={dataHome.locale.locale} limiteVisualizzazione={3}/>
         </div>
       </Layout>
     </>

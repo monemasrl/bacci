@@ -122,7 +122,7 @@ const NavBar = (props) => {
                                                         {item.childItems ?
                                                             <ul>
                                                                 {item.childItems.nodes.map((subitem) => {
-                                                                    console.log('subitem', subitem);
+                                                                 
                                                                     return (
                                                                         <>
                                                                             <li> <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>

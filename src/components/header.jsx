@@ -6,7 +6,7 @@ import Breadcrumb from "./breadcrumb/breadCrumb"
 
 const isBrowser = typeof window !== "undefined"
 
-const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeType }) => {
+const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeType, tipo }) => {
 
   const [mega, setMega] = React.useState(false)
 
@@ -18,7 +18,7 @@ const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeTy
         <NavBar locale={locale} translations={translations} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} />
         <NavBarMobile locale={locale} translations={translations} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} />
 
-      {pageTitle !== 'Home' ? <Breadcrumb pageTitle={pageTitle}  pathName={currentPath} nodeType={nodeType} locale={locale} /> : ''}
+      {pageTitle !== 'Home' ? <Breadcrumb pageTitle={pageTitle}  pathName={currentPath} nodeType={nodeType} locale={locale} tipo={tipo} /> : ''}
 
     </header>
   )

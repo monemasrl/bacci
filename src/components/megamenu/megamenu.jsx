@@ -4,8 +4,10 @@ import { StaticImage } from "gatsby-plugin-image";
 import Tassonomie from "../tassonomie";
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, Link, graphql } from "gatsby";
-
+import { Termini, langTag } from "../../../data-translations";
+import LinkFade from "../TransitionLinks/LinkFade";
 import './megamenu.scss'
+import { node } from "prop-types";
 
 const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
 
@@ -14,6 +16,8 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
                 allWpProdotto {
                     edges {
                     node {
+                        date
+                        slug
                         prodotto {
                         paragrafo
                         sottotitolo
@@ -69,10 +73,10 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
         return (item.node.locale.locale === locale)
     })
 
-const novita  = langFilterProdotto[langFilterProdotto.length - 1].node
-const inEvidenza  = langFilterProdotto.filter((item)=>item.node.prodotto.inEvidenza[0] === 'si' )
+    const novita =  langFilterProdotto.sort((item) => item.node.date)
+    const inEvidenza = langFilterProdotto.filter((item) => item.node.prodotto.inEvidenza === 'si')
 
-console.log(inEvidenza);
+    console.log('novita', novita);
     return (
 
         <AnimatePresence>
@@ -100,17 +104,16 @@ console.log(inEvidenza);
                                     NOVITA’
                                 </div>
                                 <div className="content-mega">
-
-                                        <>
-                                            <h2>{novita.title}</h2>
-                                            <p>{novita.prodotto.sottotitolo}</p>
-                                            <GatsbyImage image={novita.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={novita.prodotto.immagine.altText} />
-
-                                            <p dangerouslySetInnerHTML={{__html:novita.prodotto.testoAnteprima}} />
-                                        </>
-                                        
-                                    
-
+                                    <>
+                                        <div>
+                                            <LinkFade url={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${novita[0].node.slug}`}>
+                                                <h2>{novita[0].node.title}</h2>
+                                            </LinkFade>
+                                            <p>{novita[0].node.prodotto.sottotitolo}</p>
+                                        </div>
+                                        <GatsbyImage image={novita[0].node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={novita[0].node.prodotto.immagine.altText} />
+                                        <p dangerouslySetInnerHTML={{ __html: novita[0].node.prodotto.testoAnteprima }} />
+                                    </>
                                 </div>
                             </div>
                         </motion.div>
@@ -127,16 +130,17 @@ console.log(inEvidenza);
                                 <div className="titolo-col-mega">
                                     IN EVIDENZA
                                 </div>
-
-                                <div className="content-mega">
-                                    <h2>{inEvidenza[0].node.title}</h2>
-                                    <p>{inEvidenza[0].node.prodotto.sottotitolo}</p>
-                                    <GatsbyImage image={inEvidenza[0].node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={novita.prodotto.immagine.altText} />
-
-                                    <p dangerouslySetInnerHTML={{__html:inEvidenza[0].node.prodotto.testoAnteprima}} />
-                                      
-                                    
-                                </div>
+                                {inEvidenza[0].node.title &&
+                                    <div className="content-mega">
+                                        <div>
+                                            <LinkFade url={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${inEvidenza[0].node.slug}`}>
+                                                <h2>{inEvidenza[0].node.title}</h2>
+                                            </LinkFade>
+                                            <p>{inEvidenza[0].node.prodotto.sottotitolo}</p>
+                                        </div>
+                                        <GatsbyImage image={inEvidenza[0].node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={inEvidenza[0].node.prodotto.immagine.altText} />
+                                        <p dangerouslySetInnerHTML={{ __html: inEvidenza[0].node.prodotto.testoAnteprima }} />
+                                    </div>}
                             </div>
                         </motion.div>
                         <motion.div className="col-mega"

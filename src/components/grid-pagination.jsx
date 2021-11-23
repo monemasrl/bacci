@@ -1,6 +1,7 @@
 import * as React from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { Link } from "gatsby"
+import { Termini,langTag } from "../../data-translations"
+import LinkFade from "./TransitionLinks/LinkFade"
 import Pagination from "./pagination"
 
 
@@ -30,13 +31,15 @@ const GridPagination = ({ archivio, topArchivio }) => {
     return (
         <>
             {currentPosts.map((item) => {
-               
+               console.log('item',item);
                 return (
                     <div key={item.title} className="box-prodotto">
                         <GatsbyImage image={item.node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.node.prodotto.immagine.altText} />
                         <h2>{item.node.title}</h2>
                         <p>{item.node.prodotto.paragrafo}</p>
-                       <Link className="button" to={item.node.title}>scopri</Link>
+                        <LinkFade stileClasse="button-sezione" lista url={`${(item.node.locale.locale === 'it_IT') ? '/' : langTag[item.node.locale.locale ]}${Termini[item.node.locale.locale ].prodotti}/${item.node.slug}`}>
+
+                     scopri</LinkFade>
                     </div>
                 )
             })}
