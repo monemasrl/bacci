@@ -26,7 +26,7 @@ const LastNews = ({ locale, limiteVisualizzazione }) => {
                 localFile {
                   childImageSharp {
                       gatsbyImageData(
-                        width: 450
+                        width: 401
                         placeholder: BLURRED
                         formats: [AUTO, WEBP, AVIF]
 
