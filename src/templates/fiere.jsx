@@ -13,7 +13,7 @@ const Fiere = ({ pageContext }) => {
                 translations={translations}
                 pageTitle={slug}
                 pathName={parentPath}
-                fiere >
+                tipo='fiere' >
 
                 <div className="container fiera">
                     <section className="topfiera">

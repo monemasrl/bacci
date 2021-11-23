@@ -12,7 +12,7 @@ const News = ({ pageContext }) => {
   
     return (
         <>
-            <LayoutNews locale={locale} translations={translations} pageTitle={title}>
+            <LayoutNews locale={locale} translations={translations} pageTitle={title} tipo="news">
              <div className="wrapper-news">
                  <span className="datanews">{date}</span>
                  <h2>{sottotitolo}</h2>
