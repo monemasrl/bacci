@@ -67,7 +67,15 @@ const NavBar = (props) => {
 
                             return (
                                 <li key={item.label}>
-                                    <LinkFade disabled={item.path === "#"} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath.toLowerCase()}`}>{item.label}</LinkFade>
+                                    {
+                                    item.path === '#' 
+                                    ? 
+                                    <LinkFade url={'#'}>{item.label}</LinkFade>
+                                    : 
+                                    <LinkFade url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath.toLowerCase()}`}>{item.label}</LinkFade>
+
+                                    }
+
                                 </li>
                             )
                         })
@@ -122,7 +130,7 @@ const NavBar = (props) => {
                                                         {item.childItems ?
                                                             <ul>
                                                                 {item.childItems.nodes.map((subitem) => {
-                                                                 
+
                                                                     return (
                                                                         <>
                                                                             <li> <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
@@ -135,7 +143,7 @@ const NavBar = (props) => {
                                                             </ul>
                                                             : ''}
 
-                                                    </a> : 
+                                                    </a> :
                                                     <LinkFade url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${slugify(item.label.toLowerCase())}`}>
                                                         {item.label}
                                                     </LinkFade>

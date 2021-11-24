@@ -1,112 +1,116 @@
 @import "../../assets/sass/variabili";
 
 .wrapper-megamenu {
-  height: auto;
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  left: 0;
-  opacity: 1;
-  transition: opacity 0.2s linear;
-  background-color: #fff;
-  display: block;
-  overflow: hidden;
-  z-index: 100;
-  width: 100%;
-  background-color: $lightBrown;
-
-  .mega-box {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1620px;
-    margin: 3rem auto;
-    justify-content: space-between;
-    background-color: white;
-    padding: 2rem;
-  }
-  .col-mega {
-    position: relative;
-    .content-mega {
-      
-        position: relative;
-        height: 90%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    
-      &::after {
-        content: "";
-        height: 100%;
-        width: 3px;
-        position: absolute;
-        background-color: $brown;
-        top: 0;
-        right: -4%;
-      }
-    }
-
-    a.tutti-prodotti {
-      display: block;
-      text-align: center;
-      padding: 0.7rem;
-      margin-top: 2rem;
-      font-size: 20px;
-      background-color: $brown;
-      color: white;
-      
- 
-  }
-
-  }
-  .box-prodotto {
-    flex: 1;
-    max-width: 422px;
-    height: 100%;
-
-    h2 {
-      color: $brown;
-      font-size: 18px;
-      text-transform: uppercase;
-      margin-bottom: 0;
-    }
-    p {
-      font-size: 18px;
-      color: $textColor;
-      margin-top: 10px;
-      &:first-of-type {
-        text-transform: uppercase;
-      }
-    }
-  }
-  .titolo-col-mega {
-    font-size: 30px;
-    font-weight: bold;
-    color: $textColor;
-    margin-bottom: 1rem;
-
-  }
-
-  ul.mega-list {
-    flex: 1;
-    position: relative;
-    opacity: 1;
-    z-index: 1;
-    box-shadow: 0 0 0 transparent;
-    padding: 0;
+    height: auto;
     margin: 0;
-    background-color: transparent;
-    li {
-      display: block;
-      margin: 0.5rem 0;
-      color: $brown;
-      text-transform: uppercase;
-      a{
-        color: $brown;
-        &:hover{
-          text-decoration: underline;
-        }
-      }
-    }
-  }
+    padding: 0;
+    position: absolute;
+    left: 0;
+    opacity: 1;
+    transition: opacity 0.2s linear;
+    background-color: #fff;
+    display: block;
+    overflow: hidden;
+    z-index: 100;
+    width: 100%;
+    background-color: $lightBrown;
 
+    .mega-box {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1620px;
+        margin: 3rem auto;
+        justify-content: space-between;
+        background-color: white;
+        padding: 2rem;
+    }
+
+    .col-mega {
+        position: relative;
+
+        .content-mega {
+            position: relative;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            &::after {
+                content: "";
+                height: 100%;
+                width: 3px;
+                position: absolute;
+                background-color: $brown;
+                top: 0;
+                right: -4%;
+            }
+        }
+
+        a.tutti-prodotti {
+            display: block;
+            text-align: center;
+            padding: 0.7rem;
+            margin-top: 2rem;
+            font-size: 20px;
+            background-color: $brown;
+            color: white;
+        }
+    }
+
+    .box-prodotto {
+        flex: 1;
+        max-width: 422px;
+        height: 100%;
+
+        h2 {
+            color: $brown;
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: 0;
+        }
+
+        p {
+            font-size: 18px;
+            color: $textColor;
+            margin-top: 10px;
+            text-transform: uppercase;
+
+            &.desc {
+                text-transform: none;
+            }
+        }
+    }
+
+    .titolo-col-mega {
+        font-size: 30px;
+        font-weight: bold;
+        color: $textColor;
+        margin-bottom: 1rem;
+    }
+
+    ul.mega-list {
+        flex: 1;
+        position: relative;
+        opacity: 1;
+        z-index: 1;
+        box-shadow: 0 0 0 transparent;
+        padding: 0;
+        margin: 0;
+        background-color: transparent;
+
+        li {
+            display: block;
+            margin: 0.5rem 0;
+            color: $brown;
+            text-transform: uppercase;
+
+            a {
+                color: $brown;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
 }

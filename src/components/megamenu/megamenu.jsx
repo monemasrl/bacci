@@ -112,7 +112,7 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
                                             <p>{novita[0].node.prodotto.sottotitolo}</p>
                                         </div>
                                         <GatsbyImage image={novita[0].node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={novita[0].node.prodotto.immagine.altText} />
-                                        <p dangerouslySetInnerHTML={{ __html: novita[0].node.prodotto.testoAnteprima }} />
+                                        <p className="desc" dangerouslySetInnerHTML={{ __html: novita[0].node.prodotto.testoAnteprima }} />
                                     </>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
                                             <p>{inEvidenza[0].node.prodotto.sottotitolo}</p>
                                         </div>
                                         <GatsbyImage image={inEvidenza[0].node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={inEvidenza[0].node.prodotto.immagine.altText} />
-                                        <p dangerouslySetInnerHTML={{ __html: inEvidenza[0].node.prodotto.testoAnteprima }} />
+                                        <p className="desc" dangerouslySetInnerHTML={{ __html: inEvidenza[0].node.prodotto.testoAnteprima }} />
                                     </div>}
                             </div>
                         </motion.div>
