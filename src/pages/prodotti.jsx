@@ -110,10 +110,10 @@ const Prodotti = ({ data, location }) => {
 
   const tassonomie = Tassonomie('it_IT')
   const termini = Termini.it_IT
+
   // lista delle applicazioni da lista prodotto
   let listaApplicazioni = langFilterProdotto.map((item) => item.node.prodottiApplicazioni.nodes)
   listaApplicazioni = listaApplicazioni.reduce((a, b) => { return a.concat(b) })
-
   listaApplicazioni = listaApplicazioni.map((item) => { return item.name })
   listaApplicazioni = listaApplicazioni.reduce(function (a, b) {
     if (a.indexOf(b) < 0) a.push(b);
@@ -130,6 +130,7 @@ const Prodotti = ({ data, location }) => {
     return a;
   }, []);
 
+  // Mantenere il filtro quando si accede da link esterno
 
   React.useEffect(() => {
 
@@ -178,12 +179,10 @@ const Prodotti = ({ data, location }) => {
       const filterUnchecked = filtersApp.filter((item) => {
         return item !== evt.target.value
       })
-
       setFiltersApp([...filterUnchecked])
     }
 
   }
-
 
 
   const Categorie = () => {
@@ -240,10 +239,10 @@ const Prodotti = ({ data, location }) => {
           <div className="container col-sx">
             <h2>affina la ricerca</h2>
             <div className="filters search">
-              <input onKeyUp={(e) => onChangeText(e)} type="text" placeholder={termini.tasto_ricerca}/>
+              <input onKeyUp={(e) => onChangeText(e)} type="text" placeholder={termini.tasto_ricerca} />
             </div>
 
-            <form  className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
+            <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
               <ul>
                 <li>
                   <input type="radio" value={'reset'} name="categorie" />
