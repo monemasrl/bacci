@@ -73,18 +73,18 @@ const LayoutNews = ({ children, locale, translations, pageTitle, tipo }) => {
       }
     }
   `)
-  
-   const langFilter = data.allWpPost.edges.filter((item) => {
+
+  const langFilter = data.allWpPost.edges.filter((item) => {
     return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node
 
   return (
     <div className="mainwrapper">
 
-   
+
       <Seo title={pageTitle} seo={langFilter.seo} />
       <div className="container-fluid " >
-        <Header tipo = {tipo} translations={translations} locale={locale} pageTitle={pageTitle}  nodeType={langFilter.nodeType}/>
+        <Header tipo={tipo} translations={translations} locale={locale} pageTitle={pageTitle} nodeType={langFilter.nodeType} />
       </div>
 
 
@@ -94,7 +94,7 @@ const LayoutNews = ({ children, locale, translations, pageTitle, tipo }) => {
 
       <Footer translations={translations} locale={locale} />
       <ScrollTo />
-      </div>
+    </div>
   )
 }
 
