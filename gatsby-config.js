@@ -2,10 +2,11 @@ module.exports = {
   siteMetadata: {
     title: `Bacci 1918`,
     description: `lorem ipsum`,
-    author: 'Tesecom.it',
-    siteUrl: 'https://bacci.com'
+    author: "Tesecom.it",
+    siteUrl: "https://bacci.com",
   },
   plugins: [
+    "gatsby-plugin-netlify",
     "gatsby-plugin-sass",
     "gatsby-plugin-sitemap",
     `gatsby-plugin-preact`,
@@ -14,7 +15,7 @@ module.exports = {
       resolve: `gatsby-source-wordpress`,
       options: {
         url: `https://bacci.monema.dev/graphql`,
-      }
+      },
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
@@ -113,5 +114,4 @@ module.exports = {
       },
     },
   ],
-  
 }
