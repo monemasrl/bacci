@@ -108,7 +108,7 @@ module.exports = {
         // Any additional optional fields
         sampleRate: 5,
         siteSpeedSampleRate: 10,
-        cookieDomain: "jampot.it",
+        cookieDomain: "bacci-bedrock.monema.dev",
         // defaults to false
         enableWebVitalsTracking: true,
       },
