@@ -14,7 +14,7 @@ module.exports = {
     {
       resolve: `gatsby-source-wordpress`,
       options: {
-        url: `https://bacci.monema.dev/graphql`,
+        url: `https://bacci-bedrock.monema.dev/graphql`,
       },
     },
     `gatsby-plugin-react-helmet`,
