@@ -113,5 +113,8 @@ module.exports = {
         enableWebVitalsTracking: true,
       },
     },
+    {
+      resolve: "gatsby-plugin-i18n",
+    },
   ],
 }
