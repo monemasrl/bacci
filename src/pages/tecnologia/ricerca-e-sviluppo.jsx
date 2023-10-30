@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../../components/layout/layout"
 
@@ -156,12 +156,12 @@ const Produzione = ({ data, location }) => {
 
   return (
     <>
-      <Layout 
-      pageTitle={dataFilter.title} 
-      locale={'it_IT'} 
-      translations={dataFilter.translations} 
-      pathName={location.pathname} 
-      seo={dataFilter.seo} >
+      <Layout
+        pageTitle={dataFilter.title}
+        locale={'it_IT'}
+        translations={dataFilter.translations}
+        pathName={location.pathname}
+        seo={dataFilter.seo} >
         <div className="container-fluid ricerca">
           <section className="container-fluid sezione-interne">
             <div className="box-sx">

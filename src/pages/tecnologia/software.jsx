@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../../components/layout/layout"
 
@@ -126,12 +126,12 @@ const Produzione = ({ data, location }) => {
 
   return (
     <>
-      <Layout 
-      pageTitle={dataFilter.title} 
-      locale={'it_IT'} 
-      translations={dataFilter.translations} 
-      pathName={location.pathname}  
-      seo={dataFilter.seo}
+      <Layout
+        pageTitle={dataFilter.title}
+        locale={'it_IT'}
+        translations={dataFilter.translations}
+        pathName={location.pathname}
+        seo={dataFilter.seo}
       >
         <div className="container-fluid software">
           <section className="container-fluid sezione-interne">
@@ -144,48 +144,48 @@ const Produzione = ({ data, location }) => {
             </div>
           </section>
           <section className="container sezione-3 ">
-          <div className="box-sx">
-            <h2 dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware2.titolo }} />
-            <p className="sottotitolo" dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware2.paragrafo}} />
-          </div>
-        </section>
+            <div className="box-sx">
+              <h2 dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware2.titolo }} />
+              <p className="sottotitolo" dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware2.paragrafo }} />
+            </div>
+          </section>
           <section className="container sezione-3 pitagora">
-          <div className="box-sx">
-            <h2 dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware3.titolo }} />
-            <h3 dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware3.sottotitolo }} />
-            <GatsbyImage image={dataFilter.software.sezioneSoftware3.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.software.sezioneSoftware1.immagine.altText} />
+            <div className="box-sx">
+              <h2 dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware3.titolo }} />
+              <h3 dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware3.sottotitolo }} />
+              <GatsbyImage image={dataFilter.software.sezioneSoftware3.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.software.sezioneSoftware1.immagine.altText} />
 
-            <p dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware3.paragrafo}} />
-          </div>
-        </section>
-        <section className="container repeater">
+              <p dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware3.paragrafo }} />
+            </div>
+          </section>
+          <section className="container repeater">
             <div className="box-repeater">
-                <h3>{dataFilter.software.sezioneSoftware4.titolo}</h3>
-                <p>{dataFilter.software.sezioneSoftware4.paragrafo}</p>
+              <h3>{dataFilter.software.sezioneSoftware4.titolo}</h3>
+              <p>{dataFilter.software.sezioneSoftware4.paragrafo}</p>
             </div>
             <div className="box-repeater">
-                <h3>{dataFilter.software.sezioneSoftware4.titolo2}</h3>
-                <p>{dataFilter.software.sezioneSoftware4.paragrafo2}</p>
+              <h3>{dataFilter.software.sezioneSoftware4.titolo2}</h3>
+              <p>{dataFilter.software.sezioneSoftware4.paragrafo2}</p>
             </div>
             <div className="box-repeater">
-                <h3>{dataFilter.software.sezioneSoftware4.titolo3}</h3>
-                <p>{dataFilter.software.sezioneSoftware4.paragrafo3}</p>
+              <h3>{dataFilter.software.sezioneSoftware4.titolo3}</h3>
+              <p>{dataFilter.software.sezioneSoftware4.paragrafo3}</p>
             </div>
             <div className="box-repeater">
-                <h3>{dataFilter.software.sezioneSoftware4.titolo4}</h3>
-                <p>{dataFilter.software.sezioneSoftware4.paragrafo4}</p>
+              <h3>{dataFilter.software.sezioneSoftware4.titolo4}</h3>
+              <p>{dataFilter.software.sezioneSoftware4.paragrafo4}</p>
             </div>
-        </section>
-        <section className="container sezione-testo-sx">
-          <div className="box-sx">
-            <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware5.titolo }} />
-            <h3>{dataFilter.software.sezioneSoftware5.sottotitolo}</h3>
-            <p>{dataFilter.software.sezioneSoftware5.paragrafo}</p>
-          </div>
-          <div className="box-dx">
-            <GatsbyImage image={dataFilter.software.sezioneSoftware5.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.software.sezioneSoftware5.immagine.altText} />
-          </div>
-        </section>
+          </section>
+          <section className="container sezione-testo-sx">
+            <div className="box-sx">
+              <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.software.sezioneSoftware5.titolo }} />
+              <h3>{dataFilter.software.sezioneSoftware5.sottotitolo}</h3>
+              <p>{dataFilter.software.sezioneSoftware5.paragrafo}</p>
+            </div>
+            <div className="box-dx">
+              <GatsbyImage image={dataFilter.software.sezioneSoftware5.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.software.sezioneSoftware5.immagine.altText} />
+            </div>
+          </section>
         </div>
       </Layout>
     </>
