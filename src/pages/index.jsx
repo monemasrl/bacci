@@ -2,7 +2,7 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout/layout"
-import Fade from 'react-reveal/Fade';
+
 import LinkFade from "../components/TransitionLinks/LinkFade";
 import LastNews from "../components/widgets/lastNews";
 import LastFiere from "../components/widgets/lastFiere";
@@ -171,15 +171,15 @@ const IndexPage = ({ data, location }, props) => {
           </section>
 
           <section className={`container sezione-1 `}>
-            <Fade left>
-              <div className={`box-sx`} >
-                <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
-                <p>{dataHome.home.sezione1.paragrafo}</p>
 
-                <LinkFade stileClasse="button-sezione" url={dataHome.home.sezione1.link.url}>{dataHome.home.sezione1.link.title}</LinkFade>
+            <div className={`box-sx`} >
+              <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
+              <p>{dataHome.home.sezione1.paragrafo}</p>
 
-              </div>
-            </Fade>
+              <LinkFade stileClasse="button-sezione" url={dataHome.home.sezione1.link.url}>{dataHome.home.sezione1.link.title}</LinkFade>
+
+            </div>
+
             <div className="box-dx">
               <GatsbyImage image={dataHome.home.sezione1.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataHome.home.sezione1.immagine.altText} />
             </div>
@@ -187,59 +187,59 @@ const IndexPage = ({ data, location }, props) => {
 
 
           <section className={`container sezione-2 `}>
-            <Fade left>
-              <div className={`box-sx`} >
-                <div className="novita">
-                  Novità
-                </div>
-                <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.titolo }} />
-                <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.paragrafo }} />
 
-                <LinkFade stileClasse="button-sezione" url={dataHome.home.sezione2.link.url}>{dataHome.home.sezione2.link.title}
-                </LinkFade>
-
+            <div className={`box-sx`} >
+              <div className="novita">
+                Novità
               </div>
-            </Fade>
+              <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.titolo }} />
+              <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.paragrafo }} />
+
+              <LinkFade stileClasse="button-sezione" url={dataHome.home.sezione2.link.url}>{dataHome.home.sezione2.link.title}
+              </LinkFade>
+
+            </div>
+
             <div className="box-dx">
               <GatsbyImage image={dataHome.home.sezione2.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataHome.home.sezione1.immagine.altText} />
 
             </div>
           </section>
 
-          <Fade bottom>
-            <section className={`container sezione-3 `}>
-              <div className={`box-sx `} >
-                <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.titolo }} />
-                <GatsbyImage image={dataHome.home.sezione3.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataHome.home.sezione1.immagine.altText} />
 
-              </div>
+          <section className={`container sezione-3 `}>
+            <div className={`box-sx `} >
+              <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.titolo }} />
+              <GatsbyImage image={dataHome.home.sezione3.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataHome.home.sezione1.immagine.altText} />
 
-              <div className="box-dx">
-                <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.paragrafo }} />
+            </div>
 
-                <LinkFade stileClasse="button-sezione" className="button-sezione" url={dataHome.home.sezione3.link.url}>{dataHome.home.sezione3.link.title}</LinkFade>
+            <div className="box-dx">
+              <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.paragrafo }} />
 
-              </div>
-            </section>
-          </Fade>
-          <section className="container sezione-4">
-            <Fade left>
-              <div className={`box-sx `} >
-                <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
-                <p>{dataHome.home.sezione4.paragrafo}</p>
+              <LinkFade stileClasse="button-sezione" className="button-sezione" url={dataHome.home.sezione3.link.url}>{dataHome.home.sezione3.link.title}</LinkFade>
 
-                <LinkFade stileClasse="button-sezione" className="button-sezione" url={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</LinkFade>
-
-              </div>
-            </Fade>
-            <Fade right>
-              <div className={`box-dx`}>
-                <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataHome.home.sezione4.immagine.altText} />
-              </div>
-            </Fade>
+            </div>
           </section>
-          <LastFiere locale={dataHome.locale.locale} limiteVisualizzazione={3}/>
-          <LastNews locale={dataHome.locale.locale} limiteVisualizzazione={3}/>
+
+          <section className="container sezione-4">
+
+            <div className={`box-sx `} >
+              <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
+              <p>{dataHome.home.sezione4.paragrafo}</p>
+
+              <LinkFade stileClasse="button-sezione" className="button-sezione" url={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</LinkFade>
+
+            </div>
+
+
+            <div className={`box-dx`}>
+              <GatsbyImage image={dataHome.home.sezione4.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataHome.home.sezione4.immagine.altText} />
+            </div>
+
+          </section>
+          <LastFiere locale={dataHome.locale.locale} limiteVisualizzazione={3} />
+          <LastNews locale={dataHome.locale.locale} limiteVisualizzazione={3} />
         </div>
       </Layout>
     </>
