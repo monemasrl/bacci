@@ -2,7 +2,7 @@ import React from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { useStaticQuery, graphql } from "gatsby"
 import { Termini, langTag } from "../../../data-translations";
-import LinkFade from "../TransitionLinks/LinkFade";
+import { Link } from "gatsby"
 const SoftwareProduct = ({ locale }) => {
   const data = useStaticQuery(graphql`
     {
@@ -50,7 +50,7 @@ const SoftwareProduct = ({ locale }) => {
         <GatsbyImage image={dataFilter.software.sezioneSoftware3.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.software.sezioneSoftware3.immagine.altText} />
 
         <p dangerouslySetInnerHTML={{ __html: Termini[locale].pitagora_desc }} />
-        <LinkFade url={`${(locale === 'it_IT') ? '/' : 'langTag[locale]'}${Termini[locale].tecnologia}/software`} stileClasse="button-sezione" className="button-sezione">Software</LinkFade>
+        <Link to={`${(locale === 'it_IT') ? '/' : 'langTag[locale]'}${Termini[locale].tecnologia}/software`} stileClasse="button-sezione" className="button-sezione">Software</Link>
       </div>
 
     </section>

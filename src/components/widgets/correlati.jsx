@@ -3,9 +3,10 @@ import { useStaticQuery, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Termini, langTag } from "../../../data-translations";
 import './correlati.scss'
-import LinkFade from "../TransitionLinks/LinkFade";
+import { Link } from "gatsby";
+
 const Correlati = ({ applicazioni, locale, limiteVisualizzazione }) => {
-    const data = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     {
       allWpProdotto {
         edges {
@@ -44,41 +45,41 @@ const Correlati = ({ applicazioni, locale, limiteVisualizzazione }) => {
     }
   `)
 
-    const langFilterProdotto = data.allWpProdotto.edges.filter((item) => {
-        return (item.node.locale.locale === 'it_IT')
+  const langFilterProdotto = data.allWpProdotto.edges.filter((item) => {
+    return (item.node.locale.locale === 'it_IT')
+  })
+
+  // lista delle applicazioni da lista prodotto
+  let listaApplicazioni = applicazioni.nodes.map((item) => item.name)
+
+  const filtersResultApp = langFilterProdotto.filter((item) => {
+    return listaApplicazioni.length > 0 && item.node.prodottiApplicazioni.nodes.some((item) => {
+      return listaApplicazioni.includes(item.name)
     })
+  })
 
-    // lista delle applicazioni da lista prodotto
-    let listaApplicazioni = applicazioni.nodes.map((item) => item.name)
-
-    const filtersResultApp = langFilterProdotto.filter((item) => {
-        return listaApplicazioni.length > 0 && item.node.prodottiApplicazioni.nodes.some((item) => {
-            return listaApplicazioni.includes(item.name)
-        })
-    })
-
-    return (
-        <>
-            <section className=" widget-correlati">
-                <h2>{Termini[locale].correlati}</h2>
-                <div className="container">
-                    {filtersResultApp.map((item) => {
-                        console.log(item);
-                        return (
-                            <div className="col-3">
-                                <div className="box-correlati">
-                                    <GatsbyImage className="immagine-widget" image={item.node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.node.prodotto.immagine.altText} />
-                                    <h2>{item.node.title}</h2>
-                                    <p dangerouslySetInnerHTML={{__html: item.node.prodotto.testoAnteprima}} />
-                                    <LinkFade url={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${item.node.slug}`} stileClasse="button-sezione">scopri</LinkFade>
-                                </div>
-                            </div>
-                        )
-                    })}
+  return (
+    <>
+      <section className=" widget-correlati">
+        <h2>{Termini[locale].correlati}</h2>
+        <div className="container">
+          {filtersResultApp.map((item) => {
+            console.log(item);
+            return (
+              <div className="col-3">
+                <div className="box-correlati">
+                  <GatsbyImage className="immagine-widget" image={item.node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.node.prodotto.immagine.altText} />
+                  <h2>{item.node.title}</h2>
+                  <p dangerouslySetInnerHTML={{ __html: item.node.prodotto.testoAnteprima }} />
+                  <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${item.node.slug}`} stileClasse="button-sezione">scopri</Link>
                 </div>
-            </section>
-        </>
-    )
+              </div>
+            )
+          })}
+        </div>
+      </section>
+    </>
+  )
 }
 
 export default Correlati

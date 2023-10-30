@@ -2,8 +2,6 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout/layout"
-
-import LinkFade from "../components/TransitionLinks/LinkFade";
 import LastNews from "../components/widgets/lastNews";
 import LastFiere from "../components/widgets/lastFiere";
 export const query = graphql`
@@ -176,7 +174,7 @@ const IndexPage = ({ data, location }, props) => {
               <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
               <p>{dataHome.home.sezione1.paragrafo}</p>
 
-              <LinkFade stileClasse="button-sezione" url={dataHome.home.sezione1.link.url}>{dataHome.home.sezione1.link.title}</LinkFade>
+              <Link stileClasse="button-sezione" to={dataHome.home.sezione1.link.url}>{dataHome.home.sezione1.link.title}</Link>
 
             </div>
 
@@ -195,8 +193,8 @@ const IndexPage = ({ data, location }, props) => {
               <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.titolo }} />
               <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.paragrafo }} />
 
-              <LinkFade stileClasse="button-sezione" url={dataHome.home.sezione2.link.url}>{dataHome.home.sezione2.link.title}
-              </LinkFade>
+              <Link stileClasse="button-sezione" to={dataHome.home.sezione2.link.url}>{dataHome.home.sezione2.link.title}
+              </Link>
 
             </div>
 
@@ -217,7 +215,7 @@ const IndexPage = ({ data, location }, props) => {
             <div className="box-dx">
               <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.paragrafo }} />
 
-              <LinkFade stileClasse="button-sezione" className="button-sezione" url={dataHome.home.sezione3.link.url}>{dataHome.home.sezione3.link.title}</LinkFade>
+              <Link stileClasse="button-sezione" className="button-sezione" to={dataHome.home.sezione3.link.url}>{dataHome.home.sezione3.link.title}</Link>
 
             </div>
           </section>
@@ -228,7 +226,7 @@ const IndexPage = ({ data, location }, props) => {
               <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
               <p>{dataHome.home.sezione4.paragrafo}</p>
 
-              <LinkFade stileClasse="button-sezione" className="button-sezione" url={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</LinkFade>
+              <Link stileClasse="button-sezione" className="button-sezione" to={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</Link>
 
             </div>
 

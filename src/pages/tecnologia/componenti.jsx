@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../../components/layout/layout"
 
@@ -174,12 +174,12 @@ const Produzione = ({ data, location }) => {
 
   return (
     <>
-      <Layout 
-      pageTitle={dataFilter.title} 
-      locale={'it_IT'} 
-      translations={dataFilter.translations} 
-      pathName={location.pathname}  
-      seo={dataFilter.seo}
+      <Layout
+        pageTitle={dataFilter.title}
+        locale={'it_IT'}
+        translations={dataFilter.translations}
+        pathName={location.pathname}
+        seo={dataFilter.seo}
       >
 
         <div className="container-fluid componenti">
@@ -200,64 +200,64 @@ const Produzione = ({ data, location }) => {
           </section>
           <section className="container repeater">
             <div className="box-repeater">
-                <h3>{dataFilter.componenti.sezioneComponenti3.titolo}</h3>
-                <p>{dataFilter.componenti.sezioneComponenti3.paragrafo}</p>
+              <h3>{dataFilter.componenti.sezioneComponenti3.titolo}</h3>
+              <p>{dataFilter.componenti.sezioneComponenti3.paragrafo}</p>
             </div>
             <div className="box-repeater">
-                <h3>{dataFilter.componenti.sezioneComponenti3.titolo2}</h3>
-                <p>{dataFilter.componenti.sezioneComponenti3.paragrafo2}</p>
+              <h3>{dataFilter.componenti.sezioneComponenti3.titolo2}</h3>
+              <p>{dataFilter.componenti.sezioneComponenti3.paragrafo2}</p>
             </div>
             <div className="box-repeater">
-                <h3>{dataFilter.componenti.sezioneComponenti3.titolo3}</h3>
-                <p>{dataFilter.componenti.sezioneComponenti3.paragrafo3}</p>
+              <h3>{dataFilter.componenti.sezioneComponenti3.titolo3}</h3>
+              <p>{dataFilter.componenti.sezioneComponenti3.paragrafo3}</p>
             </div>
             <div className="box-repeater">
-                <h3>{dataFilter.componenti.sezioneComponenti3.titolo4}</h3>
-                <p>{dataFilter.componenti.sezioneComponenti3.paragrafo4}</p>
+              <h3>{dataFilter.componenti.sezioneComponenti3.titolo4}</h3>
+              <p>{dataFilter.componenti.sezioneComponenti3.paragrafo4}</p>
             </div>
             <div className="box-repeater">
-                <h3>{dataFilter.componenti.sezioneComponenti3.titolo5}</h3>
-                <p>{dataFilter.componenti.sezioneComponenti3.paragrafo5}</p>
+              <h3>{dataFilter.componenti.sezioneComponenti3.titolo5}</h3>
+              <p>{dataFilter.componenti.sezioneComponenti3.paragrafo5}</p>
             </div>
             <div className="box-repeater">
-                <h3>{dataFilter.componenti.sezioneComponenti3.titolo6}</h3>
-                <p>{dataFilter.componenti.sezioneComponenti3.paragrafo6}</p>
+              <h3>{dataFilter.componenti.sezioneComponenti3.titolo6}</h3>
+              <p>{dataFilter.componenti.sezioneComponenti3.paragrafo6}</p>
             </div>
-        </section>
-        <section className="container sezione-3">
+          </section>
+          <section className="container sezione-3">
             <div className="box-sx">
-            <GatsbyImage image={dataFilter.componenti.sezioneComponenti4.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.componenti.sezioneComponenti4.immagine.altText} />
+              <GatsbyImage image={dataFilter.componenti.sezioneComponenti4.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.componenti.sezioneComponenti4.immagine.altText} />
               <p className="sottotitolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti4.paragrafo }} />
             </div>
           </section>
           <section className="container sezione-testo-sx">
-          <div className="box-sx">
-            <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti5.titolo }} />
-            <p dangerouslySetInnerHTML={{__html:dataFilter.componenti.sezioneComponenti5.paragrafo}} />
-          </div>
-          <div className="box-dx">
-            <GatsbyImage image={dataFilter.componenti.sezioneComponenti5.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.componenti.sezioneComponenti5.immagine.altText} />
-          </div>
-        </section>
-        <section className="container sezione-testo-dx">
-          <div className="box-sx">
-          <GatsbyImage image={dataFilter.componenti.sezioneComponenti6.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.componenti.sezioneComponenti6.immagine.altText} />
-          </div>
-          <div className="box-dx">
-          <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti6.titolo }} />
-          <p dangerouslySetInnerHTML={{__html:dataFilter.componenti.sezioneComponenti6.paragrafo}} />
-          </div>
-        </section>
-        <section className="container sezione-testo-sx">
-          <div className="box-sx">
-            <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti7.titolo }} />
-            <p dangerouslySetInnerHTML={{__html:dataFilter.componenti.sezioneComponenti7.paragrafo}} />
-          </div>
-          <div className="box-dx">
-            <GatsbyImage image={dataFilter.componenti.sezioneComponenti7.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.componenti.sezioneComponenti7.immagine.altText} />
-          </div>
-        </section>
-        <section className="container sezione-3">
+            <div className="box-sx">
+              <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti5.titolo }} />
+              <p dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti5.paragrafo }} />
+            </div>
+            <div className="box-dx">
+              <GatsbyImage image={dataFilter.componenti.sezioneComponenti5.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.componenti.sezioneComponenti5.immagine.altText} />
+            </div>
+          </section>
+          <section className="container sezione-testo-dx">
+            <div className="box-sx">
+              <GatsbyImage image={dataFilter.componenti.sezioneComponenti6.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.componenti.sezioneComponenti6.immagine.altText} />
+            </div>
+            <div className="box-dx">
+              <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti6.titolo }} />
+              <p dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti6.paragrafo }} />
+            </div>
+          </section>
+          <section className="container sezione-testo-sx">
+            <div className="box-sx">
+              <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti7.titolo }} />
+              <p dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti7.paragrafo }} />
+            </div>
+            <div className="box-dx">
+              <GatsbyImage image={dataFilter.componenti.sezioneComponenti7.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.componenti.sezioneComponenti7.immagine.altText} />
+            </div>
+          </section>
+          <section className="container sezione-3">
             <div className="box-sx">
               <h2 dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti8.titolo }} />
               <p className="sottotitolo" dangerouslySetInnerHTML={{ __html: dataFilter.componenti.sezioneComponenti8.paragrafo }} />
@@ -265,19 +265,19 @@ const Produzione = ({ data, location }) => {
           </section>
           <section className="container repeater no-flag">
             <div className="box-repeater">
-                <h3>{dataFilter.componenti.sezioneComponenti9.titolo}</h3>
-                <p>{dataFilter.componenti.sezioneComponenti9.paragrafo}</p>
+              <h3>{dataFilter.componenti.sezioneComponenti9.titolo}</h3>
+              <p>{dataFilter.componenti.sezioneComponenti9.paragrafo}</p>
             </div>
             <div className="box-repeater">
-                <h3>{dataFilter.componenti.sezioneComponenti9.titolo2}</h3>
-                <p>{dataFilter.componenti.sezioneComponenti9.paragrafo2}</p>
+              <h3>{dataFilter.componenti.sezioneComponenti9.titolo2}</h3>
+              <p>{dataFilter.componenti.sezioneComponenti9.paragrafo2}</p>
             </div>
             <div className="box-repeater">
-                <h3>{dataFilter.componenti.sezioneComponenti9.titolo3}</h3>
-                <p>{dataFilter.componenti.sezioneComponenti9.paragrafo3}</p>
+              <h3>{dataFilter.componenti.sezioneComponenti9.titolo3}</h3>
+              <p>{dataFilter.componenti.sezioneComponenti9.paragrafo3}</p>
             </div>
-          
-        </section>
+
+          </section>
         </div>
       </Layout>
     </>

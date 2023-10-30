@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 import Layout from "../../components/layout/layout"
-import LinkFade from "../../components/TransitionLinks/LinkFade"
+
 import { langTag } from "../../../data-translations"
 
 export const query = graphql`
@@ -80,7 +80,7 @@ const indexFiere = ({ data }) => {
         return (item.node.locale.locale === 'it_IT')
     })
 
-console.log(langFilterFiera);
+    console.log(langFilterFiera);
 
     return (
         <>
@@ -93,17 +93,17 @@ console.log(langFilterFiera);
             >
                 <section className="container fiere">
                     {langFilterFiera.map((item) => {
-                     const slug=`${langTag[item.node.locale.locale] === "it" ? '' : langTag[item.node.locale.locale]}/fiere/${item.node.slug}`
+                        const slug = `${langTag[item.node.locale.locale] === "it" ? '' : langTag[item.node.locale.locale]}/fiere/${item.node.slug}`
                         return (
                             <div className="box-single-fiera">
-                             <LinkFade  url={slug}><h2>{item.node.title}</h2>   </LinkFade>  
-                              <div className="data">
-                                {item.node.fiere.dataDa.slice(0,2)}-
-                                {item.node.fiere.dataA}
-                              </div>  
-                               <div className="luogo">
-                               {item.node.fiere.luogo}
-                               </div> 
+                                <Link url={slug}><h2>{item.node.title}</h2>   </Link>
+                                <div className="data">
+                                    {item.node.fiere.dataDa.slice(0, 2)}-
+                                    {item.node.fiere.dataA}
+                                </div>
+                                <div className="luogo">
+                                    {item.node.fiere.luogo}
+                                </div>
                                 <a href={item.node.fiere.link} className="link" targe="_blank" rel="nofollow" >{item.node.fiere.link.slice(8)}</a>
                             </div>
                         )

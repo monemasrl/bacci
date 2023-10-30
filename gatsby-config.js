@@ -6,11 +6,9 @@ module.exports = {
     siteUrl: "https://bacci.com",
   },
   plugins: [
-    "gatsby-plugin-netlify",
     "gatsby-plugin-sass",
     "gatsby-plugin-sitemap",
     `gatsby-plugin-preact`,
-    `gatsby-plugin-transition-link`,
     {
       resolve: `gatsby-source-wordpress`,
       options: {
@@ -40,16 +38,6 @@ module.exports = {
         // theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/favicon.png`, // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: `gatsby-plugin-wordpress-preview`,
-      options: {
-        graphqlEndpoint: "http://testwpmlgatsby.local/graphql", // defaults to `${generalSettings.url}/graphql` from wordpress
-        excludedTemplates: [], // exclude templates by their graphqlSingleName. defaults to none
-        debug: false, // shows extra console logs. defaults to false
-        templatesPath: `./src/templates/**/*.js`, // default
-        contentTypeTemplateDirectory: `./src/templates`, // default
       },
     },
     {

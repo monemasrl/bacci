@@ -5,9 +5,7 @@ import Tassonomie from "../tassonomie";
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, Link, graphql } from "gatsby";
 import { Termini, langTag } from "../../../data-translations";
-import LinkFade from "../TransitionLinks/LinkFade";
 import './megamenu.scss'
-import { node } from "prop-types";
 
 const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
 
@@ -73,7 +71,7 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
         return (item.node.locale.locale === locale)
     })
 
-    const novita =  langFilterProdotto.sort((item) => item.node.date)
+    const novita = langFilterProdotto.sort((item) => item.node.date)
     const inEvidenza = langFilterProdotto.filter((item) => item.node.prodotto.inEvidenza === 'si')
 
     console.log('novita', novita);
@@ -106,9 +104,9 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
                                 <div className="content-mega">
                                     <>
                                         <div>
-                                            <LinkFade url={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${novita[0].node.slug}`}>
+                                            <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${novita[0].node.slug}`}>
                                                 <h2>{novita[0].node.title}</h2>
-                                            </LinkFade>
+                                            </Link>
                                             <p>{novita[0].node.prodotto.sottotitolo}</p>
                                         </div>
                                         <GatsbyImage image={novita[0].node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={novita[0].node.prodotto.immagine.altText} />
@@ -133,9 +131,9 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
                                 {inEvidenza[0].node.title &&
                                     <div className="content-mega">
                                         <div>
-                                            <LinkFade url={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${inEvidenza[0].node.slug}`}>
+                                            <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${inEvidenza[0].node.slug}`}>
                                                 <h2>{inEvidenza[0].node.title}</h2>
-                                            </LinkFade>
+                                            </Link>
                                             <p>{inEvidenza[0].node.prodotto.sottotitolo}</p>
                                         </div>
                                         <GatsbyImage image={inEvidenza[0].node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={inEvidenza[0].node.prodotto.immagine.altText} />

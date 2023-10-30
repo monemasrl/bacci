@@ -3,10 +3,10 @@ import { useStaticQuery, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image";
 import { Termini, langTag } from "../../../data-translations";
 import './lastNews.scss'
-import LinkFade from "../TransitionLinks/LinkFade";
+import { Link } from "gatsby";
 
 const LastNews = ({ locale, limiteVisualizzazione }) => {
-    const data = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     {
         allWpPost {
         edges {
@@ -47,37 +47,37 @@ const LastNews = ({ locale, limiteVisualizzazione }) => {
     }
   `)
 
-    let langFilterProdotto = data.allWpPost.edges.filter((item) => {
-        return (item.node.locale.locale === 'it_IT')
-    })
-    langFilterProdotto = langFilterProdotto.slice(0, limiteVisualizzazione)
+  let langFilterProdotto = data.allWpPost.edges.filter((item) => {
+    return (item.node.locale.locale === 'it_IT')
+  })
+  langFilterProdotto = langFilterProdotto.slice(0, limiteVisualizzazione)
 
-    return (
-        <>
-            <section className="container widget-news">
-                <h2>Bacci news</h2>
-                <div className="container">
-                    {langFilterProdotto.map((item) => {
-                        console.log(item);
-                        return (
-                            <div className="col-3">
-                                <div className="box-news">
-                                    <GatsbyImage className="immagine-widget" image={item.node.featuredImage.node.localFile.childImageSharp.gatsbyImageData} alt={item.node.featuredImage.node.altText} />
-                                    <h3>{item.node.date}</h3>
-                                    <LinkFade url={`${(locale === 'it_IT') ? '/' : langTag[locale]}news/${item.node.slug}`}>
-                                        <h2>{item.node.title}</h2>
-                                    </LinkFade>
-                                    <p dangerouslySetInnerHTML={{ __html: item.node.excerpt }} />
-                                    <LinkFade url={`${(locale === 'it_IT') ? '/' : langTag[locale]}news/${item.node.slug}`}><span class="leggi-tutto">Leggi tutto</span>
-                                    </LinkFade>
-                                </div>
-                            </div>
-                        )
-                    })}
+  return (
+    <>
+      <section className="container widget-news">
+        <h2>Bacci news</h2>
+        <div className="container">
+          {langFilterProdotto.map((item) => {
+            console.log(item);
+            return (
+              <div className="col-3">
+                <div className="box-news">
+                  <GatsbyImage className="immagine-widget" image={item.node.featuredImage.node.localFile.childImageSharp.gatsbyImageData} alt={item.node.featuredImage.node.altText} />
+                  <h3>{item.node.date}</h3>
+                  <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}news/${item.node.slug}`}>
+                    <h2>{item.node.title}</h2>
+                  </Link>
+                  <p dangerouslySetInnerHTML={{ __html: item.node.excerpt }} />
+                  <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}news/${item.node.slug}`}><span class="leggi-tutto">Leggi tutto</span>
+                  </Link>
                 </div>
-            </section>
-        </>
-    )
+              </div>
+            )
+          })}
+        </div>
+      </section>
+    </>
+  )
 }
 
 export default LastNews

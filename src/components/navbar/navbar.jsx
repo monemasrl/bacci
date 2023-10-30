@@ -3,7 +3,6 @@ import { Link, graphql, useStaticQuery } from 'gatsby'
 import { langTag } from '../../../data-translations'
 import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
-import LinkFade from "../TransitionLinks/LinkFade"
 import Megamenu from '../megamenu/megamenu'
 import { Termini } from '../../../data-translations'
 import './navbar.scss'
@@ -68,11 +67,11 @@ const NavBar = (props) => {
                             return (
                                 <li key={item.label}>
                                     {
-                                    item.path === '#' 
-                                    ? 
-                                    <LinkFade url={'#'}>{item.label}</LinkFade>
-                                    : 
-                                    <LinkFade url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath.toLowerCase()}`}>{item.label}</LinkFade>
+                                        item.path === '#'
+                                            ?
+                                            <Link to={'#'}>{item.label}</Link>
+                                            :
+                                            <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath.toLowerCase()}`}>{item.label}</Link>
 
                                     }
 
@@ -133,9 +132,9 @@ const NavBar = (props) => {
 
                                                                     return (
                                                                         <>
-                                                                            <li> <LinkFade key={subitem.label} url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
+                                                                            <li> <Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
                                                                                 {subitem.label}
-                                                                            </LinkFade>
+                                                                            </Link>
                                                                             </li>
                                                                         </>)
 
@@ -144,9 +143,9 @@ const NavBar = (props) => {
                                                             : ''}
 
                                                     </a> :
-                                                    <LinkFade url={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${slugify(item.label.toLowerCase())}`}>
+                                                    <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${slugify(item.label.toLowerCase())}`}>
                                                         {item.label}
-                                                    </LinkFade>
+                                                    </Link>
                                                 }
 
                                             </li> : ''

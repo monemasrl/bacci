@@ -3,7 +3,7 @@ import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { langTag, Termini } from "../../data-translations"
 import Layout from "../components/layout/layout"
-import LinkFade from "../components/TransitionLinks/LinkFade"
+
 
 export const query = graphql`
 {
@@ -141,7 +141,7 @@ const CaseHistory = ({ data, location }, props) => {
                 <h2 dangerouslySetInnerHTML={{ __html: item.node.title }} />
                 <p className="sottotitolo" dangerouslySetInnerHTML={{ __html: item.node.caseHistorySingle.sottotitolo }} />
                 <GatsbyImage image={item.node.caseHistorySingle.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.node.caseHistorySingle.immagine.altText} />
-                <LinkFade stileClasse="button-sezione" className="button-sezione">{Termini['it_IT'].scopri}</LinkFade>
+                <Link stileClasse="button-sezione" className="button-sezione">{Termini['it_IT'].scopri}</Link>
               </div>
 
 
