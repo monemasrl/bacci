@@ -1,7 +1,7 @@
-import * as React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { langTag, Termini } from "../../data-translations"
+import * as React from "react"
+import { Termini } from "../../data-translations"
 import Layout from "../components/layout/layout"
 
 

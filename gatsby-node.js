@@ -1,4 +1,6 @@
-exports.createPages = async ({ graphql, actions: { createPage } }) => {
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions
+  
   function getSlugFromTranslationHref(tHref) {
     const arrayFromHref = tHref.split("/").slice(2, 3)
     return arrayFromHref[0]
