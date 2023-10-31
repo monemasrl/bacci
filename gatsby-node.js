@@ -1,4 +1,37 @@
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
+  function getSlugFromTranslationHref(tHref) {
+    const arrayFromHref = tHref.split("/").slice(2, 3)
+    return arrayFromHref[0]
+  }
+
+  const langTag = {
+    en_US: "en",
+    it_IT: "it",
+  }
+  const Termini = {
+    en_US: {
+      azienda: "company",
+      prodotti: "products",
+      tutti_prodotti: "all products",
+      tasto_ricerca: "Search for model",
+      eventi: "fair and events",
+      prodotti: "products",
+      macchine: "machines",
+      tecnologia: "tecnology",
+      correlati: "realted products",
+    },
+    it_IT: {
+      azienda: "azienda",
+      prodotti: "prodotti",
+      tutti_prodotti: "tutti i prodotti",
+      tasto_ricerca: "Ricerca Modello",
+      eventi: "eventi e fiere",
+      prodotti: "prodotti",
+      macchine: "macchine",
+      tecnologia: "tecnologia",
+      correlati: "prodotti correlati",
+    },
+  }
   const result = await graphql(`
     {
       allWpFiera {
@@ -149,6 +182,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       }
     }
   `)
+
   const dataForLanguagePath = await graphql(`
     {
       allWpPage {
@@ -157,11 +191,30 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             title
             slug
             pathPagine {
-              fieldGroupName
               path
             }
             locale {
               locale
+            }
+            translations {
+              locale
+              post_title
+              href
+            }
+          }
+        }
+      }
+      allWpMenu {
+        edges {
+          node {
+            language
+            menuItems {
+              nodes {
+                label
+                id
+                path
+                parentId
+              }
             }
           }
         }
@@ -169,17 +222,44 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     }
   `)
   const fiere = result.data.allWpFiera.edges
-  const langTag = {
-    en_US: "en",
-    it_IT: "it",
-  }
-  const Termini = {
-    en_US: {
-      prodotti: "products",
-    },
-    it_IT: {
-      prodotti: "prodotti",
-    },
+
+  /**
+   * Creazione delle pagine statiche
+   * @date 31/10/2023 - 11:40:10
+   *
+   *
+   */
+
+  function getParentPathFromMenu(locale, title, dataMenu) {
+    let idPath
+    let g
+
+    dataMenu.forEach(menu => {
+      if (menu.node.language === langTag[locale]) {
+        menu.node.menuItems.nodes.forEach(item => {
+          if (title === item.label && item.parentId !== null) {
+            idPath = item.parentId
+          }
+        })
+      }
+    })
+
+    dataMenu.forEach(menu => {
+      if (idPath) {
+        const isItemInMenu = menu.node.menuItems.nodes.find(item => {
+          return item.id === idPath
+        })
+        if (isItemInMenu) {
+          g = menu.node.menuItems.nodes.find(item => {
+            return item.id === idPath
+          })
+        }
+      }
+    })
+    if (g) {
+      return g.label.toLowerCase()
+    }
+    return ""
   }
 
   dataForLanguagePath.data.allWpPage.edges.forEach(entry => {
@@ -195,6 +275,52 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         context: {
           lang: entry.node.locale.locale,
         },
+      })
+    }
+
+    if (entry.node.slug === "gruppo-bacci") {
+      // creare un path di default per l'italiano
+      const defaultPath =
+        getParentPathFromMenu(
+          entry.node.locale.locale,
+          entry.node.title,
+          dataForLanguagePath.data.allWpMenu.edges
+        ) +
+        "/" +
+        entry.node.slug +
+        "/"
+      // crea la pagina di lingua default in italiano
+      createPage({
+        path: defaultPath,
+        component: require.resolve("./src/templates/gruppo-bacci.jsx"),
+        context: {
+          lang: entry.node.locale.locale,
+          postTitle: entry.node.title,
+        },
+      })
+
+      // cicla su ogni traduzione e crea la pagina per ogni lingua
+      entry.node.translations.forEach(translation => {
+        const path =
+          langTag[translation.locale] +
+          "/" +
+          getParentPathFromMenu(
+            translation.locale,
+            translation.post_title,
+            dataForLanguagePath.data.allWpMenu.edges
+          ) +
+          "/" +
+          getSlugFromTranslationHref(translation.href) +
+          "/"
+
+        createPage({
+          path: path,
+          component: require.resolve("./src/templates/gruppo-bacci.jsx"),
+          context: {
+            lang: translation.locale,
+            postTitle: translation.post_title,
+          },
+        })
       })
     }
   })

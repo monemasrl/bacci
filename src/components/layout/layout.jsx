@@ -18,8 +18,8 @@ import ScrollTo from "../scrollTo"
 
 
 
-const Layout = ({ children, locale, translations, pageTitle, seo }, props) => {
-
+const Layout = ({ children, locale, translations, pageTitle, seo }) => {
+  console.log(locale, 'locale')
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -27,7 +27,6 @@ const Layout = ({ children, locale, translations, pageTitle, seo }, props) => {
           title
         }
       }
-
       allWpPage{
         edges {
           node {
@@ -67,7 +66,7 @@ const Layout = ({ children, locale, translations, pageTitle, seo }, props) => {
           pageTitle={pageTitle}
           pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''}
           currentPath={langFilter.pathPagine.path}
-          
+
         />
 
       </div>

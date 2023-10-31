@@ -5,7 +5,7 @@ import Personale from "../components/personale/personale";
 const Fiere = ({ pageContext }) => {
 
     const { locale, translations, slug, parentPath, content } = pageContext
-    console.log(content);
+
     return (
         <>
             <LayoutFiere
@@ -24,18 +24,18 @@ const Fiere = ({ pageContext }) => {
                         <h2>{content.fiere.sottotitolo}</h2>
                         <p>{content.fiere.descrizione}</p>
                         <div className="calltoaction" id="form-prenotazione">
-                            <p dangerouslySetInnerHTML={{__html:content.fiere.callToAction.paragrafo}} />
-                        <FormFiere />
+                            <p dangerouslySetInnerHTML={{ __html: content.fiere.callToAction.paragrafo }} />
+                            <FormFiere />
                         </div>
                     </section>
                     <section className="content-fiera">
-                        <div className="box-content-fiera" dangerouslySetInnerHTML={{__html: content.content}}/>
-                            
-                      
+                        <div className="box-content-fiera" dangerouslySetInnerHTML={{ __html: content.content }} />
+
+
                     </section>
-                  
-                        <Personale locale={locale}  personale={content.fiere.personale}/>
-                <a className="button-fiere" href="#form-prenotazione">Prenota la tua visita</a>
+
+                    <Personale locale={locale} personale={content.fiere.personale} />
+                    <a className="button-fiere" href="#form-prenotazione">Prenota la tua visita</a>
                 </div>
             </LayoutFiere>
         </>
