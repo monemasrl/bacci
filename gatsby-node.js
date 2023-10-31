@@ -1,6 +1,6 @@
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  
+
   function getSlugFromTranslationHref(tHref) {
     const arrayFromHref = tHref.split("/").slice(2, 3)
     return arrayFromHref[0]
@@ -302,28 +302,30 @@ exports.createPages = async ({ graphql, actions }) => {
       })
 
       // cicla su ogni traduzione e crea la pagina per ogni lingua
-      entry.node.translations.forEach(translation => {
-        const path =
-          langTag[translation.locale] +
-          "/" +
-          getParentPathFromMenu(
-            translation.locale,
-            translation.post_title,
-            dataForLanguagePath.data.allWpMenu.edges
-          ) +
-          "/" +
-          getSlugFromTranslationHref(translation.href) +
-          "/"
+      if (entry.node.translations) {
+        entry.node.translations.forEach(translation => {
+          const path =
+            langTag[translation.locale] +
+            "/" +
+            getParentPathFromMenu(
+              translation.locale,
+              translation.post_title,
+              dataForLanguagePath.data.allWpMenu.edges
+            ) +
+            "/" +
+            getSlugFromTranslationHref(translation.href) +
+            "/"
 
-        createPage({
-          path: path,
-          component: require.resolve("./src/templates/gruppo-bacci.jsx"),
-          context: {
-            lang: translation.locale,
-            postTitle: translation.post_title,
-          },
+          createPage({
+            path: path,
+            component: require.resolve("./src/templates/gruppo-bacci.jsx"),
+            context: {
+              lang: translation.locale,
+              postTitle: translation.post_title,
+            },
+          })
         })
-      })
+      }
     }
   })
 

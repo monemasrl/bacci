@@ -10,15 +10,14 @@ const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeTy
 
   const [mega, setMega] = React.useState(false)
 
- 
+
 
   return (
     <header>
-  
-        <NavBar locale={locale} translations={translations} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} />
-        <NavBarMobile locale={locale} translations={translations} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} />
 
-      {pageTitle !== 'Home' ? <Breadcrumb pageTitle={pageTitle}  pathName={currentPath} nodeType={nodeType} locale={locale} tipo={tipo} /> : ''}
+      <NavBar locale={locale} translations={translations} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} />
+
+      {pageTitle !== 'Home' ? <Breadcrumb pageTitle={pageTitle} pathName={currentPath} nodeType={nodeType} locale={locale} tipo={tipo} /> : ''}
 
     </header>
   )
