@@ -8,6 +8,10 @@ import { Termini } from '../../../data-translations'
 import './navbar.scss'
 let slugify = require('slugify')
 
+function getSlugFromHref(tHref) {
+    const arrayFromHref = tHref.split("/").slice(-2)
+    return arrayFromHref[0]
+}
 
 const NavBar = (props) => {
 
@@ -135,7 +139,8 @@ const NavBar = (props) => {
 
                                                                         return (
                                                                             <>
-                                                                                <li> <Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>
+
+                                                                                <li> <Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${getSlugFromHref(subitem.path)}`}>
                                                                                     {subitem.label}
                                                                                 </Link>
                                                                                 </li>

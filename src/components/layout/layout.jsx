@@ -52,7 +52,7 @@ const Layout = ({ children, locale, translations, pageTitle, seo }) => {
   const langFilter = data.allWpPage.edges.filter((item) => {
     return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node
-
+  console.log(langFilter, 'langFilter')
 
 
   return (
@@ -66,7 +66,6 @@ const Layout = ({ children, locale, translations, pageTitle, seo }) => {
           pageTitle={pageTitle}
           pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''}
           currentPath={langFilter.pathPagine.path}
-
         />
 
       </div>

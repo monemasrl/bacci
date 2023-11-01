@@ -2,7 +2,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
   function getSlugFromTranslationHref(tHref) {
-    const arrayFromHref = tHref.split("/").slice(2, 3)
+    const arrayFromHref = tHref.split("/").slice(-2)
     return arrayFromHref[0]
   }
 
@@ -280,7 +280,10 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     }
 
-    if (entry.node.slug === "gruppo-bacci") {
+    if (
+      entry.node.slug === "gruppo-bacci" &&
+      entry.node.locale.locale === "it_IT"
+    ) {
       // creare un path di default per l'italiano
       const defaultPath =
         getParentPathFromMenu(

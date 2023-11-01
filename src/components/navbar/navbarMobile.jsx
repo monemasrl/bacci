@@ -80,7 +80,7 @@ const NavBarMobile = (props) => {
                         <div className="container">
                             <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} />
 
-                            <ul>
+                            {menuFilter[1] && <ul>
                                 {menuFilter[1].node.menuItems.nodes.map((item, index) => {
 
                                     const menuPath = slugify(item.label)
@@ -94,7 +94,7 @@ const NavBarMobile = (props) => {
 
 
                                 }
-                            </ul>
+                            </ul>}
 
 
                         </div>
@@ -104,7 +104,7 @@ const NavBarMobile = (props) => {
                         <div className="container">
 
 
-                            <ul>
+                            {menuFilter[0] && <ul>
 
                                 {menuFilter[0].node.menuItems.nodes.map((item, index) => {
 
@@ -151,7 +151,7 @@ const NavBarMobile = (props) => {
                                         </React.Fragment>
                                     )
                                 })}
-                            </ul>
+                            </ul>}
                         </div>
                     </nav>
                 </div>

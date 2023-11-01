@@ -4,7 +4,7 @@ import { langTag } from '../../data-translations';
 var slugify = require('slugify')
 
 const LangSwitcher = (props) => {
-
+  console.log(props.pathName, 'props.pathname')
   const url = props.translations.length !== 0 ? slugify(props.translations[0].post_title) : ''
 
   return (

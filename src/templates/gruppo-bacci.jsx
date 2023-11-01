@@ -172,11 +172,11 @@ export const query = graphql`
 }`
 
 const GruppoBacci = ({ data, location, pageContext }) => {
+  console.log(data, 'pageContext.lang')
   const langFilter = data.allWpPage.edges.filter((item) => {
     return (item.node.locale.locale === pageContext.lang)
   })[0].node
   const dataFilter = langFilter
-  console.log(pageContext.lang, 'pageContext.lang')
   return (
     <>
       <Layout

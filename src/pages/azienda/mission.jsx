@@ -16,6 +16,7 @@ export const query = graphql`
         translations {
           locale
           post_title
+          href
         }
         seo {
               canonical
@@ -141,69 +142,71 @@ const Produzione = ({ data, location }) => {
     return (item.node.locale.locale === 'it_IT')
   })[0].node
   const dataFilter = langFilter
-  
+
+
+
   return (
     <>
-      <Layout 
-      pageTitle={dataFilter.title} 
-      locale={'it_IT'} 
-      translations={dataFilter.translations} 
-      pathName = {location.pathname}  
-      seo={dataFilter.seo}
+      <Layout
+        pageTitle={dataFilter.title}
+        locale={'it_IT'}
+        translations={dataFilter.translations}
+        pathName={location.pathname}
+        seo={dataFilter.seo}
       >
-    <div className="container-fluid mission">
-        <section className="container-fluid sezione-interne">
-          <div className="box-sx">
-            <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission1.titolo }} />
-            <p>{dataFilter.mission.sezioneMission1.paragrafo}</p>
-          </div>
-          <div className="box-dx">
-            <GatsbyImage image={dataFilter.mission.sezioneMission1.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.mission.sezioneMission1.immagine.altText} />
-          </div>
-        </section>
-        <section className="container sezione-3">
-          <div className="box-sx">
-            <h2 dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission2.titolo }} />
-            <p className="sottotitolo">{dataFilter.mission.sezioneMission2.sottotitolo}</p>
-            <GatsbyImage image={dataFilter.mission.sezioneMission2.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.mission.sezioneMission2.immagine.altText} />
-            <p dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission2.paragrafo }} />
+        <div className="container-fluid mission">
+          <section className="container-fluid sezione-interne">
+            <div className="box-sx">
+              <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission1.titolo }} />
+              <p>{dataFilter.mission.sezioneMission1.paragrafo}</p>
+            </div>
+            <div className="box-dx">
+              <GatsbyImage image={dataFilter.mission.sezioneMission1.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.mission.sezioneMission1.immagine.altText} />
+            </div>
+          </section>
+          <section className="container sezione-3">
+            <div className="box-sx">
+              <h2 dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission2.titolo }} />
+              <p className="sottotitolo">{dataFilter.mission.sezioneMission2.sottotitolo}</p>
+              <GatsbyImage image={dataFilter.mission.sezioneMission2.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.mission.sezioneMission2.immagine.altText} />
+              <p dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission2.paragrafo }} />
 
-          </div>
+            </div>
 
-          <div className="box-dx">
-            <p dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission2.paragrafo2 }} />
+            <div className="box-dx">
+              <p dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission2.paragrafo2 }} />
 
-          </div>
-        </section>
+            </div>
+          </section>
 
-        <section className="container sezione-testo-sx">
-          <div className="box-sx">
-                      <h2 className="titoli" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission3.titolo }} />
-            <p>{dataFilter.mission.sezioneMission3.paragrafo}</p>
-          </div>
-          <div className="box-dx">
-            <GatsbyImage image={dataFilter.mission.sezioneMission3.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.mission.sezioneMission3.immagine.altText} />
-          </div>
-        </section>
+          <section className="container sezione-testo-sx">
+            <div className="box-sx">
+              <h2 className="titoli" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission3.titolo }} />
+              <p>{dataFilter.mission.sezioneMission3.paragrafo}</p>
+            </div>
+            <div className="box-dx">
+              <GatsbyImage image={dataFilter.mission.sezioneMission3.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.mission.sezioneMission3.immagine.altText} />
+            </div>
+          </section>
 
-        <section className="container sezione-testo-dx">
-          <div className="box-sx">
-          <GatsbyImage image={dataFilter.mission.sezioneMission4.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.mission.sezioneMission4.immagine.altText} />
-          </div>
-          <div className="box-dx">
-                    <h2 className="titoli" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission4.titolo }} />
-          <p>{dataFilter.mission.sezioneMission4.paragrafo}</p>
-          </div>
-        </section>
-        <section className="container sezione-testo-sx">
-          <div className="box-sx">
-                      <h2 className="titoli" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission5.titolo }} />
-            <p>{dataFilter.mission.sezioneMission5.paragrafo}</p>
-          </div>
-          <div className="box-dx">
-            <GatsbyImage image={dataFilter.mission.sezioneMission5.immagine.localFile.childImageSharp.gatsbyImageData}  alt={dataFilter.mission.sezioneMission5.immagine.altText} />
-          </div>
-        </section>
+          <section className="container sezione-testo-dx">
+            <div className="box-sx">
+              <GatsbyImage image={dataFilter.mission.sezioneMission4.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.mission.sezioneMission4.immagine.altText} />
+            </div>
+            <div className="box-dx">
+              <h2 className="titoli" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission4.titolo }} />
+              <p>{dataFilter.mission.sezioneMission4.paragrafo}</p>
+            </div>
+          </section>
+          <section className="container sezione-testo-sx">
+            <div className="box-sx">
+              <h2 className="titoli" dangerouslySetInnerHTML={{ __html: dataFilter.mission.sezioneMission5.titolo }} />
+              <p>{dataFilter.mission.sezioneMission5.paragrafo}</p>
+            </div>
+            <div className="box-dx">
+              <GatsbyImage image={dataFilter.mission.sezioneMission5.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.mission.sezioneMission5.immagine.altText} />
+            </div>
+          </section>
         </div>
       </Layout>
     </>
