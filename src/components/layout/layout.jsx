@@ -19,7 +19,7 @@ import ScrollTo from "../scrollTo"
 
 
 const Layout = ({ children, locale, translations, pageTitle, seo }) => {
-  console.log(locale, 'locale')
+
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -52,7 +52,7 @@ const Layout = ({ children, locale, translations, pageTitle, seo }) => {
   const langFilter = data.allWpPage.edges.filter((item) => {
     return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node
-  console.log(langFilter, 'langFilter')
+
 
 
   return (

@@ -74,7 +74,6 @@ const Megamenu = ({ mega, setMega, terminiTraduzione, locale, language }) => {
     const novita = langFilterProdotto.sort((item) => item.node.date)
     const inEvidenza = langFilterProdotto.filter((item) => item.node.prodotto.inEvidenza === 'si')
 
-    console.log('novita', novita);
     return (
 
         <AnimatePresence>

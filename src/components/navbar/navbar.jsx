@@ -6,6 +6,8 @@ import { StaticImage } from "gatsby-plugin-image"
 import Megamenu from '../megamenu/megamenu'
 import { Termini } from '../../../data-translations'
 import './navbar.scss'
+import { getParentPathFromMenu } from '../../utils'
+
 let slugify = require('slugify')
 
 function getSlugFromHref(tHref) {
@@ -15,8 +17,6 @@ function getSlugFromHref(tHref) {
 
 const NavBar = (props) => {
 
-
-
     const data = useStaticQuery(graphql`
     query datimenu{
         allWpMenu {
@@ -25,6 +25,7 @@ const NavBar = (props) => {
                     language
                     menuItems {
                     nodes {
+                        id
                         label
                         parentId
                         path
@@ -32,9 +33,7 @@ const NavBar = (props) => {
                           nodes {
                             label
                             path
-                            parent{
-                                id
-                            }
+                         parentId
                           }
                         }
                         menu {
@@ -56,6 +55,7 @@ const NavBar = (props) => {
     const menuFilter = data.allWpMenu.edges.filter((lang) => {
         return lang.node.language === langTag[props.locale]
     })
+
     const terminiTraduzione = Termini[props.locale]
 
     return (
@@ -140,7 +140,7 @@ const NavBar = (props) => {
                                                                         return (
                                                                             <>
 
-                                                                                <li> <Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${getSlugFromHref(subitem.path)}`}>
+                                                                                <li> <Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${getParentPathFromMenu(props.locale, subitem.label, data.allWpMenu.edges)}/${getSlugFromHref(subitem.path)}`}>
                                                                                     {subitem.label}
                                                                                 </Link>
                                                                                 </li>
