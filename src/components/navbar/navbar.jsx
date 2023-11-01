@@ -111,7 +111,6 @@ const NavBar = (props) => {
 
                             {menuFilter[0].node.menuItems.nodes.map((item, index) => {
 
-                                const menuPath = slugify(item.label)
 
                                 return (
                                     <React.Fragment key={item.label}>
