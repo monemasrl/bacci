@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby'
 import { langTag } from '../../data-translations';
-var slugify = require('slugify')
+
 
 const LangSwitcher = (props) => {
 

@@ -103,3 +103,20 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 Gatsby Cloud is an end-to-end cloud platform specifically built for the Gatsby framework that combines a modern developer experience with an optimized, global edge network.
 
 <!-- AUTO-GENERATED-CONTENT:END -->
+
+<!-- ERRORS -->
+
+gatsby-source-wordpress Error occurred while fetching "MediaItem" nodes in inline html.
+
+Unable to connect to WPGraphQL.
+
+Either WPGraphQL is not active or there are some WordPress PHP filters in your site which are
+adding additional output to the GraphQL response.
+These may have been added via custom code or via a plugin.
+
+You will need to debug this and remove these filters during GraphQL requests using something like
+the following:
+
+if ( defined( 'GRAPHQL_REQUEST' ) && true === GRAPHQL_REQUEST ) {
+return;
+}
