@@ -1,10 +1,16 @@
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
 
-  function getSlugFromTranslationHref(tHref) {
-    const arrayFromHref = tHref.split("/").slice(-2)
-    return arrayFromHref[0]
-  }
+  /**
+   * Creazione contenuti
+   * @date 02/11/2023 - 17:51:04
+   *
+   * @function slugify - slugify string
+   * @function createPathFromMenu - crea il path della pagina a partire dal nome della pagina e dalla struttura del menu
+   * @var result - query per ottenere i contenuti di prodotto, news e fiere
+   * @var dataForLanguagePath - query dei dati per la costruzione del path delle pagine
+   */
+
   function slugify(str) {
     return String(str)
       .normalize("NFKD") // split accented characters into their base characters and diacritical marks
@@ -56,7 +62,10 @@ exports.createPages = async ({ graphql, actions }) => {
       }
       return ""
     }
-
+    function getSlugFromTranslationHref(tHref) {
+      const arrayFromHref = tHref.split("/").slice(-2)
+      return arrayFromHref[0]
+    }
     if (!dataPage || !dataMenu || !slugPagina || !defaultLanguage) {
       throw new Error("error, parametri mancanti in createPathFromMenu")
     }
@@ -337,44 +346,7 @@ exports.createPages = async ({ graphql, actions }) => {
   `)
   const fiere = result.data.allWpFiera.edges
 
-  /**
-   * Creazione delle pagine statiche
-   * @date 31/10/2023 - 11:40:10
-   *
-   *
-   */
-
-  function getParentPathFromMenu(locale, title, dataMenu) {
-    let idPath
-    let g
-
-    dataMenu.forEach(menu => {
-      if (menu.node.language === langTag[locale]) {
-        menu.node.menuItems.nodes.forEach(item => {
-          if (title === item.label && item.parentId !== null) {
-            idPath = item.parentId
-          }
-        })
-      }
-    })
-
-    dataMenu.forEach(menu => {
-      if (idPath) {
-        const isItemInMenu = menu.node.menuItems.nodes.find(item => {
-          return item.id === idPath
-        })
-        if (isItemInMenu) {
-          g = menu.node.menuItems.nodes.find(item => {
-            return item.id === idPath
-          })
-        }
-      }
-    })
-    if (g) {
-      return slugify(g.label.toLowerCase()) + "/"
-    }
-    return ""
-  }
+  // CREAZIONE PAGINE
 
   dataForLanguagePath.data.allWpPage.edges.forEach(entry => {
     if (entry.node.slug === "home" && entry.node.locale.locale === "it_IT") {
