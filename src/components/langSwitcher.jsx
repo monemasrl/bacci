@@ -5,20 +5,24 @@ var slugify = require('slugify')
 
 const LangSwitcher = (props) => {
 
-  const url = props.translations.length !== 0 ? slugify(props.translations[0].post_title) : ''
-
   return (
     <>
       {props.translations.length !== 0 ?
         (
           <div className='langbox' >
             <ul className="languages">
+              {props.allPagePath.map((item) => {
+                if (item.locale === props.locale) {
+                  return <li>{langTag[item.locale]}</li>
+                }
+                else {
+                  return <li>
+                    <Link to={`/${item.path !== '/' ? item.path : ''}`}>{langTag[item.locale]}</Link>
+                  </li>
 
-              <li>{langTag[props.locale].toUpperCase()}</li>
-              <li>
-                <Link to={`${langTag[props.translations[0].locale] === 'it' ? '' : '/'
-                  + langTag[props.translations[0].locale]}/${url === 'Home' ? '' : (props.pathName ? props.pathName : '') + '/' + url.toLowerCase()}`}>{langTag[props.translations[0].locale]}</Link>
-              </li>
+                }
+
+              })}
             </ul>
           </div>)
         : ''}

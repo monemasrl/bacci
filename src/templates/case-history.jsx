@@ -105,13 +105,14 @@ export const query = graphql`
   }
 }
 `
-const CaseHistory = ({ data, location }, props) => {
+const CaseHistory = ({ data, location, pageContext }) => {
+
   const langFilter = data.allWpPage.edges.filter((item) => {
-    return (item.node.locale.locale === 'it_IT')
+    return (item.node.locale.locale === pageContext.lang)
   })[0].node
 
   const langFilterData = data.allWpCaseHistory.edges.filter((item) => {
-    return (item.node.locale.locale === 'it_IT')
+    return (item.node.locale.locale === pageContext.lang)
   })
 
   const datapage = langFilter
@@ -119,10 +120,10 @@ const CaseHistory = ({ data, location }, props) => {
   return (
     <Layout
       pageTitle={datapage.title}
-      locale={'it_IT'}
+      locale={pageContext.lang}
       translations={datapage.translations}
-
       seo={langFilter.seo}
+      allPagePath={pageContext.allPagePath}
     >
       <section className="container case-history">
         <section className="container sezione-4">

@@ -6,7 +6,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import Megamenu from '../megamenu/megamenu'
 import { Termini } from '../../../data-translations'
 import './navbar.scss'
-import { getParentPathFromMenu } from '../../utils'
+import { getParentPathFromMenu, createPathFromMenu } from '../../utils'
 
 let slugify = require('slugify')
 
@@ -19,6 +19,22 @@ const NavBar = (props) => {
 
     const data = useStaticQuery(graphql`
     query datimenu{
+        allWpPage{
+            edges {
+                node{
+                    title
+                    slug
+                    locale {
+                        locale
+                    }
+                    translations{
+                    locale
+                    post_title
+                    href
+                  }
+                }
+            }
+        }
         allWpMenu {
                 edges {
                 node {
@@ -57,7 +73,7 @@ const NavBar = (props) => {
     })
 
     const terminiTraduzione = Termini[props.locale]
-
+    console.log(createPathFromMenu(data.allWpPage.edges, data.allWpMenu.edges, 'home', 'it_IT'), 'test')
     return (
         <>
             <nav className="container-fluid top-menu">
@@ -77,9 +93,7 @@ const NavBar = (props) => {
                                                 <Link to={'#'}>{item.label}</Link>
                                                 :
                                                 <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath.toLowerCase()}`}>{item.label}</Link>
-
                                         }
-
                                     </li>
                                 )
                             })
@@ -88,7 +102,7 @@ const NavBar = (props) => {
                             }
                         </ul>}
 
-                    <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} />
+                    <LangSwitcher allPagePath={props.allPagePath} locale={props.locale} translations={props.translations} pathName={props.pathName} />
 
                 </div>
 
@@ -139,7 +153,7 @@ const NavBar = (props) => {
                                                                         return (
                                                                             <>
 
-                                                                                <li> <Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${getParentPathFromMenu(props.locale, subitem.label, data.allWpMenu.edges)}/${getSlugFromHref(subitem.path)}`}>
+                                                                                <li><Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${getParentPathFromMenu(props.locale, subitem.label, data.allWpMenu.edges)}${getSlugFromHref(subitem.path)}`}>
                                                                                     {subitem.label}
                                                                                 </Link>
                                                                                 </li>

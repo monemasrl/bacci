@@ -80,7 +80,7 @@ const indexFiere = ({ data }) => {
         return (item.node.locale.locale === 'it_IT')
     })
 
-    console.log(langFilterFiera);
+
 
     return (
         <>

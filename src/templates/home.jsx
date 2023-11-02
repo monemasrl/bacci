@@ -158,12 +158,12 @@ export const query = graphql`
 
 const IndexPage = ({ data, pageContext }) => {
 
-  console.log(pageContext, 'props')
   const dataHome = data.allWpPage.edges[0].node
 
   return (
     <>
-      <Layout pageTitle={dataHome.title} seo={dataHome.seo} locale={pageContext.lang} translations={dataHome.translations} >
+      <Layout pageTitle={dataHome.title} seo={dataHome.seo} locale={pageContext.lang} translations={dataHome.translations}
+        allPagePath={pageContext.allPagePath}>
         <div className="container-fluid home">
           <section className="jumbo-home">
             <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />

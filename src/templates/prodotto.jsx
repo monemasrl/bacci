@@ -6,7 +6,7 @@ import Correlati from "../components/widgets/correlati";
 const Prodotto = ({ pageContext }) => {
 
     const { locale, translations, parentPath, content, title } = pageContext
-    console.log('content', content);
+
     return (
         <>
             <LayoutProdotto
@@ -45,7 +45,7 @@ const Prodotto = ({ pageContext }) => {
 
                     })}
                     <SoftwareProduct locale={locale} />
-                    <Correlati locale={locale} applicazioni = {content.prodottiApplicazioni} limiteVisualizzazione = {3} />
+                    <Correlati locale={locale} applicazioni={content.prodottiApplicazioni} limiteVisualizzazione={3} />
                 </div>
             </LayoutProdotto>
         </>

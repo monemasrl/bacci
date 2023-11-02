@@ -78,7 +78,7 @@ const NavBarMobile = (props) => {
                 <div className={`container-mobile ${open ? 'open' : ''}`}>
                     <nav className="container-fluid top-menu-mobile">
                         <div className="container">
-                            <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} />
+                            {/*   <LangSwitcher locale={props.locale} translations={props.translations} pathName={props.pathName} /> */}
 
                             {menuFilter[1] && <ul>
                                 {menuFilter[1].node.menuItems.nodes.map((item, index) => {

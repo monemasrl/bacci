@@ -31,7 +31,7 @@ const GridPagination = ({ archivio, topArchivio }) => {
     return (
         <>
             {currentPosts.map((item) => {
-                console.log('item', item);
+
                 return (
                     <div key={item.title} className="box-prodotto">
                         <GatsbyImage image={item.node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.node.prodotto.immagine.altText} />

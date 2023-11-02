@@ -15,6 +15,109 @@ exports.createPages = async ({ graphql, actions }) => {
       .replace(/\s+/g, "-") // replace spaces with hyphens
       .replace(/-+/g, "-") // remove consecutive hyphens
   }
+
+  function createPathFromMenu(dataPage, dataMenu, slugPagina, defaultLanguage) {
+    const langTag = {
+      en_US: "en",
+      it_IT: "it",
+    }
+    let path = []
+    function getParent(locale, title, dataMenu) {
+      let idPath
+      let g
+
+      dataMenu.forEach(menu => {
+        if (menu.node.language === langTag[locale]) {
+          menu.node.menuItems.nodes.forEach(item => {
+            if (
+              title.toLowerCase() === item.label.toLowerCase() &&
+              item.parentId !== null
+            ) {
+              idPath = item.parentId
+            }
+          })
+        }
+      })
+
+      dataMenu.forEach(menu => {
+        if (idPath) {
+          const isItemInMenu = menu.node.menuItems.nodes.find(item => {
+            return item.id === idPath
+          })
+          if (isItemInMenu) {
+            g = menu.node.menuItems.nodes.find(item => {
+              return item.id === idPath
+            })
+          }
+        }
+      })
+      if (g) {
+        return slugify(g.label.toLowerCase()) + "/"
+      }
+      return ""
+    }
+
+    if (!dataPage || !dataMenu || !slugPagina || !defaultLanguage) {
+      throw new Error("error, parametri mancanti in createPathFromMenu")
+    }
+
+    if (dataPage.node.slug === "home") {
+      if (dataPage.node.locale.locale === defaultLanguage) {
+        path.push({
+          path: "/",
+          title: dataPage.node.title,
+          locale: defaultLanguage,
+        })
+      }
+      if (dataPage.node.translations.length) {
+        dataPage.node.translations.forEach(translation => {
+          const defaultPath = langTag[translation.locale] + "/"
+
+          const translationsPath = {}
+          translationsPath.path = defaultPath
+          translationsPath.title = translation.post_title
+          translationsPath.locale = translation.locale
+          path.push(translationsPath)
+        })
+      }
+    }
+    if (dataPage.node.slug === slugPagina && slugPagina !== "home") {
+      if (dataPage.node.locale.locale === defaultLanguage) {
+        const defaultPath =
+          getParent(
+            dataPage.node.locale.locale,
+            dataPage.node.title,
+            dataMenu
+          ) + dataPage.node.slug
+
+        path.push({
+          path: defaultPath,
+          title: dataPage.node.title,
+          locale: defaultLanguage,
+        })
+
+        if (dataPage.node.translations.length) {
+          dataPage.node.translations.forEach(translation => {
+            const defaultPath =
+              translation.locale === defaultLanguage
+                ? "/"
+                : langTag[translation.locale] + "/"
+
+            const translationsPath = {}
+            translationsPath.path =
+              defaultPath +
+              getParent(translation.locale, translation.post_title, dataMenu) +
+              getSlugFromTranslationHref(translation.href)
+            translationsPath.title = translation.post_title
+            translationsPath.locale = translation.locale
+            path.push(translationsPath)
+          })
+        }
+      }
+    }
+    return path
+  }
+
   const langTag = {
     en_US: "en",
     it_IT: "it",
@@ -268,24 +371,31 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     })
     if (g) {
-      return slugify(g.label.toLowerCase())
+      return slugify(g.label.toLowerCase()) + "/"
     }
     return ""
   }
 
   dataForLanguagePath.data.allWpPage.edges.forEach(entry => {
-    if (entry.node.slug === "home") {
-      const path =
-        langTag[entry.node.locale.locale] === "it"
-          ? "/"
-          : langTag[entry.node.locale.locale] + "/"
+    if (entry.node.slug === "home" && entry.node.locale.locale === "it_IT") {
+      const allPagePath = createPathFromMenu(
+        entry,
+        dataForLanguagePath.data.allWpMenu.edges,
+        entry.node.slug,
+        entry.node.locale.locale
+      )
 
-      createPage({
-        path: path,
-        component: require.resolve("./src/templates/home.jsx"),
-        context: {
-          lang: entry.node.locale.locale,
-        },
+      allPagePath.forEach(data => {
+        const path = data.path
+        createPage({
+          path: path,
+          component: require.resolve("./src/templates/home.jsx"),
+          context: {
+            lang: data.locale,
+            postTitle: data.title,
+            allPagePath: allPagePath,
+          },
+        })
       })
     }
 
@@ -294,50 +404,50 @@ exports.createPages = async ({ graphql, actions }) => {
       entry.node.locale.locale === "it_IT"
     ) {
       // creare un path di default per l'italiano
-      const defaultPath =
-        getParentPathFromMenu(
-          entry.node.locale.locale,
-          entry.node.title,
-          dataForLanguagePath.data.allWpMenu.edges
-        ) +
-        "/" +
-        entry.node.slug +
-        "/"
-      // crea la pagina di lingua default in italiano
-      createPage({
-        path: defaultPath,
-        component: require.resolve("./src/templates/gruppo-bacci.jsx"),
-        context: {
-          lang: entry.node.locale.locale,
-          postTitle: entry.node.title,
-        },
-      })
+      const allPagePath = createPathFromMenu(
+        entry,
+        dataForLanguagePath.data.allWpMenu.edges,
+        entry.node.slug,
+        entry.node.locale.locale
+      )
 
-      // cicla su ogni traduzione e crea la pagina per ogni lingua
-      if (entry.node.translations) {
-        entry.node.translations.forEach(translation => {
-          const path =
-            langTag[translation.locale] +
-            "/" +
-            getParentPathFromMenu(
-              translation.locale,
-              translation.post_title,
-              dataForLanguagePath.data.allWpMenu.edges
-            ) +
-            "/" +
-            getSlugFromTranslationHref(translation.href) +
-            "/"
-
-          createPage({
-            path: path,
-            component: require.resolve("./src/templates/gruppo-bacci.jsx"),
-            context: {
-              lang: translation.locale,
-              postTitle: translation.post_title,
-            },
-          })
+      allPagePath.forEach(data => {
+        const path = data.path
+        createPage({
+          path: path,
+          component: require.resolve("./src/templates/gruppo-bacci.jsx"),
+          context: {
+            lang: data.locale,
+            postTitle: data.title,
+            allPagePath: allPagePath,
+          },
         })
-      }
+      })
+    }
+    if (
+      entry.node.slug === "case-history" &&
+      entry.node.locale.locale === "it_IT"
+    ) {
+      // creare un path di default per l'italiano
+      const allPagePath = createPathFromMenu(
+        entry,
+        dataForLanguagePath.data.allWpMenu.edges,
+        entry.node.slug,
+        entry.node.locale.locale
+      )
+
+      allPagePath.forEach(data => {
+        const path = data.path
+        createPage({
+          path: path,
+          component: require.resolve("./src/templates/case-history.jsx"),
+          context: {
+            lang: data.locale,
+            postTitle: data.title,
+            allPagePath: allPagePath,
+          },
+        })
+      })
     }
   })
 

@@ -58,7 +58,7 @@ const LastNews = ({ locale, limiteVisualizzazione }) => {
         <h2>Bacci news</h2>
         <div className="container">
           {langFilterProdotto.map((item) => {
-            console.log(item);
+
             return (
               <div className="col-3">
                 <div className="box-news">

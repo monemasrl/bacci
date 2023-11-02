@@ -42,7 +42,7 @@ const SoftwareProduct = ({ locale }) => {
   const dataFilter = data.allWpPage.edges.filter((item) => {
     return (item.node.locale.locale === 'it_IT')
   })[0].node
-  console.log(dataFilter);
+
   return (
     <section className="container sezione-3 pitagora">
       <div className="box-sx">

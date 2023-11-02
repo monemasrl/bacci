@@ -64,7 +64,7 @@ const Correlati = ({ applicazioni, locale, limiteVisualizzazione }) => {
         <h2>{Termini[locale].correlati}</h2>
         <div className="container">
           {filtersResultApp.map((item) => {
-            console.log(item);
+
             return (
               <div className="col-3">
                 <div className="box-correlati">
