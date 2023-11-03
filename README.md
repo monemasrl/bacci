@@ -122,3 +122,5 @@ return;
 }
 
 Segmentation fault: 11
+
+NODE_OPTIONS='--openssl-legacy-provider' npm run build

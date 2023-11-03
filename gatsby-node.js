@@ -411,7 +411,6 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // CREAZIONE PAGINE
-
   dataForLanguagePath.data.allWpPage.edges.forEach(entry => {
     if (entry.node.locale.locale === "it_IT") {
       // crea un path di default per l'italiano
