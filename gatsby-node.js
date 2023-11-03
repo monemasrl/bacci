@@ -1,6 +1,9 @@
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
+  const sharp = require("sharp")
 
+  sharp.cache(false)
+  sharp.simd(false)
   /**
    * Creazione contenuti
    * @date 02/11/2023 - 17:51:04
@@ -463,7 +466,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     createPage({
       path: `${urlBase}fiere/${entry.node.slug}`,
-      component: require.resolve("./src/templates/fiere.jsx"),
+      component: require.resolve("./src/templates/templatefiere.jsx"),
       context: {
         content: entry.node,
         locale: entry.node.locale.locale,
@@ -491,7 +494,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     createPage({
       path: `${urlBase}news/${entry.node.slug}`,
-      component: require.resolve("./src/templates/news.jsx"),
+      component: require.resolve("./src/templates/templatenews.jsx"),
       context: {
         content: entry.node.content,
         locale: entry.node.locale.locale,
@@ -521,7 +524,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `${urlBase}${Termini[entry.node.locale.locale].prodotti}/${
         entry.node.slug
       }`,
-      component: require.resolve("./src/templates/prodotto.jsx"),
+      component: require.resolve("./src/templates/templateprodotto.jsx"),
       context: {
         content: entry.node,
         locale: entry.node.locale.locale,

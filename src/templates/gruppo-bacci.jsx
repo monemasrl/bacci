@@ -173,19 +173,17 @@ export const query = graphql`
 
 const GruppoBacci = ({ data, location, pageContext }) => {
 
-  const langFilter = data.allWpPage.edges.filter((item) => {
-    return (item.node.locale.locale === pageContext.lang)
-  })[0].node
-  const dataFilter = langFilter
+
+  const dataFilter = data.allWpPage.edges[0].node
   return (
     <>
       <Layout
         pageTitle={dataFilter.title}
         locale={pageContext.lang}
-        translations={dataFilter.translations}
+
         pathName={location.pathname}
-        seo={dataFilter.seo}
         allPagePath={pageContext.allPagePath}
+        seo={dataFilter.seo}
       >
         <div className="container-fluid gruppo-bacci">
           <section className="container-fluid sezione-interne">

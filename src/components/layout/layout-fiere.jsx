@@ -17,7 +17,7 @@ import ScrollTo from "../scrollTo"
 
 let slugify = require('slugify')
 
-const LayoutFiere = ({ children, locale, translations, pageTitle, pathName, tipo, allPagePath }) => {
+const LayoutFiere = ({ children, locale, pageTitle, pathName, tipo, allPagePath }) => {
   const data = useStaticQuery(graphql`
     {
       site {
@@ -60,7 +60,7 @@ const LayoutFiere = ({ children, locale, translations, pageTitle, pathName, tipo
 
 
 
-      <Footer translations={translations} locale={locale} />
+      <Footer locale={locale} />
       <ScrollTo />
     </div>
   )

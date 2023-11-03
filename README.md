@@ -120,3 +120,5 @@ the following:
 if ( defined( 'GRAPHQL_REQUEST' ) && true === GRAPHQL_REQUEST ) {
 return;
 }
+
+Segmentation fault: 11
