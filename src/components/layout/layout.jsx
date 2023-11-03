@@ -61,7 +61,6 @@ const Layout = ({ children, locale, translations, pageTitle, seo, allPagePath })
 
       <div className="container-fluid " >
         <Header
-          translations={translations}
           locale={locale}
           pageTitle={pageTitle}
           pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''}

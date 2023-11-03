@@ -102,7 +102,7 @@ const NavBar = (props) => {
                             }
                         </ul>}
 
-                    <LangSwitcher allPagePath={props.allPagePath} locale={props.locale} translations={props.translations} pathName={props.pathName} />
+                    <LangSwitcher allPagePath={props.allPagePath} locale={props.locale} pathName={props.pathName} />
 
                 </div>
 

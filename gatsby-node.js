@@ -10,6 +10,7 @@ exports.createPages = async ({ graphql, actions }) => {
    * @var result - query per ottenere i contenuti di prodotto, news e fiere
    * @var dataForLanguagePath - query dei dati per la costruzione del path delle pagine
    */
+
   const langTag = {
     en_US: "en",
     it_IT: "it",
@@ -38,6 +39,206 @@ exports.createPages = async ({ graphql, actions }) => {
       correlati: "prodotti correlati",
     },
   }
+  const result = await graphql(`
+    {
+      allWpFiera {
+        edges {
+          node {
+            content
+            fiere {
+              dataDa
+              dataA
+              luogo
+              link
+              sottotitolo
+              descrizione
+              personale {
+                ... on WpPersonale {
+                  id
+                  title
+                  personale {
+                    immagine {
+                      altText
+                      localFile {
+                        childImageSharp {
+                          gatsbyImageData(
+                            width: 238
+                            placeholder: BLURRED
+                            formats: [AUTO, WEBP, AVIF]
+                          )
+                        }
+                      }
+                    }
+                    link
+                    nome
+                    professione
+                    cognome
+                  }
+                }
+              }
+              callToAction {
+                paragrafo
+              }
+            }
+            title
+            slug
+            locale {
+              locale
+            }
+            translations {
+              href
+              id
+              locale
+              post_title
+            }
+          }
+        }
+      }
+      wpPersonale {
+        id
+        title
+        personale {
+          immagine {
+            id
+          }
+          link
+          nome
+          professione
+          cognome
+        }
+      }
+      allWpPost {
+        edges {
+          node {
+            content
+            title
+            slug
+            date(formatString: "DD.MM.YYYY")
+            articoli {
+              sottotitolo
+            }
+            locale {
+              locale
+            }
+            translations {
+              href
+              id
+              locale
+              post_title
+            }
+          }
+        }
+      }
+      allWpProdotto {
+        edges {
+          node {
+            prodottiApplicazioni {
+              nodes {
+                name
+              }
+            }
+            prodotto {
+              inEvidenza
+              paragrafo
+              software
+              sottotitolo
+              testoAnteprima
+              immagine {
+                altText
+                localFile {
+                  childImageSharp {
+                    gatsbyImageData(
+                      width: 900
+                      placeholder: BLURRED
+                      formats: [AUTO, WEBP, AVIF]
+                    )
+                  }
+                }
+              }
+              sezioniProdotto {
+                immagine {
+                  altText
+                  localFile {
+                    childImageSharp {
+                      gatsbyImageData(
+                        width: 728
+                        placeholder: BLURRED
+                        formats: [AUTO, WEBP, AVIF]
+                      )
+                    }
+                  }
+                }
+                paragrafo
+                titolo
+              }
+            }
+            title
+            slug
+            translations {
+              href
+              id
+              locale
+              post_title
+            }
+            locale {
+              id
+              locale
+            }
+          }
+        }
+      }
+    }
+  `)
+  const dataForLanguagePath = await graphql(`
+    {
+      allWpPage {
+        edges {
+          node {
+            title
+            slug
+            pathPagine {
+              path
+            }
+            locale {
+              locale
+            }
+            translations {
+              locale
+              post_title
+              href
+            }
+          }
+        }
+      }
+      allWpMenu {
+        edges {
+          node {
+            language
+            menuItems {
+              nodes {
+                label
+                id
+                path
+                parentId
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+  const dataFromFilesystem = await graphql(`
+    {
+      allFile {
+        edges {
+          node {
+            name
+            relativePath
+          }
+        }
+      }
+    }
+  `)
 
   function slugify(str) {
     /**
@@ -206,212 +407,11 @@ exports.createPages = async ({ graphql, actions }) => {
     return path
   }
 
-  const result = await graphql(`
-    {
-      allWpFiera {
-        edges {
-          node {
-            content
-            fiere {
-              dataDa
-              dataA
-              luogo
-              link
-              sottotitolo
-              descrizione
-              personale {
-                ... on WpPersonale {
-                  id
-                  title
-                  personale {
-                    immagine {
-                      altText
-                      localFile {
-                        childImageSharp {
-                          gatsbyImageData(
-                            width: 238
-                            placeholder: BLURRED
-                            formats: [AUTO, WEBP, AVIF]
-                          )
-                        }
-                      }
-                    }
-                    link
-                    nome
-                    professione
-                    cognome
-                  }
-                }
-              }
-              callToAction {
-                paragrafo
-              }
-            }
-            title
-            slug
-            locale {
-              locale
-            }
-            translations {
-              href
-              id
-              locale
-              post_title
-            }
-          }
-        }
-      }
-      wpPersonale {
-        id
-        title
-        personale {
-          immagine {
-            id
-          }
-          link
-          nome
-          professione
-          cognome
-        }
-      }
-      allWpPost {
-        edges {
-          node {
-            content
-            title
-            slug
-            date(formatString: "DD.MM.YYYY")
-            articoli {
-              sottotitolo
-            }
-            locale {
-              locale
-            }
-            translations {
-              href
-              id
-              locale
-              post_title
-            }
-          }
-        }
-      }
-      allWpProdotto {
-        edges {
-          node {
-            prodottiApplicazioni {
-              nodes {
-                name
-              }
-            }
-            prodotto {
-              inEvidenza
-              paragrafo
-              software
-              sottotitolo
-              testoAnteprima
-              immagine {
-                altText
-                localFile {
-                  childImageSharp {
-                    gatsbyImageData(
-                      width: 900
-                      placeholder: BLURRED
-                      formats: [AUTO, WEBP, AVIF]
-                    )
-                  }
-                }
-              }
-              sezioniProdotto {
-                immagine {
-                  altText
-                  localFile {
-                    childImageSharp {
-                      gatsbyImageData(
-                        width: 728
-                        placeholder: BLURRED
-                        formats: [AUTO, WEBP, AVIF]
-                      )
-                    }
-                  }
-                }
-                paragrafo
-                titolo
-              }
-            }
-            title
-            slug
-            translations {
-              href
-              id
-              locale
-              post_title
-            }
-            locale {
-              id
-              locale
-            }
-          }
-        }
-      }
-    }
-  `)
-
-  const dataForLanguagePath = await graphql(`
-    {
-      allWpPage {
-        edges {
-          node {
-            title
-            slug
-            pathPagine {
-              path
-            }
-            locale {
-              locale
-            }
-            translations {
-              locale
-              post_title
-              href
-            }
-          }
-        }
-      }
-      allWpMenu {
-        edges {
-          node {
-            language
-            menuItems {
-              nodes {
-                label
-                id
-                path
-                parentId
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
-  const dataFromFilesystem = await graphql(`
-    {
-      allFile {
-        edges {
-          node {
-            name
-            relativePath
-          }
-        }
-      }
-    }
-  `)
   // CREAZIONE PAGINE
 
   dataForLanguagePath.data.allWpPage.edges.forEach(entry => {
     if (entry.node.locale.locale === "it_IT") {
-      // creare un path di default per l'italiano
+      // crea un path di default per l'italiano
       const allPagePath = createPathFromMenu(
         entry,
         dataForLanguagePath.data.allWpMenu.edges,
@@ -428,6 +428,7 @@ exports.createPages = async ({ graphql, actions }) => {
         }
         return `./src/templates/default.jsx`
       }
+
       allPagePath.forEach(data => {
         const path = data.path
         createPage({
@@ -443,9 +444,18 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   })
 
+  // CREAZIONE PAGINE FIERE, NEWS E PRODOTTI
+
   const fiere = result.data.allWpFiera.edges
 
   fiere.forEach(entry => {
+    const allPagePath = createPathFromMenu(
+      entry,
+      fiere,
+      entry.node.slug,
+      entry.node.locale.locale
+    )
+
     const urlBase =
       langTag[entry.node.locale.locale] === "it"
         ? "/"
@@ -460,6 +470,7 @@ exports.createPages = async ({ graphql, actions }) => {
         translations: entry.node.translations,
         slug: entry.node.slug,
         parentPath: entry.node.fiere.path,
+        allPagePath: allPagePath,
       },
     })
   })
@@ -467,6 +478,12 @@ exports.createPages = async ({ graphql, actions }) => {
   const news = result.data.allWpPost.edges
 
   news.forEach(entry => {
+    const allPagePath = createPathFromMenu(
+      entry,
+      news,
+      entry.node.slug,
+      entry.node.locale.locale
+    )
     const urlBase =
       langTag[entry.node.locale.locale] === "it"
         ? "/"
@@ -483,11 +500,18 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: entry.node.slug,
         title: entry.node.title,
         date: entry.node.date,
+        allPagePath: allPagePath,
       },
     })
   })
-
-  result.data.allWpProdotto.edges.forEach(entry => {
+  const prodotti = result.data.allWpProdotto.edges
+  prodotti.forEach(entry => {
+    const allPagePath = createPathFromMenu(
+      entry,
+      prodotti,
+      entry.node.slug,
+      entry.node.locale.locale
+    )
     const urlBase =
       langTag[entry.node.locale.locale] === "it"
         ? "/"
@@ -504,6 +528,7 @@ exports.createPages = async ({ graphql, actions }) => {
         translations: entry.node.translations,
         slug: entry.node.slug,
         title: entry.node.title,
+        allPagePath: allPagePath,
       },
     })
   })

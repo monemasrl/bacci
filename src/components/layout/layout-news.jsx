@@ -16,7 +16,7 @@ import ScrollTo from "../scrollTo"
 
 
 
-const LayoutNews = ({ children, locale, translations, pageTitle, tipo }) => {
+const LayoutNews = ({ children, locale, translations, pageTitle, tipo, allPagePath }) => {
   const data = useStaticQuery(graphql`
     {
       site {
@@ -84,7 +84,7 @@ const LayoutNews = ({ children, locale, translations, pageTitle, tipo }) => {
 
       <Seo title={pageTitle} seo={langFilter.seo} />
       <div className="container-fluid " >
-        <Header tipo={tipo} translations={translations} locale={locale} pageTitle={pageTitle} nodeType={langFilter.nodeType} />
+        <Header allPagePath={allPagePath} tipo={tipo} locale={locale} pageTitle={pageTitle} nodeType={langFilter.nodeType} />
       </div>
 
 

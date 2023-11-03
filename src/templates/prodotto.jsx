@@ -5,7 +5,7 @@ import SoftwareProduct from "../components/SoftwareProduct/SoftwareProduct";
 import Correlati from "../components/widgets/correlati";
 const Prodotto = ({ pageContext }) => {
 
-    const { locale, translations, parentPath, content, title } = pageContext
+    const { locale, translations, parentPath, content, title, allPagePath } = pageContext
 
     return (
         <>
@@ -15,6 +15,7 @@ const Prodotto = ({ pageContext }) => {
                 pageTitle={title}
                 pathName={parentPath}
                 tipo='prodotto'
+                allPagePath={allPagePath}
             >
 
                 <div className="container prodotto">

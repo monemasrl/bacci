@@ -162,7 +162,11 @@ const IndexPage = ({ data, pageContext }) => {
 
   return (
     <>
-      <Layout pageTitle={dataHome.title} seo={dataHome.seo} locale={pageContext.lang} translations={dataHome.translations}
+      <Layout
+        pageTitle={dataHome.title}
+        seo={dataHome.seo}
+        locale={pageContext.lang}
+        translations={dataHome.translations}
         allPagePath={pageContext.allPagePath}>
         <div className="container-fluid home">
           <section className="jumbo-home">

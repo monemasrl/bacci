@@ -4,7 +4,7 @@ import FormFiere from "../components/form";
 import Personale from "../components/personale/personale";
 const Fiere = ({ pageContext }) => {
 
-    const { locale, translations, slug, parentPath, content } = pageContext
+    const { locale, translations, slug, parentPath, content, allPagePath } = pageContext
 
     return (
         <>
@@ -13,6 +13,7 @@ const Fiere = ({ pageContext }) => {
                 translations={translations}
                 pageTitle={slug}
                 pathName={parentPath}
+                allPagePath={allPagePath}
                 tipo='fiere' >
 
                 <div className="container fiera">

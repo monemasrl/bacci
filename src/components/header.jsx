@@ -15,8 +15,9 @@ const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeTy
   return (
     <header>
 
-      <NavBar locale={locale} translations={translations} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} allPagePath={allPagePath} />
-      <NavBarMobile locale={locale} translations={translations} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} />
+      <NavBar locale={locale} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} allPagePath={allPagePath} />
+
+      {/* <NavBarMobile locale={locale} translations={translations} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} /> */}
 
       {pageTitle !== 'Home' ? <Breadcrumb pageTitle={pageTitle} pathName={currentPath} nodeType={nodeType} locale={locale} tipo={tipo} /> : ''}
 
