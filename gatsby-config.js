@@ -25,6 +25,7 @@ module.exports = {
             // options: {
             //   verbose: true,
             // },
+            // url: `https://bacci.monema.dev/graphql`,
             url: `https://bacci-bedrock.monema.dev/wp/graphql`,
             // protocol: `http`,
             // Indicates if a site is hosted on WordPress.com
