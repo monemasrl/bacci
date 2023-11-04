@@ -478,7 +478,7 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   const news = result.data.allWpPost.edges
-
+  /* 
   news.forEach(entry => {
     const allPagePath = createPathFromMenu(
       entry,
@@ -505,7 +505,8 @@ exports.createPages = async ({ graphql, actions }) => {
         allPagePath: allPagePath,
       },
     })
-  })
+  }) */
+
   const prodotti = result.data.allWpProdotto.edges
   prodotti.forEach(entry => {
     const allPagePath = createPathFromMenu(

@@ -980,7 +980,9 @@ section.container.repeater.no-flag {
   .box-single-news {
     border: 1px solid $brown;
     margin: 10px;
-
+    img {
+      width: 100%;
+    }
     .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
       margin-bottom: 2rem;
     }

@@ -5,6 +5,7 @@ import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
 import Tassonomie from "../components/tassonomie"
 import { Termini } from "../../data-translations"
+
 export const query = graphql`
  query($lang: String!, $postTitle: String!){
     allWpPage(filter: {

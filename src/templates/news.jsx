@@ -1,4 +1,5 @@
-import * as React from "react"
+import { useState, useEffect } from "react"
+import React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { langTag } from "../../data-translations"
@@ -52,7 +53,6 @@ query($lang: String!, $postTitle: String!){
         }
     }
 
-
     allWpPost(filter:{locale:{locale:{eq: $lang}}}) {
         edges {
           node {
@@ -96,6 +96,30 @@ const News = ({ data, location, pageContext }) => {
 
   const datapage = data.allWpPage.edges[0].node
 
+  const [newsFromREST, setNewsFromREST] = useState()
+
+
+  useEffect(() => {
+    // get data from GitHub api
+    try {
+      fetch(`https://bacci-bedrock.monema.dev/wp-json/wp/v2/posts?_embed&per_page=3&lang=${langTag[pageContext.lang]}`)
+        .then(response => response.json()) // parse JSON from request
+        .then(resultData => {
+          setNewsFromREST(resultData)
+        }) // set data for the number of stars}
+    } catch {
+      console.log('errore')
+    }
+  }, [])
+
+  useEffect(() => {
+
+
+
+  }, [newsFromREST])
+
+
+  console.log(newsFromREST, 'newsFromREST')
   return (
     <Layout
       pageTitle={datapage.title}
@@ -106,21 +130,21 @@ const News = ({ data, location, pageContext }) => {
       seo={datapage.seo}
     >
       <section className="container news">
-        {langFilterData.map((item) => {
+        {newsFromREST ? newsFromREST.map((item) => {
           return (
             <div className="col-3">
               <div className="box-single-news">
-                <GatsbyImage image={item.node.featuredImage.node.localFile.childImageSharp.gatsbyImageData} alt={item.node.featuredImage.node.altText} />
+                <img height={356} width={487} src={item.yoast_head_json.og_image[0].url} alt={`featured image for ${item.title.rendered}`} />
                 <div className="date">
-                  {item.node.date}
+                  {item.title.date}
                 </div>
-                <h2>{item.node.title}</h2>
-                <div dangerouslySetInnerHTML={{ __html: item.node.excerpt }} />
-                <Link to={`${langTag[item.node.locale.locale] === "it" ? '' : langTag[item.node.locale.locale]}/news/${item.node.slug}`}>leggi tutto</Link>
+                <h2>{item.title.rendered}</h2>
+                <div dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
+                <Link to={`${langTag[item.yoast_head_json.og_locale] === "it" ? '' : langTag[item.yoast_head_json.og_locale]}/news/${item.slug}`}>leggi tutto</Link>
               </div>
 
             </div>)
-        })}
+        }) : 'Loading...'}
       </section>
 
     </Layout>
