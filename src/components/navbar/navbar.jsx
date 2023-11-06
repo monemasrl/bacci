@@ -125,14 +125,12 @@ const NavBar = (props) => {
 
                             {menuFilter[0].node.menuItems.nodes.map((item) => {
 
-
                                 return (
                                     <React.Fragment key={item.label}>
 
                                         {!item.parentId ?
-
                                             item.menuCampi.megamenu ?
-                                                <li tabindex={0} onMouseEnter={() => props.setMega(true)}
+                                                <li role="button" tabIndex={0} onMouseEnter={() => props.setMega(true)}
                                                     onMouseLeave={() => props.setMega(false)}>
                                                     <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} ><a href="#">{item.label}</a>
                                                     </div>

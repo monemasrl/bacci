@@ -67,7 +67,7 @@ const NavBarMobile = (props) => {
                         </Link>
 
                     </div>
-                    <div className="hamburger" tabindex={0} onClick={() => setOpen(!open)} >
+                    <div className="hamburger" role="button" tabIndex={0} onClick={() => setOpen(!open)} >
                         <span>  <StaticImage
                             placeholder="none"
                             width={30}
