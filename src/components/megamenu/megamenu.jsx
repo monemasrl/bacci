@@ -1,6 +1,5 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import { StaticImage } from "gatsby-plugin-image";
 import Tassonomie from "../tassonomie";
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, Link, graphql } from "gatsby";

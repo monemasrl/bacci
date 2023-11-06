@@ -6,7 +6,6 @@ const Breadcrumb = ({ pageTitle, pathName, nodeType, fiere, locale, tipo }) => {
 
     const parentFolder = pathName ? pathName : ''
 
-
     return (
         <div className="container-fluid breadcrumb">
 

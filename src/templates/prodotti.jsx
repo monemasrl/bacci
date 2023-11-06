@@ -118,14 +118,14 @@ const Prodotti = ({ data, location, pageContext }) => {
   }, []);
 
   // lista delle categorie da lista prodotto
-  let listaCategorie = langFilterProdotto.map((item) => item.node.prodottiCategorie.nodes)
+  /* let listaCategorie = langFilterProdotto.map((item) => item.node.prodottiCategorie.nodes)
   listaCategorie = listaCategorie.reduce((a, b) => { return a.concat(b) })
 
   listaCategorie = listaCategorie.map((item) => { return item.name })
   listaCategorie = listaCategorie.reduce(function (a, b) {
     if (a.indexOf(b) < 0) a.push(b);
     return a;
-  }, []);
+  }, []); */
 
   // Mantenere il filtro quando si accede da link esterno
 
@@ -135,7 +135,7 @@ const Prodotti = ({ data, location, pageContext }) => {
       setFiltersCat([location.state.categoria])
     }
 
-  }, [location.state && location.state.categoria])
+  }, [location.state.categoria])
 
 
 
@@ -291,7 +291,7 @@ export default Prodotti
 
 
 
-/*   
+{/*   
 const onChangeCheckboxApplicazioni = (evt) => {
  setToggleFilterTag(true)
  setToggleFilterCat(false)
@@ -309,7 +309,7 @@ const onChangeCheckboxApplicazioni = (evt) => {
    setFiltersApp([...filterUnchecked])
  }
  
-} */
+} */}
 
 
 
@@ -331,7 +331,7 @@ const onChangeCheckboxApplicazioni = (evt) => {
 </form> */}
 
 
-/*
+{/*
 const Applicazioni = () => {
 
   const filterProductApp = () => {
@@ -347,4 +347,4 @@ const Applicazioni = () => {
 
   return filterProductApp()
 
-} */
+} */}

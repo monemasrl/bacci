@@ -132,12 +132,9 @@ const NavBar = (props) => {
                                         {!item.parentId ?
 
                                             item.menuCampi.megamenu ?
-                                                <li
-                                                    onMouseEnter={() => props.setMega(true)}
+                                                <li onMouseEnter={() => props.setMega(true)}
                                                     onMouseLeave={() => props.setMega(false)}>
-                                                    <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
-
-                                                        href="#"><a href="#">{item.label}</a>
+                                                    <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} ><a href="#">{item.label}</a>
                                                     </div>
                                                     <Megamenu terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={item.menu.node.language} /></li>
                                                 :

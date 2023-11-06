@@ -21,6 +21,7 @@ const LangSwitcher = (props) => {
                 </li>
               }
             }
+            return ''
           })}
         </ul>
       </div>

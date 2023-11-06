@@ -1,7 +1,7 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image";
-import { Termini, langTag } from "../../../data-translations";
+import { langTag } from "../../../data-translations";
 import './lastNews.scss'
 import { Link } from "gatsby";
 
