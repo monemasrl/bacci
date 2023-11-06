@@ -6,7 +6,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import Megamenu from '../megamenu/megamenu'
 import { Termini } from '../../../data-translations'
 import './navbar.scss'
-import { getParentPathFromMenu, createPathFromMenu } from '../../utils'
+import { getParentPathFromMenu } from '../../utils'
 
 let slugify = require('slugify')
 
@@ -73,7 +73,7 @@ const NavBar = (props) => {
     })
 
     const terminiTraduzione = Termini[props.locale]
-    console.log(createPathFromMenu(data.allWpPage.edges, data.allWpMenu.edges, 'home', 'it_IT'), 'test')
+
     return (
         <>
             <nav className="container-fluid top-menu">

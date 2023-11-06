@@ -1,12 +1,14 @@
 import React from "react"
-
+import { createPathFromMenu } from "../../utils"
 import LayoutNews from "../../components/layout/layout-news"
 
 const NewsPost = props => {
-  console.log(props, "props")
+  console.log(props.serverData.id, "props")
+  //createPathFromMenu(dataPage, dataMenu, slugPagina, defaultLanguage)
+
   return (
     <>
-      {/*  <LayoutNews allPagePath={allPagePath} locale={locale} translations={translations} pageTitle={title} tipo="news">
+      {/*  <LayoutNews allPagePath={allPagePath} locale={locale}  pageTitle={title} tipo="news">
                 <div className="wrapper-news">
                     <span className="datanews">{date}</span>
                     <h2>{sottotitolo}</h2>
@@ -19,10 +21,11 @@ const NewsPost = props => {
 
 export default NewsPost
 
-export async function getServerData() {
+export async function getServerData(props) {
   try {
+    const dataId = await props.serverData.id
     const res = await fetch(
-      `https://bacci-bedrock.monema.dev/wp-json/wp/v2/posts/1017`
+      `https://bacci-bedrock.monema.dev/wp-json/wp/v2/posts/${dataId}`
     )
 
     if (!res.ok) {

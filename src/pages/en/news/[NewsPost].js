@@ -1,6 +1,6 @@
 import React from "react"
 
-import LayoutNews from "../../components/layout/layout-news"
+import LayoutNews from "../../../components/layout/layout-news"
 
 const NewsPost = props => {
   console.log(props, "props")

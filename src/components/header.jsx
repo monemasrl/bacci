@@ -4,9 +4,7 @@ import NavBar from "./navbar/navbar"
 import NavBarMobile from "./navbar/navbarMobile"
 import Breadcrumb from "./breadcrumb/breadCrumb"
 
-const isBrowser = typeof window !== "undefined"
-
-const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeType, tipo, allPagePath }) => {
+const Header = ({ locale, pageTitle, pathName, currentPath, nodeType, tipo, allPagePath }) => {
 
   const [mega, setMega] = React.useState(false)
 

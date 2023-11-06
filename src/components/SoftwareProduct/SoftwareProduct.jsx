@@ -1,7 +1,7 @@
 import React from "react";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { useStaticQuery, graphql } from "gatsby"
-import { Termini, langTag } from "../../../data-translations";
+import { Termini } from "../../../data-translations";
 import { Link } from "gatsby"
 const SoftwareProduct = ({ locale }) => {
   const data = useStaticQuery(graphql`

@@ -77,7 +77,7 @@ const LayoutNews = ({ children, locale, pageTitle, tipo, allPagePath }) => {
   const langFilter = data.allWpPost.edges.filter((item) => {
     return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
   })[0].node
-
+  console.log(langFilter.nodeType, 'nodeType')
   return (
     <div className="mainwrapper">
 

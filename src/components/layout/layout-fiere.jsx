@@ -53,13 +53,7 @@ const LayoutFiere = ({ children, locale, pageTitle, pathName, tipo, allPagePath 
       <div className="container-fluid " >
         <Header allPagePath={allPagePath} locale={locale} pageTitle={pageTitle} pathName={pathName} tipo={tipo} />
       </div>
-
-
       <main>{children}</main>
-
-
-
-
       <Footer locale={locale} />
       <ScrollTo />
     </div>
