@@ -135,7 +135,7 @@ const Prodotti = ({ data, location, pageContext }) => {
       setFiltersCat([location.state.categoria])
     }
 
-  }, [location.state && location.state.categoria])
+  }, [location.state])
 
 
 
