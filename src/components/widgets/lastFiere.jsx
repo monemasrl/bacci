@@ -1,6 +1,5 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image";
 import { Termini, langTag } from "../../../data-translations";
 import './lastFiere.scss'
 import { Link } from "gatsby";
@@ -41,7 +40,7 @@ const LastFiere = ({ locale, limiteVisualizzazione }) => {
           {langFilterProdotto.map((item) => {
             const slug = `${langTag[item.node.locale.locale] === "it" ? '' : langTag[item.node.locale.locale]}/fiere/${item.node.slug}`
             return (
-              <div className="box-single-fiera">
+              <div key={item.node.title} className="box-single-fiera">
                 <Link to={slug}><h2>{item.node.title}</h2>   </Link>
                 <div className="data">
                   {item.node.fiere.dataDa.slice(0, 2)}-

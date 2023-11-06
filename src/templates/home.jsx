@@ -179,7 +179,7 @@ const IndexPage = ({ data, pageContext }) => {
               <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataHome.home.sezione1.titolo }} />
               <p>{dataHome.home.sezione1.paragrafo}</p>
 
-              <Link stileClasse="button-sezione" to={dataHome.home.sezione1.link.url}>{dataHome.home.sezione1.link.title}</Link>
+              <Link className="button-sezione" to={dataHome.home.sezione1.link.url}>{dataHome.home.sezione1.link.title}</Link>
 
             </div>
 
@@ -198,7 +198,7 @@ const IndexPage = ({ data, pageContext }) => {
               <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.titolo }} />
               <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione2.paragrafo }} />
 
-              <Link stileClasse="button-sezione" to={dataHome.home.sezione2.link.url}>{dataHome.home.sezione2.link.title}
+              <Link className="button-sezione" to={dataHome.home.sezione2.link.url}>{dataHome.home.sezione2.link.title}
               </Link>
 
             </div>
@@ -220,7 +220,7 @@ const IndexPage = ({ data, pageContext }) => {
             <div className="box-dx">
               <p dangerouslySetInnerHTML={{ __html: dataHome.home.sezione3.paragrafo }} />
               {dataHome.home.sezione3.link &&
-                <Link stileClasse="button-sezione" className="button-sezione" to={dataHome.home.sezione3.link.url}>{dataHome.home.sezione3.link.title}</Link>}
+                <Link className="button-sezione" to={dataHome.home.sezione3.link.url}>{dataHome.home.sezione3.link.title}</Link>}
 
             </div>
           </section>
@@ -231,7 +231,7 @@ const IndexPage = ({ data, pageContext }) => {
               <h2 dangerouslySetInnerHTML={{ __html: dataHome.home.sezione4.titolo }} />
               <p>{dataHome.home.sezione4.paragrafo}</p>
 
-              <Link stileClasse="button-sezione" className="button-sezione" to={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</Link>
+              <Link className="button-sezione" to={dataHome.home.sezione4.link.url}>{dataHome.home.sezione4.link.title}</Link>
 
             </div>
 

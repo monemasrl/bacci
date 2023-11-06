@@ -81,7 +81,7 @@ const NavBar = (props) => {
                     {menuFilter[1] &&
                         <ul>
 
-                            {menuFilter[1].node.menuItems.nodes.map((item, index) => {
+                            {menuFilter[1].node.menuItems.nodes.map((item) => {
 
                                 const menuPath = slugify(item.label)
 
@@ -123,7 +123,7 @@ const NavBar = (props) => {
 
                         <ul>
 
-                            {menuFilter[0].node.menuItems.nodes.map((item, index) => {
+                            {menuFilter[0].node.menuItems.nodes.map((item) => {
 
 
                                 return (
@@ -132,38 +132,34 @@ const NavBar = (props) => {
                                         {!item.parentId ?
 
                                             item.menuCampi.megamenu ?
-                                                <li
-                                                    onMouseEnter={() => props.setMega(true)}
+                                                <li tabindex={0} onMouseEnter={() => props.setMega(true)}
                                                     onMouseLeave={() => props.setMega(false)}>
-                                                    <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`}
-
-                                                        href="#"><a href="#">{item.label}</a>
+                                                    <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} ><a href="#">{item.label}</a>
                                                     </div>
                                                     <Megamenu terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={item.menu.node.language} /></li>
                                                 :
                                                 <li>
                                                     {item.path === "#" ?
-
-                                                        <a className={`${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} disabled={item.path === "#"} to={item.path}>{item.label}
+                                                        <>
+                                                            <a className={`${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} disabled={item.path === "#"} to={item.path}>{item.label}</a>
 
                                                             {item.childItems ?
                                                                 <ul>
                                                                     {item.childItems.nodes.map((subitem) => {
 
                                                                         return (
-                                                                            <>
 
-                                                                                <li><Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${getParentPathFromMenu(props.locale, subitem.label, data.allWpMenu.edges)}${getSlugFromHref(subitem.path)}`}>
-                                                                                    {subitem.label}
-                                                                                </Link>
-                                                                                </li>
-                                                                            </>)
+                                                                            <li key={subitem.label}><Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${getParentPathFromMenu(props.locale, subitem.label, data.allWpMenu.edges)}${getSlugFromHref(subitem.path)}`}>
+                                                                                {subitem.label}
+                                                                            </Link>
+                                                                            </li>
+                                                                        )
 
                                                                     })}
                                                                 </ul>
-                                                                : ''}
+                                                                : ''}</>
 
-                                                        </a> :
+                                                        :
                                                         <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${slugify(item.label.toLowerCase())}`}>
                                                             {item.label}
                                                         </Link>

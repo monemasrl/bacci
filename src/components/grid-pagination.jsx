@@ -7,7 +7,7 @@ import Pagination from "./pagination"
 
 
 const GridPagination = ({ archivio, topArchivio }) => {
-    const { useState, useRef, useEffect } = React
+    const { useState, useEffect } = React
     const [posts, setPosts] = useState(() => archivio)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostPerPage] = useState(2)
@@ -25,9 +25,6 @@ const GridPagination = ({ archivio, topArchivio }) => {
         setCurrentPage(1)
     }, [archivio])
 
-    var slugify = require('slugify')
-
-
     return (
         <>
             {currentPosts.map((item) => {
@@ -37,7 +34,7 @@ const GridPagination = ({ archivio, topArchivio }) => {
                         <GatsbyImage image={item.node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.node.prodotto.immagine.altText} />
                         <h2>{item.node.title}</h2>
                         <p>{item.node.prodotto.paragrafo}</p>
-                        <Link stileClasse="button-sezione" lista to={`${(item.node.locale.locale === 'it_IT') ? '/' : langTag[item.node.locale.locale]}${Termini[item.node.locale.locale].prodotti}/${item.node.slug}`}>
+                        <Link className="button-sezione" lista to={`${(item.node.locale.locale === 'it_IT') ? '/' : langTag[item.node.locale.locale]}${Termini[item.node.locale.locale].prodotti}/${item.node.slug}`}>
 
                             scopri</Link>
                     </div>
