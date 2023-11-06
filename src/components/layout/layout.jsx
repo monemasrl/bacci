@@ -57,7 +57,7 @@ const Layout = ({ children, locale, pageTitle, seo, allPagePath }) => {
 
   return (
     <div className="mainwrapper">
-      {seo && <Seo title={pageTitle} seo={seo} />}
+      {seo && <Seo lang={locale} title={pageTitle} seo={seo} />}
 
       <div className="container-fluid " >
         <Header

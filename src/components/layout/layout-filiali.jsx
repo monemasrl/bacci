@@ -82,7 +82,7 @@ const LayoutFiere = ({ children, locale, pageTitle }) => {
 
   return (
     <div className="mainwrapper">
-      <Seo title={pageTitle} seo={langFilter.seo} />
+      <Seo lang={locale} title={pageTitle} seo={langFilter.seo} />
       <div className="container-fluid " >
         <Header
           locale={locale}

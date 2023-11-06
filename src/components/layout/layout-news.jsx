@@ -82,7 +82,7 @@ const LayoutNews = ({ children, locale, pageTitle, tipo, allPagePath }) => {
     <div className="mainwrapper">
 
 
-      <Seo title={pageTitle} seo={langFilter.seo} />
+      <Seo lang={locale} title={pageTitle} seo={langFilter.seo} />
       <div className="container-fluid " >
         <Header allPagePath={allPagePath} tipo={tipo} locale={locale} pageTitle={pageTitle} nodeType={langFilter.nodeType} />
       </div>
