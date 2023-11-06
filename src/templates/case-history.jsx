@@ -1,11 +1,14 @@
-import { Link, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import * as React from "react"
 import { Termini } from "../../data-translations"
 import Layout from "../components/layout/layout"
 
 
-export const query = graphql`
+
+const CaseHistory = ({ location, pageContext }) => {
+
+  const data = useStaticQuery`
  query($lang: String!, $postTitle: String!){
     allWpPage(filter: {
     title: {eq: $postTitle}
@@ -14,6 +17,11 @@ export const query = graphql`
         edges {
         node {
             title
+            translated{
+                    pathPagine{
+                      path
+                    }
+                  }
             caseHistory {
               caseHistorySezione1 {
                 paragrafo
@@ -105,7 +113,6 @@ export const query = graphql`
   }
 }
 `
-const CaseHistory = ({ data, location, pageContext }) => {
 
   const langFilter = data.allWpPage.edges.filter((item) => {
     return (item.node.locale.locale === pageContext.lang)
@@ -121,9 +128,11 @@ const CaseHistory = ({ data, location, pageContext }) => {
     <Layout
       pageTitle={datapage.title}
       locale={pageContext.lang}
+      translated={datapage.translated}
       translations={datapage.translations}
       seo={langFilter.seo}
       allPagePath={pageContext.allPagePath}
+      dataMenu={pageContext.dataMenu}
     >
       <section className="container case-history">
         <section className="container sezione-4">

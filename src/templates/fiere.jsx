@@ -17,6 +17,11 @@ query($lang: String!, $postTitle: String!){
             locale {
             locale
             }
+            translated{
+                    pathPagine{
+                      path
+                    }
+                  }
             translations {
             locale
             post_title
@@ -82,8 +87,10 @@ const Fiere = ({ data, location, pageContext }) => {
             <Layout
                 pageTitle={langFilter.title}
                 locale={pageContext.lang}
+                translated={langFilter.translated}
                 pathName={location.pathname}
                 allPagePath={pageContext.allPagePath}
+                dataMenu={pageContext.dataMenu}
             >
                 <section className="container fiere">
                     {langFilterFiera.map((item) => {

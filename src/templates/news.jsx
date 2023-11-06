@@ -18,6 +18,11 @@ query($lang: String!, $postTitle: String!){
             locale {
             locale
             }
+            translated{
+                    pathPagine{
+                      path
+                    }
+                  }
             translations {
             locale
             post_title
@@ -101,7 +106,9 @@ const News = ({ data, location, pageContext }) => {
       pageTitle={datapage.title}
       locale={pageContext.lang}
       allPagePath={pageContext.allPagePath}
+      translated={datapage.translated}
       pathName={location.pathname}
+      dataMenu={pageContext.dataMenu}
       news
       seo={datapage.seo}
     >

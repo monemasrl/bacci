@@ -16,6 +16,11 @@ query($lang: String!, $postTitle: String!){
           locale
         }
         title
+        translated{
+        pathPagine{
+                  path
+                }
+                  }
         translations {
           locale
           post_title
@@ -178,9 +183,11 @@ const Componenti = ({ data, location, pageContext }) => {
       <Layout
         pageTitle={dataFilter.title}
         locale={pageContext.lang}
-        allPagePath={pageContext.allPagePath}
+        translated={dataFilter.translated}
         pathName={location.pathname}
         seo={dataFilter.seo}
+        allPagePath={pageContext.allPagePath}
+        dataMenu={pageContext.dataMenu}
       >
 
         <div className="container-fluid componenti">

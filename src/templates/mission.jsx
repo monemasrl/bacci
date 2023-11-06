@@ -16,6 +16,11 @@ export const query = graphql`
           locale
         }
         title
+        translated{
+                    pathPagine{
+                      path
+                    }
+                  }
         translations {
           locale
           post_title
@@ -150,8 +155,10 @@ const Mission = ({ data, location, pageContext }) => {
         pageTitle={dataFilter.title}
         locale={pageContext.lang}
         pathName={location.pathname}
+        translated={dataFilter.translated}
         seo={dataFilter.seo}
         allPagePath={pageContext.allPagePath}
+        dataMenu={pageContext.dataMenu}
       >
         <div className="container-fluid mission">
           <section className="container-fluid sezione-interne">

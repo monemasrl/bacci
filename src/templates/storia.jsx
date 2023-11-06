@@ -17,6 +17,11 @@ export const query = graphql`
           locale
         }
         title
+        translated{
+                    pathPagine{
+                      path
+                    }
+                  }
         translations {
           locale
           post_title
@@ -349,16 +354,17 @@ export const query = graphql`
 const Produzione = ({ data, location, pageContext }) => {
 
   const dataFilter = data.allWpPage.edges[0].node
-
+  console.log(dataFilter, 'testdatafilter')
   return (
     <>
       <Layout
         pageTitle={dataFilter.title}
         locale={pageContext.lang}
-
+        translated={dataFilter.translated}
         pathName={location.pathname}
         seo={dataFilter.seo}
         allPagePath={pageContext.allPagePath}
+        dataMenu={pageContext.dataMenu}
       >
         <div className="container-fluid storia">
           <section className="container-fluid sezione-interne">

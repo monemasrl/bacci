@@ -15,7 +15,9 @@ const Fiere = ({ pageContext }) => {
                 pageTitle={slug}
                 pathName={parentPath}
                 allPagePath={allPagePath}
-                tipo='fiere' >
+                tipo='fiere'
+
+            >
 
                 <div className="container fiera">
                     <section className="topfiera">

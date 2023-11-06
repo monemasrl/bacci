@@ -16,6 +16,11 @@ export const query = graphql`
           locale
         }
         title
+        translated{
+                    pathPagine{
+                      path
+                    }
+                  }
         translations {
           locale
           post_title
@@ -180,10 +185,11 @@ const GruppoBacci = ({ data, location, pageContext }) => {
       <Layout
         pageTitle={dataFilter.title}
         locale={pageContext.lang}
-
+        translated={dataFilter.translated}
         pathName={location.pathname}
         allPagePath={pageContext.allPagePath}
         seo={dataFilter.seo}
+        dataMenu={pageContext.dataMenu}
       >
         <div className="container-fluid gruppo-bacci">
           <section className="container-fluid sezione-interne">

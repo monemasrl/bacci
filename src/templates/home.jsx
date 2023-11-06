@@ -18,6 +18,11 @@ export const query = graphql`
         locale {
           locale
         }
+        translated{
+                    pathPagine{
+                      path
+                    }
+                  }
         translations {
           locale
           post_title
@@ -166,8 +171,10 @@ const IndexPage = ({ data, pageContext }) => {
         pageTitle={dataHome.title}
         seo={dataHome.seo}
         locale={pageContext.lang}
-        translations={dataHome.translations}
-        allPagePath={pageContext.allPagePath}>
+        translated={dataHome.translated}
+        allPagePath={pageContext.allPagePath}
+        dataMenu={pageContext.dataMenu}
+      >
         <div className="container-fluid home">
           <section className="jumbo-home">
             <GatsbyImage image={dataHome.featuredImage.node.localFile.childImageSharp.gatsbyImageData} className="jumbo-image" alt="featured image" />

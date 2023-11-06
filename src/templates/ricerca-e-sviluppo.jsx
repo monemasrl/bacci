@@ -16,6 +16,11 @@ export const query = graphql`
           locale
         }
         title
+        translated{
+                    pathPagine{
+                      path
+                    }
+                  }
         translations {
           locale
           post_title
@@ -162,7 +167,11 @@ const RicercaSviluppo = ({ data, location, pageContext }) => {
         locale={pageContext.lang}
         allPagePath={pageContext.allPagePath}
         pathName={location.pathname}
-        seo={dataFilter.seo} >
+        translated={dataFilter.translated}
+        dataMenu={pageContext.dataMenu}
+        seo={dataFilter.seo}
+
+      >
         <div className="container-fluid ricerca">
           <section className="container-fluid sezione-interne">
             <div className="box-sx">

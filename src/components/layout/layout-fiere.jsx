@@ -18,34 +18,7 @@ import ScrollTo from "../scrollTo"
 let slugify = require('slugify')
 
 const LayoutFiere = ({ children, locale, pageTitle, pathName, tipo, allPagePath }) => {
-  const data = useStaticQuery(graphql`
-    {
-      site {
-        siteMetadata {
-          title
-        }
-      }
 
-      allWpFiera {
-        edges {
-          node {
-            slug
-            content
-            locale {
-              locale
-            }
-            translations {
-              href
-              id
-              locale
-              post_title
-            }
-
-          }
-        }
-      }
-    }
-  `)
 
   return (
     <div className="mainwrapper">

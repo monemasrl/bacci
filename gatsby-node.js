@@ -11,7 +11,7 @@ exports.createPages = async ({ graphql, actions }) => {
    * @function slugify - slugify string
    * @function createPathFromMenu - crea il path della pagina a partire dal nome della pagina e dalla struttura del menu
    * @var result - query per ottenere i contenuti di prodotto, news e fiere
-   * @var dataForLanguagePath - query dei dati per la costruzione del path delle pagine
+   * @var dataForMenuPath - query dei dati per la costruzione del path delle pagine
    */
 
   const langTag = {
@@ -192,7 +192,7 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
-  const dataForLanguagePath = await graphql(`
+  const dataForMenuPath = await graphql(`
     {
       allWpPage {
         edges {
@@ -219,10 +219,25 @@ exports.createPages = async ({ graphql, actions }) => {
             language
             menuItems {
               nodes {
-                label
                 id
-                path
+                label
                 parentId
+                path
+                childItems {
+                  nodes {
+                    label
+                    path
+                    parentId
+                  }
+                }
+                menu {
+                  node {
+                    language
+                  }
+                }
+                menuCampi {
+                  megamenu
+                }
               }
             }
           }
@@ -411,12 +426,12 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // CREAZIONE PAGINE
-  dataForLanguagePath.data.allWpPage.edges.forEach(entry => {
+  dataForMenuPath.data.allWpPage.edges.forEach(entry => {
     if (entry.node.locale.locale === "it_IT") {
       // crea un path di default per l'italiano
       const allPagePath = createPathFromMenu(
         entry,
-        dataForLanguagePath.data.allWpMenu.edges,
+        dataForMenuPath.data.allWpMenu.edges,
         entry.node.slug,
         entry.node.locale.locale
       )
@@ -440,6 +455,7 @@ exports.createPages = async ({ graphql, actions }) => {
             lang: data.locale,
             postTitle: data.title,
             allPagePath: allPagePath,
+            dataMenu: dataForMenuPath.data.allWpMenu.edges,
           },
         })
       })
@@ -473,6 +489,7 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: entry.node.slug,
         parentPath: entry.node.fiere.path,
         allPagePath: allPagePath,
+        dataMenu: dataForMenuPath.data.allWpMenu.edges,
       },
     })
   })
@@ -503,6 +520,7 @@ exports.createPages = async ({ graphql, actions }) => {
         title: entry.node.title,
         date: entry.node.date,
         allPagePath: allPagePath,
+        dataMenu: dataForMenuPath.data.allWpMenu.edges,
       },
     })
   })
@@ -519,7 +537,7 @@ exports.createPages = async ({ graphql, actions }) => {
         ? "/"
         : `/${langTag[entry.node.locale.locale]}/`
 
-    createPage({
+    /*  createPage({
       path: `${urlBase}${Termini[entry.node.locale.locale].prodotti}/${
         entry.node.slug
       }`,
@@ -531,7 +549,8 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: entry.node.slug,
         title: entry.node.title,
         allPagePath: allPagePath,
+        dataMenu: dataForMenuPath.data.allWpMenu.edges,
       },
-    })
+    }) */
   })
 }

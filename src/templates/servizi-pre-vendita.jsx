@@ -16,6 +16,11 @@ export const query = graphql`
           locale
         }
         title
+        translated{
+                    pathPagine{
+                      path
+                    }
+                  }
         translations {
           locale
           post_title
@@ -134,7 +139,10 @@ const ServiziPre = ({ data, location, pageContext }) => {
         locale={pageContext.lang}
         allPagePath={pageContext.allPagePath}
         pathName={location.pathname}
-        seo={dataFilter.seo}>
+        seo={dataFilter.seo}
+        translated={dataFilter.translated}
+        dataMenu={pageContext.dataMenu}
+      >
         <div className="container-fluid prevendita">
           <section className="container-fluid sezione-interne">
             <div className="box-sx">

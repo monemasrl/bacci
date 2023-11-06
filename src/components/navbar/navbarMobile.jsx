@@ -10,44 +10,7 @@ let slugify = require('slugify')
 
 const NavBarMobile = (props) => {
 
-
-    const data = useStaticQuery(graphql`
-    query datimenumobile{
-        allWpMenu {
-                edges {
-                node {
-                    language
-                    menuItems {
-                    nodes {
-                        label
-                        parentId
-                        path
-                        childItems {
-                          nodes {
-                            label
-                            path
-                            parent{
-                                id
-                            }
-                          }
-                        }
-                        menu {
-                        node {
-                            language
-                        }
-                        }
-                        menuCampi {
-                              megamenu
-                            }
-                    }
-                    }
-                }
-                }
-            }
-            }
-    `)
-
-    const menuFilter = data.allWpMenu.edges.filter((lang) => {
+    const menuFilter = props.dataMenu.filter((lang) => {
         return lang.node.language === langTag[props.locale]
     })
     const terminiTraduzione = Termini[props.locale]
