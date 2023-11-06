@@ -81,7 +81,7 @@ const NavBar = (props) => {
                     {menuFilter[1] &&
                         <ul>
 
-                            {menuFilter[1].node.menuItems.nodes.map((item, index) => {
+                            {menuFilter[1].node.menuItems.nodes.map((item) => {
 
                                 const menuPath = slugify(item.label)
 
@@ -123,7 +123,7 @@ const NavBar = (props) => {
 
                         <ul>
 
-                            {menuFilter[0].node.menuItems.nodes.map((item, index) => {
+                            {menuFilter[0].node.menuItems.nodes.map((item) => {
 
 
                                 return (
@@ -148,13 +148,12 @@ const NavBar = (props) => {
                                                                     {item.childItems.nodes.map((subitem) => {
 
                                                                         return (
-                                                                            <>
 
-                                                                                <li><Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${getParentPathFromMenu(props.locale, subitem.label, data.allWpMenu.edges)}${getSlugFromHref(subitem.path)}`}>
-                                                                                    {subitem.label}
-                                                                                </Link>
-                                                                                </li>
-                                                                            </>)
+                                                                            <li key={subitem.label}><Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${getParentPathFromMenu(props.locale, subitem.label, data.allWpMenu.edges)}${getSlugFromHref(subitem.path)}`}>
+                                                                                {subitem.label}
+                                                                            </Link>
+                                                                            </li>
+                                                                        )
 
                                                                     })}
                                                                 </ul>

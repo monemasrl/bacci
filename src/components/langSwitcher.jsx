@@ -10,13 +10,13 @@ const LangSwitcher = (props) => {
 
       <div className='langbox' >
         <ul className="languages">
-          {props.allPagePath.map((item) => {
+          {props.allPagePath.map((item, index) => {
             if (item.locale) {
               if (item.locale === props.locale) {
-                return <li>{langTag[item.locale]}</li>
+                return <li key={index} >{langTag[item.locale]}</li>
               }
               else if (item.locale !== props.locale) {
-                return <li>
+                return <li key={index}>
                   <Link to={`/${item.path !== '/' ? item.path : ''}`}>{langTag[item.locale]}</Link>
                 </li>
               }
