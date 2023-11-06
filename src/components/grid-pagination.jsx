@@ -7,7 +7,7 @@ import Pagination from "./pagination"
 
 
 const GridPagination = ({ archivio, topArchivio }) => {
-    const { useState, useRef, useEffect } = React
+    const { useState, useEffect } = React
     const [posts, setPosts] = useState(() => archivio)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostPerPage] = useState(2)
@@ -24,9 +24,6 @@ const GridPagination = ({ archivio, topArchivio }) => {
         setPosts(archivio)
         setCurrentPage(1)
     }, [archivio])
-
-    var slugify = require('slugify')
-
 
     return (
         <>
