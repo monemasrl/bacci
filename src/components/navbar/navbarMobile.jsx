@@ -67,7 +67,7 @@ const NavBarMobile = (props) => {
                         </Link>
 
                     </div>
-                    <div className="hamburger" onClick={() => setOpen(!open)} >
+                    <div className="hamburger" tabindex={0} onClick={() => setOpen(!open)} >
                         <span>  <StaticImage
                             placeholder="none"
                             width={30}
@@ -124,26 +124,24 @@ const NavBarMobile = (props) => {
 
                                                     <li >
                                                         {item.path === "#" ?
-
-                                                            <a disabled={item.path === "#"} to={item.path}> {item.label}
+                                                            <>
+                                                                <a disabled={item.path === "#"} to={item.path}> {item.label} </a>
 
                                                                 {item.childItems ?
                                                                     <ul>
-                                                                        {item.childItems.nodes.map((subitem) => {
+                                                                        {item.childItems.nodes.map((subitem, index) => {
                                                                             return (
-                                                                                <>
-
-                                                                                    <li>
-                                                                                        <Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>  {subitem.label} </Link></li>
+                                                                                <li key={index}>
+                                                                                    <Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>  {subitem.label} </Link></li>
 
 
-                                                                                </>)
+                                                                            )
 
                                                                         })}
                                                                     </ul>
-                                                                    : ''}
+                                                                    : ''}</>
 
-                                                            </a> : <Link to="/"> {item.label} </Link>
+                                                            : <Link to="/"> {item.label} </Link>
                                                         }
 
                                                     </li> : ''

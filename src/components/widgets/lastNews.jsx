@@ -60,7 +60,7 @@ const LastNews = ({ locale, limiteVisualizzazione }) => {
           {langFilterProdotto.map((item) => {
 
             return (
-              <div className="col-3">
+              <div key={item.node.title} className="col-3">
                 <div className="box-news">
                   <GatsbyImage className="immagine-widget" image={item.node.featuredImage.node.localFile.childImageSharp.gatsbyImageData} alt={item.node.featuredImage.node.altText} />
                   <h3>{item.node.date}</h3>
@@ -68,7 +68,7 @@ const LastNews = ({ locale, limiteVisualizzazione }) => {
                     <h2>{item.node.title}</h2>
                   </Link>
                   <p dangerouslySetInnerHTML={{ __html: item.node.excerpt }} />
-                  <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}news/${item.node.slug}`}><span class="leggi-tutto">Leggi tutto</span>
+                  <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}news/${item.node.slug}`}><span className="leggi-tutto">Leggi tutto</span>
                   </Link>
                 </div>
               </div>

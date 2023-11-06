@@ -71,7 +71,7 @@ const Correlati = ({ applicazioni, locale, limiteVisualizzazione }) => {
                   <GatsbyImage className="immagine-widget" image={item.node.prodotto.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.node.prodotto.immagine.altText} />
                   <h2>{item.node.title}</h2>
                   <p dangerouslySetInnerHTML={{ __html: item.node.prodotto.testoAnteprima }} />
-                  <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${item.node.slug}`} stileClasse="button-sezione">scopri</Link>
+                  <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${item.node.slug}`} className="button-sezione">scopri</Link>
                 </div>
               </div>
             )

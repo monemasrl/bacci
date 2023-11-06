@@ -132,7 +132,7 @@ const NavBar = (props) => {
                                         {!item.parentId ?
 
                                             item.menuCampi.megamenu ?
-                                                <li onMouseEnter={() => props.setMega(true)}
+                                                <li tabindex={0} onMouseEnter={() => props.setMega(true)}
                                                     onMouseLeave={() => props.setMega(false)}>
                                                     <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} ><a href="#">{item.label}</a>
                                                     </div>
@@ -140,8 +140,8 @@ const NavBar = (props) => {
                                                 :
                                                 <li>
                                                     {item.path === "#" ?
-
-                                                        <a className={`${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} disabled={item.path === "#"} to={item.path}>{item.label}
+                                                        <>
+                                                            <a className={`${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} disabled={item.path === "#"} to={item.path}>{item.label}</a>
 
                                                             {item.childItems ?
                                                                 <ul>
@@ -157,9 +157,9 @@ const NavBar = (props) => {
 
                                                                     })}
                                                                 </ul>
-                                                                : ''}
+                                                                : ''}</>
 
-                                                        </a> :
+                                                        :
                                                         <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${slugify(item.label.toLowerCase())}`}>
                                                             {item.label}
                                                         </Link>

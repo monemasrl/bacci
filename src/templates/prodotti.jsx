@@ -135,7 +135,7 @@ const Prodotti = ({ data, location, pageContext }) => {
       setFiltersCat([location.state.categoria])
     }
 
-  }, [location.state.categoria])
+  }, [location.state && location.state.categoria])
 
 
 
@@ -291,7 +291,7 @@ export default Prodotti
 
 
 
-{/*   
+/*   
 const onChangeCheckboxApplicazioni = (evt) => {
  setToggleFilterTag(true)
  setToggleFilterCat(false)
@@ -309,7 +309,7 @@ const onChangeCheckboxApplicazioni = (evt) => {
    setFiltersApp([...filterUnchecked])
  }
  
-} */}
+} */
 
 
 
@@ -331,7 +331,7 @@ const onChangeCheckboxApplicazioni = (evt) => {
 </form> */}
 
 
-{/*
+/*
 const Applicazioni = () => {
 
   const filterProductApp = () => {
@@ -347,4 +347,4 @@ const Applicazioni = () => {
 
   return filterProductApp()
 
-} */}
+} */

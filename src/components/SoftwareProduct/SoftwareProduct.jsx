@@ -50,7 +50,7 @@ const SoftwareProduct = ({ locale }) => {
         <GatsbyImage image={dataFilter.software.sezioneSoftware3.immagine.localFile.childImageSharp.gatsbyImageData} alt={dataFilter.software.sezioneSoftware3.immagine.altText} />
 
         <p dangerouslySetInnerHTML={{ __html: Termini[locale].pitagora_desc }} />
-        <Link to={`${(locale === 'it_IT') ? '/' : 'langTag[locale]'}${Termini[locale].tecnologia}/software`} stileClasse="button-sezione" className="button-sezione">Software</Link>
+        <Link to={`${(locale === 'it_IT') ? '/' : 'langTag[locale]'}${Termini[locale].tecnologia}/software`} className="button-sezione">Software</Link>
       </div>
 
     </section>
