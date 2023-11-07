@@ -124,3 +124,31 @@ return;
 Segmentation fault: 11
 
 NODE_OPTIONS='--openssl-legacy-provider' npm run build
+
+success gatsby-source-wordpress Page - 8.110s - fetched 28
+
+ERROR UNKNOWN
+
+timeout of 30000ms exceeded
+
+ERROR #gatsby-source-wordpress_111006 PLUGIN
+
+gatsby-source-wordpress It took too long for
+https://bacci-bedrock.monema.dev/wp/graphql to respond (longer than 30 seconds).
+
+Either your URL is wrong, you need to increase server resources, or you need to
+decrease the amount of resources each request takes.
+
+You can configure how much resources each request takes by lowering your
+`options.schema.perPage` value from the default of 100 nodes per request.
+Alternatively you can increase the request timeout by setting a value in milliseconds
+to `options.schema.timeout`, the current setting is 30000.
+
+GraphQL request to https://bacci-bedrock.monema.dev/wp/graphql failed.
+
+Please ensure the following statements are true
+
+- your WordPress URL is correct in gatsby-config.js
+- your server is responding to requests
+- WPGraphQL and WPGatsby are installed and active in your WordPress backend
+- Your WordPress debug.log does not contain critical errors
