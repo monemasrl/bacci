@@ -1,9 +1,9 @@
 import * as React from "react"
 import PropTypes from "prop-types"
-import NavBar from "./navbar/navbar"
+
 import NavBarMobile from "./navbar/navbarMobile"
 import Breadcrumb from "./breadcrumb/breadCrumb"
-
+import NavBarDirectus from "./navbar/navbardirectus"
 
 const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeType, tipo, allPagePath }) => {
 
@@ -14,7 +14,8 @@ const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeTy
   return (
     <header>
 
-      <NavBar locale={locale} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} allPagePath={allPagePath} />
+
+      <NavBarDirectus locale={locale} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} allPagePath={allPagePath} />
 
       <NavBarMobile locale={locale} allPagePath={allPagePath} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} />
 
