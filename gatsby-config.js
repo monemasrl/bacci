@@ -72,5 +72,11 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: "@directus/gatsby-source-directus",
+      options: {
+        url: `https://bacci-directus.monema.dev`, // Fill with your Directus instance address
+      },
+    },
   ],
 }

@@ -35,6 +35,33 @@ const NavBar = (props) => {
                 }
             }
         }
+        directus{
+            menus{
+                name
+                items{
+            
+                translations{
+                    languages_code{
+                        code
+                    }
+                    label
+                    slug
+                }
+                sub_items{
+                    translations{
+                    languages_code{
+                        code
+                    }
+                    label
+                    slug
+                    }
+                    parent_item{
+                    id
+                    }
+                }
+                }
+            }
+            }
         allWpMenu {
                 edges {
                 node {
@@ -73,6 +100,8 @@ const NavBar = (props) => {
     })
 
     const terminiTraduzione = Termini[props.locale]
+    console.log(data.directus.menus, 'directus')
+    console.log(data.allWpMenu.edges, 'wp menu')
     console.log(createPathFromMenu(data.allWpPage.edges, data.allWpMenu.edges, 'home', 'it_IT'), 'test')
     return (
         <>

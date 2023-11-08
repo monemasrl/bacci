@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@directus/gatsby-source-directus": "^9.16.2",
     "@emotion/react": "^11.11.1",
     "@fontsource/open-sans": "^5.0.17",
     "@fontsource/oswald": "^5.0.17",
@@ -16,6 +17,7 @@
     "gatsby-plugin-sharp": "^5.12.0",
     "gatsby-plugin-sitemap": "^6.12.3",
     "gatsby-source-filesystem": "^5.12.1",
+    "gatsby-source-graphql": "^5.12.1",
     "gatsby-source-wordpress": "^7.12.3",
     "gatsby-transformer-sharp": "^5.12.3",
     "react": "^18.2.0",
