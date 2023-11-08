@@ -14,7 +14,6 @@ const Header = ({ locale, translations, pageTitle, pathName, currentPath, nodeTy
   return (
     <header>
 
-
       <NavBarDirectus locale={locale} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} allPagePath={allPagePath} />
 
       <NavBarMobile locale={locale} allPagePath={allPagePath} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} />

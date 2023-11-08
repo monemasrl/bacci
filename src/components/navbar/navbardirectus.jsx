@@ -179,45 +179,6 @@ const NavBarDirectus = (props) => {
 
                                                     })}
                                                 </ul> : ''}</li>}
-
-                                        {/*    {!item.parentId ?
-                                            item.menuCampi.megamenu ?
-                                                <li role="button" tabIndex={0} onMouseEnter={() => props.setMega(true)}
-                                                    onMouseLeave={() => props.setMega(false)}>
-                                                    <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} ><a href="#">{item.label}</a>
-                                                    </div>
-                                                    <Megamenu terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={item.menu.node.language} /></li>
-                                                :
-                                    <li>
-                                    {item.path === "#" ?
-                                            <>
-                            <a className={`${props.currentPath === item.label.toLowerCase() ? 'active' : ''}`} disabled={item.path === "#"} to={item.path}>{item.label}</a>
-
-                                                {item.childItems ?
-                                                            <ul>
-                                    {item.childItems.nodes.map((subitem) => {
-
-                                                            return (
-
-                    <li key={subitem.label}><Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${getParentPathFromMenu(props.locale, subitem.label, data.allWpMenu.edges)}${getSlugFromHref(subitem.path)}`}>
-                                            {subitem.label}
-                                                                            </Link>
-                                                                            </li>
-                                                                        )
-
-                                                                    })}
-                                                                </ul>
-                                                                : ''}</>
-
-                                                        :
-                                                        <Link to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${slugify(item.label.toLowerCase())}`}>
-                                                            {item.label}
-                                                        </Link>
-                                                    }
-
-                                                </li> : ''
-
-                                        } */}
                                     </React.Fragment>
                                 )
                             })}
