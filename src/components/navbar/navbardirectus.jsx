@@ -1,19 +1,13 @@
 import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
-import { langTag } from '../../../data-translations'
 import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
-import Megamenu from '../megamenu/megamenu'
-import { Termini } from '../../../data-translations'
+//import Megamenu from '../megamenu/megamenu'
+import MegamenuDirectus from '../megamenu/megamenudir'
+import { Termini, langTag } from '../../../data-translations'
 import './navbar.scss'
 import { getParentPathFromMenu, createPathFromMenu } from '../../utils'
 
-let slugify = require('slugify')
-
-const langCode = {
-    "it-IT": 'it_IT',
-    "en-US": 'en_US',
-}
 
 function getSlugFromHref(tHref) {
     const arrayFromHref = tHref.split("/").slice(-2)
@@ -116,7 +110,7 @@ const NavBarDirectus = (props) => {
                             {data.directus.menus[1].items.map((item) => {
 
                                 const itemTranslated = item.translations.find((lang) => {
-                                    return langCode[lang.languages_code.code] === props.locale
+                                    return langTag[lang.languages_code.code] === langTag[props.locale]
                                 })
                                 return (
                                     <li key={itemTranslated.label}>
@@ -152,7 +146,7 @@ const NavBarDirectus = (props) => {
                             {data.directus.menus[0].items.map((item) => {
 
                                 const itemTranslated = item.translations.find((lang) => {
-                                    return langCode[lang.languages_code.code] === props.locale
+                                    return langTag[lang.languages_code.code] === langTag[props.locale]
                                 })
                                 console.log(item, 'item')
                                 return (
@@ -162,16 +156,19 @@ const NavBarDirectus = (props) => {
                                             onMouseLeave={() => props.setMega(false)}>
                                             <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a href="#">{itemTranslated.label}</a>
                                             </div>
-                                            <Megamenu terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={langCode[itemTranslated.languages_code.code]} /></li> :
+                                            {/*     <Megamenu terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={langTag[itemTranslated.languages_code.code]} /> */}
+                                            <MegamenuDirectus terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={langTag[itemTranslated.languages_code.code]} />
+
+                                        </li> :
                                             <li>
                                                 <a href='#'>{itemTranslated.label}</a> {item.sub_items ? <ul>
                                                     {item.sub_items.map((subitem) => {
                                                         const subItemTranslated = subitem.translations.find((lang) => {
-                                                            return langCode[lang.languages_code.code] === props.locale
+                                                            return langTag[lang.languages_code.code] === langTag[props.locale]
                                                         })
                                                         console.log(subItemTranslated, 'subitem')
                                                         return (
-                                                            <li key={subItemTranslated.label}><Link to={`${langCode[subItemTranslated.languages_code.code] === 'it_IT' ? '' : '/' + langCode[subItemTranslated.languages_code.code]}/${itemTranslated.slug}/${subItemTranslated.slug}`}>
+                                                            <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug}/${subItemTranslated.slug}`}>
                                                                 {subItemTranslated.label}
                                                             </Link>
                                                             </li>

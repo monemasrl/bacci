@@ -17,6 +17,8 @@ exports.createPages = async ({ graphql, actions }) => {
   const langTag = {
     en_US: "en",
     it_IT: "it",
+    "en-US": "en",
+    "it-IT": "it",
   }
   const Termini = {
     en_US: {
@@ -31,6 +33,28 @@ exports.createPages = async ({ graphql, actions }) => {
       correlati: "realted products",
     },
     it_IT: {
+      azienda: "azienda",
+      prodotti: "prodotti",
+      tutti_prodotti: "tutti i prodotti",
+      tasto_ricerca: "Ricerca Modello",
+      eventi: "eventi e fiere",
+      prodotti: "prodotti",
+      macchine: "macchine",
+      tecnologia: "tecnologia",
+      correlati: "prodotti correlati",
+    },
+    "en-US": {
+      azienda: "company",
+      prodotti: "products",
+      tutti_prodotti: "all products",
+      tasto_ricerca: "Search for model",
+      eventi: "fair and events",
+      prodotti: "products",
+      macchine: "machines",
+      tecnologia: "tecnology",
+      correlati: "realted products",
+    },
+    "it-IT": {
       azienda: "azienda",
       prodotti: "prodotti",
       tutti_prodotti: "tutti i prodotti",
@@ -108,6 +132,71 @@ exports.createPages = async ({ graphql, actions }) => {
           nome
           professione
           cognome
+        }
+      }
+      directus {
+        Prodotti {
+          id
+          name
+          date_created
+          immagine {
+            id
+            imageFile {
+              id
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+          featured
+          translations {
+            languages_code {
+              code
+            }
+            slug
+            titolo
+            sottotitolo
+            testo_antemprima
+            paragrafo
+          }
+          applicazioni {
+            applicazioni_id {
+              id
+
+              translations {
+                id
+                label
+              }
+            }
+          }
+          categoria {
+            id
+            translations {
+              id
+              nome
+            }
+          }
+          sezioni_prodotto {
+            immagine {
+              id
+              imageFile {
+                id
+                childImageSharp {
+                  gatsbyImageData
+                }
+              }
+            }
+            prodotto_id {
+              id
+            }
+            translations {
+              languages_code {
+                code
+              }
+              titolo
+              paragrafo
+            }
+          }
         }
       }
       allWpPost {
@@ -409,7 +498,21 @@ exports.createPages = async ({ graphql, actions }) => {
     // ritorna l'array di oggetti con path, title e locale
     return path
   }
-
+  function getAllPath(translations) {
+    const allPath = []
+    translations.forEach(item => {
+      const lang = item.languages_code.code
+      const baseLang = langTag[lang] !== "it" ? langTag[lang] + "/" : "/"
+      const path = baseLang + Termini[lang].prodotti + "/" + item.slug
+      const pathObj = {
+        path: path,
+        locale: lang,
+        title: item.titolo,
+      }
+      allPath.push(pathObj)
+    })
+    return allPath
+  }
   // CREAZIONE PAGINE
   dataForLanguagePath.data.allWpPage.edges.forEach(entry => {
     if (entry.node.locale.locale === "it_IT") {
@@ -447,7 +550,7 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   // CREAZIONE PAGINE FIERE, NEWS E PRODOTTI
-
+  /* 
   const fiere = result.data.allWpFiera.edges
 
   fiere.forEach(entry => {
@@ -475,7 +578,7 @@ exports.createPages = async ({ graphql, actions }) => {
         allPagePath: allPagePath,
       },
     })
-  })
+  }) */
 
   const news = result.data.allWpPost.edges
 
@@ -506,32 +609,64 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
-  const prodotti = result.data.allWpProdotto.edges
-  prodotti.forEach(entry => {
-    const allPagePath = createPathFromMenu(
-      entry,
-      prodotti,
-      entry.node.slug,
-      entry.node.locale.locale
-    )
-    const urlBase =
-      langTag[entry.node.locale.locale] === "it"
-        ? "/"
-        : `/${langTag[entry.node.locale.locale]}/`
+  //PAGINA PRODOTTI
+  const paginaProdotto = {
+    translations: [
+      {
+        titolo: "prodotti",
+        languages_code: { code: "it-IT" },
+        slug: "prodotti",
+      },
+      {
+        titolo: "products",
+        languages_code: { code: "en-EN" },
+        slug: "products",
+      },
+    ],
+  }
 
+  const allPagePath = getAllPath(paginaProdotto.translations)
+
+  paginaProdotto.translations.forEach(translation => {
     createPage({
-      path: `${urlBase}${Termini[entry.node.locale.locale].prodotti}/${
-        entry.node.slug
+      path: `${urlBase}${Termini[translation.languages_code.code].prodotti}/${
+        translation.slug
       }`,
-      component: require.resolve("./src/templates/templateprodotto.jsx"),
+      component: require.resolve("./src/templates/prodotti.jsx"),
       context: {
-        content: entry.node,
-        locale: entry.node.locale.locale,
-        translations: entry.node.translations,
-        slug: entry.node.slug,
-        title: entry.node.title,
+        locale: translation.languages_code.code,
+        slug: translation.slug,
+        title: translation.titolo,
         allPagePath: allPagePath,
       },
+    })
+  })
+
+  // SCHEDA PRODOTTO
+  const prodottiDirectus = result.data.directus.Prodotti
+
+  prodottiDirectus.forEach(entry => {
+    const allPagePath = getAllPath(entry.translations)
+
+    entry.translations.forEach(translation => {
+      const urlBase =
+        langTag[translation.languages_code.code] === "it"
+          ? "/"
+          : `/${langTag[translation.languages_code.code]}/`
+
+      createPage({
+        path: `${urlBase}${Termini[translation.languages_code.code].prodotti}/${
+          translation.slug
+        }`,
+        component: require.resolve("./src/templates/templateprodotto.jsx"),
+        context: {
+          content: entry,
+          locale: translation.languages_code.code,
+          slug: translation.slug,
+          title: translation.titolo,
+          allPagePath: allPagePath,
+        },
+      })
     })
   })
 }

@@ -146,4 +146,30 @@ function createPathFromMenu(dataPage, dataMenu, slugPagina, defaultLanguage) {
   return path
 }
 
-export { getParentPathFromMenu, slugify, createPathFromMenu }
+function findItemTranslated(translations, langCode) {
+  const itemTranslated = translations.find(lang => {
+    const code = lang.languages_code.code
+    return langTag[code] === langTag[langCode]
+  })
+  if (!itemTranslated) {
+    throw new Error("error, traduzione non trovata")
+  }
+  return itemTranslated
+}
+function findItemsTranslated(translations, langCode) {
+  const itemTranslated = translations.filter(lang => {
+    const code = lang.languages_code.code
+    return langTag[code] === langTag[langCode]
+  })
+  if (!itemTranslated) {
+    throw new Error("error, traduzione non trovata")
+  }
+  return itemTranslated
+}
+export {
+  getParentPathFromMenu,
+  slugify,
+  createPathFromMenu,
+  findItemTranslated,
+  findItemsTranslated,
+}

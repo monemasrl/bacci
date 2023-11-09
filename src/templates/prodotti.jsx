@@ -4,55 +4,103 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
 import Tassonomie from "../components/tassonomie"
-import { Termini } from "../../data-translations"
+import { Termini, langTag } from "../../data-translations"
+import { findItemTranslated, findItemsTranslated } from "../utils"
+
 export const query = graphql`
- query($lang: String!, $postTitle: String!){
-    allWpPage(filter: {
-    title: {eq: $postTitle}
-    locale: {locale: {eq: $lang}}
-    }) {
-        edges {
-        node {
-            title
+ {
+  directus{
+    prodotto_categorie_translations{
+    languages_code{
+      code
+    }
+    nome
+  }
+  applicazioni_translations{
+      languages_code{
+        code
+      }
+      label
+    }
+  
+  Prodotti{
+    id
+    name
+    date_created
+    immagine{
+      id
+  imageFile{
+    id
+childImageSharp{
+  gatsbyImageData
+}
+  }
+      
+    }
+    featured
+    translations{
+      languages_code{
+        code
+      }
+      slug
+      titolo
+      sottotitolo
+      testo_antemprima
+      paragrafo
+      
+    }
+    applicazioni{
+      
+      applicazioni_id{
+        id
        
-            locale {
-            locale
-            }
-            translations {
-            locale
-            post_title
-            }
-            seo {
-            canonical
-            cornerstone
-            focuskw
-            fullHead
-            metaDesc
-            metaKeywords
-            metaRobotsNofollow
-            metaRobotsNoindex
-            opengraphAuthor
-            opengraphDescription
-            opengraphImage {
-              sourceUrl
-            }
-            title
-            twitterDescription
-            twitterTitle
-            opengraphModifiedTime
-            opengraphPublishedTime
-            opengraphPublisher
-            opengraphSiteName
-            opengraphTitle
-            opengraphType
-            opengraphUrl
-            readingTime
+        translations{
+          languages_code{
+            code
+          }
+          id
+           label
+        }
+      }
+      
+    }
+    categoria{
+      id
+      translations{
+        languages_code{
+            code
+          }
+        id
+        nome
+      }
+    }
+    sezioni_prodotto{
+      immagine{
+        id
+        imageFile{
+          id
+          childImageSharp{
+            gatsbyImageData
           }
         }
+      }
+      prodotto_id{
+        id
+      }
+      translations{
+        languages_code{
+          code
         }
+        titolo
+        paragrafo
+        
+      }
+      
     }
-
-    allWpProdotto(filter:{locale:{locale:{eq: $lang}}}) {
+    
+  }
+}
+    allWpProdotto(filter:{locale:{locale:{eq: "it_IT"}}}) {
     edges {
       node {
         slug
@@ -96,31 +144,34 @@ export const query = graphql`
       }
     }
   }
-
-  }
-
-`
+  }`
 const Prodotti = ({ data, location, pageContext }) => {
 
-  const langFilter = data.allWpPage.edges[0].node
-
-  const langFilterProdotto = data.allWpProdotto.edges
   const tassonomie = Tassonomie('it_IT')
   const termini = Termini.it_IT
 
+  const langFilterProdotto = data.directus.Prodotti.filter((item) => {
+    return item.translations.some((item) => {
+
+      return item.languages_code.code === pageContext.locale
+    })
+  })
+  const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.lang)
+  const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.lang)
+  console.log(pageContext, 'liste')
   // lista delle applicazioni da lista prodotto
-  let listaApplicazioni = langFilterProdotto.map((item) => item.node.prodottiApplicazioni.nodes)
+  /* let listaApplicazioni = langFilterProdotto.map((item) => item.node.prodottiApplicazioni.nodes)
   listaApplicazioni = listaApplicazioni.reduce((a, b) => { return a.concat(b) })
   listaApplicazioni = listaApplicazioni.map((item) => { return item.name })
   listaApplicazioni = listaApplicazioni.reduce(function (a, b) {
     if (a.indexOf(b) < 0) a.push(b);
     return a;
-  }, []);
+  }, []); */
 
   // lista delle categorie da lista prodotto
   /* let listaCategorie = langFilterProdotto.map((item) => item.node.prodottiCategorie.nodes)
   listaCategorie = listaCategorie.reduce((a, b) => { return a.concat(b) })
-
+ 
   listaCategorie = listaCategorie.map((item) => { return item.name })
   listaCategorie = listaCategorie.reduce(function (a, b) {
     if (a.indexOf(b) < 0) a.push(b);
@@ -178,7 +229,6 @@ const Prodotti = ({ data, location, pageContext }) => {
       })
       setFiltersApp([...filterUnchecked])
     }
-
   }
 
 
@@ -228,7 +278,7 @@ const Prodotti = ({ data, location, pageContext }) => {
 
   return (
     <>
-      <Layout pageTitle={langFilter.title} seo={langFilter.seo} locale={pageContext.lang}
+      {/*   <Layout pageTitle={pageContext.title} locale={pageContext.lang}
         allPagePath={pageContext.allPagePath} >
 
         <div className="container prodotti" ref={topArchivio}>
@@ -243,12 +293,12 @@ const Prodotti = ({ data, location, pageContext }) => {
                 <li>
                   <input type="radio" value={'reset'} name="categorie" />
                   <label for="categorie">{termini.tutti_prodotti}</label></li>
-                {tassonomie.categorie.map((item) => {
+                {listaCategorie.map((item) => {
                   return (
                     <li>
-                      <input type="radio" value={item} name="categorie"
+                      <input type="radio" value={item.nome} name="categorie"
                         checked={item === filtersCat[0]} />
-                      <label for="categorie">{item}</label>
+                      <label for="categorie">{item.nome}</label>
                     </li>)
 
                 })}
@@ -279,7 +329,7 @@ const Prodotti = ({ data, location, pageContext }) => {
 
 
         </div>
-      </Layout>
+      </Layout> */}
     </>
   )
 

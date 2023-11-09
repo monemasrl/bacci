@@ -41,10 +41,6 @@ const LayoutProdotto = ({ children, locale, pageTitle, pathName, tipo, allPagePa
       }
     }
   `)
-  const langFilter = data.allWpProdotto.edges.filter((item) => {
-
-    return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
-  })[0].node
 
   return (
     <div className="mainwrapper">
