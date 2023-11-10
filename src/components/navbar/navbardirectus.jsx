@@ -6,34 +6,12 @@ import { StaticImage } from "gatsby-plugin-image"
 import MegamenuDirectus from '../megamenu/megamenudir'
 import { Termini, langTag } from '../../../data-translations'
 import './navbar.scss'
-import { getParentPathFromMenu, createPathFromMenu } from '../../utils'
-
-
-function getSlugFromHref(tHref) {
-    const arrayFromHref = tHref.split("/").slice(-2)
-    return arrayFromHref[0]
-}
 
 const NavBarDirectus = (props) => {
 
     const data = useStaticQuery(graphql`
     query datimenu{
-        allWpPage{
-            edges {
-                node{
-                    title
-                    slug
-                    locale {
-                        locale
-                    }
-                    translations{
-                    locale
-                    post_title
-                    href
-                  }
-                }
-            }
-        }
+   
         directus{
             menus{
                 name
@@ -62,44 +40,15 @@ const NavBarDirectus = (props) => {
                 }
             }
             }
-        allWpMenu {
-                edges {
-                node {
-                    language
-                    menuItems {
-                    nodes {
-                        id
-                        label
-                        parentId
-                        path
-                        childItems {
-                          nodes {
-                            label
-                            path
-                         parentId
-                          }
-                        }
-                        menu {
-                        node {
-                            language
-                        }
-                        }
-                        menuCampi {
-                              megamenu
-                            }
-                    }
-                    }
-                }
-                }
-            }
+    
             }
     `)
 
 
     const terminiTraduzione = Termini[props.locale]
     console.log(data.directus.menus, 'directus')
-    console.log(data.allWpMenu.edges, 'wp menu')
-    console.log(createPathFromMenu(data.allWpPage.edges, data.allWpMenu.edges, 'home', 'it_IT'), 'test')
+
+
     return (
         <>
             <nav className="container-fluid top-menu">

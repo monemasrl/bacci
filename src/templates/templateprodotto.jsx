@@ -50,7 +50,7 @@ const Prodotto = ({ pageContext }) => {
 
                     })}
                     <SoftwareProduct locale={locale} />
-                    <Correlati locale={locale} applicazioni={content.prodottiApplicazioni} limiteVisualizzazione={3} />
+                    {/*  <Correlati locale={locale} applicazioni={content.prodottiApplicazioni} limiteVisualizzazione={3} /> */}
                 </div>
             </LayoutProdotto>
         </>

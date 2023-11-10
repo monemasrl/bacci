@@ -24,7 +24,6 @@ function getParentPathFromMenu(locale, title, dataMenu) {
           title.toLowerCase() === item.label.toLowerCase() &&
           item.parentId !== null
         ) {
-          console.log("getParentPathFromMenu", locale, title, dataMenu)
           idPath = item.parentId
         }
       })

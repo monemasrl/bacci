@@ -10,37 +10,7 @@ import ScrollTo from "../scrollTo"
 let slugify = require('slugify')
 
 const LayoutProdotto = ({ children, locale, pageTitle, pathName, tipo, allPagePath }) => {
-  const data = useStaticQuery(graphql`
-    {
-      site {
-        siteMetadata {
-          title
-        }
-      }
 
-      allWpProdotto {
-        edges {
-          node {
-            title
-            slug
-            content
-            locale {
-              locale
-            }
-            translations {
-              href
-              id
-              locale
-              post_title
-            }
-            translated {
-               id
-            }
-          }
-        }
-      }
-    }
-  `)
 
   return (
     <div className="mainwrapper">

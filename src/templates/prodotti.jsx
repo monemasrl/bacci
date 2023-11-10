@@ -100,65 +100,21 @@ childImageSharp{
     
   }
 }
-    allWpProdotto(filter:{locale:{locale:{eq: "it_IT"}}}) {
-    edges {
-      node {
-        slug
-        title
-        locale {
-              locale
-            }
-        prodotto {
-          paragrafo
-          sottotitolo
-          immagine {
-            altText
-            localFile {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 380
-                placeholder: BLURRED
-                formats: [AUTO, WEBP, AVIF]
-
-                )
-              }
-            }
-          }
-        }
-        prodottiCategorie {
-          nodes {
-            name
-          }
-        }
-        prodottiApplicazioni {
-          nodes {
-            name
-          }
-        }
-        translations {
-              href
-              id
-              locale
-              post_title
-            }
-      }
-    }
-  }
   }`
 const Prodotti = ({ data, location, pageContext }) => {
 
   const tassonomie = Tassonomie('it_IT')
   const termini = Termini.it_IT
 
-  const langFilterProdotto = data.directus.Prodotti.filter((item) => {
-    return item.translations.some((item) => {
+  const langFilterProdotto = data.directus.Prodotti.filter((itema) => {
+    return itema.translations.some((item) => {
 
-      return item.languages_code.code === pageContext.locale
+      return langTag[item.languages_code.code] === langTag[pageContext.locale]
     })
   })
-  const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.lang)
-  const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.lang)
-  console.log(pageContext, 'liste')
+  const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
+  const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+  console.log(listaCategorie, 'locale')
   // lista delle applicazioni da lista prodotto
   /* let listaApplicazioni = langFilterProdotto.map((item) => item.node.prodottiApplicazioni.nodes)
   listaApplicazioni = listaApplicazioni.reduce((a, b) => { return a.concat(b) })
@@ -194,6 +150,20 @@ const Prodotti = ({ data, location, pageContext }) => {
   const [filtersCat, setFiltersCat] = React.useState(() => [])
   const [filtersApp, setFiltersApp] = React.useState(() => [])
   const [filtersSearch, setFiltersSearch] = React.useState()
+  const [resultFilter, setResutlFilter] = React.useState()
+
+  React.useEffect(() => {
+    if (langFilterProdotto && pageContext.lang) {
+
+      let filteredCat = langFilterProdotto.filter((prodotto) => {
+        const categoriaLang = []
+        const filterResultCat = categoriaLang.nome === filtersCat[0]
+        return filtersCat.length > 0 && filterResultCat
+      });
+      setResutlFilter((prev) => langFilterProdotto)
+    }
+
+  }, [filtersCat])
 
   // setta il valore del campo ricerca nello stato  
   const onChangeText = (evt) => {
@@ -233,21 +203,24 @@ const Prodotti = ({ data, location, pageContext }) => {
 
 
   const Categorie = () => {
-    // filtra prodotti per tag applicazioni
-    const filtersResultApp = langFilterProdotto.filter((item) => {
-      return filtersApp.length > 0 && item.node.prodottiApplicazioni.nodes.some((item) => {
-        return filtersApp.includes(item.name)
+    // filtra prodotti che hanno tra le  applicazioni i filtri selezionati dentro filtersApp
+    const filtersResultApp = langFilterProdotto.filter((itema) => {
+
+      return filtersApp.length > 0 && itema.applicazioni.translations.some((item) => {
+        return filtersApp.includes(item.label)
       })
     })
+    console.log(langFilterProdotto, 'test')
     // filtra prodotti per categorie
     let filteredCat = langFilterProdotto.filter((prodotto) => {
-      const filterResultCat = prodotto.node.prodottiCategorie.nodes[0].name === filtersCat[0]
+      const categoriaLang = findItemTranslated(prodotto.categoria.translations, pageContext.locale)
+      const filterResultCat = categoriaLang.nome === filtersCat[0]
       return filtersCat.length > 0 && filterResultCat
     });
     // filtra prodotti per campo di ricerca
 
     let campoRicerca = langFilterProdotto.filter((prodotto) => {
-      let filterResultSearch = prodotto.node.title.toLowerCase()
+      let filterResultSearch = prodotto.name.toLowerCase()
       filterResultSearch = filterResultSearch.includes(filtersSearch)
       return filterResultSearch && filterResultSearch
     })
@@ -266,19 +239,18 @@ const Prodotti = ({ data, location, pageContext }) => {
 
       concatArray = concatArray.filter((thing, index, self) =>
         index === self.findIndex((t) => (
-          t.node.title === thing.node.title
+          t.name === thing.name
         ))
       )
-
       return concatArray
     }
   }
-
+  console.log(Categorie())
   const topArchivio = React.useRef()
 
   return (
     <>
-      {/*   <Layout pageTitle={pageContext.title} locale={pageContext.lang}
+      <Layout pageTitle={pageContext.title} locale={pageContext.locale}
         allPagePath={pageContext.allPagePath} >
 
         <div className="container prodotti" ref={topArchivio}>
@@ -294,16 +266,18 @@ const Prodotti = ({ data, location, pageContext }) => {
                   <input type="radio" value={'reset'} name="categorie" />
                   <label for="categorie">{termini.tutti_prodotti}</label></li>
                 {listaCategorie.map((item) => {
+
                   return (
                     <li>
                       <input type="radio" value={item.nome} name="categorie"
-                        checked={item === filtersCat[0]} />
+                        checked={item.nome === filtersCat[0]} />
                       <label for="categorie">{item.nome}</label>
                     </li>)
 
                 })}
               </ul>
             </form>
+
             <form className="filters" onChange={(e) => onChangeCheckboxApplicazioni(e)}>
               <h3>Applicazioni</h3>
               <ul>
@@ -311,8 +285,8 @@ const Prodotti = ({ data, location, pageContext }) => {
                 {listaApplicazioni.map((item, index) => {
                   return (
                     <li>
-                      <input type="checkbox" value={item} name="applicazioni" />
-                      <label for="applicazioni">{item}</label>
+                      <input type="checkbox" value={item.label} name="applicazioni" />
+                      <label for="applicazioni">{item.label}</label>
                     </li>)
 
                 })}
@@ -322,14 +296,14 @@ const Prodotti = ({ data, location, pageContext }) => {
           </div>
           <div className="container col-dx">
 
-            {<GridPagination archivio={Categorie()} loading={false} topArchivio={topArchivio} />}
 
+            {<GridPagination archivio={Categorie()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} />}
           </div>
 
 
 
         </div>
-      </Layout> */}
+      </Layout>
     </>
   )
 

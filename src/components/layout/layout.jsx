@@ -20,39 +20,7 @@ import ScrollTo from "../scrollTo"
 
 const Layout = ({ children, locale, pageTitle, seo, allPagePath }) => {
 
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-      allWpPage{
-        edges {
-          node {
-            locale{
-              locale
-            }
-            title
-            pathPagine {
-                    path
-                }
-            translated {
-                pathPagine {
-                    path
-                }
-            }
-
-          }
-        }
-      }
-    }
-  `)
-
-  const langFilter = data.allWpPage.edges.filter((item) => {
-    return (((item.node.locale.locale === locale) && (item.node.title === pageTitle)))
-  })[0].node
-
+  console.log(allPagePath, 'allpagepath')
 
 
   return (
@@ -63,8 +31,6 @@ const Layout = ({ children, locale, pageTitle, seo, allPagePath }) => {
         <Header
           locale={locale}
           pageTitle={pageTitle}
-          pathName={langFilter.translated[0] ? langFilter.translated[0].pathPagine.path : ''}
-          currentPath={langFilter.pathPagine.path}
           allPagePath={allPagePath}
         />
 
