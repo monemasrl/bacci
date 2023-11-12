@@ -9,14 +9,13 @@ import { findItemTranslated } from "../utils"
 
 
 const GridPagination = ({ archivio, topArchivio, lang }) => {
-    console.log(archivio, 'archivio')
     const [posts, setPosts] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostPerPage] = useState(2)
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirsPost = indexOfLastPost - postsPerPage
     const currentPosts = (indexOfLastPost && indexOfFirsPost && (posts.length > 2)) ? posts.slice(indexOfFirsPost, indexOfLastPost) : posts
-    console.log(posts, 'currentPosts')
+
     useEffect(() => {
         setPosts(archivio)
     }, [])

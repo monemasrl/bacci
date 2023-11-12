@@ -105,7 +105,7 @@ const Prodotti = ({ data, location, pageContext }) => {
 
 
   const termini = Termini.it_IT
-  console.log(data, 'data')
+
   const langFilterProdotto = data.directus.Prodotti.filter((itema) => {
     return itema.translations.some((item) => {
       return langTag[item.languages_code.code] === langTag[pageContext.locale]
@@ -113,58 +113,34 @@ const Prodotti = ({ data, location, pageContext }) => {
   })
   const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
   const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+  // variabili stato
+  const [filtersCat, setFiltersCat] = React.useState(() => [])
+  const [filtersApp, setFiltersApp] = React.useState(() => [])
+  const [filtersSearch, setFiltersSearch] = React.useState()
+  console.log(filtersApp, filtersCat, filtersSearch, 'filters')
 
 
-  // lista delle applicazioni da lista prodotto
-  /* let listaApplicazioni = langFilterProdotto.map((item) => item.node.prodottiApplicazioni.nodes)
-  listaApplicazioni = listaApplicazioni.reduce((a, b) => { return a.concat(b) })
-  listaApplicazioni = listaApplicazioni.map((item) => { return item.name })
-  listaApplicazioni = listaApplicazioni.reduce(function (a, b) {
-    if (a.indexOf(b) < 0) a.push(b);
-    return a;
-  }, []); */
-
-  // lista delle categorie da lista prodotto
-  /* let listaCategorie = langFilterProdotto.map((item) => item.node.prodottiCategorie.nodes)
-  listaCategorie = listaCategorie.reduce((a, b) => { return a.concat(b) })
- 
-  listaCategorie = listaCategorie.map((item) => { return item.name })
-  listaCategorie = listaCategorie.reduce(function (a, b) {
-    if (a.indexOf(b) < 0) a.push(b);
-    return a;
-  }, []); */
-
-  // Mantenere il filtro quando si accede da link esterno
+  // Mantenere il filtro quando si accede da link esterno e resettarlo al cambio di pagina (unmount)
 
   React.useEffect(() => {
 
-    if (location.state && location.state.categoria) {
-      setFiltersCat([location.state.categoria])
+    if (location.state && (location.state.categoria || location.state.applicazione)) {
+      location.state.categoria && setFiltersCat([location.state.categoria])
+      location.state.applicazione && setFiltersApp([location.state.applicazione])
+    } else {
+      setFiltersCat([])
+      setFiltersApp([])
+    }
+    return () => {
+      setFiltersCat([])
+      setFiltersApp([])
     }
 
   }, [location.state])
 
 
 
-  // variabili stato
-  const [filtersCat, setFiltersCat] = React.useState(() => [])
-  const [filtersApp, setFiltersApp] = React.useState(() => [])
-  const [filtersSearch, setFiltersSearch] = React.useState()
-  const [resultFilter, setResutlFilter] = React.useState()
-
-  React.useEffect(() => {
-    if (langFilterProdotto && pageContext.lang) {
-
-      let filteredCat = langFilterProdotto.filter((prodotto) => {
-        const categoriaLang = []
-        const filterResultCat = categoriaLang.nome === filtersCat[0]
-        return filtersCat.length > 0 && filterResultCat
-      });
-      setResutlFilter((prev) => langFilterProdotto)
-    }
-
-  }, [filtersCat])
-
+  console.log(location.state, 'location state')
   // setta il valore del campo ricerca nello stato  
   const onChangeText = (evt) => {
     if (evt.target.value === '') {
@@ -174,12 +150,12 @@ const Prodotti = ({ data, location, pageContext }) => {
     }
   }
 
-
   // setta il valore dei filtri nello stato
   const onChangeCheckboxCategorie = (evt) => {
 
     if (evt.target.value === 'reset') {
       setFiltersCat([])
+
     } else {
       setFiltersCat([evt.target.value])
     }
@@ -189,6 +165,7 @@ const Prodotti = ({ data, location, pageContext }) => {
   const onChangeCheckboxApplicazioni = (evt) => {
 
     // se il filtro è check crea l'array
+
     if (evt.target.checked) {
       setFiltersApp([...filtersApp, evt.target.value])
     } else {
@@ -204,7 +181,7 @@ const Prodotti = ({ data, location, pageContext }) => {
 
   const Categorie = () => {
     // filtra prodotti che hanno tra le  applicazioni i filtri selezionati dentro filtersApp
-    console.log(filtersApp, 'filtersApp')
+
     const filtersResultApp = langFilterProdotto.filter((itema) => {
 
       return filtersApp.length > 0 && itema.applicazioni.some((itemb) => {
@@ -274,7 +251,7 @@ const Prodotti = ({ data, location, pageContext }) => {
             <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
               <ul>
                 <li>
-                  <input type="radio" value={'reset'} name="categorie" />
+                  <input type="radio" checked={filtersCat.length === 0} value={'reset'} name="categorie" />
                   <label for="categorie">{termini.tutti_prodotti}</label></li>
                 {listaCategorie.map((item) => {
 
@@ -288,21 +265,21 @@ const Prodotti = ({ data, location, pageContext }) => {
                 })}
               </ul>
             </form>
-
-            <form className="filters" onChange={(e) => onChangeCheckboxApplicazioni(e)}>
+            <div className="filters">
               <h3>Applicazioni</h3>
-              <ul>
-
-                {listaApplicazioni.map((item, index) => {
-                  return (
-                    <li>
-                      <input type="checkbox" value={item.label} name="applicazioni" />
-                      <label for="applicazioni">{item.label}</label>
-                    </li>)
-
-                })}
-              </ul>
-            </form>
+              <button onClick={() => setFiltersApp([])}> Tutte le applicazioni</button>
+              <form onChange={(e) => onChangeCheckboxApplicazioni(e)}>
+                <ul>
+                  {listaApplicazioni.map((item, index) => {
+                    return (
+                      <li>
+                        <input type="checkbox" checked={filtersApp.includes(item.label)} value={item.label} id={item.label} name="applicazioni" />
+                        <label htmlFor={item.label}>{item.label}</label>
+                      </li>)
+                  })}
+                </ul>
+              </form>
+            </div>
 
           </div>
           <div className="container col-dx">
@@ -321,65 +298,3 @@ const Prodotti = ({ data, location, pageContext }) => {
 }
 
 export default Prodotti
-
-
-
-
-
-/*   
-const onChangeCheckboxApplicazioni = (evt) => {
- setToggleFilterTag(true)
- setToggleFilterCat(false)
- 
- // se il filtro è check crea l'array
- if (evt.target.checked) {
-   setFiltersApp([...filtersApp, evt.target.value])
- } else {
- 
-   // se il filtro è uncheck togli il record dall'array
-   const filterUnchecked = filtersApp.filter((item) => {
-     return item !== evt.target.value
-   })
- 
-   setFiltersApp([...filterUnchecked])
- }
- 
-} */
-
-
-
-{/* 
-<form className="filters" onChange={(e) => onChangeCheckboxApplicazioni(e)}>
-  <ul>
-
-    {listaApplicazioni.map((item, index) => {
-
-      return (
-        <li>
-          <input type="checkbox" value={item} name="applicazioni" />
-          <label for="applicazioni">{item}</label>
-
-        </li>)
-
-    })}
-  </ul>
-</form> */}
-
-
-/*
-const Applicazioni = () => {
-
-  const filterProductApp = () => {
-    const result = langFilterProdotto.filter((item) => {
-      return item.node.prodottiApplicazioni.nodes.some((item) => {
-
-        return filtersApp.includes(item.name)
-      })
-    })
-    return result
-  }
-
-
-  return filterProductApp()
-
-} */

@@ -11,8 +11,8 @@ module.exports = {
   siteMetadata: {
     title: `Bacci COM`,
     description: `Bacci COM`,
-    author: `Tesecom`,
-    siteUrl: `https://bacci-bedrock.monema.dev/`,
+    author: `Monema.srl`,
+    siteUrl: `https://bacci.com/`,
   },
   plugins: [
     `gatsby-plugin-sass`,
