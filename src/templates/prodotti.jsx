@@ -101,9 +101,32 @@ childImageSharp{
   }
 }
   }`
+
+
 const Prodotti = ({ data, location, pageContext }) => {
 
 
+
+  /**
+   * Description placeholder
+   * @date 12/11/2023 - 12:12:36
+   * @var data - data from graphql query
+   * @var location - location from gatsby
+   * @var pageContext - pageContext from gatsby
+   * @var langFilterProdotto - filter prodotti by language
+   * @var listaApplicazioni - Lista applicazioni filtrata per lingua
+   * @var listaCategorie - Lista applicazioni filtrata per lingua
+   * --- state ---
+   * @var filtersCat - state for categorie filter
+   * @var filtersApp - state for applicazioni filter
+   * @var filtersSearch - state for search filter
+   * --- functions ---
+   * @function onChangeText - set state for search filter
+   * @function onChangeCheckboxCategorie - set state for categorie filter
+   * @function onChangeCheckboxApplicazioni - set state for applicazioni filter
+   * @function resultFromFilters - filter prodotti by categorie applicazioni and search
+   * @type {*}
+   */
   const termini = Termini.it_IT
 
   const langFilterProdotto = data.directus.Prodotti.filter((itema) => {
@@ -117,13 +140,12 @@ const Prodotti = ({ data, location, pageContext }) => {
   const [filtersCat, setFiltersCat] = React.useState(() => [])
   const [filtersApp, setFiltersApp] = React.useState(() => [])
   const [filtersSearch, setFiltersSearch] = React.useState()
-  console.log(filtersApp, filtersCat, filtersSearch, 'filters')
 
 
   // Mantenere il filtro quando si accede da link esterno e resettarlo al cambio di pagina (unmount)
 
   React.useEffect(() => {
-
+    // se il filtro è passato da link esterno setta i filtri nello stato corrispondente.
     if (location.state && (location.state.categoria || location.state.applicazione)) {
       location.state.categoria && setFiltersCat([location.state.categoria])
       location.state.applicazione && setFiltersApp([location.state.applicazione])
@@ -131,16 +153,14 @@ const Prodotti = ({ data, location, pageContext }) => {
       setFiltersCat([])
       setFiltersApp([])
     }
+    // all'unmount resetta i filtri
     return () => {
       setFiltersCat([])
       setFiltersApp([])
     }
-
   }, [location.state])
 
 
-
-  console.log(location.state, 'location state')
   // setta il valore del campo ricerca nello stato  
   const onChangeText = (evt) => {
     if (evt.target.value === '') {
@@ -150,26 +170,22 @@ const Prodotti = ({ data, location, pageContext }) => {
     }
   }
 
-  // setta il valore dei filtri nello stato
+  // setta il valore dei filtri della categoria nello stato filtersCat 
   const onChangeCheckboxCategorie = (evt) => {
-
     if (evt.target.value === 'reset') {
+      // se il filtro è reset resetta l'array
       setFiltersCat([])
-
     } else {
       setFiltersCat([evt.target.value])
     }
-
   }
 
+  // setta il valore dei filtri della applicazione nello stato filtersApp 
   const onChangeCheckboxApplicazioni = (evt) => {
-
-    // se il filtro è check crea l'array
-
+    // se il filtro è check crea o aggiorna l'array 
     if (evt.target.checked) {
       setFiltersApp([...filtersApp, evt.target.value])
     } else {
-
       // se il filtro è uncheck togli il record dall'array
       const filterUnchecked = filtersApp.filter((item) => {
         return item !== evt.target.value
@@ -179,44 +195,41 @@ const Prodotti = ({ data, location, pageContext }) => {
   }
 
 
-  const Categorie = () => {
-    // filtra prodotti che hanno tra le  applicazioni i filtri selezionati dentro filtersApp
-
+  const resultFromFilters = () => {
+    // Se ci sono filtri per applicazioni filtra i prodotti per applicazioni
     const filtersResultApp = langFilterProdotto.filter((itema) => {
-
       return filtersApp.length > 0 && itema.applicazioni.some((itemb) => {
-
         return itemb.applicazioni_id.translations.some((itemc) => {
-
           return filtersApp.includes(itemc.label)
         })
       })
     })
 
-    // filtra prodotti per categorie
+    // Se ci sono filtri per categorie filtra i prodotti per categorie
     let filteredCat = langFilterProdotto.filter((prodotto) => {
       const categoriaLang = findItemTranslated(prodotto.categoria.translations, pageContext.locale)
       const filterResultCat = categoriaLang.nome === filtersCat[0]
       return filtersCat.length > 0 && filterResultCat
     });
-    // filtra prodotti per campo di ricerca
 
+    // filtra prodotti per campo di ricerca
     let campoRicerca = langFilterProdotto.filter((prodotto) => {
       let filterResultSearch = prodotto.name.toLowerCase()
       filterResultSearch = filterResultSearch.includes(filtersSearch)
       return filterResultSearch && filterResultSearch
     })
 
-
     // se i filtri sono vuoti renderizza tutti i prodotti altrimenti concatena i due array
     // elimina gli elementi duplicati e ritorna l'array
     if (campoRicerca.length > 0) {
+      // se il cammpo di ricerca ha un valore ritorna i prodotti filtrati
       return campoRicerca
-
-    }
-    else if (filtersApp.length === 0 && filtersCat.length === 0) {
+    } else if (filtersApp.length === 0 && filtersCat.length === 0) {
+      // se non ci sono filtri ritorna tutti i prodotti
       return langFilterProdotto
     } else {
+      // concatena i due array di prodotti filtrati per categoria e applicazione e ritorna l'array
+
       let concatArray = filteredCat.concat(filtersResultApp)
 
       concatArray = concatArray.filter((thing, index, self) =>
@@ -238,7 +251,6 @@ const Prodotti = ({ data, location, pageContext }) => {
         allPagePath={pageContext.allPagePath}
         listaApplicazioni={listaApplicazioni}
         listaCategorie={listaCategorie}
-
       >
 
         <div className="container prodotti" ref={topArchivio}>
@@ -285,7 +297,7 @@ const Prodotti = ({ data, location, pageContext }) => {
           <div className="container col-dx">
 
 
-            {<GridPagination archivio={Categorie()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} />}
+            {<GridPagination archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} />}
           </div>
 
 
