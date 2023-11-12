@@ -6,10 +6,7 @@ import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
 
-
-let slugify = require('slugify')
-
-const LayoutProdotto = ({ children, locale, pageTitle, pathName, tipo, allPagePath }) => {
+const LayoutProdotto = ({ listaApplicazioni, listaCategorie, children, locale, pageTitle, pathName, tipo, allPagePath }) => {
 
 
   return (
@@ -23,6 +20,8 @@ const LayoutProdotto = ({ children, locale, pageTitle, pathName, tipo, allPagePa
           pathName={pathName}
           tipo={tipo}
           allPagePath={allPagePath}
+          listaApplicazioni={listaApplicazioni}
+          listaCategorie={listaCategorie}
         />
       </div>
 

@@ -1,13 +1,12 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion"
-import Tassonomie from "../tassonomie";
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, Link, graphql } from "gatsby";
 import { Termini, langTag } from "../../../data-translations";
 import { findItemTranslated } from "../../utils";
 import './megamenu.scss'
 
-const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language }) => {
+const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, listaApplicazioni, listaCategorie }) => {
 
 
     /**
@@ -94,65 +93,10 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language }
                     
                 }
             }
-                allWpProdotto {
-                    edges {
-                    node {
-                        date
-                        slug
-                        prodotto {
-                        paragrafo
-                        sottotitolo
-                        testoAnteprima
-                        sezioniProdotto {
-                            paragrafo 
-                            titolo
-                        }
-                        inEvidenza
-                        immagine{
-                            altText
-                            localFile {
-                            childImageSharp {
-                                gatsbyImageData(
-                                width: 422
-                                placeholder: BLURRED
-                                formats: [AUTO, WEBP, AVIF]
-
-                                )
-                            }
-                            }
-                        }
-                        }
-                        locale{locale}
-                        title
-                        translated {
-                        prodottiApplicazioni {
-                            nodes {
-                            name
-                            }
-                        }
-                        translations {
-                            id
-                        }
-                        translated {
-                            prodotto {
-                            sezioniProdotto {
-                                paragrafo
-                                titolo
-                            }
-                            }
-                        }
-                        }
-                    }
-                    }
-                }
-
             }`)
 
 
-    const tassonomie = Tassonomie(locale)
-    const langFilterProdotto = dataMega.allWpProdotto.edges.filter((item) => {
-        return (item.node.locale.locale === locale)
-    })
+
 
     const novita = dataMega.directus.Prodotti.sort((item) => item.date_create)
 
@@ -160,7 +104,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language }
     const inEvidenzaLocalizzato = findItemTranslated(inEvidenza[0].translations, locale)
     const novitaLocalizzato = findItemTranslated(novita[0].translations, locale)
 
-    console.log(novitaLocalizzato, 'novitaLocalizzato')
+
     return (
 
         <AnimatePresence>
@@ -240,19 +184,11 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language }
                                 APPLICAZIONE
                             </div>
                             <ul className="mega-list">
-                                <li>Fresatura</li>
-                                <li>Mortasa | Telone</li>
-                                <li>Doppie teste</li>
-                                <li>Tornitura</li>
-                                <li>TAVOLI E PANNELLI</li>
-                                <li>DIVANI</li>
-                                <li>ANTINE</li>
-                                <li>PORTE E FINESTRE</li>
-                                <li>ARTICOLI SPORTIVI</li>
-                                <li>STRUMENTI MUSICALI</li>
-                                <li>COFANI</li>
-                                <li>TORNITURA</li>
-                                <li>LETTINI</li>
+                                {listaApplicazioni.map((item) =>
+                                    <li>
+                                        <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`} state={{ applicazione: item.label }}
+                                            className="mega-item">{item.label}</Link></li>
+                                )}
                             </ul>
                         </motion.div>
                         <motion.div className="col-mega" initial={{ opacity: 0, x: -100 }}
@@ -267,9 +203,9 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language }
                                 TIPOLOGIA
                             </div>
                             <ul className="mega-list">
-                                {tassonomie.categorie.map((item) => <li>
-                                    <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`} state={{ categoria: item }}
-                                        className="mega-item">{item}</Link></li>
+                                {listaCategorie.map((item) => <li>
+                                    <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`} state={{ categoria: item.nome }}
+                                        className="mega-item">{item.nome}</Link></li>
                                 )}
                             </ul>
 

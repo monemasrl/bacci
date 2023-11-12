@@ -5,7 +5,7 @@ import NavBarMobile from "./navbar/navbarMobile"
 import Breadcrumb from "./breadcrumb/breadCrumb"
 import NavBarDirectus from "./navbar/navbardirectus"
 
-const Header = ({ locale, pageTitle, currentPath, nodeType, tipo, allPagePath }) => {
+const Header = ({ locale, pageTitle, currentPath, nodeType, tipo, allPagePath, listaApplicazioni, listaCategorie }) => {
 
   const [mega, setMega] = React.useState(false)
 
@@ -14,7 +14,14 @@ const Header = ({ locale, pageTitle, currentPath, nodeType, tipo, allPagePath })
   return (
     <header>
 
-      <NavBarDirectus locale={locale} mega={mega} setMega={setMega} allPagePath={allPagePath} />
+      <NavBarDirectus
+        locale={locale}
+        mega={mega}
+        setMega={setMega}
+        allPagePath={allPagePath}
+        listaApplicazioni={listaApplicazioni}
+        listaCategorie={listaCategorie}
+      />
 
       {/*  <NavBarMobile locale={locale} allPagePath={allPagePath} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} /> */}
 

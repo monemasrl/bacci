@@ -1,15 +1,34 @@
 import React from "react";
 import LayoutProdotto from "../components/layout/layout-prodotto";
 import { GatsbyImage } from "gatsby-plugin-image";
-import SoftwareProduct from "../components/SoftwareProduct/SoftwareProduct";
+import SoftwareProduct from "../components/SoftwareProduct/SoftwareProduct.jsx";
 import Correlati from "../components/widgets/correlati";
-import { findItemTranslated } from "../utils";
+import { findItemTranslated, findItemsTranslated } from "../utils";
+import { graphql } from "gatsby"
 
-const Prodotto = ({ pageContext }) => {
-
+export const query = graphql`
+ query{
+  directus{
+    prodotto_categorie_translations{
+    languages_code{
+      code
+    }
+    nome
+  }
+  applicazioni_translations{
+      languages_code{
+        code
+      }
+      label
+    }
+}
+  }`
+const Prodotto = ({ data, pageContext }) => {
+    console.log(data.directus, 'testdata')
     const { locale, parentPath, content, title, allPagePath } = pageContext
     const dataProdottoTranslated = findItemTranslated(content.translations, locale)
-
+    const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
+    const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
 
     return (
         <>
@@ -19,6 +38,8 @@ const Prodotto = ({ pageContext }) => {
                 pathName={parentPath}
                 tipo='prodotto'
                 allPagePath={allPagePath}
+                listaApplicazioni={listaApplicazioni}
+                listaCategorie={listaCategorie}
             >
 
                 <div className="container prodotto">

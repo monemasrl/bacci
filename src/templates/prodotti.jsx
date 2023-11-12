@@ -3,12 +3,12 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
-import Tassonomie from "../components/tassonomie"
+
 import { Termini, langTag } from "../../data-translations"
 import { findItemTranslated, findItemsTranslated } from "../utils"
 
 export const query = graphql`
- {
+ query{
   directus{
     prodotto_categorie_translations{
     languages_code{
@@ -103,18 +103,18 @@ childImageSharp{
   }`
 const Prodotti = ({ data, location, pageContext }) => {
 
-  const tassonomie = Tassonomie('it_IT')
-  const termini = Termini.it_IT
 
+  const termini = Termini.it_IT
+  console.log(data, 'data')
   const langFilterProdotto = data.directus.Prodotti.filter((itema) => {
     return itema.translations.some((item) => {
-
       return langTag[item.languages_code.code] === langTag[pageContext.locale]
     })
   })
   const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
   const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
-  console.log(listaCategorie, 'locale')
+
+
   // lista delle applicazioni da lista prodotto
   /* let listaApplicazioni = langFilterProdotto.map((item) => item.node.prodottiApplicazioni.nodes)
   listaApplicazioni = listaApplicazioni.reduce((a, b) => { return a.concat(b) })
@@ -204,13 +204,18 @@ const Prodotti = ({ data, location, pageContext }) => {
 
   const Categorie = () => {
     // filtra prodotti che hanno tra le  applicazioni i filtri selezionati dentro filtersApp
+    console.log(filtersApp, 'filtersApp')
     const filtersResultApp = langFilterProdotto.filter((itema) => {
 
-      return filtersApp.length > 0 && itema.applicazioni.translations.some((item) => {
-        return filtersApp.includes(item.label)
+      return filtersApp.length > 0 && itema.applicazioni.some((itemb) => {
+
+        return itemb.applicazioni_id.translations.some((itemc) => {
+
+          return filtersApp.includes(itemc.label)
+        })
       })
     })
-    console.log(langFilterProdotto, 'test')
+
     // filtra prodotti per categorie
     let filteredCat = langFilterProdotto.filter((prodotto) => {
       const categoriaLang = findItemTranslated(prodotto.categoria.translations, pageContext.locale)
@@ -245,13 +250,19 @@ const Prodotti = ({ data, location, pageContext }) => {
       return concatArray
     }
   }
-  console.log(Categorie())
+
   const topArchivio = React.useRef()
 
   return (
     <>
-      <Layout pageTitle={pageContext.title} locale={pageContext.locale}
-        allPagePath={pageContext.allPagePath} >
+      <Layout
+        pageTitle={pageContext.title}
+        locale={pageContext.locale}
+        allPagePath={pageContext.allPagePath}
+        listaApplicazioni={listaApplicazioni}
+        listaCategorie={listaCategorie}
+
+      >
 
         <div className="container prodotti" ref={topArchivio}>
           <div className="container col-sx">

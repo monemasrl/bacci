@@ -5,36 +5,36 @@ import './lastFiere.scss'
 import { Link } from "gatsby";
 
 const LastFiere = ({ locale, limiteVisualizzazione }) => {
-  const data = useStaticQuery(graphql`
-    {
-          allWpFiera {
-            edges {
-            node {
-                fiere {
-                dataDa
-                dataA
-                luogo
-                link
-                }
-                title
-                slug
-                locale {
-              locale
-            }
-            }
-            }
+  /*   const data = useStaticQuery(graphql`
+      {
+            allWpFiera {
+              edges {
+              node {
+                  fiere {
+                  dataDa
+                  dataA
+                  luogo
+                  link
+                  }
+                  title
+                  slug
+                  locale {
+                locale
+              }
+              }
+              }
+        }
       }
-    }
-  `)
-
-  let langFilterProdotto = data.allWpFiera.edges.filter((item) => {
-    return (item.node.locale.locale === 'it_IT')
-  })
-  langFilterProdotto = langFilterProdotto.slice(0, limiteVisualizzazione)
-
+    `)
+  
+    let langFilterProdotto = data.allWpFiera.edges.filter((item) => {
+      return (item.node.locale.locale === 'it_IT')
+    })
+    langFilterProdotto = langFilterProdotto.slice(0, limiteVisualizzazione)
+   */
   return (
     <>
-      <section className="container widget-fiere">
+      {/*   <section className="container widget-fiere">
         <h2>{Termini[locale].eventi}</h2>
         <div className="widget-fiere-wrapper">
           {langFilterProdotto.map((item) => {
@@ -54,7 +54,7 @@ const LastFiere = ({ locale, limiteVisualizzazione }) => {
             )
           })}
         </div>
-      </section>
+      </section> */}
     </>
   )
 }

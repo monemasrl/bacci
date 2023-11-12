@@ -17,30 +17,6 @@ module.exports = {
   plugins: [
     `gatsby-plugin-sass`,
     `gatsby-plugin-sitemap`,
-    {
-      resolve: `gatsby-source-wordpress`,
-      options: {
-        // Specify the URL of the WordPress source
-        // baseURL: `localhost:8888`,
-        // options: {
-        //   verbose: true,
-        // },
-        url: `https://bacci-bedrock.monema.dev/wp/graphql`,
-        // protocol: `http`,
-        // Indicates if a site is hosted on WordPress.com
-        // hostingWPCOM: false,
-        // Specify which URL structures to fetch
-        // includedRoutes: [
-        //   '**/posts',
-        //   '**/tags',
-        //   '**/categories'
-        // ]
-      },
-      schema: {
-        timeout: 100000,
-        requestConcurrency: 5,
-      },
-    },
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,

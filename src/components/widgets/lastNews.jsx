@@ -6,7 +6,7 @@ import './lastNews.scss'
 import { Link } from "gatsby";
 
 const LastNews = ({ locale, limiteVisualizzazione }) => {
-  const data = useStaticQuery(graphql`
+  /* const data = useStaticQuery(graphql`
     {
         allWpPost {
         edges {
@@ -50,11 +50,11 @@ const LastNews = ({ locale, limiteVisualizzazione }) => {
   let langFilterProdotto = data.allWpPost.edges.filter((item) => {
     return (item.node.locale.locale === 'it_IT')
   })
-  langFilterProdotto = langFilterProdotto.slice(0, limiteVisualizzazione)
+  langFilterProdotto = langFilterProdotto.s */lice(0, limiteVisualizzazione)
 
   return (
     <>
-      <section className="container widget-news">
+      {/* <section className="container widget-news">
         <h2>Bacci news</h2>
         <div className="container">
           {langFilterProdotto.map((item) => {
@@ -75,7 +75,7 @@ const LastNews = ({ locale, limiteVisualizzazione }) => {
             )
           })}
         </div>
-      </section>
+      </section> */}
     </>
   )
 }

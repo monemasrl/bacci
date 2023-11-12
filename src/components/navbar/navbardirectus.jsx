@@ -46,7 +46,7 @@ const NavBarDirectus = (props) => {
 
 
     const terminiTraduzione = Termini[props.locale]
-    console.log(data.directus.menus, 'directus')
+
 
 
     return (
@@ -55,7 +55,6 @@ const NavBarDirectus = (props) => {
                 <div className="container">
                     {data.directus.menus &&
                         <ul>
-
                             {data.directus.menus[1].items.map((item) => {
 
                                 const itemTranslated = item.translations.find((lang) => {
@@ -97,16 +96,23 @@ const NavBarDirectus = (props) => {
                                 const itemTranslated = item.translations.find((lang) => {
                                     return langTag[lang.languages_code.code] === langTag[props.locale]
                                 })
-                                console.log(item, 'item')
+
                                 return (
                                     <React.Fragment key={item.label}>
-
                                         {item.id === '2' ? <li role="button" tabIndex={0} onMouseEnter={() => props.setMega(true)}
                                             onMouseLeave={() => props.setMega(false)}>
                                             <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a href="#">{itemTranslated.label}</a>
                                             </div>
                                             {/*     <Megamenu terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={langTag[itemTranslated.languages_code.code]} /> */}
-                                            <MegamenuDirectus terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={langTag[itemTranslated.languages_code.code]} />
+                                            <MegamenuDirectus
+                                                terminiTraduzione={terminiTraduzione} mega={props.mega}
+                                                setMega={props.setMega}
+                                                locale={props.locale}
+                                                language={langTag[itemTranslated.languages_code.code]}
+                                                listaApplicazioni={props.listaApplicazioni}
+                                                listaCategorie={props.listaCategorie}
+
+                                            />
 
                                         </li> :
                                             <li>
@@ -115,7 +121,6 @@ const NavBarDirectus = (props) => {
                                                         const subItemTranslated = subitem.translations.find((lang) => {
                                                             return langTag[lang.languages_code.code] === langTag[props.locale]
                                                         })
-                                                        console.log(subItemTranslated, 'subitem')
                                                         return (
                                                             <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug}/${subItemTranslated.slug}`}>
                                                                 {subItemTranslated.label}
