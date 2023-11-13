@@ -50,11 +50,17 @@ exports.createPages = async ({ graphql, actions }) => {
           id
           items {
             translations {
+              languages_code {
+                code
+              }
               label
               slug
             }
             sub_items {
               translations {
+                languages_code {
+                  code
+                }
                 label
                 slug
               }
@@ -127,61 +133,143 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
-  function getAllPathPagine(translations) {
+  function getAllPathPagine(translations, parent) {
     const allPath = []
     translations.forEach(item => {
+      // cerca tra le traduzioni del parent path quella con la stessa lingua della traduzione corrente
+      const parentPath =
+        parent && parent.find(itemb => item.languages_code.code === itemb.lang)
+      console.log(parentPath, "parent")
       const lang = item.languages_code.code
       const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
-      const path = baseLang + "/" + item.slug
+      const path =
+        baseLang + (parentPath ? parentPath.parentPath : "") + item.slug
       const pathObj = {
         path: path,
         locale: lang,
-        title: item.titolo,
+        title: item.label,
       }
       allPath.push(pathObj)
     })
     return allPath
   }
 
-  // CREAZIONE PAGINE PRINCIPALI
-  dataForLanguagePath.data.allWpPage.edges.forEach(entry => {
-    if (entry.node.locale.locale === "it_IT") {
-      // crea un path di default per l'italiano
-      const allPagePath = createPathFromMenu(
-        entry,
-        dataForLanguagePath.data.allWpMenu.edges,
-        entry.node.slug,
-        entry.node.locale.locale
-      )
-
-      function isTemplateFile() {
-        const isFile = dataFromFilesystem.data.allFile.edges.find(file => {
-          return file.node.relativePath === `templates/${entry.node.slug}.jsx`
-        })
-        if (isFile) {
-          return `./src/templates/${entry.node.slug}.jsx`
-        }
-        return `./src/templates/default.jsx`
-      }
-
-      allPagePath.forEach(data => {
-        const path = data.path
-        createPage({
-          path: path,
-          component: require.resolve(isTemplateFile()),
-          context: {
-            lang: data.locale,
-            postTitle: data.title,
-            allPagePath: allPagePath,
+  // CREAZIONE HOMEPAGE
+  const homePage = {
+    translations: [
+      {
+        titolo: "Home",
+        languages_code: { code: "it_IT" },
+        slug: "",
+      },
+      {
+        titolo: "Home",
+        languages_code: { code: "en_US" },
+        slug: "en",
+      },
+    ],
+  }
+  homePage.translations.forEach(translation => {
+    createPage({
+      path: `/${
+        translation.languages_code.code == "it_IT"
+          ? ""
+          : langTag[translation.languages_code.code] + "/"
+      }`,
+      component: require.resolve("./src/templates/page.jsx"),
+      context: {
+        locale: translation.languages_code.code,
+        slug: translation.slug,
+        title: translation.titolo,
+        allPagePath: [
+          {
+            path: "/",
+            locale: "it_IT",
+            title: "Home",
           },
+          {
+            path: "/en",
+            locale: "en_US",
+            title: "Home",
+          },
+        ],
+      },
+    })
+  })
+
+  // CREAZIONE PAGINE
+
+  await result.data.directus.menus.forEach(menu => {
+    // Loop su tutti i menu
+    menu.items.forEach(item => {
+      // se non ci sono elementi di secondo livello crea la pagina
+      if (item.sub_items.length === 0) {
+        const allPagePath = getAllPathPagine(item.translations)
+
+        item.translations.forEach(translation => {
+          const urlBase =
+            langTag[translation.languages_code.code] === "it"
+              ? "/"
+              : langTag[translation.languages_code.code] + "/"
+
+          createPage({
+            path: `${urlBase}${translation.slug}`,
+            component: require.resolve("./src/templates/page.jsx"),
+            context: {
+              locale: translation.languages_code.code,
+              title: translation.label,
+              slug: translation.slug,
+              allPagePath: allPagePath,
+            },
+          })
         })
-      })
-    }
+      }
+      // se ci sono elementi di secondo livello crea le pagine
+      if (item.sub_items.length > 0) {
+        // per ogni traduzione di voce di menu padre crea un array con tutti i path parent
+        let parentPath = []
+
+        item.translations.forEach(translation => {
+          parentPath.push({
+            parentPath: translation.slug + "/",
+            lang: translation.languages_code.code,
+          })
+        })
+        //per ogni pagina di secondo livello crea i dati per il context e la pagina
+        item.sub_items.forEach(subItem => {
+          subItem.translations.forEach((translation, index) => {
+            const allPagePath = getAllPathPagine(
+              subItem.translations,
+              parentPath
+            )
+            // il path viene creato concatenando il path del padre con il path del figlio
+            const findParent = parentPath.find(item => {
+              return item.lang === translation.languages_code.code
+            })
+            const urlBase =
+              langTag[translation.languages_code.code] === "it"
+                ? "/"
+                : "/" + langTag[translation.languages_code.code] + "/"
+
+            createPage({
+              path: `${urlBase}${findParent.parentPath}${translation.slug}`,
+              component: require.resolve("./src/templates/page.jsx"),
+              context: {
+                locale: translation.languages_code.code,
+                slug: translation.slug,
+                title: translation.label,
+                allPagePath: allPagePath,
+              },
+            })
+          })
+        })
+      }
+    })
   })
 
   // CREAZIONE PAGINE FIERE, NEWS E PRODOTTI
   /* 
-  const fiere = result.data.allWpFiera.edges
+   const fiere = result.data.allWpFiera.edges
 
   fiere.forEach(entry => {
     const allPagePath = createPathFromMenu(
@@ -286,7 +374,7 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   // SCHEDA PRODOTTO
-  const prodottiDirectus = result.data.directus.Prodotti
+  const prodottiDirectus = await result.data.directus.Prodotti
   function getAllPathProdotti(translations) {
     const allPath = []
     translations.forEach(item => {

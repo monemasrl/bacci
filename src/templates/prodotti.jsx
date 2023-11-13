@@ -10,22 +10,7 @@ import { findItemTranslated, findItemsTranslated } from "../utils"
 export const query = graphql`
  query{
   directus{
-    menus {
-          name
-          id
-          items {
-            translations {
-              label
-              slug
-            }
-            sub_items {
-              translations {
-                label
-                slug
-              }
-            }
-          }
-        }
+    
     prodotto_categorie_translations{
     languages_code{
       code
@@ -122,24 +107,6 @@ childImageSharp{
 const Prodotti = ({ data, location, pageContext }) => {
 
 
-  function getAllPathPagine(translations) {
-
-    const allPath = []
-    translations.forEach(item => {
-      const lang = item.languages_code.code
-      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
-      const path = baseLang + "/" + item.slug
-      const pathObj = {
-        path: path,
-        locale: lang,
-        title: item.titolo,
-      }
-      allPath.push(pathObj)
-    })
-    return allPath
-  }
-  console.log(data.directus.menus[0].items[2], 'menus')
-  //console.log(getAllPathPagine(data.directus.menus[0]), 'menus')
 
   /**
    * Description placeholder

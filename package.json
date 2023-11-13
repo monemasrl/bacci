@@ -19,6 +19,7 @@
     "gatsby-source-filesystem": "^5.12.1",
     "gatsby-source-graphql": "^5.12.1",
     "gatsby-source-wordpress": "^7.12.3",
+    "gatsby-source-wordpress-menus": "^1.1.4",
     "gatsby-transformer-sharp": "^5.12.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
