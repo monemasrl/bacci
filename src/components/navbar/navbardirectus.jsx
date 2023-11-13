@@ -103,7 +103,7 @@ const NavBarDirectus = (props) => {
                                             onMouseLeave={() => props.setMega(false)}>
                                             <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a href="#">{itemTranslated.label}</a>
                                             </div>
-                                            {/*     <Megamenu terminiTraduzione={terminiTraduzione} mega={props.mega} setMega={props.setMega} locale={props.locale} language={langTag[itemTranslated.languages_code.code]} /> */}
+
                                             <MegamenuDirectus
                                                 terminiTraduzione={terminiTraduzione} mega={props.mega}
                                                 setMega={props.setMega}

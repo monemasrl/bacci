@@ -45,6 +45,22 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
     {
       directus {
+        menus {
+          name
+          id
+          items {
+            translations {
+              label
+              slug
+            }
+            sub_items {
+              translations {
+                label
+                slug
+              }
+            }
+          }
+        }
         Prodotti {
           id
           name
@@ -111,9 +127,24 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
+  function getAllPathPagine(translations) {
+    const allPath = []
+    translations.forEach(item => {
+      const lang = item.languages_code.code
+      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+      const path = baseLang + "/" + item.slug
+      const pathObj = {
+        path: path,
+        locale: lang,
+        title: item.titolo,
+      }
+      allPath.push(pathObj)
+    })
+    return allPath
+  }
 
-  // CREAZIONE PAGINE
-  /*   dataForLanguagePath.data.allWpPage.edges.forEach(entry => {
+  // CREAZIONE PAGINE PRINCIPALI
+  dataForLanguagePath.data.allWpPage.edges.forEach(entry => {
     if (entry.node.locale.locale === "it_IT") {
       // crea un path di default per l'italiano
       const allPagePath = createPathFromMenu(
@@ -146,7 +177,7 @@ exports.createPages = async ({ graphql, actions }) => {
         })
       })
     }
-  }) */
+  })
 
   // CREAZIONE PAGINE FIERE, NEWS E PRODOTTI
   /* 

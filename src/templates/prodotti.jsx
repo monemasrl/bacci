@@ -10,6 +10,22 @@ import { findItemTranslated, findItemsTranslated } from "../utils"
 export const query = graphql`
  query{
   directus{
+    menus {
+          name
+          id
+          items {
+            translations {
+              label
+              slug
+            }
+            sub_items {
+              translations {
+                label
+                slug
+              }
+            }
+          }
+        }
     prodotto_categorie_translations{
     languages_code{
       code
@@ -106,6 +122,24 @@ childImageSharp{
 const Prodotti = ({ data, location, pageContext }) => {
 
 
+  function getAllPathPagine(translations) {
+
+    const allPath = []
+    translations.forEach(item => {
+      const lang = item.languages_code.code
+      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+      const path = baseLang + "/" + item.slug
+      const pathObj = {
+        path: path,
+        locale: lang,
+        title: item.titolo,
+      }
+      allPath.push(pathObj)
+    })
+    return allPath
+  }
+  console.log(data.directus.menus[0].items[2], 'menus')
+  //console.log(getAllPathPagine(data.directus.menus[0]), 'menus')
 
   /**
    * Description placeholder
@@ -127,8 +161,8 @@ const Prodotti = ({ data, location, pageContext }) => {
    * @function resultFromFilters - filter prodotti by categorie applicazioni and search
    * @type {*}
    */
-  const termini = Termini.it_IT
 
+  const termini = Termini[pageContext.locale]
   const langFilterProdotto = data.directus.Prodotti.filter((itema) => {
     return itema.translations.some((item) => {
       return langTag[item.languages_code.code] === langTag[pageContext.locale]
@@ -200,6 +234,7 @@ const Prodotti = ({ data, location, pageContext }) => {
     const filtersResultApp = langFilterProdotto.filter((itema) => {
       return filtersApp.length > 0 && itema.applicazioni.some((itemb) => {
         return itemb.applicazioni_id.translations.some((itemc) => {
+
           return filtersApp.includes(itemc.label)
         })
       })
