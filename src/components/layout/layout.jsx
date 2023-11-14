@@ -6,9 +6,9 @@ import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
 
-const Layout = ({ children, locale, pageTitle, seo, allPagePath, listaApplicazioni, listaCategorie }) => {
+const Layout = ({ children, locale, pageTitle, seo, allPagePath, listaApplicazioni, listaCategorie, parentPath }) => {
 
-  console.log(allPagePath, 'allpagepath')
+
 
   return (
     <div className="mainwrapper">
@@ -21,6 +21,7 @@ const Layout = ({ children, locale, pageTitle, seo, allPagePath, listaApplicazio
           allPagePath={allPagePath}
           listaApplicazioni={listaApplicazioni}
           listaCategorie={listaCategorie}
+          parentPath={parentPath}
         />
 
       </div>

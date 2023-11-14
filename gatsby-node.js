@@ -139,13 +139,14 @@ exports.createPages = async ({ graphql, actions }) => {
       // cerca tra le traduzioni del parent path quella con la stessa lingua della traduzione corrente
       const parentPath =
         parent && parent.find(itemb => item.languages_code.code === itemb.lang)
-      console.log(parentPath, "parent")
+
       const lang = item.languages_code.code
       const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
       const path =
         baseLang + (parentPath ? parentPath.parentPath : "") + item.slug
       const pathObj = {
-        path: path,
+        //solo se esiste uno slug in traduzione crea il path
+        path: item.slug && path,
         locale: lang,
         title: item.label,
       }
@@ -179,7 +180,7 @@ exports.createPages = async ({ graphql, actions }) => {
       component: require.resolve("./src/templates/page.jsx"),
       context: {
         locale: translation.languages_code.code,
-        slug: translation.slug,
+        slug: "home",
         title: translation.titolo,
         allPagePath: [
           {
@@ -255,6 +256,7 @@ exports.createPages = async ({ graphql, actions }) => {
               path: `${urlBase}${findParent.parentPath}${translation.slug}`,
               component: require.resolve("./src/templates/page.jsx"),
               context: {
+                parentPath: findParent.parentPath,
                 locale: translation.languages_code.code,
                 slug: translation.slug,
                 title: translation.label,

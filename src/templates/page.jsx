@@ -5,9 +5,8 @@ import { Termini, langTag } from "../../data-translations"
 import { findItemTranslated, findItemsTranslated } from "../utils"
 
 export const query = graphql`
- query{
+ query($locale: String!, $slug: String!) {
   directus{
-
     prodotto_categorie_translations{
     languages_code{
       code
@@ -20,7 +19,14 @@ export const query = graphql`
       }
       label
     }
-    pages {
+    pages(filter: {translations: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}}) {
+      id
+      translations(filter: {languages_code: {code: {_eq: $locale}}}){
+        languages_code{
+          code}
+        slug
+      }
+   
       blocchi {
         id
         collection
@@ -36,18 +42,19 @@ export const query = graphql`
                 }
               }
             }
-          }
-          ... on DirectusData_Blocchi{
-            id
-            Nome
-            traduzioni{
+            novita
+            nome
+            traduzioni(filter: {languages_code: {code: {_eq: $locale}}}) {
               languages_code{
                 code
               }
-              blocchi
-              
+              titolo
+              sotto_titolo
+							paragrafo
             }
+            
           }
+        
         }
       }
     }
@@ -56,7 +63,8 @@ export const query = graphql`
 
 
 const Pagine = ({ data, location, pageContext }) => {
-
+  console.log(data.directus.pages, 'data')
+  console.log(pageContext, 'data')
   const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
   const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
   const termini = Termini[pageContext.locale]
@@ -69,7 +77,9 @@ const Pagine = ({ data, location, pageContext }) => {
           locale={pageContext.locale}
           allPagePath={pageContext.allPagePath}
           listaApplicazioni={listaApplicazioni}
-          listaCategorie={listaCategorie}>
+          listaCategorie={listaCategorie}
+          parentPath={pageContext.parentPath}
+        >
           <div className={`container-fluid ${pageContext.slug}`} >
 
 

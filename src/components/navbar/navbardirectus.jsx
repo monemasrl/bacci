@@ -47,7 +47,7 @@ const NavBarDirectus = (props) => {
 
     const terminiTraduzione = Termini[props.locale]
 
-    console.log(props.allPagePath, 'allpagepath')
+
 
     return (
         <>

@@ -24,7 +24,7 @@ export const query = graphql`
 }
   }`
 const Prodotto = ({ data, pageContext }) => {
-    console.log(data.directus, 'testdata')
+
     const { locale, parentPath, content, title, allPagePath } = pageContext
     const dataProdottoTranslated = findItemTranslated(content.translations, locale)
     const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
