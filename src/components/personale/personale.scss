@@ -1,49 +1,49 @@
 @import "../../assets/sass/_variabili";
 
 .personale {
-h2{
+  h2 {
     font-size: 40px;
     text-transform: uppercase;
-    color: $textColor;
+    color: $grey;
     margin-bottom: 2rem;
-}
-.wrap-personale {
+  }
+  .wrap-personale {
     display: flex;
     justify-content: space-between;
-}
-    .box-personale {
-        h2 {
-            font-size: 24px;
-            font-weight: normal;
-            font-family: $text;
-            color: $textColor;
-            margin: 0;
-            margin-bottom: 10px;
-        }
-
-        display: flex;
-        flex: 1;
-        max-width: 500px;
-        justify-content: flex-start;
-
-        span.professione {
-            font-size: 20px;
-            font-style: italic;
-            color: $textColor;
-            max-width: 200px;
-            display: block;
-        }
-
-        .linkedin {
-            margin-bottom: 0.5rem;
-        }
-
-        .sx {
-            margin-right: 2rem;
-        }
-
-        .dx {
-            align-self: flex-end;
-        }
+  }
+  .box-personale {
+    h2 {
+      font-size: 24px;
+      font-weight: normal;
+      font-family: $text;
+      color: $grey;
+      margin: 0;
+      margin-bottom: 10px;
     }
+
+    display: flex;
+    flex: 1;
+    max-width: 500px;
+    justify-content: flex-start;
+
+    span.professione {
+      font-size: 20px;
+      font-style: italic;
+      color: $grey;
+      max-width: 200px;
+      display: block;
+    }
+
+    .linkedin {
+      margin-bottom: 0.5rem;
+    }
+
+    .sx {
+      margin-right: 2rem;
+    }
+
+    .dx {
+      align-self: flex-end;
+    }
+  }
 }

@@ -1,237 +1,234 @@
 @import "../../assets/sass/variabili";
 
 footer {
-    display: block;
-    margin-top: 4rem;
+  display: block;
+  margin-top: 4rem;
+
+  a {
+    color: white;
+  }
+
+  .footer1 {
+    background-color: $lightBrown;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
 
     a {
-        color: white;
+      font-weight: bold;
     }
 
-    .footer1 {
-        background-color: $lightBrown;
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-
-        a {
-            font-weight: bold;
-        }
-
-        .container {
-            width: 100%;
-            justify-content: space-evenly;
-            @media #{$large}{
-                align-items: center;
-            }
-        }
-
-        h2 {
-            font-size: 60px;
-            text-transform: uppercase;
-            color: white;
-            margin: 0;
-
-            @media #{$large} {
-                font-size: 40px;
-            }
-
-            @media #{$large} {
-                font-size: 30px;
-            }
-
-            strong {
-                display: block;
-                font-size: 90px;
-
-                @media #{$large} {
-                    font-size: 60px;
-                }
-
-                @media #{$large} {
-                    font-size: 40px;
-                }
-            }
-        }
-
-        p {
-            color: white;
-            font-size: 24px;
-        }
-
-        display: flex;
-
-        .box-sx {
-            flex: 1;
-            max-width: 610px;
-
-            @media #{$large} {
-                padding: 2rem;
-                max-width: 700px;
-                text-align: center;
-            }
-
-       
-        }
-
-        .box-dx {
-            .form-contatti {
-                max-width: 800px;
-
-                @media #{$large} {
-                    max-width: 100%;
-                }
-
-                label[for="privacy"] {
-                    display: block;
-                    @media #{$phone}{
-                        padding: 1rem;
-                    }
-                    span {
-                        color: white;
-                    }
-                    
-                }
-
-                input {
-                    width: 376px;
-                    margin: 5px;
-                    height: 50px;
-                    padding: 5px;
-                    box-sizing: border-box;
-                    border-radius: 0;
-                    outline: 0;
-                    border: 0;
-
-                    &[type="checkbox"] {
-                        height: 20px;
-                        width: 20px;
-                    }
-
-                    @media #{$large} {
-                        width: 330px;
-                    }
-                }
-
-                textarea {
-                    margin: 5px;
-                    width: 99%;
-                    padding: 5px;
-                    box-sizing: border-box;
-                    border: 0;
-
-                    @media #{$large} {
-                        width: 98%;
-                    }
-                }
-
-                .box-form-message {
-                    @media #{$large} {
-                        max-width: 680px;
-                        margin: 0 auto;
-                    }
-                    @media #{$phone}{
-                        padding: 1rem;
-                    }
-                }
-
-                .box-submit {
-                    text-align: right;
-                    margin: 2rem 0;
-
-                    @media #{$large} {
-                        text-align: center;
-                    }
-
-                    .button-sezione {
-                        @include button-sezione(6rem, 1%);
-
-                        height: 55px;
-                        background-color: transparent;
-                        border: 1px solid white;
-                        color: white;
-                        width: auto;
-                        @media #{$large}{
-                            width: 300px;
-                        }
-                    }
-                }
-            }
-        }
+    .container {
+      width: 100%;
+      justify-content: space-evenly;
+      @media #{$large} {
+        align-items: center;
+      }
     }
 
-    .footer2 {
-        display: flex;
-        justify-content: center;
-        margin: 4rem auto;
+    h2 {
+      font-size: 60px;
+      text-transform: uppercase;
+      color: white;
+      margin: 0;
 
-        .footer-col {
-            width: 15%;
+      @media #{$large} {
+        font-size: 40px;
+      }
 
-            @media #{$large} {
-                width: 100%;
-                text-align: center;
-            }
+      @media #{$large} {
+        font-size: 30px;
+      }
 
-            ul {
-                list-style: none;
-
-                li {
-                    text-transform: uppercase;
-                    font-size: 16px;
-                    margin: 1rem 0;
-                    color: $brown;
-
-                    &:first-child {
-                        margin-bottom: 2rem;
-                        font-size: 18px;
-                        color: $textColor;
-                    }
-                }
-            }
-        }
-    }
-
-    .footer3 {
-        background-color: $lightBrown;
-        padding: 2rem 0;
-
-        a {
-            text-decoration: underline;
-            margin: 5px 0;
-            display: inline-block;
-        }
-
-        ul {
-            list-style: none;
-            color: white;
-
-            li {
-                font-size: 18px;
-                margin: 5px 0;
-
-                &:first-child {
-                    font-weight: bold;
-                }
-            }
-        }
-
-        .footer-col {
-            width: 33%;
-
-            @media #{$large} {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    }
-
-    .box-form {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
+      strong {
+        display: block;
+        font-size: 90px;
 
         @media #{$large} {
-            justify-content: center;
+          font-size: 60px;
         }
+
+        @media #{$large} {
+          font-size: 40px;
+        }
+      }
     }
+
+    p {
+      color: white;
+      font-size: 24px;
+    }
+
+    display: flex;
+
+    .box-sx {
+      flex: 1;
+      max-width: 610px;
+
+      @media #{$large} {
+        padding: 2rem;
+        max-width: 700px;
+        text-align: center;
+      }
+    }
+
+    .box-dx {
+      .form-contatti {
+        max-width: 800px;
+
+        @media #{$large} {
+          max-width: 100%;
+        }
+
+        label[for="privacy"] {
+          display: block;
+          @media #{$phone} {
+            padding: 1rem;
+          }
+          span {
+            color: white;
+          }
+        }
+
+        input {
+          width: 376px;
+          margin: 5px;
+          height: 50px;
+          padding: 5px;
+          box-sizing: border-box;
+          border-radius: 0;
+          outline: 0;
+          border: 0;
+
+          &[type="checkbox"] {
+            height: 20px;
+            width: 20px;
+          }
+
+          @media #{$large} {
+            width: 330px;
+          }
+        }
+
+        textarea {
+          margin: 5px;
+          width: 99%;
+          padding: 5px;
+          box-sizing: border-box;
+          border: 0;
+
+          @media #{$large} {
+            width: 98%;
+          }
+        }
+
+        .box-form-message {
+          @media #{$large} {
+            max-width: 680px;
+            margin: 0 auto;
+          }
+          @media #{$phone} {
+            padding: 1rem;
+          }
+        }
+
+        .box-submit {
+          text-align: right;
+          margin: 2rem 0;
+
+          @media #{$large} {
+            text-align: center;
+          }
+
+          .button-sezione {
+            @include button-sezione(6rem, 1%);
+
+            height: 55px;
+            background-color: transparent;
+            border: 1px solid white;
+            color: white;
+            width: auto;
+            @media #{$large} {
+              width: 300px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer2 {
+    display: flex;
+    justify-content: center;
+    margin: 4rem auto;
+
+    .footer-col {
+      width: 15%;
+
+      @media #{$large} {
+        width: 100%;
+        text-align: center;
+      }
+
+      ul {
+        list-style: none;
+
+        li {
+          text-transform: uppercase;
+          font-size: 16px;
+          margin: 1rem 0;
+          color: $brown;
+
+          &:first-child {
+            margin-bottom: 2rem;
+            font-size: 18px;
+            color: $grey;
+          }
+        }
+      }
+    }
+  }
+
+  .footer3 {
+    background-color: $lightBrown;
+    padding: 2rem 0;
+
+    a {
+      text-decoration: underline;
+      margin: 5px 0;
+      display: inline-block;
+    }
+
+    ul {
+      list-style: none;
+      color: white;
+
+      li {
+        font-size: 18px;
+        margin: 5px 0;
+
+        &:first-child {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .footer-col {
+      width: 33%;
+
+      @media #{$large} {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+  .box-form {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @media #{$large} {
+      justify-content: center;
+    }
+  }
 }

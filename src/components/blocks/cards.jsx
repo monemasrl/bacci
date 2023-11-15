@@ -3,7 +3,7 @@ import React from 'react';
 function Cards({ content }) {
     console.log(content, 'content from cards')
     return (
-        <section className='container repeater'>
+        <section className='container repeater cards'>
             {content.item.traduzioni[0].blocchi.map((item) => {
                 return (
                     <div className='box-repeater'>

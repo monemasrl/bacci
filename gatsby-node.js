@@ -195,6 +195,7 @@ exports.createPages = async ({ graphql, actions }) => {
         locale: translation.languages_code.code,
         slug: "home",
         title: translation.titolo,
+        pageName: "home",
         allPagePath: [
           {
             path: "/",
