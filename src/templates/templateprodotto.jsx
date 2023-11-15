@@ -38,6 +38,7 @@ const Prodotto = ({ data, pageContext }) => {
                 pathName={parentPath}
                 tipo='prodotto'
                 allPagePath={allPagePath}
+                pathFromContext={pageContext}
                 listaApplicazioni={listaApplicazioni}
                 listaCategorie={listaCategorie}
             >

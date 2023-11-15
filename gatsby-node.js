@@ -14,6 +14,17 @@ exports.createPages = async ({ graphql, actions }) => {
    * @var dataForLanguagePath - query dei dati per la costruzione del path delle pagine
    */
 
+  function slugify(str) {
+    return String(str)
+      .normalize("NFKD") // split accented characters into their base characters and diacritical marks
+      .replace(/[\u0300-\u036f]/g, "") // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+      .trim() // trim leading or trailing whitespace
+      .toLowerCase() // convert to lowercase
+      .replace(/[^a-z0-9 -]/g, "") // remove non-alphanumeric characters
+      .replace(/\s+/g, "-") // replace spaces with hyphens
+      .replace(/-+/g, "-") // remove consecutive hyphens
+  }
+
   const langTag = {
     en_US: "en",
     it_IT: "it",
@@ -49,6 +60,7 @@ exports.createPages = async ({ graphql, actions }) => {
           name
           id
           items {
+            name
             translations {
               languages_code {
                 code
@@ -57,6 +69,7 @@ exports.createPages = async ({ graphql, actions }) => {
               slug
             }
             sub_items {
+              name
               translations {
                 languages_code {
                   code
@@ -221,6 +234,7 @@ exports.createPages = async ({ graphql, actions }) => {
               title: translation.label,
               slug: translation.slug,
               allPagePath: allPagePath,
+              pageName: slugify(item.name).toLowerCase(),
             },
           })
         })
@@ -261,6 +275,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 slug: translation.slug,
                 title: translation.label,
                 allPagePath: allPagePath,
+                pageName: slugify(subItem.name).toLowerCase(),
               },
             })
           })

@@ -19,12 +19,11 @@
   width: 100%;
   margin-top: 2rem;
 
-.box-single-fiera {
-    border: 5px solid #a4917d;
+  .box-single-fiera {
+    border: 5px solid $brown;
     margin: 10px;
     padding: 2rem 3rem;
     flex: 1;
-
 
     .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
       margin-bottom: 2rem;

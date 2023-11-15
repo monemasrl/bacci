@@ -98,8 +98,8 @@ const NavBarDirectus = (props) => {
                                 })
 
                                 return (
-                                    <React.Fragment key={item.label}>
-                                        {item.id === '2' ? <li role="button" tabIndex={0} onMouseEnter={() => props.setMega(true)}
+                                    < >
+                                        {item.id === '2' ? <li key={item.id} role="button" tabIndex={0} onMouseEnter={() => props.setMega(true)}
                                             onMouseLeave={() => props.setMega(false)}>
                                             <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a href="#">{itemTranslated.label}</a>
                                             </div>
@@ -115,8 +115,8 @@ const NavBarDirectus = (props) => {
                                             />
 
                                         </li> :
-                                            <li>
-                                                {item.sub_items.length ? <a href='/#'>{itemTranslated.label}</a> : <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul>
+                                            <li key={item.id}>
+                                                {item.sub_items.length ? <a href='#'>{itemTranslated.label}</a> : <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul>
                                                     {item.sub_items.map((subitem) => {
                                                         const subItemTranslated = subitem.translations.find((lang) => {
                                                             return langTag[lang.languages_code.code] === langTag[props.locale]
@@ -130,7 +130,7 @@ const NavBarDirectus = (props) => {
 
                                                     })}
                                                 </ul> : ''}</li>}
-                                    </React.Fragment>
+                                    </>
                                 )
                             })}
                         </ul>}

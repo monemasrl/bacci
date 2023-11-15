@@ -3,6 +3,10 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
 import { Termini, langTag } from "../../data-translations"
 import { findItemTranslated, findItemsTranslated } from "../utils"
+import BlocksComponent from "../components/blocks/blocks"
+
+
+
 
 export const query = graphql`
  query($locale: String!, $slug: String!) {
@@ -21,28 +25,59 @@ export const query = graphql`
     }
     pages(filter: {translations: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}}) {
       id
-      translations(filter: {languages_code: {code: {_eq: $locale}}}){
+      translations(filter: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}){
         languages_code{
           code}
         slug
       }
    
       blocchi {
+        
         id
         collection
+    
         item{
+          ... on DirectusData_block_hero{
+              name
+              sort
+              image{
+                id
+              imageFile{
+                id
+                childImageSharp{
+                  gatsbyImageData
+                }
+
+              }
+            }
+              translations(filter: {languages_code: {code: {_eq: $locale}}}){
+       
+                headline
+              }
+            }
           ... on DirectusData_testo_immagine{
+            nome
+            novita
+            link{
+              translations(filter: {languages_code: {code: {_eq: $locale}}}){
+                slug
+              }
+            }
+            allineamento
             id
             immagine{
               id
               imageFile{
                 id
                 childImageSharp{
-                  gatsbyImageData
+                  gatsbyImageData(   
+
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP, AVIF])
                 }
               }
             }
-            novita
+          
             nome
             traduzioni(filter: {languages_code: {code: {_eq: $locale}}}) {
               languages_code{
@@ -54,7 +89,14 @@ export const query = graphql`
             }
             
           }
-        
+          ... on DirectusData_Blocchi{
+            traduzioni(filter: {languages_code: {code: {_eq: $locale}}}) {
+              languages_code{
+                code
+              }
+              blocchi
+            }
+          }
         }
       }
     }
@@ -63,15 +105,17 @@ export const query = graphql`
 
 
 const Pagine = ({ data, location, pageContext }) => {
-  console.log(data.directus.pages, 'data')
-  console.log(pageContext, 'data')
-  const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-  const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+
+
+  const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
+  const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
   const termini = Termini[pageContext.locale]
+  console.log(data, 'data')
+  console.log(pageContext, 'context')
 
   return (
     <>
-      {pageContext ?
+      {pageContext && data.directus.pages[0] ?
         <Layout
           pageTitle={pageContext.title}
           locale={pageContext.locale}
@@ -80,10 +124,10 @@ const Pagine = ({ data, location, pageContext }) => {
           listaCategorie={listaCategorie}
           parentPath={pageContext.parentPath}
         >
-          <div className={`container-fluid ${pageContext.slug}`} >
-
-
-
+          <div className={`container-fluid ${pageContext.pageName}`}>
+            {data.directus.pages[0].blocchi?.map((blocco, index) => {
+              return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
+            })}
           </div>
         </Layout> : 'Loading...'}
     </>
