@@ -10,7 +10,6 @@ import { findItemTranslated, findItemsTranslated } from "../utils"
 export const query = graphql`
  query{
   directus{
-    
     prodotto_categorie_translations{
     languages_code{
       code

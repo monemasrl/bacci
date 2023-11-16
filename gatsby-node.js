@@ -117,6 +117,9 @@ exports.createPages = async ({ graphql, actions }) => {
           categoria {
             id
             translations {
+              languages_code {
+                code
+              }
               id
               nome
             }

@@ -29,7 +29,8 @@ const Prodotto = ({ data, pageContext }) => {
     const dataProdottoTranslated = findItemTranslated(content.translations, locale)
     const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
     const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
-
+    const categoriaProdotto = findItemTranslated(content.categoria.translations, locale)
+    console.log(categoriaProdotto, 'data prodotto scheda')
     return (
         <>
             <LayoutProdotto
@@ -72,7 +73,7 @@ const Prodotto = ({ data, pageContext }) => {
 
                     })}
                     <SoftwareProduct locale={locale} />
-                    {/*  <Correlati locale={locale} applicazioni={content.prodottiApplicazioni} limiteVisualizzazione={3} /> */}
+                    <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} limiteVisualizzazione={3} />
                 </div>
             </LayoutProdotto>
         </>
