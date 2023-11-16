@@ -1,8 +1,8 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
-import { Termini, langTag } from "../../data-translations"
-import { findItemTranslated, findItemsTranslated } from "../utils"
+import { Termini } from "../../data-translations"
+import { findItemsTranslated } from "../utils"
 import BlocksComponent from "../components/blocks/blocks"
 
 
@@ -32,10 +32,8 @@ export const query = graphql`
       }
    
       blocchi {
-        
         id
         collection
-    
         item{
           ... on DirectusData_block_hero{
               name

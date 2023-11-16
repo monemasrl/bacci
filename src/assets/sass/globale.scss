@@ -41,8 +41,31 @@ h1,
 h2 {
   @include h2-sezioni(60px, 95px);
   font-family: "Oswald", sans-serif;
+  line-height: 1;
 }
-
+main {
+  @media #{$tablet} {
+    padding: 0 1rem;
+  }
+}
+.prodotto {
+  .sezione-1 {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+  .sezione-3 {
+    h1.titolo {
+      font-size: 95px;
+      font-weight: 700;
+      margin: 0;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    h2 {
+      font-size: 48px;
+    }
+  }
+}
 .home {
   h1,
   h2 {
@@ -175,8 +198,10 @@ section.container.repeater {
   justify-content: space-around;
 
   .box-repeater {
-    max-width: 600px;
-
+    width: 600px;
+    @media #{$tablet} {
+      width: 100%;
+    }
     h3 {
       color: $brown;
       text-transform: uppercase;
@@ -194,6 +219,9 @@ section.container.repeater {
         margin-right: 10px;
         top: 5px;
         background-image: url(../../images/check_icon.png);
+        @media #{$tablet} {
+          display: none;
+        }
       }
     }
 
@@ -236,26 +264,31 @@ section.container.repeater {
 .sezione-1 {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
-  margin: 5rem auto;
+  gap: 5rem;
+  margin: 7rem auto;
+  &.right {
+    flex-direction: row-reverse;
+  }
   &.index-0 {
     max-width: 100%;
     justify-content: flex-end;
     gap: 6rem;
     .box-sx {
       flex: 1 1;
-
       max-width: 600px;
     }
     .box-dx {
       flex: 1 1;
-
       max-width: 1000px;
     }
   }
 
   .box-sx {
     flex: 1 1 600px;
+    h2 {
+      font-size: 50px;
+      line-height: 1.2;
+    }
   }
   .box-dx {
     flex: 1 1 728px;
@@ -319,6 +352,46 @@ section.container.repeater {
   .index-3 {
     h2 {
       @include h2-sezioni(72px, 120px);
+    }
+  }
+}
+.sezione-3 {
+  .box-sx {
+    width: 100%;
+    .gatsby-image-wrapper-constrained {
+      margin: 2rem auto 0 auto;
+    }
+  }
+}
+.map-gruppo-bacci {
+  position: relative;
+  .gatsby-image-wrapper.gatsby-image-wrapper-constrained.map-gruppo-bacci__image {
+    max-width: 1190px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+.map-gruppo-bacci__lista {
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    background-color: #c8bcb091;
+    padding: 3rem 5rem;
+    font-size: 36px;
+    text-transform: uppercase;
+    list-style: none;
+
+    li {
+      a {
+        color: $brown;
+      }
+      margin: 0.5rem 0;
     }
   }
 }

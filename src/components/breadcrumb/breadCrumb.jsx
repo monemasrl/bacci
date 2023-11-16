@@ -24,7 +24,9 @@ const Breadcrumb = ({ pageTitle, pathName, nodeType, fiere, locale, tipo }) => {
                             {Termini[locale].eventi}
                         </h2>
 
-                        : tipo === 'prodotto' ? <h2>/{Termini[locale].macchine}</h2> :
+                        : tipo === 'prodotto' ? <h2>
+                            <span>/{Termini[locale].prodotti}</span>
+                            <span>{pageTitle}</span></h2> :
 
                             (pageTitle.toLowerCase() === parentFolder.toLowerCase()) || !parentFolder ?
 
