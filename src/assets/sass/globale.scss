@@ -221,6 +221,18 @@ section.container.repeater {
   background-position-x: 50%;
   background-position-y: 50%;
 }
+.sezione-3 {
+  text-align: center;
+  margin: 5rem auto;
+  h2 {
+    font-size: 74px;
+  }
+  h3 {
+    color: $grey;
+    font-size: 24px;
+    font-weight: 100;
+  }
+}
 .sezione-1 {
   display: flex;
   flex-wrap: wrap;
@@ -267,6 +279,7 @@ section.container.repeater {
     }
   }
 }
+
 .home {
   .sezione-1 h2:before {
     display: none;
@@ -298,6 +311,9 @@ section.container.repeater {
       font-size: 36px;
       padding: 0.4rem 4rem;
       text-transform: uppercase;
+    }
+    .box-sx {
+      padding-left: 2rem;
     }
   }
   .index-3 {
