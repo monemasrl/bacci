@@ -16,7 +16,9 @@ html {
   margin: 0 auto;
   box-shadow: 0px 0px 11px #dfdfdf;
 }
-
+ul {
+  list-style: none;
+}
 header {
   position: relative;
 
@@ -46,6 +48,55 @@ h2 {
 main {
   @media #{$tablet} {
     padding: 0 1rem;
+  }
+}
+.prodotti {
+  justify-content: space-between;
+  min-height: 970px;
+  padding: 0 1rem;
+  .filters {
+    &.search input {
+      border: 0;
+      border-bottom: 1px solid #a4917d;
+      height: 40px;
+      margin: 1rem 1rem 1rem 0;
+      max-width: 300px;
+      outline: none;
+      width: 100%;
+    }
+    ul li {
+      margin: 10px 0;
+      label {
+        color: #a4917d;
+        font-size: 22px;
+        margin-left: 10px;
+        text-transform: uppercase;
+      }
+    }
+  }
+  .col-sx {
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
+    max-width: 550px;
+  }
+  .col-dx {
+    display: flex;
+    flex: 1 1;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 2rem;
+    .box-prodotto {
+      margin-bottom: 2rem;
+      max-width: 380px;
+      text-align: center;
+      p {
+        color: #5f6062;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+    }
   }
 }
 .prodotto {

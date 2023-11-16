@@ -23,7 +23,7 @@ const Header = ({ locale, pageTitle, nodeType, tipo, allPagePath, listaApplicazi
         listaCategorie={listaCategorie}
       />
 
-      {/*  <NavBarMobile locale={locale} allPagePath={allPagePath} currentPath={currentPath} pathName={pathName} mega={mega} setMega={setMega} /> */}
+      <NavBarMobile locale={locale} allPagePath={allPagePath} mega={mega} setMega={setMega} />
 
       {pageTitle !== 'Home' ? <Breadcrumb pageTitle={pageTitle} pathName={parentPath} nodeType={nodeType} locale={locale} tipo={tipo} /> : ''}
 

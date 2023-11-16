@@ -11,51 +11,46 @@ let slugify = require('slugify')
 const NavBarMobile = (props) => {
 
 
-    /*     const data = useStaticQuery(graphql`
-        query datimenumobile{
-            allWpMenu {
-                    edges {
-                    node {
-                        language
-                        menuItems {
-                        nodes {
-                            label
-                            parentId
-                            path
-                            childItems {
-                              nodes {
-                                label
-                                path
-                                parent{
-                                    id
-                                }
-                              }
-                            }
-                            menu {
-                            node {
-                                language
-                            }
-                            }
-                            menuCampi {
-                                  megamenu
-                                }
-                        }
-                        }
+    const data = useStaticQuery(graphql`
+    query datimenu{
+   
+        directus{
+            menus{
+                name
+                items{
+                id
+                translations{
+                    languages_code{
+                        code
                     }
+                    label
+                    slug
+                }
+                sub_items{
+                    id
+                    translations{
+                    languages_code{
+                        code
+                    }
+                    label
+                    slug
+                    }
+                    parent_item{
+                    id
                     }
                 }
                 }
-        `)
+            }
+            }
     
-        const menuFilter = data.allWpMenu.edges.filter((lang) => {
-            return lang.node.language === langTag[props.locale]
-        })
-        const terminiTraduzione = Termini[props.locale]
-        const [open, setOpen] = React.useState(false)
-     */
+            }
+    `)
+    const terminiTraduzione = Termini[props.locale]
+    const [open, setOpen] = React.useState(false)
+
     return (
         <>
-            {/*    <div className="mobile">
+            <div className="mobile">
 
                 <div className="top-box">
                     <div className="main-logo">
@@ -80,14 +75,15 @@ const NavBarMobile = (props) => {
                         <div className="container">
                             <LangSwitcher locale={props.locale} allPagePath={props.allPagePath} pathName={props.pathName} />
 
-                            {menuFilter[1] && <ul>
-                                {menuFilter[1].node.menuItems.nodes.map((item, index) => {
+                            {data.directus.menus[1] && <ul>
+                                {data.directus.menus[1].items.map((item, index) => {
 
-                                    const menuPath = slugify(item.label)
-
+                                    const itemTranslated = item.translations.find((lang) => {
+                                        return langTag[lang.languages_code.code] === langTag[props.locale]
+                                    })
                                     return (
-                                        <li key={item.label}>
-                                            <Link disabled={item.path === "#"} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${menuPath.toLowerCase()}`}>{item.label}</Link>
+                                        <li key={itemTranslated.label}>
+                                            <Link to={`${langTag[props.locale] === 'it' ? '' : '/' + langTag[props.locale]}/${itemTranslated.slug}`}>{itemTranslated.label}</Link>
                                         </li>
                                     )
                                 })
@@ -104,47 +100,40 @@ const NavBarMobile = (props) => {
                         <div className="container">
 
 
-                            {menuFilter[0] && <ul>
+                            {data.directus.menus[0] && <ul>
 
-                                {menuFilter[0].node.menuItems.nodes.map((item, index) => {
+                                {data.directus.menus[0].items.map((item, index) => {
 
-                                    const menuPath = slugify(item.label)
+                                    const itemTranslated = item.translations.find((lang) => {
+                                        return langTag[lang.languages_code.code] === langTag[props.locale]
+                                    })
 
                                     return (
                                         <React.Fragment key={item.label}>
 
-                                            {!item.parentId ?
-                                                item.menuCampi.megamenu ?
-                                                    <li>
-                                                        <Link to={`${props.locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + item.menu.node.language + "/" + terminiTraduzione.prodotti}`}>{item.label}</Link>
+                                            {item.id === '2' ?
+                                                <li>
+                                                    <Link to={`${props.locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + itemTranslated.slug + "/" + terminiTraduzione.prodotti}`}>{itemTranslated.label}</Link>
 
-                                                    </li>
+                                                </li>
 
-                                                    :
+                                                :
 
-                                                    <li >
-                                                        {item.path === "#" ?
-                                                            <>
-                                                                <a disabled={item.path === "#"} to={item.path}> {item.label} </a>
+                                                <li key={item.id}>
+                                                    {item.sub_items.length ? <a href='#'>{itemTranslated.label}</a> : <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul>
+                                                        {item.sub_items.map((subitem) => {
+                                                            const subItemTranslated = subitem.translations.find((lang) => {
+                                                                return langTag[lang.languages_code.code] === langTag[props.locale]
+                                                            })
+                                                            return (
+                                                                <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug}/${subItemTranslated.slug}`}>
+                                                                    {subItemTranslated.label}
+                                                                </Link>
+                                                                </li>
+                                                            )
 
-                                                                {item.childItems ?
-                                                                    <ul>
-                                                                        {item.childItems.nodes.map((subitem, index) => {
-                                                                            return (
-                                                                                <li key={index}>
-                                                                                    <Link key={subitem.label} to={`${item.menu.node.language === 'it' ? '' : '/' + item.menu.node.language}/${item.label.toLowerCase()}/${slugify(subitem.label.toLowerCase())}`}>  {subitem.label} </Link></li>
-
-
-                                                                            )
-
-                                                                        })}
-                                                                    </ul>
-                                                                    : ''}</>
-
-                                                            : <Link to="/"> {item.label} </Link>
-                                                        }
-
-                                                    </li> : ''
+                                                        })}
+                                                    </ul> : ''}</li>
                                             }
                                         </React.Fragment>
                                     )
@@ -153,7 +142,7 @@ const NavBarMobile = (props) => {
                         </div>
                     </nav>
                 </div>
-            </div> */}
+            </div>
         </>
     )
 }
