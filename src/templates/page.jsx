@@ -1,5 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
+import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout/layout"
 import { Termini } from "../../data-translations"
 import { findItemsTranslated } from "../utils"
@@ -10,6 +11,7 @@ import BlocksComponent from "../components/blocks/blocks"
 
 export const query = graphql`
  query($locale: String!, $slug: String!) {
+
   directus{
     prodotto_categorie_translations{
     languages_code{
@@ -25,6 +27,15 @@ export const query = graphql`
     }
     pages(filter: {translations: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}}) {
       id
+      featured_image{
+      id
+      imageFile{
+        id
+        childImageSharp{
+          gatsbyImageData
+        }
+      }
+    }
       translations(filter: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}){
         languages_code{
           code}
@@ -108,8 +119,7 @@ const Pagine = ({ data, location, pageContext }) => {
   const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
   const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
   const termini = Termini[pageContext.locale]
-  console.log(data, 'data')
-  console.log(pageContext, 'context')
+  console.log(data.directus.pages[0], 'data')
 
   return (
     <>
@@ -122,6 +132,10 @@ const Pagine = ({ data, location, pageContext }) => {
           listaCategorie={listaCategorie}
           parentPath={pageContext.parentPath}
         >
+          {pageContext.pageName === "home" &&
+            <section class="jumbo-home">
+              <GatsbyImage className="jumbo-image" image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
+            </section>}
           <div className={`container-fluid ${pageContext.pageName}`}>
             {data.directus.pages[0].blocchi?.map((blocco, index) => {
               return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)

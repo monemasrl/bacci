@@ -118,6 +118,18 @@ main {
   }
 }
 .home {
+  .jumbo-home {
+    text-align: center;
+    .jumbo-image {
+      background-color: #c8bcb0;
+      background-image: url(/static/logo-a42d934….png);
+      background-position-x: 50%;
+      background-position-y: 50%;
+      background-repeat: no-repeat;
+      display: block;
+      margin: 1.5rem auto;
+    }
+  }
   h1,
   h2 {
     @include h2-sezioni(60px, 95px);
