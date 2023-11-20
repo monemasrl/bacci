@@ -51,7 +51,6 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
   const prodottiCorrelatiCategoria = data.directus.Prodotti.filter((item) => {
     if (item.id !== idProdotto) {
       return item.categoria.translations.some((categoria) => {
-        console.log(categoria.languages_code.code === locale, 'categoria')
         if (categoria.languages_code.code === locale) {
           return categoria.nome === categoriaProdotto
         }

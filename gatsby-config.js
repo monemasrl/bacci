@@ -15,6 +15,7 @@ module.exports = {
     siteUrl: `https://bacci.com/`,
   },
   plugins: [
+    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-image`,

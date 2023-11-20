@@ -80,6 +80,28 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        posts {
+          id
+          date_created
+          translations {
+            languages_code {
+              code
+            }
+            title
+            slug
+            summary
+            content
+          }
+          image {
+            id
+            imageFile {
+              id
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+        }
         Prodotti {
           id
           name
@@ -430,6 +452,90 @@ exports.createPages = async ({ graphql, actions }) => {
           locale: translation.languages_code.code,
           slug: translation.slug,
           title: translation.titolo,
+          allPagePath: allPagePath,
+        },
+      })
+    })
+  })
+
+  //PAGINA NEWS
+  const paginaNews = {
+    translations: [
+      {
+        titolo: "news",
+        languages_code: { code: "it_IT" },
+        slug: "news",
+      },
+      {
+        titolo: "news",
+        languages_code: { code: "en_US" },
+        slug: "news",
+      },
+    ],
+  }
+
+  paginaNews.translations.forEach(translation => {
+    const urlBase =
+      langTag[translation.languages_code.code] === "it"
+        ? "/"
+        : "/" + langTag[translation.languages_code.code] + "/"
+
+    createPage({
+      path: `${urlBase}${translation.slug}`,
+      component: require.resolve("./src/templates/news.jsx"),
+      context: {
+        locale: translation.languages_code.code,
+        slug: translation.slug,
+        title: translation.titolo,
+        allPagePath: [
+          {
+            path: "/news/",
+            locale: "it_IT",
+            title: "news",
+          },
+          {
+            path: "/en/news",
+            locale: "en_US",
+            title: "news",
+          },
+        ],
+      },
+    })
+  })
+  // SINGOLA NEWS
+  const news = await result.data.directus.posts
+  function getAllPathProdotti(translations) {
+    const allPath = []
+    translations.forEach(item => {
+      const lang = item.languages_code.code
+      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+      const path = baseLang + "news" + "/" + item.slug
+      const pathObj = {
+        path: path,
+        locale: lang,
+        title: item.title,
+      }
+      allPath.push(pathObj)
+    })
+    return allPath
+  }
+  news.forEach(entry => {
+    const allPagePath = getAllPathProdotti(entry.translations)
+
+    entry.translations.forEach(translation => {
+      const urlBase =
+        langTag[translation.languages_code.code] === "it"
+          ? "/"
+          : "/" + langTag[translation.languages_code.code] + "/"
+
+      createPage({
+        path: `${urlBase}${"news"}/${translation.slug}`,
+        component: require.resolve("./src/templates/templatenews.jsx"),
+        context: {
+          content: entry,
+          locale: translation.languages_code.code,
+          slug: translation.slug,
+          title: translation.title,
           allPagePath: allPagePath,
         },
       })

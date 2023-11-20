@@ -274,7 +274,6 @@ const Prodotti = ({ data, location, pageContext }) => {
                         checked={item.nome === filtersCat[0]} />
                       <label for="categorie">{item.nome}</label>
                     </li>)
-
                 })}
               </ul>
             </form>
@@ -296,13 +295,8 @@ const Prodotti = ({ data, location, pageContext }) => {
 
           </div>
           <div className="container col-dx">
-
-
-            {<GridPagination archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} />}
+            {<GridPagination pageName={'prodotti'} archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} />}
           </div>
-
-
-
         </div>
       </Layout>
     </>

@@ -2,7 +2,7 @@ import React from 'react'
 
 
 const Pagination = ({ postsPerPage, totalPosts, paginate, topArchivio }) => {
-    const {useState} = React
+    const { useState } = React
     const [activePage, setActivePage] = useState('')
 
     const pageNumbers = []
@@ -10,32 +10,32 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, topArchivio }) => {
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
         pageNumbers.push(i)
     }
-
+    console.log(topArchivio, 'toparchivio')
     return (
 
         <div className="wrapperpagination">
             {pageNumbers.length > 1 &&
-            <ul className="pagination-list">
-            {
-                pageNumbers.map((item) => {
-                    return <li key={item} 
-                    className={
-                        item === activePage ? 'active' : ''
-                    } 
-                    onClick={() => {
-                        setActivePage(item)
-                        paginate(item)
-                        window.scrollTo({
-                            top:  topArchivio.current.offsetTop,
-                            behavior: "smooth",
-                        });                            
-                    }}>{item}</li>
-                })
-            }
-        </ul>
+                <ul className="pagination-list">
+                    {
+                        pageNumbers.map((item) => {
+                            return <li key={item}
+                                className={
+                                    item === activePage ? 'active' : ''
+                                }
+                                onClick={() => {
+                                    setActivePage(item)
+                                    paginate(item)
+                                    window.scrollTo({
+                                        top: topArchivio.current.offsetTop,
+                                        behavior: "smooth",
+                                    });
+                                }}>{item}</li>
+                        })
+                    }
+                </ul>
 
             }
-            
+
         </div>
     )
 }

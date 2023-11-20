@@ -16,8 +16,9 @@ export const Termini = {
     macchine: "machines",
     pitagora_desc:
       "ENG Il software di programmazione avanzato con simulazione grafica 3D, elaborato da Bacci MAcchine per Centri di Lavoro CNC da 5 a 13 assi. ",
-    tecnologia: "tecnology",
-    correlati: "realted products",
+    tecnologia: "Tecnology",
+    correlati: "Realted products",
+    newsCorrelate: "Related news",
   },
   it_IT: {
     azienda: "azienda",
@@ -32,5 +33,6 @@ export const Termini = {
       "Il software di programmazione avanzato con simulazione grafica 3D, elaborato da Bacci MAcchine per Centri di Lavoro CNC da 5 a 13 assi. ",
     tecnologia: "tecnologia",
     correlati: "prodotti correlati",
+    newsCorrelate: "Articoli correlati",
   },
 }

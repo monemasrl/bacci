@@ -6,13 +6,13 @@ import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
 
-const Layout = ({ children, locale, pageTitle, seo, allPagePath, listaApplicazioni, listaCategorie, parentPath }) => {
+const Layout = ({ children, locale, pageTitle, seo, allPagePath, listaApplicazioni, listaCategorie, parentPath, tipo }) => {
 
 
 
   return (
     <div className="mainwrapper">
-      {seo && <Seo lang={locale} title={pageTitle} seo={seo} />}
+      <Seo lang={locale} title={pageTitle} seo={seo} />
 
       <div className="container-fluid " >
         <Header
@@ -22,6 +22,8 @@ const Layout = ({ children, locale, pageTitle, seo, allPagePath, listaApplicazio
           listaApplicazioni={listaApplicazioni}
           listaCategorie={listaCategorie}
           parentPath={parentPath}
+
+          tipo={tipo}
         />
 
       </div>

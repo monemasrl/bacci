@@ -5,7 +5,7 @@ import Layout from "../components/layout/layout"
 import { Termini } from "../../data-translations"
 import { findItemsTranslated } from "../utils"
 import BlocksComponent from "../components/blocks/blocks"
-
+import LastNews from "../components/widgets/lastNews"
 
 
 
@@ -26,6 +26,7 @@ export const query = graphql`
       label
     }
     pages(filter: {translations: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}}) {
+      __typename
       id
       featured_image{
       id
@@ -119,11 +120,11 @@ const Pagine = ({ data, location, pageContext }) => {
   const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
   const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
   const termini = Termini[pageContext.locale]
-  console.log(data.directus.pages[0], 'data')
+  console.log(data, 'data')
 
   return (
     <>
-      {pageContext && data.directus.pages[0] ?
+      {pageContext ?
         <Layout
           pageTitle={pageContext.title}
           locale={pageContext.locale}
@@ -132,15 +133,24 @@ const Pagine = ({ data, location, pageContext }) => {
           listaCategorie={listaCategorie}
           parentPath={pageContext.parentPath}
         >
-          {pageContext.pageName === "home" &&
-            <section class="jumbo-home">
-              <GatsbyImage className="jumbo-image" image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
-            </section>}
-          <div className={`container-fluid ${pageContext.pageName}`}>
-            {data.directus.pages[0].blocchi?.map((blocco, index) => {
-              return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
-            })}
-          </div>
+
+          {/* PAGINE INTERNE */}
+          {data.directus.pages[0] &&
+            <>
+              {pageContext.pageName === "home" &&
+                <section class="jumbo-home">
+                  <GatsbyImage className="jumbo-image" image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
+                </section>}
+              <div className={`container-fluid ${pageContext.pageName}`}>
+                {data.directus.pages[0].blocchi?.map((blocco, index) => {
+                  return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
+                })}
+              </div>
+              <LastNews locale={pageContext.locale} limiteVisualizzazione={3} />
+            </>}
+          {!data.directus.pages[0] &&
+            <h1>Non ci sono dati!</h1>
+          }
         </Layout> : 'Loading...'}
     </>
   )

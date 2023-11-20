@@ -1,11 +1,11 @@
 import React from "react";
 import './breadcrumb.scss';
-import { Termini } from "../../../data-translations"
+import { langTag, Termini } from "../../../data-translations"
+import { navigate } from "gatsby"
 
-const Breadcrumb = ({ pageTitle, pathName, nodeType, fiere, locale, tipo }) => {
-
+const Breadcrumb = ({ pageTitle, pathName, nodeType, fiere, locale, tipo, newsTitle }) => {
     const parentFolder = pathName ? pathName : ''
-
+    console.log(pageTitle, pathName, parentFolder, nodeType, 'breadcrumb')
     return (
         <div className="container-fluid breadcrumb">
 
@@ -14,8 +14,8 @@ const Breadcrumb = ({ pageTitle, pathName, nodeType, fiere, locale, tipo }) => {
 
 
                 {tipo === 'news' ?
-                    <h2>
-                        <span>/News<br /></span>
+                    <h2 className="newsh2">
+                        <span onClick={() => navigate(`${langTag[locale] === 'it' ? "/news" : "/" + langTag[locale] + "/news"}`)}> /News<br /></span>
                         <span>{pageTitle}</span>
                     </h2>
 

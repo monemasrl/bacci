@@ -31,12 +31,12 @@ function Seo({ description, lang, meta, title, seo }) {
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang: lang,
       }}
       title={title}
       description={metaDescription}
       titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-      meta={[
+      /*    meta={[
         {
           name: `description`,
           content: seo.metaDesc,
@@ -57,15 +57,9 @@ function Seo({ description, lang, meta, title, seo }) {
           property: `og:type`,
           content: seo.opengraphType,
         },
-      ].concat(meta)}
+      ].concat(meta)} */
     />
   )
-}
-
-Seo.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
 }
 
 Seo.propTypes = {
