@@ -17,7 +17,7 @@ const LangSwitcher = (props) => {
               }
               else if (item.locale !== props.locale) {
                 return <li key={index}>
-                  <Link to={`${item.path}`}>{langTag[item.locale]}</Link>
+                  <Link to={`${item.path.toLowerCase()}`}>{langTag[item.locale]}</Link>
                 </li>
               }
             }

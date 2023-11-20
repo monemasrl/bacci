@@ -80,6 +80,24 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        Fiere {
+          name
+          from
+          to
+          link_fiera
+          location
+          translations {
+            languages_code {
+              code
+            }
+            slug
+            title
+            sottotitolo
+            description
+            call2action
+            body
+          }
+        }
         posts {
           id
           date_created
@@ -193,6 +211,23 @@ exports.createPages = async ({ graphql, actions }) => {
     return allPath
   }
 
+  const findMenuItem = (menuName, itemToFind) => {
+    const menu = result.data.directus.menus.find(item => {
+      return item.name === menuName
+    })
+    let menuItem
+    if (menu) {
+      menuItem = menu.items.find(item => {
+        return item.name === itemToFind
+      })
+    } else {
+      throw new Error("menu non trovato")
+    }
+    if (menuItem != undefined) {
+      return menuItem
+    }
+  }
+
   // CREAZIONE HOMEPAGE
   const homePage = {
     translations: [
@@ -253,7 +288,7 @@ exports.createPages = async ({ graphql, actions }) => {
               : langTag[translation.languages_code.code] + "/"
 
           createPage({
-            path: `${urlBase}${translation.slug}`,
+            path: `${urlBase}${translation.slug.toLowerCase()}`,
             component: require.resolve("./src/templates/page.jsx"),
             context: {
               locale: translation.languages_code.code,
@@ -293,7 +328,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 : "/" + langTag[translation.languages_code.code] + "/"
 
             createPage({
-              path: `${urlBase}${findParent.parentPath}${translation.slug}`,
+              path: `${urlBase}${findParent.parentPath.toLowerCase()}${translation.slug.toLowerCase()}`,
               component: require.resolve("./src/templates/page.jsx"),
               context: {
                 parentPath: findParent.parentPath,
@@ -309,67 +344,6 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     })
   })
-
-  // CREAZIONE PAGINE FIERE, NEWS E PRODOTTI
-  /* 
-   const fiere = result.data.allWpFiera.edges
-
-  fiere.forEach(entry => {
-    const allPagePath = createPathFromMenu(
-      entry,
-      fiere,
-      entry.node.slug,
-      entry.node.locale.locale
-    )
-
-    const urlBase =
-      langTag[entry.node.locale.locale] === "it"
-        ? "/"
-        : `/${langTag[entry.node.locale.locale]}/`
-
-    createPage({
-      path: `${urlBase}fiere/${entry.node.slug}`,
-      component: require.resolve("./src/templates/templatefiere.jsx"),
-      context: {
-        content: entry.node,
-        locale: entry.node.locale.locale,
-        translations: entry.node.translations,
-        slug: entry.node.slug,
-        parentPath: entry.node.fiere.path,
-        allPagePath: allPagePath,
-      },
-    })
-  }) 
-
-  const news = result.data.allWpPost.edges
-
-  news.forEach(entry => {
-    const allPagePath = createPathFromMenu(
-      entry,
-      news,
-      entry.node.slug,
-      entry.node.locale.locale
-    )
-    const urlBase =
-      langTag[entry.node.locale.locale] === "it"
-        ? "/"
-        : `/${langTag[entry.node.locale.locale]}/`
-
-    createPage({
-      path: `${urlBase}news/${entry.node.slug}`,
-      component: require.resolve("./src/templates/templatenews.jsx"),
-      context: {
-        content: entry.node.content,
-        locale: entry.node.locale.locale,
-        sottotitolo: entry.node.articoli.sottotitolo,
-        translations: entry.node.translations,
-        slug: entry.node.slug,
-        title: entry.node.title,
-        date: entry.node.date,
-        allPagePath: allPagePath,
-      },
-    })
-  })*/
 
   //PAGINA PRODOTTI
   const paginaProdotto = {
@@ -394,7 +368,7 @@ exports.createPages = async ({ graphql, actions }) => {
         : "/" + langTag[translation.languages_code.code] + "/"
 
     createPage({
-      path: `${urlBase}${translation.slug}`,
+      path: `${urlBase}${translation.slug.toLowerCase()}`,
       component: require.resolve("./src/templates/prodotti.jsx"),
       context: {
         locale: translation.languages_code.code,
@@ -437,15 +411,16 @@ exports.createPages = async ({ graphql, actions }) => {
     const allPagePath = getAllPathProdotti(entry.translations)
 
     entry.translations.forEach(translation => {
+      console.log(allPagePath, "allPagePath")
       const urlBase =
         langTag[translation.languages_code.code] === "it"
           ? "/"
           : "/" + langTag[translation.languages_code.code] + "/"
 
       createPage({
-        path: `${urlBase}${Termini[translation.languages_code.code].prodotti}/${
-          translation.slug
-        }`,
+        path: `${urlBase}${
+          Termini[translation.languages_code.code].prodotti
+        }/${translation.slug.toLowerCase()}`,
         component: require.resolve("./src/templates/templateprodotto.jsx"),
         context: {
           content: entry,
@@ -481,7 +456,7 @@ exports.createPages = async ({ graphql, actions }) => {
         : "/" + langTag[translation.languages_code.code] + "/"
 
     createPage({
-      path: `${urlBase}${translation.slug}`,
+      path: `${urlBase}${translation.slug.toLowerCase()}`,
       component: require.resolve("./src/templates/news.jsx"),
       context: {
         locale: translation.languages_code.code,
@@ -504,7 +479,7 @@ exports.createPages = async ({ graphql, actions }) => {
   })
   // SINGOLA NEWS
   const news = await result.data.directus.posts
-  function getAllPathProdotti(translations) {
+  function getAllPathNews(translations) {
     const allPath = []
     translations.forEach(item => {
       const lang = item.languages_code.code
@@ -520,7 +495,7 @@ exports.createPages = async ({ graphql, actions }) => {
     return allPath
   }
   news.forEach(entry => {
-    const allPagePath = getAllPathProdotti(entry.translations)
+    const allPagePath = getAllPathNews(entry.translations)
 
     entry.translations.forEach(translation => {
       const urlBase =
@@ -529,8 +504,90 @@ exports.createPages = async ({ graphql, actions }) => {
           : "/" + langTag[translation.languages_code.code] + "/"
 
       createPage({
-        path: `${urlBase}${"news"}/${translation.slug}`,
+        path: `${urlBase}${"news"}/${translation.slug.toLowerCase()}`,
         component: require.resolve("./src/templates/templatenews.jsx"),
+        context: {
+          content: entry,
+          locale: translation.languages_code.code,
+          slug: translation.slug,
+          title: translation.title,
+          allPagePath: allPagePath,
+        },
+      })
+    })
+  })
+  //PAGINA FIERE
+  const paginaFiereMenuItem = findMenuItem("Top Menu", "Fiere")
+
+  function getAllPathFiera(translations) {
+    const allPath = []
+    translations.forEach(item => {
+      const lang = item.languages_code.code
+      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+      const path = baseLang + item.slug + "/"
+      const pathObj = {
+        path: path,
+        locale: lang,
+        title: item.label,
+      }
+      allPath.push(pathObj)
+    })
+    return allPath
+  }
+  paginaFiereMenuItem.translations.forEach(translation => {
+    const urlBase =
+      langTag[translation.languages_code.code] === "it"
+        ? "/"
+        : "/" + langTag[translation.languages_code.code] + "/"
+
+    createPage({
+      path: `${urlBase}${translation.slug.toLowerCase()}`,
+      component: require.resolve("./src/templates/fiere.jsx"),
+      context: {
+        locale: translation.languages_code.code,
+        slug: translation.slug,
+        title: translation.label,
+        allPagePath: getAllPathFiera(paginaFiereMenuItem.translations),
+      },
+    })
+  })
+  // SINGOLA FIERA
+  const fiere = await result.data.directus.Fiere
+  function getAllPathFiere(translations) {
+    const allPath = []
+    translations.forEach(item => {
+      const parentPathFromMenu = paginaFiereMenuItem.translations.find(
+        itemb => item.languages_code.code === itemb.languages_code.code
+      )
+
+      const lang = item.languages_code.code
+      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+      const path = baseLang + parentPathFromMenu.label + "/" + item.slug
+      const pathObj = {
+        path: path,
+        locale: lang,
+        title: item.title,
+      }
+      allPath.push(pathObj)
+    })
+    return allPath
+  }
+  fiere.forEach(entry => {
+    const allPagePath = getAllPathFiere(entry.translations)
+    console.log(allPagePath, "paginaFiereMenuItem")
+    entry.translations.forEach((translation, index) => {
+      const urlBase =
+        langTag[translation.languages_code.code] === "it"
+          ? "/"
+          : "/" + langTag[translation.languages_code.code] + "/"
+
+      const parentPathFromMenu = paginaFiereMenuItem.translations.find(
+        itemb => translation.languages_code.code === itemb.languages_code.code
+      )
+
+      createPage({
+        path: `${urlBase}${parentPathFromMenu.slug.toLowerCase()}/${translation.slug.toLowerCase()}`,
+        component: require.resolve("./src/templates/templatefiere.jsx"),
         context: {
           content: entry,
           locale: translation.languages_code.code,

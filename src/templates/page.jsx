@@ -146,7 +146,8 @@ const Pagine = ({ data, location, pageContext }) => {
                   return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
                 })}
               </div>
-              <LastNews locale={pageContext.locale} limiteVisualizzazione={3} />
+              {pageContext.pageName === "news" &&
+                <LastNews locale={pageContext.locale} limiteVisualizzazione={3} />}
             </>}
           {!data.directus.pages[0] &&
             <h1>Non ci sono dati!</h1>

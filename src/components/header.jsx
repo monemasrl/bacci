@@ -5,7 +5,7 @@ import NavBarMobile from "./navbar/navbarMobile"
 import Breadcrumb from "./breadcrumb/breadCrumb"
 import NavBarDirectus from "./navbar/navbardirectus"
 
-const Header = ({ locale, pageTitle, nodeType, tipo, allPagePath, listaApplicazioni, listaCategorie, parentPath }) => {
+const Header = ({ dataBreadCrumbFiere, locale, pageTitle, nodeType, tipo, allPagePath, listaApplicazioni, listaCategorie, parentPath }) => {
 
   const [mega, setMega] = React.useState(false)
 
@@ -25,7 +25,7 @@ const Header = ({ locale, pageTitle, nodeType, tipo, allPagePath, listaApplicazi
 
       <NavBarMobile locale={locale} allPagePath={allPagePath} mega={mega} setMega={setMega} />
 
-      {pageTitle !== 'Home' ? <Breadcrumb pageTitle={pageTitle} pathName={parentPath} nodeType={nodeType} locale={locale} tipo={tipo} /> : ''}
+      {pageTitle !== 'Home' ? <Breadcrumb dataBreadCrumbFiere={dataBreadCrumbFiere} pageTitle={pageTitle} pathName={parentPath} nodeType={nodeType} locale={locale} tipo={tipo} /> : ''}
 
     </header>
   )

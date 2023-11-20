@@ -3,9 +3,9 @@ import './breadcrumb.scss';
 import { langTag, Termini } from "../../../data-translations"
 import { navigate } from "gatsby"
 
-const Breadcrumb = ({ pageTitle, pathName, nodeType, fiere, locale, tipo, newsTitle }) => {
+const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale, tipo }) => {
     const parentFolder = pathName ? pathName : ''
-    console.log(pageTitle, pathName, parentFolder, nodeType, 'breadcrumb')
+    console.log(dataBreadCrumbFiere, 'breadcrumb')
     return (
         <div className="container-fluid breadcrumb">
 
@@ -22,6 +22,10 @@ const Breadcrumb = ({ pageTitle, pathName, nodeType, fiere, locale, tipo, newsTi
                     : tipo === 'fiere' ?
                         <h2>
                             {Termini[locale].eventi}
+                            <span>{pageTitle}</span>
+                            <span>{dataBreadCrumbFiere.dataFrom}</span>
+                            <span>{dataBreadCrumbFiere.dataTo}</span>
+                            <span>{dataBreadCrumbFiere.location}</span>
                         </h2>
 
                         : tipo === 'prodotto' ? <h2>

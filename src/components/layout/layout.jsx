@@ -6,7 +6,7 @@ import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
 
-const Layout = ({ children, locale, pageTitle, seo, allPagePath, listaApplicazioni, listaCategorie, parentPath, tipo }) => {
+const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, allPagePath, listaApplicazioni, listaCategorie, parentPath, tipo }) => {
 
 
 
@@ -14,7 +14,7 @@ const Layout = ({ children, locale, pageTitle, seo, allPagePath, listaApplicazio
     <div className="mainwrapper">
       <Seo lang={locale} title={pageTitle} seo={seo} />
 
-      <div className="container-fluid " >
+      <div className={`container-fluid ${tipo}`}  >
         <Header
           locale={locale}
           pageTitle={pageTitle}
@@ -22,7 +22,7 @@ const Layout = ({ children, locale, pageTitle, seo, allPagePath, listaApplicazio
           listaApplicazioni={listaApplicazioni}
           listaCategorie={listaCategorie}
           parentPath={parentPath}
-
+          dataBreadCrumbFiere={dataBreadCrumbFiere}
           tipo={tipo}
         />
 

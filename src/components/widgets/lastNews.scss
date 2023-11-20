@@ -10,13 +10,13 @@
     margin-bottom: 0;
     font-weight: normal;
   }
-  .container {
-    display: flex;
-  }
-  .box-news {
+  .col-3 {
+    flex: 1 1 430px;
     margin: 2rem 1rem 1rem 1rem;
     border: 1px solid $brown;
     padding: 1rem;
+  }
+  .box-news {
     h2 {
       color: $brown;
       text-align: left;
@@ -31,6 +31,12 @@
     p {
       text-align: left;
       font-size: 1rem;
+      line-height: 1.5rem;
+    }
+    .date {
+      color: $grey;
+      font-size: 18px;
+      padding: 0px;
     }
     .button-sezione {
       @include button-sezione(2rem, 5rem);
