@@ -120,7 +120,7 @@ const Pagine = ({ data, location, pageContext }) => {
   const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
   const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
   const termini = Termini[pageContext.locale]
-
+  console.log(data, 'data')
 
   return (
     <>

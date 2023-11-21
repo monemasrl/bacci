@@ -1,30 +1,29 @@
 @import "../../assets/sass/variabili";
 
+.breadcrumb {
+  background-color: $lightGrey;
+  margin-top: 1rem;
+  .container {
+    padding-left: 2rem;
+  }
+  h2 {
+    font-family: $title;
+    font-size: 72px;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 400;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    @media #{$large} {
+      align-self: flex-start;
+    }
 
-.breadcrumb{
-    background-color: $lightBrown;
-    margin-top: 1rem;
-    .container{
-        padding-left: 2rem;
-    }
-    h2{
-        font-family: $title;
+    span {
+      font-size: 36px;
+      display: block;
+      &:nth-child(2) {
         font-size: 72px;
-        text-transform: uppercase;
-        color:white;
-        font-weight: 400;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-        @media #{$large}{
-            align-self: flex-start;
-        }
-     
-        span{
-            font-size: 36px;
-            display: block;
-            &:nth-child(2){
-                font-size: 72px;
-            }
-        }
+      }
     }
+  }
 }

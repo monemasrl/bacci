@@ -598,3 +598,9 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 }
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    devtool: "cheap-module-source-map",
+  })
+}

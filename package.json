@@ -7,8 +7,8 @@
   "dependencies": {
     "@directus/gatsby-source-directus": "^9.16.2",
     "@emotion/react": "^11.11.1",
-    "@fontsource/open-sans": "^5.0.17",
     "@fontsource/oswald": "^5.0.17",
+    "@fontsource/roboto": "^5.0.8",
     "framer-motion": "^10.16.4",
     "gatsby": "^5.12.9",
     "gatsby-plugin-image": "^3.12.3",

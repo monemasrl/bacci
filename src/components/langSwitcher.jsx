@@ -7,7 +7,6 @@ const LangSwitcher = (props) => {
 
   return (
     <>
-
       <div className='langbox' >
         <ul className="languages">
           {props.allPagePath.map((item, index) => {
@@ -25,7 +24,6 @@ const LangSwitcher = (props) => {
           })}
         </ul>
       </div>
-
     </>
   )
 }

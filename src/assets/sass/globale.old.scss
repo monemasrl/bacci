@@ -231,7 +231,7 @@ section.container.repeater {
     p {
       color: $grey;
       font-family: $text;
-      font-size: 20px;
+      font-size: $paragraph;
       line-height: 30px;
     }
   }
@@ -257,7 +257,7 @@ section.container.repeater.no-flag {
     p {
       color: $grey;
       font-family: $text;
-      font-size: 20px;
+      font-size: $paragraph;
       line-height: 30px;
     }
   }
@@ -999,7 +999,7 @@ div:not(.home) .container.sezione-1 {
     p {
       color: $grey;
       line-height: 34px;
-      font-size: 24px;
+      font-size: $paragraph;
       margin-top: 1rem;
       padding: 0 10px;
     }
@@ -1121,7 +1121,7 @@ div:not(.home) .container.sezione-1 {
       }
 
       p {
-        font-size: 18px;
+        font-size: $paragraph;
         color: $grey;
         font-weight: normal;
         line-height: 1.5;
@@ -1242,7 +1242,7 @@ div:not(.home) .container.sezione-1 {
     p {
       color: $grey;
       line-height: 34px;
-      font-size: 24px;
+      font-size: $paragraph;
       margin-top: 1rem;
       padding: 0 10px;
     }
@@ -1289,7 +1289,7 @@ div:not(.home) .container.sezione-1 {
     }
 
     p {
-      font-size: 24px;
+      font-size: $paragraph;
       line-height: 1.5;
       color: $grey;
 
@@ -1384,7 +1384,7 @@ div:not(.home) .container.sezione-1 {
 
   .box-content-fiera {
     p {
-      font-size: 24px;
+      font-size: $paragraph;
       line-height: 1.5;
       color: $grey;
 

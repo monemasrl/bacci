@@ -46,6 +46,7 @@ h2 {
   @include h2-sezioni(60px, 95px);
   font-family: "Oswald", sans-serif;
   line-height: 1;
+  color: $grey;
 }
 main {
   @media #{$tablet} {
@@ -94,7 +95,7 @@ main {
       text-align: center;
       p {
         color: #5f6062;
-        font-size: 18px;
+        font-size: $paragraph;
         font-weight: 400;
         line-height: 1.5;
       }
@@ -105,6 +106,12 @@ main {
   .sezione-1 {
     margin-top: 4rem;
     margin-bottom: 4rem;
+    .box-sx {
+      flex: 1 1 420px;
+    }
+    .box-dx {
+      flex: 1 1 890px;
+    }
   }
   .sezione-3 {
     h1.titolo {
@@ -122,8 +129,8 @@ main {
 
 p {
   font-weight: lighter;
-  font-size: 24px;
-  line-height: 38px;
+  font-size: $paragraph;
+  line-height: 1.5;
 }
 
 .tl-edges {
@@ -224,7 +231,7 @@ ul {
   border: 1px solid #c8bcb0;
   border-radius: 30px;
   color: #fff;
-  color: #a4917d;
+  color: $grey;
   display: inline-block;
   font-size: 24px;
   line-height: 45px;
@@ -234,7 +241,7 @@ ul {
   text-transform: uppercase;
   vertical-align: middle;
   &:hover {
-    background-color: #c8bcb0;
+    background-color: $grey;
     color: #fff;
     cursor: pointer;
   }
@@ -274,7 +281,7 @@ section.container.repeater {
     p {
       color: $grey;
       font-family: $text;
-      font-size: 20px;
+      font-size: $paragraph;
       line-height: 30px;
     }
   }
@@ -333,7 +340,7 @@ section.container.repeater {
     flex: 1 1 600px;
     h2 {
       font-size: 50px;
-      line-height: 1.2;
+      line-height: 1.1;
     }
   }
   .box-dx {
@@ -388,16 +395,16 @@ section.container.repeater {
     display: none;
   }
   .seznovita {
-    border-bottom: 3px solid #c8bcb0;
-    border-top: 3px solid #c8bcb0;
+    border-bottom: 3px solid $grey;
+    border-top: 3px solid $grey;
     justify-content: space-between;
     h2 {
       font-size: 105px;
-      color: $brown;
+      color: $grey;
       font-weight: 700;
     }
     p {
-      color: #a4917d;
+      color: $grey;
       font-family: Oswald;
       font-size: 38px;
       margin-top: 2rem;
@@ -407,7 +414,7 @@ section.container.repeater {
       color: $brown;
     }
     .novita {
-      background-color: #c8bcb0;
+      background-color: $grey;
       color: #fff;
       display: inline-block;
       font-family: Oswald;
@@ -500,7 +507,7 @@ section.container.repeater {
       }
       p {
         color: $grey;
-        font-size: 24px;
+        font-size: $paragraph;
         line-height: 34px;
         margin-top: 1rem;
         padding: 0 10px;
