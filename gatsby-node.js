@@ -411,7 +411,6 @@ exports.createPages = async ({ graphql, actions }) => {
     const allPagePath = getAllPathProdotti(entry.translations)
 
     entry.translations.forEach(translation => {
-      console.log(allPagePath, "allPagePath")
       const urlBase =
         langTag[translation.languages_code.code] === "it"
           ? "/"
@@ -574,7 +573,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
   fiere.forEach(entry => {
     const allPagePath = getAllPathFiere(entry.translations)
-    console.log(allPagePath, "paginaFiereMenuItem")
+
     entry.translations.forEach((translation, index) => {
       const urlBase =
         langTag[translation.languages_code.code] === "it"

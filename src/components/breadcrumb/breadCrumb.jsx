@@ -5,7 +5,7 @@ import { navigate } from "gatsby"
 
 const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale, tipo }) => {
     const parentFolder = pathName ? pathName : ''
-    console.log(dataBreadCrumbFiere, 'breadcrumb')
+
     return (
         <div className="container-fluid breadcrumb">
 
@@ -20,13 +20,17 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
                     </h2>
 
                     : tipo === 'fiere' ?
-                        <h2>
-                            {Termini[locale].eventi}
-                            <span>{pageTitle}</span>
-                            <span>{dataBreadCrumbFiere.dataFrom}</span>
-                            <span>{dataBreadCrumbFiere.dataTo}</span>
-                            <span>{dataBreadCrumbFiere.location}</span>
-                        </h2>
+                        <>
+                            <h2>
+                                {Termini[locale].eventi}
+                            </h2>
+                            <div className="dataEventi">
+                                <span>{pageTitle}</span>
+                                <span>{dataBreadCrumbFiere.dataFrom}-{dataBreadCrumbFiere.dataTo}</span>
+                                <span>{dataBreadCrumbFiere.location}</span>
+                            </div>
+                        </>
+
 
                         : tipo === 'prodotto' ? <h2>
                             <span>/{Termini[locale].prodotti}</span>

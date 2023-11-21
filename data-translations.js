@@ -19,6 +19,10 @@ export const Termini = {
     tecnologia: "Tecnology",
     correlati: "Realted products",
     newsCorrelate: "Related news",
+    in_evidenza: "Featured",
+    novita: "News",
+    applicazione: "Designed for",
+    tipologia: "Typology",
   },
   it_IT: {
     azienda: "azienda",
@@ -34,5 +38,9 @@ export const Termini = {
     tecnologia: "tecnologia",
     correlati: "prodotti correlati",
     newsCorrelate: "Articoli correlati",
+    in_evidenza: "In evidenza",
+    novita: "Novità",
+    applicazione: "Applicazione",
+    tipologia: "Tipologia",
   },
 }

@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 
 const FormFiere = () => {
 
-
     return (
         <div className="wrapper-form" >
             <form method="POST" name="fiere" action="/thanks" netlify-honeypot="bot-field" data-netlify="true">
@@ -29,7 +28,7 @@ const FormFiere = () => {
                         <textarea rows={6} placeholder="messaggio" name="messaggio" id="messaggio" required />
                     </label>
                 </div>
-                <label htmlFor="privacy">
+                <label className="privacy" htmlFor="privacy">
                     <input type="checkbox" placeholder="privacy" name="privacy" id="privacy" required />
                     <span>Accettazione della <Link to="/privacy"> Privacy</Link></span>
                 </label>

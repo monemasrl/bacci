@@ -27,37 +27,36 @@ export const query = graphql`
   }`
 const Prodotto = ({ data, pageContext }) => {
 
-    const { locale, parentPath, content, title, allPagePath } = pageContext
-    const dataProdottoTranslated = findItemTranslated(content.translations, locale)
-    const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-    const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+  const { locale, parentPath, content, title, allPagePath } = pageContext
+  const dataProdottoTranslated = findItemTranslated(content.translations, locale)
+  const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
+  const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
 
-    console.log(pageContext, 'data prodotto scheda')
-    const date = new Date(Date.parse(content.date_created))
-    return (
-        <>
-            <Layout
-                locale={locale}
-                pageTitle={title}
-                pathName={parentPath}
-                tipo='news'
-                allPagePath={allPagePath}
-                pathFromContext={pageContext}
-                listaApplicazioni={listaApplicazioni}
-                listaCategorie={listaCategorie}
-            >
-                <div className="wrapper-news">
-                    <GatsbyImage image={content.image.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.title} />
-                    <span class="datanews"> {moment(date).locale(pageContext.locale).format('DD MM YYYY')}</span>
+  const date = new Date(Date.parse(content.date_created))
+  return (
+    <>
+      <Layout
+        locale={locale}
+        pageTitle={title}
+        pathName={parentPath}
+        tipo='news'
+        allPagePath={allPagePath}
+        pathFromContext={pageContext}
+        listaApplicazioni={listaApplicazioni}
+        listaCategorie={listaCategorie}
+      >
+        <div className="wrapper-news">
+          <GatsbyImage image={content.image.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.title} />
+          <span class="datanews"> {moment(date).locale(pageContext.locale).format('DD MM YYYY')}</span>
 
-                    <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.content }} />
+          <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.content }} />
 
-                </div>
-                <LastNews locale={locale} limiteVisualizzazione={3} />
-            </Layout>
-        </>
+        </div>
+        <LastNews locale={locale} limiteVisualizzazione={3} />
+      </Layout>
+    </>
 
-    )
+  )
 
 }
 

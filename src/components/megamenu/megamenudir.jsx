@@ -129,7 +129,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                             }}>
                             <div className="box-prodotto">
                                 <div className="titolo-col-mega">
-                                    NOVITA’
+                                    {Termini[locale].novita}
                                 </div>
                                 <div className="content-mega">
                                     <>
@@ -156,7 +156,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                             }} >
                             <div className="box-prodotto">
                                 <div className="titolo-col-mega">
-                                    IN EVIDENZA
+                                    {Termini[locale].in_evidenza}
                                 </div>
                                 {inEvidenzaLocalizzato.titolo &&
                                     <div className="content-mega">
@@ -181,7 +181,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                 delay: 0.5
                             }} >
                             <div className="titolo-col-mega">
-                                APPLICAZIONE
+                                {Termini[locale].applicazione}
                             </div>
                             <ul className="mega-list">
                                 {listaApplicazioni.map((item) =>
@@ -200,7 +200,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                 delay: 0.6
                             }} >
                             <div className="titolo-col-mega">
-                                TIPOLOGIA
+                                {Termini[locale].tipologia}
                             </div>
                             <ul className="mega-list">
                                 {listaCategorie.map((item) => <li>

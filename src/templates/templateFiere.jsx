@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/layout/layout";
 import { findItemTranslated, findItemsTranslated } from "../utils";
 import { graphql } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image"
+import FormFiere from "../components/form";
 
 const moment = require('moment')
 
@@ -36,7 +36,7 @@ const Fiere = ({ data, pageContext }) => {
 
   const dataBreadCrumbFiere = {
     dataFrom: moment(dateFrom).locale(pageContext.locale).format('DD'),
-    dataTo: moment(dateTo).locale(pageContext.locale).format('DD MMMM YYYY'),
+    dataTo: moment(dateTo).locale(pageContext.locale).format('DD MMM YYYY'),
     title: dataProdottoTranslated.title,
     location: content.location,
   }
@@ -55,12 +55,14 @@ const Fiere = ({ data, pageContext }) => {
         dataBreadCrumbFiere={dataBreadCrumbFiere}
       >
         <div className="wrapper-fiere">
-          {content.image && <GatsbyImage image={content.image.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.title} />}
-          <section className="topfiera">
-            <h1>{dataProdottoTranslated.title}</h1>
 
-            <div className="description" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.description }} />
-            <div className="call2action" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.call2action }} />
+          <section className="topfiera">
+            <h2>{dataProdottoTranslated.sottotitolo}</h2>
+            <p className="description" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.description }} />
+            {dataProdottoTranslated.call2action && <div className="call2action">
+              <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.call2action }} />
+              <FormFiere />
+            </div>}
           </section>
           <div className="bodyFiera" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.body }} />
 

@@ -10,7 +10,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, topArchivio }) => {
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
         pageNumbers.push(i)
     }
-    console.log(topArchivio, 'toparchivio')
+
     return (
 
         <div className="wrapperpagination">

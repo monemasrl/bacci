@@ -589,10 +589,28 @@ section.container.repeater {
 }
 .fiere {
   .breadcrumb {
+    padding: 2rem 0;
     h2 {
       font-size: 36px;
+      margin: 0;
       span {
         font-size: 72px;
+      }
+    }
+    .dataEventi {
+      width: 100%;
+      display: flex;
+      font-size: 72px;
+      font-family: $title;
+      color: white;
+      text-transform: uppercase;
+      span:not(:last-child) {
+        &::after {
+          content: "|";
+          top: -5px;
+          position: relative;
+          margin: 0 1rem;
+        }
       }
     }
   }
@@ -601,16 +619,23 @@ section.container.repeater {
   max-width: $container;
   margin: 0 auto;
   padding-left: 2rem;
+  max-width: 1068px;
   .topfiera {
+    margin-top: 6rem;
+
     .datafiera {
       color: #5f6062;
       font-size: 35px;
       text-transform: uppercase;
     }
+    .description {
+      margin: 3rem 0;
+    }
     .call2action {
       border: 2px solid #a4917d;
       padding: 2rem;
       text-align: center;
+      margin-bottom: 2rem;
       h2 {
         color: #5f6062;
         font-size: 42px;
@@ -622,6 +647,68 @@ section.container.repeater {
         font-size: 36px;
         font-weight: normal;
         font-family: $title;
+      }
+    }
+    .wrapper-form {
+      background-color: #c8bcb0;
+      padding: 1rem;
+      form {
+        margin: 0 auto;
+        max-width: 789px;
+        .box-form {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+        }
+        label {
+          flex: 1 1;
+          margin: 10px 0;
+          max-width: 376px;
+          width: 100%;
+        }
+        label input {
+          border: 0;
+          height: 40px;
+          max-width: none;
+          width: 100%;
+        }
+        textarea {
+          border: 0;
+          width: 100%;
+        }
+        .box-form-message {
+          margin: 10px 0;
+        }
+        input[type="checkbox"] {
+          height: 20px;
+          margin-right: 10px;
+          width: 20px;
+        }
+        .privacy {
+          display: block;
+          max-width: 100%;
+          text-align: center;
+        }
+        .box-submit {
+          text-align: center;
+        }
+        .button-sezione {
+          background-color: transparent;
+          border: 1px solid #fff;
+          border-radius: 30px;
+          color: #a4917d;
+          color: #fff;
+          display: inline-block;
+          font-size: 24px;
+          height: 55px;
+          line-height: 45px;
+          margin-top: 2rem;
+          padding: 0.2rem 6rem;
+          text-align: center;
+          text-transform: uppercase;
+          vertical-align: middle;
+          width: auto;
+        }
       }
     }
   }

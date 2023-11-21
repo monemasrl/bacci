@@ -45,7 +45,7 @@ const LastNews = ({ locale, limiteVisualizzazione }) => {
   const langFilterProdottoSorted = langFilterNews.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
-  console.log(langFilterProdottoSorted, 'langFilterNews')
+
   return (
     <>
       <section className="widget-news">

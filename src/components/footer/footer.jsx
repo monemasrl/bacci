@@ -2,29 +2,34 @@ import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { StaticImage } from "gatsby-plugin-image"
 import './footer.scss'
+import { langTag } from '../../../data-translations'
+import FooterMenu from './footerMenu'
 
+const Footer = ({ locale }) => {
 
-const Footer = () => {
-    const data = useStaticQuery(graphql`
-    {
-      site {
-        siteMetadata {
-          title
+    const data = {
+        en: {
+            body: `  <h2>EN Hai bisogno di <strong>informazioni?</strong></h2>
+            <p>Se desideri avere maggiori informazioni sulla nostra Azienda
+                e sui nostri prodotti, scrivici compilando il form.
+                il nostro Staff ti risponderà presto!</p>`,
+            privacy: `EN Accettazione della`,
+        },
+        it: {
+            body: `  <h2>Hai bisogno di <strong>informazioni?</strong></h2>
+            <p>Se desideri avere maggiori informazioni sulla nostra Azienda
+                e sui nostri prodotti, scrivici compilando il form.
+                il nostro Staff ti risponderà presto!</p>`,
+            privacy: `Accettazione della`,
         }
-      }
-
     }
-  `)
+
     return (
         <footer>
             <section className='container-fuid footer1 '>
                 <div className='container'>
-                    <div className="box-sx">
-                        <h2>Hai bisogno di <strong>informazioni?</strong></h2>
-                        <p>Se desideri avere maggiori informazioni sulla nostra Azienda
-                            e sui nostri prodotti, scrivici compilando il form.
-                            il nostro Staff ti risponderà presto!</p>
-                    </div>
+                    <div className="box-sx" dangerouslySetInnerHTML={{ __html: data[langTag[locale]].body }} />
+
                     <div className="box-dx">
                         <div className="form-contatti">
 
@@ -53,7 +58,7 @@ const Footer = () => {
                                 </div>
                                 <label htmlFor="privacy">
                                     <input type="checkbox" placeholder="privacy" name="privacy" id="privacy" required />
-                                    <span>Accettazione della <Link to="/privacy"> Privacy</Link></span>
+                                    <span>{data[langTag[locale]].privacy} <Link to="/privacy"> Privacy</Link></span>
                                 </label>
                                 <div className="box-submit">
                                     <label htmlFor="submit">
@@ -67,62 +72,7 @@ const Footer = () => {
                     </div>
                 </div>
             </section>
-            <section className='container footer2'>
-                <div className="footer-col">
-                    <ul>
-                        <li>Azienda</li>
-                        <li>GRUPPO</li>
-                        <li>MISSION</li>
-                        <li>PRODUZIONE</li>
-                        <li>STORIA</li>
-                    </ul>
-                </div>
-                <div className="footer-col">
-                    <ul>
-                        <li>macchine</li>
-                        <li>FORATRICI</li>
-                        <li>TORNITURA</li>
-                        <li>FRESATURA</li>
-                        <li>MORTASA/TELONE</li>
-                        <li>DOPPIE TESTE</li>
-                        <li>SPECIALI</li>
-                        <li>MATERIALI COMPOSITI</li>
-
-                    </ul>
-                </div>
-                <div className="footer-col">
-                    <ul>
-                        <li>tecnologia</li>
-                        <li>RICERCA E SVILUPPO</li>
-                        <li>TECNOLOGIE DISTINTIVE</li>
-                        <li>COMPONENTI</li>
-                        <li>PERSONALIZZAZIONE</li>
-                        <li>SERVICE</li>
-                        <li>SOFTWARE</li>
-                    </ul>
-                </div>
-                <div className="footer-col">
-                    <ul>
-                        <li>filiali</li>
-                        <li>BACCI AMERICA</li>
-                        <li>BACCI CHINA</li>
-
-                    </ul>
-                </div>
-                <div className="footer-col">
-                    <ul>
-                        <li>contatti</li>
-                        <li>richiedi informazioni</li>
-                    </ul>
-                </div>
-                <div className="footer-col">
-                    <ul>
-                        <li>seguici su</li>
-                        <li>Facebook</li>
-                        <li>YouTube</li>
-                    </ul>
-                </div>
-            </section>
+            <FooterMenu locale={locale} />
             <section className='container-fluid footer3'>
 
                 <div className="container">
@@ -141,7 +91,7 @@ const Footer = () => {
                     </div>
                     <div className="footer-col">
                         <ul>
-                            <li>Cap. Sociale 1.500.000,00 i.v. <br/> Partita iva / codice fiscale 022456588996365</li>
+                            <li>Cap. Sociale 1.500.000,00 i.v. <br /> Partita iva / codice fiscale 022456588996365</li>
                             <li>
                                 <Link to="/"> Privacy Policy</Link>	<Link to="/">Termini e condizioni</Link>	</li>
                         </ul>
