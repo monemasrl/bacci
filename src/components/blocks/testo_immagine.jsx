@@ -31,10 +31,10 @@ function TestoImmagine({ index, allineamento, content }) {
                     <h2 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />
                     {content.item.traduzioni[0].sotto_titolo && <h3 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo }} />}
                     {content.item.immagine && <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
-
                 </div>
 
                 <div className="box-dx">
+
                     <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo }} />
 
                     {content.item.link && <Link className="button-sezione" to={content.item.link.translations[0].slug}>{content.item.link.translations[0].slug}</Link>}
