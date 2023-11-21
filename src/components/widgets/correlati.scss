@@ -1,5 +1,6 @@
 @import "../../assets/sass/variabili";
 .widget-correlati {
+  width: 100%;
   h2 {
     text-align: center;
     margin: 4rem 0 2rem 0;
@@ -22,10 +23,15 @@
     }
 
     .box-correlati {
+      text-align: center;
       .gatsby-image-wrapper-constrained {
         display: inline-block;
         vertical-align: top;
         height: 250px;
+      }
+      p {
+        font-size: 1rem;
+        line-height: 1.5rem;
       }
     }
   }

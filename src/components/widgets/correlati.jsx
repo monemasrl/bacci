@@ -71,7 +71,7 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
                   <div className="box-correlati">
                     <GatsbyImage className="immagine-widget" image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.titolo} />
                     <h2>{prodottoTradotto.titolo}</h2>
-                    <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.testoAnteprima }} />
+                    <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.testo_antemprima }} />
                     <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}${Termini[locale].prodotti}/${prodottoTradotto.slug}`} className="button-sezione">scopri</Link>
                   </div>
                 </div>
