@@ -513,7 +513,7 @@ exports.createPages = async ({ graphql, actions }) => {
       if (translation.slug) {
         createPage({
           path: `${urlBase}${"news"}/${translation.slug.toLowerCase()}`,
-          component: require.resolve("./src/templates/templatenews.jsx"),
+          component: require.resolve("./src/templates/templateNews.jsx"),
           context: {
             content: entry,
             locale: translation.languages_code.code,
