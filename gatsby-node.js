@@ -327,18 +327,20 @@ exports.createPages = async ({ graphql, actions }) => {
                 ? "/"
                 : "/" + langTag[translation.languages_code.code] + "/"
 
-            createPage({
-              path: `${urlBase}${findParent.parentPath.toLowerCase()}${translation.slug.toLowerCase()}`,
-              component: require.resolve("./src/templates/page.jsx"),
-              context: {
-                parentPath: findParent.parentPath,
-                locale: translation.languages_code.code,
-                slug: translation.slug,
-                title: translation.label,
-                allPagePath: allPagePath,
-                pageName: slugify(subItem.name).toLowerCase(),
-              },
-            })
+            if (translation.slug) {
+              createPage({
+                path: `${urlBase}${findParent.parentPath.toLowerCase()}${translation.slug.toLowerCase()}`,
+                component: require.resolve("./src/templates/page.jsx"),
+                context: {
+                  parentPath: findParent.parentPath,
+                  locale: translation.languages_code.code,
+                  slug: translation.slug,
+                  title: translation.label,
+                  allPagePath: allPagePath,
+                  pageName: slugify(subItem.name).toLowerCase(),
+                },
+              })
+            }
           })
         })
       }
