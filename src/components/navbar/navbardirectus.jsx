@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
-//import Megamenu from '../megamenu/megamenu'
 import MegamenuDirectus from '../megamenu/megamenudir'
 import { Termini, langTag } from '../../../data-translations'
 import './navbar.scss'
@@ -46,7 +45,22 @@ const NavBarDirectus = (props) => {
 
 
     const terminiTraduzione = Termini[props.locale]
+    const [stickyClass, setStickyClass] = useState('relative');
 
+    useEffect(() => {
+        window.addEventListener('scroll', stickNavbar);
+
+        return () => {
+            window.removeEventListener('scroll', stickNavbar);
+        };
+    }, []);
+
+    const stickNavbar = () => {
+        if (window !== undefined) {
+            let windowHeight = window.scrollY;
+            windowHeight > 200 ? setStickyClass('fixed') : setStickyClass('');
+        }
+    };
 
 
     return (
@@ -76,7 +90,7 @@ const NavBarDirectus = (props) => {
                 </div>
 
             </nav>
-            <nav className='container-fluid mainmenu'>
+            <nav className={`container-fluid mainmenu ${stickyClass}`}>
                 <div className="container">
 
                     <div className="main-logo">
@@ -84,7 +98,7 @@ const NavBarDirectus = (props) => {
                             <StaticImage
                                 placeholder="none"
                                 width={362}
-                                src="../../images/logo.png" alt="Bacci logo" />
+                                src="../../images/logo_scuro.jpg" alt="Bacci logo" />
                         </Link>
 
                     </div>

@@ -58,7 +58,7 @@ const NavBarMobile = (props) => {
                             <StaticImage
                                 placeholder="none"
                                 width={362}
-                                src="../../images/logo.png" alt="Bacci logo" />
+                                src="../../images/logo_scuro.jpg" alt="Bacci logo" />
                         </Link>
 
                     </div>

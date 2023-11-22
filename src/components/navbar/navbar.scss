@@ -12,6 +12,7 @@
     margin: 0 auto;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     @media #{$large} {
       flex-direction: column-reverse;
       align-items: center;
@@ -47,18 +48,24 @@
 
     ul {
       li {
-        margin: 0;
-        color: white;
-        text-decoration: underline;
+        color: $lightBrown;
 
-        &:first-child {
-          text-decoration: none;
+        width: 30px;
+        height: 30px;
+        background: rgba(255, 255, 255, 0.815);
+
+        text-align: center;
+        line-height: 30px;
+        border-radius: 50%;
+        margin: 0 0.2rem;
+        text-transform: uppercase;
+        &.active {
+          text-decoration: underline;
+          background: rgba(255, 255, 255);
         }
 
-        &:first-child::after {
-          position: relative;
-          content: "-";
-          margin: 0 3px;
+        a {
+          color: #0e294b;
         }
       }
     }
@@ -67,11 +74,27 @@
 
 .mainmenu {
   font-family: $title;
+  margin-top: 20px;
+  padding: 0 1rem;
+  &.fixed {
+    margin-top: 0;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background: white;
+    animation: menuSticky 0.5s;
+    @media #{$large} {
+      margin-top: 20px;
+      position: relative;
+    }
+    .main-logo {
+      width: 272px;
+      padding: 0.5rem;
+    }
+  }
   @media #{$landscape} {
     display: none;
   }
-  margin-top: 20px;
-  padding: 0 1rem;
   a:not(.mega-item) {
     color: $brown;
     text-transform: uppercase;
@@ -195,5 +218,16 @@
   width: 362px;
   @media #{$large} {
     margin-bottom: 1rem;
+  }
+}
+
+@keyframes menuSticky {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
