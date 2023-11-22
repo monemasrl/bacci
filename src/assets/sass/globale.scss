@@ -130,7 +130,7 @@ main {
 p {
   font-weight: lighter;
   font-size: $paragraph;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .tl-edges {
@@ -309,6 +309,9 @@ section.container.repeater {
 .sezione-3 {
   text-align: center;
   margin: 5rem auto;
+  p {
+    font-size: 24px;
+  }
   h2 {
     font-size: 74px;
   }

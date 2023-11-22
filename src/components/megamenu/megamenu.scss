@@ -8,21 +8,20 @@
   left: 0;
   opacity: 1;
   transition: opacity 0.2s linear;
-  background-color: #fff;
   display: block;
-  overflow: hidden;
+
   z-index: 100;
   width: 100%;
-  background-color: $lightBrown;
 
   .mega-box {
     display: flex;
     flex-wrap: wrap;
     max-width: 1620px;
-    margin: 3rem auto;
-    justify-content: space-between;
+    margin: 0rem auto;
+    justify-content: space-around;
     background-color: white;
     padding: 2rem;
+    box-shadow: 5px 5px 1px #00000012;
   }
 
   .col-mega {
@@ -58,9 +57,11 @@
   }
 
   .box-prodotto {
-    flex: 1;
     max-width: 422px;
     height: 100%;
+    @media #{$large} {
+      max-width: 260px;
+    }
 
     h2 {
       color: $brown;
@@ -83,7 +84,7 @@
 
   .titolo-col-mega {
     font-size: 30px;
-    font-weight: bold;
+
     color: $grey;
     margin-bottom: 1rem;
     text-transform: uppercase;

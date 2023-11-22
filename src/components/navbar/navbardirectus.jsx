@@ -100,7 +100,7 @@ const NavBarDirectus = (props) => {
                                 return (
                                     < >
                                         {item.id === '2' ? <li key={item.id} role="button" tabIndex={0} onMouseEnter={() => props.setMega(true)}
-                                            onMouseLeave={() => props.setMega(false)}>
+                                            onMouseLeave={() => props.setMega(true)}>
                                             <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a href="#">{itemTranslated.label}</a>
                                             </div>
 
