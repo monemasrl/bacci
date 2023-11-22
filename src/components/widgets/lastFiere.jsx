@@ -3,58 +3,68 @@ import { useStaticQuery, graphql } from "gatsby"
 import { Termini, langTag } from "../../../data-translations";
 import './lastFiere.scss'
 import { Link } from "gatsby";
+import { findItemTranslated } from "../../utils";
+const moment = require('moment')
 
 const LastFiere = ({ locale, limiteVisualizzazione }) => {
-  /*   const data = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
       {
-            allWpFiera {
-              edges {
-              node {
-                  fiere {
-                  dataDa
-                  dataA
-                  luogo
-                  link
-                  }
-                  title
-                  slug
-                  locale {
-                locale
+          directus{
+  
+            Fiere{
+            name
+            from
+            to
+            location
+            link_fiera
+            translations{
+              languages_code{
+                code
               }
-              }
-              }
+              slug
+              title
+
+              sottotitolo
+              description
+              call2action
+              body
+              
+            }
+          }
         }
       }
     `)
-  
-    let langFilterProdotto = data.allWpFiera.edges.filter((item) => {
-      return (item.node.locale.locale === 'it_IT')
-    })
-    langFilterProdotto = langFilterProdotto.slice(0, limiteVisualizzazione)
-   */
+
+  const langFilterFiereSorted = data.directus.Fiere.sort((a, b) => {
+    return new Date(b.date_created) - new Date(a.date_created)
+  })
+
   return (
     <>
-      {/*   <section className="container widget-fiere">
+      <section className="container widget-fiere">
         <h2>{Termini[locale].eventi}</h2>
         <div className="widget-fiere-wrapper">
-          {langFilterProdotto.map((item) => {
-            const slug = `${langTag[item.node.locale.locale] === "it" ? '' : langTag[item.node.locale.locale]}/fiere/${item.node.slug}`
+          {langFilterFiereSorted.map((item) => {
+            const FiereTranslated = findItemTranslated(item.translations, locale)
+
+            const dataFrom = new Date(Date.parse(item.from))
+            const dataTo = new Date(Date.parse(item.to))
             return (
-              <div key={item.node.title} className="box-single-fiera">
-                <Link to={slug}><h2>{item.node.title}</h2>   </Link>
-                <div className="data">
-                  {item.node.fiere.dataDa.slice(0, 2)}-
-                  {item.node.fiere.dataA}
+              <div key={FiereTranslated.title} className="box-single-fiera">
+                <Link to={`/${langTag[locale] === "it" ? '' : langTag[locale] + "/"}${Termini[locale].fiere}/${FiereTranslated.slug} `}><h2>{FiereTranslated.title}</h2>   </Link>
+                <div className="datafiera">
+                  <span>{moment(dataFrom).locale(locale).format('DD')}</span> - &nbsp;
+                  <span>{moment(dataTo).locale(locale).format('DD MMMM YYYY')}</span>
                 </div>
                 <div className="luogo">
-                  {item.node.fiere.luogo}
+                  {item.location}
                 </div>
-                <a href={item.node.fiere.link} className="link" targe="_blank" rel="nofollow" >{item.node.fiere.link.slice(8)}</a>
+                <a href={item.link_fiera} className="link" targe="_blank" rel="nofollow" >{item.link_fiera}</a>
               </div>
             )
           })}
         </div>
-      </section> */}
+      </section>
     </>
   )
 }

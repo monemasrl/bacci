@@ -23,6 +23,8 @@ export const Termini = {
     novita: "News",
     applicazione: "Designed for",
     tipologia: "Typology",
+    ultime_news: "Latest news",
+    fiere: "Exhibitions",
   },
   it_IT: {
     azienda: "azienda",
@@ -42,5 +44,7 @@ export const Termini = {
     novita: "Novità",
     applicazione: "Applicazione",
     tipologia: "Tipologia",
+    ultime_news: "Ultime news",
+    fiere: "Fiere",
   },
 }

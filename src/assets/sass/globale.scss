@@ -488,7 +488,7 @@ section.container.repeater {
     width: 100%;
     max-width: 440px;
     .box-single-news {
-      border: 1px solid #a4917d;
+      border: 1px solid $grey;
       margin: 10px;
       height: 100%;
       .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
@@ -536,7 +536,7 @@ section.container.repeater {
   display: flex;
   justify-content: center;
   li {
-    background-color: #c8bcb0;
+    background-color: $lightBrown;
     color: #fff;
     cursor: pointer;
     display: inline-block;
@@ -545,6 +545,11 @@ section.container.repeater {
     margin: 0.5rem;
     text-align: center;
     width: 30px;
+    &.active {
+      background-color: white;
+      color: $lightBrown;
+      outline: 1px solid $lightBrown;
+    }
   }
 }
 
@@ -568,8 +573,7 @@ section.container.repeater {
 }
 
 .box-single-fiera {
-  border: 5px solid #a4917d;
-  flex: 1 1;
+  border: 5px solid $grey;
   margin: 10px;
   padding: 2rem 3rem;
   h2 {
@@ -578,14 +582,12 @@ section.container.repeater {
     font-size: 36px;
     font-style: normal;
     font-weight: 600;
-    margin-bottom: 1rem;
     margin-top: 0;
     padding: 0;
   }
-  .date {
+  .datafiera {
     color: $grey;
-    font-size: 18px;
-    font-size: 32px;
+    font-size: 24px;
     margin-bottom: 1rem;
     padding: 0;
   }
@@ -594,7 +596,7 @@ section.container.repeater {
   }
   .link {
     padding: 0;
-    color: #a4917d;
+    color: $grey;
     display: block;
     font-size: 24px;
     font-style: italic;

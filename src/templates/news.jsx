@@ -44,7 +44,7 @@ export const query = graphql`
   }`
 
 
-const News = ({ data, location, pageContext }) => {
+const News = ({ data, pageContext }) => {
   const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
   const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
   const topArchivio = React.useRef()
@@ -61,7 +61,7 @@ const News = ({ data, location, pageContext }) => {
         listaCategorie={listaCategorie}
       >
         <section className="container news" ref={topArchivio}>
-          <GridPagination pageName="news" topArchivio={topArchivio} archivio={langFilterProdottoSorted} lang={pageContext.locale} />
+          <GridPagination pagePath={'/news'} pageName="news" topArchivio={topArchivio} archivio={langFilterProdottoSorted} lang={pageContext.locale} />
         </section>
       </Layout>
     </>

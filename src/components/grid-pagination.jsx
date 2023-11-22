@@ -60,13 +60,13 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
     }
 
     if (pageName === 'news') {
+        console.log(pagePath, 'current posts')
         return (
             <>
                 {currentPosts && currentPosts.map((item) => {
                     const translated = findItemTranslated(item.translations, lang)
                     const data = new Date(Date.parse(item.date_created))
 
-                    const pathTranslated = pagePath.find((item) => item.locale === lang)
                     return (
                         <div className="col-3">
                             <div className="box-single-news">
@@ -76,7 +76,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                 </div>
                                 <h2>{translated.title}</h2>
                                 <p dangerouslySetInnerHTML={{ __html: translated.summary }} />
-                                <Link to={`${pathTranslated.path}${translated.slug}`}>leggi tutto</Link>
+                                <Link to={`${'/news/'}${translated.slug}`}>leggi tutto</Link>
                             </div>
                         </div>)
                 })}

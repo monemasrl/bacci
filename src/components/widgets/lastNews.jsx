@@ -7,7 +7,7 @@ import { Termini } from "../../../data-translations";
 import './lastNews.scss'
 import { Link } from "gatsby";
 const moment = require('moment')
-const LastNews = ({ locale, limiteVisualizzazione }) => {
+const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
   const data = useStaticQuery(graphql`
     {
        directus{
@@ -49,7 +49,7 @@ const LastNews = ({ locale, limiteVisualizzazione }) => {
   return (
     <>
       <section className="widget-news">
-        <h2>{Termini[locale].newsCorrelate}</h2>
+        {pageType !== "home" ? <h2>{Termini[locale].newsCorrelate}</h2> : <h2>{Termini[locale].ultime_news}</h2>}
         <div className="container">
           {langFilterProdottoSorted.map((item, index) => {
             const prodottoTradotto = findItemTranslated(item.translations, locale)
