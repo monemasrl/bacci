@@ -599,7 +599,7 @@ exports.createPages = async ({ graphql, actions }) => {
       if (translation.slug) {
         createPage({
           path: `${urlBase}${parentPathFromMenu.slug.toLowerCase()}/${translation.slug.toLowerCase()}`,
-          component: require.resolve("./src/templates/templatefiere.jsx"),
+          component: require.resolve("./src/templates/templateFiere.jsx"),
           context: {
             content: entry,
             locale: translation.languages_code.code,
