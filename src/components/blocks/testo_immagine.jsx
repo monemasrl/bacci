@@ -10,10 +10,7 @@ function TestoImmagine({ index, allineamento, content }) {
                 {content.item.traduzioni.length > 0 && <>
                     <div className={`box-sx`} >
                         {content.item.novita && <div className="novita">Novità</div>}
-                        {index === 0 ?
-                            <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />
-                            :
-                            <h2 className="titoli" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />}
+                        <h2 className="titoli" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />
                         <p>{content.item.traduzioni[0].paragrafo}</p>
                         {content.item.link && <Link className="button-sezione" to={content.item.link.translations[0].slug}>{content.item.link.translations[0].slug}</Link>}
                     </div>

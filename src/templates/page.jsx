@@ -6,7 +6,7 @@ import { Termini } from "../../data-translations"
 import { findItemsTranslated } from "../utils"
 import BlocksComponent from "../components/blocks/blocks"
 import LastNews from "../components/widgets/lastNews"
-
+import TestoMainContent from "../components/blocks/testo_main_content"
 
 
 export const query = graphql`
@@ -33,6 +33,7 @@ export const query = graphql`
       imageFile{
         id
         childImageSharp{
+          id
           gatsbyImageData
         }
       }
@@ -41,6 +42,9 @@ export const query = graphql`
         languages_code{
           code}
         slug
+        main_content
+        main_content_titolo
+        main_content_sottotitolo
       }
    
       blocchi {
@@ -141,6 +145,9 @@ const Pagine = ({ data, location, pageContext }) => {
                 <section class="jumbo-home">
                   <GatsbyImage className="jumbo-image" image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
                 </section>}
+              {pageContext.pageName !== "home" &&
+                <TestoMainContent content={data.directus.pages[0].translations[0]} featuredImage={data.directus.pages[0].featured_image?.imageFile.childImageSharp.gatsbyImageData} />}
+
               <div className={`container-fluid ${pageContext.pageName}`}>
                 {data.directus.pages[0].blocchi?.map((blocco, index) => {
                   return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
