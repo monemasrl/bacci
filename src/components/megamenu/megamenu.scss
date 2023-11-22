@@ -2,16 +2,16 @@
 
 .wrapper-megamenu {
   height: auto;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   position: absolute;
   left: 0;
-  opacity: 1;
+  right: 0;
   transition: opacity 0.2s linear;
   display: block;
-
   z-index: 100;
   width: 100%;
+  max-width: 1620px;
 
   .mega-box {
     display: flex;
@@ -20,8 +20,8 @@
     margin: 0rem auto;
     justify-content: space-around;
     background-color: white;
-    padding: 2rem;
     box-shadow: 5px 5px 1px #00000012;
+    padding: 2rem 2rem 4rem 2rem;
   }
 
   .col-mega {
@@ -59,6 +59,9 @@
   .box-prodotto {
     max-width: 422px;
     height: 100%;
+    .titolo-col-mega {
+      margin-bottom: 3rem;
+    }
     @media #{$large} {
       max-width: 260px;
     }
@@ -106,6 +109,7 @@
       color: $brown;
       text-transform: uppercase;
       font-size: 1.2rem;
+      font-weight: 300;
 
       a {
         color: $brown;
