@@ -476,13 +476,6 @@ section.container.repeater {
 
 /* ANCHOR: NEWS */
 .news {
-  justify-content: flex-start;
-  margin-top: 3rem;
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  max-width: 1420px;
-  align-items: stretch;
   .col-3 {
     margin-top: 1rem;
     width: 100%;
@@ -557,7 +550,7 @@ section.container.repeater {
   margin: 3rem auto 0;
   max-width: 1070px;
   .datanews {
-    color: #a4917d;
+    color: $grey;
     display: block;
     font-size: 48px;
     margin: 2rem 0 1rem 0;
