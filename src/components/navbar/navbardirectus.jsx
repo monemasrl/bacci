@@ -84,7 +84,7 @@ const NavBarDirectus = (props) => {
                             <StaticImage
                                 placeholder="none"
                                 width={362}
-                                src="../../images/logo_scuro.jpg" alt="Bacci logo" />
+                                src="../../images/logo.png" alt="Bacci logo" />
                         </Link>
 
                     </div>
@@ -100,7 +100,7 @@ const NavBarDirectus = (props) => {
                                 return (
                                     < >
                                         {item.id === '2' ? <li key={item.id} role="button" tabIndex={0} onMouseEnter={() => props.setMega(true)}
-                                            onMouseLeave={() => props.setMega(true)}>
+                                            onMouseLeave={() => props.setMega(false)}>
                                             <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a href="#">{itemTranslated.label}</a>
                                             </div>
 
