@@ -369,27 +369,29 @@ exports.createPages = async ({ graphql, actions }) => {
         ? "/"
         : "/" + langTag[translation.languages_code.code] + "/"
 
-    createPage({
-      path: `${urlBase}${translation.slug.toLowerCase()}`,
-      component: require.resolve("./src/templates/prodotti.jsx"),
-      context: {
-        locale: translation.languages_code.code,
-        slug: translation.slug,
-        title: translation.titolo,
-        allPagePath: [
-          {
-            path: "/prodotti/",
-            locale: "it_IT",
-            title: "prodotti",
-          },
-          {
-            path: "/en/products",
-            locale: "en_US",
-            title: "products",
-          },
-        ],
-      },
-    })
+    if (translation.slug) {
+      createPage({
+        path: `${urlBase}${translation.slug.toLowerCase()}`,
+        component: require.resolve("./src/templates/prodotti.jsx"),
+        context: {
+          locale: translation.languages_code.code,
+          slug: translation.slug,
+          title: translation.titolo,
+          allPagePath: [
+            {
+              path: "/prodotti/",
+              locale: "it_IT",
+              title: "prodotti",
+            },
+            {
+              path: "/en/products",
+              locale: "en_US",
+              title: "products",
+            },
+          ],
+        },
+      })
+    }
   })
 
   // SCHEDA PRODOTTO
@@ -418,19 +420,21 @@ exports.createPages = async ({ graphql, actions }) => {
           ? "/"
           : "/" + langTag[translation.languages_code.code] + "/"
 
-      createPage({
-        path: `${urlBase}${
-          Termini[translation.languages_code.code].prodotti
-        }/${translation.slug.toLowerCase()}`,
-        component: require.resolve("./src/templates/templateprodotto.jsx"),
-        context: {
-          content: entry,
-          locale: translation.languages_code.code,
-          slug: translation.slug,
-          title: translation.titolo,
-          allPagePath: allPagePath,
-        },
-      })
+      if (translation.slug) {
+        createPage({
+          path: `${urlBase}${
+            Termini[translation.languages_code.code].prodotti
+          }/${translation.slug.toLowerCase()}`,
+          component: require.resolve("./src/templates/templateprodotto.jsx"),
+          context: {
+            content: entry,
+            locale: translation.languages_code.code,
+            slug: translation.slug,
+            title: translation.titolo,
+            allPagePath: allPagePath,
+          },
+        })
+      }
     })
   })
 
@@ -456,27 +460,29 @@ exports.createPages = async ({ graphql, actions }) => {
         ? "/"
         : "/" + langTag[translation.languages_code.code] + "/"
 
-    createPage({
-      path: `${urlBase}${translation.slug.toLowerCase()}`,
-      component: require.resolve("./src/templates/news.jsx"),
-      context: {
-        locale: translation.languages_code.code,
-        slug: translation.slug,
-        title: translation.titolo,
-        allPagePath: [
-          {
-            path: "/news/",
-            locale: "it_IT",
-            title: "news",
-          },
-          {
-            path: "/en/news",
-            locale: "en_US",
-            title: "news",
-          },
-        ],
-      },
-    })
+    if (translation.slug) {
+      createPage({
+        path: `${urlBase}${translation.slug.toLowerCase()}`,
+        component: require.resolve("./src/templates/news.jsx"),
+        context: {
+          locale: translation.languages_code.code,
+          slug: translation.slug,
+          title: translation.titolo,
+          allPagePath: [
+            {
+              path: "/news/",
+              locale: "it_IT",
+              title: "news",
+            },
+            {
+              path: "/en/news",
+              locale: "en_US",
+              title: "news",
+            },
+          ],
+        },
+      })
+    }
   })
   // SINGOLA NEWS
   const news = await result.data.directus.posts
@@ -504,17 +510,19 @@ exports.createPages = async ({ graphql, actions }) => {
           ? "/"
           : "/" + langTag[translation.languages_code.code] + "/"
 
-      createPage({
-        path: `${urlBase}${"news"}/${translation.slug.toLowerCase()}`,
-        component: require.resolve("./src/templates/templatenews.jsx"),
-        context: {
-          content: entry,
-          locale: translation.languages_code.code,
-          slug: translation.slug,
-          title: translation.title,
-          allPagePath: allPagePath,
-        },
-      })
+      if (translation.slug) {
+        createPage({
+          path: `${urlBase}${"news"}/${translation.slug.toLowerCase()}`,
+          component: require.resolve("./src/templates/templatenews.jsx"),
+          context: {
+            content: entry,
+            locale: translation.languages_code.code,
+            slug: translation.slug,
+            title: translation.title,
+            allPagePath: allPagePath,
+          },
+        })
+      }
     })
   })
   //PAGINA FIERE
@@ -541,16 +549,18 @@ exports.createPages = async ({ graphql, actions }) => {
         ? "/"
         : "/" + langTag[translation.languages_code.code] + "/"
 
-    createPage({
-      path: `${urlBase}${translation.slug.toLowerCase()}`,
-      component: require.resolve("./src/templates/fiere.jsx"),
-      context: {
-        locale: translation.languages_code.code,
-        slug: translation.slug,
-        title: translation.label,
-        allPagePath: getAllPathFiera(paginaFiereMenuItem.translations),
-      },
-    })
+    if (translation.slug) {
+      createPage({
+        path: `${urlBase}${translation.slug.toLowerCase()}`,
+        component: require.resolve("./src/templates/fiere.jsx"),
+        context: {
+          locale: translation.languages_code.code,
+          slug: translation.slug,
+          title: translation.label,
+          allPagePath: getAllPathFiera(paginaFiereMenuItem.translations),
+        },
+      })
+    }
   })
   // SINGOLA FIERA
   const fiere = await result.data.directus.Fiere
@@ -586,17 +596,19 @@ exports.createPages = async ({ graphql, actions }) => {
         itemb => translation.languages_code.code === itemb.languages_code.code
       )
 
-      createPage({
-        path: `${urlBase}${parentPathFromMenu.slug.toLowerCase()}/${translation.slug.toLowerCase()}`,
-        component: require.resolve("./src/templates/templatefiere.jsx"),
-        context: {
-          content: entry,
-          locale: translation.languages_code.code,
-          slug: translation.slug,
-          title: translation.title,
-          allPagePath: allPagePath,
-        },
-      })
+      if (translation.slug) {
+        createPage({
+          path: `${urlBase}${parentPathFromMenu.slug.toLowerCase()}/${translation.slug.toLowerCase()}`,
+          component: require.resolve("./src/templates/templatefiere.jsx"),
+          context: {
+            content: entry,
+            locale: translation.languages_code.code,
+            slug: translation.slug,
+            title: translation.title,
+            allPagePath: allPagePath,
+          },
+        })
+      }
     })
   })
 }
