@@ -13,7 +13,6 @@ $text: "roboto", sans-serif;
 $link: "roboto", sans-serif;
 $title: "Oswald";
 $container: 1420px;
-$paragraph: 18px;
 $phone: "only screen and (max-width : 460px)";
 $tablet: "only screen and (max-width : 720px)";
 $landscape: "only screen and (max-width : 1024px)";
@@ -21,7 +20,7 @@ $desktop: "only screen and (max-width : 1200px)";
 $large: "only screen and (max-width: 1340px)";
 $wide: "only screen and (max-width : 1620px)";
 $big: "only screen and (max-width : 1900px)";
-$Psize: 18px;
+$Psize: 20px;
 
 @mixin h2-sezioni($sizeh2, $sizeStrong: 36px) {
   color: $grey;

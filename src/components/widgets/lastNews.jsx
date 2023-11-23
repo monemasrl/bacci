@@ -63,7 +63,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
                     <div className="box-correlati">
 
                       <div className="date">{date}</div>
-                      <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}${"news"}/${prodottoTradotto.slug}`} ><h2>{prodottoTradotto.title}</h2></Link>
+                      <h2>{prodottoTradotto.title}</h2>
                       <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.summary }} />
                       <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}${"news"}/${prodottoTradotto.slug}`} >Leggi tutto</Link>
                     </div>

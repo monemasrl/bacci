@@ -40,11 +40,13 @@
     }
     p {
       text-align: left;
-      font-size: $paragraph;
+      font-size: $Psize;
       line-height: 1.5rem;
     }
     a {
-      color: $lightBrown;
+      color: $grey;
+      font-size: $Psize;
+      font-style: italic;
     }
     .date {
       color: $grey;

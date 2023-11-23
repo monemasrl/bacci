@@ -48,6 +48,9 @@ h2 {
   line-height: 1;
   color: $grey;
 }
+h3 {
+  font-family: "Oswald", sans-serif;
+}
 main {
   @media #{$tablet} {
     padding: 0 1rem;
@@ -95,7 +98,7 @@ main {
       text-align: center;
       p {
         color: #5f6062;
-        font-size: $paragraph;
+        font-size: $Psize;
         font-weight: 400;
         line-height: 1.5;
       }
@@ -129,7 +132,7 @@ main {
 
 p {
   font-weight: lighter;
-  font-size: $paragraph;
+  font-size: $Psize;
   line-height: 1.6;
 }
 
@@ -255,7 +258,8 @@ section.container.repeater {
   justify-content: space-around;
 
   .box-repeater {
-    width: 600px;
+    max-width: 600px;
+    width: 100%;
     @media #{$tablet} {
       width: 100%;
     }
@@ -285,7 +289,7 @@ section.container.repeater {
     p {
       color: $grey;
       font-family: $text;
-      font-size: $paragraph;
+      font-size: $Psize;
       line-height: 30px;
     }
   }
@@ -328,6 +332,15 @@ section.container.repeater {
   flex-wrap: wrap;
   gap: 5rem;
   margin: 6rem auto;
+  h3.sottotitolo {
+    color: $grey;
+
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: normal;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
   &.right {
     flex-direction: row-reverse;
   }
@@ -338,6 +351,7 @@ section.container.repeater {
     .box-sx {
       flex: 1 1;
       max-width: 600px;
+      padding-left: 0;
     }
     .box-dx {
       flex: 1 1;
@@ -379,7 +393,7 @@ section.container.repeater {
   .box-sx {
     width: 100%;
     .gatsby-image-wrapper-constrained {
-      margin: 2rem auto 0 auto;
+      margin: 2rem auto 1rem auto;
     }
   }
 }
@@ -402,9 +416,13 @@ section.container.repeater {
     }
   }
   .sezione-1 {
+    h2 {
+      font-size: 60px;
+    }
     h2:before {
       display: none;
     }
+
     p {
       margin: 3rem 0 1rem 0;
     }
@@ -515,7 +533,7 @@ section.container.repeater {
       }
       p {
         color: $grey;
-        font-size: $paragraph;
+        font-size: $Psize;
         line-height: 34px;
         margin-top: 1rem;
         padding: 0 10px;
@@ -618,7 +636,7 @@ section.container.repeater {
       margin: 3rem 0;
     }
     .call2action {
-      border: 2px solid #a4917d;
+      border: 2px solid $lightBrown;
       padding: 2rem;
       text-align: center;
       margin-bottom: 2rem;
@@ -629,14 +647,14 @@ section.container.repeater {
         line-height: 1;
       }
       h3 {
-        color: #a4917d;
+        color: $grey;
         font-size: 36px;
         font-weight: normal;
         font-family: $title;
       }
     }
     .wrapper-form {
-      background-color: #c8bcb0;
+      background-color: $lightGrey;
       padding: 1rem;
       form {
         margin: 0 auto;
