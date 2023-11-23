@@ -352,7 +352,7 @@ div:not(.home) .container.sezione-1 {
       line-height: 38px;
 
       @media #{$large} {
-        font-size: 18px;
+        font-size: $Psize;
         line-height: 30px;
       }
     }
@@ -474,7 +474,7 @@ div:not(.home) .container.sezione-1 {
     }
 
     @media #{$phone} {
-      font-size: 18px;
+      font-size: $Psize;
       line-height: 30px;
       padding-left: 1rem;
     }
@@ -517,7 +517,7 @@ div:not(.home) .container.sezione-1 {
       max-width: 520px;
 
       @media #{$large} {
-        font-size: 18px;
+        font-size: $Psize;
         line-height: 30px;
         max-width: 100%;
       }
@@ -992,7 +992,7 @@ div:not(.home) .container.sezione-1 {
 
     .date {
       padding: 0 10px;
-      font-size: 18px;
+      font-size: $Psize;
       color: $grey;
     }
 
@@ -1225,7 +1225,7 @@ div:not(.home) .container.sezione-1 {
 
     .data {
       padding: 0;
-      font-size: 18px;
+      font-size: $Psize;
       color: $grey;
       font-size: 36px;
       margin-bottom: 1rem;

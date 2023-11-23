@@ -133,7 +133,7 @@ footer {
 
         .box-submit {
           text-align: right;
-          margin: 2rem 0;
+          margin: 2rem 0 0 0;
 
           @media #{$large} {
             text-align: center;
@@ -209,7 +209,7 @@ footer {
       color: white;
 
       li {
-        font-size: 18px;
+        font-size: $Psize;
         margin: 5px 0;
 
         &:first-child {

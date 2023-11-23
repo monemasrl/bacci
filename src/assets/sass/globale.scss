@@ -232,7 +232,7 @@ p.sottotitolo {
   text-align: center;
 }
 .button-sezione {
-  border: 1px solid #c8bcb0;
+  border: 1px solid $lightGrey;
   border-radius: 30px;
   color: #fff;
   color: $grey;
@@ -309,8 +309,10 @@ section.container.repeater {
 .sezione-3 {
   text-align: center;
   margin: 5rem auto;
+  padding: 0 2rem;
   p {
     font-size: 24px;
+    line-height: 1.4;
   }
   h2 {
     font-size: 74px;
@@ -325,7 +327,7 @@ section.container.repeater {
   display: flex;
   flex-wrap: wrap;
   gap: 5rem;
-  margin: 7rem auto;
+  margin: 6rem auto;
   &.right {
     flex-direction: row-reverse;
   }
@@ -345,6 +347,7 @@ section.container.repeater {
 
   .box-sx {
     flex: 1 1 600px;
+    padding-left: 2rem;
     h2 {
       font-size: 50px;
       line-height: 1.1;
@@ -364,8 +367,8 @@ section.container.repeater {
       height: 100%;
       left: -30px;
       position: absolute;
-      top: 0;
-      width: 10px;
+      top: 8px;
+      width: 8px;
     }
     strong {
       font-size: 55px;
@@ -398,8 +401,13 @@ section.container.repeater {
       margin: 1.5rem auto;
     }
   }
-  .sezione-1 h2:before {
-    display: none;
+  .sezione-1 {
+    h2:before {
+      display: none;
+    }
+    p {
+      margin: 3rem 0 1rem 0;
+    }
   }
   .seznovita {
     border-bottom: 3px solid $grey;
@@ -491,7 +499,7 @@ section.container.repeater {
       }
       .date {
         color: $grey;
-        font-size: 18px;
+        font-size: $Psize;
         padding: 0 10px;
         margin-bottom: 0.5rem;
         font-weight: bold;
@@ -565,37 +573,6 @@ section.container.repeater {
   }
 }
 
-.box-single-fiera {
-  border: 5px solid $grey;
-  margin: 10px;
-  padding: 2rem 3rem;
-  h2 {
-    color: $brown;
-    font-family: Oswald;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 600;
-    margin-top: 0;
-    padding: 0;
-  }
-  .datafiera {
-    color: $grey;
-    font-size: 24px;
-    margin-bottom: 1rem;
-    padding: 0;
-  }
-  .luogo {
-    font-size: 24px;
-  }
-  .link {
-    padding: 0;
-    color: $grey;
-    display: block;
-    font-size: 24px;
-    font-style: italic;
-    margin-bottom: 1rem;
-  }
-}
 .fiere {
   .breadcrumb {
     padding: 2rem 0;

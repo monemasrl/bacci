@@ -1,18 +1,23 @@
 @import "../../assets/sass/variabili";
 .widget-news {
   margin-top: 3rem;
+
+  .container {
+    gap: 1rem;
+    padding: 0 2rem;
+  }
   > h2 {
     color: $brown;
     text-transform: uppercase;
-    text-align: center;
+    padding: 0 2rem;
     margin-left: 2rem;
-    font-size: 70px;
-    margin-bottom: 0;
+    margin: 0 auto;
     font-weight: normal;
+    max-width: 1420px;
   }
   .col-3 {
     flex: 1 1 430px;
-    margin: 2rem 1rem 1rem 1rem;
+    margin-top: 2rem;
     border: 1px solid $brown;
     padding: 1rem;
   }
@@ -24,8 +29,9 @@
     h2 {
       color: $brown;
       text-align: left;
-
-      font-size: 24px;
+      font-family: $text;
+      font-size: $Psize;
+      font-weight: bold;
       margin: 0;
     }
     h3 {
@@ -37,10 +43,15 @@
       font-size: $paragraph;
       line-height: 1.5rem;
     }
+    a {
+      color: $lightBrown;
+    }
     .date {
       color: $grey;
-      font-size: 18px;
+      font-size: $Psize;
+      font-weight: normal;
       padding: 0px;
+      margin: 0.5rem 0;
     }
     .button-sezione {
       @include button-sezione(2rem, 5rem);
