@@ -9,7 +9,7 @@
     "@emotion/react": "^11.11.1",
     "@fontsource/oswald": "^5.0.17",
     "@fontsource/roboto": "^5.0.8",
-    "framer-motion": "^10.16.4",
+    "framer-motion": "^10.16.5",
     "gatsby": "^5.12.9",
     "gatsby-plugin-image": "^3.12.3",
     "gatsby-plugin-manifest": "^5.12.3",

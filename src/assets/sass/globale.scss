@@ -431,6 +431,7 @@ section.container.repeater {
     border-bottom: 3px solid $grey;
     border-top: 3px solid $grey;
     justify-content: space-between;
+    padding-bottom: 4rem;
     h2 {
       font-size: 105px;
       color: $grey;
@@ -443,9 +444,7 @@ section.container.repeater {
       margin-top: 2rem;
       line-height: 43px;
     }
-    .button-sezione {
-      color: $brown;
-    }
+
     .novita {
       background-color: $grey;
       color: #fff;
