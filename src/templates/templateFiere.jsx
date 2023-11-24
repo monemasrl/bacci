@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/layout/layout";
 import { findItemTranslated, findItemsTranslated } from "../utils";
 import { graphql } from "gatsby"
-import FormFiere from "../components/form";
+import { FormFiere } from "../components/form";
 
 const moment = require('moment')
 

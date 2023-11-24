@@ -1,40 +1,125 @@
 import React from "react";
 import { Link } from 'gatsby';
+import { useForm } from 'react-hook-form';
 
 const FormFiere = () => {
+    const form = useForm()
+    const { register, handleSubmit, formState } = form
+    const { errors } = formState
+
+
+
 
     return (
         <div className="wrapper-form" >
-            <form method="POST" name="fiere" action="/thanks" netlify-honeypot="bot-field" data-netlify="true">
+            <form data-netlify="true"
+                name="fiere"
+                onSubmit={
+
+                    handleSubmit((data) => {
+                        console.log(data, 'form data')
+                        const myForm = data;
+
+                        fetch("/", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                            body: myForm,
+                        })
+                            .then(() => console.log("Form successfully submitted"))
+                            .catch((error) => alert(error));
+                    })
+                }>
                 <input type="hidden" name="form-name" value="fiere" />
                 <div className="box-form">
                     <label htmlFor="nome">
-                        <input placeholder="nome" type="text" name="nome" id="nome" required />
+                        <input
+                            placeholder="nome"
+                            type="text"
+                            name="nome"
+                            id="nome"
+                            {...register("nome", {
+                                required: {
+                                    value: true,
+                                    message: "Campo obbligatorio"
+                                },
+                            })
+                            } />
+                        {errors.nome && <p>{errors.nome?.message}</p>}
                     </label>
                     <label htmlFor="cognome">
-                        <input placeholder="cognome" type="url" name="url" id="cognome" />
+                        <input
+                            placeholder="cognome"
+                            type="text"
+                            name="url"
+                            id="cognome"
+                            {...register("cognome", {
+                                required: {
+                                    value: true,
+                                    message: "Campo obbligatorio"
+                                },
+                            })
+                            } />
+                        {errors.cognome && <p>{errors.cognome?.message}</p>}
                     </label>
                 </div>
                 <div className="box-form">
                     <label htmlFor="azienda">
-                        <input placeholder="azienda" type="text" name="azienda" id="azienda" required />
+                        <input {...register("azienda", {
+                            required: {
+                                value: true,
+                                message: "Campo obbligatorio"
+                            },
+                        })
+                        } placeholder="azienda" type="text" name="azienda" id="azienda" />
+                        {errors.azienda && <p>{errors.azienda?.message}</p>}
                     </label>
                     <label htmlFor="email">
-                        <input placeholder="email" type="text" name="email" id="email" required />
+                        <input {...register("email", {
+                            required: {
+                                value: true,
+                                message: "Campo obbligatorio"
+                            },
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "Formato password errato"
+                            }
+                        })
+                        } placeholder="email" type="text" name="email" id="email" />
+                        {errors.email && <p>{errors.email?.message}</p>}
                     </label>
                 </div>
                 <div className="box-form-message">
                     <label htmlFor="messaggio">
-                        <textarea rows={6} placeholder="messaggio" name="messaggio" id="messaggio" required />
+                        <textarea {...register("messaggio", {
+                            required: {
+                                value: true,
+                                message: "Campo obbligatorio"
+                            }
+                        })
+                        } rows={6} placeholder="messaggio" name="messaggio" id="messaggio" />
+                        {errors.messaggio && <p>{errors.messaggio?.message}</p>}
                     </label>
                 </div>
                 <label className="privacy" htmlFor="privacy">
-                    <input type="checkbox" placeholder="privacy" name="privacy" id="privacy" required />
+                    <input
+                        type="checkbox"
+                        placeholder="privacy"
+                        name="privacy"
+                        id="privacy"
+                        {...register("privacy", {
+                            required: {
+                                value: true,
+                                message: "Accetta le condizioni sulla Privacy"
+                            },
+
+                        })}
+                    />
+                    {errors.privacy && <p>{errors.privacy?.message}</p>}
                     <span>Accettazione della <Link to="/privacy"> Privacy</Link></span>
                 </label>
                 <div className="box-submit">
                     <label htmlFor="submit">
-                        <input className='button-sezione' type="submit" value="invia" name="submit" />
+                        <input className='button-sezione' type="submit" />
                     </label>
                 </div>
 
@@ -45,4 +130,4 @@ const FormFiere = () => {
 
 }
 
-export default FormFiere
+export { FormFiere }
