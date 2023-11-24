@@ -186,12 +186,12 @@ const FormFiere = ({ nomeEvento, lang }) => {
 const FormContatti = ({ lang }) => {
     const form = useForm({
         defaultValues: {
-            nome: "",
-            cognome: "",
-            azienda: "",
-            email: "",
-            messaggio: "",
-            privacy: false
+            contattiNome: "",
+            contattiCognome: "",
+            contattiAzienda: "",
+            contattiEmail: "",
+            contattiMessaggio: "",
+            contattiPrivacy: false
         }
     })
     const { register, handleSubmit, formState, reset } = form
@@ -226,7 +226,7 @@ const FormContatti = ({ lang }) => {
                 name="contatti"
                 netlify-honeypot="bot-field"
                 onSubmit={handleSubmit((data) => {
-
+                    console.log(data, 'form data')
                     toast(Termini[lang].formSuccess)
                     fetch("/", {
                         method: "POST",
@@ -244,7 +244,7 @@ const FormContatti = ({ lang }) => {
                 <input type="hidden" name="form-name" value="contatti" />
 
                 <div className="box-form">
-                    <label htmlFor="nome">
+                    <label htmlFor="contattiNome">
                         <input
                             placeholder="nome"
                             type="text"
@@ -263,7 +263,7 @@ const FormContatti = ({ lang }) => {
                             } />
                         {errors.contattiNome && <p>{errors.contattiNome?.message}</p>}
                     </label>
-                    <label htmlFor="cognome">
+                    <label htmlFor="contattiCognome">
                         <input
                             placeholder="cognome"
                             type="text"
@@ -284,22 +284,23 @@ const FormContatti = ({ lang }) => {
                     </label>
                 </div>
                 <div className="box-form">
-                    <label htmlFor="azienda">
-                        <input {...register("contattiAzienda", {
-                            required: {
-                                value: true,
-                                message: Termini[lang].formRequired
-                            },
-                            minLength: {
-                                value: 3,
-                                message: Termini[lang].formMinimoCaratteri
-                            }
-                        })
-                        } placeholder="azienda" type="text" name="azienda" id="contattiAzienda" />
+                    <label htmlFor="contattiAzienda">
+                        <input placeholder="azienda" type="text" name="azienda" id="contattiAzienda"
+                            {...register("contattiAzienda", {
+                                required: {
+                                    value: true,
+                                    message: Termini[lang].formRequired
+                                },
+                                minLength: {
+                                    value: 3,
+                                    message: Termini[lang].formMinimoCaratteri
+                                }
+                            })
+                            } />
                         {errors.contattiAzienda && <p>{errors.contattiAzienda?.message}</p>}
                     </label>
-                    <label htmlFor="email">
-                        <input {...register("contattiEmail", {
+                    <label htmlFor="contattiEmail">
+                        <input placeholder="email" type="text" name="email" id="contattiEmail" {...register("contattiEmail", {
                             required: {
                                 value: true,
                                 message: Termini[lang].formRequired
@@ -309,13 +310,13 @@ const FormContatti = ({ lang }) => {
                                 message: Termini[lang].formMail
                             }
                         })
-                        } placeholder="email" type="text" name="email" id="contattiEmail" />
+                        } />
                         {errors.contattiEmail && <p>{errors.contattiEmail?.message}</p>}
                     </label>
                 </div>
                 <div className="box-form-message">
                     <label htmlFor="contattiMessaggio">
-                        <textarea {...register("contattiMessaggio", {
+                        <textarea rows={6} placeholder="messaggio" name="messaggio" id="contattiMessaggio" {...register("contattiMessaggio", {
                             required: {
                                 value: true,
                                 message: Termini[lang].formRequired
@@ -325,7 +326,7 @@ const FormContatti = ({ lang }) => {
                                 message: Termini[lang].formMessaggio
                             }
                         })
-                        } rows={6} placeholder="messaggio" name="messaggio" id="contattiMessaggio" />
+                        } />
                         {errors.contattiMessaggio && <p>{errors.contattiMessaggio?.message}</p>}
                     </label>
                 </div>
