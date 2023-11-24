@@ -7,27 +7,28 @@ const FormFiere = () => {
     const { register, handleSubmit, formState } = form
     const { errors } = formState
 
-
+    const encode = (data) => {
+        return Object.keys(data)
+            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+            .join("&");
+    }
 
 
     return (
         <div className="wrapper-form" >
             <form data-netlify="true"
                 name="fiere"
-                onSubmit={
+                onSubmit={handleSubmit((data) => {
+                    console.log(data, 'form data')
 
-                    handleSubmit((data) => {
-                        console.log(data, 'form data')
-                        const myForm = data;
-
-                        fetch("/", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: myForm,
-                        })
-                            .then(() => console.log("Form successfully submitted"))
-                            .catch((error) => alert(error));
+                    fetch("/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: encode({ "form-name": "fiere", ...data }),
                     })
+                        .then(() => console.log("Form successfully submitted"))
+                        .catch((error) => alert(error));
+                })
                 }>
                 <input type="hidden" name="form-name" value="fiere" />
                 <div className="box-form">
