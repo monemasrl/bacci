@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from 'gatsby';
 import { useForm } from 'react-hook-form';
 import { Termini } from "../../data-translations";
+import { toast } from 'react-toastify';
 
 const FormFiere = ({ nomeEvento, lang }) => {
-    const form = useForm()
-    const { register, handleSubmit, formState } = form
+    const form = useForm({
+        defaultValues: {
+            nome: "",
+            cognome: "",
+            azienda: "",
+            email: "",
+            messaggio: "",
+            privacy: false
+        }
+    })
+    const { register, handleSubmit, formState, reset } = form
     const { errors } = formState
-    const [confirmSubmit, setConfirmSubmit] = useState('')
+
 
     //Funzione per l'enconding dei dati del form
 
@@ -31,7 +41,10 @@ const FormFiere = ({ nomeEvento, lang }) => {
                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
                         body: encode({ "form-name": "fiere", ...data }),
                     })
-                        .then(() => setConfirmSubmit(Termini[lang].formSuccess))
+                        .then(() => {
+                            reset()
+                            toast(Termini[lang].formSuccess)
+                        })
                         .catch((error) => alert(error));
                 })
                 }>
