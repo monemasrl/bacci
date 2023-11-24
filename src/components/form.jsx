@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from 'gatsby';
 import { useForm } from 'react-hook-form';
 import { Termini } from "../../data-translations";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FormFiere = ({ nomeEvento, lang }) => {
     const form = useForm({
@@ -30,12 +31,24 @@ const FormFiere = ({ nomeEvento, lang }) => {
 
     return (
         <div className="wrapper-form" >
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick={true}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable={false}
+                pauseOnHover
+                theme="dark" />
+
             <form data-netlify="true"
                 name="fiere"
                 onSubmit={handleSubmit((data) => {
                     console.log(data, 'form data')
                     data.nomeEvento = nomeEvento
-
+                    toast(Termini[lang].formSuccess)
                     fetch("/", {
                         method: "POST",
                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -43,7 +56,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                     })
                         .then(() => {
                             reset()
-                            toast(Termini[lang].formSuccess)
+
                         })
                         .catch((error) => alert(error));
                 })

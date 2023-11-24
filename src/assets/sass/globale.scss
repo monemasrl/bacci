@@ -674,10 +674,13 @@ section.container.repeater {
           height: 40px;
           max-width: none;
           width: 100%;
+          padding-left: 1rem;
         }
         textarea {
           border: 0;
           width: 100%;
+          padding-top: 1rem;
+          padding-left: 1rem;
         }
         .box-form-message {
           margin: 10px 0;
@@ -715,4 +718,13 @@ section.container.repeater {
       }
     }
   }
+}
+
+.Toastify__toast-theme--dark {
+  background: $lightBrown !important;
+  color: white;
+}
+.Toastify__toast-container--bottom-center {
+  bottom: 4em !important;
+  font-weight: bold;
 }

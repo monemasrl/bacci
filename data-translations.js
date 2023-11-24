@@ -6,7 +6,7 @@ export const langTag = {
 }
 export const Termini = {
   en_US: {
-    formSuccess: "Form successfully sent",
+    formSuccess: "Form sent successfully",
     azienda: "company",
     prodotti: "products",
     tutti_prodotti: "all products",
