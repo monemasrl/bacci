@@ -62,10 +62,11 @@ main {
     padding: 0 1rem;
   }
 }
-.prodotti {
+.container.prodotti {
   justify-content: space-between;
   min-height: 970px;
   padding: 0 1rem;
+  margin-top: 6rem;
   .filters {
     &.search input {
       border: 0;
