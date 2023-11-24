@@ -6,7 +6,11 @@ export const langTag = {
 }
 export const Termini = {
   en_US: {
+    formMessaggio: "Minimum 15 characters",
     formSuccess: "Form sent successfully",
+    formRequired: "Required field",
+    formMinimoCaratteri: "Minimum 3 characters",
+    formMail: "Insert a valid email",
     azienda: "company",
     prodotti: "products",
     tutti_prodotti: "all products",
@@ -28,7 +32,11 @@ export const Termini = {
     fiere: "Exhibitions",
   },
   it_IT: {
+    formMessaggio: "Minimo 15 caratteri",
     formSuccess: "Form inviato con successo",
+    formRequired: "campo obbligatorio",
+    formMinimoCaratteri: "Minimo 3 caratteri",
+    formMail: "Inserisci una mail valida",
     azienda: "azienda",
     prodotti: "prodotti",
     tutti_prodotti: "tutti i prodotti",

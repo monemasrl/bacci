@@ -40,7 +40,13 @@ a {
 div {
   box-sizing: border-box;
 }
-
+input {
+  padding-left: 1rem;
+}
+textarea {
+  padding-left: 1rem;
+  padding-top: 1rem;
+}
 h1,
 h2 {
   @include h2-sezioni(60px, 95px);
@@ -655,9 +661,17 @@ section.container.repeater {
     .wrapper-form {
       background-color: $lightGrey;
       padding: 1rem;
+
       form {
         margin: 0 auto;
         max-width: 789px;
+        p {
+          font-size: 12px;
+          margin: 0;
+          color: #c71212;
+          font-weight: bold;
+          letter-spacing: 1px;
+        }
         .box-form {
           display: flex;
           justify-content: space-between;
