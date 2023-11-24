@@ -142,7 +142,7 @@ const Prodotti = ({ data, location, pageContext }) => {
   const [filtersSearch, setFiltersSearch] = React.useState()
 
 
-  // Mantenere il filtro quando si accede da link esterno e resettarlo al cambio di pagina (unmount)
+  // Mantenere il filtro quando si accede da link esterno e resettarlo all' unmount
 
   React.useEffect(() => {
     // se il filtro è passato da link esterno setta i filtri nello stato corrispondente.

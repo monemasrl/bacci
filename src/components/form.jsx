@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'gatsby';
 import { useForm } from 'react-hook-form';
+import { Termini } from "../../data-translations";
 
-const FormFiere = ({ nomeEvento }) => {
+const FormFiere = ({ nomeEvento, lang }) => {
     const form = useForm()
     const { register, handleSubmit, formState } = form
     const { errors } = formState
+    const [confirmSubmit, setConfirmSubmit] = useState('')
+
+    //Funzione per l'enconding dei dati del form
 
     const encode = (data) => {
         return Object.keys(data)
@@ -20,13 +24,14 @@ const FormFiere = ({ nomeEvento }) => {
                 name="fiere"
                 onSubmit={handleSubmit((data) => {
                     console.log(data, 'form data')
+                    data.nomeEvento = nomeEvento
 
                     fetch("/", {
                         method: "POST",
                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: encode({ "form-name": "fiere", "fiera": nomeEvento, ...data }),
+                        body: encode({ "form-name": "fiere", ...data }),
                     })
-                        .then(() => console.log("Form successfully submitted"))
+                        .then(() => setConfirmSubmit(Termini[lang].formSuccess))
                         .catch((error) => alert(error));
                 })
                 }>
