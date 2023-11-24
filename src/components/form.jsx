@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'gatsby';
 import { useForm } from 'react-hook-form';
 
-const FormFiere = () => {
+const FormFiere = ({ nomeEvento }) => {
     const form = useForm()
     const { register, handleSubmit, formState } = form
     const { errors } = formState
@@ -24,7 +24,7 @@ const FormFiere = () => {
                     fetch("/", {
                         method: "POST",
                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: encode({ "form-name": "fiere", ...data }),
+                        body: encode({ "form-name": "fiere", "fiera": nomeEvento, ...data }),
                     })
                         .then(() => console.log("Form successfully submitted"))
                         .catch((error) => alert(error));
