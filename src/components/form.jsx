@@ -35,7 +35,9 @@ const FormFiere = ({ nomeEvento, lang }) => {
                         .catch((error) => alert(error));
                 })
                 }>
+                <input type="hidden" name="evento" value={nomeEvento} />
                 <input type="hidden" name="form-name" value="fiere" />
+
                 <div className="box-form">
                     <label htmlFor="nome">
                         <input
