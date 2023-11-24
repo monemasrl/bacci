@@ -19,7 +19,7 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
                         <span>{pageTitle}</span>
                     </h2>
 
-                    : tipo === 'fiere' ?
+                    : tipo === 'fiera' ?
                         <>
                             <h2>
                                 {Termini[locale].eventi}

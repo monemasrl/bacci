@@ -47,7 +47,7 @@ const Fiere = ({ data, pageContext }) => {
         locale={locale}
         pageTitle={title}
         pathName={parentPath}
-        tipo='fiere'
+        tipo='fiera'
         allPagePath={allPagePath}
         pathFromContext={pageContext}
         listaApplicazioni={listaApplicazioni}

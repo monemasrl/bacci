@@ -595,8 +595,63 @@ section.container.repeater {
     text-transform: uppercase;
   }
 }
-
 .fiere {
+  margin-top: 6rem;
+  .box-single-fiera {
+    border: 1px solid $brown;
+    flex: 1;
+    padding: 2rem;
+    max-width: 430px;
+    .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
+      margin-bottom: 2rem;
+    }
+    h2 {
+      font-size: 28px;
+      color: $brown;
+      font-weight: 600;
+      font-family: $text;
+      margin-bottom: 0;
+      margin-top: 0;
+      padding: 0;
+      font-style: normal;
+    }
+
+    .datafiera {
+      padding: 0;
+      font-size: $Psize;
+      color: $grey;
+      margin: 1.5rem 0;
+    }
+
+    .luogo {
+      font-size: $Psize;
+      font-weight: bold;
+      color: $grey;
+    }
+
+    .link {
+      padding: 0;
+    }
+
+    p {
+      color: $grey;
+      line-height: 34px;
+      font-size: $Psize;
+      margin-top: 1rem;
+      padding: 0 10px;
+    }
+
+    a {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 24px;
+
+      color: $brown;
+      padding: 0;
+    }
+  }
+}
+.fiera {
   .breadcrumb {
     padding: 2rem 0;
     h2 {
@@ -625,13 +680,13 @@ section.container.repeater {
   }
 }
 .wrapper-fiere {
+  margin-top: 6rem;
   max-width: $container;
   margin: 0 auto;
   padding-left: 2rem;
   max-width: 1068px;
   .topfiera {
     margin-top: 6rem;
-
     .datafiera {
       color: #5f6062;
       font-size: 35px;
