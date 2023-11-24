@@ -161,7 +161,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                         {...register("privacy", {
                             required: {
                                 value: true,
-                                message: "Accetta le condizioni sulla Privacy"
+                                message: Termini[lang].formPrivacy
                             },
 
                         })}
@@ -339,7 +339,7 @@ const FormContatti = ({ lang }) => {
                         {...register("contattiPrivacy", {
                             required: {
                                 value: true,
-                                message: "Accetta le condizioni sulla Privacy"
+                                message: Termini[lang].formPrivacy
                             },
 
                         })}
