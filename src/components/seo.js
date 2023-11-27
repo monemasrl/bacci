@@ -27,38 +27,42 @@ function Seo({ description, lang, meta, title, seo }) {
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
-
-  return (
-    <Helmet
-      htmlAttributes={{
-        lang: lang,
-      }}
-      title={title}
-      description={metaDescription}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-      /*    meta={[
-        {
-          name: `description`,
-          content: seo.metaDesc,
-        },
-        {
-          name: `keywords`,
-          content: seo.focuskw,
-        },
-        {
+  function getDataSeoOpenGraph(seo) {
+    const arrSeo = []
+    if (seo) {
+      if (seo.opengraphTitle) {
+        arrSeo.push({
           property: `og:title`,
           content: seo.opengraphTitle,
-        },
-        {
+        })
+      }
+      if (seo.opengraphDescription) {
+        arrSeo.push({
           property: `og:description`,
           content: seo.opengraphDescription,
-        },
-        {
+        })
+      }
+      if (seo.opengraphType) {
+        arrSeo.push({
           property: `og:type`,
           content: seo.opengraphType,
-        },
-      ].concat(meta)} */
-    />
+        })
+      }
+    }
+    return arrSeo
+  }
+  return (
+    <Helmet>
+      <html lang={lang} />
+      <title>{title || defaultTitle}</title>
+      <meta name="description" content={metaDescription} />
+      <meta name="author" content={site.siteMetadata.author} />
+      <link rel="icon" href="/src/images/favicon.png" />
+      {seo &&
+        getDataSeoOpenGraph(seo).map((item, index) => {
+          return <meta property={index} {...item} />
+        })}
+    </Helmet>
   )
 }
 

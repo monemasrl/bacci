@@ -123,6 +123,9 @@ main {
       margin-bottom: 2rem;
       max-width: 380px;
       text-align: center;
+      .gatsby-image-wrapper-constrained {
+        height: auto;
+      }
       p {
         color: #5f6062;
         font-size: $Psize;
