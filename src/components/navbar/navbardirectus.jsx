@@ -74,11 +74,13 @@ const NavBarDirectus = (props) => {
                                 const itemTranslated = item.translations.find((lang) => {
                                     return langTag[lang.languages_code.code] === langTag[props.locale]
                                 })
-                                return (
-                                    <li key={itemTranslated.label}>
-                                        <Link to={`${langTag[props.locale] === 'it' ? '' : '/' + langTag[props.locale]}/${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
-                                    </li>
-                                )
+                                if (itemTranslated.slug) {
+                                    return (
+                                        <li key={itemTranslated.label}>
+                                            <Link to={`${langTag[props.locale] === 'it' ? '' : '/' + langTag[props.locale]}/${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
+                                        </li>
+                                    )
+                                }
                             })
 
 
@@ -130,20 +132,23 @@ const NavBarDirectus = (props) => {
 
                                         </li> :
                                             <li key={item.id}>
-                                                {item.sub_items.length ? <a href='#'>{itemTranslated.label}</a> : <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul>
-                                                    {item.sub_items.map((subitem) => {
-                                                        const subItemTranslated = subitem.translations.find((lang) => {
-                                                            return langTag[lang.languages_code.code] === langTag[props.locale]
-                                                        })
-                                                        return (
-                                                            <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug.toLowerCase()}/${subItemTranslated.slug}`}>
-                                                                {subItemTranslated.label}
-                                                            </Link>
-                                                            </li>
-                                                        )
+                                                {item.sub_items.length ? <a href='#'>{itemTranslated.label}</a> :
+                                                    itemTranslated.slug && <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul>
+                                                        {item.sub_items.map((subitem) => {
+                                                            const subItemTranslated = subitem.translations.find((lang) => {
+                                                                return langTag[lang.languages_code.code] === langTag[props.locale]
+                                                            })
+                                                            if (subItemTranslated.slug) {
+                                                                return (
+                                                                    <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug.toLowerCase()}/${subItemTranslated.slug}`}>
+                                                                        {subItemTranslated.label}
+                                                                    </Link>
+                                                                    </li>
+                                                                )
+                                                            }
 
-                                                    })}
-                                                </ul> : ''}</li>}
+                                                        })}
+                                                    </ul> : ''}</li>}
                                     </>
                                 )
                             })}

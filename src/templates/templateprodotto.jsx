@@ -45,12 +45,15 @@ const Prodotto = ({ data, pageContext }) => {
             >
 
                 <div className="container prodotto">
-                    <section className="container sezione-3">
+                    <section className="container sezione-1 mainProdotto">
                         <div className="box-sx">
-                            <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.titolo} />
                             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.titolo }} />
                             <h2 dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.sottotitolo }} />
                             <p dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.paragrafo }} />
+                        </div>
+                        <div className="box-dx">
+                            <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.titolo} />
+
                         </div>
                     </section>
                     {content.sezioni_prodotto.map((item) => {
