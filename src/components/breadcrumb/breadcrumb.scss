@@ -17,12 +17,24 @@
     @media #{$large} {
       align-self: flex-start;
     }
+    @media #{$desktop} {
+      flex-direction: row;
+    }
 
     span {
       font-size: 36px;
       display: block;
+      @media #{$phone} {
+        font-size: 26px;
+      }
       &:nth-child(2) {
         font-size: 72px;
+        @media #{$large} {
+          font-size: 36px;
+        }
+        @media #{$phone} {
+          font-size: 26px;
+        }
       }
     }
   }

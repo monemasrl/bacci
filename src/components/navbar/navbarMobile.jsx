@@ -83,7 +83,7 @@ const NavBarMobile = (props) => {
                                     })
                                     return (
                                         <li key={itemTranslated.label}>
-                                            <Link to={`${langTag[props.locale] === 'it' ? '' : '/' + langTag[props.locale]}/${itemTranslated.slug}`}>{itemTranslated.label}</Link>
+                                            <Link to={`${langTag[props.locale] === 'it' ? '' : '/' + langTag[props.locale]}/${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
                                         </li>
                                     )
                                 })
@@ -111,30 +111,21 @@ const NavBarMobile = (props) => {
                                     return (
                                         <React.Fragment key={item.label}>
 
-                                            {item.id === '2' ?
-                                                <li>
-                                                    <Link to={`${props.locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + itemTranslated.slug + "/" + terminiTraduzione.prodotti}`}>{itemTranslated.label}</Link>
+                                            <li key={item.id}>
+                                                {item.sub_items.length ? <a href='#'>{itemTranslated.label}</a> : <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul>
+                                                    {item.sub_items.map((subitem) => {
+                                                        const subItemTranslated = subitem.translations.find((lang) => {
+                                                            return langTag[lang.languages_code.code] === langTag[props.locale]
+                                                        })
+                                                        return (
+                                                            <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug.toLowerCase()}/${subItemTranslated.slug}`}>
+                                                                {subItemTranslated.label}
+                                                            </Link>
+                                                            </li>
+                                                        )
 
-                                                </li>
-
-                                                :
-
-                                                <li key={item.id}>
-                                                    {item.sub_items.length ? <a href='#'>{itemTranslated.label}</a> : <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul>
-                                                        {item.sub_items.map((subitem) => {
-                                                            const subItemTranslated = subitem.translations.find((lang) => {
-                                                                return langTag[lang.languages_code.code] === langTag[props.locale]
-                                                            })
-                                                            return (
-                                                                <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug}/${subItemTranslated.slug}`}>
-                                                                    {subItemTranslated.label}
-                                                                </Link>
-                                                                </li>
-                                                            )
-
-                                                        })}
-                                                    </ul> : ''}</li>
-                                            }
+                                                    })}
+                                                </ul> : ''}</li>
                                         </React.Fragment>
                                     )
                                 })}

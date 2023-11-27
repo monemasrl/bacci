@@ -1,30 +1,30 @@
 @import "../../assets/sass/variabili";
 .mobile {
   display: none;
-  @media #{$landscape}{
+  @media #{$landscape} {
     display: inherit;
   }
   .top-box {
     display: flex;
     justify-content: space-between;
-    margin: 1rem;
+    padding: 1rem 1rem 0 1rem;
+
     .main-logo {
       width: 272px;
     }
     .hamburger {
-   
       height: 30px;
       align-self: center;
-  }
+    }
   }
   .top-menu-mobile {
-    @media #{$landscape}{
+    @media #{$landscape} {
       display: inherit;
     }
     background-color: $lightBrown;
     .languages {
       margin: 0;
-      background-color: #b3a495;
+      background-color: $brown;
       padding: 10px;
       li {
         display: inline-block;
@@ -64,19 +64,19 @@
         font-size: 24px;
         margin: 2rem 0;
         font-weight: bold;
-        a[disabled="true"]{
-          display:inline-block;
+        a[disabled="true"] {
+          display: inline-block;
           text-decoration: none;
-          &::before{
-            content:'\203A';
+          &::before {
+            content: "\203A";
             position: relative;
             font-size: 15px;
             display: inline-block;
             bottom: 5px;
           }
         }
-        &:first-child{
-          margin-top:0;
+        &:first-child {
+          margin-top: 0;
         }
         ul {
           margin-top: 1rem;
@@ -84,7 +84,9 @@
             font-size: 1rem;
             margin: 0.7rem;
             font-weight: normal;
-            a{text-decoration: none;}
+            a {
+              text-decoration: none;
+            }
           }
         }
       }
@@ -102,10 +104,9 @@
   left: -1000px;
   transition: all ease-in-out 0.5s;
   border-bottom: 10px solid $brown;
-  &.open{
+  &.open {
     opacity: 1;
     z-index: 100;
-    left:0px;
-   
+    left: 0px;
   }
 }

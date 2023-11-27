@@ -28,14 +28,14 @@ export const query = graphql`
 const Prodotto = ({ data, pageContext }) => {
 
   const { locale, parentPath, content, title, allPagePath } = pageContext
-  const dataProdottoTranslated = findItemTranslated(content.translations, locale)
-  const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-  const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+  const dataProdottoTranslated = data && findItemTranslated(content.translations, locale)
+  const listaApplicazioni = data && findItemsTranslated(data.directus?.applicazioni_translations, pageContext.locale)
+  const listaCategorie = data && findItemsTranslated(data.directus?.prodotto_categorie_translations, pageContext.locale)
 
   const date = new Date(Date.parse(content.date_created))
   return (
     <>
-      <Layout
+      {data && <Layout
         locale={locale}
         pageTitle={title}
         pathName={parentPath}
@@ -53,7 +53,7 @@ const Prodotto = ({ data, pageContext }) => {
 
         </div>
         <LastNews locale={locale} limiteVisualizzazione={3} />
-      </Layout>
+      </Layout>}
     </>
 
   )

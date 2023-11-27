@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/layout/layout";
 import { findItemTranslated, findItemsTranslated } from "../utils";
 import { graphql } from "gatsby"
-import FormFiere from "../components/form";
+import { FormFiere } from "../components/form";
 
 const moment = require('moment')
 
@@ -47,7 +47,7 @@ const Fiere = ({ data, pageContext }) => {
         locale={locale}
         pageTitle={title}
         pathName={parentPath}
-        tipo='fiere'
+        tipo='fiera'
         allPagePath={allPagePath}
         pathFromContext={pageContext}
         listaApplicazioni={listaApplicazioni}
@@ -61,7 +61,7 @@ const Fiere = ({ data, pageContext }) => {
             <p className="description" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.description }} />
             {dataProdottoTranslated.call2action && <div className="call2action">
               <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.call2action }} />
-              <FormFiere />
+              <FormFiere nomeEvento={title} lang={pageContext.locale} />
             </div>}
           </section>
           <div className="bodyFiera" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.body }} />

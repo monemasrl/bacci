@@ -72,11 +72,7 @@ export const query = graphql`
           ... on DirectusData_testo_immagine{
             nome
             novita
-            link{
-              translations(filter: {languages_code: {code: {_eq: $locale}}}){
-                slug
-              }
-            }
+       
             allineamento
             id
             immagine{
@@ -100,6 +96,8 @@ export const query = graphql`
               titolo
               sotto_titolo
 							paragrafo
+              link_label
+              url
             }
             
           }
@@ -150,6 +148,7 @@ const Pagine = ({ data, location, pageContext }) => {
 
               <div className={`container-fluid ${pageContext.pageName}`}>
                 {data.directus.pages[0].blocchi?.map((blocco, index) => {
+                  console.log(blocco, 'blocco')
                   return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
                 })}
               </div>

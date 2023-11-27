@@ -61,7 +61,8 @@ const News = ({ data, pageContext }) => {
         listaCategorie={listaCategorie}
       >
         <section className="container news" ref={topArchivio}>
-          <GridPagination pagePath={'/news'} pageName="news" topArchivio={topArchivio} archivio={langFilterProdottoSorted} lang={pageContext.locale} />
+          {langFilterProdottoSorted &&
+            <GridPagination pagePath={'/news'} pageName="news" topArchivio={topArchivio} archivio={langFilterProdottoSorted} lang={pageContext.locale} />}
         </section>
       </Layout>
     </>

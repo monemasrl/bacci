@@ -12,8 +12,7 @@ $lightGrey: #a9b0ba;
 $text: "roboto", sans-serif;
 $link: "roboto", sans-serif;
 $title: "Oswald";
-$container: 1420px;
-$paragraph: 18px;
+$container: 1520px;
 $phone: "only screen and (max-width : 460px)";
 $tablet: "only screen and (max-width : 720px)";
 $landscape: "only screen and (max-width : 1024px)";
@@ -21,6 +20,8 @@ $desktop: "only screen and (max-width : 1200px)";
 $large: "only screen and (max-width: 1340px)";
 $wide: "only screen and (max-width : 1620px)";
 $big: "only screen and (max-width : 1900px)";
+$Psize: 20px;
+$PsizeMobile: 16px;
 
 @mixin h2-sezioni($sizeh2, $sizeStrong: 36px) {
   color: $grey;
@@ -35,6 +36,9 @@ $big: "only screen and (max-width : 1900px)";
     font-size: $sizeStrong;
     display: block;
     font-weight: 600;
+    @media #{$tablet} {
+      font-size: 15vw;
+    }
   }
   span {
     display: block;
