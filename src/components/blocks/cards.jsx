@@ -1,9 +1,22 @@
 import React from 'react';
+import { useRef } from 'react'
+import { useInView, motion } from 'framer-motion'
 
 function Cards({ content }) {
+    const card = useRef(null)
+    const isInViewRight = useInView(card, { once: true });
 
     return (
-        <section className='container repeater cards'>
+        <motion.section
+            ref={card}
+            className='container repeater cards'
+            animate={isInViewRight ? {
+                opacity: 1, y: 0,
+                transition: {
+                    duration: 1,
+                }
+            } : { opacity: 0, y: 100 }}
+        >
             {content.item.traduzioni[0].blocchi.map((item) => {
                 return (
                     <div className='box-repeater'>
@@ -12,7 +25,7 @@ function Cards({ content }) {
                     </div>
                 )
             })}
-        </section>)
+        </motion.section>)
 }
 
 export default Cards

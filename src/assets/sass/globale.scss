@@ -141,10 +141,13 @@ main {
       .gatsby-image-wrapper-constrained {
         height: auto;
       }
+      h2 {
+        font-size: 48px;
+      }
       p {
         color: #5f6062;
         font-size: 18px;
-        font-weight: normal;
+        font-weight: lighter;
         line-height: 1.2;
       }
     }
@@ -317,7 +320,7 @@ section.container.repeater {
   justify-content: space-around;
   gap: 20px;
   margin: 6rem auto;
-
+  padding: 0 2rem;
   .box-repeater {
     max-width: 450px;
     width: 100%;
