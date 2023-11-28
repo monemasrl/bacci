@@ -4,6 +4,8 @@ import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
 import MegamenuDirectus from '../megamenu/megamenudir'
 import { Termini, langTag } from '../../../data-translations'
+import icon from '../../images/icon-menu.svg'
+import logo from '../../images/logo.svg'
 import './navbar.scss'
 
 const NavBarDirectus = (props) => {
@@ -46,7 +48,7 @@ const NavBarDirectus = (props) => {
 
     const terminiTraduzione = Termini[props.locale]
     const [stickyClass, setStickyClass] = useState('relative');
-
+    const [openSub, setOpenSub] = useState(false);
     useEffect(() => {
         window.addEventListener('scroll', stickNavbar);
 
@@ -94,13 +96,11 @@ const NavBarDirectus = (props) => {
             </nav>
             <nav className={`container-fluid mainmenu ${stickyClass}`}>
                 <div className="container">
-
                     <div className="main-logo">
                         <Link to={`${langTag[props.locale] === 'it' ? '/' : '/' + langTag[props.locale] + '/'}`}>
-                            <StaticImage
-                                placeholder="none"
+                            <img
                                 width={362}
-                                src="../../images/logo_scuro.jpg" alt="Bacci logo" />
+                                src={logo} alt="Bacci logo" />
                         </Link>
 
                     </div>
@@ -115,9 +115,9 @@ const NavBarDirectus = (props) => {
 
                                 return (
                                     < >
-                                        {item.id === '2' ? <li key={item.id} role="button" tabIndex={0} onMouseEnter={() => props.setMega(true)}
+                                        {item.id === '2' ? <li key={item.id} role="button" tabIndex={0} onClick={() => props.setMega(true)}
                                             onMouseLeave={() => props.setMega(false)}>
-                                            <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a href="#">{itemTranslated.label}</a>
+                                            <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a>{itemTranslated.label}</a><img src={icon} width="20" alt="iconamenu" />
                                             </div>
 
                                             <MegamenuDirectus
@@ -131,9 +131,9 @@ const NavBarDirectus = (props) => {
                                             />
 
                                         </li> :
-                                            <li key={item.id}>
-                                                {item.sub_items.length ? <a href='#'>{itemTranslated.label}</a> :
-                                                    itemTranslated.slug && <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul>
+                                            <li onClick={() => setOpenSub(item.id)} onMouseLeave={() => setOpenSub(null)} key={item.id}>
+                                                {item.sub_items.length ? <a >{itemTranslated.label}<img src={icon} width="20" alt="iconamenu" /></a> :
+                                                    itemTranslated.slug && <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul className={`${item.id === openSub ? 'open' : ''}`}>
                                                         {item.sub_items.map((subitem) => {
                                                             const subItemTranslated = subitem.translations.find((lang) => {
                                                                 return langTag[lang.languages_code.code] === langTag[props.locale]

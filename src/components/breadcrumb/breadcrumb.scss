@@ -12,8 +12,9 @@
     text-transform: uppercase;
     color: white;
     font-weight: 400;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1.8rem;
+    margin-bottom: 1.8rem;
+    padding-left: 5px;
     @media #{$large} {
       align-self: flex-start;
     }
@@ -22,13 +23,13 @@
     }
 
     span {
-      font-size: 36px;
+      font-size: 20px;
       display: block;
       @media #{$phone} {
         font-size: 26px;
       }
-      &:nth-child(2) {
-        font-size: 72px;
+      &:last-child {
+        font-size: 44px;
         @media #{$large} {
           font-size: 36px;
         }

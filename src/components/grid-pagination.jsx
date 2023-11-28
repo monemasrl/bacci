@@ -5,8 +5,8 @@ import { Termini, langTag } from "../../data-translations"
 import { Link } from "gatsby"
 import Pagination from "./pagination"
 import { findItemTranslated } from "../utils"
-const moment = require('moment')
 
+const moment = require('moment')
 
 
 const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 2 }) => {
@@ -16,6 +16,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirsPost = indexOfLastPost - postsPerPage
     const currentPosts = posts.slice(indexOfFirsPost, indexOfLastPost)
+    moment.locale(langTag[lang])
 
     useEffect(() => {
         setPosts(archivio)
@@ -71,12 +72,14 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                         <div className="col-3">
                             <div className="box-single-news">
                                 {item.image && <GatsbyImage image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={translated.title} />}
-                                <div className="date">
-                                    {moment(data).locale(lang).format('DD MMMM YYYY')}
+                                <div className="box-correlati">
+                                    <div className="date">
+                                        {moment(data).format('DD MM YYYY')}
+                                    </div>
+                                    <h2>{translated.title}</h2>
+                                    <p dangerouslySetInnerHTML={{ __html: translated.summary }} />
+                                    <Link to={`${'/news/'}${translated.slug}`}>leggi tutto</Link>
                                 </div>
-                                <h2>{translated.title}</h2>
-                                <p dangerouslySetInnerHTML={{ __html: translated.summary }} />
-                                <Link to={`${'/news/'}${translated.slug}`}>leggi tutto</Link>
                             </div>
                         </div>)
                 })}

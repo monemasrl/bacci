@@ -3,6 +3,7 @@ import Layout from "../components/layout/layout";
 import { findItemTranslated, findItemsTranslated } from "../utils";
 import { graphql } from "gatsby"
 import { FormFiere } from "../components/form";
+import { langTag } from "../../data-translations";
 
 const moment = require('moment')
 
@@ -33,10 +34,10 @@ const Fiere = ({ data, pageContext }) => {
 
   const dateFrom = new Date(Date.parse(content.from))
   const dateTo = new Date(Date.parse(content.to))
-
+  moment.locale(langTag[pageContext.locale])
   const dataBreadCrumbFiere = {
-    dataFrom: moment(dateFrom).locale(pageContext.locale).format('DD'),
-    dataTo: moment(dateTo).locale(pageContext.locale).format('DD MMM YYYY'),
+    dataFrom: moment(dateFrom).format('DD'),
+    dataTo: moment(dateTo).format('DD MMM YYYY'),
     title: dataProdottoTranslated.title,
     location: content.location,
   }

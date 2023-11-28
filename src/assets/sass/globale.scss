@@ -60,7 +60,7 @@ textarea {
 }
 h1,
 h2 {
-  @include h2-sezioni(60px, 95px);
+  @include h2-sezioni(72px, 100px);
   font-family: "Oswald", sans-serif;
   line-height: 1;
   color: $grey;
@@ -88,14 +88,22 @@ main {
   padding: 0 1rem;
   margin-top: 6rem;
   .filters {
-    &.search input {
+    .filters button {
+      padding: 1rem;
       border: 0;
-      border-bottom: 1px solid #a4917d;
-      height: 40px;
-      margin: 1rem 1rem 1rem 0;
-      max-width: 300px;
-      outline: none;
-      width: 100%;
+    }
+    &.search {
+      margin: 1rem 0;
+      input {
+        border: 0;
+        border-bottom: 1px solid #a4917d;
+        background-color: #f0f0f0;
+        height: 40px;
+        margin: 1rem 1rem 1rem 0;
+        max-width: 300px;
+        outline: none;
+        width: 100%;
+      }
     }
     ul li {
       margin: 10px 0;
@@ -128,9 +136,9 @@ main {
       }
       p {
         color: #5f6062;
-        font-size: $Psize;
-        font-weight: 400;
-        line-height: 1.5;
+        font-size: 18px;
+        font-weight: normal;
+        line-height: 1.2;
       }
     }
   }
@@ -366,6 +374,7 @@ section.container.repeater {
   text-align: center;
   margin: 5rem auto;
   padding: 0 2rem;
+  flex-direction: column;
   @media #{$landscape} {
     padding: 0;
   }
@@ -604,50 +613,59 @@ section.container.repeater {
 
 /* ANCHOR: NEWS */
 .news {
+  gap: 2rem;
   .col-3 {
     margin-top: 1rem;
-    width: 100%;
-    max-width: 440px;
+    border: 1px solid #4a6c96;
+    max-width: 460px;
     .box-single-news {
-      border: 1px solid $grey;
-      margin: 10px;
+      display: flex;
+      flex-direction: column;
       height: 100%;
+      justify-content: space-between;
       .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
         margin-bottom: 2rem;
         width: 100%;
         height: 300px;
       }
-      .date {
-        color: $grey;
-        font-size: $Psize;
-        padding: 0 10px;
-        margin-bottom: 0.5rem;
-        font-weight: bold;
-      }
-      h2 {
-        color: $brown;
-        font-family: open sans;
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 0;
-        margin-top: 0;
-        padding: 0 10px;
-        text-align: left;
-      }
-      p {
-        color: $grey;
-        font-size: $Psize;
-        line-height: 34px;
-        margin-top: 1rem;
-        padding: 0 10px;
-      }
-      a {
-        color: $brown;
-        display: block;
-        font-size: 24px;
-        font-style: italic;
-        margin-bottom: 1rem;
-        padding: 0 10px;
+      .box-correlati {
+        margin-top: 1.5rem;
+        padding: 0rem 1.5rem 1.5rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex: 1 1;
+        .date {
+          color: $grey;
+          font-size: 20px;
+          padding: 0 10px;
+          margin-bottom: 0.5rem;
+        }
+        h2 {
+          color: $brown;
+          font-family: open sans;
+          font-size: 20px;
+          font-weight: 700;
+          margin-bottom: 0;
+          margin-top: 0;
+          padding: 0 10px;
+          text-align: left;
+        }
+        p {
+          color: $grey;
+          font-size: 20px;
+
+          margin-top: 1rem;
+          padding: 0 10px;
+        }
+        a {
+          color: $brown;
+          display: block;
+          font-size: 20px;
+          margin-bottom: 1rem;
+          padding: 0 10px;
+          margin-top: auto;
+        }
       }
     }
   }

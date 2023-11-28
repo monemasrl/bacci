@@ -125,11 +125,14 @@
     display: block;
     padding: 5px 10px;
     transition: all ease-in-out 0.5s;
+    img {
+      margin-left: 8px;
+    }
     a {
       color: $brown;
       text-transform: uppercase;
       font-size: 24px;
-      cursor: default;
+      cursor: pointer;
       &:hover {
         text-decoration: none;
       }
@@ -154,8 +157,12 @@
     li {
       display: inline-block;
       margin: 0 2rem;
+      cursor: pointer;
       &:last-child {
         margin-right: 0;
+      }
+      img {
+        margin-left: 8px;
       }
       ul {
         position: absolute;
@@ -187,28 +194,26 @@
         }
       }
 
-      &:hover {
-        ul:not(.mega-list) {
-          opacity: 1;
-          z-index: 2;
-          box-shadow: 0px 5px 0px rgb(58 72 90 / 52%);
-          li {
-            display: block;
-            margin: 0;
-            font-size: 16px;
-            a:not(.mega-item).active {
-              background-color: $lightBrown;
-            }
-            a.active {
-              color: white;
-            }
+      ul:not(.mega-list).open {
+        opacity: 1;
+        z-index: 2;
+        box-shadow: 0px 5px 0px rgb(58 72 90 / 52%);
+        li {
+          display: block;
+          margin: 0;
+          font-size: 16px;
+          a:not(.mega-item).active {
+            background-color: $lightBrown;
+          }
+          a.active {
+            color: white;
           }
         }
+      }
 
-        .wrapper-megamenu {
-          opacity: 1;
-          z-index: 100;
-        }
+      .wrapper-megamenu {
+        opacity: 1;
+        z-index: 100;
       }
     }
   }

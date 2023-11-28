@@ -210,7 +210,8 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                             </ul>
 
 
-                            <Link className="tutti-prodotti" to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`}>{terminiTraduzione.tutti_prodotti}</Link>
+                            {/* PULSANTE A TUTTI I PRODOTTI
+                            <Link className="tutti-prodotti" to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`}>{terminiTraduzione.tutti_prodotti}</Link> */}
 
 
                             <div>

@@ -1,9 +1,16 @@
 @import "../../assets/sass/variabili";
 .widget-news {
   margin-top: 3rem;
-
+  .box-correlati {
+    margin-top: 1.5rem;
+    padding: 0rem 1.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1;
+  }
   .container {
-    gap: 1rem;
+    gap: 2rem;
     padding: 0 2rem;
     @media #{$landscape} {
       padding: 0;
@@ -16,14 +23,13 @@
     margin-left: 2rem;
     margin: 0 auto;
     font-weight: normal;
-    max-width: 1420px;
+    max-width: 1540px;
   }
   .col-3 {
-    flex: 1 1 430px;
-    margin-top: 2rem;
     border: 1px solid $brown;
-    padding: 1rem;
-    max-width: 430px;
+    flex: 1 1;
+    margin-top: 2rem;
+    max-width: 460px;
   }
 
   .box-news {
@@ -35,7 +41,7 @@
       color: $brown;
       text-align: left;
       font-family: $text;
-      font-size: $Psize;
+      font-size: 20px;
       font-weight: bold;
       margin: 0;
     }
@@ -45,17 +51,19 @@
     }
     p {
       text-align: left;
-      font-size: $Psize;
+      font-size: 20px;
       line-height: 1.5rem;
     }
     a {
-      color: $grey;
-      font-size: $Psize;
-      font-style: italic;
+      color: $lightBrown;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 100;
+      margin-top: auto;
     }
     .date {
       color: $grey;
-      font-size: $Psize;
+      font-size: 20px;
       font-weight: normal;
       padding: 0px;
       margin: 0.5rem 0;
@@ -66,7 +74,6 @@
       margin: 2rem auto 0 auto;
     }
     .immagine-widget {
-      max-width: 450px;
       height: 300px;
       display: block;
       margin: 0 auto;
