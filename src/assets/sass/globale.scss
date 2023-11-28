@@ -88,6 +88,12 @@ main {
   padding: 0 1rem;
   margin-top: 6rem;
   .filters {
+    h3 {
+      font-size: 24px;
+      color: $brown;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
     button {
       padding: 1rem;
       border: 0;
@@ -480,6 +486,9 @@ section.container.repeater {
       position: absolute;
       top: 8px;
       width: 8px;
+      @media #{$landscape} {
+        display: none;
+      }
     }
     strong {
       font-size: 55px;

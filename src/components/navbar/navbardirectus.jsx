@@ -131,7 +131,7 @@ const NavBarDirectus = (props) => {
                                             />
 
                                         </li> :
-                                            <li onClick={() => setOpenSub(item.id)} onMouseLeave={() => setOpenSub(null)} key={item.id}>
+                                            <li role="button" tabIndex={0} onClick={() => setOpenSub(item.id)} onMouseLeave={() => setOpenSub(null)} key={item.id}>
                                                 {item.sub_items.length ? <a >{itemTranslated.label}<img src={icon} width="20" alt="iconamenu" /></a> :
                                                     itemTranslated.slug && <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul className={`${item.id === openSub ? 'open' : ''}`}>
                                                         {item.sub_items.map((subitem) => {

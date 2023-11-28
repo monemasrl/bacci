@@ -21,7 +21,7 @@ $large: "only screen and (max-width: 1340px)";
 $wide: "only screen and (max-width : 1620px)";
 $big: "only screen and (max-width : 1900px)";
 $Psize: 24px;
-$PsizeMobile: 16px;
+$PsizeMobile: 20px;
 
 @mixin h2-sezioni($sizeh2, $sizeStrong: 36px) {
   color: $grey;

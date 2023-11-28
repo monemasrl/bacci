@@ -257,9 +257,7 @@ const Prodotti = ({ data, location, pageContext }) => {
         <div className="container prodotti" ref={topArchivio}>
           <div className="container col-sx">
             <h2>affina la ricerca</h2>
-            <div className="filters search">
-              <input onKeyUp={(e) => onChangeText(e)} type="text" placeholder={termini.tasto_ricerca} />
-            </div>
+
 
             <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
               <ul>
@@ -292,7 +290,9 @@ const Prodotti = ({ data, location, pageContext }) => {
                 </ul>
               </form>
             </div>
-
+            <div className="filters search">
+              <input onKeyUp={(e) => onChangeText(e)} type="text" placeholder={termini.tasto_ricerca} />
+            </div>
           </div>
           <div className="container col-dx">
             {<GridPagination pageName={'prodotti'} archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} />}
