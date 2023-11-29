@@ -97,23 +97,25 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
         return (
             <>
                 {currentPosts && currentPosts.map((item) => {
-                    const translated = findItemTranslated(item.translations, lang)
+                    const titleTranslated = findItemTranslated(item.title_translations, lang)
                     const dataFrom = new Date(Date.parse(item.from))
                     const dataTo = new Date(Date.parse(item.to))
 
                     const pathTranslated = pagePath.find((item) => item.locale === lang)
-                    return (
-                        <div className="col-3">
-                            <div className="box-single-fiera">
-                                <Link to={`${pathTranslated.path}${translated.slug}`}><h2>{translated.title}</h2></Link>
-                                <div className="datafiera">
-                                    <span>{moment(dataFrom).locale(lang).format('DD')}</span> - &nbsp;
-                                    <span>{moment(dataTo).locale(lang).format('DD MMMM YYYY')}</span>
+                    if (titleTranslated) {
+                        return (
+                            <div className="col-3">
+                                <div className="box-single-fiera">
+                                    <Link to={`${pathTranslated.path}${titleTranslated.slug}`}><h2>{titleTranslated.title}</h2></Link>
+                                    <div className="datafiera">
+                                        <span>{moment(dataFrom).locale(lang).format('DD')}</span> - &nbsp;
+                                        <span>{moment(dataTo).locale(lang).format('DD MMMM YYYY')}</span>
+                                    </div>
+                                    <div className="luogo">{item.location}</div>
+                                    <a className="link" href={item.link_fiera} target="_blank">{item.link_fiera}</a>
                                 </div>
-                                <div className="luogo">{item.location}</div>
-                                <a className="link" href={item.link_fiera} target="_blank">{item.link_fiera}</a>
-                            </div>
-                        </div>)
+                            </div>)
+                    }
                 })}
                 <div className="break"></div>
                 {<Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} topArchivio={topArchivio} />}

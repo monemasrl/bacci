@@ -25,12 +25,17 @@ export const query = graphql`
     to
     location
     link_fiera
+    title_translations{
+          languages_code{
+            code
+          }
+          title
+          slug
+        }
     translations{
       languages_code{
         code
       }
-      slug
-      title
 
       sottotitolo
       description

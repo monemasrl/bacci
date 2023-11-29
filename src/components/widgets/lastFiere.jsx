@@ -17,12 +17,16 @@ const LastFiere = ({ locale, limiteVisualizzazione }) => {
             to
             location
             link_fiera
+            title_translations{
+                languages_code{
+                  code
+                }  title
+                slug
+              }
             translations{
               languages_code{
                 code
               }
-              slug
-              title
 
               sottotitolo
               description
@@ -38,30 +42,32 @@ const LastFiere = ({ locale, limiteVisualizzazione }) => {
   const langFilterFiereSorted = data.directus.Fiere.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
-
+  console.log(langFilterFiereSorted, 'langFilterFiereSorted')
   return (
     <>
       {langFilterFiereSorted && <section className="container widget-fiere">
         <h2>{Termini[locale].eventi}</h2>
         <div className="widget-fiere-wrapper">
           {langFilterFiereSorted.map((item) => {
-            const FiereTranslated = findItemTranslated(item.translations, locale)
 
+            const titleFiereTranslated = findItemTranslated(item.title_translations, locale)
             const dataFrom = new Date(Date.parse(item.from))
             const dataTo = new Date(Date.parse(item.to))
-            return (
-              <div key={FiereTranslated.title} className="box-single-fiera">
-                <Link to={`/${langTag[locale] === "it" ? '' : langTag[locale] + "/"}${Termini[locale].fiere.toLowerCase()}/${FiereTranslated.slug}`}><h2>{FiereTranslated.title}</h2>   </Link>
-                <div className="datafiera">
-                  <span>{moment(dataFrom).locale(locale).format('DD')}</span> - &nbsp;
-                  <span>{moment(dataTo).locale(locale).format('DD MMMM YYYY')}</span>
+            if (titleFiereTranslated) {
+              return (
+                <div key={titleFiereTranslated.title} className="box-single-fiera">
+                  <Link to={`/${langTag[locale] === "it" ? '' : langTag[locale] + "/"}${Termini[locale].fiere.toLowerCase()}/${titleFiereTranslated.slug}`}><h2>{titleFiereTranslated.title}</h2>   </Link>
+                  <div className="datafiera">
+                    <span>{moment(dataFrom).locale(locale).format('DD')}</span> - &nbsp;
+                    <span>{moment(dataTo).locale(locale).format('DD MMMM YYYY')}</span>
+                  </div>
+                  <div className="luogo">
+                    {item.location}
+                  </div>
+                  <a href={item.link_fiera} className="link" targe="_blank" rel="nofollow" >{item.link_fiera}</a>
                 </div>
-                <div className="luogo">
-                  {item.location}
-                </div>
-                <a href={item.link_fiera} className="link" targe="_blank" rel="nofollow" >{item.link_fiera}</a>
-              </div>
-            )
+              )
+            }
           })}
         </div>
       </section>}

@@ -86,12 +86,18 @@ exports.createPages = async ({ graphql, actions }) => {
           to
           link_fiera
           location
+          title_translations {
+            languages_code {
+              code
+            }
+            title
+            slug
+          }
           translations {
             languages_code {
               code
             }
-            slug
-            title
+
             sottotitolo
             description
             call2action
@@ -563,6 +569,7 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     }
   })
+
   // SINGOLA FIERA
   const fiere = await result.data.directus.Fiere
   function getAllPathFiere(translations) {
@@ -584,10 +591,11 @@ exports.createPages = async ({ graphql, actions }) => {
     })
     return allPath
   }
-  fiere.forEach(entry => {
-    const allPagePath = getAllPathFiere(entry.translations)
 
-    entry.translations.forEach((translation, index) => {
+  fiere.forEach(entry => {
+    const allPagePath = getAllPathFiere(entry.title_translations)
+
+    entry.title_translations.forEach((translation, index) => {
       const urlBase =
         langTag[translation.languages_code.code] === "it"
           ? "/"
@@ -613,7 +621,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 }
-
+//Per attivare la source  map sul scss
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     devtool: "cheap-module-source-map",
