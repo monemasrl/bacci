@@ -17,6 +17,8 @@ const LastFiere = ({ locale, limiteVisualizzazione }) => {
             to
             location
             link_fiera
+            type
+            page
             title_translations{
                 languages_code{
                   code

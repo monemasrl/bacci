@@ -743,13 +743,35 @@ section.container.repeater {
 }
 .fiere {
   margin-top: 6rem;
+  gap: 3rem;
+  justify-content: flex-start;
+  .col-3 {
+    max-width: 440px;
+    width: 100%;
+  }
   .box-single-fiera {
     border: 1px solid $brown;
-    flex: 1;
+
     padding: 2rem;
     max-width: 430px;
+    width: 100%;
+    height: 100%;
     .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
       margin-bottom: 2rem;
+    }
+    .buttonLink {
+      display: inline-block;
+      background: $lightBrown;
+      color: white;
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-radius: 50%;
+      margin-left: 95%;
+      margin-bottom: 0px;
+      position: relative;
+      top: 17px;
     }
     h2 {
       font-size: 28px;

@@ -19,12 +19,14 @@ export const query = graphql`
       }
       label
     }
-    Fiere(filter: {translations: {languages_code: {code: {_eq: $locale}}}}){
+    Fiere(filter: {title_translations: {languages_code: {code: {_eq: $locale}}}}){
     name
     from
     to
     location
     link_fiera
+    type
+    page
     title_translations{
           languages_code{
             code
@@ -55,6 +57,7 @@ const Fiere = ({ data, pageContext }) => {
   const langFilterFiereSorted = data.directus.Fiere.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
+  console.log(data.directus.Fiere, 'langFilterFiereSorted')
   return (
     <>
       <Layout

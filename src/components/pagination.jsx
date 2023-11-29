@@ -25,10 +25,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, topArchivio }) => {
                                 onClick={() => {
                                     setActivePage(item)
                                     paginate(item)
-                                    window.scrollTo({
-                                        top: topArchivio.current.offsetTop,
-                                        behavior: "smooth",
-                                    });
+
                                 }}>{item}</li>
                         })
                     }

@@ -85,6 +85,8 @@ exports.createPages = async ({ graphql, actions }) => {
           from
           to
           link_fiera
+          type
+          page
           location
           title_translations {
             languages_code {
@@ -605,7 +607,7 @@ exports.createPages = async ({ graphql, actions }) => {
         itemb => translation.languages_code.code === itemb.languages_code.code
       )
 
-      if (translation.slug) {
+      if (translation.slug && entry.page === true) {
         createPage({
           path: `${urlBase}${parentPathFromMenu.slug.toLowerCase()}/${translation.slug.toLowerCase()}`,
           component: require.resolve("./src/templates/templateFiere.jsx"),

@@ -9,7 +9,7 @@ import { findItemTranslated } from "../utils"
 const moment = require('moment')
 
 
-const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 2 }) => {
+const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 4 }) => {
     const [posts, setPosts] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostPerPage] = useState(postPerPage)
@@ -42,13 +42,12 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
             <>
                 {currentPosts ? currentPosts.map((item) => {
                     const translated = findItemTranslated(item.translations, lang)
-
                     if (translated.titolo) {
                         return (
                             <div key={translated.titolo} className="box-prodotto">
                                 {item.immagine && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translated.titolo} />}
                                 <h2>{translated.titolo}</h2>
-                                <p>{translated.paragrafo}</p>
+                                <p>{translated.testo_antemprima}</p>
                                 <Link className="button-sezione" lista to={`${(langTag[translated.languages_code.code] === 'it') ? "/" : "/" + langTag[translated.languages_code.code] + "/"}${Termini[translated.languages_code.code].prodotti + '/' + translated.slug}`}>
 
                                     scopri</Link>
@@ -56,14 +55,14 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                         )
                     }
                 }) : <div>Loading...</div>}
-                <div className="break"></div>
+
                 {(posts.length > postPerPage) && <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} topArchivio={topArchivio} />}
             </>
         )
     }
 
     if (pageName === 'news') {
-        console.log(pagePath, 'current posts')
+
         return (
             <>
                 {currentPosts && currentPosts.map((item) => {
@@ -94,6 +93,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
 
     }
     if (pageName === 'fiere') {
+        console.log(currentPosts, 'currentPosts')
         return (
             <>
                 {currentPosts && currentPosts.map((item) => {
@@ -105,15 +105,17 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                     if (titleTranslated) {
                         return (
                             <div className="col-3">
-                                <div className="box-single-fiera">
-                                    <Link to={`${pathTranslated.path}${titleTranslated.slug}`}><h2>{titleTranslated.title}</h2></Link>
+                                <div className={`box-single-fiera ${item.type === 'event' ? 'evento' : ''}`}>
+                                    <h2>{titleTranslated.title}</h2>
                                     <div className="datafiera">
                                         <span>{moment(dataFrom).locale(lang).format('DD')}</span> - &nbsp;
                                         <span>{moment(dataTo).locale(lang).format('DD MMMM YYYY')}</span>
                                     </div>
                                     <div className="luogo">{item.location}</div>
                                     <a className="link" href={item.link_fiera} target="_blank">{item.link_fiera}</a>
+                                    {item.page && <Link className="buttonLink" to={`${pathTranslated.path}${titleTranslated.slug}`}>&#62;</Link>}
                                 </div>
+
                             </div>)
                     }
                 })}

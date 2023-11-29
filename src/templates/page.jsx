@@ -34,7 +34,7 @@ export const query = graphql`
         id
         childImageSharp{
           id
-          gatsbyImageData
+          gatsbyImageData(formats: [WEBP, AVIF], quality: 80, placeholder: BLURRED)
         }
       }
     }
