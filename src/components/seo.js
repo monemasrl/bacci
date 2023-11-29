@@ -9,7 +9,7 @@ import * as React from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
-
+import { langTag } from "../../data-translations"
 function Seo({ description, lang, meta, title, seo }) {
   const { site } = useStaticQuery(
     graphql`
@@ -53,7 +53,7 @@ function Seo({ description, lang, meta, title, seo }) {
   }
   return (
     <Helmet>
-      <html lang={lang} />
+      <html lang={langTag[lang]} />
       <title>{title || defaultTitle}</title>
       <meta name="description" content={metaDescription} />
       <meta name="author" content={site.siteMetadata.author} />

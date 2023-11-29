@@ -141,7 +141,7 @@ const Pagine = ({ data, location, pageContext }) => {
             <>
               {pageContext.pageName === "home" &&
                 <section class="jumbo-home">
-                  <GatsbyImage className="jumbo-image" image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
+                  <GatsbyImage loading="eager" className="jumbo-image" image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
                 </section>}
               {pageContext.pageName !== "home" &&
                 <TestoMainContent content={data.directus.pages[0].translations[0]} featuredImage={data.directus.pages[0].featured_image?.imageFile.childImageSharp.gatsbyImageData} />}
