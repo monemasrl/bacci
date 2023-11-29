@@ -83,13 +83,22 @@
     z-index: 100;
     background: white;
     animation: menuSticky 0.5s;
+    box-shadow: 1px 5px 1px #0000000d;
     @media #{$large} {
       margin-top: 20px;
       position: relative;
     }
     .main-logo {
-      width: 272px;
-      padding: 0.5rem;
+      img {
+        width: 272px;
+        padding: 0.5rem;
+      }
+    }
+    ul {
+      align-self: center;
+    }
+    .wrapper-megamenu {
+      margin: 1rem auto 0 auto;
     }
   }
   @media #{$landscape} {

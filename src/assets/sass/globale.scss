@@ -88,9 +88,11 @@ main {
   padding: 0 1rem;
   margin-top: 6rem;
   .filters {
+    margin-top: 1rem;
+
     h3 {
       font-size: 24px;
-      color: $lightBrown;
+      color: $grey;
       text-transform: uppercase;
       font-weight: 700;
       margin-bottom: 1rem;
@@ -116,7 +118,7 @@ main {
       margin: 10px 0;
       label {
         color: $grey;
-        font-size: 22px;
+        font-size: 18px;
         margin-left: 10px;
         text-transform: uppercase;
       }
@@ -127,19 +129,29 @@ main {
     flex: 1 1;
     flex-direction: column;
     max-width: 550px;
+    h2 {
+      font-size: 36px;
+    }
   }
   .col-dx {
     display: flex;
     flex: 1 1;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-top: 2rem;
+    gap: 5rem;
     .box-prodotto {
       margin-bottom: 2rem;
       max-width: 380px;
+      width: 100%;
       text-align: center;
+
       .gatsby-image-wrapper-constrained {
         height: auto;
+        margin-bottom: 2rem;
+      }
+      .button-sezione {
+        margin-top: 1rem;
       }
       h2 {
         font-size: 48px;
@@ -301,7 +313,7 @@ p.sottotitolo {
   display: inline-block;
   font-size: 24px;
   line-height: 45px;
-  margin-top: 5%;
+  margin-top: 2rem;
   padding: 0.2rem 5rem;
   text-align: center;
   text-transform: uppercase;
@@ -369,7 +381,7 @@ section.container.repeater {
 /* ANCHOR: sezione1 */
 
 .gatsby-image-wrapper-constrained.jumbo-image {
-  margin: 1.5rem auto;
+  margin: 0 auto;
   display: block;
   background-color: $lightBrown;
   background-image: url(../../images/logo.png);
@@ -548,6 +560,9 @@ section.container.repeater {
     border-bottom: 3px solid $grey;
     border-top: 3px solid $grey;
     justify-content: space-between;
+    .button-sezione {
+      margin-top: 5rem;
+    }
     h2 {
       font-size: 105px;
       color: $grey;
@@ -575,6 +590,7 @@ section.container.repeater {
     }
     .box-sx {
       padding-left: 2rem;
+      padding-bottom: 3rem;
       @media #{$landscape} {
         padding-left: 0;
       }
@@ -631,6 +647,7 @@ section.container.repeater {
     margin-top: 1rem;
     border: 1px solid #4a6c96;
     max-width: 460px;
+    width: 100%;
     .box-single-news {
       display: flex;
       flex-direction: column;

@@ -40,20 +40,22 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
     if (pageName === 'prodotti') {
         return (
             <>
-                {currentPosts && currentPosts.map((item) => {
+                {currentPosts ? currentPosts.map((item) => {
                     const translated = findItemTranslated(item.translations, lang)
 
-                    return (
-                        <div key={translated.titolo} className="box-prodotto">
-                            {item.immagine && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translated.titolo} />}
-                            <h2>{translated.titolo}</h2>
-                            <p>{translated.paragrafo}</p>
-                            <Link className="button-sezione" lista to={`${(langTag[translated.languages_code.code] === 'it') ? "/" : "/" + langTag[translated.languages_code.code] + "/"}${Termini[translated.languages_code.code].prodotti + '/' + translated.slug}`}>
+                    if (translated.titolo) {
+                        return (
+                            <div key={translated.titolo} className="box-prodotto">
+                                {item.immagine && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translated.titolo} />}
+                                <h2>{translated.titolo}</h2>
+                                <p>{translated.paragrafo}</p>
+                                <Link className="button-sezione" lista to={`${(langTag[translated.languages_code.code] === 'it') ? "/" : "/" + langTag[translated.languages_code.code] + "/"}${Termini[translated.languages_code.code].prodotti + '/' + translated.slug}`}>
 
-                                scopri</Link>
-                        </div>
-                    )
-                })}
+                                    scopri</Link>
+                            </div>
+                        )
+                    }
+                }) : <div>Loading...</div>}
                 <div className="break"></div>
                 {(posts.length > postPerPage) && <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} topArchivio={topArchivio} />}
             </>
@@ -68,20 +70,22 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                     const translated = findItemTranslated(item.translations, lang)
                     const data = new Date(Date.parse(item.date_created))
 
-                    return (
-                        <div className="col-3">
-                            <div className="box-single-news">
-                                {item.image && <GatsbyImage image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={translated.title} />}
-                                <div className="box-correlati">
-                                    <div className="date">
-                                        {moment(data).format('DD MM YYYY')}
+                    if (translated) {
+                        return (
+                            <div className="col-3">
+                                <div className="box-single-news">
+                                    {item.image && <GatsbyImage image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={translated.title} />}
+                                    <div className="box-correlati">
+                                        <div className="date">
+                                            {moment(data).format('DD MM YYYY')}
+                                        </div>
+                                        <h2>{translated.title}</h2>
+                                        <p dangerouslySetInnerHTML={{ __html: translated.summary }} />
+                                        <Link to={`${'/news/'}${translated.slug}`}>leggi tutto</Link>
                                     </div>
-                                    <h2>{translated.title}</h2>
-                                    <p dangerouslySetInnerHTML={{ __html: translated.summary }} />
-                                    <Link to={`${'/news/'}${translated.slug}`}>leggi tutto</Link>
                                 </div>
-                            </div>
-                        </div>)
+                            </div>)
+                    }
                 })}
                 <div className="break"></div>
                 {<Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} topArchivio={topArchivio} />}

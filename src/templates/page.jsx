@@ -13,13 +13,13 @@ export const query = graphql`
  query($locale: String!, $slug: String!) {
 
   directus{
-    prodotto_categorie_translations{
+    prodotto_categorie_translations(filter: {languages_code: {code: {_eq: $locale}}}){
     languages_code{
       code
     }
     nome
   }
-  applicazioni_translations{
+  applicazioni_translations(filter: {languages_code: {code: {_eq: $locale}}}) {
       languages_code{
         code
       }
@@ -119,10 +119,10 @@ export const query = graphql`
 const Pagine = ({ data, location, pageContext }) => {
 
 
-  const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-  const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+  const listaApplicazioni = data && data.directus.applicazioni_translations
+  const listaCategorie = data && data.directus.prodotto_categorie_translations
   const termini = Termini[pageContext.locale]
-  console.log(data, 'data')
+  console.log(listaApplicazioni, listaCategorie, 'data')
 
   return (
     <>

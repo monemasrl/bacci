@@ -322,6 +322,7 @@ exports.createPages = async ({ graphql, actions }) => {
             const findParent = parentPath.find(item => {
               return item.lang === translation.languages_code.code
             })
+            console.log(findParent, "findParent")
             const urlBase =
               langTag[translation.languages_code.code] === "it"
                 ? "/"

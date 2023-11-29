@@ -5,7 +5,7 @@ import GridPagination from "../components/grid-pagination"
 import { findItemsTranslated } from "../utils"
 
 export const query = graphql`
- query{
+  query($locale: String!) {
   directus{
     prodotto_categorie_translations{
     languages_code{
@@ -19,13 +19,14 @@ export const query = graphql`
       }
       label
     }
-    posts{
+    posts(filter: {translations: {languages_code: {code: {_eq: $locale}}}}){
     id
     date_created
     translations{
       languages_code{
         code
       }
+      
       title
     	slug
       summary
@@ -48,6 +49,7 @@ const News = ({ data, pageContext }) => {
   const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
   const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
   const topArchivio = React.useRef()
+
   const langFilterProdottoSorted = data.directus.posts.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })

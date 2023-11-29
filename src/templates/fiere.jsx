@@ -5,7 +5,7 @@ import GridPagination from "../components/grid-pagination"
 import { findItemsTranslated } from "../utils"
 
 export const query = graphql`
- query{
+  query($locale: String!) {
   directus{
     prodotto_categorie_translations{
     languages_code{
@@ -19,7 +19,7 @@ export const query = graphql`
       }
       label
     }
-    Fiere{
+    Fiere(filter: {translations: {languages_code: {code: {_eq: $locale}}}}){
     name
     from
     to

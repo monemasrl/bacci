@@ -151,9 +151,10 @@ function findItemTranslated(translations, langCode) {
     return langTag[code] === langTag[langCode]
   })
   if (!itemTranslated) {
-    throw new Error("error, traduzione non trovata")
+    console.log("error, traduzione non trovata")
+  } else {
+    return itemTranslated
   }
-  return itemTranslated
 }
 function findItemsTranslated(translations, langCode) {
   const itemTranslated = translations.filter(lang => {
@@ -161,9 +162,10 @@ function findItemsTranslated(translations, langCode) {
     return langTag[code] === langTag[langCode]
   })
   if (!itemTranslated) {
-    throw new Error("error, traduzione non trovata")
+    console.log("error, traduzione non trovata")
+  } else {
+    return itemTranslated
   }
-  return itemTranslated
 }
 export {
   getParentPathFromMenu,

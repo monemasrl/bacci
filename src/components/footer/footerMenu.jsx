@@ -72,8 +72,6 @@ function FooterMenu({ locale }) {
     }
 
 
-    console.log(vociMenu(), 'vociMenu')
-
     return (<section className='container footer2'>
 
 
@@ -87,12 +85,13 @@ function FooterMenu({ locale }) {
                             <li>{parentItemTranslated.label}</li>
                             {item.sub_items.map((subitem) => {
                                 const itemTranslated = findItemTranslated(subitem.translations, locale)
-
-                                return (
-                                    <li key={itemTranslated.label}>
-                                        <Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
-                                    </li>
-                                )
+                                if (itemTranslated) {
+                                    return (
+                                        <li key={itemTranslated.label}>
+                                            <Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
+                                        </li>
+                                    )
+                                }
                             })}
 
                         </ul>
@@ -106,30 +105,32 @@ function FooterMenu({ locale }) {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
                 const listaCategorieTranslated = findItemsTranslated(data.directus.prodotto_categorie_translations, locale)
                 console.log(listaCategorieTranslated, 'listaCategorieTranslated')
-                return (
-                    <div className="footer-col">
-                        <ul>
-                            <li>{parentItemTranslated.label}</li>
-                            {listaCategorieTranslated.map((subitem) => {
-                                return <li key={subitem.nome} ><Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`} state={{ categoria: subitem.nome }}>{subitem.nome}</Link></li>
-                            })}
-                        </ul>
-                    </div>
-                )
+                if (parentItemTranslated) {
+                    return (
+                        <div className="footer-col">
+                            <ul>
+                                <li>{parentItemTranslated.label}</li>
+                                {listaCategorieTranslated.map((subitem) => {
+                                    return <li key={subitem.nome} ><Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`} state={{ categoria: subitem.nome }}>{subitem.nome}</Link></li>
+                                })}
+                            </ul>
+                        </div>
+                    )
+                }
 
             }
 
             if (item.name === 'Filiali' || item.name === 'Contatti') {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
-
-                return (
-                    <div className="footer-col">
-                        <ul>
-                            <li> <Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`}>{parentItemTranslated.label.toLowerCase()}</Link></li>
-                        </ul>
-                    </div>
-                )
-
+                if (parentItemTranslated) {
+                    return (
+                        <div className="footer-col">
+                            <ul>
+                                <li> <Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`}>{parentItemTranslated.label.toLowerCase()}</Link></li>
+                            </ul>
+                        </div>
+                    )
+                }
             }
 
         })}

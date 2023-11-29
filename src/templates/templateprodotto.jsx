@@ -59,7 +59,6 @@ const Prodotto = ({ data, pageContext }) => {
                     {content.sezioni_prodotto.map((item) => {
                         const dataProdottoTranslated = findItemTranslated(item.translations, locale)
 
-
                         return (
                             <section className="container sezione-1 left">
                                 <div className="box-sx">

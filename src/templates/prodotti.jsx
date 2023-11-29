@@ -8,7 +8,7 @@ import { Termini, langTag } from "../../data-translations"
 import { findItemTranslated, findItemsTranslated } from "../utils"
 
 export const query = graphql`
- query{
+  query($locale: String!) {
   directus{
     prodotto_categorie_translations{
     languages_code{
@@ -23,7 +23,7 @@ export const query = graphql`
       label
     }
   
-  Prodotti{
+  Prodotti(filter: {translations: {languages_code: {code: {_eq: $locale}}}}){
     id
     name
     date_created
@@ -277,7 +277,7 @@ const Prodotti = ({ data, location, pageContext }) => {
             </form>
             <div className="filters">
               <h3>Applicazioni</h3>
-              <button onClick={() => setFiltersApp([])}> Tutte le applicazioni</button>
+
               <form onChange={(e) => onChangeCheckboxApplicazioni(e)}>
                 <ul>
                   {listaApplicazioni.map((item, index) => {
@@ -289,8 +289,11 @@ const Prodotti = ({ data, location, pageContext }) => {
                   })}
                 </ul>
               </form>
+              <button onClick={() => setFiltersApp([])}> Tutte le applicazioni</button>
             </div>
             <div className="filters search">
+
+              <h3>{termini.tastoRicerca}</h3>
               <input onKeyUp={(e) => onChangeText(e)} type="text" placeholder={termini.tasto_ricerca} />
             </div>
           </div>

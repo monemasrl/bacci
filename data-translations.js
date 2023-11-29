@@ -6,6 +6,7 @@ export const langTag = {
 }
 export const Termini = {
   en_US: {
+    tastoRicerca: "Search for model",
     formPrivacy: "Accept",
     formMessaggio: "Minimum 15 characters",
     formSuccess: "Form sent successfully",
@@ -34,6 +35,7 @@ export const Termini = {
     fiere: "Exhibitions",
   },
   it_IT: {
+    tastoRicerca: "Ricerca Modello",
     formPrivacy: "Accetta la",
     formMessaggio: "Minimo 15 caratteri",
     formSuccess: "Form inviato con successo",

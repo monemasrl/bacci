@@ -6,10 +6,15 @@ function Cards({ content }) {
     const card = useRef(null)
     const isInViewRight = useInView(card, { once: true });
 
+    function alignCards(lengtharray) {
+        if (lengtharray === 4) {
+            return 'four'
+        }
+    }
     return (
         <motion.section
             ref={card}
-            className='container repeater cards'
+            className={`container repeater cards ${alignCards(content.item.traduzioni[0].blocchi.length)}`}
             animate={isInViewRight ? {
                 opacity: 1, y: 0,
                 transition: {
