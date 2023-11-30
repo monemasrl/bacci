@@ -74,7 +74,7 @@ const Prodotto = ({ data, pageContext }) => {
                         )
 
                     })}
-                    <SoftwareProduct locale={locale} />
+
                     <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} limiteVisualizzazione={3} />
                 </div>
             </LayoutProdotto>

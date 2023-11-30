@@ -85,8 +85,14 @@ main {
 .container.prodotti {
   justify-content: space-between;
   min-height: 970px;
-  padding: 0 1rem;
+  padding: 0 2rem;
   margin-top: 6rem;
+  flex-wrap: nowrap;
+  @media #{$desktop} {
+    flex-direction: column;
+    margin-top: 2rem;
+    align-items: center;
+  }
   .filters {
     margin-top: 1rem;
 
@@ -126,16 +132,23 @@ main {
   }
   .col-sx {
     display: flex;
-    flex: 1 1;
+    flex: 1 1 500px;
     flex-direction: column;
-    max-width: 550px;
+    @media #{$desktop} {
+      flex-direction: row;
+      gap: 3rem;
+    }
+    @media #{$landscape} {
+      flex-direction: column;
+      gap: 0rem;
+    }
     h2 {
       font-size: 36px;
     }
   }
   .col-dx {
     display: flex;
-    flex: 1 1;
+    flex: 1 0 900px;
     flex-wrap: wrap;
     justify-content: flex-start;
     margin-top: 2rem;
@@ -167,16 +180,24 @@ main {
 }
 .prodotto {
   .sezione-1.mainProdotto {
+    width: 100%;
     h1 {
       font-size: 100px;
+      font-weight: bold;
       @media #{$landscape} {
-        font-size: 15vw;
+        font-size: 50px;
+      }
+      @media #{$phone} {
+        font-size: 40px;
       }
     }
     h2 {
       font-size: 60px;
       @media #{$landscape} {
-        font-size: 15vw;
+        font-size: 50px;
+      }
+      @media #{$phone} {
+        font-size: 40px;
       }
       &::before {
         display: none;
@@ -187,10 +208,17 @@ main {
     margin-top: 4rem;
     margin-bottom: 4rem;
     .box-sx {
-      flex: 1 1 570px;
+      flex: 1 1;
+      max-width: 570px;
+      width: 100%;
+      @media #{$landscape} {
+        padding-left: 0;
+      }
     }
     .box-dx {
-      flex: 1 1 900px;
+      flex: 1 1;
+      max-width: 900px;
+      width: 100%;
     }
   }
   .sezione-3 {
@@ -280,6 +308,7 @@ main {
 
 .container {
   max-width: $container;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -345,7 +374,9 @@ section.container.repeater {
       font-family: $title;
       font-size: 32px;
       margin-bottom: 0;
-
+      @media #{$landscape} {
+        font-size: 24px;
+      }
       &::before {
         content: "";
         position: relative;
@@ -409,8 +440,11 @@ section.container.repeater {
   }
   h2 {
     font-size: 74px;
-    @media #{$tablet} {
-      font-size: 15vw;
+    @media #{$landscape} {
+      font-size: 50px;
+    }
+    @media #{$phone} {
+      font-size: 40px;
     }
   }
   h3 {
@@ -441,6 +475,9 @@ section.container.repeater {
     font-weight: normal;
     margin-top: 0.5rem;
     margin-bottom: 1rem;
+    @media #{$landscape} {
+      text-align: center;
+    }
   }
   &.right {
     flex-direction: row-reverse;
@@ -452,6 +489,9 @@ section.container.repeater {
     max-width: 100%;
     justify-content: flex-end;
     gap: 6rem;
+    @media screen and (max-width: 1770px) {
+      padding-left: 1rem;
+    }
     @media #{$large} {
       gap: 1rem;
     }
@@ -470,13 +510,10 @@ section.container.repeater {
     flex: 1 1 600px;
     padding-left: 2rem;
     @media #{$landscape} {
-      padding-left: 1rem;
+      padding-left: 0rem;
       flex: 1 1 auto;
     }
-    h2 {
-      font-size: 50px;
-      line-height: 1.1;
-    }
+
     img {
       @media #{$landscape} {
         width: 100%;
@@ -493,7 +530,12 @@ section.container.repeater {
   h2 {
     color: $grey;
     font-size: 60px;
-
+    @media #{$landscape} {
+      font-size: 50px;
+    }
+    @media #{$phone} {
+      font-size: 40px;
+    }
     &:before {
       background-color: $brown;
       content: "";
@@ -505,9 +547,6 @@ section.container.repeater {
       @media #{$landscape} {
         display: none;
       }
-    }
-    strong {
-      font-size: 55px;
     }
   }
 }
@@ -751,11 +790,24 @@ section.container.repeater {
   }
   .box-single-fiera {
     border: 1px solid $brown;
-
     padding: 2rem;
     max-width: 430px;
     width: 100%;
     height: 100%;
+    &.evento {
+      background-color: $brown;
+      color: white;
+      h2,
+      .datafiera,
+      .luogo,
+      .link {
+        color: white;
+      }
+      .buttonLink {
+        background-color: white;
+        color: $brown;
+      }
+    }
     .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
       margin-bottom: 2rem;
     }
@@ -782,6 +834,7 @@ section.container.repeater {
       margin-top: 0;
       padding: 0;
       font-style: normal;
+      text-align: left;
     }
 
     .datafiera {
@@ -813,9 +866,11 @@ section.container.repeater {
       display: block;
       margin-bottom: 1rem;
       font-size: 24px;
-
       color: $brown;
       padding: 0;
+      @media #{$phone} {
+        font-size: 5vw;
+      }
     }
   }
 }

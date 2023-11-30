@@ -100,7 +100,6 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                     const titleTranslated = findItemTranslated(item.title_translations, lang)
                     const dataFrom = new Date(Date.parse(item.from))
                     const dataTo = new Date(Date.parse(item.to))
-
                     const pathTranslated = pagePath.find((item) => item.locale === lang)
                     if (titleTranslated) {
                         return (

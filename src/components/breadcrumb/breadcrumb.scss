@@ -4,7 +4,9 @@
   background-color: $lightGrey;
 
   .container {
-    padding-left: 2rem;
+    padding-left: 1rem;
+    justify-content: space-between;
+    width: 90%;
   }
   h2 {
     font-family: $title;
@@ -25,16 +27,14 @@
     span {
       font-size: 20px;
       display: block;
-      @media #{$phone} {
-        font-size: 26px;
-      }
+
       &:last-child {
         font-size: 44px;
         @media #{$large} {
           font-size: 36px;
         }
-        @media #{$phone} {
-          font-size: 26px;
+        @media #{$landscape} {
+          font-size: 20px;
         }
       }
     }

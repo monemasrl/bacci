@@ -18,6 +18,7 @@ $tablet: "only screen and (max-width : 720px)";
 $landscape: "only screen and (max-width : 1024px)";
 $desktop: "only screen and (max-width : 1200px)";
 $large: "only screen and (max-width: 1340px)";
+$laptop: "only screen and (max-width : 1460px)";
 $wide: "only screen and (max-width : 1620px)";
 $big: "only screen and (max-width : 1920px)";
 $Psize: 24px;
@@ -32,12 +33,15 @@ $PsizeMobile: 20px;
   flex-direction: column;
   margin: 0;
   position: relative;
+  @media #{$landscape} {
+    font-size: 50px;
+  }
   strong {
     font-size: $sizeStrong;
     display: block;
     font-weight: 600;
-    @media #{$tablet} {
-      font-size: 15vw;
+    @media #{$landscape} {
+      font-size: 50px;
     }
   }
   span {

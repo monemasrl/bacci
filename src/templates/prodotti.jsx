@@ -255,11 +255,10 @@ const Prodotti = ({ data, location, pageContext }) => {
       >
 
         <div className="container prodotti" ref={topArchivio}>
-          <div className="container col-sx">
-            <h2>affina la ricerca</h2>
-
+          <div className=" col-sx">
 
             <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
+              <h2>affina la ricerca</h2>
               <ul>
                 <li>
                   <input type="radio" checked={filtersCat.length === 0} value={'reset'} name="categorie" />
@@ -276,9 +275,10 @@ const Prodotti = ({ data, location, pageContext }) => {
               </ul>
             </form>
             <div className="filters">
-              <h3>Applicazioni</h3>
+
 
               <form onChange={(e) => onChangeCheckboxApplicazioni(e)}>
+                <h3>Applicazioni</h3>
                 <ul>
                   {listaApplicazioni.map((item, index) => {
                     return (
@@ -297,8 +297,8 @@ const Prodotti = ({ data, location, pageContext }) => {
               <input onKeyUp={(e) => onChangeText(e)} type="text" placeholder={termini.tasto_ricerca} />
             </div>
           </div>
-          <div className="container col-dx">
-            {<GridPagination pageName={'prodotti'} archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} />}
+          <div className=" col-dx">
+            {resultFromFilters().length ? <GridPagination pageName={'prodotti'} archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} /> : <div>Non ci sono prodotti per il filtro selezionato</div>}
           </div>
         </div>
       </Layout>
