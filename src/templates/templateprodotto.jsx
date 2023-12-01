@@ -1,7 +1,6 @@
 import React from "react";
 import LayoutProdotto from "../components/layout/layout-prodotto";
 import { GatsbyImage } from "gatsby-plugin-image";
-import SoftwareProduct from "../components/SoftwareProduct/SoftwareProduct.jsx";
 import Correlati from "../components/widgets/correlati";
 import { findItemTranslated, findItemsTranslated } from "../utils";
 import { graphql } from "gatsby"
@@ -25,11 +24,12 @@ export const query = graphql`
   }`
 const Prodotto = ({ data, pageContext }) => {
 
-    const { locale, parentPath, content, title, allPagePath } = pageContext
+    const { locale, parentPath, content, title, allPagePath, applicazioni_translations, prodotto_categorie_translations
+    } = pageContext
     const dataProdottoTranslated = findItemTranslated(content.translations, locale)
-    const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-    const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
-    const categoriaProdotto = findItemTranslated(content.categoria.translations, locale)
+    const listaApplicazioni = findItemsTranslated(applicazioni_translations, pageContext.locale)
+    const listaCategorie = findItemsTranslated(prodotto_categorie_translations, pageContext.locale)
+    const categoriaProdotto = content.categoria && findItemTranslated(content.categoria.translations, locale)
 
     return (
         <>
@@ -64,7 +64,6 @@ const Prodotto = ({ data, pageContext }) => {
                                 <div className="box-sx">
                                     <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.titolo }} />
                                     <p>{dataProdottoTranslated.paragrafo}</p>
-
                                 </div>
                                 <div className="box-dx">
                                     <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.titolo} />
@@ -75,7 +74,7 @@ const Prodotto = ({ data, pageContext }) => {
 
                     })}
 
-                    <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} limiteVisualizzazione={3} />
+                    {content.type === "machinery" && <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} limiteVisualizzazione={3} />}
                 </div>
             </LayoutProdotto>
         </>

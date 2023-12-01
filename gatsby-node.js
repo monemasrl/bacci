@@ -56,6 +56,18 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(`
     {
       directus {
+        prodotto_categorie_translations {
+          languages_code {
+            code
+          }
+          nome
+        }
+        applicazioni_translations {
+          languages_code {
+            code
+          }
+          label
+        }
         menus {
           name
           id
@@ -132,6 +144,7 @@ exports.createPages = async ({ graphql, actions }) => {
           id
           name
           date_created
+          type
           immagine {
             id
             imageFile {
@@ -330,7 +343,7 @@ exports.createPages = async ({ graphql, actions }) => {
             const findParent = parentPath.find(item => {
               return item.lang === translation.languages_code.code
             })
-            console.log(findParent, "findParent")
+
             const urlBase =
               langTag[translation.languages_code.code] === "it"
                 ? "/"
@@ -422,29 +435,34 @@ exports.createPages = async ({ graphql, actions }) => {
   }
   prodottiDirectus.forEach(entry => {
     const allPagePath = getAllPathProdotti(entry.translations)
+    if (entry.type === "software") {
+      entry.translations.forEach(translation => {
+        const urlBase =
+          langTag[translation.languages_code.code] === "it"
+            ? "/"
+            : "/" + langTag[translation.languages_code.code] + "/"
 
-    entry.translations.forEach(translation => {
-      const urlBase =
-        langTag[translation.languages_code.code] === "it"
-          ? "/"
-          : "/" + langTag[translation.languages_code.code] + "/"
-
-      if (translation.slug) {
-        createPage({
-          path: `${urlBase}${
-            Termini[translation.languages_code.code].prodotti
-          }/${translation.slug.toLowerCase()}`,
-          component: require.resolve("./src/templates/templateprodotto.jsx"),
-          context: {
-            content: entry,
-            locale: translation.languages_code.code,
-            slug: translation.slug,
-            title: translation.titolo,
-            allPagePath: allPagePath,
-          },
-        })
-      }
-    })
+        if (translation.slug) {
+          createPage({
+            path: `${urlBase}${
+              Termini[translation.languages_code.code].prodotti
+            }/${translation.slug.toLowerCase()}`,
+            component: require.resolve("./src/templates/templateprodotto.jsx"),
+            context: {
+              content: entry,
+              locale: translation.languages_code.code,
+              slug: translation.slug,
+              title: translation.titolo,
+              allPagePath: allPagePath,
+              applicazioni_translations:
+                result.data.directus.applicazioni_translations,
+              prodotto_categorie_translations:
+                result.data.directus.prodotto_categorie_translations,
+            },
+          })
+        }
+      })
+    }
   })
 
   //PAGINA NEWS
