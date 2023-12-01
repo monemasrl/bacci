@@ -435,34 +435,33 @@ exports.createPages = async ({ graphql, actions }) => {
   }
   prodottiDirectus.forEach(entry => {
     const allPagePath = getAllPathProdotti(entry.translations)
-    if (entry.type === "software") {
-      entry.translations.forEach(translation => {
-        const urlBase =
-          langTag[translation.languages_code.code] === "it"
-            ? "/"
-            : "/" + langTag[translation.languages_code.code] + "/"
 
-        if (translation.slug) {
-          createPage({
-            path: `${urlBase}${
-              Termini[translation.languages_code.code].prodotti
-            }/${translation.slug.toLowerCase()}`,
-            component: require.resolve("./src/templates/templateprodotto.jsx"),
-            context: {
-              content: entry,
-              locale: translation.languages_code.code,
-              slug: translation.slug,
-              title: translation.titolo,
-              allPagePath: allPagePath,
-              applicazioni_translations:
-                result.data.directus.applicazioni_translations,
-              prodotto_categorie_translations:
-                result.data.directus.prodotto_categorie_translations,
-            },
-          })
-        }
-      })
-    }
+    entry.translations.forEach(translation => {
+      const urlBase =
+        langTag[translation.languages_code.code] === "it"
+          ? "/"
+          : "/" + langTag[translation.languages_code.code] + "/"
+
+      if (translation.slug) {
+        createPage({
+          path: `${urlBase}${
+            Termini[translation.languages_code.code].prodotti
+          }/${translation.slug.toLowerCase()}`,
+          component: require.resolve("./src/templates/templateprodotto.jsx"),
+          context: {
+            content: entry,
+            locale: translation.languages_code.code,
+            slug: translation.slug,
+            title: translation.titolo,
+            allPagePath: allPagePath,
+            applicazioni_translations:
+              result.data.directus.applicazioni_translations,
+            prodotto_categorie_translations:
+              result.data.directus.prodotto_categorie_translations,
+          },
+        })
+      }
+    })
   })
 
   //PAGINA NEWS
