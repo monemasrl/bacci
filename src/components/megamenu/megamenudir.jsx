@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, Link, graphql } from "gatsby";
 import { Termini, langTag } from "../../../data-translations";
-import { findItemTranslated, findItemsTranslated } from "../../utils";
+import { findItemTranslated } from "../../utils";
 import './megamenu.scss'
 
 const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, listaApplicazioni, listaCategorie }) => {

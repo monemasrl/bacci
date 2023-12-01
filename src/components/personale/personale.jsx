@@ -1,5 +1,4 @@
 import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
 import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 import { Termini } from "../../../data-translations";
 
@@ -11,7 +10,7 @@ const Personale = ({ personale, locale }) => {
     return (
         <>
             <section className="personale">
-            <h2>{Termini[locale].accoglienza}</h2>
+                <h2>{Termini[locale].accoglienza}</h2>
                 <div className="wrap-personale">
 
                     {personale.map((item) => {

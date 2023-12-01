@@ -1,8 +1,8 @@
 import * as React from "react"
-import { Link } from 'gatsby'
+
 import { GatsbyImage } from "gatsby-plugin-image"
 
-function Hero({ index, allineamento, content, pageName }) {
+function Hero({ content, pageName }) {
 
 
     {

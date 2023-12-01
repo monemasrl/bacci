@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../components/layout/layout";
-import { findItemTranslated, findItemsTranslated } from "../utils";
-import { graphql } from "gatsby"
+import { findItemTranslated } from "../utils";
 import { FormFiere } from "../components/form";
 import { langTag } from "../../data-translations";
 

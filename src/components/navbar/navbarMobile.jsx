@@ -5,8 +5,6 @@ import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
 import { Termini } from '../../../data-translations'
 import './navbarMobile.scss'
-let slugify = require('slugify')
-
 
 const NavBarMobile = (props) => {
 

@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../components/layout/layout";
 import { findItemTranslated, findItemsTranslated } from "../utils";
-import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import LastNews from "../components/widgets/lastNews";
 

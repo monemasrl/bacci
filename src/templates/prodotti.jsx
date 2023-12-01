@@ -5,7 +5,7 @@ import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
 
 import { Termini, langTag } from "../../data-translations"
-import { findItemTranslated, findItemsTranslated } from "../utils"
+import { findItemTranslated } from "../utils"
 
 export const query = graphql`
   query($locale: String!) {
