@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const Pagination = ({ postsPerPage, totalPosts, paginate, topArchivio }) => {
     const { useState } = React
     const [activePage, setActivePage] = useState('')

@@ -1,36 +1,16 @@
 import React from "react";
 import Layout from "../components/layout/layout";
-import { findItemTranslated, findItemsTranslated } from "../utils";
-import { graphql } from "gatsby"
+import { findItemTranslated } from "../utils";
 import { FormFiere } from "../components/form";
 import { langTag } from "../../data-translations";
 
 const moment = require('moment')
 
-export const query = graphql`
- query{
-  directus{
-    prodotto_categorie_translations{
-    languages_code{
-      code
-    }
-    nome
-  }
-  applicazioni_translations{
-      languages_code{
-        code
-      }
-      label
-    }
 
-}
-  }`
-const Fiere = ({ data, pageContext }) => {
+const Fiere = ({ pageContext }) => {
 
-  const { locale, parentPath, content, title, allPagePath } = pageContext
+  const { locale, parentPath, content, title, allPagePath, listaApplicazioni, listaCategorie } = pageContext
   const dataProdottoTranslated = findItemTranslated(content.translations, locale)
-  const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-  const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
 
   const dateFrom = new Date(Date.parse(content.from))
   const dateTo = new Date(Date.parse(content.to))

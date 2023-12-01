@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { findItemTranslated, findItemsTranslated } from "../../utils"
 import { Link } from "gatsby"
 import { langTag } from "../../../data-translations"
+
 function FooterMenu({ locale }) {
     const data = useStaticQuery(graphql`
     query HeaderQuery {

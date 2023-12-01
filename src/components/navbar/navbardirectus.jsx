@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import LangSwitcher from '../langSwitcher'
-import { StaticImage } from "gatsby-plugin-image"
 import MegamenuDirectus from '../megamenu/megamenudir'
 import { Termini, langTag } from '../../../data-translations'
 import icon from '../../images/icon-menu.svg'

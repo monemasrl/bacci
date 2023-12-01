@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import { Link } from 'gatsby'
 import { StaticImage } from "gatsby-plugin-image"
 import './footer.scss'
 import { langTag } from '../../../data-translations'
