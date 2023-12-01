@@ -13,18 +13,7 @@ export const query = graphql`
  query($locale: String!, $slug: String!) {
 
   directus{
-    prodotto_categorie_translations(filter: {languages_code: {code: {_eq: $locale}}}){
-    languages_code{
-      code
-    }
-    nome
-  }
-  applicazioni_translations(filter: {languages_code: {code: {_eq: $locale}}}) {
-      languages_code{
-        code
-      }
-      label
-    }
+  
     pages(filter: {translations: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}}) {
       __typename
       id
@@ -116,14 +105,10 @@ export const query = graphql`
   }`
 
 
-const Pagine = ({ data, location, pageContext }) => {
+const Pagine = ({ data, pageContext }) => {
 
 
-  const listaApplicazioni = data && data.directus.applicazioni_translations
-  const listaCategorie = data && data.directus.prodotto_categorie_translations
-  const termini = Termini[pageContext.locale]
-  console.log(listaApplicazioni, listaCategorie, 'data')
-
+  console.log(pageContext, 'pageContext')
   return (
     <>
       {pageContext ?
@@ -131,8 +116,8 @@ const Pagine = ({ data, location, pageContext }) => {
           pageTitle={pageContext.title}
           locale={pageContext.locale}
           allPagePath={pageContext.allPagePath}
-          listaApplicazioni={listaApplicazioni}
-          listaCategorie={listaCategorie}
+          listaApplicazioni={pageContext.listaApplicazioni}
+          listaCategorie={pageContext.listaCategorie}
           parentPath={pageContext.parentPath}
         >
 
@@ -152,6 +137,7 @@ const Pagine = ({ data, location, pageContext }) => {
                   return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
                 })}
               </div>
+
               {pageContext.pageName === "news" || pageContext.pageName === "home" &&
                 <LastNews pageType={pageContext.pageName} locale={pageContext.locale} limiteVisualizzazione={3} />}
               {pageContext.pageName === "news" || pageContext.pageName === "home" &&

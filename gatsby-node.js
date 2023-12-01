@@ -53,6 +53,66 @@ exports.createPages = async ({ graphql, actions }) => {
       correlati: "prodotti correlati",
     },
   }
+  function findItemTranslated(translations, langCode) {
+    const itemTranslated = translations.find(lang => {
+      const code = lang.languages_code.code
+      return langTag[code] === langTag[langCode]
+    })
+    if (!itemTranslated) {
+      console.log("error, traduzione non trovata")
+    } else {
+      return itemTranslated
+    }
+  }
+  function getAllPathPagine(translations, parent) {
+    const allPath = []
+    translations.forEach(item => {
+      // cerca tra le traduzioni del parent path quella con la stessa lingua della traduzione corrente
+      const parentPath =
+        parent && parent.find(itemb => item.languages_code.code === itemb.lang)
+
+      const lang = item.languages_code.code
+      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+      const path =
+        baseLang + (parentPath ? parentPath.parentPath : "") + item.slug
+      const pathObj = {
+        //solo se esiste uno slug in traduzione crea il path
+        path: item.slug && path,
+        locale: lang,
+        title: item.label,
+      }
+      allPath.push(pathObj)
+    })
+    return allPath
+  }
+
+  const findMenuItem = (menuName, itemToFind) => {
+    const menu = result.data.directus.menus.find(item => {
+      return item.name === menuName
+    })
+    let menuItem
+    if (menu) {
+      menuItem = menu.items.find(item => {
+        return item.name === itemToFind
+      })
+    } else {
+      throw new Error("menu non trovato")
+    }
+    if (menuItem != undefined) {
+      return menuItem
+    }
+  }
+  function findItemsTranslated(translations, langCode) {
+    const itemTranslated = translations.filter(lang => {
+      const code = lang.languages_code.code
+      return langTag[code] === langTag[langCode]
+    })
+    if (!itemTranslated) {
+      console.log("error, traduzione non trovata")
+    } else {
+      return itemTranslated
+    }
+  }
   const result = await graphql(`
     {
       directus {
@@ -210,45 +270,38 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `)
-  function getAllPathPagine(translations, parent) {
-    const allPath = []
-    translations.forEach(item => {
-      // cerca tra le traduzioni del parent path quella con la stessa lingua della traduzione corrente
-      const parentPath =
-        parent && parent.find(itemb => item.languages_code.code === itemb.lang)
 
-      const lang = item.languages_code.code
-      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
-      const path =
-        baseLang + (parentPath ? parentPath.parentPath : "") + item.slug
-      const pathObj = {
-        //solo se esiste uno slug in traduzione crea il path
-        path: item.slug && path,
-        locale: lang,
-        title: item.label,
-      }
-      allPath.push(pathObj)
-    })
-    return allPath
+  // Dati generici
+  const applicazioni_en = findItemsTranslated(
+    result.data.directus.applicazioni_translations,
+    "en_US"
+  )
+  const applicazioni_it = findItemsTranslated(
+    result.data.directus.applicazioni_translations,
+    "it_IT"
+  )
+
+  const categorie_en = findItemsTranslated(
+    result.data.directus.prodotto_categorie_translations,
+    "en_US"
+  )
+  const categorie_it = findItemsTranslated(
+    result.data.directus.prodotto_categorie_translations,
+    "it_IT"
+  )
+
+  const tassonomiaProdotti = {
+    applicazioni: {
+      en_US: applicazioni_en,
+      it_IT: applicazioni_it,
+    },
+
+    categorie: {
+      en_US: categorie_en,
+      it_IT: categorie_it,
+    },
   }
-
-  const findMenuItem = (menuName, itemToFind) => {
-    const menu = result.data.directus.menus.find(item => {
-      return item.name === menuName
-    })
-    let menuItem
-    if (menu) {
-      menuItem = menu.items.find(item => {
-        return item.name === itemToFind
-      })
-    } else {
-      throw new Error("menu non trovato")
-    }
-    if (menuItem != undefined) {
-      return menuItem
-    }
-  }
-
+  console.log(tassonomiaProdotti.applicazioni.en_US, "tassonomiaProdotti")
   // CREAZIONE HOMEPAGE
   const homePage = {
     translations: [
@@ -276,6 +329,10 @@ exports.createPages = async ({ graphql, actions }) => {
         locale: translation.languages_code.code,
         slug: "home",
         title: translation.titolo,
+        listaApplicazioni:
+          tassonomiaProdotti.applicazioni[translation.languages_code.code],
+        listaCategorie:
+          tassonomiaProdotti.categorie[translation.languages_code.code],
         pageName: "home",
         allPagePath: [
           {
@@ -317,6 +374,12 @@ exports.createPages = async ({ graphql, actions }) => {
               slug: translation.slug,
               allPagePath: allPagePath,
               pageName: slugify(item.name).toLowerCase(),
+              listaApplicazioni:
+                tassonomiaProdotti.applicazioni[
+                  translation.languages_code.code
+                ],
+              listaCategorie:
+                tassonomiaProdotti.categorie[translation.languages_code.code],
             },
           })
         })
@@ -360,6 +423,14 @@ exports.createPages = async ({ graphql, actions }) => {
                   title: translation.label,
                   allPagePath: allPagePath,
                   pageName: slugify(subItem.name).toLowerCase(),
+                  listaApplicazioni:
+                    tassonomiaProdotti.applicazioni[
+                      translation.languages_code.code
+                    ],
+                  listaCategorie:
+                    tassonomiaProdotti.categorie[
+                      translation.languages_code.code
+                    ],
                 },
               })
             }
@@ -399,6 +470,10 @@ exports.createPages = async ({ graphql, actions }) => {
           locale: translation.languages_code.code,
           slug: translation.slug,
           title: translation.titolo,
+          listaApplicazioni:
+            tassonomiaProdotti.applicazioni[translation.languages_code.code],
+          listaCategorie:
+            tassonomiaProdotti.categorie[translation.languages_code.code],
           allPagePath: [
             {
               path: "/prodotti/",
@@ -435,34 +510,33 @@ exports.createPages = async ({ graphql, actions }) => {
   }
   prodottiDirectus.forEach(entry => {
     const allPagePath = getAllPathProdotti(entry.translations)
-    if (entry.type === "software") {
-      entry.translations.forEach(translation => {
-        const urlBase =
-          langTag[translation.languages_code.code] === "it"
-            ? "/"
-            : "/" + langTag[translation.languages_code.code] + "/"
 
-        if (translation.slug) {
-          createPage({
-            path: `${urlBase}${
-              Termini[translation.languages_code.code].prodotti
-            }/${translation.slug.toLowerCase()}`,
-            component: require.resolve("./src/templates/templateprodotto.jsx"),
-            context: {
-              content: entry,
-              locale: translation.languages_code.code,
-              slug: translation.slug,
-              title: translation.titolo,
-              allPagePath: allPagePath,
-              applicazioni_translations:
-                result.data.directus.applicazioni_translations,
-              prodotto_categorie_translations:
-                result.data.directus.prodotto_categorie_translations,
-            },
-          })
-        }
-      })
-    }
+    entry.translations.forEach(translation => {
+      const urlBase =
+        langTag[translation.languages_code.code] === "it"
+          ? "/"
+          : "/" + langTag[translation.languages_code.code] + "/"
+
+      if (translation.slug) {
+        createPage({
+          path: `${urlBase}${
+            Termini[translation.languages_code.code].prodotti
+          }/${translation.slug.toLowerCase()}`,
+          component: require.resolve("./src/templates/templateprodotto.jsx"),
+          context: {
+            content: entry,
+            locale: translation.languages_code.code,
+            slug: translation.slug,
+            title: translation.titolo,
+            allPagePath: allPagePath,
+            listaApplicazioni:
+              tassonomiaProdotti.applicazioni[translation.languages_code.code],
+            listaCategorie:
+              tassonomiaProdotti.categorie[translation.languages_code.code],
+          },
+        })
+      }
+    })
   })
 
   //PAGINA NEWS
@@ -495,6 +569,10 @@ exports.createPages = async ({ graphql, actions }) => {
           locale: translation.languages_code.code,
           slug: translation.slug,
           title: translation.titolo,
+          listaApplicazioni:
+            tassonomiaProdotti.applicazioni[translation.languages_code.code],
+          listaCategorie:
+            tassonomiaProdotti.categorie[translation.languages_code.code],
           allPagePath: [
             {
               path: "/news/",
@@ -547,6 +625,10 @@ exports.createPages = async ({ graphql, actions }) => {
             slug: translation.slug,
             title: translation.title,
             allPagePath: allPagePath,
+            listaApplicazioni:
+              tassonomiaProdotti.applicazioni[translation.languages_code.code],
+            listaCategorie:
+              tassonomiaProdotti.categorie[translation.languages_code.code],
           },
         })
       }
@@ -585,6 +667,10 @@ exports.createPages = async ({ graphql, actions }) => {
           slug: translation.slug,
           title: translation.label,
           allPagePath: getAllPathFiera(paginaFiereMenuItem.translations),
+          listaApplicazioni:
+            tassonomiaProdotti.applicazioni[translation.languages_code.code],
+          listaCategorie:
+            tassonomiaProdotti.categorie[translation.languages_code.code],
         },
       })
     }
@@ -635,6 +721,10 @@ exports.createPages = async ({ graphql, actions }) => {
             slug: translation.slug,
             title: translation.title,
             allPagePath: allPagePath,
+            listaApplicazioni:
+              tassonomiaProdotti.applicazioni[translation.languages_code.code],
+            listaCategorie:
+              tassonomiaProdotti.categorie[translation.languages_code.code],
           },
         })
       }

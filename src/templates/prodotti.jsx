@@ -10,18 +10,7 @@ import { findItemTranslated, findItemsTranslated } from "../utils"
 export const query = graphql`
   query($locale: String!) {
   directus{
-    prodotto_categorie_translations{
-    languages_code{
-      code
-    }
-    nome
-  }
-  applicazioni_translations{
-      languages_code{
-        code
-      }
-      label
-    }
+ 
   
   Prodotti(filter: {translations: {languages_code: {code: {_eq: $locale}}}, type: {_eq: "machinery"}}){
     id
@@ -135,8 +124,7 @@ const Prodotti = ({ data, location, pageContext }) => {
       return langTag[item.languages_code.code] === langTag[pageContext.locale]
     })
   })
-  const listaApplicazioni = findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-  const listaCategorie = findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+
   // variabili stato
   const [filtersCat, setFiltersCat] = React.useState(() => [])
   const [filtersApp, setFiltersApp] = React.useState(() => [])
@@ -251,8 +239,8 @@ const Prodotti = ({ data, location, pageContext }) => {
         pageTitle={pageContext.title}
         locale={pageContext.locale}
         allPagePath={pageContext.allPagePath}
-        listaApplicazioni={listaApplicazioni}
-        listaCategorie={listaCategorie}
+        listaApplicazioni={pageContext.listaApplicazioni}
+        listaCategorie={pageContext.listaCategorie}
       >
 
         <div className="container prodotti" ref={topArchivio}>
@@ -265,7 +253,7 @@ const Prodotti = ({ data, location, pageContext }) => {
                 <li>
                   <input type="radio" checked={filtersCat.length === 0} value={'reset'} name="categorie" />
                   <label for="categorie">{termini.tutti_prodotti}</label></li>
-                {listaCategorie.map((item) => {
+                {pageContext.listaCategorie.map((item) => {
 
                   return (
                     <li>
@@ -282,7 +270,7 @@ const Prodotti = ({ data, location, pageContext }) => {
               <form onChange={(e) => onChangeCheckboxApplicazioni(e)}>
                 <h3>Applicazioni</h3>
                 <ul>
-                  {listaApplicazioni.map((item, index) => {
+                  {pageContext.listaApplicazioni.map((item, index) => {
                     return (
                       <li>
                         <input type="checkbox" checked={filtersApp.includes(item.label)} value={item.label} id={item.label} name="applicazioni" />
