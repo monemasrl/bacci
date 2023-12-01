@@ -430,6 +430,7 @@ section.container.repeater {
   flex-direction: column;
   @media #{$landscape} {
     padding: 0;
+    margin: 2rem auto;
   }
   p {
     font-size: 24px;
@@ -489,6 +490,9 @@ section.container.repeater {
     max-width: 100%;
     justify-content: flex-end;
     gap: 6rem;
+    .gatsby-image-wrapper-constrained {
+      height: auto;
+    }
     @media screen and (max-width: 1770px) {
       padding-left: 1rem;
     }

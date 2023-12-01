@@ -23,10 +23,11 @@ export const query = graphql`
       label
     }
   
-  Prodotti(filter: {translations: {languages_code: {code: {_eq: $locale}}}}){
+  Prodotti(filter: {translations: {languages_code: {code: {_eq: $locale}}}, type: {_eq: "machinery"}}){
     id
     name
     date_created
+    type
     immagine{
       id
   imageFile{
@@ -259,6 +260,7 @@ const Prodotti = ({ data, location, pageContext }) => {
 
             <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
               <h2>affina la ricerca</h2>
+              <h3>Categorie</h3>
               <ul>
                 <li>
                   <input type="radio" checked={filtersCat.length === 0} value={'reset'} name="categorie" />

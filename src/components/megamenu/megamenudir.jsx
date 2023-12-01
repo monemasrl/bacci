@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, Link, graphql } from "gatsby";
 import { Termini, langTag } from "../../../data-translations";
-import { findItemTranslated } from "../../utils";
+import { findItemTranslated, findItemsTranslated } from "../../utils";
 import './megamenu.scss'
 
 const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, listaApplicazioni, listaCategorie }) => {
@@ -23,7 +23,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
             directus{
                 Prodotti{
                     id
-                   
+                   type
                     date_created
                     immagine{
                          id 
@@ -98,11 +98,15 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
 
 
 
-    const novita = dataMega.directus.Prodotti.sort((item) => item.date_create)
 
-    const inEvidenza = dataMega.directus.Prodotti.filter((item) => item.featured[0] === 'true')
+    const inEvidenza = dataMega.directus.Prodotti.filter((item) => {
+        if (!item.featured) return false
+        return item.featured[0] === 'true'
+    })
     const inEvidenzaLocalizzato = findItemTranslated(inEvidenza[0].translations, locale)
+    const novita = dataMega.directus.Prodotti.sort((item) => { if (item.type === "machinery") return item.date_create })
     const novitaLocalizzato = findItemTranslated(novita[0].translations, locale)
+    const software = dataMega.directus.Prodotti.filter((item) => item.type === "software")
 
 
     return (
@@ -114,7 +118,6 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-
                 >
 
                     <div className="mega-box" >
@@ -133,14 +136,14 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                 </div>
                                 <div className="content-mega">
                                     <>
-                                        <div>
+                                        {novitaLocalizzato && <div>
                                             <Link to={`/${(langTag[locale] === 'it') ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${novitaLocalizzato.slug}`}>
                                                 <h2>{novitaLocalizzato.titolo}</h2>
                                             </Link>
                                             <p>{novitaLocalizzato.sottotitolo}</p>
-                                        </div>
+                                        </div>}
                                         <GatsbyImage image={novita[0].immagine.imageFile.childImageSharp.gatsbyImageData} alt={novita[0].titolo} />
-                                        <p className="desc" dangerouslySetInnerHTML={{ __html: novitaLocalizzato.testo_anteprima }} />
+
                                     </>
                                 </div>
                             </div>
@@ -158,7 +161,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                 <div className="titolo-col-mega">
                                     {Termini[locale].in_evidenza}
                                 </div>
-                                {inEvidenzaLocalizzato.titolo &&
+                                {inEvidenzaLocalizzato &&
                                     <div className="content-mega">
                                         <div>
                                             <Link to={`/${(langTag[locale] === 'it') ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${inEvidenzaLocalizzato.slug}`}>
@@ -167,11 +170,11 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                             <p>{inEvidenzaLocalizzato.sottotitolo}</p>
                                         </div>
                                         <GatsbyImage image={inEvidenza[0].immagine.imageFile.childImageSharp.gatsbyImageData} alt={inEvidenzaLocalizzato.titolo} />
-                                        <p className="desc" dangerouslySetInnerHTML={{ __html: inEvidenzaLocalizzato.testo_anteprima }} />
+
                                     </div>}
                             </div>
                         </motion.div>
-                        <motion.div className="col-mega"
+                        <motion.div className="col-mega list"
                             initial={{ opacity: 0, x: -100 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{
@@ -184,7 +187,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                 {Termini[locale].applicazione}
                             </div>
                             <ul className="mega-list">
-                                {listaApplicazioni.map((item) =>
+                                {listaApplicazioni && listaApplicazioni.map((item) =>
                                     <li>
                                         <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`} state={{ applicazione: item.label }}
                                             className="mega-item">{item.label}</Link></li>
@@ -203,21 +206,30 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                 {Termini[locale].tipologia}
                             </div>
                             <ul className="mega-list">
-                                {listaCategorie.map((item) => <li>
+                                {listaCategorie && listaCategorie.map((item) => <li>
                                     <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`} state={{ categoria: item.nome }}
                                         className="mega-item">{item.nome}</Link></li>
                                 )}
                             </ul>
+                            <div className="titolo-col-mega software">
+                                Software
+                            </div>
+                            <ul className="mega-list">
+                                {software.map((item) => {
+                                    const traduzioni = findItemTranslated(item.translations, locale)
 
-
+                                    if (traduzioni) {
+                                        return (<li>
+                                            <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}/${traduzioni.slug}`}
+                                                className="mega-item">{traduzioni.titolo}</Link></li>)
+                                    }
+                                })}
+                            </ul>
                             {/* PULSANTE A TUTTI I PRODOTTI
                             <Link className="tutti-prodotti" to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`}>{terminiTraduzione.tutti_prodotti}</Link> */}
 
 
-                            <div>
-                                <Link to="">
-                                </Link>
-                            </div>
+
                         </motion.div>
                     </div>
 

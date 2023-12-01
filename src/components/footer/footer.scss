@@ -210,7 +210,9 @@ footer {
   .footer3 {
     background-color: $lightBrown;
     padding: 2rem 0;
-
+    .gatsby-image-wrapper-constrained {
+      height: auto;
+    }
     a {
       text-decoration: underline;
       margin: 5px 0;
@@ -222,7 +224,7 @@ footer {
       color: white;
 
       li {
-        font-size: $Psize;
+        font-size: 18px;
         margin: 5px 0;
 
         &:first-child {

@@ -26,23 +26,41 @@
 
   .col-mega {
     position: relative;
-
+    padding-right: 44px;
+    &:last-child {
+      &::after {
+        display: none;
+      }
+    }
+    &.list {
+      &::after {
+        content: "";
+        height: 100%;
+        width: 1px;
+        position: absolute;
+        background-color: $brown;
+        top: 0;
+        right: 0;
+      }
+    }
+    &::after {
+      content: "";
+      height: 100%;
+      width: 1px;
+      position: absolute;
+      background-color: $brown;
+      top: 0;
+      right: 0;
+    }
     .content-mega {
       position: relative;
       height: 90%;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-
-      &::after {
-        content: "";
-        height: 100%;
-        width: 3px;
-        position: absolute;
-        background-color: $brown;
-        top: 0;
-        right: -4%;
-      }
+      justify-content: flex-start;
+    }
+    .gatsby-image-wrapper {
+      height: auto;
     }
 
     a.tutti-prodotti {
@@ -61,6 +79,9 @@
     height: 100%;
     .titolo-col-mega {
       margin-bottom: 3rem;
+    }
+    @media #{$laptop} {
+      max-width: 340px;
     }
     @media #{$large} {
       max-width: 260px;
@@ -87,10 +108,12 @@
 
   .titolo-col-mega {
     font-size: 30px;
-
     color: $grey;
     margin-bottom: 1rem;
     text-transform: uppercase;
+    &.software {
+      margin-top: 2rem;
+    }
   }
 
   ul.mega-list {
@@ -102,13 +125,14 @@
     padding: 0;
     margin: 0;
     background-color: transparent;
+    font-family: "Roboto";
 
     li {
       display: block;
       margin: 0.5rem 0;
       color: $brown;
       text-transform: uppercase;
-      font-size: 1.2rem;
+      font-size: 18px;
       font-weight: 300;
 
       a {
