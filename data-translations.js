@@ -32,7 +32,7 @@ export const Termini = {
     applicazione: "Designed for",
     tipologia: "Typology",
     ultime_news: "Latest news",
-    fiere: "Exhibitions",
+    fiere: "exhibitions",
   },
   it_IT: {
     tastoRicerca: "Ricerca Modello",
@@ -61,6 +61,6 @@ export const Termini = {
     applicazione: "Applicazione",
     tipologia: "Tipologia",
     ultime_news: "Ultime news",
-    fiere: "Fiere",
+    fiere: "fiere",
   },
 }

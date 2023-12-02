@@ -6,7 +6,7 @@ import { Link } from "gatsby";
 import { findItemTranslated } from "../../utils";
 const moment = require('moment')
 
-const LastFiere = ({ locale, limiteVisualizzazione }) => {
+const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
   const data = useStaticQuery(graphql`
       {
           directus{
@@ -50,23 +50,22 @@ const LastFiere = ({ locale, limiteVisualizzazione }) => {
       {langFilterFiereSorted && <section className="container widget-fiere">
         <h2>{Termini[locale].eventi}</h2>
         <div className="widget-fiere-wrapper">
-          {langFilterFiereSorted.map((item) => {
+          {langFilterFiereSorted.map((item, index) => {
 
             const titleFiereTranslated = findItemTranslated(item.title_translations, locale)
             const dataFrom = new Date(Date.parse(item.from))
             const dataTo = new Date(Date.parse(item.to))
-            if (titleFiereTranslated) {
+            if (titleFiereTranslated && index < limiteVisualizzazione) {
               return (
-                <div key={titleFiereTranslated.title} className="box-single-fiera">
-                  <Link to={`/${langTag[locale] === "it" ? '' : langTag[locale] + "/"}${Termini[locale].fiere.toLowerCase()}/${titleFiereTranslated.slug}`}><h2>{titleFiereTranslated.title}</h2>   </Link>
+                <div className={`box-single-fiera ${item.type === 'event' ? 'evento' : ''}`}>
+                  <h2>{titleFiereTranslated.title}</h2>
                   <div className="datafiera">
                     <span>{moment(dataFrom).locale(locale).format('DD')}</span> - &nbsp;
                     <span>{moment(dataTo).locale(locale).format('DD MMMM YYYY')}</span>
                   </div>
-                  <div className="luogo">
-                    {item.location}
-                  </div>
-                  <a href={item.link_fiera} className="link" targe="_blank" rel="nofollow" >{item.link_fiera}</a>
+                  <div className="luogo">{item.location}</div>
+                  <a className="link" href={item.link_fiera} target="_blank">{item.link_fiera}</a>
+                  {item.page && <Link className="buttonLink" to={`${locale === "it_IT" ? "" : "/" + langTag[locale]}/${Termini[locale].fiere}/${titleFiereTranslated.slug}`}>&#62;</Link>}
                 </div>
               )
             }

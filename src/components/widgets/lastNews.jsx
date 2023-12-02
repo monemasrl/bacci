@@ -65,7 +65,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
                       <div className="date">{date}</div>
                       <h2>{prodottoTradotto.title}</h2>
                       <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.summary }} />
-                      <Link to={`${(locale === 'it_IT') ? '/' : langTag[locale]}${"news"}/${prodottoTradotto.slug}`} >Leggi tutto</Link>
+                      <Link to={`${locale === 'it_IT' ? "" : "/" + langTag[locale]}/${"news"}/${prodottoTradotto.slug}`} >Leggi tutto</Link>
                     </div>
                   </div>
                 </div>
@@ -73,7 +73,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
             }
           })}
         </div>
-      </section>}
+      </section >}
     </>
   )
 }

@@ -31,9 +31,6 @@
       &:last-child {
         font-size: 44px;
         @media #{$large} {
-          font-size: 36px;
-        }
-        @media #{$landscape} {
           font-size: 20px;
         }
       }

@@ -308,7 +308,7 @@ main {
 
 .container {
   max-width: $container;
-  width: 100%;
+  width: 90%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -488,6 +488,7 @@ section.container.repeater {
   }
   &.mainContent {
     max-width: 100%;
+    width: 100%;
     justify-content: flex-end;
     gap: 6rem;
     .gatsby-image-wrapper-constrained {
@@ -792,92 +793,94 @@ section.container.repeater {
     max-width: 440px;
     width: 100%;
   }
-  .box-single-fiera {
-    border: 1px solid $brown;
-    padding: 2rem;
-    max-width: 430px;
-    width: 100%;
-    height: 100%;
-    &.evento {
-      background-color: $brown;
+}
+
+.box-single-fiera {
+  border: 1px solid $brown;
+  padding: 2rem;
+  max-width: 430px;
+  width: 100%;
+
+  &.evento {
+    background-color: $brown;
+    color: white;
+    h2,
+    .datafiera,
+    .luogo,
+    .link {
       color: white;
-      h2,
-      .datafiera,
-      .luogo,
-      .link {
-        color: white;
-      }
-      .buttonLink {
-        background-color: white;
-        color: $brown;
-      }
-    }
-    .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
-      margin-bottom: 2rem;
     }
     .buttonLink {
-      display: inline-block;
-      background: $lightBrown;
-      color: white;
-      width: 30px;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-      border-radius: 50%;
-      margin-left: 95%;
-      margin-bottom: 0px;
-      position: relative;
-      top: 17px;
-    }
-    h2 {
-      font-size: 28px;
+      background-color: white;
       color: $brown;
-      font-weight: 600;
-      font-family: $text;
-      margin-bottom: 0;
-      margin-top: 0;
-      padding: 0;
-      font-style: normal;
-      text-align: left;
     }
+  }
+  .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
+    margin-bottom: 2rem;
+  }
+  .buttonLink {
+    display: inline-block;
+    background: $lightBrown;
+    color: white;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    margin-left: 95%;
+    margin-bottom: 0px;
+    position: relative;
+    top: 17px;
+  }
+  h2 {
+    font-size: 28px;
+    color: $brown;
+    font-weight: 600;
+    font-family: $text;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0;
+    font-style: normal;
+    text-align: left;
+  }
 
-    .datafiera {
-      padding: 0;
-      font-size: $Psize;
-      color: $grey;
-      margin: 1.5rem 0;
-    }
+  .datafiera {
+    padding: 0;
+    font-size: $Psize;
+    color: $grey;
+    margin: 1.5rem 0;
+  }
 
-    .luogo {
-      font-size: $Psize;
-      font-weight: bold;
-      color: $grey;
-    }
+  .luogo {
+    font-size: $Psize;
+    font-weight: bold;
+    color: $grey;
+  }
 
-    .link {
-      padding: 0;
-    }
+  .link {
+    padding: 0;
+  }
 
-    p {
-      color: $grey;
-      line-height: 34px;
-      font-size: $Psize;
-      margin-top: 1rem;
-      padding: 0 10px;
-    }
+  p {
+    color: $grey;
+    line-height: 34px;
+    font-size: $Psize;
+    margin-top: 1rem;
+    padding: 0 10px;
+  }
 
-    a {
-      display: block;
-      margin-bottom: 1rem;
-      font-size: 24px;
-      color: $brown;
-      padding: 0;
-      @media #{$phone} {
-        font-size: 5vw;
-      }
+  a {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 24px;
+    color: $brown;
+    padding: 0;
+    @media #{$phone} {
+      font-size: 5vw;
     }
   }
 }
+
 .fiera {
   .breadcrumb {
     padding: 2rem 0;
