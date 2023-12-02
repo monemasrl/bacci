@@ -64,7 +64,7 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
                     <span>{moment(dataTo).locale(locale).format('DD MMMM YYYY')}</span>
                   </div>
                   <div className="luogo">{item.location}</div>
-                  <a className="link" href={item.link_fiera} target="_blank">{item.link_fiera}</a>
+                  <a className="link" href={`https://${item.link_fiera}`} target="_blank">{item.link_fiera}</a>
                   {item.page && <Link className="buttonLink" to={`${locale === "it_IT" ? "" : "/" + langTag[locale]}/${Termini[locale].fiere}/${titleFiereTranslated.slug}`}>&#62;</Link>}
                 </div>
               )

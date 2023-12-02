@@ -111,7 +111,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                         <span>{moment(dataTo).locale(lang).format('DD MMMM YYYY')}</span>
                                     </div>
                                     <div className="luogo">{item.location}</div>
-                                    <a className="link" href={item.link_fiera} target="_blank">{item.link_fiera}</a>
+                                    <a className="link" href={`https://${item.link_fiera}`} target="_blank">{item.link_fiera}</a>
                                     {item.page && <Link className="buttonLink" to={`${pathTranslated.path}${titleTranslated.slug}`}>&#62;</Link>}
                                 </div>
 
