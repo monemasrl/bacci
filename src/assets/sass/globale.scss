@@ -86,7 +86,7 @@ main {
   justify-content: space-between;
   min-height: 970px;
   padding: 0 2rem;
-  margin-top: 6rem;
+  margin-top: 5rem;
   flex-wrap: nowrap;
   @media #{$desktop} {
     flex-direction: column;
@@ -454,6 +454,45 @@ section.container.repeater {
     font-weight: 100;
   }
 }
+.mainContent {
+  width: 90%;
+  margin: 5rem auto 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  @media #{$laptop} {
+    gap: 1rem;
+    flex-direction: column;
+    height: auto;
+  }
+  .gatsby-image-wrapper-constrained {
+    height: auto;
+  }
+  .box-sx {
+    max-width: 670px;
+    margin-right: 840px;
+    min-height: 703px;
+    @media #{$laptop} {
+      max-width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+  .box-dx {
+    position: absolute;
+    top: 0;
+    right: -5.5%;
+    max-width: 52%;
+    @media #{$laptop} {
+      position: relative;
+      max-width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      right: 0;
+    }
+  }
+}
 .sezione-1 {
   display: flex;
   flex-wrap: nowrap;
@@ -484,30 +523,6 @@ section.container.repeater {
     flex-direction: row-reverse;
     @media #{$landscape} {
       flex-direction: column;
-    }
-  }
-  &.mainContent {
-    max-width: 100%;
-    width: 100%;
-    justify-content: flex-end;
-    gap: 6rem;
-    .gatsby-image-wrapper-constrained {
-      height: auto;
-    }
-    @media screen and (max-width: 1770px) {
-      padding-left: 1rem;
-    }
-    @media #{$large} {
-      gap: 1rem;
-    }
-    .box-sx {
-      flex: 1 1;
-      max-width: 670px;
-      padding-left: 0;
-    }
-    .box-dx {
-      flex: 1 1;
-      max-width: 1000px;
     }
   }
 

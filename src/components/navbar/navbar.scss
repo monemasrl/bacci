@@ -14,7 +14,9 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
+    ul {
+      margin: 10px 0;
+    }
     @media #{$laptop} {
       flex-direction: column-reverse;
       align-items: center;

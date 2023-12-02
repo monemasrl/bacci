@@ -6,9 +6,9 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 function TestoMainContent({ content, featuredImage }) {
 
-    console.log(content)
+
     return (
-        <section className={`container sezione-1 left mainContent`}>
+        <section className={`mainContent`}>
             {content && <>
                 <div className={`box-sx`} >
                     <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.main_content_titolo }} />
