@@ -675,6 +675,9 @@ section.container.repeater {
     }
   }
   .index-3 {
+    .box-dx {
+      flex: 1 1 750px;
+    }
     h2 {
       @include h2-sezioni(72px, 120px);
       line-height: 1;
