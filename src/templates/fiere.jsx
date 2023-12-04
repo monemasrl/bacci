@@ -24,6 +24,7 @@ export const query = graphql`
     from
     to
     location
+    position
     link_fiera
     type
     page

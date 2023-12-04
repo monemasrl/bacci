@@ -423,38 +423,7 @@ section.container.repeater {
     margin: 0 auto;
   }
 }
-.sezione-3 {
-  text-align: center;
-  margin: 5rem auto;
-  padding: 0 2rem;
-  flex-direction: column;
-  @media #{$landscape} {
-    padding: 0;
-    margin: 2rem auto;
-  }
-  p {
-    font-size: 24px;
-    line-height: 1.4;
-    @media #{$tablet} {
-      font-size: 18px;
-    }
-  }
-  h2 {
-    font-size: 74px;
-    @media #{$landscape} {
-      font-size: 50px;
-    }
-    @media #{$phone} {
-      font-size: 40px;
-    }
-  }
-  h3 {
-    color: $grey;
-    font-size: 24px;
-    font-family: $title;
-    font-weight: 100;
-  }
-}
+
 .mainContent {
   width: 90%;
   margin: 5rem auto 0 auto;
@@ -572,8 +541,56 @@ section.container.repeater {
   }
 }
 .sezione-3 {
+  text-align: center;
+  margin: 5rem auto;
+
+  flex-direction: column;
+  @media #{$laptop} {
+    padding: 0 2rem;
+  }
+  @media #{$landscape} {
+    padding: 0;
+    margin: 2rem auto;
+  }
+  p {
+    font-size: 24px;
+    line-height: 1.4;
+    @media #{$tablet} {
+      font-size: 18px;
+    }
+  }
+  h2 {
+    font-size: 74px;
+    @media #{$landscape} {
+      font-size: 50px;
+    }
+    @media #{$phone} {
+      font-size: 40px;
+    }
+  }
+  h3 {
+    color: $grey;
+    font-size: 24px;
+    font-family: $title;
+    font-weight: 100;
+  }
+
+  .box-immagine {
+    margin-top: 3rem;
+    .gatsby-image-wrapper-constrained {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .box-dx {
+    width: 100%;
+    max-width: 1350px;
+    margin: 3rem auto 0 auto;
+  }
   .box-sx {
     width: 100%;
+    max-width: 1540px;
+    margin: 0 auto;
     .gatsby-image-wrapper-constrained {
       margin: 2rem auto 1rem auto;
     }
@@ -823,6 +840,7 @@ section.container.repeater {
     color: white;
     h2,
     .datafiera,
+    .position,
     .luogo,
     .link {
       color: white;
@@ -863,12 +881,16 @@ section.container.repeater {
       font-size: 28px;
     }
   }
-
+  .position {
+    font-size: 38px;
+    color: $grey;
+    margin-bottom: 1.5rem;
+  }
   .datafiera {
     padding: 0;
     font-size: 38px;
     color: $grey;
-    margin: 1.5rem 0;
+    margin: 1.5rem 0 0 0;
     @media #{$landscape} {
       font-size: 28px;
     }

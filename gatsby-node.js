@@ -160,6 +160,7 @@ exports.createPages = async ({ graphql, actions }) => {
           type
           page
           location
+          position
           title_translations {
             languages_code {
               code

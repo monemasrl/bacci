@@ -40,7 +40,7 @@ function TestoImmagine({ index, allineamento, content }) {
         )
     }
     if (allineamento === 'center') {
-        return (<motion.section ref={center} id={`${slugify(content.item.nome).toLowerCase()}`} className={`container sezione-3 ${allineamento}`}
+        return (<motion.section ref={center} id={`${slugify(content.item.nome).toLowerCase()}`} className={`container-fluid sezione-3 ${allineamento}`}
             animate={isInViewCenter ? {
                 opacity: 1, y: 0,
                 transition: {
@@ -51,9 +51,11 @@ function TestoImmagine({ index, allineamento, content }) {
                 <div className={`box-sx `} >
                     <h2 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />
                     {content.item.traduzioni[0].sotto_titolo && <h3 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo }} />}
+
+                </div>
+                <div className="box-immagine">
                     {content.item.immagine && <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
                 </div>
-
                 <div className="box-dx">
                     <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo }} />
                     {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
