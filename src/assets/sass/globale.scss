@@ -511,7 +511,7 @@ section.container.repeater {
     }
   }
   .box-dx {
-    flex: 1 1 728px;
+    flex: 0 1 728px;
     @media #{$landscape} {
       flex: 1 1 auto;
     }
