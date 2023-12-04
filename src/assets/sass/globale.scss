@@ -814,7 +814,7 @@ section.container.repeater {
 
 .box-single-fiera {
   border: 1px solid $brown;
-  padding: 2rem;
+  padding: 1rem;
   max-width: 460px;
   width: 100%;
 
@@ -839,18 +839,18 @@ section.container.repeater {
     display: inline-block;
     background: $lightBrown;
     color: white;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
     text-align: center;
     border-radius: 50%;
-    margin-left: 95%;
+    margin-left: 90%;
     margin-bottom: 0px;
     position: relative;
-    top: 17px;
   }
+
   h2 {
-    font-size: 28px;
+    font-size: 36px;
     color: $brown;
     font-weight: 600;
     font-family: $text;
@@ -859,13 +859,19 @@ section.container.repeater {
     padding: 0;
     font-style: normal;
     text-align: left;
+    @media #{$landscape} {
+      font-size: 28px;
+    }
   }
 
   .datafiera {
     padding: 0;
-    font-size: $Psize;
+    font-size: 38px;
     color: $grey;
     margin: 1.5rem 0;
+    @media #{$landscape} {
+      font-size: 28px;
+    }
   }
 
   .luogo {
@@ -1048,6 +1054,7 @@ section.container.repeater {
 .bodyFiera {
   img {
     width: 100%;
+    padding: 1rem;
   }
 }
 .Toastify__toast-theme--dark {

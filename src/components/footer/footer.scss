@@ -186,7 +186,12 @@ footer {
 
       ul {
         list-style: none;
-
+        &.social {
+          li {
+            font-size: 3rem;
+            margin: 0;
+          }
+        }
         li {
           text-transform: uppercase;
           font-size: 20px;

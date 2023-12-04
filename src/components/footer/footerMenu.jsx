@@ -3,6 +3,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import { findItemTranslated, findItemsTranslated } from "../../utils"
 import { Link } from "gatsby"
 import { langTag } from "../../../data-translations"
+import { GrLink, GrLinkedin, GrYoutube } from "react-icons/gr";
+
 
 function FooterMenu({ locale }) {
     const data = useStaticQuery(graphql`
@@ -42,7 +44,6 @@ function FooterMenu({ locale }) {
         }
     }
   `)
-    console.log(data, 'dataFooter', locale, 'localeFooter')
     const vociMenu = () => {
         let arrayVociMenu = []
         data.directus.menus.forEach((item) => {
@@ -136,12 +137,15 @@ function FooterMenu({ locale }) {
 
         })}
         <div className="footer-col">
-            <ul>
+            <ul className="social">
                 <li>Follow us</li>
                 {data.directus.social.social.map((item) => {
                     return (
                         <li key={item.nome}>
-                            <a href={item.url} target="_blank" rel="noreferrer">{item.nome}</a>
+                            <a href={item.url} target="_blank" rel="noreferrer">
+                                {item.nome === 'Youtube' && <GrYoutube />}
+                                {item.nome === 'Linkedin' && <GrLinkedin />}
+                            </a>
                         </li>
                     )
                 })}

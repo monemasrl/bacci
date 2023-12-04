@@ -11,7 +11,9 @@ export const query = graphql`
  query($locale: String!, $slug: String!) {
 
   directus{
-  
+    social{
+      social
+    }
     pages(filter: {translations: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}}) {
       __typename
       id
