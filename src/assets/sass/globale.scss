@@ -598,7 +598,7 @@ section.container.repeater {
     }
   }
   .sezione-1 {
-    margin-top: 6rem;
+    margin-top: 8rem;
     @media #{$tablet} {
       margin-top: 2rem;
     }
@@ -627,6 +627,7 @@ section.container.repeater {
       font-size: 105px;
       color: $grey;
       font-weight: 700;
+      margin-top: 2rem;
       @media #{$tablet} {
         font-size: 15vw;
       }

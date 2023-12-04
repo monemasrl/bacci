@@ -50,7 +50,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                 <p>{translated.testo_antemprima}</p>
                                 <Link className="button-sezione" lista to={`${(langTag[translated.languages_code.code] === 'it') ? "/" : "/" + langTag[translated.languages_code.code] + "/"}${Termini[translated.languages_code.code].prodotti + '/' + translated.slug}`}>
 
-                                    scopri</Link>
+                                    {Termini[translated.languages_code.code].scopri}</Link>
                             </div>
                         )
                     }

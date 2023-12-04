@@ -6,6 +6,8 @@ export const langTag = {
 }
 export const Termini = {
   en_US: {
+    footerForm:
+      "<h2>EN Hai bisogno di <strong>informazioni?</strong></h2><p>Se desideri avere maggiori informazioni sulla nostra Azienda e sui nostri prodotti, scrivici compilando il form. il nostro Staff ti risponderà presto!</p>",
     tastoRicerca: "Search for model",
     formPrivacy: "Accept",
     formMessaggio: "Minimum 15 characters",
@@ -33,8 +35,13 @@ export const Termini = {
     tipologia: "Typology",
     ultime_news: "Latest news",
     fiere: "exhibitions",
+    affinaRicerca: "refine your search",
+    tutteApplicazioni: "All applications",
+    invia: "send",
   },
   it_IT: {
+    footerForm:
+      "<h2>Hai bisogno di <strong>informazioni?</strong></h2><p>Se desideri avere maggiori informazioni sulla nostra Azienda e sui nostri prodotti, scrivici compilando il form. il nostro Staff ti risponderà presto!</p>",
     tastoRicerca: "Ricerca Modello",
     formPrivacy: "Accetta la",
     formMessaggio: "Minimo 15 caratteri",
@@ -62,5 +69,8 @@ export const Termini = {
     tipologia: "Tipologia",
     ultime_news: "Ultime news",
     fiere: "fiere",
+    affinaRicerca: "affina la ricerca",
+    tutteApplicazioni: "Tutte le applicazioni",
+    invia: "invia",
   },
 }

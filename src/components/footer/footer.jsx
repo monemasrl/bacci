@@ -5,30 +5,17 @@ import './footer.scss'
 import { langTag } from '../../../data-translations'
 import FooterMenu from './footerMenu'
 import { FormContatti } from '../form'
+import { Termini } from '../../../data-translations'
+
 const Footer = ({ locale }) => {
 
-    const data = {
-        en: {
-            body: `  <h2>EN Hai bisogno di <strong>informazioni?</strong></h2>
-            <p>Se desideri avere maggiori informazioni sulla nostra Azienda
-                e sui nostri prodotti, scrivici compilando il form.
-                il nostro Staff ti risponderà presto!</p>`,
-            privacy: `EN Accettazione della`,
-        },
-        it: {
-            body: `  <h2>Hai bisogno di <strong>informazioni?</strong></h2>
-            <p>Se desideri avere maggiori informazioni sulla nostra Azienda
-                e sui nostri prodotti, scrivici compilando il form.
-                il nostro Staff ti risponderà presto!</p>`,
-            privacy: `Accettazione della`,
-        }
-    }
+
 
     return (
         <footer>
             <section className='container-fuid footer1 '>
                 <div className='container'>
-                    <div className="box-sx" dangerouslySetInnerHTML={{ __html: data[langTag[locale]].body }} />
+                    <div className="box-sx" dangerouslySetInnerHTML={{ __html: Termini[locale].footerForm }} />
 
                     <div className="box-dx">
                         <div className="form-contatti">

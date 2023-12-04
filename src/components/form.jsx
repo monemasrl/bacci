@@ -48,7 +48,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                 name="fiere"
                 netlify-honeypot="bot-field"
                 onSubmit={handleSubmit((data) => {
-                    console.log(data, 'form data')
+
                     data.nomeEvento = nomeEvento
                     toast(Termini[lang].formSuccess)
                     fetch("/", {
@@ -350,7 +350,7 @@ const FormContatti = ({ lang }) => {
                 </label>
                 <div className="box-submit">
                     <label htmlFor="submit">
-                        <input className='button-sezione' type="submit" />
+                        <input className='button-sezione' type="submit" value={Termini[lang].invia} />
                     </label>
                 </div>
 

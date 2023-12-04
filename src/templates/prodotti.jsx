@@ -6,6 +6,7 @@ import GridPagination from "../components/grid-pagination"
 
 import { Termini, langTag } from "../../data-translations"
 import { findItemTranslated } from "../utils"
+import { locale } from "moment"
 
 export const query = graphql`
   query($locale: String!) {
@@ -247,8 +248,8 @@ const Prodotti = ({ data, location, pageContext }) => {
           <div className=" col-sx">
 
             <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
-              <h2>affina la ricerca</h2>
-              <h3>Categorie</h3>
+              <h2>{Termini[pageContext.locale].affinaRicerca}</h2>
+              <h3>{Termini[pageContext.locale].tipologia}</h3>
               <ul>
                 <li>
                   <input type="radio" checked={filtersCat.length === 0} value={'reset'} name="categorie" />
@@ -265,10 +266,8 @@ const Prodotti = ({ data, location, pageContext }) => {
               </ul>
             </form>
             <div className="filters">
-
-
               <form onChange={(e) => onChangeCheckboxApplicazioni(e)}>
-                <h3>Applicazioni</h3>
+                <h3>{Termini[pageContext.locale].applicazione}</h3>
                 <ul>
                   {pageContext.listaApplicazioni.map((item, index) => {
                     return (
@@ -279,7 +278,7 @@ const Prodotti = ({ data, location, pageContext }) => {
                   })}
                 </ul>
               </form>
-              <button onClick={() => setFiltersApp([])}> Tutte le applicazioni</button>
+              <button onClick={() => setFiltersApp([])}> {Termini[pageContext.locale].tutteApplicazioni}</button>
             </div>
             <div className="filters search">
 
