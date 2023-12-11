@@ -1090,3 +1090,13 @@ section.container.repeater {
   bottom: 4em !important;
   font-weight: bold;
 }
+
+.page404 {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
