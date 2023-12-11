@@ -18,6 +18,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-sitemap`,
+    "gatsby-plugin-robots-txt",
     `gatsby-plugin-image`,
     `gatsby-plugin-netlify`,
     {
