@@ -17,7 +17,11 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
-    { resolve: `gatsby-plugin-sitemap`, resolveSiteUrl: () => siteUrl },
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      resolveSiteUrl: () => siteUrl,
+      output: "/",
+    },
     "gatsby-plugin-robots-txt",
     `gatsby-plugin-image`,
     `gatsby-plugin-netlify`,
