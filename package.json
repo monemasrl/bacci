@@ -9,6 +9,7 @@
     "@emotion/react": "^11.11.1",
     "framer-motion": "^10.16.5",
     "gatsby": "^5.12.9",
+    "gatsby-plugin-git-lastmod": "^0.1.2",
     "gatsby-plugin-image": "^3.12.3",
     "gatsby-plugin-manifest": "^5.12.3",
     "gatsby-plugin-netlify": "^5.1.1",
