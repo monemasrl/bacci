@@ -24,28 +24,28 @@ function Seo({ description, lang, meta, title, seo }) {
       }
     `
   )
-
+  console.log(seo, "seo")
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
   function getDataSeoOpenGraph(seo) {
     const arrSeo = []
     if (seo) {
-      if (seo.opengraphTitle) {
+      if (seo.title) {
         arrSeo.push({
           property: `og:title`,
-          content: seo.opengraphTitle,
+          content: seo.title,
         })
       }
-      if (seo.opengraphDescription) {
+      if (seo.description) {
         arrSeo.push({
           property: `og:description`,
-          content: seo.opengraphDescription,
+          content: seo.description,
         })
       }
-      if (seo.opengraphType) {
+      if (seo.type) {
         arrSeo.push({
           property: `og:type`,
-          content: seo.opengraphType,
+          content: seo.type,
         })
       }
     }
@@ -54,8 +54,11 @@ function Seo({ description, lang, meta, title, seo }) {
   return (
     <Helmet>
       <html lang={langTag[lang]} />
-      <title>{title || defaultTitle}</title>
-      <meta name="description" content={metaDescription} />
+      <title>{seo?.title || title || defaultTitle}</title>
+      <meta
+        name="description"
+        content={seo?.meta_description || metaDescription}
+      />
       <meta name="author" content={site.siteMetadata.author} />
       <link rel="icon" href="/src/images/favicon.png" />
       {seo &&

@@ -153,6 +153,15 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
         Fiere {
+          seo {
+            translations {
+              languages_code {
+                code
+              }
+              title
+              meta_description
+            }
+          }
           name
           from
           to
@@ -180,6 +189,15 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
         posts {
+          seo {
+            translations {
+              languages_code {
+                code
+              }
+              title
+              meta_description
+            }
+          }
           id
           date_created
           translations {
@@ -203,6 +221,15 @@ exports.createPages = async ({ graphql, actions }) => {
         }
         Prodotti {
           id
+          seo {
+            translations {
+              languages_code {
+                code
+              }
+              title
+              meta_description
+            }
+          }
           name
           date_created
           type

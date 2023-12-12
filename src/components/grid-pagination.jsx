@@ -80,7 +80,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                         </div>
                                         <h2>{translated.title}</h2>
                                         <p dangerouslySetInnerHTML={{ __html: translated.summary }} />
-                                        <Link to={`${'/news/'}${translated.slug}`}>leggi tutto</Link>
+                                        <Link to={`${langTag[translated.languages_code.code] === 'it' ? '/' : '/' + langTag[translated.languages_code.code] + '/'}${'news/'}${translated.slug}`}>leggi tutto</Link>
                                     </div>
                                 </div>
                             </div>)

@@ -10,6 +10,7 @@ const Prodotto = ({ pageContext }) => {
 
   const { locale, parentPath, content, title, allPagePath, listaApplicazioni, listaCategorie } = pageContext
   const dataProdottoTranslated = content && findItemTranslated(content.translations, locale)
+  const seoFilterLocale = content.seo?.translations.find((item) => item.language_code.code === locale)
 
   const date = new Date(Date.parse(content.date_created))
   return (
@@ -22,7 +23,7 @@ const Prodotto = ({ pageContext }) => {
         allPagePath={allPagePath}
         pathFromContext={pageContext}
         listaApplicazioni={listaApplicazioni}
-        listaCategorie={listaCategorie}
+        listaCategorie={seoFilterLocale}
       >
         <div className="wrapper-news">
           <GatsbyImage image={content.image.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.title} />

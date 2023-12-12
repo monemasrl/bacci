@@ -3,7 +3,24 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
 import { findItemsTranslated } from "../utils"
-
+const seoSettings = {
+  seo: {
+    translations: [{
+      languages_code: {
+        code: "it_IT"
+      },
+      title: 'News',
+      meta_description: 'Le ultime dal mondo Bacci'
+    }, {
+      languages_code: {
+        code: "en_US"
+      },
+      title: 'News',
+      meta_description: 'Lastest news from Bacci world'
+    },
+    ]
+  }
+}
 export const query = graphql`
   query($locale: String!) {
   directus{
@@ -49,10 +66,11 @@ const News = ({ data, pageContext }) => {
   const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
   const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
   const topArchivio = React.useRef()
-
   const langFilterProdottoSorted = data.directus.posts.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
+  const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
+
   return (
     <>
       <Layout
@@ -61,6 +79,7 @@ const News = ({ data, pageContext }) => {
         allPagePath={pageContext.allPagePath}
         listaApplicazioni={listaApplicazioni}
         listaCategorie={listaCategorie}
+        seo={seoFilterLocale}
       >
         <section className="container news" ref={topArchivio}>
           {langFilterProdottoSorted &&

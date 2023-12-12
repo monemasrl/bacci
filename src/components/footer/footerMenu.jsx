@@ -18,7 +18,7 @@ function FooterMenu({ locale }) {
                         }
                 menus{
                     name
-                    items(filter: {name:{_in: ["Azienda", "Prodotti", "Tecnologia", "Filiali", "Contatti"]}}){
+                    items(filter: {_and:[{_or: [{name: {_eq: "Azienda"}},{name: {_eq: "Prodotti"}}, {name: {_eq: "Tecnologia"}}, {name: {_eq: "Filiali"}}, {name: {_eq: "Contatti"}}]}]}){
                         name
                         translations{
                             languages_code{

@@ -4,6 +4,25 @@ import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
 import { findItemsTranslated } from "../utils"
 
+const seoSettings = {
+  seo: {
+    translations: [{
+      languages_code: {
+        code: "it_IT"
+      },
+      title: 'Fiere',
+      meta_description: 'Fiere ed eventi'
+    }, {
+      languages_code: {
+        code: "en_US"
+      },
+      title: 'Exhibitions',
+      meta_description: 'Fair and events'
+    },
+    ]
+  }
+}
+
 export const query = graphql`
   query($locale: String!) {
   directus{
@@ -58,7 +77,8 @@ const Fiere = ({ data, pageContext }) => {
   const langFilterFiereSorted = data.directus.Fiere.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
-  console.log(data.directus.Fiere, 'langFilterFiereSorted')
+  const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
+
   return (
     <>
       <Layout
@@ -67,6 +87,7 @@ const Fiere = ({ data, pageContext }) => {
         allPagePath={pageContext.allPagePath}
         listaApplicazioni={listaApplicazioni}
         listaCategorie={listaCategorie}
+        seo={seoFilterLocale}
       >
         <section className="container fiere" ref={topArchivio}>
           <GridPagination pagePath={pageContext.allPagePath} pageName="fiere" topArchivio={topArchivio} archivio={langFilterFiereSorted} lang={pageContext.locale} />

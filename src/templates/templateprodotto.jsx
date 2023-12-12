@@ -10,8 +10,9 @@ const Prodotto = ({ pageContext }) => {
     const { locale, parentPath, content, title, allPagePath, listaApplicazioni, listaCategorie
     } = pageContext
     const dataProdottoTranslated = findItemTranslated(content.translations, locale)
-
     const categoriaProdotto = content.categoria && findItemTranslated(content.categoria.translations, locale)
+
+    const seoFilterLocale = content.seo?.translations.find((item) => item.language_code.code === locale)
 
     return (
         <>
@@ -24,6 +25,7 @@ const Prodotto = ({ pageContext }) => {
                 pathFromContext={pageContext}
                 listaApplicazioni={listaApplicazioni}
                 listaCategorie={listaCategorie}
+                seo={seoFilterLocale}
             >
 
                 <div className="container prodotto">

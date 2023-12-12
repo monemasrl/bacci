@@ -5,7 +5,7 @@ import { slugify } from "../../utils"
 import { useRef } from 'react'
 import { useInView, motion } from 'framer-motion'
 
-function TestoImmagine({ index, allineamento, content }) {
+function TestoImmagine({ index, allineamento, content, pageName }) {
     const left = useRef(null)
     const center = useRef(null)
     const right = useRef(null)
@@ -40,7 +40,7 @@ function TestoImmagine({ index, allineamento, content }) {
         )
     }
     if (allineamento === 'center') {
-        return (<motion.section ref={center} id={`${slugify(content.item.nome).toLowerCase()}`} className={`container-fluid sezione-3 ${allineamento}`}
+        return (<motion.section ref={center} id={`${slugify(content.item.nome).toLowerCase()}`} className={`container-fluid sezione-3 ${allineamento} ${pageName}`}
             animate={isInViewCenter ? {
                 opacity: 1, y: 0,
                 transition: {

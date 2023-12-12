@@ -21,6 +21,7 @@ const Fiere = ({ pageContext }) => {
     title: dataProdottoTranslated.title,
     location: content.location,
   }
+  const seoFilterLocale = content.seo?.translations.find((item) => item.language_code.code === locale)
 
   return (
     <>
@@ -34,6 +35,7 @@ const Fiere = ({ pageContext }) => {
         listaApplicazioni={listaApplicazioni}
         listaCategorie={listaCategorie}
         dataBreadCrumbFiere={dataBreadCrumbFiere}
+        seo={seoFilterLocale}
       >
         <div className="wrapper-fiere">
 

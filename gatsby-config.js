@@ -9,9 +9,9 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Bacci COM`,
-    description: `Bacci COM`,
-    author: `Monema.srl`,
+    title: `Bacci.com`,
+    description: `Bacci descrizione`,
+    author: `Bacci.com`,
     siteUrl: `https://bacci.com/`,
   },
   plugins: [

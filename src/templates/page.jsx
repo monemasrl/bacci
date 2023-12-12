@@ -13,10 +13,20 @@ export const query = graphql`
   directus{
     social{
       social
-    }
+    }    
+
     pages(filter: {translations: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}}) {
       __typename
       id
+      seo{
+      translations(filter: {languages_code: {code: {_eq: $locale}}}){
+        languages_code{
+          code
+        }
+        title
+        meta_description
+      }
+    }
       featured_image{
       id
       imageFile{
@@ -108,10 +118,10 @@ export const query = graphql`
 const Pagine = ({ data, pageContext }) => {
 
 
-  console.log(pageContext, 'pageContext')
+  console.log(data.directus.pages[0], 'pageContext')
   return (
     <>
-      {pageContext ?
+      {pageContext && data ?
         <Layout
           pageTitle={pageContext.title}
           locale={pageContext.locale}
@@ -119,6 +129,7 @@ const Pagine = ({ data, pageContext }) => {
           listaApplicazioni={pageContext.listaApplicazioni}
           listaCategorie={pageContext.listaCategorie}
           parentPath={pageContext.parentPath}
+          seo={data.directus.pages[0].seo.translations[0]}
         >
 
           {/* PAGINE INTERNE */}
@@ -133,7 +144,6 @@ const Pagine = ({ data, pageContext }) => {
 
               <div className={`container-fluid ${pageContext.pageName}`}>
                 {data.directus.pages[0].blocchi?.map((blocco, index) => {
-                  console.log(blocco, 'blocco')
                   return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
                 })}
               </div>

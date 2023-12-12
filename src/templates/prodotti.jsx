@@ -1,94 +1,108 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-
 import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
-
 import { Termini, langTag } from "../../data-translations"
 import { findItemTranslated } from "../utils"
-import { locale } from "moment"
+
+const seoSettings = {
+  seo: {
+    translations: [{
+      languages_code: {
+        code: "it_IT"
+      },
+      title: 'prodotti',
+      meta_description: 'tutti i nostri prodotti'
+    }, {
+      languages_code: {
+        code: "en_US"
+      },
+      title: 'products',
+      meta_description: 'our products'
+    },
+    ]
+  }
+}
 
 export const query = graphql`
   query($locale: String!) {
   directus{
- 
-  
-  Prodotti(filter: {translations: {languages_code: {code: {_eq: $locale}}}, type: {_eq: "machinery"}}){
-    id
-    name
-    date_created
-    type
-    immagine{
+    Prodotti(filter: {translations: {languages_code: {code: {_eq: $locale}}}, type: {_eq: "machinery"}}){
       id
-  imageFile{
-    id
-childImageSharp{
-  gatsbyImageData
-}
-  }
-      
-    }
-    featured
-    translations{
-      languages_code{
-        code
-      }
-      slug
-      titolo
-      sottotitolo
-      testo_antemprima
-      paragrafo
-      
-    }
-    applicazioni{
-      
-      applicazioni_id{
-        id
-       
-        translations{
-          languages_code{
-            code
-          }
-          id
-           label
-        }
-      }
-      
-    }
-    categoria{
-      id
-      translations{
-        languages_code{
-            code
-          }
-        id
-        nome
-      }
-    }
-    sezioni_prodotto{
+      name
+      date_created
+      type
       immagine{
         id
-        imageFile{
-          id
-          childImageSharp{
-            gatsbyImageData
-          }
-        }
+    imageFile{
+      id
+  childImageSharp{
+    gatsbyImageData
+  }
+    }
+        
       }
-      prodotto_id{
-        id
-      }
+      featured
       translations{
         languages_code{
           code
         }
+        slug
         titolo
+        sottotitolo
+        testo_antemprima
         paragrafo
         
       }
+      applicazioni{
+        
+        applicazioni_id{
+          id
+        
+          translations{
+            languages_code{
+              code
+            }
+            id
+            label
+          }
+        }
+        
+      }
+      categoria{
+        id
+        translations{
+          languages_code{
+              code
+            }
+          id
+          nome
+        }
+      }
+      sezioni_prodotto{
+        immagine{
+          id
+          imageFile{
+            id
+            childImageSharp{
+              gatsbyImageData
+            }
+          }
+        }
+        prodotto_id{
+          id
+        }
+        translations{
+          languages_code{
+            code
+          }
+          titolo
+          paragrafo
+          
+        }
+        
+      }
       
-    }
-    
   }
 }
   }`
@@ -96,7 +110,7 @@ childImageSharp{
 
 const Prodotti = ({ data, location, pageContext }) => {
 
-
+  const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
 
   /**
    * Description placeholder
@@ -242,11 +256,10 @@ const Prodotti = ({ data, location, pageContext }) => {
         allPagePath={pageContext.allPagePath}
         listaApplicazioni={pageContext.listaApplicazioni}
         listaCategorie={pageContext.listaCategorie}
+        seo={seoFilterLocale}
       >
-
         <div className="container prodotti" ref={topArchivio}>
-          <div className=" col-sx">
-
+          <div className="col-sx">
             <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
               <h2>{Termini[pageContext.locale].affinaRicerca}</h2>
               <h3>{Termini[pageContext.locale].tipologia}</h3>
@@ -255,7 +268,6 @@ const Prodotti = ({ data, location, pageContext }) => {
                   <input type="radio" checked={filtersCat.length === 0} value={'reset'} name="categorie" />
                   <label for="categorie">{termini.tutti_prodotti}</label></li>
                 {pageContext.listaCategorie.map((item) => {
-
                   return (
                     <li>
                       <input type="radio" value={item.nome} name="categorie"
