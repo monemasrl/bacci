@@ -1,0 +1,4 @@
+{
+    "graphqlForVSCode.trace.server": "off",
+    "editor.formatOnSave": true
+}
