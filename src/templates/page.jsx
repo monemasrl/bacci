@@ -6,6 +6,7 @@ import BlocksComponent from "../components/blocks/blocks"
 import LastNews from "../components/widgets/lastNews"
 import TestoMainContent from "../components/blocks/testo_main_content"
 import LastFiere from "../components/widgets/lastFiere"
+import CaseHistory from "../components/widgets/caseHistory"
 
 export const query = graphql`
  query($locale: String!, $slug: String!) {
@@ -152,7 +153,7 @@ const Pagine = ({ data, pageContext }) => {
             </>}
           {pageContext.pageName === "news" || pageContext.pageName === "home" &&
             <LastNews pageType={pageContext.pageName} locale={pageContext.locale} limiteVisualizzazione={3} />}
-
+          {pageContext.pageName === 'case-history' && <CaseHistory locale={pageContext.locale} />}
           {!data.directus.pages[0] &&
             <h1>Non ci sono dati!</h1>
           }

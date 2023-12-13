@@ -378,7 +378,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  // CREAZIONE PAGINE
+  // CREAZIONE PAGINE INTERNE
 
   await result.data.directus.menus.forEach(menu => {
     // Loop su tutti i menu

@@ -47,7 +47,6 @@ function FooterMenu({ locale }) {
     const vociMenu = () => {
         let arrayVociMenu = []
         data.directus.menus.forEach((item) => {
-
             arrayVociMenu.push(...item.items)
         })
 
@@ -97,8 +96,6 @@ function FooterMenu({ locale }) {
                             })}
 
                         </ul>
-
-
                     </div>
                 )
 

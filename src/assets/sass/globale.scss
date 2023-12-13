@@ -1104,16 +1104,14 @@ section.container.news {
   font-weight: bold;
 }
 
-.container-fluid.case-history {
-  display: flex;
-  max-width: 1546px;
-  margin: 0 auto;
-  justify-content: flex-start;
-  .container-fluid.sezione-3.case-history {
-    max-width: 750px;
-    margin: 2rem 0;
-    h2 {
-      font-size: 60px;
+.widget-case.container {
+  gap: 2rem;
+  flex-wrap: nowrap;
+  .widget-case__box {
+    flex: 0 1 746px;
+    text-align: center;
+    .gatsby-image-wrapper-constrained {
+      height: auto;
     }
   }
 }
