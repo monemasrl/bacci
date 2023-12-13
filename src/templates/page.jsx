@@ -129,7 +129,7 @@ const Pagine = ({ data, pageContext }) => {
           listaApplicazioni={pageContext.listaApplicazioni}
           listaCategorie={pageContext.listaCategorie}
           parentPath={pageContext.parentPath}
-          seo={data.directus.pages[0].seo?.translations[0]}
+          seo={data.directus.pages[0]?.seo.translations[0]}
         >
 
           {/* PAGINE INTERNE */}
