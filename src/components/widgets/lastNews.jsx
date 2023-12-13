@@ -6,7 +6,10 @@ import { findItemTranslated } from "../../utils";
 import { Termini } from "../../../data-translations";
 import './lastNews.scss'
 import { Link } from "gatsby";
+import 'moment/locale/it'
+
 const moment = require('moment')
+
 const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
   const data = useStaticQuery(graphql`
     {
