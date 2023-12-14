@@ -1104,20 +1104,6 @@ section.container.news {
   font-weight: bold;
 }
 
-.container-fluid.case-history {
-  display: flex;
-  max-width: 1546px;
-  margin: 0 auto;
-  justify-content: flex-start;
-  .container-fluid.sezione-3.case-history {
-    max-width: 750px;
-    margin: 2rem 0;
-    h2 {
-      font-size: 60px;
-    }
-  }
-}
-
 .page404 {
   max-width: 1160px;
   margin: 0 auto;
@@ -1126,4 +1112,56 @@ section.container.news {
   align-items: center;
   justify-content: center;
   height: 100vh;
+}
+.caseHistory {
+  .sezione-3 .box-immagine .gatsby-image-wrapper-constrained {
+    height: 100%;
+    width: auto;
+  }
+  .box-dx {
+    h3 {
+      font-size: 60px;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin: 2rem auto 1rem auto;
+    }
+  }
+  section#sezione-2 {
+    flex-direction: column-reverse;
+    display: flex;
+    p {
+      font-family: $title;
+      text-transform: uppercase;
+      font-size: 32px;
+      font-weight: 400;
+    }
+  }
+  .customer {
+    font-size: 24px;
+    font-family: $title;
+    color: $grey;
+    font-weight: 200;
+    ul {
+      li {
+        margin: 1rem 0;
+        position: relative;
+      }
+    }
+    li:first-child::before {
+      background-color: $brown;
+      content: "";
+      height: 100%;
+      left: -30px;
+      position: absolute;
+      top: 0px;
+      width: 8px;
+    }
+    .titolo {
+      font-size: 42px;
+      font-weight: 400;
+      text-transform: uppercase;
+      color: $grey;
+      margin-bottom: 5px;
+    }
+  }
 }

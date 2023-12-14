@@ -40,6 +40,7 @@ exports.createPages = async ({ graphql, actions }) => {
       macchine: "machines",
       tecnologia: "tecnology",
       correlati: "realted products",
+      caseHistory: "case-history",
     },
     it_IT: {
       azienda: "azienda",
@@ -51,6 +52,7 @@ exports.createPages = async ({ graphql, actions }) => {
       macchine: "macchine",
       tecnologia: "tecnologia",
       correlati: "prodotti correlati",
+      caseHistory: "case-history",
     },
   }
   function findItemTranslated(translations, langCode) {
@@ -295,6 +297,122 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        case_history {
+          translations {
+            languages_code {
+              code
+            }
+            title
+            sottotitolo
+            main_content_titolo
+            main_content
+            slug
+          }
+          case_name
+          customer
+          city
+          country
+          social_shares
+          related_machines {
+            Prodotti_id {
+              translations {
+                languages_code {
+                  code
+                }
+                titolo
+                sottotitolo
+                testo_antemprima
+                slug
+              }
+              immagine {
+                id
+                imageFile {
+                  id
+                  childImageSharp {
+                    id
+                    gatsbyImageData
+                  }
+                }
+              }
+            }
+          }
+          featured_image {
+            id
+            imageFile {
+              id
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+          secondary_image {
+            id
+            imageFile {
+              id
+              childImageSharp {
+                gatsbyImageData
+              }
+            }
+          }
+          blocchi {
+            id
+            collection
+            item {
+              ... on DirectusData_testo_immagine {
+                nome
+                novita
+                allineamento
+                id
+                images {
+                  id
+                  directus_files_id {
+                    id
+                    imageFile {
+                      id
+                      childImageSharp {
+                        gatsbyImageData(
+                          placeholder: BLURRED
+                          formats: [AUTO, WEBP, AVIF]
+                        )
+                      }
+                    }
+                  }
+                }
+                immagine {
+                  id
+                  imageFile {
+                    id
+                    childImageSharp {
+                      gatsbyImageData(
+                        placeholder: BLURRED
+                        formats: [AUTO, WEBP, AVIF]
+                      )
+                    }
+                  }
+                }
+                nome
+                traduzioni {
+                  languages_code {
+                    code
+                  }
+                  titolo
+                  sotto_titolo
+                  paragrafo
+                  link_label
+                  url
+                }
+              }
+              ... on DirectusData_Blocchi {
+                traduzioni {
+                  languages_code {
+                    code
+                  }
+                  blocchi
+                }
+              }
+            }
+          }
+        }
       }
     }
   `)
@@ -378,7 +496,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  // CREAZIONE PAGINE
+  // CREAZIONE PAGINE INTERNE
 
   await result.data.directus.menus.forEach(menu => {
     // Loop su tutti i menu
@@ -743,6 +861,54 @@ exports.createPages = async ({ graphql, actions }) => {
         createPage({
           path: `${urlBase}${parentPathFromMenu.slug.toLowerCase()}/${translation.slug.toLowerCase()}`,
           component: require.resolve("./src/templates/templateFiere.jsx"),
+          context: {
+            content: entry,
+            locale: translation.languages_code.code,
+            slug: translation.slug,
+            title: translation.title,
+            allPagePath: allPagePath,
+            listaApplicazioni:
+              tassonomiaProdotti.applicazioni[translation.languages_code.code],
+            listaCategorie:
+              tassonomiaProdotti.categorie[translation.languages_code.code],
+          },
+        })
+      }
+    })
+  })
+
+  //SINGOLO CASE HISTORY
+  const caseHistory = await result.data.directus.case_history
+  function getAllPathCaseHistory(translations) {
+    const allPath = []
+    translations.forEach(item => {
+      const lang = item.languages_code.code
+      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+      const path = baseLang + Termini[lang].caseHistory + "/" + item.slug
+      const pathObj = {
+        path: path,
+        locale: lang,
+        title: item.titolo,
+      }
+      allPath.push(pathObj)
+    })
+    return allPath
+  }
+  caseHistory.forEach(entry => {
+    const allPagePath = getAllPathCaseHistory(entry.translations)
+
+    entry.translations.forEach(translation => {
+      const urlBase =
+        langTag[translation.languages_code.code] === "it"
+          ? "/"
+          : "/" + langTag[translation.languages_code.code] + "/"
+
+      if (translation.slug) {
+        createPage({
+          path: `${urlBase}${
+            Termini[translation.languages_code.code].caseHistory
+          }/${translation.slug.toLowerCase()}`,
+          component: require.resolve("./src/templates/templateCaseHistory.jsx"),
           context: {
             content: entry,
             locale: translation.languages_code.code,

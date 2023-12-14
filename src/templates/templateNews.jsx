@@ -23,7 +23,8 @@ const Prodotto = ({ pageContext }) => {
         allPagePath={allPagePath}
         pathFromContext={pageContext}
         listaApplicazioni={listaApplicazioni}
-        listaCategorie={seoFilterLocale}
+        listaCategorie={listaCategorie}
+        seo={seoFilterLocale}
       >
         <div className="wrapper-news">
           <GatsbyImage image={content.image.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.title} />
