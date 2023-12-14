@@ -6,7 +6,7 @@ import './correlati.scss'
 import { Link } from "gatsby";
 import { findItemTranslated } from "../../utils";
 
-const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdotto }) => {
+const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdotto, listaProdottiNoQuery }) => {
   const data = useStaticQuery(graphql`
  query {
        directus {
@@ -47,35 +47,51 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
        }
      }
    `)
-
-  const prodottiCorrelatiCategoria = data.directus.Prodotti.filter((item) => {
-    if (item.id !== idProdotto && item.categoria) {
-      return item.categoria.translations.some((categoria) => {
-        if (categoria.languages_code.code === locale) {
-          return categoria.nome === categoriaProdotto
+  console.log(listaProdottiNoQuery, 'listaProdottiNoQuery')
+  function tipoCorrelazione() {
+    if (categoriaProdotto) {
+      const prodottiCorrelatiCategoria = categoriaProdotto && data.directus.Prodotti.filter((item, index) => {
+        if (item.id !== idProdotto && item.categoria && index < limiteVisualizzazione) {
+          return item.categoria.translations.some((categoria) => {
+            if (categoria.languages_code.code === locale) {
+              return categoria.nome === categoriaProdotto
+            }
+          })
         }
       })
+      return prodottiCorrelatiCategoria
+    } else if (listaProdottiNoQuery) {
+      const datiNormalizzati = listaProdottiNoQuery.map((item, index) => {
+        if (index < limiteVisualizzazione) { return ({ immagine: item.Prodotti_id.immagine, translations: item.Prodotti_id.translations }) }
+      })
+
+      return datiNormalizzati
     }
-  })
+  }
+
+
 
   return (
     <>
-      {prodottiCorrelatiCategoria.length &&
+      {tipoCorrelazione() &&
         <section className=" widget-correlati">
           <h2>{Termini[locale].correlati}</h2>
           <div className="container">
-            {prodottiCorrelatiCategoria.map((item) => {
+            {tipoCorrelazione().map((item) => {
+              console.log(item, 'test')
               const prodottoTradotto = findItemTranslated(item.translations, locale)
-              return (
-                <div className="col-3">
-                  <div className="box-correlati">
-                    <GatsbyImage className="immagine-widget" image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.titolo} />
-                    <h2>{prodottoTradotto.titolo}</h2>
-                    <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.testo_antemprima }} />
-                    <Link to={`/${(locale === 'it_IT') ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${prodottoTradotto.slug}`} className="button-sezione">scopri</Link>
+              if (prodottoTradotto) {
+                return (
+                  <div className="col-3">
+                    <div className="box-correlati">
+                      {item.immagine && <GatsbyImage className="immagine-widget" image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.titolo} />}
+                      {prodottoTradotto.titolo && <h2>{prodottoTradotto.titolo}</h2>}
+                      {prodottoTradotto.testo_antemprima && <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.testo_antemprima }} />}
+                      {prodottoTradotto.slug && <Link to={`/${(locale === 'it_IT') ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${prodottoTradotto.slug}`} className="button-sezione">scopri</Link>}
+                    </div>
                   </div>
-                </div>
-              )
+                )
+              } else { return null }
             })}
           </div>
         </section>}

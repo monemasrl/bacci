@@ -1,3 +1,5 @@
+import CaseHistory from "./src/components/widgets/caseHistory"
+
 export const langTag = {
   en_US: "en",
   it_IT: "it",
@@ -38,6 +40,11 @@ export const Termini = {
     affinaRicerca: "refine your search",
     tutteApplicazioni: "All applications",
     invia: "send",
+    caseHistory: "case-history",
+    news: "news",
+    cliente: "client",
+    nazione: "country",
+    citta: "city",
   },
   it_IT: {
     footerForm:
@@ -72,5 +79,10 @@ export const Termini = {
     affinaRicerca: "affina la ricerca",
     tutteApplicazioni: "Tutte le applicazioni",
     invia: "invia",
+    caseHistory: "case-history",
+    news: "news",
+    cliente: "cliente",
+    nazione: "nazione",
+    citta: "città",
   },
 }

@@ -32,6 +32,13 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                         <p>{content.item.traduzioni[0].paragrafo}</p>
                         {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
                     </div>
+                    {content.item.images && <div className="image-gallery">
+                        {content.item.images.map((item) => {
+                            return <div className="boxImage">
+                                <GatsbyImage image={item.directus_files_id.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
+                            </div>
+                        })}
+                    </div>}
 
                     {content.item.immagine && <div className="box-dx">
                         <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />

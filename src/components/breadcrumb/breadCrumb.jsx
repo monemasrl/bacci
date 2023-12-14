@@ -4,6 +4,7 @@ import { langTag, Termini } from "../../../data-translations"
 import { navigate } from "gatsby"
 
 const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale, tipo }) => {
+
     const parentFolder = pathName ? pathName : ''
 
     return (
@@ -11,14 +12,11 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
 
             <div className="container">
 
-
-
-                {tipo === 'news' ?
+                {tipo === 'news' || tipo === 'caseHistory' ?
                     <h2 className="newsh2">
-                        <span onClick={() => navigate(`${langTag[locale] === 'it' ? "/news" : "/" + langTag[locale] + "/news"}`)}> /News<br /></span>
+                        <span onClick={() => navigate(`${langTag[locale] === 'it' ? "/news" : "/" + langTag[locale] + "/" + Termini[locale][tipo]}`)}> /{Termini[locale][tipo]}<br /></span>
                         <span>{pageTitle}</span>
                     </h2>
-
                     : tipo === 'fiera' ?
                         <>
                             <h2>
@@ -39,11 +37,9 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
                             (pageTitle.toLowerCase() === parentFolder.toLowerCase()) || !parentFolder ?
 
                                 <h2>{pageTitle}</h2>
-
                                 :
-
                                 <h2>
-                                    <span>/{parentFolder}  <br /></span>
+                                    <span>/{parentFolder && parentFolder}  <br /></span>
                                     <span>{pageTitle}</span>
                                 </h2>
                 }

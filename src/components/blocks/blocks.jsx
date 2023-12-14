@@ -9,7 +9,7 @@ const Components = {
 }
 
 const BlocksComponent = (component, index, allineamento, content, pageName) => {
-
+    console.log(content, 'content')
     if (typeof Components[component] !== "undefined") {
         return React.createElement(Components[component], {
             index: index,
