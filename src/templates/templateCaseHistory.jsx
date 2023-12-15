@@ -30,7 +30,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                 seo={seoFilterLocale}
             >
 
-                <section id={`${slugify(content.case_name).toLowerCase()}`} className={`container-fluid sezione-3`}>
+                <section id={`${slugify(content.case_name).toLowerCase()}`} className={`container-fluid sezione-3 main`}>
                     {dataTranslated && <>
                         <div className={`box-sx `} >
                             <h2 dangerouslySetInnerHTML={{ __html: dataTranslated.title }} />

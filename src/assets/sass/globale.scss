@@ -1118,6 +1118,22 @@ section.container.news {
     height: 100%;
     width: auto;
   }
+  .main {
+    .box-sx {
+      h2 {
+        font-size: 100px;
+      }
+    }
+  }
+  .box-sx {
+    h2 {
+      font-size: bold;
+    }
+    h3 {
+      text-transform: uppercase;
+      font-family: $text;
+    }
+  }
   .box-dx {
     h3 {
       font-size: 60px;
