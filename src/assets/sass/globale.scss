@@ -1141,20 +1141,23 @@ section.container.news {
     font-family: $title;
     color: $grey;
     font-weight: 200;
-    ul {
-      li {
-        margin: 1rem 0;
-        position: relative;
+    .box-sx {
+      > ul {
+        li {
+          margin: 1rem 0;
+          position: relative;
+        }
+
+        > li:first-child::before {
+          background-color: $brown;
+          content: "";
+          height: 100%;
+          left: -30px;
+          position: absolute;
+          top: 0px;
+          width: 8px;
+        }
       }
-    }
-    li:first-child::before {
-      background-color: $brown;
-      content: "";
-      height: 100%;
-      left: -30px;
-      position: absolute;
-      top: 0px;
-      width: 8px;
     }
     .titolo {
       font-size: 42px;

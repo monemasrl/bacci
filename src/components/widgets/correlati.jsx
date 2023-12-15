@@ -48,6 +48,7 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
      }
    `)
   console.log(listaProdottiNoQuery, 'listaProdottiNoQuery')
+
   function tipoCorrelazione() {
     if (categoriaProdotto) {
       const prodottiCorrelatiCategoria = categoriaProdotto && data.directus.Prodotti.filter((item, index) => {

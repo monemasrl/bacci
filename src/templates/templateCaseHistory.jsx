@@ -14,7 +14,8 @@ const TemplateCaseHistory = ({ pageContext }) => {
     const { locale, parentPath, content, title, allPagePath, listaApplicazioni, listaCategorie } = pageContext
     const dataTranslated = content && findItemTranslated(content.translations, locale)
     const seoFilterLocale = content.seo?.translations.find((item) => item.language_code.code === locale)
-    console.log(content, 'dataTranslated')
+    const contentForBlocchiPagina = content.blocchi?.filter((blocco) => blocco.item.traduzioni.some((traduzione) => traduzione.languages_code.code === locale))
+    console.log(contentForBlocchiPagina, 'contentForBlocchiPagina')
     return (
         <>
             {content && <Layout
@@ -66,6 +67,12 @@ const TemplateCaseHistory = ({ pageContext }) => {
                             </li>}
                             {content.related_machines && <li className="macchine">
                                 <div className="titolo">Bacci Machines</div>
+                                <ul>
+                                    {content.related_machines.map((item) => {
+                                        const translated = findItemTranslated(item.Prodotti_id.translations, locale)
+                                        if (translated) { return <li><Link to={`/${locale === 'it_IT' ? '' : locale + '/'}${Termini[locale].prodotti}/${translated.slug}`}>{translated.titolo}</Link></li> }
+                                    })}
+                                </ul>
                             </li>}
                             {content.share && <li className="share">
                                 <div className="titolo">Share</div>
@@ -78,7 +85,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
 
                 </section>
                 <section className={`container-fluid ${pageContext.pageName}`}>
-                    {content.blocchi?.map((blocco, index) => {
+                    {contentForBlocchiPagina?.map((blocco, index) => {
 
                         return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
                     })}
