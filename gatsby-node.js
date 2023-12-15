@@ -14,110 +14,13 @@ exports.createPages = async ({ graphql, actions }) => {
    * @var dataForLanguagePath - query dei dati per la costruzione del path delle pagine
    */
 
-  function slugify(str) {
-    return String(str)
-      .normalize("NFKD") // split accented characters into their base characters and diacritical marks
-      .replace(/[\u0300-\u036f]/g, "") // remove all the accents, which happen to be all in the \u03xx UNICODE block.
-      .trim() // trim leading or trailing whitespace
-      .toLowerCase() // convert to lowercase
-      .replace(/[^a-z0-9 -]/g, "") // remove non-alphanumeric characters
-      .replace(/\s+/g, "-") // replace spaces with hyphens
-      .replace(/-+/g, "-") // remove consecutive hyphens
-  }
-
-  const langTag = {
-    en_US: "en",
-    it_IT: "it",
-  }
-  const Termini = {
-    en_US: {
-      azienda: "company",
-      prodotti: "products",
-      tutti_prodotti: "all products",
-      tasto_ricerca: "Search for model",
-      eventi: "fair and events",
-      prodotti: "products",
-      macchine: "machines",
-      tecnologia: "tecnology",
-      correlati: "realted products",
-      caseHistory: "case-history",
-    },
-    it_IT: {
-      azienda: "azienda",
-      prodotti: "prodotti",
-      tutti_prodotti: "tutti i prodotti",
-      tasto_ricerca: "Ricerca Modello",
-      eventi: "eventi e fiere",
-      prodotti: "prodotti",
-      macchine: "macchine",
-      tecnologia: "tecnologia",
-      correlati: "prodotti correlati",
-      caseHistory: "case-history",
-    },
-  }
-  function findItemTranslated(translations, langCode) {
-    const itemTranslated = translations.find(lang => {
-      const code = lang.languages_code.code
-      return langTag[code] === langTag[langCode]
-    })
-    if (!itemTranslated) {
-      console.log("error, traduzione non trovata")
-    } else {
-      return itemTranslated
-    }
-  }
-  function getAllPathPagine(translations, parent) {
-    const allPath = []
-    translations.forEach(item => {
-      // cerca tra le traduzioni del parent path quella con la stessa lingua della traduzione corrente
-      const parentPath =
-        parent && parent.find(itemb => item.languages_code.code === itemb.lang)
-
-      const lang = item.languages_code.code
-      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
-      const path =
-        baseLang + (parentPath ? parentPath.parentPath : "") + item.slug
-      const pathObj = {
-        //solo se esiste uno slug in traduzione crea il path
-        path: item.slug && path,
-        locale: lang,
-        title: item.label,
-      }
-      allPath.push(pathObj)
-    })
-    return allPath
-  }
-
-  const findMenuItem = (menuName, itemToFind) => {
-    const menu = result.data.directus.menus.find(item => {
-      return item.name === menuName
-    })
-    let menuItem
-    if (menu) {
-      menuItem = menu.items.find(item => {
-        return item.name === itemToFind
-      })
-    } else {
-      throw new Error("menu non trovato")
-    }
-    if (menuItem != undefined) {
-      return menuItem
-    }
-  }
-  function findItemsTranslated(translations, langCode) {
-    const itemTranslated = translations.filter(lang => {
-      const code = lang.languages_code.code
-      return langTag[code] === langTag[langCode]
-    })
-    if (!itemTranslated) {
-      console.log("error, traduzione non trovata")
-    } else {
-      return itemTranslated
-    }
-  }
+  //GRAPHQL
   const result = await graphql(`
     {
       directus {
+        languages {
+          code
+        }
         prodotto_categorie_translations {
           languages_code {
             code
@@ -417,7 +320,101 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  function slugify(str) {
+    return String(str)
+      .normalize("NFKD") // split accented characters into their base characters and diacritical marks
+      .replace(/[\u0300-\u036f]/g, "") // remove all the accents, which happen to be all in the \u03xx UNICODE block.
+      .trim() // trim leading or trailing whitespace
+      .toLowerCase() // convert to lowercase
+      .replace(/[^a-z0-9 -]/g, "") // remove non-alphanumeric characters
+      .replace(/\s+/g, "-") // replace spaces with hyphens
+      .replace(/-+/g, "-") // remove consecutive hyphens
+  }
+
+  const langTag = {
+    en_US: "en",
+    it_IT: "it",
+  }
+
+  const Termini = {
+    en_US: {
+      azienda: "company",
+      prodotti: "products",
+      tutti_prodotti: "all products",
+      tasto_ricerca: "Search for model",
+      eventi: "fair and events",
+      prodotti: "products",
+      macchine: "machines",
+      tecnologia: "tecnology",
+      correlati: "realted products",
+      caseHistory: "case-history",
+    },
+    it_IT: {
+      azienda: "azienda",
+      prodotti: "prodotti",
+      tutti_prodotti: "tutti i prodotti",
+      tasto_ricerca: "Ricerca Modello",
+      eventi: "eventi e fiere",
+      prodotti: "prodotti",
+      macchine: "macchine",
+      tecnologia: "tecnologia",
+      correlati: "prodotti correlati",
+      caseHistory: "case-history",
+    },
+  }
+
+  function getAllPathPagine(translations, parent) {
+    const allPath = []
+    translations.forEach(item => {
+      // cerca tra le traduzioni del parent path quella con la stessa lingua della traduzione corrente
+      const parentPath =
+        parent && parent.find(itemb => item.languages_code.code === itemb.lang)
+
+      const lang = item.languages_code.code
+      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+      const path =
+        baseLang + (parentPath ? parentPath.parentPath : "") + item.slug
+      const pathObj = {
+        //solo se esiste uno slug in traduzione crea il path
+        path: item.slug && path,
+        locale: lang,
+        title: item.label,
+      }
+      allPath.push(pathObj)
+    })
+    return allPath
+  }
+
+  const findMenuItem = (menuName, itemToFind) => {
+    const menu = result.data.directus.menus.find(item => {
+      return item.name === menuName
+    })
+    let menuItem
+    if (menu) {
+      menuItem = menu.items.find(item => {
+        return item.name === itemToFind
+      })
+    } else {
+      throw new Error("menu non trovato")
+    }
+    if (menuItem != undefined) {
+      return menuItem
+    }
+  }
+  function findItemsTranslated(translations, langCode) {
+    const itemTranslated = translations.filter(lang => {
+      const code = lang.languages_code.code
+      return langTag[code] === langTag[langCode]
+    })
+    if (!itemTranslated) {
+      console.log("error, traduzione non trovata")
+    } else {
+      return itemTranslated
+    }
+  }
+
   // Dati generici
+
   const applicazioni_en = findItemsTranslated(
     result.data.directus.applicazioni_translations,
     "en_US"
