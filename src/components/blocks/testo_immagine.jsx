@@ -29,7 +29,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                         {content.item.novita && <div className="novita">Novità</div>}
                         <h2 className="titoli" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />
                         <h3 className="sottotitolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo }} />
-                        <p>{content.item.traduzioni[0].paragrafo}</p>
+                        <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo }} />
                         {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
                     </div>
                     {content.item.images && <div className="image-gallery">
@@ -88,7 +88,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                         :
                         <h2 className="titoli" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />}
                     <h3 className="sottotitolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo }} />
-                    <p>{content.item.traduzioni[0].paragrafo}</p>
+                    <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo }} />
                     {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
                 </div>
 

@@ -1118,10 +1118,16 @@ section.container.news {
     height: 100%;
     width: auto;
   }
+  .main {
+    .box-sx {
+      h2 {
+        font-size: 100px;
+      }
+    }
+  }
   .box-sx {
     h2 {
       font-size: bold;
-      font-size: 100px;
     }
     h3 {
       text-transform: uppercase;
