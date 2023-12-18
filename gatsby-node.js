@@ -415,51 +415,47 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Dati generici
 
-  const applicazioni_en = findItemsTranslated(
-    result.data.directus.applicazioni_translations,
-    "en_US"
-  )
-  const applicazioni_it = findItemsTranslated(
-    result.data.directus.applicazioni_translations,
-    "it_IT"
-  )
-
-  const categorie_en = findItemsTranslated(
-    result.data.directus.prodotto_categorie_translations,
-    "en_US"
-  )
-  const categorie_it = findItemsTranslated(
-    result.data.directus.prodotto_categorie_translations,
-    "it_IT"
-  )
+  function tassonomieTraduzioni(lingue, dati) {
+    //per ogni lingua crea un oggetto con le tassonomie tradotte
+    const tassonomia = {}
+    lingue.forEach(lingua => {
+      console.log(dati, "dati")
+      tassonomia[lingua.code] = dati.filter(tassonomia => {
+        return tassonomia.languages_code.code === lingua.code
+      })
+    })
+    return tassonomia
+  }
 
   const tassonomiaProdotti = {
-    applicazioni: {
-      en_US: applicazioni_en,
-      it_IT: applicazioni_it,
-    },
+    applicazioni: tassonomieTraduzioni(
+      result.data.directus.languages,
+      result.data.directus.applicazioni_translations
+    ),
 
-    categorie: {
-      en_US: categorie_en,
-      it_IT: categorie_it,
-    },
+    categorie: tassonomieTraduzioni(
+      result.data.directus.languages,
+      result.data.directus.prodotto_categorie_translations
+    ),
   }
-  console.log(tassonomiaProdotti.applicazioni.en_US, "tassonomiaProdotti")
+
   // CREAZIONE HOMEPAGE
-  const homePage = {
-    translations: [
-      {
+  function translationHomePage(translations) {
+    //crea un array con i dati per le traduzioni della homepage
+    const data = translations.map(item => {
+      return {
         titolo: "Home",
-        languages_code: { code: "it_IT" },
-        slug: "",
-      },
-      {
-        titolo: "Home",
-        languages_code: { code: "en_US" },
-        slug: "en",
-      },
-    ],
+        languages_code: { code: item.code },
+        slug: item.code == "it_IT" ? "" : "en",
+      }
+    })
+    return data
   }
+
+  const homePage = {
+    translations: translationHomePage(result.data.directus.languages),
+  }
+
   homePage.translations.forEach(translation => {
     createPage({
       path: `/${

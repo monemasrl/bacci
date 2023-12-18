@@ -42,7 +42,7 @@ function CaseHistory({ locale }) {
                 {dataCaseHistory.map((item, index) => {
 
                     const translation = item.translations.find((item) => item.languages_code.code === locale)
-                    console.log(translation, 'translation')
+
                     const urlBase = langTag[translation.languages_code.code] === "it"
                         ? "/"
                         : "/" + langTag[translation.languages_code.code] + "/"

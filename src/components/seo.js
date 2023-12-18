@@ -24,7 +24,7 @@ function Seo({ description, lang, meta, title, seo }) {
       }
     `
   )
-  console.log(seo, "seo")
+
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
   function getDataSeoOpenGraph(seo) {

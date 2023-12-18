@@ -45,7 +45,7 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
   const langFilterFiereSorted = data.directus.Fiere.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
-  console.log(langFilterFiereSorted, 'langFilterFiereSorted')
+
   return (
     <>
       {langFilterFiereSorted && <section className="container widget-fiere">

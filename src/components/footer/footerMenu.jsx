@@ -103,7 +103,7 @@ function FooterMenu({ locale }) {
             if (item.name === 'Prodotti') {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
                 const listaCategorieTranslated = findItemsTranslated(data.directus.prodotto_categorie_translations, locale)
-                console.log(listaCategorieTranslated, 'listaCategorieTranslated')
+
                 if (parentItemTranslated) {
                     return (
                         <div className="footer-col">

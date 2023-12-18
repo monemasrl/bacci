@@ -5,13 +5,15 @@ import Header from "../header"
 import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
+import TestQueryNode from "../testQueryNode"
 
 const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, allPagePath, listaApplicazioni, listaCategorie, parentPath, tipo }) => {
 
 
-
+  TestQueryNode()
   return (
     <div className={`mainwrapper ${tipo}`}>
+
       <Seo lang={locale} title={pageTitle} seo={seo} />
 
       <div className={`container-fluid ${tipo}`}  >
