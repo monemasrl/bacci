@@ -412,17 +412,6 @@ exports.createPages = async ({ graphql, actions }) => {
       return menuItem
     }
   }
-  function findItemsTranslated(translations, langCode) {
-    const itemTranslated = translations.filter(lang => {
-      const code = lang.languages_code.code
-      return langTag[code] === langTag[langCode]
-    })
-    if (!itemTranslated) {
-      console.log("error, traduzione non trovata")
-    } else {
-      return itemTranslated
-    }
-  }
 
   // Dati generici
 
@@ -475,7 +464,18 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   // CREAZIONE PAGINE INTERNE
-
+  function getTemplate(name) {
+    switch (name) {
+      case "News":
+        return require.resolve("./src/templates/news.jsx")
+      case "Fiere":
+        return require.resolve("./src/templates/fiere.jsx")
+      case "Case History":
+        return require.resolve("./src/templates/caseHistory.jsx")
+      default:
+        return require.resolve("./src/templates/page.jsx")
+    }
+  }
   await result.data.directus.menus.forEach(menu => {
     // Loop su tutti i menu
     menu.items.forEach(item => {
@@ -491,7 +491,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
           createPage({
             path: `${urlBase}${translation.slug.toLowerCase()}`,
-            component: require.resolve("./src/templates/page.jsx"),
+            component: getTemplate(item.name),
             context: {
               locale: translation.languages_code.code,
               title: translation.label,
@@ -661,56 +661,6 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  //PAGINA NEWS
-  const paginaNews = {
-    translations: [
-      {
-        titolo: "news",
-        languages_code: { code: "it_IT" },
-        slug: "news",
-      },
-      {
-        titolo: "news",
-        languages_code: { code: "en_US" },
-        slug: "news",
-      },
-    ],
-  }
-
-  paginaNews.translations.forEach(translation => {
-    const urlBase =
-      langTag[translation.languages_code.code] === "it"
-        ? "/"
-        : "/" + langTag[translation.languages_code.code] + "/"
-
-    if (translation.slug) {
-      createPage({
-        path: `${urlBase}${translation.slug.toLowerCase()}`,
-        component: require.resolve("./src/templates/news.jsx"),
-        context: {
-          locale: translation.languages_code.code,
-          slug: translation.slug,
-          title: translation.titolo,
-          listaApplicazioni:
-            tassonomiaProdotti.applicazioni[translation.languages_code.code],
-          listaCategorie:
-            tassonomiaProdotti.categorie[translation.languages_code.code],
-          allPagePath: [
-            {
-              path: "/news/",
-              locale: "it_IT",
-              title: "news",
-            },
-            {
-              path: "/en/news",
-              locale: "en_US",
-              title: "news",
-            },
-          ],
-        },
-      })
-    }
-  })
   // SINGOLA NEWS
   const news = await result.data.directus.posts
   function getAllPathNews(translations) {
@@ -756,49 +706,9 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     })
   })
-  //PAGINA FIERE
-  const paginaFiereMenuItem = findMenuItem("Top Menu", "Fiere")
-
-  function getAllPathFiera(translations) {
-    const allPath = []
-    translations.forEach(item => {
-      const lang = item.languages_code.code
-      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
-      const path = baseLang + item.slug + "/"
-      const pathObj = {
-        path: path,
-        locale: lang,
-        title: item.label,
-      }
-      allPath.push(pathObj)
-    })
-    return allPath
-  }
-  paginaFiereMenuItem.translations.forEach(translation => {
-    const urlBase =
-      langTag[translation.languages_code.code] === "it"
-        ? "/"
-        : "/" + langTag[translation.languages_code.code] + "/"
-
-    if (translation.slug) {
-      createPage({
-        path: `${urlBase}${translation.slug.toLowerCase()}`,
-        component: require.resolve("./src/templates/fiere.jsx"),
-        context: {
-          locale: translation.languages_code.code,
-          slug: translation.slug,
-          title: translation.label,
-          allPagePath: getAllPathFiera(paginaFiereMenuItem.translations),
-          listaApplicazioni:
-            tassonomiaProdotti.applicazioni[translation.languages_code.code],
-          listaCategorie:
-            tassonomiaProdotti.categorie[translation.languages_code.code],
-        },
-      })
-    }
-  })
 
   // SINGOLA FIERA
+  const paginaFiereMenuItem = findMenuItem("Top Menu", "Fiere")
   const fiere = await result.data.directus.Fiere
   function getAllPathFiere(translations) {
     const allPath = []
@@ -806,7 +716,6 @@ exports.createPages = async ({ graphql, actions }) => {
       const parentPathFromMenu = paginaFiereMenuItem.translations.find(
         itemb => item.languages_code.code === itemb.languages_code.code
       )
-
       const lang = item.languages_code.code
       const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
       const path = baseLang + parentPathFromMenu.label + "/" + item.slug
@@ -901,6 +810,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 }
+
 //Per attivare la source  map sul scss
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
