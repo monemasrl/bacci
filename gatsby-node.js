@@ -331,6 +331,17 @@ exports.createPages = async ({ graphql, actions }) => {
       .replace(/-+/g, "-") // remove consecutive hyphens
   }
 
+  function tassonomieTraduzioni(lingue, dati) {
+    //per ogni lingua crea un oggetto con le tassonomie tradotte
+    const tassonomia = {}
+    lingue.forEach(lingua => {
+      tassonomia[lingua.code] = dati.filter(tassonomia => {
+        return tassonomia.languages_code.code === lingua.code
+      })
+    })
+    return tassonomia
+  }
+
   const langTag = {
     en_US: "en",
     it_IT: "it",
@@ -415,18 +426,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // Dati generici
 
-  function tassonomieTraduzioni(lingue, dati) {
-    //per ogni lingua crea un oggetto con le tassonomie tradotte
-    const tassonomia = {}
-    lingue.forEach(lingua => {
-      console.log(dati, "dati")
-      tassonomia[lingua.code] = dati.filter(tassonomia => {
-        return tassonomia.languages_code.code === lingua.code
-      })
-    })
-    return tassonomia
-  }
-
   const tassonomiaProdotti = {
     applicazioni: tassonomieTraduzioni(
       result.data.directus.languages,
@@ -440,13 +439,14 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // CREAZIONE HOMEPAGE
+
   function translationHomePage(translations) {
     //crea un array con i dati per le traduzioni della homepage
     const data = translations.map(item => {
       return {
-        titolo: "Home",
-        languages_code: { code: item.code },
-        slug: item.code == "it_IT" ? "" : "en",
+        title: "Home",
+        locale: item.code,
+        path: item.code == "it_IT" ? "/" : "/en",
       }
     })
     return data
@@ -459,32 +459,17 @@ exports.createPages = async ({ graphql, actions }) => {
   homePage.translations.forEach(translation => {
     createPage({
       path: `/${
-        translation.languages_code.code == "it_IT"
-          ? ""
-          : langTag[translation.languages_code.code] + "/"
+        translation.locale == "it_IT" ? "" : langTag[translation.locale] + "/"
       }`,
       component: require.resolve("./src/templates/page.jsx"),
       context: {
-        locale: translation.languages_code.code,
-        slug: "home",
-        title: translation.titolo,
-        listaApplicazioni:
-          tassonomiaProdotti.applicazioni[translation.languages_code.code],
-        listaCategorie:
-          tassonomiaProdotti.categorie[translation.languages_code.code],
-        pageName: "home",
-        allPagePath: [
-          {
-            path: "/",
-            locale: "it_IT",
-            title: "Home",
-          },
-          {
-            path: "/en",
-            locale: "en_US",
-            title: "Home",
-          },
-        ],
+        locale: translation.locale,
+        slug: translation.title.toLowerCase(),
+        title: translation.title,
+        listaApplicazioni: tassonomiaProdotti.applicazioni[translation.locale],
+        listaCategorie: tassonomiaProdotti.categorie[translation.locale],
+        pageName: translation.title.toLowerCase(),
+        allPagePath: homePage.translations,
       },
     })
   })
@@ -580,51 +565,49 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   //PAGINA PRODOTTI
+
+  function translationProdottiPage(translations, langTag) {
+    //crea un array con i dati per le traduzioni della homepage
+    const data = translations.map(item => {
+      return {
+        title: item.code == "it_IT" ? "prodotti" : "products",
+        locale: item.code,
+        path:
+          item.code == "it_IT"
+            ? "/prodotti"
+            : "/" + langTag[item.code] + item.code == "it_IT"
+            ? "prodotti"
+            : "products",
+      }
+    })
+    return data
+  }
+
   const paginaProdotto = {
-    translations: [
-      {
-        titolo: "prodotti",
-        languages_code: { code: "it_IT" },
-        slug: "prodotti",
-      },
-      {
-        titolo: "products",
-        languages_code: { code: "en_US" },
-        slug: "products",
-      },
-    ],
+    translations: translationProdottiPage(
+      result.data.directus.languages,
+      langTag
+    ),
   }
 
   paginaProdotto.translations.forEach(translation => {
     const urlBase =
-      langTag[translation.languages_code.code] === "it"
+      langTag[translation.locale] === "it"
         ? "/"
-        : "/" + langTag[translation.languages_code.code] + "/"
+        : "/" + langTag[translation.locale] + "/"
 
-    if (translation.slug) {
+    if (translation.title) {
       createPage({
-        path: `${urlBase}${translation.slug.toLowerCase()}`,
+        path: `${urlBase}${translation.title.toLowerCase()}`,
         component: require.resolve("./src/templates/prodotti.jsx"),
         context: {
-          locale: translation.languages_code.code,
-          slug: translation.slug,
-          title: translation.titolo,
+          locale: translation.locale,
+          slug: translation.title.toLowerCase(),
+          title: translation.title,
           listaApplicazioni:
-            tassonomiaProdotti.applicazioni[translation.languages_code.code],
-          listaCategorie:
-            tassonomiaProdotti.categorie[translation.languages_code.code],
-          allPagePath: [
-            {
-              path: "/prodotti/",
-              locale: "it_IT",
-              title: "prodotti",
-            },
-            {
-              path: "/en/products",
-              locale: "en_US",
-              title: "products",
-            },
-          ],
+            tassonomiaProdotti.applicazioni[translation.locale],
+          listaCategorie: tassonomiaProdotti.categorie[translation.locale],
+          allPagePath: paginaProdotto.translations,
         },
       })
     }
