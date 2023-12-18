@@ -6,12 +6,12 @@ import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
 
+
 const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, allPagePath, listaApplicazioni, listaCategorie, parentPath, tipo }) => {
-
-
 
   return (
     <div className={`mainwrapper ${tipo}`}>
+
       <Seo lang={locale} title={pageTitle} seo={seo} />
 
       <div className={`container-fluid ${tipo}`}  >

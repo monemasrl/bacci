@@ -109,7 +109,7 @@ export const query = graphql`
 
 
 const Prodotti = ({ data, location, pageContext }) => {
-
+  console.log(pageContext.locale, 'locale')
   const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
 
   /**

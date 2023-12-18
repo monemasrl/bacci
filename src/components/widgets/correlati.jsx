@@ -47,7 +47,7 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
        }
      }
    `)
-  console.log(listaProdottiNoQuery, 'listaProdottiNoQuery')
+
 
   function tipoCorrelazione() {
     if (categoriaProdotto) {
@@ -79,7 +79,7 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
           <h2>{Termini[locale].correlati}</h2>
           <div className="container">
             {tipoCorrelazione().map((item) => {
-              console.log(item, 'test')
+
               const prodottoTradotto = findItemTranslated(item.translations, locale)
               if (prodottoTradotto) {
                 return (

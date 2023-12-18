@@ -226,7 +226,7 @@ const FormContatti = ({ lang }) => {
                 name="contatti"
                 netlify-honeypot="bot-field"
                 onSubmit={handleSubmit((data) => {
-                    console.log(data, 'form data')
+
                     toast(Termini[lang].formSuccess)
                     fetch("/", {
                         method: "POST",

@@ -119,7 +119,7 @@ export const query = graphql`
 const Pagine = ({ data, pageContext }) => {
 
 
-  console.log(data.directus.pages[0], 'pageContext')
+
   return (
     <>
       {pageContext && data ?
