@@ -38,6 +38,15 @@ header {
         color: white;
         &.newsh2 {
           cursor: pointer;
+          @media #{$desktop} {
+            flex-direction: column;
+            text-align: left;
+          }
+          span:last-child {
+            @media #{$desktop} {
+              font-size: 30px;
+            }
+          }
         }
       }
     }

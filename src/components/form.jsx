@@ -69,7 +69,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                 <div className="box-form">
                     <label htmlFor="nome">
                         <input
-                            placeholder="nome"
+                            placeholder={Termini[lang].nome}
                             type="text"
                             name="nome"
                             id="nome"
@@ -88,7 +88,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                     </label>
                     <label htmlFor="cognome">
                         <input
-                            placeholder="cognome"
+                            placeholder={Termini[lang].cognome}
                             type="text"
                             name="cognome"
                             id="cognome"
@@ -118,7 +118,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                                 message: Termini[lang].formMinimoCaratteri
                             }
                         })
-                        } placeholder="azienda" type="text" name="azienda" id="azienda" />
+                        } placeholder={Termini[lang].azienda} type="text" name="azienda" id="azienda" />
                         {errors.azienda && <p>{errors.azienda?.message}</p>}
                     </label>
                     <label htmlFor="email">
@@ -148,7 +148,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                                 message: Termini[lang].formMessaggio
                             }
                         })
-                        } rows={6} placeholder="messaggio" name="messaggio" id="messaggio" />
+                        } rows={6} placeholder={Termini[lang].messaggio} name="messaggio" id="messaggio" />
                         {errors.messaggio && <p>{errors.messaggio?.message}</p>}
                     </label>
                 </div>
@@ -206,6 +206,7 @@ const FormContatti = ({ lang }) => {
             .join("&");
     }
 
+    console.log(lang, 'langform')
 
     return (
         <div className="wrapper-form" >
@@ -246,7 +247,7 @@ const FormContatti = ({ lang }) => {
                 <div className="box-form">
                     <label htmlFor="contattiNome">
                         <input
-                            placeholder="nome"
+                            placeholder={Termini[lang].nome}
                             type="text"
                             name="nome"
                             id="contattiNome"
@@ -265,7 +266,7 @@ const FormContatti = ({ lang }) => {
                     </label>
                     <label htmlFor="contattiCognome">
                         <input
-                            placeholder="cognome"
+                            placeholder={Termini[lang].cognome}
                             type="text"
                             name="cognome"
                             id="contattiCognome"
@@ -285,7 +286,7 @@ const FormContatti = ({ lang }) => {
                 </div>
                 <div className="box-form">
                     <label htmlFor="contattiAzienda">
-                        <input placeholder="azienda" type="text" name="azienda" id="contattiAzienda"
+                        <input placeholder={Termini[lang].azienda} type="text" name="azienda" id="contattiAzienda"
                             {...register("contattiAzienda", {
                                 required: {
                                     value: true,
@@ -316,7 +317,7 @@ const FormContatti = ({ lang }) => {
                 </div>
                 <div className="box-form-message">
                     <label htmlFor="contattiMessaggio">
-                        <textarea rows={6} placeholder="messaggio" name="messaggio" id="contattiMessaggio" {...register("contattiMessaggio", {
+                        <textarea rows={6} placeholder={Termini[lang].messaggio} name="messaggio" id="contattiMessaggio" {...register("contattiMessaggio", {
                             required: {
                                 value: true,
                                 message: Termini[lang].formRequired

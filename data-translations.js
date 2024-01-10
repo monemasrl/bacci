@@ -8,6 +8,10 @@ export const langTag = {
 }
 export const Termini = {
   en_US: {
+    nome: "name",
+    cognome: "last name",
+    azienda: "company",
+    messaggio: "message",
     footerForm:
       "<h2>EN Hai bisogno di <strong>informazioni?</strong></h2><p>Se desideri avere maggiori informazioni sulla nostra Azienda e sui nostri prodotti, scrivici compilando il form. il nostro Staff ti risponderà presto!</p>",
     tastoRicerca: "Search for model",
@@ -47,6 +51,10 @@ export const Termini = {
     citta: "city",
   },
   it_IT: {
+    nome: "nome",
+    cognome: "cognome",
+    azienda: "azienda",
+    messaggio: "messaggio",
     footerForm:
       "<h2>Hai bisogno di <strong>informazioni?</strong></h2><p>Se desideri avere maggiori informazioni sulla nostra Azienda e sui nostri prodotti, scrivici compilando il form. il nostro Staff ti risponderà presto!</p>",
     tastoRicerca: "Ricerca Modello",
