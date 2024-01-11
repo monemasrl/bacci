@@ -3,7 +3,7 @@ import LayoutProdotto from "../components/layout/layout-prodotto";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Correlati from "../components/widgets/correlati";
 import { findItemTranslated } from "../utils";
-
+import { Link } from "gatsby";
 
 const Prodotto = ({ pageContext }) => {
 
@@ -11,8 +11,26 @@ const Prodotto = ({ pageContext }) => {
     } = pageContext
     const dataProdottoTranslated = findItemTranslated(content.translations, locale)
     const categoriaProdotto = content.categoria && findItemTranslated(content.categoria.translations, locale)
-
     const seoFilterLocale = content.seo?.translations.find((item) => item.language_code.code === locale)
+
+    function softwareContent(productSoftwareData, lang) {
+        if (productSoftwareData) {
+            const traduzioniSezioneSoftware = findItemTranslated(productSoftwareData.translations, locale)
+            let path
+            if (lang === 'it_IT') {
+                path = `/prodotti/${traduzioniSezioneSoftware.titolo.toLowerCase()}/`
+            }
+            if (lang === 'en_US') {
+                path = `/en/products/${traduzioniSezioneSoftware.titolo.toLowerCase()}/`
+            }
+            const immagine = productSoftwareData.immagine && productSoftwareData.immagine.imageFile.childImageSharp.gatsbyImageData
+
+            return { ...traduzioniSezioneSoftware, path, immagine }
+        } else {
+            return undefined
+        }
+    }
+    const softwareData = softwareContent(content.product_software, locale)
 
     return (
         <>
@@ -37,7 +55,6 @@ const Prodotto = ({ pageContext }) => {
                         </div>
                         <div className="box-dx">
                             <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.titolo} />
-
                         </div>
                     </section>
                     {content.sezioni_prodotto.map((item) => {
@@ -57,7 +74,17 @@ const Prodotto = ({ pageContext }) => {
                         )
 
                     })}
-
+                    {softwareData ?
+                        <section className="container sezione-3 center">
+                            <h2 className="titolo">Software</h2>
+                            <div className="box-immagine">
+                                {softwareData.immagine && <GatsbyImage image={softwareData.immagine} alt={'product software'} />}
+                            </div>
+                            <p>{softwareData.sottotitolo}</p>
+                            <div>
+                                <Link class="button-sezione" to={softwareData.path}>{softwareData.titolo}</Link>
+                            </div>
+                        </section> : ''}
                     {content.type === "machinery" && <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} limiteVisualizzazione={3} />}
                 </div>
             </LayoutProdotto>

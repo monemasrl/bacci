@@ -147,6 +147,25 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
           }
+          product_software {
+            translations {
+              languages_code {
+                code
+              }
+              titolo
+              sottotitolo
+            }
+            immagine {
+              id
+              imageFile {
+                id
+                childImageSharp {
+                  id
+                  gatsbyImageData
+                }
+              }
+            }
+          }
           featured
           translations {
             languages_code {
