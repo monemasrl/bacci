@@ -18,10 +18,10 @@ const Prodotto = ({ pageContext }) => {
             const traduzioniSezioneSoftware = findItemTranslated(productSoftwareData.translations, locale)
             let path
             if (lang === 'it_IT') {
-                path = `/prodotti/${traduzioniSezioneSoftware.titolo.toLowerCase()}/`
+                path = `/prodotti/${traduzioniSezioneSoftware.slug}/`
             }
             if (lang === 'en_US') {
-                path = `/en/products/${traduzioniSezioneSoftware.titolo.toLowerCase()}/`
+                path = `/en/products/${traduzioniSezioneSoftware.slug}/`
             }
             const immagine = productSoftwareData.immagine && productSoftwareData.immagine.imageFile.childImageSharp.gatsbyImageData
 

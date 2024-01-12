@@ -154,6 +154,7 @@ exports.createPages = async ({ graphql, actions }) => {
               }
               titolo
               sottotitolo
+              slug
             }
             immagine {
               id
