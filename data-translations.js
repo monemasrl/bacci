@@ -8,6 +8,9 @@ export const langTag = {
 }
 export const Termini = {
   en_US: {
+    cookieTesto:
+      "This site uses cookies to improve the browsing experience of users and to collect information on the use of the site itself. We use both technical cookies and third-party cookies to send promotional messages based on user behavior. You can know the details by consulting our privacy policy here. By continuing to browse, you accept the use of cookies; otherwise it is possible to leave the site.",
+    cookieButton: "Accept",
     nome: "name",
     cognome: "last name",
     azienda: "company",
@@ -51,6 +54,9 @@ export const Termini = {
     citta: "city",
   },
   it_IT: {
+    cookieTesto:
+      "Questo sito utilizza cookie per migliorare l'esperienza di navigazione degli utenti e per raccogliere informazioni sull'utilizzo del sito stesso. Utilizziamo sia cookie tecnici sia cookie di parti terze per inviare messaggi promozionali sulla base dei comportamenti degli utenti. Può conoscere i dettagli consultando la nostra privacy policy qui. Proseguendo nella navigazione si accetta l'uso dei cookie; in caso contrario è possibile abbandonare il sito.",
+    cookieButton: "Accetto",
     nome: "nome",
     cognome: "cognome",
     azienda: "azienda",
