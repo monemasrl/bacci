@@ -4,6 +4,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   sharp.cache(false)
   sharp.simd(false)
+
   /**
    * Creazione contenuti
    * @date 02/11/2023 - 17:51:04
@@ -115,6 +116,7 @@ exports.createPages = async ({ graphql, actions }) => {
             content
           }
           image {
+            description
             id
             imageFile {
               id
@@ -140,6 +142,7 @@ exports.createPages = async ({ graphql, actions }) => {
           type
           immagine {
             id
+            description
             imageFile {
               id
               childImageSharp {
@@ -157,6 +160,7 @@ exports.createPages = async ({ graphql, actions }) => {
               slug
             }
             immagine {
+              description
               id
               imageFile {
                 id
@@ -200,6 +204,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
           sezioni_prodotto {
             immagine {
+              description
               id
               imageFile {
                 id
@@ -248,6 +253,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 slug
               }
               immagine {
+                description
                 id
                 imageFile {
                   id
@@ -302,6 +308,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   }
                 }
                 immagine {
+                  description
                   id
                   imageFile {
                     id

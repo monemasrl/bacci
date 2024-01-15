@@ -81,6 +81,7 @@ export const query = graphql`
       }
       sezioni_prodotto{
         immagine{
+          description
           id
           imageFile{
             id

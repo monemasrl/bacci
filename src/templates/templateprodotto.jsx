@@ -54,7 +54,7 @@ const Prodotto = ({ pageContext }) => {
                             <p dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.paragrafo }} />
                         </div>
                         <div className="box-dx">
-                            <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.titolo} />
+                            <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.immagine.description || dataProdottoTranslated.titolo} />
                         </div>
                     </section>
                     {content.sezioni_prodotto.map((item) => {
@@ -67,7 +67,7 @@ const Prodotto = ({ pageContext }) => {
                                     <p>{dataProdottoTranslated.paragrafo}</p>
                                 </div>
                                 <div className="box-dx">
-                                    <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={dataProdottoTranslated.titolo} />
+                                    <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || dataProdottoTranslated.titolo} />
                                 </div>
                             </section>
 

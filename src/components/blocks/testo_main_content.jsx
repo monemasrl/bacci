@@ -16,7 +16,7 @@ function TestoMainContent({ content, featuredImage }) {
                 </div>
 
                 {featuredImage && <div className="box-dx">
-                    <GatsbyImage image={featuredImage} alt={'test'} />
+                    <GatsbyImage image={featuredImage} alt={content.main_content_titolo || 'Bacci website image'} />
                 </div>}</>}
         </section>
     )

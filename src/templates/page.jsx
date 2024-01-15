@@ -30,6 +30,7 @@ export const query = graphql`
     }
       featured_image{
       id
+      description
       imageFile{
         id
         childImageSharp{
@@ -55,6 +56,7 @@ export const query = graphql`
               name
               sort
               image{
+                description
                 id
               imageFile{
                 id
@@ -76,6 +78,7 @@ export const query = graphql`
             allineamento
             id
             immagine{
+              description
               id
               imageFile{
                 id

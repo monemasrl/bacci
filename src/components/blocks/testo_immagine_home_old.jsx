@@ -25,7 +25,7 @@ function TestoImmagineHome({ index, allineamento, content }) {
                     </div>
 
                     <div className="box-dx">
-                        <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
+                        <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.item.immagine.description || 'Bacci website image'} />
                     </div></>}
             </motion.section>
         )

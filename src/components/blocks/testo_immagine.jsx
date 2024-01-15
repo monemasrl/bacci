@@ -22,7 +22,6 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                         duration: 1,
                     }
                 } : { opacity: 0, y: 100 }}
-
             >
                 {content.item.traduzioni.length > 0 && <>
                     <div className={`box-sx`} >
@@ -35,13 +34,13 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                     {content.item.images && <div className="image-gallery">
                         {content.item.images.map((item) => {
                             return <div className="boxImage">
-                                <GatsbyImage image={item.directus_files_id.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
+                                <GatsbyImage image={item.directus_files_id.imageFile.childImageSharp.gatsbyImageData} alt={item.description || 'Bacci website image'} />
                             </div>
                         })}
                     </div>}
 
                     {content.item.immagine && <div className="box-dx">
-                        <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
+                        <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.item.immagine.description || 'Bacci website image'} />
                     </div>}</>}
             </motion.section>
         )
@@ -61,7 +60,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
 
                 </div>
                 <div className="box-immagine">
-                    {content.item.immagine && <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
+                    {content.item.immagine && <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.item.immagine.description || 'Bacci website image'} />}
                 </div>
                 <div className="box-dx">
                     <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo }} />
@@ -93,7 +92,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                 </div>
 
                 {content.item.immagine && <div className="box-dx">
-                    <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
+                    <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.item.immagine.description || 'Bacci website image'} />
                 </div>}</>}
         </motion.section>)
     }
