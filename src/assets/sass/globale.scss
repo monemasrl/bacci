@@ -668,9 +668,9 @@ section.container.repeater {
     p {
       color: $grey;
       font-family: Oswald;
-      font-size: 38px;
+      font-size: 44px;
+      line-height: 52px;
       margin-top: 2rem;
-      line-height: 43px;
     }
 
     .novita {
@@ -698,7 +698,7 @@ section.container.repeater {
       }
     }
     h2 {
-      @include h2-sezioni(72px, 120px);
+      @include h2-sezioni(72px, 100px);
       line-height: 1;
       @media #{$landscape} {
         font-size: 12vw;
