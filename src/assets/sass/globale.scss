@@ -344,10 +344,10 @@ p.sottotitolo {
   text-align: center;
 }
 .button-sezione {
-  border: 1px solid $lightGrey;
+  border: 1px solid $brown;
   border-radius: 30px;
-  color: #fff;
-  color: $grey;
+
+  color: $brown;
   display: inline-block;
   font-size: 24px;
   line-height: 45px;
@@ -360,7 +360,7 @@ p.sottotitolo {
     font-size: 1rem;
   }
   &:hover {
-    background-color: $grey;
+    background-color: $brown;
     color: #fff;
     cursor: pointer;
   }
