@@ -1,32 +1,30 @@
 @import "../../assets/sass/variabili";
 
 .widget-fiere {
-  margin-top: 3rem;
-  flex-direction: column;
-  align-items: flex-start;
   > h2 {
     color: $brown;
     text-transform: uppercase;
-
     padding: 0 2rem;
     margin-left: 2rem;
     margin: 0 auto;
     font-weight: normal;
     max-width: 1540px;
-    width: 100%;
+    width: 90%;
+    margin-bottom: 2rem;
+  }
+  .footerSezione {
+    text-align: center;
   }
   .button-sezione {
     margin: 2rem auto 0rem auto;
   }
 }
 .widget-fiere-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  width: 100%;
-  margin-top: 2rem;
-  padding: 0 2rem;
   gap: 2rem;
+  padding: 0 2rem;
+  @media screen and (max-width: 1024px) {
+    padding: 0;
+  }
 }
 .box-fiere {
   margin: 2rem 1rem 1rem 1rem;
