@@ -114,22 +114,23 @@ const NavBarDirectus = (props) => {
 
                                 return (
                                     < >
-                                        {item.id === '2' ? <li key={item.id} role="button" tabIndex={0} onClick={() => props.setMega(true)}
-                                            onMouseLeave={() => props.setMega(false)}>
-                                            <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a>{itemTranslated.label}</a><img src={icon} width="20" alt="iconamenu" />
-                                            </div>
+                                        {item.id === '2' ?
+                                            <li key={item.id} role="button" tabIndex={0} onClick={() => props.setMega(true)}
+                                                onMouseLeave={() => props.setMega(false)}>
+                                                <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a>{itemTranslated.label}</a><img src={icon} width="20" alt="iconamenu" />
+                                                </div>
 
-                                            <MegamenuDirectus
-                                                terminiTraduzione={terminiTraduzione} mega={props.mega}
-                                                setMega={props.setMega}
-                                                locale={props.locale}
-                                                language={langTag[itemTranslated.languages_code.code]}
-                                                listaApplicazioni={props.listaApplicazioni}
-                                                listaCategorie={props.listaCategorie}
+                                                <MegamenuDirectus
+                                                    terminiTraduzione={terminiTraduzione} mega={props.mega}
+                                                    setMega={props.setMega}
+                                                    locale={props.locale}
+                                                    language={langTag[itemTranslated.languages_code.code]}
+                                                    listaApplicazioni={props.listaApplicazioni}
+                                                    listaCategorie={props.listaCategorie}
 
-                                            />
+                                                />
 
-                                        </li> :
+                                            </li> :
                                             <li role="button" tabIndex={0} onClick={() => setOpenSub(item.id)} onMouseLeave={() => setOpenSub(null)} key={item.id}>
                                                 {item.sub_items.length ? <a >{itemTranslated.label}<img src={icon} width="20" alt="iconamenu" /></a> :
                                                     itemTranslated.slug && <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul className={`${item.id === openSub ? 'open' : ''}`}>

@@ -173,19 +173,24 @@
       display: inline-block;
       margin: 0 2rem;
       cursor: pointer;
+      &:not(:first-child) {
+        position: relative;
+      }
       &:last-child {
         margin-right: 0;
       }
       img {
         margin-left: 8px;
       }
-      ul {
+      > ul {
         position: absolute;
         opacity: 0;
         z-index: -1;
         transition: all ease-in-out 0.3s;
         background-color: white;
-        padding: 0;
+        padding-top: 1rem;
+        left: -27px;
+        width: max-content;
         li {
           margin: 0;
 
