@@ -75,7 +75,7 @@ export const Termini = {
     prodotti: "prodotti",
     tutti_prodotti: "tutti i prodotti",
     tasto_ricerca: "Ricerca Modello",
-    eventi: "eventi e fiere",
+    eventi: "fiere ed eventi",
     accoglienza: "il nostro personale è pronto ad accoglierti",
     scopri: "scopri",
     macchine: "macchine",

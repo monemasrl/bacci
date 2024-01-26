@@ -76,6 +76,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
             }
           })}
         </div>
+        <Link className="button-sezione" to={`${locale === 'it_IT' ? "" : "/" + langTag[locale]}/${"news"}`} >News</Link>
       </section >}
     </>
   )

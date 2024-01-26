@@ -1,7 +1,11 @@
 @import "../../assets/sass/variabili";
 .widget-news {
   margin-top: 6rem;
-
+  display: flex;
+  flex-direction: column;
+  .button-sezione {
+    margin: 2rem auto 0rem auto;
+  }
   .box-correlati {
     margin-top: 1.5rem;
     padding: 0rem 1.5rem 1.5rem 1.5rem;
@@ -26,6 +30,7 @@
     font-weight: normal;
     max-width: 1540px;
   }
+
   .col-3 {
     border: 1px solid $brown;
     flex: 1 1;

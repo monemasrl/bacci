@@ -50,7 +50,7 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
     <>
       {langFilterFiereSorted && <section className="container widget-fiere">
         <h2>{Termini[locale].eventi}</h2>
-        <div className="widget-fiere-wrapper">
+        <div className="widget-fiere-wrapper container">
           {langFilterFiereSorted.map((item, index) => {
 
             const titleFiereTranslated = findItemTranslated(item.title_translations, locale)
@@ -73,6 +73,7 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
             }
           })}
         </div>
+        <Link className="button-sezione" to={`${locale === "it_IT" ? "" : "/" + langTag[locale]}/${Termini[locale].fiere}`} >{Termini[locale].fiere}</Link>
       </section>}
     </>
   )

@@ -668,6 +668,7 @@ section.container.repeater {
     p {
       color: $grey;
       font-family: Oswald;
+      font-weight: 300;
       font-size: 44px;
       line-height: 52px;
       margin-top: 2rem;
@@ -859,6 +860,7 @@ section.container.news {
   padding: 1rem;
   max-width: 460px;
   width: 100%;
+  flex: 1 1;
 
   &.evento {
     background-color: $brown;
