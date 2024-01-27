@@ -57,7 +57,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
           {langFilterNewsSorted.map((item, index) => {
             const prodottoTradotto = findItemTranslated(item.translations, locale)
             let date = new Date(Date.parse(item.date_created))
-            date = moment(date).locale(locale).format('DD MMMM YYYY')
+            date = moment(date).locale(locale).format('DD MM YYYY')
             if (index < limiteVisualizzazione) {
               return (
                 <div className="col-3">

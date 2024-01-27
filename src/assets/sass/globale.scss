@@ -493,6 +493,21 @@ section.container.repeater {
     flex-direction: column;
     margin: 2rem auto;
   }
+  .heading {
+    position: relative;
+    &::after {
+      background-color: #4a6c96;
+      content: "";
+      height: 100%;
+      left: -30px;
+      position: absolute;
+      top: 8px;
+      width: 8px;
+      @media screen and (max-width: 1024px) {
+        display: none;
+      }
+    }
+  }
   h3.sottotitolo {
     color: $grey;
 
@@ -541,18 +556,6 @@ section.container.repeater {
     }
     @media #{$phone} {
       font-size: 40px;
-    }
-    &:before {
-      background-color: $brown;
-      content: "";
-      height: 100%;
-      left: -30px;
-      position: absolute;
-      top: 8px;
-      width: 8px;
-      @media #{$landscape} {
-        display: none;
-      }
     }
   }
 }
