@@ -30,7 +30,7 @@
 
       &:last-child {
         font-size: 44px;
-        @media #{$large} {
+        @media #{$laptop} {
           font-size: 20px;
         }
       }

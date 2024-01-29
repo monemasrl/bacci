@@ -447,12 +447,16 @@ section.container.repeater {
     height: auto;
   }
   .gatsby-image-wrapper-constrained {
-    height: auto;
+    height: 640px;
+    @media #{$laptop} {
+      height: auto;
+    }
   }
   .box-sx {
     max-width: 670px;
     margin-right: 840px;
-    min-height: 703px;
+    min-height: 640px;
+
     @media #{$laptop} {
       max-width: 100%;
       margin-right: auto;
@@ -469,7 +473,7 @@ section.container.repeater {
     position: absolute;
     top: 0;
     right: -5.5%;
-    max-width: 52%;
+    max-width: 58%;
     @media #{$laptop} {
       position: relative;
       max-width: 100%;
@@ -633,11 +637,21 @@ section.container.repeater {
       margin: 1.5rem auto;
     }
   }
+
   .sezione-1 {
     margin-top: 8rem;
     @media #{$tablet} {
       margin-top: 2rem;
     }
+    &.index-1 {
+      .gatsby-image-wrapper-constrained {
+        height: 100%;
+      }
+    }
+    .gatsby-image-wrapper-constrained {
+      height: auto;
+    }
+
     h2 {
       font-size: 60px;
       @media #{$tablet} {
