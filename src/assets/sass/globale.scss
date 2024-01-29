@@ -378,11 +378,12 @@ section.container.repeater {
       width: 100%;
     }
     h3 {
-      color: $brown;
+      color: $grey;
       text-transform: uppercase;
       font-family: $title;
       font-size: 32px;
       margin-bottom: 0;
+      font-weight: normal;
       @media #{$landscape} {
         font-size: 24px;
       }
@@ -407,6 +408,7 @@ section.container.repeater {
       font-family: $text;
       font-size: 20px;
       line-height: 30px;
+      margin: 0.5rem 0;
       @media #{$landscape} {
         font-size: $PsizeMobile;
       }
@@ -1142,6 +1144,15 @@ section.container.news {
   height: 100vh;
 }
 .caseHistory {
+  a {
+    color: $grey;
+  }
+  .sezione-1 .box-dx {
+    flex: 0 1 auto;
+  }
+  .gatsby-image-wrapper-constrained {
+    height: auto;
+  }
   .sezione-3 .box-immagine .gatsby-image-wrapper-constrained {
     height: 100%;
     width: auto;
@@ -1160,6 +1171,13 @@ section.container.news {
     h3 {
       text-transform: uppercase;
       font-family: $text;
+    }
+  }
+  .share {
+    a {
+      color: $brown;
+      display: inline-block;
+      font-size: 3rem;
     }
   }
   .box-dx {
@@ -1204,7 +1222,7 @@ section.container.news {
       }
     }
     .titolo {
-      font-size: 42px;
+      font-size: 32px;
       font-weight: 400;
       text-transform: uppercase;
       color: $grey;

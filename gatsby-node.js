@@ -241,6 +241,7 @@ exports.createPages = async ({ graphql, actions }) => {
           city
           country
           social_shares
+          website
           related_machines {
             Prodotti_id {
               translations {

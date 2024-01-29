@@ -7,7 +7,9 @@ import { slugify } from "../utils";
 import { Link } from 'gatsby'
 import { Termini } from "../../data-translations";
 import Correlati from "../components/widgets/correlati";
-const moment = require('moment')
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+
+
 
 const TemplateCaseHistory = ({ pageContext }) => {
 
@@ -15,6 +17,35 @@ const TemplateCaseHistory = ({ pageContext }) => {
     const dataTranslated = content && findItemTranslated(content.translations, locale)
     const seoFilterLocale = content.seo?.translations.find((item) => item.language_code.code === locale)
     const contentForBlocchiPagina = content.blocchi?.filter((blocco) => blocco.item.traduzioni.some((traduzione) => traduzione.languages_code.code === locale))
+    console.log('casi', content)
+    const urlWithoutProtocol = new URL(content.website).host;
+
+    const iconSocial = {
+        facebook: FaFacebook,
+        instagram: FaInstagram,
+        linkedin: FaLinkedin,
+    }
+
+    function socialShare(socials, icons) {
+        const arraySocial = socials.map((social) => {
+
+            switch (social.social) {
+                case 'facebook': {
+                    return <a href={social.link} target="_blank" rel="noreferrer noopener"><icons.facebook /></a>
+                }
+                case 'instagram': {
+                    return <a href={social.link} target="_blank" rel="noreferrer noopener"><icons.instagram /></a>
+                }
+                case 'linkedin': {
+                    return <a href={social.link} target="_blank" rel="noreferrer noopener"><icons.linkedin /></a>
+                }
+
+            }
+
+        })
+        return arraySocial
+
+    }
 
     return (
         <>
@@ -63,7 +94,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                             </li>}
                             {content.website && <li className="website">
                                 <div className="titolo">Website</div>
-                                {content.website}
+                                <a href={content.website} target="_blank" rel="noreferrer noopener">{urlWithoutProtocol}</a>
                             </li>}
                             {content.related_machines && <li className="macchine">
                                 <div className="titolo">Bacci Machines</div>
@@ -74,8 +105,9 @@ const TemplateCaseHistory = ({ pageContext }) => {
                                     })}
                                 </ul>
                             </li>}
-                            {content.share && <li className="share">
+                            {content.social_shares && <li className="share">
                                 <div className="titolo">Share</div>
+                                {socialShare(content.social_shares, iconSocial)}
                             </li>}
                         </ul>
                     </div>

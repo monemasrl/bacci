@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { findItemTranslated, findItemsTranslated } from "../../utils"
 import { Link } from "gatsby"
 import { langTag } from "../../../data-translations"
-import { GrLink, GrLinkedin, GrYoutube } from "react-icons/gr";
+import { GrLinkedin, GrYoutube } from "react-icons/gr";
 
 
 function FooterMenu({ locale }) {
