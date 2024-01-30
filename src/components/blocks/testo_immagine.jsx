@@ -15,7 +15,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
 
     if (allineamento === 'left') {
         return (
-            <motion.section ref={left} className={`container sezione-1 ${allineamento} ${content.item.novita ? 'seznovita' : ''} ${'index-' + index}`}
+            <motion.section key={index} ref={left} className={`container sezione-1 ${allineamento} ${content.item.novita ? 'seznovita' : ''} ${'index-' + index}`}
                 animate={isInViewLeft ? {
                     opacity: 1, y: 0,
                     transition: {
@@ -34,8 +34,8 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                         {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
                     </div>
                     {content.item.images && <div className="image-gallery">
-                        {content.item.images.map((item) => {
-                            return <div className="boxImage">
+                        {content.item.images.map((item, index) => {
+                            return <div key={index} className="boxImage">
                                 <GatsbyImage image={item.directus_files_id.imageFile.childImageSharp.gatsbyImageData} alt={item.description || 'Bacci website image'} />
                             </div>
                         })}
@@ -48,7 +48,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
         )
     }
     if (allineamento === 'center') {
-        return (<motion.section ref={center} id={`${slugify(content.item.nome).toLowerCase()}`} className={`container-fluid sezione-3 ${allineamento} ${pageName}`}
+        return (<motion.section key={index} ref={center} id={`${slugify(content.item.nome).toLowerCase()}`} className={`container-fluid sezione-3 ${allineamento} ${pageName}`}
             animate={isInViewCenter ? {
                 opacity: 1, y: 0,
                 transition: {
@@ -72,7 +72,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
         </motion.section>)
     }
     if (allineamento === 'right') {
-        return (<motion.section ref={right} className={`container sezione-1 ${allineamento} ${content.item.novita ? 'seznovita' : ''} ${'index-' + index}`}
+        return (<motion.section key={index} ref={right} className={`container sezione-1 ${allineamento} ${content.item.novita ? 'seznovita' : ''} ${'index-' + index}`}
             animate={isInViewRight ? {
                 opacity: 1, y: 0,
                 transition: {

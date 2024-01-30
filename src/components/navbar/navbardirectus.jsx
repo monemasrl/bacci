@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import LangSwitcher from '../langSwitcher'
 import MegamenuDirectus from '../megamenu/megamenudir'
@@ -13,6 +13,18 @@ const NavBarDirectus = (props) => {
     query datimenu{
    
         directus{
+            applicazioni{
+      translations{
+        languages_code{
+          code
+        }
+        label
+      }
+  }
+  languages{
+  
+  code
+}
             menus{
                 name
                 items{
@@ -63,6 +75,22 @@ const NavBarDirectus = (props) => {
         }
     };
 
+    function tassonomieTraduzioni(lingue, dati) {
+        //per ogni lingua crea un oggetto con le tassonomie tradotte
+        const tassonomia = {}
+        lingue.forEach((item) => {
+            tassonomia[item.code] = []
+            dati.forEach((dato) => {
+                if (dato) {
+                    const findData = dato.translations.find((traduzione) => traduzione.languages_code.code === item.code)
+                    tassonomia[item.code].push(findData)
+                }
+            })
+        })
+        return tassonomia
+    }
+
+    console.log(tassonomieTraduzioni(data.directus.languages, data.directus.applicazioni), 'applicazioni_translations')
 
     return (
         <>
@@ -113,7 +141,7 @@ const NavBarDirectus = (props) => {
                                 })
 
                                 return (
-                                    < >
+                                    <Fragment key={item.id} >
                                         {item.id === '2' ?
                                             <li key={item.id} role="button" tabIndex={0} onClick={() => props.setMega(true)}
                                                 onMouseLeave={() => props.setMega(false)}>
@@ -149,7 +177,7 @@ const NavBarDirectus = (props) => {
 
                                                         })}
                                                     </ul> : ''}</li>}
-                                    </>
+                                    </Fragment>
                                 )
                             })}
                         </ul>}

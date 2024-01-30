@@ -2,7 +2,7 @@ import React from 'react';
 import { useRef } from 'react'
 import { useInView, motion } from 'framer-motion'
 
-function Cards({ content }) {
+function Cards({ content, index }) {
     const card = useRef(null)
     const isInViewRight = useInView(card, { once: true });
 
@@ -13,6 +13,7 @@ function Cards({ content }) {
     }
     return (
         <motion.section
+            key={index}
             ref={card}
             className={`container repeater cards ${alignCards(content.item.traduzioni[0].blocchi.length)}`}
             animate={isInViewRight ? {

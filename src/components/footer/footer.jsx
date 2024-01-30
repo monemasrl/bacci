@@ -2,14 +2,13 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { StaticImage } from "gatsby-plugin-image"
 import './footer.scss'
-import { langTag } from '../../../data-translations'
 import FooterMenu from './footerMenu'
 import { FormContatti } from '../form'
 import { Termini } from '../../../data-translations'
 
+
+
 const Footer = ({ locale }) => {
-
-
 
     return (
         <footer>
@@ -32,8 +31,9 @@ const Footer = ({ locale }) => {
                 <div className="container">
                     <div className="footer-col">
                         <StaticImage
-                            placeholder="none"
+                            placeholder="blurred"
                             width={239}
+                            height={50}
                             src="../../images/logo-footer.png" alt="Bacci logo" />
                     </div>
                     <div className="footer-col">

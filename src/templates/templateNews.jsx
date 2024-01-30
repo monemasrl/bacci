@@ -28,7 +28,7 @@ const Prodotto = ({ pageContext }) => {
       >
         <div className="wrapper-news">
           <GatsbyImage image={content.image.imageFile.childImageSharp.gatsbyImageData} alt={content.image.description || dataProdottoTranslated.title} />
-          <span class="datanews"> {moment(date).locale(pageContext.locale).format('DD MM YYYY')}</span>
+          <span className="datanews"> {moment(date).locale(pageContext.locale).format('DD MM YYYY')}</span>
 
           <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.content }} />
 

@@ -107,7 +107,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
     const novita = dataMega.directus.Prodotti.sort((item) => { if (item.type === "machinery") return item.date_create })
     const novitaLocalizzato = findItemTranslated(novita[0].translations, locale)
     const software = dataMega.directus.Prodotti.filter((item) => item.type === "software")
-
+    console.log(listaApplicazioni, 'listaApplicazioni')
 
     return (
 

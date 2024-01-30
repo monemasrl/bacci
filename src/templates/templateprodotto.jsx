@@ -82,7 +82,7 @@ const Prodotto = ({ pageContext }) => {
                             </div>
                             <p>{softwareData.sottotitolo}</p>
                             <div>
-                                <Link class="button-sezione" to={softwareData.path}>{softwareData.titolo}</Link>
+                                <Link className="button-sezione" to={softwareData.path}>{softwareData.titolo}</Link>
                             </div>
                         </section> : ''}
                     {content.type === "machinery" && <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} limiteVisualizzazione={3} />}

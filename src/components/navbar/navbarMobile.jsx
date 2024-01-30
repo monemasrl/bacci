@@ -13,6 +13,7 @@ const NavBarMobile = (props) => {
     query datimenu{
    
         directus{
+            
             menus{
                 name
                 items{
@@ -43,7 +44,7 @@ const NavBarMobile = (props) => {
     
             }
     `)
-    const terminiTraduzione = Termini[props.locale]
+
     const [open, setOpen] = React.useState(false)
 
     return (
@@ -80,7 +81,7 @@ const NavBarMobile = (props) => {
                                         return langTag[lang.languages_code.code] === langTag[props.locale]
                                     })
                                     return (
-                                        <li key={itemTranslated.label}>
+                                        <li key={index}>
                                             <Link to={`${langTag[props.locale] === 'it' ? '' : '/' + langTag[props.locale]}/${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
                                         </li>
                                     )
@@ -107,16 +108,16 @@ const NavBarMobile = (props) => {
                                     })
 
                                     return (
-                                        <React.Fragment key={item.label}>
+                                        <React.Fragment key={index}>
 
                                             <li key={item.id}>
                                                 {item.sub_items.length ? <a href='#'>{itemTranslated.label}</a> : <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul>
-                                                    {item.sub_items.map((subitem) => {
+                                                    {item.sub_items.map((subitem, index) => {
                                                         const subItemTranslated = subitem.translations.find((lang) => {
                                                             return langTag[lang.languages_code.code] === langTag[props.locale]
                                                         })
                                                         return (
-                                                            <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug.toLowerCase()}/${subItemTranslated.slug}`}>
+                                                            <li key={index}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug.toLowerCase()}/${subItemTranslated.slug}`}>
                                                                 {subItemTranslated.label}
                                                             </Link>
                                                             </li>

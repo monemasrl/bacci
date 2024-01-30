@@ -60,10 +60,10 @@ function Seo({ description, lang, meta, title, seo }) {
         content={seo?.meta_description || metaDescription}
       />
       <meta name="author" content={site.siteMetadata.author} />
-      <link rel="icon" href="/src/images/favicon.png" />
+
       {seo &&
         getDataSeoOpenGraph(seo).map((item, index) => {
-          return <meta property={index} {...item} />
+          return <meta key={index} property={index} {...item} />
         })}
     </Helmet>
   )

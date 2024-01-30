@@ -10,8 +10,8 @@ import CaseHistory from "../components/widgets/caseHistory"
 
 export const query = graphql`
  query($locale: String!, $slug: String!) {
-
   directus{
+
     social{
       social
     }    
@@ -140,7 +140,7 @@ const Pagine = ({ data, pageContext }) => {
           {data.directus.pages[0] &&
             <>
               {pageContext.pageName === "home" &&
-                <section class="jumbo-home">
+                <section className="jumbo-home">
                   <GatsbyImage loading="eager" className="jumbo-image" image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
                 </section>}
               {pageContext.pageName !== "home" &&

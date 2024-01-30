@@ -53,7 +53,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
     <>
       {langFilterNewsSorted && <section className="widget-news">
         {pageType !== "home" ? <h2>{Termini[locale].newsCorrelate}</h2> : <h2>{Termini[locale].ultime_news}</h2>}
-        {pageType !== "home" ? <p class="widget-news__sub">{Termini[locale].ultime_news_sub}</p> : ''}
+        {pageType !== "home" ? <p className="widget-news__sub">{Termini[locale].ultime_news_sub}</p> : ''}
         <div className="container">
           {langFilterNewsSorted.map((item, index) => {
             const prodottoTradotto = findItemTranslated(item.translations, locale)
@@ -61,9 +61,9 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
             date = moment(date).locale(locale).format('DD MM YYYY')
             if (index < limiteVisualizzazione) {
               return (
-                <div className="col-3">
+                <div key={index} className="col-3">
                   <div className="box-news">
-                    <GatsbyImage className="immagine-widget" image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.titolo} />
+                    <GatsbyImage className="immagine-widget" image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.title} />
                     <div className="box-correlati">
 
                       <div className="date">{date}</div>

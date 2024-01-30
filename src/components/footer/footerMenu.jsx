@@ -76,19 +76,19 @@ function FooterMenu({ locale }) {
     return (<section className='container footer2'>
 
 
-        {vociMenu().map((item) => {
+        {vociMenu().map((item, index) => {
             if (item.name === 'Azienda' || item.name === 'Tecnologia') {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
 
                 return (
-                    <div className="footer-col">
+                    <div key={index} className="footer-col">
                         <ul>
                             <li>{parentItemTranslated.label}</li>
-                            {item.sub_items.map((subitem) => {
+                            {item.sub_items.map((subitem, index) => {
                                 const itemTranslated = findItemTranslated(subitem.translations, locale)
                                 if (itemTranslated) {
                                     return (
-                                        <li key={itemTranslated.label}>
+                                        <li key={index}>
                                             <Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
                                         </li>
                                     )
@@ -106,11 +106,11 @@ function FooterMenu({ locale }) {
 
                 if (parentItemTranslated) {
                     return (
-                        <div className="footer-col">
+                        <div key={index} className="footer-col">
                             <ul>
                                 <li>{parentItemTranslated.label}</li>
-                                {listaCategorieTranslated.map((subitem) => {
-                                    return <li key={subitem.nome} ><Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`} state={{ categoria: subitem.nome }}>{subitem.nome}</Link></li>
+                                {listaCategorieTranslated.map((subitem, index) => {
+                                    return <li key={index} ><Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`} state={{ categoria: subitem.nome }}>{subitem.nome}</Link></li>
                                 })}
                             </ul>
                         </div>
@@ -123,7 +123,7 @@ function FooterMenu({ locale }) {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
                 if (parentItemTranslated) {
                     return (
-                        <div className="footer-col">
+                        <div key={index} className="footer-col">
                             <ul>
                                 <li> <Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`}>{parentItemTranslated.label.toLowerCase()}</Link></li>
                             </ul>
@@ -136,9 +136,9 @@ function FooterMenu({ locale }) {
         <div className="footer-col">
             <ul className="social">
                 <li>Follow us</li>
-                {data.directus.social.social.map((item) => {
+                {data.directus.social.social.map((item, index) => {
                     return (
-                        <li key={item.nome}>
+                        <li key={index}>
                             <a href={item.url} target="_blank" rel="noreferrer">
                                 {item.nome === 'Youtube' && <GrYoutube />}
                                 {item.nome === 'Linkedin' && <GrLinkedin />}
