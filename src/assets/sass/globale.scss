@@ -596,8 +596,9 @@ section.container.repeater {
   h3 {
     color: $grey;
     font-size: 24px;
-    font-family: $title;
+    font-family: $text;
     font-weight: 100;
+    line-height: 1.5;
   }
 
   .box-immagine {
@@ -1178,6 +1179,7 @@ section.container.news {
       color: $brown;
       display: inline-block;
       font-size: 3rem;
+      margin: 0 0.5rem;
     }
   }
   .box-dx {
@@ -1227,6 +1229,25 @@ section.container.news {
       text-transform: uppercase;
       color: $grey;
       margin-bottom: 5px;
+    }
+  }
+}
+
+.storia {
+  .sezione-1 {
+    .heading {
+      &::after {
+        background-color: #4a6c96;
+        content: "";
+        height: 120px;
+        left: -30px;
+        position: absolute;
+        top: 8px;
+        width: 8px;
+        @media screen and (max-width: 1024px) {
+          display: none;
+        }
+      }
     }
   }
 }
