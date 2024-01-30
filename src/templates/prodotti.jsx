@@ -201,12 +201,11 @@ const Prodotti = ({ data, location, pageContext }) => {
 
 
   const resultFromFilters = () => {
-    // Se ci sono filtri per applicazioni filtra i prodotti per applicazioni
+    // Se ci sono filtri settati per applicazioni filtra i prodotti per applicazioni
     const filtersResultApp = langFilterProdotto.filter((itema) => {
       return filtersApp.length > 0 && itema.applicazioni.some((itemb) => {
         return itemb.applicazioni_id.translations.some((itemc) => {
-
-          return filtersApp.includes(itemc.label)
+          if (itemc.label !== null) { return filtersApp.includes(itemc.label) }
         })
       })
     })
@@ -248,7 +247,7 @@ const Prodotti = ({ data, location, pageContext }) => {
   }
 
   const topArchivio = React.useRef()
-
+  console.log(pageContext.listaApplicazioni, 'listaApplicazioni')
   return (
     <>
       <Layout
@@ -269,12 +268,14 @@ const Prodotti = ({ data, location, pageContext }) => {
                   <input type="radio" checked={filtersCat.length === 0} value={'reset'} name="categorie" />
                   <label for="categorie">{termini.tutti_prodotti}</label></li>
                 {pageContext.listaCategorie.map((item) => {
-                  return (
-                    <li>
-                      <input type="radio" value={item.nome} name="categorie"
-                        checked={item.nome === filtersCat[0]} />
-                      <label for="categorie">{item.nome}</label>
-                    </li>)
+                  if (item !== null) {
+                    return (
+                      <li>
+                        <input type="radio" value={item.nome} name="categorie"
+                          checked={item.nome === filtersCat[0]} />
+                        <label for="categorie">{item.nome}</label>
+                      </li>)
+                  }
                 })}
               </ul>
             </form>
@@ -283,11 +284,13 @@ const Prodotti = ({ data, location, pageContext }) => {
                 <h3>{Termini[pageContext.locale].applicazione}</h3>
                 <ul>
                   {pageContext.listaApplicazioni.map((item, index) => {
-                    return (
-                      <li>
-                        <input type="checkbox" checked={filtersApp.includes(item.label)} value={item.label} id={item.label} name="applicazioni" />
-                        <label htmlFor={item.label}>{item.label}</label>
-                      </li>)
+                    if (item !== null) {
+                      return (
+                        <li key={index}>
+                          <input type="checkbox" checked={filtersApp.includes(item.label)} value={item.label} id={item.label} name="applicazioni" />
+                          <label htmlFor={item.label}>{item.label}</label>
+                        </li>)
+                    }
                   })}
                 </ul>
               </form>
