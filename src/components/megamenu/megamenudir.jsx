@@ -52,26 +52,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                     paragrafo
                     
                     }
-                    applicazioni{
-                    
-                    applicazioni_id{
-                        id
-                    
-                        translations{
-                        
-                        id
-                        label
-                        }
-                    }
-                    
-                    }
-                    categoria{
-                    id
-                    translations{
-                        id
-                        nome
-                    }
-                    }
+             
                     sezioni_prodotto{
                     immagine{
                         imageFile{
@@ -107,7 +88,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
     const novita = dataMega.directus.Prodotti.sort((item) => { if (item.type === "machinery") return item.date_create })
     const novitaLocalizzato = findItemTranslated(novita[0].translations, locale)
     const software = dataMega.directus.Prodotti.filter((item) => item.type === "software")
-    console.log(listaApplicazioni, 'listaApplicazioni')
+
 
     return (
 
@@ -187,7 +168,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                 {Termini[locale].applicazione}
                             </div>
                             <ul className="mega-list">
-                                {listaApplicazioni && listaApplicazioni.map((item) =>
+                                {listaApplicazioni && listaApplicazioni.map((item) => item &&
                                     <li>
                                         <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`} state={{ applicazione: item.label }}
                                             className="mega-item">{item.label}</Link></li>
@@ -206,7 +187,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                 {Termini[locale].tipologia}
                             </div>
                             <ul className="mega-list">
-                                {listaCategorie && listaCategorie.map((item) => <li>
+                                {listaCategorie && listaCategorie.map((item) => item && <li>
                                     <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`} state={{ categoria: item.nome }}
                                         className="mega-item">{item.nome}</Link></li>
                                 )}

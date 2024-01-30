@@ -10,21 +10,9 @@ import './navbar.scss'
 const NavBarDirectus = (props) => {
 
     const data = useStaticQuery(graphql`
-    query datimenu{
-   
-        directus{
-            applicazioni{
-      translations{
-        languages_code{
-          code
-        }
-        label
-      }
-  }
-  languages{
-  
-  code
-}
+query datimenu{
+    directus{
+
             menus{
                 name
                 items{
@@ -75,22 +63,6 @@ const NavBarDirectus = (props) => {
         }
     };
 
-    function tassonomieTraduzioni(lingue, dati) {
-        //per ogni lingua crea un oggetto con le tassonomie tradotte
-        const tassonomia = {}
-        lingue.forEach((item) => {
-            tassonomia[item.code] = []
-            dati.forEach((dato) => {
-                if (dato) {
-                    const findData = dato.translations.find((traduzione) => traduzione.languages_code.code === item.code)
-                    tassonomia[item.code].push(findData)
-                }
-            })
-        })
-        return tassonomia
-    }
-
-    console.log(tassonomieTraduzioni(data.directus.languages, data.directus.applicazioni), 'applicazioni_translations')
 
     return (
         <>

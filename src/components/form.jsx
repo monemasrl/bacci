@@ -206,7 +206,7 @@ const FormContatti = ({ lang }) => {
             .join("&");
     }
 
-    console.log(lang, 'langform')
+
 
     return (
         <div className="wrapper-form" >

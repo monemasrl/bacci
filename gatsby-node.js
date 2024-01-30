@@ -22,17 +22,21 @@ exports.createPages = async ({ graphql, actions }) => {
         languages {
           code
         }
-        prodotto_categorie_translations {
-          languages_code {
-            code
+        prodotto_categorie {
+          translations {
+            languages_code {
+              code
+            }
+            nome
           }
-          nome
         }
-        applicazioni_translations {
-          languages_code {
-            code
+        applicazioni {
+          translations {
+            languages_code {
+              code
+            }
+            label
           }
-          label
         }
         menus {
           name
@@ -362,9 +366,15 @@ exports.createPages = async ({ graphql, actions }) => {
   function tassonomieTraduzioni(lingue, dati) {
     //per ogni lingua crea un oggetto con le tassonomie tradotte
     const tassonomia = {}
-    lingue.forEach(lingua => {
-      tassonomia[lingua.code] = dati.filter(tassonomia => {
-        return tassonomia.languages_code.code === lingua.code
+    lingue.forEach(item => {
+      tassonomia[item.code] = []
+      dati.forEach(dato => {
+        if (dato) {
+          const findData = dato.translations.find(
+            traduzione => traduzione.languages_code.code === item.code
+          )
+          tassonomia[item.code].push(findData)
+        }
       })
     })
     return tassonomia
@@ -446,12 +456,12 @@ exports.createPages = async ({ graphql, actions }) => {
   const tassonomiaProdotti = {
     applicazioni: tassonomieTraduzioni(
       result.data.directus.languages,
-      result.data.directus.applicazioni_translations
+      result.data.directus.applicazioni
     ),
 
     categorie: tassonomieTraduzioni(
       result.data.directus.languages,
-      result.data.directus.prodotto_categorie_translations
+      result.data.directus.prodotto_categorie
     ),
   }
 

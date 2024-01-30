@@ -16,7 +16,7 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
     }
 
     const parentFolder = pathName ? pathName : ''
-    console.log(pageTitle, 'pageTitle')
+
     return (
         <div className="container-fluid breadcrumb">
 

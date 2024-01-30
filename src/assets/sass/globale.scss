@@ -960,6 +960,9 @@ section.container.news {
     margin-left: 90%;
     margin-bottom: 0px;
     position: relative;
+    @media #{$landscape} {
+      margin-left: 85%;
+    }
   }
 
   h2 {
@@ -980,6 +983,9 @@ section.container.news {
     font-size: 38px;
     color: $grey;
     margin-bottom: 1.5rem;
+    @media #{$landscape} {
+      font-size: 28px;
+    }
   }
   .datafiera {
     padding: 0;
@@ -1035,7 +1041,7 @@ section.container.news {
     .dataEventi {
       width: 100%;
       display: flex;
-      font-size: 72px;
+      font-size: 44px;
       font-family: $title;
       color: white;
       text-transform: uppercase;

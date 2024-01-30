@@ -3,7 +3,7 @@ import * as React from "react"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 function Hero({ content, pageName, index }) {
-    console.log('content', content)
+
 
     if (pageName === 'gruppo-bacci') return (
         <section key={index} className="map-gruppo-bacci">
