@@ -77,7 +77,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                     {item.image && <GatsbyImage image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={translated.title} />}
                                     <div className="box-correlati">
                                         <div className="date">
-                                            {moment(data).locale(lang).format('DD MM YYYY')}
+                                            {moment(data).locale(lang).format('DD.MM.YYYY')}
                                         </div>
                                         <h2>{translated.title}</h2>
                                         <p dangerouslySetInnerHTML={{ __html: translated.summary }} />

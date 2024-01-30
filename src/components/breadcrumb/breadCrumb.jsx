@@ -6,7 +6,7 @@ import { navigate } from "gatsby"
 const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale, tipo }) => {
 
     const parentFolder = pathName ? pathName : ''
-
+    console.log(pageTitle, 'pageTitle')
     return (
         <div className="container-fluid breadcrumb">
 
@@ -36,7 +36,7 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
 
                             (pageTitle.toLowerCase() === parentFolder.toLowerCase()) || !parentFolder ?
 
-                                <h2>{pageTitle}</h2>
+                                <h2>{pageTitle === 'News' ? 'Bacci News' : pageTitle}</h2>
                                 :
                                 <h2>
                                     <span>/{parentFolder && parentFolder}  <br /></span>

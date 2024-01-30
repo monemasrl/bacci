@@ -53,6 +53,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
     <>
       {langFilterNewsSorted && <section className="widget-news">
         {pageType !== "home" ? <h2>{Termini[locale].newsCorrelate}</h2> : <h2>{Termini[locale].ultime_news}</h2>}
+        {pageType !== "home" ? <p class="widget-news__sub">{Termini[locale].ultime_news_sub}</p> : ''}
         <div className="container">
           {langFilterNewsSorted.map((item, index) => {
             const prodottoTradotto = findItemTranslated(item.translations, locale)
