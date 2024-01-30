@@ -5,6 +5,16 @@ import { navigate } from "gatsby"
 
 const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale, tipo }) => {
 
+    function breadCrumbTitle(pageTitle, termini) {
+        if (pageTitle === 'News') {
+            return 'Bacci News'
+        }
+        else if (pageTitle === 'Fiere' || pageTitle === 'Exhibitions') {
+            return termini[locale].eventi
+        }
+        else { return pageTitle }
+    }
+
     const parentFolder = pathName ? pathName : ''
     console.log(pageTitle, 'pageTitle')
     return (
@@ -36,7 +46,7 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
 
                             (pageTitle.toLowerCase() === parentFolder.toLowerCase()) || !parentFolder ?
 
-                                <h2>{pageTitle === 'News' ? 'Bacci News' : pageTitle}</h2>
+                                <h2>{breadCrumbTitle(pageTitle, Termini)}</h2>
                                 :
                                 <h2>
                                     <span>/{parentFolder && parentFolder}  <br /></span>

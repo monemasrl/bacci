@@ -1031,6 +1031,7 @@ section.container.news {
         font-size: 72px;
       }
     }
+
     .dataEventi {
       width: 100%;
       display: flex;
@@ -1056,6 +1057,9 @@ section.container.news {
   margin: 0 auto;
   padding: 0 1rem;
   max-width: 1068px;
+  h2 {
+    font-size: 48px;
+  }
   .topfiera {
     margin-top: 6rem;
     .datafiera {
