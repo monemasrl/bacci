@@ -67,7 +67,7 @@ export const query = graphql`
               }
             }
               translations(filter: {languages_code: {code: {_eq: $locale}}}){
-       
+                titolo
                 headline
               }
             }
