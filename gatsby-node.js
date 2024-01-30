@@ -613,9 +613,7 @@ exports.createPages = async ({ graphql, actions }) => {
         path:
           item.code == "it_IT"
             ? "/prodotti"
-            : "/" + langTag[item.code] + item.code == "it_IT"
-            ? "prodotti"
-            : "products",
+            : "/" + langTag[item.code] + "/" + "products",
       }
     })
     return data
