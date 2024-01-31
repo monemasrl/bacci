@@ -648,6 +648,12 @@ section.container.repeater {
     @include h2-sezioni(60px, 95px);
     font-family: "Oswald", sans-serif;
   }
+
+  .sezione-1 .heading {
+    &::after {
+      display: none;
+    }
+  }
   .jumbo-home {
     text-align: center;
     .jumbo-image {
