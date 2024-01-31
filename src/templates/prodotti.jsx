@@ -212,8 +212,8 @@ const Prodotti = ({ data, location, pageContext }) => {
 
     // Se ci sono filtri per categorie filtra i prodotti per categorie
     let filteredCat = langFilterProdotto.filter((prodotto) => {
-      const categoriaLang = findItemTranslated(prodotto.categoria.translations, pageContext.locale)
-      const filterResultCat = categoriaLang.nome === filtersCat[0]
+      const categoriaLang = prodotto.categoria && findItemTranslated(prodotto.categoria.translations, pageContext.locale)
+      const filterResultCat = categoriaLang && categoriaLang.nome === filtersCat[0]
       return filtersCat.length > 0 && filterResultCat
     });
 
