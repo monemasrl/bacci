@@ -508,8 +508,6 @@ exports.createPages = async ({ graphql, actions }) => {
         return require.resolve("./src/templates/news.jsx")
       case "Fiere":
         return require.resolve("./src/templates/fiere.jsx")
-      case "Case History":
-        return require.resolve("./src/templates/caseHistory.jsx")
       default:
         return require.resolve("./src/templates/page.jsx")
     }

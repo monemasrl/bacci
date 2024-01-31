@@ -16,7 +16,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
     const { locale, parentPath, content, title, allPagePath, listaApplicazioni, listaCategorie } = pageContext
     const dataTranslated = content && findItemTranslated(content.translations, locale)
     const seoFilterLocale = content.seo?.translations.find((item) => item.language_code.code === locale)
-    const contentForBlocchiPagina = content.blocchi?.filter((blocco) => blocco.item.traduzioni.some((traduzione) => traduzione.languages_code.code === locale))
+    const contentForBlocchiPagina = content.blocchi?.filter((blocco) => blocco.item.traduzioni.some((traduzione) => traduzione.languages_code?.code === locale))
 
     const urlWithoutProtocol = new URL(content.website).host;
 

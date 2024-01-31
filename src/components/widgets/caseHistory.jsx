@@ -40,22 +40,26 @@ function CaseHistory({ locale }) {
         return (
             <section className="widget-case container">
                 {dataCaseHistory.map((item, index) => {
+                    if (item) {
+                        const translation = item.translations.find((item) => item.languages_code.code === locale)
+                        if (translation) {
 
-                    const translation = item.translations.find((item) => item.languages_code.code === locale)
-
-                    const urlBase = langTag[translation.languages_code.code] === "it"
-                        ? "/"
-                        : "/" + langTag[translation.languages_code.code] + "/"
-                    return (
-                        translation && (
-                            <div className="widget-case__box">
-                                <h2>{translation.title}</h2>
-                                <h3>{translation.sottotitolo}</h3>
-                                <GatsbyImage loading="eager" image={item.featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
-                                <Link className="button-sezione" to={`${urlBase}${Termini[locale].caseHistory}/${translation.slug}`}>{Termini[locale].scopri}</Link>
-                            </div>)
-                    )
-                })}
+                            const urlBase = langTag[translation.languages_code.code] === "it"
+                                ? "/"
+                                : "/" + langTag[translation.languages_code.code] + "/"
+                            return (
+                                translation && (
+                                    <div key={index} className="widget-case__box">
+                                        <h2>{translation.title}</h2>
+                                        <h3>{translation.sottotitolo}</h3>
+                                        <GatsbyImage loading="eager" image={item.featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
+                                        <Link className="button-sezione" to={`${urlBase}${Termini[locale].caseHistory}/${translation.slug}`}>{Termini[locale].scopri}</Link>
+                                    </div>)
+                            )
+                        }
+                    }
+                }
+                )}
             </section >)
     }
 

@@ -12,7 +12,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
     const isInViewLeft = useInView(left, { once: true });
     const isInViewCenter = useInView(center, { once: true });
     const isInViewRight = useInView(right, { once: true });
-    console.log(content.item.images.length > 0)
+
     if (allineamento === 'left') {
         return (
             <motion.section key={index} ref={left} className={`container sezione-1 ${allineamento} ${content.item.novita ? 'seznovita' : ''} ${'index-' + index}`}
