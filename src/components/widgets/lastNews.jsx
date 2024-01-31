@@ -59,16 +59,18 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
             const prodottoTradotto = findItemTranslated(item.translations, locale)
             let date = new Date(Date.parse(item.date_created))
             date = moment(date).locale(locale).format('DD.MM.YYYY')
+            const summary = prodottoTradotto.summary.slice(0, 120) + '...'
+            console.log(summary, "summary")
             if (index < limiteVisualizzazione) {
               return (
                 <div key={index} className="col-3">
                   <div className="box-news">
-                    <GatsbyImage className="immagine-widget" image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.title} />
+                    {item.image && <GatsbyImage className="immagine-widget" image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.title} />}
                     <div className="box-correlati">
 
                       <div className="date">{date}</div>
                       <h2>{prodottoTradotto.title}</h2>
-                      <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.summary }} />
+                      <p dangerouslySetInnerHTML={{ __html: summary }} />
                       <Link to={`${locale === 'it_IT' ? "" : "/" + langTag[locale]}/${"news"}/${prodottoTradotto.slug}`} >Leggi tutto</Link>
                     </div>
                   </div>

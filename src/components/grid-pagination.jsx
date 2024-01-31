@@ -69,7 +69,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                 {currentPosts && currentPosts.map((item) => {
                     const translated = findItemTranslated(item.translations, lang)
                     const data = new Date(Date.parse(item.date_created))
-
+                    const summary = translated.summary.slice(0, 120) + '...'
                     if (translated) {
                         return (
                             <div className="col-3">
@@ -80,7 +80,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                             {moment(data).locale(lang).format('DD.MM.YYYY')}
                                         </div>
                                         <h2>{translated.title}</h2>
-                                        <p dangerouslySetInnerHTML={{ __html: translated.summary }} />
+                                        <p dangerouslySetInnerHTML={{ __html: summary }} />
                                         <Link to={`${langTag[translated.languages_code.code] === 'it' ? '/' : '/' + langTag[translated.languages_code.code] + '/'}${'news/'}${translated.slug}`}>leggi tutto</Link>
                                     </div>
                                 </div>

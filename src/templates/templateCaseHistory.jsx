@@ -71,8 +71,11 @@ const TemplateCaseHistory = ({ pageContext }) => {
                             {content.featured_image && <GatsbyImage image={content.featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
                         </div>
                         <div className="box-dx">
-                            <h3 dangerouslySetInnerHTML={{ __html: dataTranslated.main_content_titolo }} />
-                            <p dangerouslySetInnerHTML={{ __html: dataTranslated.main_content }} />
+
+                            {dataTranslated.main_content_titolo &&
+                                <h3 dangerouslySetInnerHTML={{ __html: dataTranslated.main_content_titolo }} />}
+                            {dataTranslated.main_content &&
+                                <p dangerouslySetInnerHTML={{ __html: dataTranslated.main_content }} />}
                             {dataTranslated.url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
                         </div>
                     </>}

@@ -12,7 +12,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
     const isInViewLeft = useInView(left, { once: true });
     const isInViewCenter = useInView(center, { once: true });
     const isInViewRight = useInView(right, { once: true });
-
+    console.log(content.item.images.length > 0)
     if (allineamento === 'left') {
         return (
             <motion.section key={index} ref={left} className={`container sezione-1 ${allineamento} ${content.item.novita ? 'seznovita' : ''} ${'index-' + index}`}
@@ -33,13 +33,14 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                         <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo }} />
                         {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
                     </div>
-                    {content.item.images && <div className="image-gallery">
-                        {content.item.images.map((item, index) => {
-                            return <div key={index} className="boxImage">
-                                <GatsbyImage image={item.directus_files_id.imageFile.childImageSharp.gatsbyImageData} alt={item.description || 'Bacci website image'} />
-                            </div>
-                        })}
-                    </div>}
+                    {(content.item.images && content.item.images.length > 0) &&
+                        <div className="image-gallery">
+                            {content.item.images.map((item, index) => {
+                                return <div key={index} className="boxImage">
+                                    <GatsbyImage image={item.directus_files_id.imageFile.childImageSharp.gatsbyImageData} alt={item.description || 'Bacci website image'} />
+                                </div>
+                            })}
+                        </div>}
 
                     {content.item.immagine && <div className="box-dx">
                         <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.item.immagine.description || 'Bacci website image'} />

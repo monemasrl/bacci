@@ -901,16 +901,30 @@ section.container.news {
   .datanews {
     color: $grey;
     display: block;
-    font-size: 48px;
-    margin: 2rem 0 1rem 0;
+    font-size: 24px;
+    margin: 3rem 0 0 0;
     font-weight: 500;
   }
+  p {
+    display: flex;
+    gap: 1rem;
+    @media #{$landscape} {
+      flex-direction: column;
+    }
+    img {
+      width: 100%;
+    }
+  }
   h2 {
-    color: #a4917d;
-    font-size: 72px;
+    font-size: 48px;
     font-weight: 400;
     margin-top: 0;
-    text-transform: uppercase;
+    font-family: $text;
+    text-transform: none;
+    text-align: left;
+    @media #{$landscape} {
+      font-size: 35px;
+    }
   }
 }
 .fiere {
@@ -1206,6 +1220,10 @@ section.container.news {
   a {
     color: $grey;
   }
+  .sezione-1 .heading::after {
+    height: 90px;
+    top: 3px;
+  }
   .sezione-1 .box-dx {
     flex: 0 1 auto;
   }
@@ -1225,7 +1243,7 @@ section.container.news {
   }
   .box-sx {
     h2 {
-      font-size: bold;
+      font-size: 32px;
     }
     h3 {
       text-transform: uppercase;
@@ -1245,6 +1263,7 @@ section.container.news {
       font-size: 60px;
       text-transform: uppercase;
       font-weight: 400;
+      font-family: $title;
       margin: 2rem auto 1rem auto;
     }
   }

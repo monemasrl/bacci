@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/layout/layout";
-import { findItemTranslated, findItemsTranslated } from "../utils";
+import { findItemTranslated } from "../utils";
 import { GatsbyImage } from "gatsby-plugin-image"
 import LastNews from "../components/widgets/lastNews";
 
@@ -27,7 +27,8 @@ const Prodotto = ({ pageContext }) => {
         seo={seoFilterLocale}
       >
         <div className="wrapper-news">
-          <GatsbyImage image={content.image.imageFile.childImageSharp.gatsbyImageData} alt={content.image.description || dataProdottoTranslated.title} />
+          {content.image && <GatsbyImage image={content.image.imageFile.childImageSharp.gatsbyImageData} alt={content.image.description || dataProdottoTranslated.title} />}
+
           <span className="datanews"> {moment(date).locale(pageContext.locale).format('DD MM YYYY')}</span>
 
           <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.content }} />
