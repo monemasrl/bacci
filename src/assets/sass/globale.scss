@@ -216,9 +216,11 @@ main {
   .sezione-1 {
     margin-top: 4rem;
     margin-bottom: 4rem;
+    gap: 2rem;
+    width: 100%;
     .box-sx {
       flex: 1 1;
-      max-width: 570px;
+      max-width: 620px;
       width: 100%;
       @media #{$landscape} {
         padding-left: 0;
@@ -231,6 +233,9 @@ main {
     }
   }
   .sezione-3 {
+    &.container {
+      width: 100%;
+    }
     h1.titolo {
       font-size: 95px;
       font-weight: 700;

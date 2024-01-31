@@ -24,7 +24,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, topArchivio }) => {
                                 onClick={() => {
                                     setActivePage(item)
                                     paginate(item)
-
+                                    window.scrollTo(0, 0)
                                 }}>{item}</li>
                         })
                     }
