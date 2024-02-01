@@ -14,19 +14,17 @@
   max-width: 1620px;
 
   .mega-box {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     max-width: 1620px;
-    margin: 0rem auto;
-    justify-content: space-around;
     background-color: white;
-    box-shadow: 5px 5px 1px #00000012;
+    box-shadow: 5px 5px 1px rgba(0, 0, 0, 0.0705882353);
     padding: 2rem 2rem 4rem 2rem;
   }
 
   .col-mega {
     position: relative;
-    padding-right: 20px;
+    padding: 0 20px;
     &:last-child {
       &::after {
         display: none;
