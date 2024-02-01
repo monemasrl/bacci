@@ -52,6 +52,11 @@ const Prodotto = ({ pageContext }) => {
                             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.titolo }} />
                             <h2 dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.sottotitolo }} />
                             <p dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.paragrafo }} />
+                            <nav>
+                                <button className="button-sezione" >download</button>
+                                <button className="button-sezione" >live demo</button>
+                                <button className="button-sezione" >informazioni</button>
+                            </nav>
                         </div>
                         <div className="box-dx">
                             <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.immagine.description || dataProdottoTranslated.titolo} />
@@ -63,12 +68,15 @@ const Prodotto = ({ pageContext }) => {
                         return (
                             <section className="container sezione-1 left">
                                 <div className="box-sx">
-                                    <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.titolo }} />
+                                    <div className="heading">
+                                        <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.titolo }} />
+                                    </div>
                                     <p>{dataProdottoTranslated.paragrafo}</p>
                                 </div>
                                 <div className="box-dx">
                                     <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || dataProdottoTranslated.titolo} />
                                 </div>
+
                             </section>
 
                         )

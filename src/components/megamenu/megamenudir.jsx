@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { useStaticQuery, Link, graphql } from "gatsby";
 import { Termini, langTag } from "../../../data-translations";
-import { findItemTranslated } from "../../utils";
+import { findItemTranslated, summary } from "../../utils";
 import './megamenu.scss'
 
 const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, listaApplicazioni, listaCategorie }) => {
@@ -86,7 +86,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
     })
     const inEvidenzaLocalizzato = findItemTranslated(inEvidenza[0].translations, locale)
     const novita = dataMega.directus.Prodotti.sort((item) => { if (item.type === "machinery") return item.date_create })
-    const novitaLocalizzato = findItemTranslated(novita[0].translations, locale)
+    const novitaLocalizzato = findItemTranslated(novita[novita.length - 1].translations, locale)
     const software = dataMega.directus.Prodotti.filter((item) => item.type === "software")
 
 
@@ -121,7 +121,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                             <Link to={`/${(langTag[locale] === 'it') ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${novitaLocalizzato.slug}`}>
                                                 <h2>{novitaLocalizzato.titolo}</h2>
                                             </Link>
-                                            <p>{novitaLocalizzato.sottotitolo}</p>
+                                            <p>{novitaLocalizzato.sottotitolo && summary(novitaLocalizzato.sottotitolo, 120)}</p>
                                         </div>}
                                         <GatsbyImage image={novita[0].immagine.imageFile.childImageSharp.gatsbyImageData} alt={novita[0].titolo} />
 
@@ -148,7 +148,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                             <Link to={`/${(langTag[locale] === 'it') ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${inEvidenzaLocalizzato.slug}`}>
                                                 <h2>{inEvidenzaLocalizzato.titolo}</h2>
                                             </Link>
-                                            <p>{inEvidenzaLocalizzato.sottotitolo}</p>
+                                            <p>{inEvidenzaLocalizzato.sottotitolo && summary(inEvidenzaLocalizzato.sottotitolo, 120)}</p>
                                         </div>
                                         <GatsbyImage image={inEvidenza[0].immagine.imageFile.childImageSharp.gatsbyImageData} alt={inEvidenzaLocalizzato.titolo} />
 
@@ -206,19 +206,11 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                     }
                                 })}
                             </ul>
-                            {/* PULSANTE A TUTTI I PRODOTTI
-                            <Link className="tutti-prodotti" to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}`}>{terminiTraduzione.tutti_prodotti}</Link> */}
-
-
-
                         </motion.div>
                     </div>
-
                 </motion.div>
-
             )}
         </AnimatePresence>
-
     )
 }
 

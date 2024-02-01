@@ -167,10 +167,16 @@ function findItemsTranslated(translations, langCode) {
     return itemTranslated
   }
 }
+function summary(string, maxLength) {
+  if (string.length < maxLength) return string
+  const summary = string.slice(0, maxLength) + " ..."
+  return summary
+}
 export {
   getParentPathFromMenu,
   slugify,
   createPathFromMenu,
   findItemTranslated,
   findItemsTranslated,
+  summary,
 }

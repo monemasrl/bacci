@@ -4,7 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import { Termini, langTag } from "../../../data-translations";
 import './correlati.scss'
 import { Link } from "gatsby";
-import { findItemTranslated } from "../../utils";
+import { findItemTranslated, summary } from "../../utils";
 
 const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdotto, listaProdottiNoQuery }) => {
   const data = useStaticQuery(graphql`
@@ -81,13 +81,14 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
             {tipoCorrelazione().map((item) => {
 
               const prodottoTradotto = findItemTranslated(item.translations, locale)
+
               if (prodottoTradotto) {
                 return (
                   <div className="col-3">
                     <div className="box-correlati">
                       {item.immagine && <GatsbyImage className="immagine-widget" image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.titolo} />}
                       {prodottoTradotto.titolo && <h2>{prodottoTradotto.titolo}</h2>}
-                      {prodottoTradotto.testo_antemprima && <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.testo_antemprima }} />}
+                      {prodottoTradotto.testo_antemprima && <p dangerouslySetInnerHTML={{ __html: summary(prodottoTradotto.testo_antemprima, 120) }} />}
                       {prodottoTradotto.slug && <Link to={`/${(locale === 'it_IT') ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${prodottoTradotto.slug}`} className="button-sezione">scopri</Link>}
                     </div>
                   </div>

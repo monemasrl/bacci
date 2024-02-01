@@ -102,6 +102,9 @@ main {
     margin-top: 2rem;
     align-items: center;
   }
+  @media #{$phone} {
+    padding: 0;
+  }
   .filters {
     margin-top: 1rem;
 
@@ -143,6 +146,7 @@ main {
     display: flex;
     flex: 1 1 500px;
     flex-direction: column;
+    min-width: 200px;
     @media #{$desktop} {
       flex-direction: row;
       gap: 3rem;
@@ -158,16 +162,24 @@ main {
   .col-dx {
     display: flex;
     flex: 1 0 900px;
-    flex-wrap: wrap;
     justify-content: flex-start;
     margin-top: 2rem;
     gap: 5rem;
+    @media #{$landscape} {
+      flex-direction: column;
+      gap: 0rem;
+    }
     .box-prodotto {
       margin-bottom: 2rem;
       max-width: 380px;
       width: 100%;
       text-align: center;
-
+      .thumb {
+        height: 360px;
+        @media #{$landscape} {
+          height: auto;
+        }
+      }
       .gatsby-image-wrapper-constrained {
         height: auto;
         margin-bottom: 2rem;
@@ -225,11 +237,29 @@ main {
       @media #{$landscape} {
         padding-left: 0;
       }
+      nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        .button-sezione {
+          padding: 0;
+          margin: 0;
+          background-color: white;
+          &:hover {
+            background-color: #4a6c96;
+            color: #fff;
+            cursor: pointer;
+          }
+        }
+      }
     }
     .box-dx {
       flex: 1 1;
       max-width: 900px;
       width: 100%;
+      .gatsby-image-wrapper-constrained {
+        height: auto;
+      }
     }
   }
   .sezione-3 {
@@ -514,7 +544,7 @@ section.container.repeater {
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  @media #{$landscape} {
+  @media #{$desktop} {
     gap: 2rem;
     flex-direction: column;
     margin: 2rem auto;

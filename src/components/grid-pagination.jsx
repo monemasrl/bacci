@@ -4,7 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import { Termini, langTag } from "../../data-translations"
 import { Link } from "gatsby"
 import Pagination from "./pagination"
-import { findItemTranslated } from "../utils"
+import { findItemTranslated, summary } from "../utils"
 import 'moment/locale/it'
 
 const moment = require('moment')
@@ -46,9 +46,11 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                     if (translated.titolo) {
                         return (
                             <div key={translated.titolo} className="box-prodotto">
-                                {item.immagine && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translated.titolo} />}
+                                {item.immagine && <div className="thumb">
+                                    <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translated.titolo} />
+                                </div>}
                                 <h2>{translated.titolo}</h2>
-                                <p>{translated.testo_antemprima}</p>
+                                <p>{translated.testo_antemprima && summary(translated.testo_antemprima, 120)}</p>
                                 <Link className="button-sezione" lista to={`${(langTag[translated.languages_code.code] === 'it') ? "/" : "/" + langTag[translated.languages_code.code] + "/"}${Termini[translated.languages_code.code].prodotti + '/' + translated.slug}`}>
 
                                     {Termini[translated.languages_code.code].scopri}</Link>
@@ -69,7 +71,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                 {currentPosts && currentPosts.map((item) => {
                     const translated = findItemTranslated(item.translations, lang)
                     const data = new Date(Date.parse(item.date_created))
-                    const summary = translated.summary.slice(0, 120) + '...'
+
                     if (translated) {
                         return (
                             <div className="col-3">
@@ -80,7 +82,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                             {moment(data).locale(lang).format('DD.MM.YYYY')}
                                         </div>
                                         <h2>{translated.title}</h2>
-                                        <p dangerouslySetInnerHTML={{ __html: summary }} />
+                                        <p dangerouslySetInnerHTML={{ __html: summary(translated.summary, 120) }} />
                                         <Link to={`${langTag[translated.languages_code.code] === 'it' ? '/' : '/' + langTag[translated.languages_code.code] + '/'}${'news/'}${translated.slug}`}>leggi tutto</Link>
                                     </div>
                                 </div>
