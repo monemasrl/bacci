@@ -619,6 +619,10 @@ section.container.repeater {
     @media #{$phone} {
       font-size: 40px;
     }
+    small {
+      font-size: 36px;
+      margin-top: 1rem;
+    }
   }
 }
 .sezione-3 {
