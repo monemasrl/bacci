@@ -241,6 +241,12 @@ main {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
+        max-width: 550px;
+        @media #{$phone} {
+          grid-template-columns: 1fr;
+          max-width: 100%;
+          gap: 1rem;
+        }
         .button-sezione {
           padding: 0;
           margin: 0;
