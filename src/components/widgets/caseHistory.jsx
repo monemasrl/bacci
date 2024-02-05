@@ -35,7 +35,7 @@ function CaseHistory({ locale }) {
     }
   `)
     const dataCaseHistory = data.directus.case_history
-
+    console.log(dataCaseHistory, 'dataCaseHistory')
     if (dataCaseHistory.length > 0) {
         return (
             <section className="widget-case container">

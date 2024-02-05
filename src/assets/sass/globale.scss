@@ -1296,6 +1296,11 @@ section.container.news {
   height: 100vh;
 }
 .caseHistory {
+  .image-gallery {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
   a {
     color: $grey;
   }
