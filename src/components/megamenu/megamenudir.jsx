@@ -123,7 +123,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                             </Link>
                                             <p>{novitaLocalizzato.sottotitolo && summary(novitaLocalizzato.sottotitolo, 120)}</p>
                                         </div>}
-                                        <GatsbyImage image={novita[0].immagine.imageFile.childImageSharp.gatsbyImageData} alt={novita[0].titolo} />
+                                        <GatsbyImage image={novita[novita.length - 1].immagine.imageFile.childImageSharp.gatsbyImageData} alt={novita[0].titolo} />
 
                                     </>
                                 </div>

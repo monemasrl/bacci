@@ -48,7 +48,9 @@ const Fiere = ({ pageContext }) => {
             </div>}
           </section>
           <div className="bodyFiera" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.body }} />
-
+          <div className="wrapperFormBottomFiere">
+            <FormFiere nomeEvento={title} lang={pageContext.locale} />
+          </div>
         </div>
 
       </Layout>

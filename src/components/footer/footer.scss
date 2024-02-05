@@ -177,7 +177,7 @@ footer {
 
   .footer2 {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin: 4rem auto;
 
     .footer-col {
@@ -194,6 +194,22 @@ footer {
           li {
             font-size: 3rem;
             margin: 0;
+          }
+          ul.social_list {
+            display: flex;
+            li {
+              &:first-child {
+                color: $brown;
+                font-family: "Oswald";
+                font-size: 3rem;
+                margin-left: 0px;
+                a {
+                  color: $brown;
+                }
+              }
+
+              margin-left: 10px;
+            }
           }
         }
         li {

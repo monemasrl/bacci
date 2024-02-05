@@ -10,7 +10,7 @@ import 'moment/locale/it'
 const moment = require('moment')
 
 
-const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 4 }) => {
+const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 8 }) => {
     const [posts, setPosts] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostPerPage] = useState(postPerPage)

@@ -708,7 +708,7 @@ section.container.repeater {
   }
 
   .sezione-1 {
-    margin-top: 8rem;
+    margin-top: 6rem;
     @media #{$tablet} {
       margin-top: 2rem;
     }
@@ -724,7 +724,7 @@ section.container.repeater {
     h2 {
       font-size: 60px;
       @media #{$tablet} {
-        font-size: 13vw;
+        font-size: 40px;
       }
     }
     h2:before {
@@ -739,8 +739,19 @@ section.container.repeater {
     border-bottom: 3px solid $grey;
     border-top: 3px solid $grey;
     justify-content: space-between;
+    .gatsby-image-wrapper.gatsby-image-wrapper-constrained {
+      @media #{$desktop} {
+        height: auto;
+      }
+    }
+    .box-sx {
+      @media #{$desktop} {
+        flex: 0 1 auto;
+      }
+    }
     .button-sezione {
-      margin-top: 5rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
     }
     h2 {
       font-size: 105px;
@@ -771,7 +782,7 @@ section.container.repeater {
     }
     .box-sx {
       padding-left: 2rem;
-      padding-bottom: 3rem;
+
       @media #{$landscape} {
         padding-left: 0;
       }
@@ -782,6 +793,7 @@ section.container.repeater {
       flex: 1 1 750px;
       .gatsby-image-wrapper img {
         object-fit: contain;
+        flex: 1 1 auto;
       }
     }
     h2 {
@@ -957,8 +969,10 @@ section.container.news {
     font-weight: 500;
   }
   p {
-    display: flex;
-    gap: 1rem;
+    &:has(img) {
+      display: flex;
+      gap: 1rem;
+    }
     @media #{$landscape} {
       flex-direction: column;
     }
@@ -983,7 +997,7 @@ section.container.news {
   gap: 3rem;
   justify-content: flex-start;
   .col-3 {
-    max-width: 440px;
+    max-width: 480px;
     width: 100%;
   }
 }
@@ -991,8 +1005,9 @@ section.container.news {
 .box-single-fiera {
   border: 1px solid $brown;
   padding: 1rem;
-  max-width: 460px;
+
   width: 100%;
+  min-height: 316px;
   flex: 1 1;
 
   &.evento {
@@ -1128,8 +1143,96 @@ section.container.news {
   margin: 0 auto;
   padding: 0 1rem;
   max-width: 1068px;
+
   h2 {
     font-size: 48px;
+    font-family: $text;
+  }
+  .wrapperFormBottomFiere {
+    border: 1px solid $lightBrown;
+    padding: 1rem;
+  }
+  .wrapper-form {
+    background-color: $lightGrey;
+    padding: 1rem;
+
+    form {
+      margin: 0 auto;
+      max-width: 789px;
+      p {
+        font-size: 12px;
+        margin: 0;
+        color: #c71212;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .box-form {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        @media #{$landscape} {
+          flex-direction: column;
+        }
+      }
+      label {
+        flex: 1 1;
+        margin: 10px 0;
+        max-width: 376px;
+        width: 100%;
+        @media #{$landscape} {
+          max-width: 100%;
+        }
+      }
+      label input {
+        border: 0;
+        height: 40px;
+        max-width: none;
+        width: 100%;
+        padding-left: 1rem;
+      }
+      textarea {
+        border: 0;
+        width: 100%;
+        padding-top: 1rem;
+        padding-left: 1rem;
+      }
+      .box-form-message {
+        margin: 10px 0;
+      }
+      input[type="checkbox"] {
+        height: 20px;
+        margin-right: 10px;
+        width: 20px;
+      }
+      .privacy {
+        display: block;
+        max-width: 100%;
+        text-align: center;
+      }
+      .box-submit {
+        text-align: center;
+      }
+      .button-sezione {
+        background-color: transparent;
+        border: 1px solid #fff;
+        border-radius: 30px;
+        color: #a4917d;
+        color: #fff;
+        display: inline-block;
+        font-size: 24px;
+        height: 55px;
+        line-height: 45px;
+        margin-top: 2rem;
+        padding: 0.2rem 6rem;
+        text-align: center;
+        text-transform: uppercase;
+        vertical-align: middle;
+        width: auto;
+        @media #{$landscape} {
+          padding: 0.2rem 3rem;
+        }
+      }
+    }
   }
   .topfiera {
     margin-top: 6rem;
@@ -1142,8 +1245,8 @@ section.container.news {
       margin: 3rem 0;
     }
     .call2action {
-      border: 2px solid $lightBrown;
-      padding: 2rem;
+      border: 1px solid $lightBrown;
+      padding: 1rem;
       text-align: center;
       margin-bottom: 2rem;
       h2 {
@@ -1151,6 +1254,7 @@ section.container.news {
         font-size: 42px;
         font-weight: 400;
         line-height: 1;
+        font-family: $title;
       }
       h3 {
         color: $grey;
@@ -1159,91 +1263,15 @@ section.container.news {
         font-family: $title;
       }
     }
-    .wrapper-form {
-      background-color: $lightGrey;
-      padding: 1rem;
-
-      form {
-        margin: 0 auto;
-        max-width: 789px;
-        p {
-          font-size: 12px;
-          margin: 0;
-          color: #c71212;
-          font-weight: bold;
-          letter-spacing: 1px;
-        }
-        .box-form {
-          display: flex;
-          justify-content: space-between;
-          width: 100%;
-          @media #{$landscape} {
-            flex-direction: column;
-          }
-        }
-        label {
-          flex: 1 1;
-          margin: 10px 0;
-          max-width: 376px;
-          width: 100%;
-          @media #{$landscape} {
-            max-width: 100%;
-          }
-        }
-        label input {
-          border: 0;
-          height: 40px;
-          max-width: none;
-          width: 100%;
-          padding-left: 1rem;
-        }
-        textarea {
-          border: 0;
-          width: 100%;
-          padding-top: 1rem;
-          padding-left: 1rem;
-        }
-        .box-form-message {
-          margin: 10px 0;
-        }
-        input[type="checkbox"] {
-          height: 20px;
-          margin-right: 10px;
-          width: 20px;
-        }
-        .privacy {
-          display: block;
-          max-width: 100%;
-          text-align: center;
-        }
-        .box-submit {
-          text-align: center;
-        }
-        .button-sezione {
-          background-color: transparent;
-          border: 1px solid #fff;
-          border-radius: 30px;
-          color: #a4917d;
-          color: #fff;
-          display: inline-block;
-          font-size: 24px;
-          height: 55px;
-          line-height: 45px;
-          margin-top: 2rem;
-          padding: 0.2rem 6rem;
-          text-align: center;
-          text-transform: uppercase;
-          vertical-align: middle;
-          width: auto;
-          @media #{$landscape} {
-            padding: 0.2rem 3rem;
-          }
-        }
-      }
-    }
   }
 }
 .bodyFiera {
+  p:has(img) {
+    display: flex;
+    @media #{$landscape} {
+      flex-direction: column;
+    }
+  }
   img {
     width: 100%;
     padding: 1rem;

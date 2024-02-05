@@ -136,16 +136,20 @@ function FooterMenu({ locale }) {
         <div className="footer-col">
             <ul className="social">
                 <li>Follow us</li>
-                {data.directus.social.social.map((item, index) => {
-                    return (
-                        <li key={index}>
-                            <a href={item.url} target="_blank" rel="noreferrer">
-                                {item.nome === 'Youtube' && <GrYoutube />}
-                                {item.nome === 'Linkedin' && <GrLinkedin />}
-                            </a>
-                        </li>
-                    )
-                })}
+                <li>
+                    <ul className="social_list">
+                        {data.directus.social.social.map((item, index) => {
+                            return (
+                                <li key={index}>
+                                    <a href={item.url} target="_blank" rel="noreferrer">
+                                        {item.nome === 'Youtube' && <GrYoutube />}
+                                        {item.nome === 'Linkedin' && <GrLinkedin />}
+                                    </a>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </li>
             </ul>
         </div>
 
