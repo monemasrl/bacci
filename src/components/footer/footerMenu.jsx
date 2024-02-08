@@ -110,9 +110,9 @@ function FooterMenu({ locale, listaTipologia }) {
                         <div key={index} className="footer-col">
                             <ul>
                                 <li>{parentItemTranslated.label}</li>
-                                {listaCategorieTranslated.map((subitem, index) => {
+                                {/* {listaCategorieTranslated.map((subitem, index) => {
                                     return <li key={index} ><Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`} state={{ categoria: subitem.nome }}>{subitem.nome}</Link></li>
-                                })}
+                                })} */}
                             </ul>
                         </div>
                     )
