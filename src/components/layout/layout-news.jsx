@@ -28,7 +28,7 @@ const LayoutNews = ({ children, locale, pageTitle, tipo, allPagePath }) => {
 
 
 
-      <Footer locale={locale} />
+      <Footer listaTipologia={listaCategorie} locale={locale} />
       <ScrollTo />
       <Gdpr locale={locale} />
     </div>

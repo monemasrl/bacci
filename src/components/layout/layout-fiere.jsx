@@ -31,7 +31,7 @@ const LayoutFiere = ({ children, locale, pageTitle, pathName, tipo, allPagePath 
 
 
 
-      <Footer locale={locale} />
+      <Footer listaTipologia={listaCategorie} locale={locale} />
       <ScrollTo />
       <Gdpr locale={locale} />
     </div>

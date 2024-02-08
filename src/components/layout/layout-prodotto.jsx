@@ -32,7 +32,7 @@ const LayoutProdotto = ({ listaApplicazioni, listaCategorie, children, locale, p
 
 
 
-      <Footer locale={locale} />
+
       <ScrollTo />
       <Gdpr locale={locale} />
     </div>
