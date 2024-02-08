@@ -1156,6 +1156,9 @@ section.container.news {
   h2 {
     font-size: 48px;
     font-family: $text;
+    @media #{$landscape} {
+      font-size: 35px;
+    }
   }
   .wrapperFormBottomFiere {
     border: 1px solid $lightBrown;
