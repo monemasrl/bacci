@@ -31,7 +31,7 @@ const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, allPage
       <main>{children}</main>
 
 
-      <Footer locale={locale} />
+      <Footer listaTipologia={listaCategorie} locale={locale} />
 
       <ScrollTo />
       <Gdpr locale={locale} />

@@ -8,7 +8,7 @@ import { Termini } from '../../../data-translations'
 
 
 
-const Footer = ({ locale }) => {
+const Footer = ({ locale, listaTipologia }) => {
 
     return (
         <footer>
@@ -25,7 +25,7 @@ const Footer = ({ locale }) => {
                     </div>
                 </div>
             </section>
-            <FooterMenu locale={locale} />
+            <FooterMenu locale={locale} listaTipologia={listaTipologia} />
             <section className='container-fluid footer3'>
 
                 <div className="container">

@@ -6,7 +6,8 @@ import { langTag } from "../../../data-translations"
 import { GrLinkedin, GrYoutube } from "react-icons/gr";
 
 
-function FooterMenu({ locale }) {
+function FooterMenu({ locale, listaTipologia }) {
+
     const data = useStaticQuery(graphql`
     query HeaderQuery {
             directus{        
@@ -102,7 +103,7 @@ function FooterMenu({ locale }) {
             }
             if (item.name === 'Prodotti') {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
-                const listaCategorieTranslated = findItemsTranslated(data.directus.prodotto_categorie_translations, locale)
+                const listaCategorieTranslated = findItemsTranslated(listaTipologia, locale)
 
                 if (parentItemTranslated) {
                     return (

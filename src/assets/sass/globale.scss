@@ -1300,6 +1300,7 @@ section.container.news {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    gap: 2rem;
   }
   a {
     color: $grey;
