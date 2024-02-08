@@ -152,28 +152,31 @@ const FormFiere = ({ nomeEvento, lang }) => {
                         {errors.messaggio && <p>{errors.messaggio?.message}</p>}
                     </label>
                 </div>
-                <label className="privacy" htmlFor="privacy">
-                    <input
-                        type="checkbox"
-                        placeholder="privacy"
-                        name="privacy"
-                        id="privacy"
-                        {...register("privacy", {
-                            required: {
-                                value: true,
-                                message: Termini[lang].formPrivacy
-                            },
 
-                        })}
-                    />
-
-                    <span>{Termini[lang].formPrivacy} <Link to="/privacy"> Privacy</Link></span>
-                    {errors.privacy && <p>{errors.privacy?.message}</p>}
-                </label>
                 <div className="box-submit">
-                    <label htmlFor="submit">
-                        <input className='button-sezione' type="submit" />
-                    </label>
+                    <div className="accept">
+                        <label className="privacy" htmlFor="privacy">
+                            <input
+                                type="checkbox"
+                                placeholder="privacy"
+                                name="privacy"
+                                id="privacy"
+                                {...register("privacy", {
+                                    required: {
+                                        value: true,
+                                        message: Termini[lang].formPrivacy
+                                    },
+
+                                })}
+                            />
+
+                            <span>{Termini[lang].formPrivacy} <Link to="/privacy"> Privacy</Link></span>
+                            {errors.privacy && <p>{errors.privacy?.message}</p>}
+                        </label>
+                    </div>
+
+                    <input className='button-sezione' type="submit" />
+
                 </div>
 
             </form>

@@ -996,6 +996,15 @@ section.container.news {
   margin-top: 6rem;
   gap: 3rem;
   justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  @media #{$landscape} {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media #{$tablet} {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
   .col-3 {
     max-width: 480px;
     width: 100%;
@@ -1154,7 +1163,7 @@ section.container.news {
   }
   .wrapper-form {
     background-color: $lightGrey;
-    padding: 1rem;
+    padding: 3rem 1rem;
 
     form {
       margin: 0 auto;
@@ -1203,14 +1212,23 @@ section.container.news {
         height: 20px;
         margin-right: 10px;
         width: 20px;
+        top: 4px;
+        position: relative;
       }
       .privacy {
         display: block;
         max-width: 100%;
         text-align: center;
+        color: white;
+        a {
+          color: white;
+        }
       }
       .box-submit {
         text-align: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
       }
       .button-sezione {
         background-color: transparent;
@@ -1222,7 +1240,7 @@ section.container.news {
         font-size: 24px;
         height: 55px;
         line-height: 45px;
-        margin-top: 2rem;
+        margin-top: 1rem;
         padding: 0.2rem 6rem;
         text-align: center;
         text-transform: uppercase;
