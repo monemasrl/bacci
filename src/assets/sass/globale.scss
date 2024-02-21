@@ -201,6 +201,9 @@ main {
 }
 .prodotto {
   .sezione-1.mainProdotto {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    gap: 2rem;
     width: 100%;
     h1 {
       font-size: 100px;
@@ -224,12 +227,21 @@ main {
         display: none;
       }
     }
+    .box-dx {
+      flex: 1 1;
+      max-width: 900px;
+      width: 100%;
+      .gatsby-image-wrapper-constrained {
+        height: auto;
+      }
+    }
   }
   .sezione-1 {
     margin-top: 4rem;
     margin-bottom: 4rem;
     gap: 2rem;
     width: 100%;
+    justify-content: space-around;
     .box-sx {
       flex: 1 1;
       max-width: 620px;
@@ -259,9 +271,10 @@ main {
         }
       }
     }
+
     .box-dx {
       flex: 1 1;
-      max-width: 900px;
+      max-width: 680px;
       width: 100%;
       .gatsby-image-wrapper-constrained {
         height: auto;
