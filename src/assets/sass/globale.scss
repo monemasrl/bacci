@@ -217,6 +217,7 @@ main {
     }
     h2 {
       font-size: 60px;
+      margin-top: 1rem;
       @media #{$landscape} {
         font-size: 50px;
       }
@@ -1373,8 +1374,8 @@ section.container.news {
     a {
       color: $brown;
       display: inline-block;
-      font-size: 3rem;
-      margin: 0 0.5rem;
+      font-size: 2rem;
+      margin: 0 0.5rem 0 0;
     }
   }
   .box-dx {

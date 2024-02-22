@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import LayoutProdotto from "../components/layout/layout-prodotto";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Correlati from "../components/widgets/correlati";
 import { findItemTranslated } from "../utils";
-import { Link } from "gatsby";
-
+import Modale from "../components/modale/modale";
+import { FormDownloadCatalogo } from "../components/form";
+import { Termini } from "../../data-translations";
 const Prodotto = ({ pageContext }) => {
 
     const { locale, parentPath, content, title, allPagePath, listaApplicazioni, listaCategorie
@@ -30,8 +31,9 @@ const Prodotto = ({ pageContext }) => {
             return undefined
         }
     }
-    const softwareData = softwareContent(content.product_software, locale)
 
+    /* const softwareData = softwareContent(content.product_software, locale) */
+    const [showModale, setShowModale] = useState(false)
     return (
         <>
             <LayoutProdotto
@@ -45,7 +47,10 @@ const Prodotto = ({ pageContext }) => {
                 listaCategorie={listaCategorie}
                 seo={seoFilterLocale}
             >
-
+                <Modale show={showModale} close={() => setShowModale(false)}>
+                    <div className="titoloModale">{Termini[locale].downloadCatalogoText}</div>
+                    <FormDownloadCatalogo lang={locale} />
+                </Modale>
                 <div className="container prodotto">
                     <section className="container sezione-1 mainProdotto">
                         <div className="box-sx">
@@ -53,9 +58,9 @@ const Prodotto = ({ pageContext }) => {
                             <h2 dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.sottotitolo }} />
                             <p dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.paragrafo }} />
                             <nav>
-                                <button className="button-sezione" >download</button>
-                                <button className="button-sezione" >live demo</button>
-                                <button className="button-sezione" >informazioni</button>
+                                <button className="button-sezione" onClick={() => setShowModale(true)} >download</button>
+                                <button className="button-sezione" >video</button>
+
                             </nav>
                         </div>
                         <div className="box-dx">
@@ -82,7 +87,7 @@ const Prodotto = ({ pageContext }) => {
                         )
 
                     })}
-                    {softwareData ?
+                    {/*{softwareData ?
                         <section className="container sezione-3 center">
                             <h2 className="titolo">Software</h2>
                             <div className="box-immagine">
@@ -92,7 +97,7 @@ const Prodotto = ({ pageContext }) => {
                             <div>
                                 <Link className="button-sezione" to={softwareData.path}>{softwareData.titolo}</Link>
                             </div>
-                        </section> : ''}
+                        </section> : ''} */}
                     {content.type === "machinery" && <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} limiteVisualizzazione={3} />}
                 </div>
             </LayoutProdotto>

@@ -366,4 +366,153 @@ const FormContatti = ({ lang }) => {
 }
 
 
-export { FormFiere, FormContatti }
+const FormDownloadCatalogo = ({ lang }) => {
+    const form = useForm({
+        defaultValues: {
+            catalogoRichiesteNome: "",
+            catalogoRichiesteCognome: "",
+            catalogoRichiesteEmail: "",
+            catalogoRichiestePrivacy: false
+        }
+    })
+
+    const { register, handleSubmit, formState, reset } = form
+    const { errors } = formState
+
+
+    //Funzione per l'enconding dei dati del form
+
+    const encode = (data) => {
+        return Object.keys(data)
+            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+            .join("&");
+    }
+
+
+
+    return (
+        <div className="wrapper-form downloadCatalogo" >
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar
+                newestOnTop={false}
+                closeOnClick={true}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable={false}
+                pauseOnHover
+                theme="dark" />
+
+            <form
+                data-netlify="true"
+                name="catalogoRichieste"
+                netlify-honeypot="bot-field"
+                onSubmit={handleSubmit((data) => {
+
+                    toast(Termini[lang].formSuccess)
+                    fetch("/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                        body: encode({ "form-name": "catalogoRichieste", ...data }),
+                    })
+                        .then(() => {
+                            reset()
+
+                        })
+                        .catch((error) => alert(error));
+                })
+                }>
+
+                <input type="hidden" name="form-name" value="catalogoRichieste" />
+
+                <div className="box-form">
+                    <label htmlFor="catalogoRichiesteNome">
+                        <input
+                            placeholder={Termini[lang].nome}
+                            type="text"
+                            name="nome"
+                            id="catalogoRichiesteNome"
+                            {...register("catalogoRichiesteNome", {
+                                required: {
+                                    value: true,
+                                    message: Termini[lang].formRequired
+                                },
+                                minLength: {
+                                    value: 3,
+                                    message: Termini[lang].formMinimoCaratteri
+                                }
+                            })
+                            } />
+                        {errors.catalogoRichiesteNome && <p>{errors.catalogoRichiesteNome?.message}</p>}
+                    </label>
+                    <label htmlFor="catalogoRichiesteCognome">
+                        <input
+                            placeholder={Termini[lang].cognome}
+                            type="text"
+                            name="cognome"
+                            id="catalogoRichiesteCognome"
+                            {...register("catalogoRichiesteCognome", {
+                                required: {
+                                    value: true,
+                                    message: Termini[lang].formRequired
+                                },
+                                minLength: {
+                                    value: 3,
+                                    message: Termini[lang].formMinimoCaratteri
+                                }
+                            })
+                            } />
+                        {errors.catalogoRichiesteCognome && <p>{errors.catalogoRichiesteCognome?.message}</p>}
+                    </label>
+                </div>
+                <div className="box-form">
+
+                    <label htmlFor="catalogoRichiesteEmail">
+                        <input placeholder="email" type="text" name="email" id="catalogoRichiesteEmail" {...register("catalogoRichiesteEmail", {
+                            required: {
+                                value: true,
+                                message: Termini[lang].formRequired
+                            },
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: Termini[lang].formMail
+                            }
+                        })
+                        } />
+                        {errors.catalogoRichiesteEmail && <p>{errors.catalogoRichiesteEmail?.message}</p>}
+                    </label>
+                </div>
+
+                <label className="privacy" htmlFor="catalogoRichiestePrivacy">
+                    <input
+                        type="checkbox"
+                        placeholder="privacy"
+                        name="privacy"
+                        id="catalogoRichiestePrivacy"
+                        {...register("catalogoRichiestePrivacy", {
+                            required: {
+                                value: true,
+                                message: Termini[lang].formPrivacy
+                            },
+                        })}
+                    />
+
+                    <span>{Termini[lang].formPrivacy}<Link to="/privacy"> Privacy</Link></span>
+                    {errors.catalogoRichiestePrivacy && <p>{errors.catalogoRichiestePrivacy?.message}</p>}
+                </label>
+                <div className="box-submit">
+                    <label htmlFor="submit">
+                        <input className='button-sezione' type="submit" value={Termini[lang].invia} />
+                    </label>
+                </div>
+
+            </form>
+
+        </div>
+    )
+
+}
+
+
+export { FormFiere, FormContatti, FormDownloadCatalogo }

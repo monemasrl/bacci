@@ -1,0 +1,94 @@
+@import "../../assets/sass/variabili";
+.modale {
+  position: fixed;
+  background: #ffffff7d;
+  width: 100%;
+  top: 0;
+  overflow: hidden;
+  height: 0vh;
+  &__background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: -1;
+  }
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    padding: 40px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0px #d4d4d47d;
+    z-index: 1;
+    p {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+    .titoloModale {
+      text-align: center;
+      margin: 1rem 0;
+      font-size: 1.5rem;
+      font-family: $title;
+      text-transform: uppercase;
+      color: $brown;
+    }
+    .box-submit {
+      text-align: right;
+      .button-sezione {
+        font-size: 20px;
+        line-height: 33px;
+        margin-top: 0rem;
+        padding: 0.2rem 2rem;
+      }
+    }
+    .privacy {
+      margin-top: 1rem;
+      display: block;
+      input {
+        margin-right: 5px;
+      }
+    }
+    .wrapper-form.downloadCatalogo .box-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+
+      label {
+        flex: 1;
+
+        input {
+          width: 100%;
+          border: 0;
+          border-radius: 0;
+          height: 40px;
+          background-color: $lightGrey;
+          color: white;
+        }
+      }
+    }
+  }
+  &.visible {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    height: 0vh;
+  }
+  99% {
+    height: 100vh;
+  }
+  100% {
+    height: 100vh;
+    z-index: 100;
+  }
+}

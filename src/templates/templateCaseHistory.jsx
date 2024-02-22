@@ -99,7 +99,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                                 <div className="titolo">Website</div>
                                 <a href={content.website} target="_blank" rel="noreferrer noopener">{urlWithoutProtocol}</a>
                             </li>}
-                            {content.related_machines && <li className="macchine">
+                            {(content.related_machines.length > 9) && <li className="macchine">
                                 <div className="titolo">Bacci Machines</div>
                                 <ul>
                                     {content.related_machines.map((item) => {
@@ -125,7 +125,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                         return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
                     })}
                 </section>
-                <Correlati locale={locale} idProdotto={content.id} listaProdottiNoQuery={content.related_machines} limiteVisualizzazione={3} />
+                {(content.related_machines.length > 0) && <Correlati locale={locale} idProdotto={content.id} listaProdottiNoQuery={content.related_machines} limiteVisualizzazione={3} />}
             </Layout>}
         </>
 
