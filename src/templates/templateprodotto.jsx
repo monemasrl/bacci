@@ -51,7 +51,7 @@ const Prodotto = ({ pageContext }) => {
                 listaCategorie={listaCategorie}
                 seo={seoFilterLocale}
             >
-                {content.catalogo.filename_disk && <Modale show={showModale} close={() => setShowModale(false)}>
+                {content.catalogo?.filename_disk && <Modale show={showModale} close={() => setShowModale(false)}>
                     <div className="titoloModale">
                         {!isCatalogoVisible ? Termini[locale].downloadCatalogoText : Termini[locale].downloadCatalogoTextLink}
                     </div>
