@@ -78,6 +78,20 @@
   &.visible {
     animation: fadeIn 0.5s ease-in-out forwards;
   }
+  .boxDownloadCatalogo {
+    opacity: 0;
+    overflow: hidden;
+    height: 0;
+    transition: all ease-in-out 0.5s;
+    text-align: center;
+    a {
+      color: $lightBrown;
+    }
+    &.visible {
+      opacity: 1;
+      height: 50px;
+    }
+  }
 }
 
 @keyframes fadeIn {

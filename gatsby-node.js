@@ -132,6 +132,15 @@ exports.createPages = async ({ graphql, actions }) => {
         }
         Prodotti {
           id
+          video
+          catalogo {
+            title
+            filename_download
+            filename_disk
+            folder {
+              name
+            }
+          }
           seo {
             translations {
               languages_code {
@@ -144,6 +153,7 @@ exports.createPages = async ({ graphql, actions }) => {
           name
           date_created
           type
+
           immagine {
             id
             description
@@ -154,27 +164,7 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
           }
-          product_software {
-            translations {
-              languages_code {
-                code
-              }
-              titolo
-              sottotitolo
-              slug
-            }
-            immagine {
-              description
-              id
-              imageFile {
-                id
-                childImageSharp {
-                  id
-                  gatsbyImageData
-                }
-              }
-            }
-          }
+
           featured
           translations {
             languages_code {

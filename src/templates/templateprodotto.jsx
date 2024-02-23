@@ -6,6 +6,8 @@ import { findItemTranslated } from "../utils";
 import Modale from "../components/modale/modale";
 import { FormDownloadCatalogo } from "../components/form";
 import { Termini } from "../../data-translations";
+import { GrDocumentPdf } from "react-icons/gr";
+import YoutubeEmbed from "../components/youtubeEmbed";
 const Prodotto = ({ pageContext }) => {
 
     const { locale, parentPath, content, title, allPagePath, listaApplicazioni, listaCategorie
@@ -34,6 +36,8 @@ const Prodotto = ({ pageContext }) => {
 
     /* const softwareData = softwareContent(content.product_software, locale) */
     const [showModale, setShowModale] = useState(false)
+    const [isCatalogoVisible, setIsCatalogoVisible] = useState(false)
+    const [isVideoVisible, setIsVideoVisible] = useState(false)
     return (
         <>
             <LayoutProdotto
@@ -47,10 +51,16 @@ const Prodotto = ({ pageContext }) => {
                 listaCategorie={listaCategorie}
                 seo={seoFilterLocale}
             >
-                <Modale show={showModale} close={() => setShowModale(false)}>
-                    <div className="titoloModale">{Termini[locale].downloadCatalogoText}</div>
-                    <FormDownloadCatalogo lang={locale} />
-                </Modale>
+                {content.catalogo.filename_disk && <Modale show={showModale} close={() => setShowModale(false)}>
+                    <div className="titoloModale">
+                        {!isCatalogoVisible ? Termini[locale].downloadCatalogoText : Termini[locale].downloadCatalogoTextLink}
+                    </div>
+                    {!isCatalogoVisible && <FormDownloadCatalogo lang={locale} setIsCatalogoVisible={setIsCatalogoVisible} />}
+                    <div className={`boxDownloadCatalogo ${isCatalogoVisible ? 'visible' : ''}`}><a target="_blank" href={`https://bacci-directus.monema.dev/assets/${content.catalogo.filename_disk}`}><GrDocumentPdf />&nbsp;Catalogo</a></div>
+                </Modale>}
+                {content.video && <Modale show={isVideoVisible} close={() => setIsVideoVisible(false)}>
+                    <YoutubeEmbed embedId={content.video} />
+                </Modale>}
                 <div className="container prodotto">
                     <section className="container sezione-1 mainProdotto">
                         <div className="box-sx">
@@ -59,7 +69,7 @@ const Prodotto = ({ pageContext }) => {
                             <p dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.paragrafo }} />
                             <nav>
                                 <button className="button-sezione" onClick={() => setShowModale(true)} >download</button>
-                                <button className="button-sezione" >video</button>
+                                <button className="button-sezione" onClick={() => setIsVideoVisible(true)} >video</button>
 
                             </nav>
                         </div>

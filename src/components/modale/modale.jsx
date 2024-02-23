@@ -6,8 +6,7 @@ function Modale({ children, show, close }) {
         <div className={`modale ${show ? 'visible' : ''}`} >
             <div className="modale__background" onClick={close}></div>
             <div className="modale__content">
-
-                {children}
+                {show ? children : 'loading...'}
             </div>
         </div>
     )

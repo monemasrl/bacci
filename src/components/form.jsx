@@ -366,7 +366,7 @@ const FormContatti = ({ lang }) => {
 }
 
 
-const FormDownloadCatalogo = ({ lang }) => {
+const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
     const form = useForm({
         defaultValues: {
             catalogoRichiesteNome: "",
@@ -378,7 +378,6 @@ const FormDownloadCatalogo = ({ lang }) => {
 
     const { register, handleSubmit, formState, reset } = form
     const { errors } = formState
-
 
     //Funzione per l'enconding dei dati del form
 
@@ -417,6 +416,7 @@ const FormDownloadCatalogo = ({ lang }) => {
                         body: encode({ "form-name": "catalogoRichieste", ...data }),
                     })
                         .then(() => {
+                            setIsCatalogoVisible(true)
                             reset()
 
                         })

@@ -53,7 +53,8 @@ export const Termini = {
     cliente: "client",
     nazione: "country",
     citta: "city",
-    downloadCatalogoText: "Inserire i dati per scaricare il catalogo",
+    downloadCatalogoText: "EN Inserire i dati per scaricare il catalogo",
+    downloadCatalogoTextLink: "EN Scarica il catalogo",
   },
   it_IT: {
     cookieTesto:
@@ -102,5 +103,6 @@ export const Termini = {
     nazione: "nazione",
     citta: "città",
     downloadCatalogoText: "Inserire i dati per scaricare il catalogo",
+    downloadCatalogoTextLink: "Scarica il catalogo",
   },
 }
