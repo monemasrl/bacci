@@ -7,7 +7,7 @@ import LastNews from "../components/widgets/lastNews"
 import TestoMainContent from "../components/blocks/testo_main_content"
 import LastFiere from "../components/widgets/lastFiere"
 import CaseHistory from "../components/widgets/caseHistory"
-
+import Slider from "../components/slider"
 export const query = graphql`
  query($locale: String!, $slug: String!) {
   directus{
@@ -141,6 +141,7 @@ const Pagine = ({ data, pageContext }) => {
             <>
               {pageContext.pageName === "home" &&
                 <section className="jumbo-home">
+                  <Slider />
                   <GatsbyImage loading="eager" className="jumbo-image" image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
                 </section>}
               {pageContext.pageName !== "home" &&

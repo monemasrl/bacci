@@ -30,7 +30,6 @@ const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, allPage
 
       <main>{children}</main>
 
-
       <Footer listaTipologia={listaCategorie} locale={locale} />
 
       <ScrollTo />
@@ -39,8 +38,5 @@ const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, allPage
   )
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
 export default Layout
