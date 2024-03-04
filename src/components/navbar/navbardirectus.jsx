@@ -81,6 +81,8 @@ query datimenu{
                                             <Link to={`${langTag[props.locale] === 'it' ? '' : '/' + langTag[props.locale]}/${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
                                         </li>
                                     )
+                                } else {
+                                    return null
                                 }
                             })
 
@@ -145,6 +147,8 @@ query datimenu{
                                                                     </Link>
                                                                     </li>
                                                                 )
+                                                            } else {
+                                                                return null
                                                             }
 
                                                         })}

@@ -134,9 +134,10 @@ function FooterMenu({ locale, listaTipologia }) {
                         </div>
                     )
                 }
-            } else {
-                return null
             }
+
+            return null
+
 
         })}
         <div className="footer-col">
