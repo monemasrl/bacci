@@ -56,14 +56,14 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
           return item.categoria.translations.some((categoria) => {
             if (categoria.languages_code.code === locale) {
               return categoria.nome === categoriaProdotto
-            }
+            } else { return null }
           })
-        }
+        } else { return null }
       })
       return prodottiCorrelatiCategoria
     } else if (listaProdottiNoQuery) {
       const datiNormalizzati = listaProdottiNoQuery.map((item, index) => {
-        if (index < limiteVisualizzazione) { return ({ immagine: item.Prodotti_id.immagine, translations: item.Prodotti_id.translations }) }
+        if (index < limiteVisualizzazione) { return ({ immagine: item.Prodotti_id.immagine, translations: item.Prodotti_id.translations }) } else { return null }
       })
 
       return datiNormalizzati
