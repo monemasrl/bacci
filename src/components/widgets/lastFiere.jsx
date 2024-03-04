@@ -70,7 +70,7 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
                   {item.page && <Link className="buttonLink" to={`${locale === "it_IT" ? "" : "/" + langTag[locale]}/${Termini[locale].fiere}/${titleFiereTranslated.slug}`}>&#62;</Link>}
                 </div>
               )
-            }
+            } else { return null }
           })}
         </div>
         <div className="footerSezione">
