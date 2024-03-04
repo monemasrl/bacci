@@ -58,6 +58,7 @@ function CaseHistory({ locale }) {
                             )
                         }
                     }
+                    else { return null }
                 }
                 )}
             </section >)
