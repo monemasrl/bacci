@@ -11,20 +11,14 @@ const moment = require('moment')
 
 
 const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 8 }) => {
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState(archivio)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostPerPage] = useState(postPerPage)
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirsPost = indexOfLastPost - postsPerPage
     const currentPosts = posts.slice(indexOfFirsPost, indexOfLastPost)
+
     moment.locale(langTag[lang])
-
-    useEffect(() => {
-        setPosts(archivio)
-    }, [])
-
-
-
 
     const paginate = (pageNumber) => {
         setCurrentPage(pageNumber)
@@ -34,8 +28,6 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
         setPosts(archivio)
         setCurrentPage(1)
     }, [archivio])
-
-
 
 
     if (pageName === 'prodotti') {
@@ -56,6 +48,8 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                     {Termini[translated.languages_code.code].scopri}</Link>
                             </div>
                         )
+                    } else {
+                        return null
                     }
                 }) : <div>Loading...</div>}
 
@@ -87,6 +81,8 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                     </div>
                                 </div>
                             </div>)
+                    } else {
+                        return null
                     }
                 })}
                 <div className="break"></div>
@@ -115,18 +111,22 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                     </div>
                                     <div className="position">{item.position}</div>
                                     <div className="luogo">{item.location}</div>
-                                    <a className="link" href={`https://${item.link_fiera}`} target="_blank">{item.link_fiera}</a>
+                                    <a className="link" href={`https://${item.link_fiera}`} target="_blank" rel="noreferrer noopener">{item.link_fiera}</a>
                                     {item.page && <Link className="buttonLink" to={`${pathTranslated.path}/${titleTranslated.slug}`}>&#62;</Link>}
                                 </div>
 
                             </div>)
+                    } else {
+                        return null
                     }
                 })}
                 <div className="break"></div>
-                {<Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} topArchivio={topArchivio} />}
+                {(posts.length > postPerPage) && <Pagination postsPerPage={postPerPage} totalPosts={posts.length} paginate={paginate} topArchivio={topArchivio} />}
             </>
         )
 
+    } else {
+        return null
     }
 }
 
