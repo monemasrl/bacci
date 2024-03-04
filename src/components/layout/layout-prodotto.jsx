@@ -2,10 +2,9 @@ import * as React from "react"
 import "../../assets/sass/globale.scss"
 import Header from "../header"
 import Footer from "../footer/footer"
-import Seo from "../seo"
 import ScrollTo from "../scrollTo"
 import Gdpr from "../gdpr"
-const LayoutProdotto = ({ listaApplicazioni, listaCategorie, children, locale, pageTitle, pathName, tipo, allPagePath, seo }) => {
+const LayoutProdotto = ({ listaApplicazioni, listaCategorie, children, locale, pageTitle, pathName, tipo, allPagePath }) => {
 
 
   return (
