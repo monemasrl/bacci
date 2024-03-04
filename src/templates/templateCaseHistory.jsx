@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/layout/layout";
-import { findItemTranslated, findItemsTranslated } from "../utils";
+import { findItemTranslated } from "../utils";
 import { GatsbyImage } from "gatsby-plugin-image"
 import BlocksComponent from "../components/blocks/blocks"
 import { slugify } from "../utils";
@@ -39,8 +39,12 @@ const TemplateCaseHistory = ({ pageContext }) => {
                 case 'linkedin': {
                     return <a href={social.link} target="_blank" rel="noreferrer noopener"><icons.linkedin /></a>
                 }
+                default: {
+                    return null
+                }
 
             }
+            return null
 
         })
         return arraySocial
@@ -104,7 +108,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                                 <ul>
                                     {content.related_machines.map((item) => {
                                         const translated = findItemTranslated(item.Prodotti_id.translations, locale)
-                                        if (translated) { return <li><Link to={`/${locale === 'it_IT' ? '' : locale + '/'}${Termini[locale].prodotti}/${translated.slug}`}>{translated.titolo}</Link></li> }
+                                        if (translated) { return <li><Link to={`/${locale === 'it_IT' ? '' : locale + '/'}${Termini[locale].prodotti}/${translated.slug}`}>{translated.titolo}</Link></li> } else { return null }
                                     })}
                                 </ul>
                             </li>}
