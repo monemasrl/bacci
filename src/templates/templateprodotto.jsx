@@ -16,7 +16,7 @@ const Prodotto = ({ pageContext }) => {
     const categoriaProdotto = content.categoria && findItemTranslated(content.categoria.translations, locale)
     const seoFilterLocale = content.seo?.translations.find((item) => item.language_code.code === locale)
 
-    function softwareContent(productSoftwareData, lang) {
+    /* function softwareContent(productSoftwareData, lang) {
         if (productSoftwareData) {
             const traduzioniSezioneSoftware = findItemTranslated(productSoftwareData.translations, locale)
             let path
@@ -34,7 +34,7 @@ const Prodotto = ({ pageContext }) => {
         }
     }
 
-    /* const softwareData = softwareContent(content.product_software, locale) */
+     const softwareData = softwareContent(content.product_software, locale) */
     const [showModale, setShowModale] = useState(false)
     const [isCatalogoVisible, setIsCatalogoVisible] = useState(false)
     const [isVideoVisible, setIsVideoVisible] = useState(false)
@@ -56,7 +56,7 @@ const Prodotto = ({ pageContext }) => {
                         {!isCatalogoVisible ? Termini[locale].downloadCatalogoText : Termini[locale].downloadCatalogoTextLink}
                     </div>
                     {!isCatalogoVisible && <FormDownloadCatalogo lang={locale} setIsCatalogoVisible={setIsCatalogoVisible} />}
-                    <div className={`boxDownloadCatalogo ${isCatalogoVisible ? 'visible' : ''}`}><a target="_blank" href={`https://bacci-directus.monema.dev/assets/${content.catalogo.filename_disk}`}><GrDocumentPdf />&nbsp;Catalogo</a></div>
+                    <div className={`boxDownloadCatalogo ${isCatalogoVisible ? 'visible' : ''}`}><a target="_blank" rel="noreferrer noopener" href={`https://bacci-directus.monema.dev/assets/${content.catalogo.filename_disk}`}><GrDocumentPdf />&nbsp;Catalogo</a></div>
                 </Modale>}
                 {content.video && <Modale show={isVideoVisible} close={() => setIsVideoVisible(false)}>
                     <YoutubeEmbed embedId={content.video} />

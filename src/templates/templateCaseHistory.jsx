@@ -44,7 +44,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                 }
 
             }
-            return null
+
 
         })
         return arraySocial
