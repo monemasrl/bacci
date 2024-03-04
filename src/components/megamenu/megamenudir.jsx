@@ -85,7 +85,7 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
         return item.featured[0] === 'true'
     })
     const inEvidenzaLocalizzato = findItemTranslated(inEvidenza[0].translations, locale)
-    const novita = dataMega.directus.Prodotti.sort((item) => { if (item.type === "machinery") return item.date_create })
+    const novita = dataMega.directus.Prodotti.sort((item) => { if (item.type === "machinery") { return item.date_create } else { return item } })
     const novitaLocalizzato = findItemTranslated(novita[novita.length - 1].translations, locale)
     const software = dataMega.directus.Prodotti.filter((item) => item.type === "software")
 
@@ -203,6 +203,8 @@ const MegamenuDirectus = ({ mega, setMega, terminiTraduzione, locale, language, 
                                         return (<li>
                                             <Link to={`${locale === 'it_IT' ? '/' + terminiTraduzione.prodotti : '/' + language + "/" + terminiTraduzione.prodotti}/${traduzioni.slug}`}
                                                 className="mega-item">{traduzioni.titolo}</Link></li>)
+                                    } else {
+                                        return null
                                     }
                                 })}
                             </ul>
