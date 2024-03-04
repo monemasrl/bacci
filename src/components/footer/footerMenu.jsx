@@ -90,9 +90,11 @@ function FooterMenu({ locale, listaTipologia }) {
                                 if (itemTranslated) {
                                     return (
                                         <li key={index}>
-                                            <Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
+                                            <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
                                         </li>
                                     )
+                                } else {
+                                    return null
                                 }
                             })}
 
@@ -111,7 +113,8 @@ function FooterMenu({ locale, listaTipologia }) {
                             <ul>
                                 <li>{parentItemTranslated.label}</li>
                                 {listaCategorieTranslated.map((subitem, index) => {
-                                    if (subitem) { return <li key={index} ><Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`} state={{ categoria: subitem.nome }}>{subitem.nome}</Link></li> }
+                                    if (subitem) { return <li key={index} ><Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`} state={{ categoria: subitem.nome }}>{subitem.nome}</Link></li> }
+                                    else { return null }
                                 })}
                             </ul>
                         </div>
@@ -126,11 +129,13 @@ function FooterMenu({ locale, listaTipologia }) {
                     return (
                         <div key={index} className="footer-col">
                             <ul>
-                                <li> <Link to={"/" + `${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`}>{parentItemTranslated.label.toLowerCase()}</Link></li>
+                                <li> <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`}>{parentItemTranslated.label.toLowerCase()}</Link></li>
                             </ul>
                         </div>
                     )
                 }
+            } else {
+                return null
             }
 
         })}
