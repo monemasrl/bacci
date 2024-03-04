@@ -205,7 +205,7 @@ const Prodotti = ({ data, location, pageContext }) => {
     const filtersResultApp = langFilterProdotto.filter((itema) => {
       return filtersApp.length > 0 && itema.applicazioni.some((itemb) => {
         return itemb.applicazioni_id.translations.some((itemc) => {
-          if (itemc.label !== null) { return filtersApp.includes(itemc.label) }
+          if (itemc.label !== null) { return filtersApp.includes(itemc.label) } else { return false }
         })
       })
     })
@@ -275,6 +275,8 @@ const Prodotti = ({ data, location, pageContext }) => {
                           checked={item.nome === filtersCat[0]} />
                         <label for="categorie">{item.nome}</label>
                       </li>)
+                  } else {
+                    return null
                   }
                 })}
               </ul>
@@ -290,6 +292,8 @@ const Prodotti = ({ data, location, pageContext }) => {
                           <input type="checkbox" checked={filtersApp.includes(item.label)} value={item.label} id={item.label} name="applicazioni" />
                           <label htmlFor={item.label}>{item.label}</label>
                         </li>)
+                    } else {
+                      return null
                     }
                   })}
                 </ul>
