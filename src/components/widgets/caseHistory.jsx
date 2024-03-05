@@ -56,8 +56,9 @@ function CaseHistory({ locale }) {
                                         <Link className="button-sezione" to={`${urlBase}${Termini[locale].caseHistory}/${translation.slug}`}>{Termini[locale].scopri}</Link>
                                     </div>)
                             )
-                        }
+                        } else { return null }
                     }
+                    else { return null }
                 }
                 )}
             </section >)

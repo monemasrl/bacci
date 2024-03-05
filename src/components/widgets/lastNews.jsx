@@ -75,6 +75,8 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
                   </div>
                 </div>
               )
+            } else {
+              return null
             }
           })}
         </div>

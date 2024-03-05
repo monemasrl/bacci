@@ -1,5 +1,3 @@
-import CaseHistory from "./src/components/widgets/caseHistory"
-
 export const langTag = {
   en_US: "en",
   it_IT: "it",
@@ -13,12 +11,11 @@ export const Termini = {
     cookieButton: "Accept",
     nome: "name",
     cognome: "last name",
-    azienda: "company",
+
     messaggio: "message",
     footerForm:
       "<h2>EN Hai bisogno di <strong>informazioni?</strong></h2><p>Se desideri avere maggiori informazioni sulla nostra Azienda e sui nostri prodotti, scrivici compilando il form. il nostro Staff ti risponderà presto!</p>",
     tastoRicerca: "Search for model",
-    formPrivacy: "Accept",
     formMessaggio: "Minimum 15 characters",
     formSuccess: "Form sent successfully",
     formRequired: "Required field",
@@ -67,14 +64,13 @@ export const Termini = {
     footerForm:
       "<h2>Hai bisogno di <strong>informazioni?</strong></h2><p>Se desideri avere maggiori informazioni sulla nostra Azienda e sui nostri prodotti, scrivici compilando il form. il nostro Staff ti risponderà presto!</p>",
     tastoRicerca: "Ricerca Modello",
-    formPrivacy: "Accetta la",
     formMessaggio: "Minimo 15 caratteri",
     formSuccess: "Form inviato con successo",
     formRequired: "campo obbligatorio",
     formMinimoCaratteri: "Minimo 3 caratteri",
     formMail: "Inserisci una mail valida",
     formPrivacy: "Accetta la privacy",
-    azienda: "azienda",
+
     prodotti: "prodotti",
     tutti_prodotti: "tutti i prodotti",
     tasto_ricerca: "Ricerca Modello",

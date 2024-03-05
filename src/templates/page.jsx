@@ -152,10 +152,10 @@ const Pagine = ({ data, pageContext }) => {
                   return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
                 })}
               </div>
-              {pageContext.pageName === "news" || pageContext.pageName === "home" &&
+              {(pageContext.pageName === "news" || pageContext.pageName === "home") &&
                 <LastFiere pageType={pageContext.pageName} locale={pageContext.locale} limiteVisualizzazione={3} />}
             </>}
-          {pageContext.pageName === "news" || pageContext.pageName === "home" &&
+          {(pageContext.pageName === "news" || pageContext.pageName === "home") &&
             <LastNews pageType={pageContext.pageName} locale={pageContext.locale} limiteVisualizzazione={3} />}
           {pageContext.pageName === 'case-history' && <CaseHistory locale={pageContext.locale} />}
           {!data.directus.pages[0] &&

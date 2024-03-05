@@ -3,7 +3,6 @@ import { Link, graphql, useStaticQuery } from 'gatsby'
 import { langTag } from '../../../data-translations'
 import LangSwitcher from '../langSwitcher'
 import { StaticImage } from "gatsby-plugin-image"
-import { Termini } from '../../../data-translations'
 import './navbarMobile.scss'
 
 const NavBarMobile = (props) => {

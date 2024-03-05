@@ -7,14 +7,32 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-
-
+import { useStaticQuery, graphql } from "gatsby"
 
 // import required modules
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 function Slider() {
+
+
+    const data = useStaticQuery(graphql`
+        query {
+            directus {
+                slide{
+                        translations{
+                            titolo
+                            testo
+                            languages_code{
+                            code
+                            }
+                        }
+                    }
+            }
+            }
+   `)
+
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    console.log(data)
     return (
         <>
             <Swiper
