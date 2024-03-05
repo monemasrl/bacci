@@ -1,38 +1,52 @@
-import React, { useRef, useState } from 'react';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
+
+import React, { useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import SwiperCore from 'swiper'
+import { Autoplay } from 'swiper/modules';
 import { useStaticQuery, graphql } from "gatsby"
+import { GatsbyImage } from "gatsby-plugin-image";
+import { FreeMode, Navigation, Thumbs, } from 'swiper/modules';
 
-// import required modules
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
-
-function Slider() {
-
-
+function Slider({ locale }) {
+    SwiperCore.use([Autoplay]);
     const data = useStaticQuery(graphql`
         query {
-            directus {
-                slide{
-                        translations{
+            
+                directus {
+                    slider{
+                        slides{
+                            tipo
+                            immagine{
+                            id
+                            imageFile{
+                                id
+                                childImageSharp{
+                                gatsbyImageData
+                                }
+                            }
+                            }
+                            translations{
+                                languages_code{
+                                    code
+                                }
                             titolo
                             testo
-                            languages_code{
-                            code
                             }
                         }
                     }
-            }
+                 }
             }
    `)
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    console.log(data)
+    const translation = data.directus.slider.slides.map((item) =>
+        item.translations.find((item) => item.languages_code.code === locale)
+    )
+    console.log(translation)
     return (
         <>
             <Swiper
@@ -44,38 +58,24 @@ function Slider() {
                 navigation={true}
                 thumbs={{ swiper: thumbsSwiper }}
                 modules={[FreeMode, Navigation, Thumbs]}
+                autoplay={{ delay: 10000 }}
                 className="mySwiper2"
             >
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                </SwiperSlide>
+
+                {data.directus.slider.slides.map((item, index) => {
+                    const translations = translation[index]
+                    return (
+                        <SwiperSlide key={index}>
+                            {item.tipo === "immagine" ?
+                                <GatsbyImage className="background-slider" quality={100} image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translations.titolo} /> :
+                                <div>test</div>}
+                            <div className="sliderContent">
+                                <div className='sliderContent__box' dangerouslySetInnerHTML={{ __html: translations.testo }} />
+                            </div>
+
+                        </SwiperSlide>
+                    )
+                })}
             </Swiper>
             <Swiper
                 onSwiper={setThumbsSwiper}
@@ -84,39 +84,17 @@ function Slider() {
                 freeMode={true}
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
-                className="mySwiper"
+                className="mySwiperNav"
             >
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                </SwiperSlide>
-            </Swiper>
+                {data.directus.slider.slides.map((item, index) => {
+                    const translations = translation[index]
+                    return (
+                        < SwiperSlide >
+                            {translations.titolo}
+                        </SwiperSlide>)
+                })}
+
+            </Swiper >
         </>
     );
 }

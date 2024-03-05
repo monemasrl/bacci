@@ -1532,3 +1532,79 @@ section.container.news {
   height: 100%;
   object-fit: cover;
 }
+
+.sliderContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 1rem;
+  text-transform: uppercase;
+  @media #{$landscape} {
+    font-size: 0.7rem;
+  }
+  @media #{$phone} {
+    font-size: 0.6rem;
+  }
+  &__box {
+    color: white;
+    h3 {
+      font-size: 2em;
+      margin: 0;
+    }
+    h4 {
+      font-size: 5.5em;
+      margin: 0;
+      font-family: $title;
+    }
+    p {
+      max-width: 800px;
+      font-size: 1.5em;
+      color: white;
+      text-transform: none;
+      @media #{$phone} {
+        display: none;
+      }
+    }
+  }
+}
+.background-slider {
+  width: 100%;
+}
+
+.mySwiperNav {
+  height: 50px;
+  position: relative;
+  top: -60px;
+
+  @media #{$landscape} {
+    display: none !important;
+  }
+  .swiper-wrapper {
+    justify-content: center;
+    .swiper-slide {
+      position: relative;
+      background-color: transparent;
+      color: white;
+      height: 50px;
+      line-height: 50px;
+      text-transform: uppercase;
+      cursor: pointer;
+      &.swiper-slide-thumb-active {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          width: 100%;
+          display: block;
+          border-top: 2px solid $brown;
+        }
+      }
+    }
+  }
+}
