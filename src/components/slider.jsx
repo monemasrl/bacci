@@ -45,10 +45,10 @@ function Slider({ locale }) {
    `)
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const translation = data.directus.slider.slides.map((item) =>
+    const translation = data.directus.slider.slides.filter((item) =>
         item.translations.find((item) => item.languages_code.code === locale)
     )
-
+    console.log(translation.length)
     if (data.directus.slider.slides.length === 0) {
         return <h2>Error, no Slides!</h2>
     }
@@ -70,6 +70,7 @@ function Slider({ locale }) {
 
                 {data.directus.slider.slides.map((item, index) => {
                     const translations = translation[index]
+                    if (translation.length === 0) return null
                     return (
                         <SwiperSlide key={index}>
                             {item.tipo === "immagine" ?
@@ -95,6 +96,7 @@ function Slider({ locale }) {
             >
                 {data.directus.slider.slides.map((item, index) => {
                     const translations = translation[index]
+                    if (translation.length === 0) return null
                     return (
                         < SwiperSlide >
                             {translations.titolo}
