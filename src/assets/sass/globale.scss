@@ -1575,8 +1575,14 @@ section.container.news {
       margin: 0;
       font-family: $title;
     }
-    p {
+    h5 {
+      font-family: $title;
+      font-weight: normal;
       max-width: 800px;
+      margin: 3rem 0 0 0;
+    }
+    p {
+      max-width: 760px;
       font-size: 1.5em;
       color: white;
       text-transform: none;

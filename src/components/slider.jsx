@@ -64,7 +64,7 @@ function Slider({ locale }) {
                 navigation={true}
                 thumbs={{ swiper: thumbsSwiper }}
                 modules={[FreeMode, Navigation, Thumbs]}
-                autoplay={{ delay: 10000 }}
+                autoplay={{ delay: 100000 }}
                 className="mySwiper2"
             >
 
