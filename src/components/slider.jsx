@@ -3,7 +3,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper'
 import { Autoplay } from 'swiper/modules';
@@ -35,6 +35,8 @@ function Slider({ locale }) {
                                 }
                             titolo
                             testo
+                            action_label
+                            action_url
                             }
                         }
                     }
@@ -46,7 +48,11 @@ function Slider({ locale }) {
     const translation = data.directus.slider.slides.map((item) =>
         item.translations.find((item) => item.languages_code.code === locale)
     )
-    console.log(translation)
+
+    if (data.directus.slider.slides.length === 0) {
+        return <h2>Error, no Slides!</h2>
+    }
+
     return (
         <>
             <Swiper
@@ -69,9 +75,10 @@ function Slider({ locale }) {
                             {item.tipo === "immagine" ?
                                 <GatsbyImage className="background-slider" quality={100} image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translations.titolo} /> :
                                 <div>test</div>}
-                            <div className="sliderContent">
+                            {translations.testo && <div className="sliderContent">
                                 <div className='sliderContent__box' dangerouslySetInnerHTML={{ __html: translations.testo }} />
-                            </div>
+                                {translations.action_url && <a href={translations.action_url} title={translations.action_label} className="buttonLink">&#62;</a>}
+                            </div>}
 
                         </SwiperSlide>
                     )
