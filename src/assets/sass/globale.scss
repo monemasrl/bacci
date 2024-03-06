@@ -1562,24 +1562,39 @@ section.container.news {
     border-radius: 50%;
     margin-top: 2rem;
     position: relative;
+    font-size: 1.7rem;
   }
   &__box {
     font-family: $title;
     color: white;
+    padding: 1rem;
     h3 {
       font-size: 2em;
       margin: 0;
+      @media #{$landscape} {
+        font-size: 2em !important;
+      }
     }
     h4 {
       font-size: 5.5em;
       margin: 0;
       font-family: $title;
+      @media #{$landscape} {
+        font-size: 2em !important;
+      }
     }
     h5 {
       font-family: $title;
       font-weight: normal;
       max-width: 800px;
       margin: 3rem 0 0 0;
+      @media #{$landscape} {
+        font-size: 1.8em !important;
+        margin: 1rem 0 0 0;
+      }
+    }
+    div {
+      font-size: 2em !important;
     }
     p {
       max-width: 760px;
@@ -1587,13 +1602,18 @@ section.container.news {
       color: white;
       text-transform: none;
       @media #{$phone} {
-        display: none;
       }
     }
   }
 }
 .background-slider {
   width: 100%;
+  @media #{$desktop} {
+    height: 600px;
+  }
+  @media #{$phone} {
+    height: 300px;
+  }
 }
 
 .mySwiperNav {
@@ -1601,7 +1621,7 @@ section.container.news {
   position: relative;
   top: -60px;
 
-  @media #{$landscape} {
+  @media #{$phone} {
     display: none !important;
   }
   .swiper-wrapper {
