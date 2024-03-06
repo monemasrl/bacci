@@ -69,12 +69,15 @@ function Slider({ locale }) {
             >
 
                 {data.directus.slider.slides.map((item, index) => {
-                    const translations = translation[index]
-                    if (translation.length === 0) return null
+
+                    /* Se non esiste una traduzione ritorna slide vuota */
+                    if (translation.length === 0) return <div key={index}></div>
+
+                    const translations = translation[index].translations[0]
                     return (
                         <SwiperSlide key={index}>
                             {item.tipo === "immagine" ?
-                                <GatsbyImage className="background-slider" quality={100} image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translations.titolo} /> :
+                                <GatsbyImage className="background-slider" quality={100} image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translations.titolo ? translations.titolo : 'immagine slider'} /> :
                                 <div>test</div>}
                             {translations.testo && <div className="sliderContent">
                                 <div className='sliderContent__box' dangerouslySetInnerHTML={{ __html: translations.testo }} />
@@ -95,10 +98,13 @@ function Slider({ locale }) {
                 className="mySwiperNav"
             >
                 {data.directus.slider.slides.map((item, index) => {
-                    const translations = translation[index]
-                    if (translation.length === 0) return null
+
+                    /* Se non esiste una traduzione ritorna slide vuota */
+                    if (translation.length === 0) return <div key={index}></div>
+
+                    const translations = translation[index].translations[0]
                     return (
-                        < SwiperSlide >
+                        < SwiperSlide key={index} >
                             {translations.titolo}
                         </SwiperSlide>)
                 })}

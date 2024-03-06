@@ -9,7 +9,7 @@ function TestoImmagineHome({ index, allineamento, content }) {
 
     if (allineamento === 'left') {
         return (
-            <motion.section ref={isInView}
+            <motion.section key={index} ref={isInView}
                 className={`container sezione-1 ${content.item.novita ? 'seznovita' : ''} ${'index-' + index}`}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
             >
