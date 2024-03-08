@@ -1634,16 +1634,6 @@ section.container.news {
       line-height: 50px;
       text-transform: uppercase;
       cursor: pointer;
-      &.swiper-slide-thumb-active {
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          width: 100%;
-          display: block;
-          border-top: 2px solid $brown;
-        }
-      }
     }
   }
 }

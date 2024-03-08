@@ -1,15 +1,47 @@
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
 import 'swiper/css/thumbs';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper'
 import { Autoplay } from 'swiper/modules';
 import { useStaticQuery, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image";
-import { FreeMode, Navigation, Thumbs, } from 'swiper/modules';
+import { FreeMode, Navigation, Thumbs, EffectFade } from 'swiper/modules';
+
+const TIMER = 10000
+
+function SliderName({ titolo, isChangeSlider, currentSlide, setCurrentSlide, currentIndex }) {
+    console.log(currentSlide)
+    const [slideThumbBar, setSlideThumbBar] = useState(0)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            /* al cambio di slide setta la dimensione a zero */
+            if (isChangeSlider) setSlideThumbBar(0)
+            /* Quando è finita la transizione in entrata, slideThumbar è 0, parte la barra */
+            else {
+                if (slideThumbBar < 100) {
+                    let size = slideThumbBar + .1
+                    setSlideThumbBar(size)
+                }
+            }
+        }, TIMER / 1200);
+        return () => clearInterval(interval);
+
+    })
+
+
+    return (
+        <>
+            <div style={{ width: `${currentIndex === currentSlide ? slideThumbBar : 0}%`, height: 3, background: "#4a6c96" }} > </div>
+            {titolo}
+        </>
+    )
+}
+
 
 function Slider({ locale }) {
     SwiperCore.use([Autoplay]);
@@ -45,10 +77,13 @@ function Slider({ locale }) {
    `)
 
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [isChangeSlider, setIsChangeSlider] = useState(false)
+    const [currentSlide, setCurrentSlide] = useState(0)
+
     const translation = data.directus.slider.slides.filter((item) =>
         item.translations.find((item) => item.languages_code.code === locale)
     )
-    console.log(translation.length)
+
     if (data.directus.slider.slides.length === 0) {
         return <h2>Error, no Slides!</h2>
     }
@@ -63,9 +98,21 @@ function Slider({ locale }) {
                 spaceBetween={10}
                 navigation={true}
                 thumbs={{ swiper: thumbsSwiper }}
-                modules={[FreeMode, Navigation, Thumbs]}
-                autoplay={{ delay: 10000 }}
+                modules={[FreeMode, Navigation, Thumbs, EffectFade]}
+                autoplay={{ delay: TIMER }}
                 className="mySwiper2"
+                effect='fade'
+                onSlideChangeTransitionEnd={() => {
+
+                    setIsChangeSlider(false)
+
+
+                }}
+                onActiveIndexChange={(swiper) => {
+                    setCurrentSlide(swiper.realIndex)
+                    setIsChangeSlider(true)
+
+                }}
             >
 
                 {data.directus.slider.slides.map((item, index) => {
@@ -87,7 +134,7 @@ function Slider({ locale }) {
                         </SwiperSlide>
                     )
                 })}
-            </Swiper>
+            </Swiper >
             <Swiper
                 onSwiper={setThumbsSwiper}
                 spaceBetween={10}
@@ -96,6 +143,7 @@ function Slider({ locale }) {
                 watchSlidesProgress={true}
                 modules={[FreeMode, Navigation, Thumbs]}
                 className="mySwiperNav"
+
             >
                 {data.directus.slider.slides.map((item, index) => {
 
@@ -104,8 +152,9 @@ function Slider({ locale }) {
 
                     const translations = translation[index].translations[0]
                     return (
-                        < SwiperSlide key={index} >
-                            {translations.titolo}
+
+                        <SwiperSlide key={index} >
+                            <SliderName titolo={translations.titolo} isChangeSlider={isChangeSlider} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} currentIndex={index} />
                         </SwiperSlide>)
                 })}
 
