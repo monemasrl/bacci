@@ -22,7 +22,14 @@ module.exports = {
       resolveSiteUrl: () => siteUrl,
       output: "/",
     },
-    "gatsby-plugin-robots-txt",
+    {
+      resolve: `gatsby-plugin-robots-txt`,
+      options: {
+        host: "https://bacci.com",
+        sitemap: "https://bacci.com/sitemap.xml",
+        policy: [{ userAgent: "*", allow: "/", disallow: "/en" }],
+      },
+    },
     `gatsby-plugin-image`,
     `gatsby-plugin-netlify`,
     {

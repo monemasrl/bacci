@@ -12,7 +12,6 @@ const NavBarDirectus = (props) => {
     const data = useStaticQuery(graphql`
 query datimenu{
     directus{
-
             menus{
                 name
                 items{
@@ -40,7 +39,7 @@ query datimenu{
                 }
             }
             }
-    
+
             }
     `)
 
@@ -90,8 +89,8 @@ query datimenu{
                             }
                         </ul>}
 
-                    <LangSwitcher allPagePath={props.allPagePath} locale={props.locale} pathName={props.pathName} />
-
+                    {/*  <LangSwitcher allPagePath={props.allPagePath} locale={props.locale} pathName={props.pathName} />
+ */}
                 </div>
 
             </nav>
