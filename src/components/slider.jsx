@@ -15,7 +15,7 @@ import { FreeMode, Navigation, Thumbs, EffectFade } from 'swiper/modules';
 const TIMER = 10000
 
 function SliderName({ titolo, isChangeSlider, currentSlide, setCurrentSlide, currentIndex }) {
-    console.log(currentSlide)
+
     const [slideThumbBar, setSlideThumbBar] = useState(0)
     useEffect(() => {
         const interval = setInterval(() => {
@@ -84,8 +84,8 @@ function Slider({ locale }) {
         item.translations.find((item) => item.languages_code.code === locale)
     )
 
-    if (data.directus.slider.slides.length === 0) {
-        return <h2>Error, no Slides!</h2>
+    if (translation.length === 0) {
+        return
     }
 
     return (

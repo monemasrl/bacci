@@ -14,7 +14,9 @@ const Prodotto = ({ pageContext }) => {
     } = pageContext
     const dataProdottoTranslated = findItemTranslated(content.translations, locale)
     const categoriaProdotto = content.categoria && findItemTranslated(content.categoria.translations, locale)
-    const seoFilterLocale = content.seo?.translations.find((item) => item.language_code.code === locale)
+    const seoFilterLocale = content.seo?.translations.find((item) => item.languages_code?.code === locale)
+
+    console.log('content', seoFilterLocale)
 
     /* function softwareContent(productSoftwareData, lang) {
         if (productSoftwareData) {
@@ -27,13 +29,13 @@ const Prodotto = ({ pageContext }) => {
                 path = `/en/products/${traduzioniSezioneSoftware.slug}/`
             }
             const immagine = productSoftwareData.immagine && productSoftwareData.immagine.imageFile.childImageSharp.gatsbyImageData
-
+    
             return { ...traduzioniSezioneSoftware, path, immagine }
         } else {
             return undefined
         }
     }
-
+    
      const softwareData = softwareContent(content.product_software, locale) */
     const [showModale, setShowModale] = useState(false)
     const [isCatalogoVisible, setIsCatalogoVisible] = useState(false)
@@ -68,20 +70,19 @@ const Prodotto = ({ pageContext }) => {
                             <h2 dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.sottotitolo }} />
                             <p dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.paragrafo }} />
                             <nav>
-                                <button className="button-sezione" onClick={() => setShowModale(true)} >download</button>
-                                <button className="button-sezione" onClick={() => setIsVideoVisible(true)} >video</button>
-
+                                {content.catalogo?.filename_disk && <button className="button-sezione" onClick={() => setShowModale(true)} >download</button>}
+                                {content.video && <button className="button-sezione" onClick={() => setIsVideoVisible(true)} >video</button>}
                             </nav>
                         </div>
                         <div className="box-dx">
                             <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.immagine.description || dataProdottoTranslated.titolo} />
                         </div>
                     </section>
-                    {content.sezioni_prodotto.map((item) => {
+                    {content.sezioni_prodotto.map((item, index) => {
                         const dataProdottoTranslated = findItemTranslated(item.translations, locale)
 
                         return (
-                            <section className="container sezione-1 left">
+                            <section className="container sezione-1 left" key={index}>
                                 <div className="box-sx">
                                     <div className="heading">
                                         <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.titolo }} />

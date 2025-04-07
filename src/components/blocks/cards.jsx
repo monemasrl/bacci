@@ -23,9 +23,9 @@ function Cards({ content, index }) {
                 }
             } : { opacity: 0, y: 100 }}
         >
-            {content.item.traduzioni[0].blocchi.map((item) => {
+            {content.item.traduzioni[0].blocchi.map((item, index) => {
                 return (
-                    <div className='box-repeater'>
+                    <div key={index} className='box-repeater'>
                         <h3>{item.Titolo}</h3>
                         <p>{item.Corpo}</p>
                     </div>

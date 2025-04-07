@@ -4,17 +4,15 @@ import Header from "../header"
 import Footer from "../footer/footer"
 import ScrollTo from "../scrollTo"
 import Gdpr from "../gdpr"
-const LayoutProdotto = ({ listaApplicazioni, listaCategorie, children, locale, pageTitle, pathName, tipo, allPagePath }) => {
+import Seo from "../seo"
+const LayoutProdotto = ({ listaApplicazioni, listaCategorie, children, locale, pageTitle, pathName, tipo, allPagePath, seo }) => {
 
 
   return (
     <div className="mainwrapper">
-
-
-
       <div className="container-fluid " >
+        <Seo lang={locale} title={pageTitle} seo={seo} />
         <Header
-
           locale={locale}
           pageTitle={pageTitle}
           pathName={pathName}

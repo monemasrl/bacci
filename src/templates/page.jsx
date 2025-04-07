@@ -139,6 +139,7 @@ const Pagine = ({ data, pageContext }) => {
           {/* PAGINE INTERNE */}
           {data.directus.pages[0] &&
             <>
+
               {pageContext.pageName === "home" &&
                 <section className="jumbo-home">
                   <Slider locale={pageContext.locale} />
@@ -149,7 +150,7 @@ const Pagine = ({ data, pageContext }) => {
 
               <div className={`container-fluid ${pageContext.pageName}`}>
                 {data.directus.pages[0].blocchi?.map((blocco, index) => {
-                  return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
+                  return <React.Fragment key={index}>{BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)}</React.Fragment>
                 })}
               </div>
               {(pageContext.pageName === "news" || pageContext.pageName === "home") &&

@@ -162,7 +162,7 @@ function findItemsTranslated(translations, langCode) {
     return langTag[code] === langTag[langCode]
   })
   if (!itemTranslated) {
-    console.log("error, traduzione non trovata")
+    return
   } else {
     return itemTranslated
   }

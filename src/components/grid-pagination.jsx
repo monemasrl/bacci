@@ -62,13 +62,13 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
 
         return (
             <>
-                {currentPosts && currentPosts.map((item) => {
+                {currentPosts && currentPosts.map((item, index) => {
                     const translated = findItemTranslated(item.translations, lang)
                     const data = new Date(Date.parse(item.date_created))
 
                     if (translated) {
                         return (
-                            <div className="col-3">
+                            <div key={index} className="col-3">
                                 <div className="box-single-news">
                                     {item.image && <GatsbyImage image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={translated.title} />}
                                     <div className="box-correlati">
@@ -95,14 +95,14 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
 
         return (
             <>
-                {currentPosts && currentPosts.map((item) => {
+                {currentPosts && currentPosts.map((item, index) => {
                     const titleTranslated = findItemTranslated(item.title_translations, lang)
                     const dataFrom = new Date(Date.parse(item.from))
                     const dataTo = new Date(Date.parse(item.to))
                     const pathTranslated = pagePath.find((item) => item.locale === lang)
                     if (titleTranslated) {
                         return (
-                            <div className="col-3">
+                            <div className="col-3" key={index}>
                                 <div className={`box-single-fiera ${item.type === 'event' ? 'evento' : ''}`}>
                                     <h2>{titleTranslated.title}</h2>
                                     <div className="datafiera">

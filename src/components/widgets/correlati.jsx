@@ -84,7 +84,7 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
 
               if (prodottoTradotto) {
                 return (
-                  <div className="col-3">
+                  <div className="col-3" key={prodottoTradotto.titolo}>
                     <div className="box-correlati">
                       {item.immagine && <GatsbyImage className="immagine-widget" image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.titolo} />}
                       {prodottoTradotto.titolo && <h2>{prodottoTradotto.titolo}</h2>}
