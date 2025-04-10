@@ -16,8 +16,6 @@ const Prodotto = ({ pageContext }) => {
     const categoriaProdotto = content.categoria && findItemTranslated(content.categoria.translations, locale)
     const seoFilterLocale = content.seo?.translations.find((item) => item.languages_code?.code === locale)
 
-    console.log('content', seoFilterLocale)
-
     /* function softwareContent(productSoftwareData, lang) {
         if (productSoftwareData) {
             const traduzioniSezioneSoftware = findItemTranslated(productSoftwareData.translations, locale)
@@ -37,9 +35,11 @@ const Prodotto = ({ pageContext }) => {
     }
     
      const softwareData = softwareContent(content.product_software, locale) */
+
     const [showModale, setShowModale] = useState(false)
     const [isCatalogoVisible, setIsCatalogoVisible] = useState(false)
     const [isVideoVisible, setIsVideoVisible] = useState(false)
+    console.log('content', content)
     return (
         <>
             <LayoutProdotto
@@ -63,6 +63,7 @@ const Prodotto = ({ pageContext }) => {
                 {content.video && <Modale show={isVideoVisible} close={() => setIsVideoVisible(false)}>
                     <YoutubeEmbed embedId={content.video} />
                 </Modale>}
+
                 <div className="container prodotto">
                     <section className="container sezione-1 mainProdotto">
                         <div className="box-sx">
@@ -80,7 +81,6 @@ const Prodotto = ({ pageContext }) => {
                     </section>
                     {content.sezioni_prodotto.map((item, index) => {
                         const dataProdottoTranslated = findItemTranslated(item.translations, locale)
-
                         return (
                             <section className="container sezione-1 left" key={index}>
                                 <div className="box-sx">
@@ -94,9 +94,7 @@ const Prodotto = ({ pageContext }) => {
                                 </div>
 
                             </section>
-
                         )
-
                     })}
                     {/*{softwareData ?
                         <section className="container sezione-3 center">
@@ -109,7 +107,7 @@ const Prodotto = ({ pageContext }) => {
                                 <Link className="button-sezione" to={softwareData.path}>{softwareData.titolo}</Link>
                             </div>
                         </section> : ''} */}
-                    {content.type === "machinery" && <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} limiteVisualizzazione={3} />}
+                    {content.type === "machinery" && <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} limiteVisualizzazione={3} prodotti_correlati={content.prodotti_correlati} />}
                 </div>
             </LayoutProdotto>
         </>

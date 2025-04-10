@@ -196,6 +196,25 @@ exports.createPages = async ({ graphql, actions }) => {
               nome
             }
           }
+          prodotti_correlati {
+            related_Prodotti_id {
+              immagine {
+                id
+                imageFile {
+                  childImageSharp {
+                    gatsbyImageData
+                  }
+                }
+              }
+              translations {
+                languages_code {
+                  code
+                }
+                titolo
+                slug
+              }
+            }
+          }
           sezioni_prodotto {
             immagine {
               description
