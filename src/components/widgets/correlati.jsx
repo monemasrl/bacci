@@ -67,7 +67,7 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
 
   console.log(prodottiCorrelatiCategoria, 'prodotti correlati')
   function tipoCorrelazione() {
-    if (prodotti_correlati.length > 0) {
+    if (prodotti_correlati?.length > 0) {
       return prodotti_correlati.map((item) => { return { ...item.related_Prodotti_id } })
     } else {
       return prodottiCorrelatiCategoria
@@ -78,14 +78,13 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
 
   return (
     <>
-      {tipoCorrelazione().length > 0 &&
+      {tipoCorrelazione() && tipoCorrelazione().length > 0 &&
         <section className=" widget-correlati">
           <h2>{Termini[locale].correlati}</h2>
           <div className="container">
             {tipoCorrelazione().map((item, index) => {
 
               const prodottoTradotto = findItemTranslated(item.translations, locale)
-
 
               if (prodottoTradotto && index < limiteVisualizzazione) {
                 return (
