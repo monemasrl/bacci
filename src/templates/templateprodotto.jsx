@@ -90,7 +90,8 @@ const Prodotto = ({ pageContext }) => {
                                     <p>{dataProdottoTranslated.paragrafo}</p>
                                 </div>
                                 <div className="box-dx">
-                                    <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || dataProdottoTranslated.titolo} />
+
+                                    {item.immagine && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || dataProdottoTranslated.titolo} />}
                                 </div>
 
                             </section>

@@ -165,6 +165,7 @@ main {
     justify-content: flex-start;
     margin-top: 2rem;
     gap: 5rem;
+    flex-wrap: wrap;
     @media #{$landscape} {
       flex-direction: column;
       gap: 0rem;

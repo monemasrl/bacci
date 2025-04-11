@@ -265,15 +265,15 @@ const Prodotti = ({ data, location, pageContext }) => {
               <h3>{Termini[pageContext.locale].tipologia}</h3>
               <ul>
                 <li>
-                  <input type="radio" checked={filtersCat.length === 0} value={'reset'} name="categorie" />
-                  <label for="categorie">{termini.tutti_prodotti}</label></li>
-                {pageContext.listaCategorie.map((item) => {
+                  <input type="radio" checked={filtersCat.length === 0} value={'reset'} name="categorie" readOnly />
+                  <label htmlFor="categorie">{termini.tutti_prodotti}</label></li>
+                {pageContext.listaCategorie.map((item, index) => {
                   if (item !== null) {
                     return (
-                      <li>
-                        <input type="radio" value={item.nome} name="categorie"
-                          checked={item.nome === filtersCat[0]} />
-                        <label for="categorie">{item.nome}</label>
+                      <li key={index}>
+                        <input id={item.nome} type="radio" value={item.nome} name="categorie"
+                          checked={item.nome === filtersCat[0]} readOnly />
+                        <label htmlFor={item.nome}>{item.nome}</label>
                       </li>)
                   } else {
                     return null
@@ -284,12 +284,13 @@ const Prodotti = ({ data, location, pageContext }) => {
             <div className="filters">
               <form onChange={(e) => onChangeCheckboxApplicazioni(e)}>
                 <h3>{Termini[pageContext.locale].applicazione}</h3>
+                <button onClick={() => setFiltersApp([])}> {Termini[pageContext.locale].tutteApplicazioni}</button>
                 <ul>
                   {pageContext.listaApplicazioni.map((item, index) => {
                     if (item !== null) {
                       return (
                         <li key={index}>
-                          <input type="checkbox" checked={filtersApp.includes(item.label)} value={item.label} id={item.label} name="applicazioni" />
+                          <input type="checkbox" checked={filtersApp.includes(item.label)} value={item.label} id={item.label} name="applicazioni" readOnly />
                           <label htmlFor={item.label}>{item.label}</label>
                         </li>)
                     } else {
@@ -298,7 +299,7 @@ const Prodotti = ({ data, location, pageContext }) => {
                   })}
                 </ul>
               </form>
-              <button onClick={() => setFiltersApp([])}> {Termini[pageContext.locale].tutteApplicazioni}</button>
+
             </div>
             <div className="filters search">
 
