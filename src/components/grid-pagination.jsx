@@ -10,14 +10,14 @@ import 'moment/locale/it'
 const moment = require('moment')
 
 
-const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 8 }) => {
+const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 8, locationState = {} }) => {
     const [posts, setPosts] = useState(archivio)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostPerPage] = useState(postPerPage)
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirsPost = indexOfLastPost - postsPerPage
     const currentPosts = posts.slice(indexOfFirsPost, indexOfLastPost)
-
+    console.log(locationState, 'location in grid pagination')
     moment.locale(langTag[lang])
 
     const paginate = (pageNumber) => {
@@ -43,7 +43,9 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                 </div>}
                                 <h2>{translated.titolo}</h2>
                                 <p>{translated.testo_antemprima && summary(translated.testo_antemprima, 120)}</p>
-                                <Link className="button-sezione" lista to={`${(langTag[translated.languages_code.code] === 'it') ? "/" : "/" + langTag[translated.languages_code.code] + "/"}${Termini[translated.languages_code.code].prodotti + '/' + translated.slug}`}>
+                                <Link className="button-sezione" lista to={`${(langTag[translated.languages_code.code] === 'it') ? "/" : "/" + langTag[translated.languages_code.code] + "/"}${Termini[translated.languages_code.code].prodotti + '/' + translated.slug}`} state={
+                                    { applicazione: locationState.applicazione, categoria: locationState.categoria }
+                                }>
 
                                     {Termini[translated.languages_code.code].scopri}</Link>
                             </div>

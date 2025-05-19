@@ -152,8 +152,8 @@ const Prodotti = ({ data, location, pageContext }) => {
   React.useEffect(() => {
     // se il filtro è passato da link esterno setta i filtri nello stato corrispondente.
     if (location.state && (location.state.categoria || location.state.applicazione)) {
-      location.state.categoria && setFiltersCat([location.state.categoria])
-      location.state.applicazione && setFiltersApp([location.state.applicazione])
+      location.state.categoria && setFiltersCat(location.state.categoria)
+      location.state.applicazione && setFiltersApp(location.state.applicazione)
     } else {
       setFiltersCat([])
       setFiltersApp([])
@@ -308,7 +308,7 @@ const Prodotti = ({ data, location, pageContext }) => {
             </div>
           </div>
           <div className=" col-dx">
-            {resultFromFilters().length ? <GridPagination pageName={'prodotti'} archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} /> : <div>Non ci sono prodotti per il filtro selezionato</div>}
+            {resultFromFilters().length ? <GridPagination pageName={'prodotti'} archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} locationState={{ applicazione: filtersApp, categoria: filtersCat }} /> : <div>Non ci sono prodotti per il filtro selezionato</div>}
           </div>
         </div>
       </Layout>

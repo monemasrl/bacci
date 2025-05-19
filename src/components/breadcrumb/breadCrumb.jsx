@@ -2,9 +2,12 @@ import React from "react";
 import './breadcrumb.scss';
 import { langTag, Termini } from "../../../data-translations"
 import { navigate } from "gatsby"
+import { Link } from "gatsby";
+import { useLocation } from '@reach/router';
 
 const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale, tipo }) => {
-
+    const location = useLocation()
+    console.log(location, 'location')
     function breadCrumbTitle(pageTitle, termini) {
         if (pageTitle === 'News') {
             return 'Bacci News'
@@ -16,7 +19,7 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
     }
 
     const parentFolder = pathName ? pathName : ''
-
+    const terminiTraduzione = Termini[locale]
     return (
         <div className="container-fluid breadcrumb">
 
@@ -41,8 +44,21 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
 
 
                         : tipo === 'prodotto' ? <h2>
-                            <span>/{Termini[locale].prodotti}</span>
-                            <span>{pageTitle}</span></h2> :
+                            <Link
+                                to={`${locale === "it_IT"
+                                    ? "/" + terminiTraduzione.prodotti
+                                    : "/" +
+                                    locale +
+                                    "/" +
+                                    terminiTraduzione.prodotti
+                                    }`}
+                                state={location.state ? { ...location.state } : {}}
+                                className="prodotti"
+                            >
+                                <span >/{Termini[locale].prodotti}</span>
+                            </Link>
+
+                            <span className="nomeProdotto">{pageTitle}</span></h2> :
 
                             (pageTitle.toLowerCase() === parentFolder.toLowerCase()) || !parentFolder ?
 

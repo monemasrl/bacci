@@ -82,6 +82,7 @@ const MegamenuDirectus = ({
         if (!item.featured) return false
         return item.featured[0] === "true"
     })
+    console.log(dataMega.directus.Prodotti)
     const inEvidenzaLocalizzato =
         inEvidenza.length && findItemTranslated(inEvidenza[0].translations, locale)
     const novita = dataMega.directus.Prodotti.sort(item => {
@@ -222,7 +223,7 @@ const MegamenuDirectus = ({
                                                             "/" +
                                                             terminiTraduzione.prodotti
                                                             }`}
-                                                        state={{ applicazione: item.label }}
+                                                        state={{ applicazione: [item.label] }}
                                                         className="mega-item"
                                                     >
                                                         {item.label}
@@ -258,7 +259,7 @@ const MegamenuDirectus = ({
                                                             "/" +
                                                             terminiTraduzione.prodotti
                                                             }`}
-                                                        state={{ categoria: item.nome }}
+                                                        state={{ categoria: [item.nome] }}
                                                         className="mega-item"
                                                     >
                                                         {item.nome}

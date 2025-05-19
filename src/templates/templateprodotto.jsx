@@ -8,6 +8,8 @@ import { FormDownloadCatalogo } from "../components/form";
 import { Termini } from "../../data-translations";
 import { GrDocumentPdf } from "react-icons/gr";
 import YoutubeEmbed from "../components/youtubeEmbed";
+
+
 const Prodotto = ({ pageContext }) => {
 
     const { locale, parentPath, content, title, allPagePath, listaApplicazioni, listaCategorie
