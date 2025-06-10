@@ -123,7 +123,7 @@ function Slider({ locale }) {
                     const translations = translation[index].translations[0]
                     return (
                         <SwiperSlide key={index}>
-                            {item.tipo === "immagine" ?
+                            {item.tipo === "immagine" && item.immagine?.imageFile ?
                                 <GatsbyImage className="background-slider" quality={100} image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translations.titolo ? translations.titolo : 'immagine slider'} /> :
                                 <div>test</div>}
                             {translations.testo && <div className="sliderContent">

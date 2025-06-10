@@ -78,7 +78,7 @@ const Prodotto = ({ pageContext }) => {
                             </nav>
                         </div>
                         <div className="box-dx">
-                            <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.immagine.description || dataProdottoTranslated.titolo} />
+                            {content.immagine?.imageFile && <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.immagine.description || dataProdottoTranslated.titolo} />}
                         </div>
                     </section>
                     {content.sezioni_prodotto.map((item, index) => {
@@ -89,11 +89,12 @@ const Prodotto = ({ pageContext }) => {
                                     <div className="heading">
                                         <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.titolo }} />
                                     </div>
-                                    <p>{dataProdottoTranslated.paragrafo}</p>
+
+                                    <div className="content" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.paragrafo }} />
                                 </div>
                                 <div className="box-dx">
 
-                                    {item.immagine && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || dataProdottoTranslated.titolo} />}
+                                    {item.immagine?.imageFile && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || dataProdottoTranslated.titolo} />}
                                 </div>
 
                             </section>

@@ -148,6 +148,7 @@ exports.createPages = async ({ graphql, actions }) => {
               }
               title
               meta_description
+              keywords
             }
           }
           name

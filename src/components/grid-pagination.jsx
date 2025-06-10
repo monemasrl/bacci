@@ -38,7 +38,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                     if (translated.titolo) {
                         return (
                             <div key={translated.titolo} className="box-prodotto">
-                                {item.immagine && <div className="thumb">
+                                {item.immagine?.imageFile && <div className="thumb">
                                     <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translated.titolo} />
                                 </div>}
                                 <h2>{translated.titolo}</h2>
@@ -72,7 +72,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                         return (
                             <div key={index} className="col-3">
                                 <div className="box-single-news">
-                                    {item.image && <GatsbyImage image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={translated.title} />}
+                                    {item.image.imageFile && <GatsbyImage image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={translated.title} />}
                                     <div className="box-correlati">
                                         <div className="date">
                                             {moment(data).locale(lang).format('DD.MM.YYYY')}

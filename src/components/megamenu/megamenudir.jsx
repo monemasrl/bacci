@@ -143,13 +143,13 @@ const MegamenuDirectus = ({
                                                 </p>
                                             </div>
                                         )}
-                                        <GatsbyImage
+                                        {novita[novita.length - 1].immagine?.imageFile && <GatsbyImage
                                             image={
                                                 novita[novita.length - 1].immagine.imageFile
                                                     .childImageSharp.gatsbyImageData
                                             }
                                             alt={novita[0].titolo || 'titolo'}
-                                        />
+                                        />}
                                     </>
                                 </div>
                             </div>
@@ -184,13 +184,13 @@ const MegamenuDirectus = ({
                                                     summary(inEvidenzaLocalizzato.sottotitolo, 120)}
                                             </p>
                                         </div>
-                                        <GatsbyImage
+                                        {inEvidenza[0].immagine?.imageFile && <GatsbyImage
                                             image={
                                                 inEvidenza[0].immagine.imageFile.childImageSharp
                                                     .gatsbyImageData
                                             }
                                             alt={inEvidenzaLocalizzato.titolo || 'titolo'}
-                                        />
+                                        />}
                                     </div>
                                 )}
                             </div>

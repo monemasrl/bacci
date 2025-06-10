@@ -28,6 +28,7 @@ function Seo({ description, lang, meta, title, seo }) {
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
   function getDataSeoOpenGraph(seo) {
+    console.log(seo, "seo")
     const arrSeo = []
     if (seo) {
       if (seo.title) {
@@ -60,7 +61,7 @@ function Seo({ description, lang, meta, title, seo }) {
         content={seo?.meta_description || metaDescription}
       />
       <meta name="author" content={site.siteMetadata.author} />
-
+      <meta name="keywords" content={seo?.keywords} />
       {seo &&
         getDataSeoOpenGraph(seo).map((item, index) => {
           return <meta key={index} property={index} {...item} />

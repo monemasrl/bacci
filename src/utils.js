@@ -146,7 +146,7 @@ function createPathFromMenu(dataPage, dataMenu, slugPagina, defaultLanguage) {
 }
 
 function findItemTranslated(translations, langCode) {
-  const itemTranslated = translations.find(lang => {
+  const itemTranslated = translations?.find(lang => {
     const code = lang.languages_code.code
     return langTag[code] === langTag[langCode]
   })

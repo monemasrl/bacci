@@ -64,7 +64,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
               return (
                 <div key={index} className="col-3">
                   <div className="box-news">
-                    {item.image && <GatsbyImage className="immagine-widget" image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.title} />}
+                    {item.image?.imageFile && <GatsbyImage className="immagine-widget" image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.title} />}
                     <div className="box-correlati">
 
                       <div className="date">{date}</div>

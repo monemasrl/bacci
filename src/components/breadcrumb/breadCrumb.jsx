@@ -25,49 +25,55 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
 
             <div className="container">
 
-                {tipo === 'news' || tipo === 'caseHistory' ?
+                {tipo === 'news' ?
                     <h2 className="newsh2">
                         <span onClick={() => navigate(`${langTag[locale] === 'it' ? "/news" : "/" + langTag[locale] + "/" + Termini[locale][tipo]}`)}> /{Termini[locale][tipo]}<br /></span>
                         <span>{pageTitle}</span>
                     </h2>
-                    : tipo === 'fiera' ?
-                        <>
-                            <h2>
-                                {Termini[locale].eventi}
-                            </h2>
-                            <div className="dataEventi">
-                                <span>{pageTitle}</span>
-                                <span>{dataBreadCrumbFiere.dataFrom}-{dataBreadCrumbFiere.dataTo}</span>
-                                <span>{dataBreadCrumbFiere.location}</span>
-                            </div>
-                        </>
+                    : tipo === 'caseHistory' ?
+                        <h2 className="newsh2">
+                            <span onClick={() => navigate(`${langTag[locale] === 'it' ? "/case-history" : "/" + langTag[locale] + "/" + "case-history"}`)}> /{Termini[locale][tipo]}<br /></span>
+                            <span>{pageTitle}</span>
+                        </h2>
 
-
-                        : tipo === 'prodotto' ? <h2>
-                            <Link
-                                to={`${locale === "it_IT"
-                                    ? "/" + terminiTraduzione.prodotti
-                                    : "/" +
-                                    locale +
-                                    "/" +
-                                    terminiTraduzione.prodotti
-                                    }`}
-                                state={location.state ? { ...location.state } : {}}
-                                className="prodotti"
-                            >
-                                <span >/{Termini[locale].prodotti}</span>
-                            </Link>
-
-                            <span className="nomeProdotto">{pageTitle}</span></h2> :
-
-                            (pageTitle.toLowerCase() === parentFolder.toLowerCase()) || !parentFolder ?
-
-                                <h2>{breadCrumbTitle(pageTitle, Termini)}</h2>
-                                :
+                        : tipo === 'fiera' ?
+                            <>
                                 <h2>
-                                    <span>/{parentFolder && parentFolder}  <br /></span>
-                                    <span>{pageTitle}</span>
+                                    {Termini[locale].eventi}
                                 </h2>
+                                <div className="dataEventi">
+                                    <span>{pageTitle}</span>
+                                    <span>{dataBreadCrumbFiere.dataFrom}-{dataBreadCrumbFiere.dataTo}</span>
+                                    <span>{dataBreadCrumbFiere.location}</span>
+                                </div>
+                            </>
+
+
+                            : tipo === 'prodotto' ? <h2>
+                                <Link
+                                    to={`${locale === "it_IT"
+                                        ? "/" + terminiTraduzione.prodotti
+                                        : "/" +
+                                        locale +
+                                        "/" +
+                                        terminiTraduzione.prodotti
+                                        }`}
+                                    state={location.state ? { ...location.state } : {}}
+                                    className="prodotti"
+                                >
+                                    <span >/{Termini[locale].prodotti}</span>
+                                </Link>
+
+                                <span className="nomeProdotto">{pageTitle}</span></h2> :
+
+                                (pageTitle.toLowerCase() === parentFolder.toLowerCase()) || !parentFolder ?
+
+                                    <h2>{breadCrumbTitle(pageTitle, Termini)}</h2>
+                                    :
+                                    <h2>
+                                        <span>/{parentFolder && parentFolder}  <br /></span>
+                                        <span>{pageTitle}</span>
+                                    </h2>
                 }
 
 

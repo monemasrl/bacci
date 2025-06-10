@@ -260,6 +260,10 @@ const Prodotti = ({ data, location, pageContext }) => {
       >
         <div className="container prodotti" ref={topArchivio}>
           <div className="col-sx">
+            <div className="filters search">
+              <h3>{termini.tastoRicerca}</h3>
+              <input onKeyUp={(e) => onChangeText(e)} type="text" placeholder={termini.tasto_ricerca} />
+            </div>
             <form className="filters" onChange={(e) => onChangeCheckboxCategorie(e)} >
               <h2>{Termini[pageContext.locale].affinaRicerca}</h2>
               <h3>{Termini[pageContext.locale].tipologia}</h3>
@@ -301,11 +305,7 @@ const Prodotti = ({ data, location, pageContext }) => {
               </form>
 
             </div>
-            <div className="filters search">
 
-              <h3>{termini.tastoRicerca}</h3>
-              <input onKeyUp={(e) => onChangeText(e)} type="text" placeholder={termini.tasto_ricerca} />
-            </div>
           </div>
           <div className=" col-dx">
             {resultFromFilters().length ? <GridPagination pageName={'prodotti'} archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} locationState={{ applicazione: filtersApp, categoria: filtersCat }} /> : <div>Non ci sono prodotti per il filtro selezionato</div>}

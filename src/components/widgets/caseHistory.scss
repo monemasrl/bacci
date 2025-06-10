@@ -16,6 +16,9 @@
       color: $grey;
       text-transform: uppercase;
     }
+    .button-sezione {
+      margin-top: 1rem;
+    }
     .gatsby-image-wrapper-constrained {
       height: 500px;
       @media #{$tablet} {

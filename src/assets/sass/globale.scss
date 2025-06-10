@@ -20,7 +20,8 @@ ul {
   list-style: none;
 }
 
-p {
+p,
+.prodotto .content {
   color: $grey;
   font-weight: lighter;
   font-family: $text;
@@ -29,6 +30,10 @@ p {
   @media #{$landscape} {
     font-size: $PsizeMobile;
   }
+}
+.prodotto .content {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 header {
   position: relative;
@@ -126,7 +131,7 @@ main {
         border-bottom: 1px solid #a4917d;
         background-color: #f0f0f0;
         height: 40px;
-        margin: 1rem 1rem 1rem 0;
+        margin: 0rem 1rem 1rem 0;
         max-width: 300px;
         outline: none;
         width: 100%;
@@ -1331,6 +1336,7 @@ section.container.news {
   justify-content: center;
   height: 100vh;
 }
+
 .caseHistory {
   .image-gallery {
     display: flex;
