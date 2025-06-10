@@ -135,7 +135,11 @@ const Prodotti = ({ data, location, pageContext }) => {
    */
 
   const termini = Termini[pageContext.locale]
-  const langFilterProdotto = data.directus.Prodotti.filter((itema) => {
+  const sortedData = data.directus.Prodotti.sort((a, b) => {
+    return a.name.localeCompare(b.name)
+  })
+
+  const langFilterProdotto = sortedData.filter((itema) => {
     return itema.translations.some((item) => {
       return langTag[item.languages_code.code] === langTag[pageContext.locale]
     })
