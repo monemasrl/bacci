@@ -82,7 +82,7 @@ const MegamenuDirectus = ({
         if (!item.featured) return false
         return item.featured[0] === "true"
     })
-    console.log(dataMega.directus.Prodotti)
+
     const inEvidenzaLocalizzato =
         inEvidenza.length && findItemTranslated(inEvidenza[0].translations, locale)
     const novita = dataMega.directus.Prodotti.sort(item => {

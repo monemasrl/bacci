@@ -156,11 +156,28 @@ function findItemTranslated(translations, langCode) {
     return itemTranslated
   }
 }
+function findCategoryTranslated(translations, langCode) {
+  const itemsTranslated = translations?.map(prod => {
+
+    return prod.tipologie_id.translations.find((item) => {
+
+      const code = item.languages_code.code
+      return langTag[code] === langTag[langCode]
+    })
+  })
+
+  if (!itemsTranslated) {
+    console.log("error, traduzione non trovata")
+  } else {
+    return itemsTranslated
+  }
+}
 function findItemsTranslated(translations, langCode) {
   const itemTranslated = translations.filter(lang => {
     const code = lang.languages_code.code
     return langTag[code] === langTag[langCode]
   })
+  console.log(itemTranslated, 'item translated')
   if (!itemTranslated) {
     return
   } else {
@@ -179,4 +196,5 @@ export {
   findItemTranslated,
   findItemsTranslated,
   summary,
+  findCategoryTranslated
 }

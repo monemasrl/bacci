@@ -17,7 +17,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirsPost = indexOfLastPost - postsPerPage
     const currentPosts = posts.slice(indexOfFirsPost, indexOfLastPost)
-    console.log(locationState, 'location in grid pagination')
+
     moment.locale(langTag[lang])
 
     const paginate = (pageNumber) => {

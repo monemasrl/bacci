@@ -6,7 +6,7 @@ import './correlati.scss'
 import { Link } from "gatsby";
 import { findItemTranslated, summary } from "../../utils";
 
-const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdotto, prodotti_correlati }) => {
+const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione = 100, idProdotto, prodotti_correlati }) => {
   const data = useStaticQuery(graphql`
     query {
           directus {
@@ -57,7 +57,7 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
       return item.categoria.translations.some((categoria) => {
 
         if (categoria.languages_code.code === locale) {
-          console.log(categoriaProdotto, 'prodotti correlati categoria')
+
           return categoria.nome === categoriaProdotto
         } else { return null }
       })
@@ -65,7 +65,6 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione, idProdott
   })
 
 
-  console.log(prodottiCorrelatiCategoria, 'prodotti correlati')
   function tipoCorrelazione() {
     if (prodotti_correlati?.length > 0) {
       return prodotti_correlati.map((item) => { return { ...item.related_Prodotti_id } })

@@ -253,8 +253,9 @@ main {
       flex: 1 1;
       max-width: 620px;
       width: 100%;
-      @media #{$landscape} {
+      @media #{$desktop} {
         padding-left: 0;
+        max-width: 100%;
       }
       nav {
         display: grid;

@@ -41,7 +41,7 @@ const Prodotto = ({ pageContext }) => {
     const [showModale, setShowModale] = useState(false)
     const [isCatalogoVisible, setIsCatalogoVisible] = useState(false)
     const [isVideoVisible, setIsVideoVisible] = useState(false)
-    console.log('content', content)
+
     return (
         <>
             <LayoutProdotto
@@ -111,7 +111,7 @@ const Prodotto = ({ pageContext }) => {
                                 <Link className="button-sezione" to={softwareData.path}>{softwareData.titolo}</Link>
                             </div>
                         </section> : ''} */}
-                    {content.type === "machinery" && <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} limiteVisualizzazione={3} prodotti_correlati={content.prodotti_correlati} />}
+                    {content.type === "machinery" && <Correlati locale={locale} idProdotto={content.id} categoriaProdotto={categoriaProdotto.nome} prodotti_correlati={content.prodotti_correlati} />}
                 </div>
             </LayoutProdotto>
         </>

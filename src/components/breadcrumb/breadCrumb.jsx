@@ -7,7 +7,7 @@ import { useLocation } from '@reach/router';
 
 const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale, tipo }) => {
     const location = useLocation()
-    console.log(location, 'location')
+
     function breadCrumbTitle(pageTitle, termini) {
         if (pageTitle === 'News') {
             return 'Bacci News'

@@ -9,18 +9,13 @@
   .container {
     display: flex;
     gap: 2rem;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: flex-start;
-    @media #{$landscape} {
-      flex-direction: column;
-      align-items: center;
-      flex-wrap: wrap;
-    }
+    justify-content: center;
 
     .col-3 {
-      flex: 1 1 440px;
-      max-width: 440px;
+      flex: 0 1 320px;
     }
 
     .box-correlati {

@@ -22,6 +22,7 @@ exports.createPages = async ({ graphql, actions }) => {
         languages {
           code
         }
+
         prodotto_categorie {
           translations {
             languages_code {
@@ -30,6 +31,14 @@ exports.createPages = async ({ graphql, actions }) => {
             nome
           }
         }
+          tipologie{
+              translations{
+                languages_code{
+                  code
+                }
+                nome
+              }
+            }
         applicazioni {
           translations {
             languages_code {
@@ -177,6 +186,15 @@ exports.createPages = async ({ graphql, actions }) => {
             testo_antemprima
             paragrafo
           }
+          tipologie {
+              tipologie_id {
+                id
+                translations {
+                  id
+                  nome
+                }
+              }
+            }
           applicazioni {
             applicazioni_id {
               id
@@ -471,7 +489,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     categorie: tassonomieTraduzioni(
       result.data.directus.languages,
-      result.data.directus.prodotto_categorie
+      result.data.directus.tipologie
     ),
   }
 
@@ -495,9 +513,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
   homePage.translations.forEach(translation => {
     createPage({
-      path: `/${
-        translation.locale == "it_IT" ? "" : langTag[translation.locale] + "/"
-      }`,
+      path: `/${translation.locale == "it_IT" ? "" : langTag[translation.locale] + "/"
+        }`,
       component: require.resolve("./src/templates/page.jsx"),
       context: {
         locale: translation.locale,
@@ -546,7 +563,7 @@ exports.createPages = async ({ graphql, actions }) => {
               pageName: slugify(item.name).toLowerCase(),
               listaApplicazioni:
                 tassonomiaProdotti.applicazioni[
-                  translation.languages_code.code
+                translation.languages_code.code
                 ],
               listaCategorie:
                 tassonomiaProdotti.categorie[translation.languages_code.code],
@@ -595,11 +612,11 @@ exports.createPages = async ({ graphql, actions }) => {
                   pageName: slugify(subItem.name).toLowerCase(),
                   listaApplicazioni:
                     tassonomiaProdotti.applicazioni[
-                      translation.languages_code.code
+                    translation.languages_code.code
                     ],
                   listaCategorie:
                     tassonomiaProdotti.categorie[
-                      translation.languages_code.code
+                    translation.languages_code.code
                     ],
                 },
               })
@@ -685,9 +702,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
       if (translation.slug) {
         createPage({
-          path: `${urlBase}${
-            Termini[translation.languages_code.code].prodotti
-          }/${translation.slug.toLowerCase()}`,
+          path: `${urlBase}${Termini[translation.languages_code.code].prodotti
+            }/${translation.slug.toLowerCase()}`,
           component: require.resolve("./src/templates/templateprodotto.jsx"),
           context: {
             content: entry,
@@ -834,9 +850,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
       if (translation.slug) {
         createPage({
-          path: `${urlBase}${
-            Termini[translation.languages_code.code].caseHistory
-          }/${translation.slug.toLowerCase()}`,
+          path: `${urlBase}${Termini[translation.languages_code.code].caseHistory
+            }/${translation.slug.toLowerCase()}`,
           component: require.resolve("./src/templates/templateCaseHistory.jsx"),
           context: {
             content: entry,

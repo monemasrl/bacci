@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
 import { Termini, langTag } from "../../data-translations"
-import { findItemTranslated } from "../utils"
+import { findCategoryTranslated } from "../utils"
 
 const seoSettings = {
   seo: {
@@ -53,6 +53,18 @@ export const query = graphql`
         testo_antemprima
         paragrafo
         
+      }
+      tipologie {
+        tipologie_id {
+          id
+          translations {
+            languages_code{
+              code
+              }
+            id
+            nome
+          }
+        }
       }
       applicazioni{
         
@@ -182,13 +194,21 @@ const Prodotti = ({ data, location, pageContext }) => {
   // setta il valore dei filtri della categoria nello stato filtersCat 
   const onChangeCheckboxCategorie = (evt) => {
     if (evt.target.value === 'reset') {
-      // se il filtro è reset resetta l'array
+      // se il filtro è reset setta i filtri a vuoto
       setFiltersCat([])
+      return
+    }
+    if (evt.target.checked) {
+      setFiltersCat([...filtersCat, evt.target.value])
     } else {
-      setFiltersCat([evt.target.value])
+      // se il filtro è uncheck togli il record dall'array
+      const filterUnchecked = filtersCat.filter((item) => {
+        return item !== evt.target.value
+      })
+      setFiltersCat([...filterUnchecked])
     }
   }
-
+  console.log(filtersCat, 'filtersCat')
   // setta il valore dei filtri della applicazione nello stato filtersApp 
   const onChangeCheckboxApplicazioni = (evt) => {
     // se il filtro è check crea o aggiorna l'array 
@@ -203,7 +223,6 @@ const Prodotti = ({ data, location, pageContext }) => {
     }
   }
 
-
   const resultFromFilters = () => {
     // Se ci sono filtri settati per applicazioni filtra i prodotti per applicazioni
     const filtersResultApp = langFilterProdotto.filter((itema) => {
@@ -215,11 +234,15 @@ const Prodotti = ({ data, location, pageContext }) => {
     })
 
     // Se ci sono filtri per categorie filtra i prodotti per categorie
-    let filteredCat = langFilterProdotto.filter((prodotto) => {
-      const categoriaLang = prodotto.categoria && findItemTranslated(prodotto.categoria.translations, pageContext.locale)
-      const filterResultCat = categoriaLang && categoriaLang.nome === filtersCat[0]
-      return filtersCat.length > 0 && filterResultCat
-    });
+    let filteredCat = langFilterProdotto.filter((itema) => {
+
+      return filtersCat.length > 0 && itema.tipologie.some((itemb) => {
+
+        return itemb.tipologie_id.translations.some((itemc) => {
+          if (itemc.nome !== null) { return filtersCat.includes(itemc.nome) } else { return false }
+        })
+      })
+    })
 
     // filtra prodotti per campo di ricerca
     let campoRicerca = langFilterProdotto.filter((prodotto) => {
@@ -251,7 +274,7 @@ const Prodotti = ({ data, location, pageContext }) => {
   }
 
   const topArchivio = React.useRef()
-  console.log(pageContext.listaApplicazioni, 'listaApplicazioni')
+
   return (
     <>
       <Layout
@@ -273,14 +296,13 @@ const Prodotti = ({ data, location, pageContext }) => {
               <h3>{Termini[pageContext.locale].tipologia}</h3>
               <ul>
                 <li>
-                  <input type="radio" checked={filtersCat.length === 0} value={'reset'} name="categorie" readOnly />
+                  <input type="checkbox" checked={filtersCat.length === 0} value={'reset'} name="categorie" readOnly id="categorie" />
                   <label htmlFor="categorie">{termini.tutti_prodotti}</label></li>
                 {pageContext.listaCategorie.map((item, index) => {
                   if (item !== null) {
                     return (
                       <li key={index}>
-                        <input id={item.nome} type="radio" value={item.nome} name="categorie"
-                          checked={item.nome === filtersCat[0]} readOnly />
+                        <input type="checkbox" checked={filtersCat.includes(item.nome)} value={item.nome} id={item.nome} name="applicazioni" readOnly />
                         <label htmlFor={item.nome}>{item.nome}</label>
                       </li>)
                   } else {
