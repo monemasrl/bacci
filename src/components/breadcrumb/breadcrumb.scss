@@ -8,9 +8,13 @@
     justify-content: space-between;
     width: 90%;
   }
+  a.prodotti {
+    position: relative;
+    z-index: 1;
+  }
   h2 {
     font-family: $title;
-    font-size: 44px;
+    font-size: 34px;
     text-transform: uppercase;
     color: white;
     font-weight: 400;
@@ -34,7 +38,7 @@
       }
     }
     span.nomeProdotto {
-      font-size: 44px;
+      font-size: 35px;
       z-index: 0;
       @media #{$laptop} {
         font-size: 20px;

@@ -68,9 +68,9 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione = 100, idP
   function tipoCorrelazione() {
     if (prodotti_correlati?.length > 0) {
       return prodotti_correlati.map((item) => { return { ...item.related_Prodotti_id } })
-    } else {
+    } /* else {
       return prodottiCorrelatiCategoria
-    }
+    } */
   }
 
   //  const correlati = findItemTranslated(prodotti_correlati.Prodotti_id.translations, locale)

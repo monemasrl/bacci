@@ -8,15 +8,14 @@
   @media #{$landscape} {
     display: none;
   }
+
   .container {
     max-width: $container;
     margin: 0 auto;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    ul {
-      margin: 10px 0;
-    }
+
     @media #{$laptop} {
       flex-direction: column-reverse;
       align-items: center;
@@ -26,10 +25,25 @@
 
   ul {
     list-style: disc;
-
-    li {
+    position: relative;
+    margin: 10px 0;
+    ul {
+      position: absolute;
+      display: none;
+      top: 10px;
+      padding: 1rem 10px;
+      &.open {
+        display: flex;
+        z-index: 2;
+        background-color: #0e294b;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+    > li {
       display: inline-block;
       margin: 0 1rem;
+      cursor: pointer;
       &:last-child {
         margin-right: 0;
       }
