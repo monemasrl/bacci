@@ -100,7 +100,7 @@ main {
   justify-content: space-between;
   min-height: 970px;
   padding: 0 2rem;
-  margin-top: 5rem;
+  margin-top: 3rem;
   flex-wrap: nowrap;
   @media #{$desktop} {
     flex-direction: column;
@@ -957,7 +957,17 @@ section.container.news {
     }
   }
 }
-
+section.container.candidature {
+  max-width: 1068px;
+  margin: 4rem auto;
+  .candidatura {
+    margin-top: 2rem;
+    .data {
+      font-size: 1.5rem;
+      font-weight: 200;
+    }
+  }
+}
 .wrapperpagination {
   width: 100%;
   display: flex;
@@ -1168,7 +1178,8 @@ section.container.news {
     }
   }
 }
-.wrapper-fiere {
+.wrapper-fiere,
+.wrapper-candidature {
   margin-top: 6rem;
   max-width: $container;
   margin: 0 auto;

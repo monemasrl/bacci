@@ -48,7 +48,6 @@ const FormFiere = ({ nomeEvento, lang }) => {
                 name="fiere"
                 netlify-honeypot="bot-field"
                 onSubmit={handleSubmit((data) => {
-
                     data.nomeEvento = nomeEvento
                     toast(Termini[lang].formSuccess)
                     fetch("/", {
@@ -514,5 +513,170 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
 
 }
 
+const FormCandidature = ({ lang, candidature }) => {
+    const form = useForm({
+        defaultValues: {
+            contattiNome: "",
+            contattiCognome: "",
+            contattiAzienda: "",
+            contattiEmail: "",
+            contattiMessaggio: "",
+            contattiPrivacy: false
+        }
+    })
+    const { register, handleSubmit, formState, reset } = form
+    const { errors } = formState
 
-export { FormFiere, FormContatti, FormDownloadCatalogo }
+    console.log(candidature, 'candidature')
+    //Funzione per l'enconding dei dati del form
+
+    const encode = (data) => {
+        return Object.keys(data)
+            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+            .join("&");
+    }
+
+
+
+    return (
+        <div className="wrapper-candidature">
+            <div className="wrapper-form" >
+                <ToastContainer
+                    position="bottom-center"
+                    autoClose={5000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick={true}
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable={false}
+                    pauseOnHover
+                    theme="dark" />
+                <form
+                    data-netlify="true"
+                    name="contatti"
+                    netlify-honeypot="bot-field"
+                    onSubmit={handleSubmit((data) => {
+                        toast(Termini[lang].formSuccess)
+                        fetch("/", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                            body: encode({ "form-name": "contatti", ...data }),
+                        })
+                            .then(() => {
+                                reset()
+                            })
+                            .catch((error) => alert(error));
+                    })
+                    }>
+                    <input type="hidden" name="form-name" value="contatti" />
+                    <div className="box-form">
+                        <label htmlFor="contattiNome">
+                            <input
+                                placeholder={Termini[lang].nome}
+                                type="text"
+                                name="nome"
+                                id="contattiNome"
+                                {...register("contattiNome", {
+                                    required: {
+                                        value: true,
+                                        message: Termini[lang].formRequired
+                                    },
+                                    minLength: {
+                                        value: 3,
+                                        message: Termini[lang].formMinimoCaratteri
+                                    }
+                                })
+                                } />
+                            {errors.contattiNome && <p>{errors.contattiNome?.message}</p>}
+                        </label>
+                        <label htmlFor="contattiCognome">
+                            <input
+                                placeholder={Termini[lang].cognome}
+                                type="text"
+                                name="cognome"
+                                id="contattiCognome"
+                                {...register("contattiCognome", {
+                                    required: {
+                                        value: true,
+                                        message: Termini[lang].formRequired
+                                    },
+                                    minLength: {
+                                        value: 3,
+                                        message: Termini[lang].formMinimoCaratteri
+                                    }
+                                })
+                                } />
+                            {errors.contattiCognome && <p>{errors.contattiCognome?.message}</p>}
+                        </label>
+                    </div>
+                    <div className="box-form">
+                        <label htmlFor="contattiAzienda">
+                            <input placeholder={Termini[lang].azienda} type="text" name="azienda" id="contattiAzienda"
+                                {...register("contattiAzienda", {
+                                    required: {
+                                        value: true,
+                                        message: Termini[lang].formRequired
+                                    },
+                                    minLength: {
+                                        value: 3,
+                                        message: Termini[lang].formMinimoCaratteri
+                                    }
+                                })
+                                } />
+                            {errors.contattiAzienda && <p>{errors.contattiAzienda?.message}</p>}
+                        </label>
+                        <label htmlFor="contattiEmail">
+                            <input placeholder="email" type="text" name="email" id="contattiEmail" {...register("contattiEmail", {
+                                required: {
+                                    value: true,
+                                    message: Termini[lang].formRequired
+                                },
+                                pattern: {
+                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                    message: Termini[lang].formMail
+                                }
+                            })
+                            } />
+                            {errors.contattiEmail && <p>{errors.contattiEmail?.message}</p>}
+                        </label>
+                    </div>
+                    <div className="box-form-message">
+                        <label htmlFor="candidature">
+                            <select name="messaggio" id="candidature" {...register("candidature")} >
+                                {candidature && candidature.map((item, index) => {
+                                    return (
+                                        <option key={index} value={item.titolo}>{item.titolo}</option>
+                                    )
+                                })}
+                            </select>
+                        </label>
+                    </div>
+                    <label className="privacy" htmlFor="contattiPrivacy">
+                        <input
+                            type="checkbox"
+                            placeholder="privacy"
+                            name="privacy"
+                            id="contattiPrivacy"
+                            {...register("contattiPrivacy", {
+                                required: {
+                                    value: true,
+                                    message: Termini[lang].formPrivacy
+                                },
+                            })}
+                        />
+                        <span>{Termini[lang].formPrivacy}<Link to="/privacy"> Privacy</Link></span>
+                        {errors.contattiPrivacy && <p>{errors.contattiPrivacy?.message}</p>}
+                    </label>
+                    <div className="box-submit">
+                        <label htmlFor="submit">
+                            <input className='button-sezione' type="submit" value={Termini[lang].invia} />
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
+
+}
+export { FormFiere, FormContatti, FormDownloadCatalogo, FormCandidature }

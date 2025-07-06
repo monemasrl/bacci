@@ -27,6 +27,17 @@
     list-style: disc;
     position: relative;
     margin: 10px 0;
+    > li {
+      display: inline-block;
+      margin: 0 1rem;
+      cursor: pointer;
+      &:last-child {
+        margin-right: 0;
+      }
+      @media #{$landscape} {
+        display: block;
+      }
+    }
     ul {
       position: absolute;
       display: none;
@@ -39,16 +50,8 @@
         flex-direction: column;
         gap: 0.5rem;
       }
-    }
-    > li {
-      display: inline-block;
-      margin: 0 1rem;
-      cursor: pointer;
-      &:last-child {
-        margin-right: 0;
-      }
-      @media #{$landscape} {
-        display: block;
+      > li:last-child {
+        margin-right: 1rem;
       }
     }
   }
@@ -157,6 +160,7 @@
     img {
       margin-left: 8px;
     }
+
     a {
       color: $brown;
       text-transform: uppercase;

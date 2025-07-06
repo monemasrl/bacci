@@ -1,6 +1,5 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout/layout"
 import BlocksComponent from "../components/blocks/blocks"
 import LastNews from "../components/widgets/lastNews"
@@ -8,6 +7,7 @@ import TestoMainContent from "../components/blocks/testo_main_content"
 import LastFiere from "../components/widgets/lastFiere"
 import CaseHistory from "../components/widgets/caseHistory"
 import Slider from "../components/slider"
+
 export const query = graphql`
  query($locale: String!, $slug: String!) {
   directus{

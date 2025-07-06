@@ -177,7 +177,7 @@ function findItemsTranslated(translations, langCode) {
     const code = lang.languages_code.code
     return langTag[code] === langTag[langCode]
   })
-  console.log(itemTranslated, 'item translated')
+
   if (!itemTranslated) {
     return
   } else {

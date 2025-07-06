@@ -28,7 +28,6 @@ function Seo({ description, lang, meta, title, seo }) {
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
   function getDataSeoOpenGraph(seo) {
-    console.log(seo, "seo")
     const arrSeo = []
     if (seo) {
       if (seo.title) {
@@ -52,6 +51,7 @@ function Seo({ description, lang, meta, title, seo }) {
     }
     return arrSeo
   }
+
   return (
     <Helmet>
       <html lang={langTag[lang]} />

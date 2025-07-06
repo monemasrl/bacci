@@ -11,7 +11,6 @@ export const Termini = {
     cookieButton: "Accept",
     nome: "name",
     cognome: "last name",
-
     messaggio: "message",
     footerForm:
       "<h2>EN Hai bisogno di <strong>informazioni?</strong></h2><p>Se desideri avere maggiori informazioni sulla nostra Azienda e sui nostri prodotti, scrivici compilando il form. il nostro Staff ti risponderà presto!</p>",
@@ -52,6 +51,7 @@ export const Termini = {
     citta: "city",
     downloadCatalogoText: "EN Inserire i dati per scaricare il catalogo",
     downloadCatalogoTextLink: "EN Scarica il catalogo",
+    buttonCandidatura: 'application'
   },
   it_IT: {
     cookieTesto:
@@ -100,5 +100,6 @@ export const Termini = {
     citta: "città",
     downloadCatalogoText: "Inserire i dati per scaricare il catalogo",
     downloadCatalogoTextLink: "Scarica il catalogo",
+    buttonCandidatura: 'candidatura'
   },
 }

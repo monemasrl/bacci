@@ -20,6 +20,7 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
 
     const parentFolder = pathName ? pathName : ''
     const terminiTraduzione = Termini[locale]
+
     return (
         <div className="container-fluid breadcrumb">
 
@@ -54,7 +55,7 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
                                     to={`${locale === "it_IT"
                                         ? "/" + terminiTraduzione.prodotti
                                         : "/" +
-                                        locale +
+                                        langTag[locale] +
                                         "/" +
                                         terminiTraduzione.prodotti
                                         }`}

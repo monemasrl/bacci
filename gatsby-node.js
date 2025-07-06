@@ -22,7 +22,6 @@ exports.createPages = async ({ graphql, actions }) => {
         languages {
           code
         }
-
         prodotto_categorie {
           translations {
             languages_code {
@@ -31,14 +30,14 @@ exports.createPages = async ({ graphql, actions }) => {
             nome
           }
         }
-          tipologie{
-              translations{
-                languages_code{
-                  code
-                }
-                nome
-              }
+        tipologie {
+          translations {
+            languages_code {
+              code
             }
+            nome
+          }
+        }
         applicazioni {
           translations {
             languages_code {
@@ -100,7 +99,6 @@ exports.createPages = async ({ graphql, actions }) => {
             languages_code {
               code
             }
-
             sottotitolo
             description
             call2action
@@ -163,7 +161,6 @@ exports.createPages = async ({ graphql, actions }) => {
           name
           date_created
           type
-
           immagine {
             id
             description
@@ -174,7 +171,6 @@ exports.createPages = async ({ graphql, actions }) => {
               }
             }
           }
-
           featured
           translations {
             languages_code {
@@ -187,18 +183,17 @@ exports.createPages = async ({ graphql, actions }) => {
             paragrafo
           }
           tipologie {
-              tipologie_id {
+            tipologie_id {
+              id
+              translations {
                 id
-                translations {
-                  id
-                  nome
-                }
+                nome
               }
             }
+          }
           applicazioni {
             applicazioni_id {
               id
-
               translations {
                 id
                 label
@@ -256,6 +251,17 @@ exports.createPages = async ({ graphql, actions }) => {
               paragrafo
             }
           }
+        }
+        candidature {
+          translations {
+            languages_code {
+              code
+            }
+            candidatura
+            testo
+          }
+          titolo
+          data
         }
         case_history {
           translations {
@@ -425,6 +431,8 @@ exports.createPages = async ({ graphql, actions }) => {
       tecnologia: "tecnology",
       correlati: "realted products",
       caseHistory: "case-history",
+      careers: "careers",
+      posizioni_aperte: "open positions"
     },
     it_IT: {
       azienda: "azienda",
@@ -437,6 +445,8 @@ exports.createPages = async ({ graphql, actions }) => {
       tecnologia: "tecnologia",
       correlati: "prodotti correlati",
       caseHistory: "case-history",
+      careers: "careers",
+      posizioni_aperte: "posizioni aperte"
     },
   }
 
@@ -528,13 +538,17 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  // CREAZIONE PAGINE INTERNE
+  // ANCHOR: CREAZIONE PAGINE INTERNE
   function getTemplate(name) {
     switch (name) {
       case "News":
         return require.resolve("./src/templates/news.jsx")
       case "Fiere":
         return require.resolve("./src/templates/fiere.jsx")
+      case "posizioni aperte":
+        return require.resolve("./src/templates/candidature.jsx")
+      case "candidature":
+        return require.resolve('./src/templates/formCandidature.jsx')
       default:
         return require.resolve("./src/templates/page.jsx")
     }
@@ -602,7 +616,7 @@ exports.createPages = async ({ graphql, actions }) => {
             if (translation.slug) {
               createPage({
                 path: `${urlBase}${findParent.parentPath.toLowerCase()}${translation.slug.toLowerCase()}`,
-                component: require.resolve("./src/templates/page.jsx"),
+                component: getTemplate(subItem.name),
                 context: {
                   parentPath: findParent.parentPath,
                   locale: translation.languages_code.code,
@@ -627,7 +641,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  //PAGINA PRODOTTI
+  // ANCHOR: PAGINA PRODOTTI
 
   function translationProdottiPage(translations, langTag) {
     //crea un array con i dati per le traduzioni della homepage
@@ -868,7 +882,10 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     })
   })
+
+
 }
+
 
 //Per attivare la source  map sul scss
 exports.onCreateWebpackConfig = ({ actions }) => {
