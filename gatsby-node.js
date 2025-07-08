@@ -517,7 +517,7 @@ exports.createPages = async ({ graphql, actions }) => {
       return {
         title: "Home",
         locale: item.code,
-        path: item.code == "it_IT" ? "/" : "/en",
+        path: item.code == "en_US" ? "/en" : "/",
       }
     })
     return data
@@ -526,7 +526,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const homePage = {
     translations: translationHomePage(result.data.directus.languages),
   }
-  const allPagePath = getAllPathPagine(translations)
+  const allPagePath = homePage.translations
   homePage.translations.forEach(translation => {
     createPage({
       path: `/${translation.locale == "it_IT" ? "" : langTag[translation.locale] + "/"
