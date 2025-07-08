@@ -357,6 +357,7 @@ main {
   right: -300px;
   top: 50%;
   transition: all ease-in-out 0.5s;
+  z-index: 1000;
 
   @media #{$phone} {
     display: none;
@@ -962,6 +963,7 @@ section.container.candidature {
   margin: 4rem auto;
   .candidatura {
     margin-top: 2rem;
+    margin-bottom: 2rem;
     .data {
       font-size: 1.5rem;
       font-weight: 200;
@@ -1179,7 +1181,8 @@ section.container.candidature {
   }
 }
 .wrapper-fiere,
-.wrapper-candidature {
+.wrapper-candidature,
+.wrapper-contatti {
   margin-top: 6rem;
   max-width: $container;
   margin: 0 auto;
@@ -1263,8 +1266,8 @@ section.container.candidature {
       .box-submit {
         text-align: center;
         display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+        flex-direction: column;
+        align-items: center;
       }
       .button-sezione {
         background-color: transparent;
@@ -1317,6 +1320,54 @@ section.container.candidature {
         font-family: $title;
       }
     }
+  }
+}
+.wrapper-candidature {
+  padding: 0;
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    color: black;
+  }
+  .wrapper-form {
+    padding-top: 0rem;
+    background-color: white;
+    form {
+      label {
+        max-width: 100%;
+        input:not([type="file"]) {
+          border: 1px solid black;
+          color: black;
+        }
+      }
+      label[for="submit"] {
+        text-align: left;
+        input {
+          background-color: #a9b0ba;
+          color: white;
+          border: 0;
+        }
+      }
+      .privacy {
+        width: auto;
+        text-align: left;
+        font-size: 14px;
+        color: black;
+        a {
+          text-decoration: underline;
+          color: black;
+        }
+      }
+    }
+  }
+  .box-form {
+    gap: 1rem;
+  }
+  #candidatureCV {
+    margin-top: 1rem;
+    padding-left: 0;
   }
 }
 .bodyFiera {
@@ -1656,4 +1707,107 @@ section.container.candidature {
       cursor: pointer;
     }
   }
+}
+.wrapper-contatti {
+  max-width: 1560px;
+  h1 {
+    font-size: 36px;
+    max-width: 900px;
+    position: absolute;
+    z-index: 1;
+    top: 31%;
+    @media #{$landscape} {
+      top: 20%;
+      font-size: 24px;
+    }
+    @media #{$phone} {
+      top: 0%;
+      font-size: 20px;
+    }
+  }
+  h3 {
+    font-size: 36px;
+    font-family: $title;
+    font-weight: normal;
+    text-transform: uppercase;
+    color: #59616e;
+    margin-bottom: 0;
+  }
+  a {
+    color: #59616e;
+  }
+  .wrappersedi {
+    section {
+      margin-bottom: 4rem;
+    }
+  }
+  .heading {
+    position: relative;
+    &::after {
+      background-color: #4a6c96;
+      content: "";
+      height: 100%;
+      left: -30px;
+      position: absolute;
+      top: 0px;
+      width: 8px;
+      @media screen and (max-width: 1024px) {
+        display: none;
+      }
+    }
+
+    h2 {
+      font-family: $title;
+      line-height: 1;
+    }
+  }
+
+  .sedi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    &.hq {
+      max-width: 100%;
+    }
+  }
+  .sedelegale {
+    h3 {
+      margin-top: 0;
+      @media #{$landscape} {
+        text-align: center;
+      }
+    }
+  }
+  .sede {
+    display: flex;
+    flex-direction: column;
+
+    ul {
+      width: 360px;
+
+      li {
+        font-size: 26px;
+        color: $grey;
+        font-weight: lighter;
+        font-family: $text;
+        margin-bottom: 7px;
+      }
+    }
+  }
+  .sede.hq {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    ul {
+      max-width: 550px;
+      width: 100%;
+    }
+  }
+}
+
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+  z-index: 1;
 }

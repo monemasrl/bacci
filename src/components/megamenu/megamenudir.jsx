@@ -268,36 +268,37 @@ const MegamenuDirectus = ({
                                             )
                                     )}
                             </ul>
-                            <div className="titolo-col-mega software">Software</div>
-                            <ul className="mega-list">
-                                {software.map((item, index) => {
-                                    const traduzioni = findItemTranslated(
-                                        item.translations,
-                                        locale
-                                    )
-
-                                    if (traduzioni) {
-                                        return (
-                                            <li key={index}>
-                                                <Link
-                                                    to={`${locale === "it_IT"
-                                                        ? "/" + terminiTraduzione.prodotti
-                                                        : "/" +
-                                                        language +
-                                                        "/" +
-                                                        terminiTraduzione.prodotti
-                                                        }/${traduzioni.slug}`}
-                                                    className="mega-item"
-                                                >
-                                                    {traduzioni.titolo}
-                                                </Link>
-                                            </li>
+                            {software.length > 1 && <div className="titolo-col-mega software">Software</div>}
+                            {software.length > 1 &&
+                                <ul className="mega-list">
+                                    {software?.map((item, index) => {
+                                        const traduzioni = findItemTranslated(
+                                            item.translations,
+                                            locale
                                         )
-                                    } else {
-                                        return null
-                                    }
-                                })}
-                            </ul>
+
+                                        if (traduzioni) {
+                                            return (
+                                                <li key={index}>
+                                                    <Link
+                                                        to={`${locale === "it_IT"
+                                                            ? "/" + terminiTraduzione.prodotti
+                                                            : "/" +
+                                                            language +
+                                                            "/" +
+                                                            terminiTraduzione.prodotti
+                                                            }/${traduzioni.slug}`}
+                                                        className="mega-item"
+                                                    >
+                                                        {traduzioni.titolo}
+                                                    </Link>
+                                                </li>
+                                            )
+                                        } else {
+                                            return null
+                                        }
+                                    })}
+                                </ul>}
                         </motion.div>
                     </div>
                 </motion.div>

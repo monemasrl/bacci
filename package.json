@@ -14,6 +14,7 @@
     "gatsby-plugin-manifest": "^5.12.3",
     "gatsby-plugin-netlify": "^5.1.1",
     "gatsby-plugin-react-helmet": "^6.12.0",
+    "gatsby-plugin-react-leaflet": "^4.0.3",
     "gatsby-plugin-robots-txt": "^1.8.0",
     "gatsby-plugin-sass": "^6.12.3",
     "gatsby-plugin-sharp": "^5.12.0",
@@ -28,6 +29,7 @@
     "react-helmet": "^6.1.0",
     "react-hook-form": "^7.48.2",
     "react-icons": "^4.12.0",
+    "react-leaflet": "^4.2.1",
     "react-toastify": "^9.1.3",
     "swiper": "^11.0.6"
   },

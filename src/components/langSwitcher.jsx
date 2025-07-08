@@ -4,7 +4,7 @@ import { langTag } from '../../data-translations';
 
 
 const LangSwitcher = (props) => {
-
+  console.log(props.allPagePath)
   return (
     <>
       <div className='langbox' >

@@ -79,11 +79,64 @@ const NavBarMobile = (props) => {
                                     const itemTranslated = item.translations.find((lang) => {
                                         return langTag[lang.languages_code.code] === langTag[props.locale]
                                     })
+
                                     return (
-                                        <li key={index}>
-                                            <Link to={`${langTag[props.locale] === 'it' ? '' : '/' + langTag[props.locale]}/${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
+                                        <li
+                                            role="button"
+                                            tabIndex={item.id}
+
+                                            key={item.id + 'main'}
+                                        >
+                                            {
+                                                item.sub_items.length == 0 && itemTranslated.slug && (
+                                                    <Link
+                                                        to={`/${langTag[itemTranslated.languages_code.code] === 'it'
+                                                            ? ''
+                                                            : langTag[itemTranslated.languages_code.code] + '/'
+                                                            }${itemTranslated.slug.toLowerCase()}`}
+                                                    >
+                                                        {itemTranslated.label}
+                                                    </Link>
+                                                )
+                                            }
+                                            {item.sub_items.length > 0 ? (
+                                                <ul >
+                                                    {item.sub_items.map((subitem) => {
+                                                        const subItemTranslated = subitem.translations.find(
+                                                            (lang) =>
+                                                                langTag[lang.languages_code.code] ===
+                                                                langTag[props.locale]
+                                                        );
+                                                        if (subItemTranslated.slug) {
+                                                            return (
+                                                                <li key={subItemTranslated.label}>
+                                                                    <Link
+                                                                        to={`${langTag[
+                                                                            subItemTranslated.languages_code.code
+                                                                        ] === 'it'
+                                                                            ? ''
+                                                                            : '/' +
+                                                                            langTag[
+                                                                            subItemTranslated
+                                                                                .languages_code.code
+                                                                            ]
+                                                                            }/${itemTranslated.slug.toLowerCase()}/${subItemTranslated.slug
+                                                                            }`}
+                                                                    >
+                                                                        {subItemTranslated.label}
+                                                                    </Link>
+                                                                </li>
+                                                            );
+                                                        } else {
+                                                            return null;
+                                                        }
+                                                    })}
+                                                </ul>
+                                            ) : (
+                                                ''
+                                            )}
                                         </li>
-                                    )
+                                    );
                                 })
 
 

@@ -468,6 +468,12 @@ exports.createPages = async ({ graphql, actions }) => {
         title: item.label,
       }
       allPath.push(pathObj)
+      allPath.sort((a, b) => {
+        if (a.locale.toLowerCase() === "it_it" || b.locale.toLowerCase() === "it_it") return 1
+
+        return -1
+      })
+
     })
     return allPath
   }
@@ -520,7 +526,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const homePage = {
     translations: translationHomePage(result.data.directus.languages),
   }
-
+  const allPagePath = getAllPathPagine(translations)
   homePage.translations.forEach(translation => {
     createPage({
       path: `/${translation.locale == "it_IT" ? "" : langTag[translation.locale] + "/"
@@ -533,7 +539,7 @@ exports.createPages = async ({ graphql, actions }) => {
         listaApplicazioni: tassonomiaProdotti.applicazioni[translation.locale],
         listaCategorie: tassonomiaProdotti.categorie[translation.locale],
         pageName: translation.title.toLowerCase(),
-        allPagePath: homePage.translations,
+        allPagePath: allPagePath,
       },
     })
   })
@@ -549,6 +555,8 @@ exports.createPages = async ({ graphql, actions }) => {
         return require.resolve("./src/templates/candidature.jsx")
       case "candidature":
         return require.resolve('./src/templates/formCandidature.jsx')
+      case "contatti":
+        return require.resolve('./src/templates/contatti.jsx')
       default:
         return require.resolve("./src/templates/page.jsx")
     }
