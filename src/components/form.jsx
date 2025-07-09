@@ -572,6 +572,7 @@ const FormCandidature = ({ lang, candidature }) => {
                                 type="text"
                                 name="nome"
                                 id="candidatureNome"
+                                defaultValue=""
                                 {...register("nome", {
                                     required: {
                                         value: true,
@@ -591,6 +592,7 @@ const FormCandidature = ({ lang, candidature }) => {
                                 type="text"
                                 name="cognome"
                                 id="candidatureCognome"
+                                defaultValue=""
                                 {...register("cognome", {
                                     required: {
                                         value: true,
@@ -705,7 +707,7 @@ const FormCandidature = ({ lang, candidature }) => {
                     </label>
                     <div className="box-submit">
                         <label htmlFor="submit">
-                            <input className='button-sezione' type="submit" value={Termini[lang].invia} />
+                            <input id="submit" className='button-sezione' type="submit" value={Termini[lang].invia} />
                         </label>
                     </div>
                 </form>
