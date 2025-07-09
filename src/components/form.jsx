@@ -520,13 +520,12 @@ const FormCandidature = ({ lang, candidature }) => {
             contattiEmail: "",
             candidatureLinkedin: "",
             candidatureCV: "",
-            contattiPrivacy: false
+            candidaturePrivacy: false
         }
     })
     const { register, handleSubmit, formState, reset } = form
     const { errors } = formState
 
-    console.log(candidature, 'candidature')
     //Funzione per l'enconding dei dati del form
 
     const encode = (data) => {
@@ -553,14 +552,14 @@ const FormCandidature = ({ lang, candidature }) => {
                     theme="dark" />
                 <form
                     data-netlify="true"
-                    name="contatti"
+                    name="candidature"
                     netlify-honeypot="bot-field"
                     onSubmit={handleSubmit((data) => {
                         toast(Termini[lang].formSuccess)
                         fetch("/", {
                             method: "POST",
                             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: encode({ "form-name": "contatti", ...data }),
+                            body: encode({ "form-name": "candidature", ...data }),
                         })
                             .then(() => {
                                 reset()
@@ -568,7 +567,7 @@ const FormCandidature = ({ lang, candidature }) => {
                             .catch((error) => alert(error));
                     })
                     }>
-                    <input type="hidden" name="form-name" value="contatti" />
+                    <input type="hidden" name="form-name" value="candidature" />
                     <div className="box-form">
                         <label htmlFor="candidatureNome">
                             <input
@@ -623,7 +622,7 @@ const FormCandidature = ({ lang, candidature }) => {
                                 }
                             })
                             } />
-                            {errors.contattiEmail && <p>{errors.contattiEmail?.message}</p>}
+                            {errors.candidatureEmail && <p>{errors.candidatureEmail?.message}</p>}
                         </label>
                         <label htmlFor="candidatureTelefono">
                             <input placeholder={Termini[lang].formTelefono} type="text" name="telefono" id="candidatureTelefono"
@@ -704,7 +703,7 @@ const FormCandidature = ({ lang, candidature }) => {
                             })}
                         />
                         <span>{Termini[lang].formPrivacyText1}<Link to="/privacy">{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
-                        {errors.contattiPrivacy && <p>{errors.contattiPrivacy?.message}</p>}
+                        {errors.candidaturePrivacy && <p>{errors.candidaturePrivacy?.message}</p>}
                     </label>
                     <div className="box-submit">
                         <label htmlFor="submit">
