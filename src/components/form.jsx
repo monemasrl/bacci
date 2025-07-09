@@ -563,7 +563,20 @@ const FormCandidature = ({ lang, candidature }) => {
                     data-netlify="true"
                     name="candidature"
                     netlify-honeypot="bot-field"
-                >
+                    onSubmit={handleSubmit((data) => {
+                        toast(Termini[lang].formSuccess)
+                        console.log(data, 'data form candidature')
+                        fetch("/", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                            body: new URLSearchParams(data).toString()
+                        })
+                            .then(() => {
+                                reset()
+                            })
+                            .catch((error) => alert(error));
+                    })
+                    }>
                     <input type="hidden" name="form-name" value="candidature" />
                     <div className="box-form">
                         <label htmlFor="candidatureNome">
@@ -572,7 +585,6 @@ const FormCandidature = ({ lang, candidature }) => {
                                 type="text"
                                 name="nome"
                                 id="candidatureNome"
-                                defaultValue=""
                                 {...register("nome", {
                                     required: {
                                         value: true,
@@ -592,7 +604,6 @@ const FormCandidature = ({ lang, candidature }) => {
                                 type="text"
                                 name="cognome"
                                 id="candidatureCognome"
-                                defaultValue=""
                                 {...register("cognome", {
                                     required: {
                                         value: true,
@@ -707,7 +718,7 @@ const FormCandidature = ({ lang, candidature }) => {
                     </label>
                     <div className="box-submit">
                         <label htmlFor="submit">
-                            <input id="submit" className='button-sezione' type="submit" value={Termini[lang].invia} />
+                            <input className='button-sezione' type="submit" value={Termini[lang].invia} />
                         </label>
                     </div>
                 </form>
