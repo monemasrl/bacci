@@ -566,10 +566,11 @@ const FormCandidature = ({ lang, candidature }) => {
                     onSubmit={handleSubmit((data) => {
                         toast(Termini[lang].formSuccess)
                         console.log(data, 'data form candidature')
+                        data["form-name"] = "candidature";
                         fetch("/", {
                             method: "POST",
                             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: new URLSearchParams(data).toString()
+                            body: new URLSearchParams(data).toString(),
                         })
                             .then(() => {
                                 reset()
