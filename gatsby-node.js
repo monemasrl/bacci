@@ -509,7 +509,7 @@ exports.createPages = async ({ graphql, actions }) => {
     ),
   }
 
-  // CREAZIONE HOMEPAGE
+  // ANCHOR: CREAZIONE HOMEPAGE
 
   function translationHomePage(translations) {
     //crea un array con i dati per le traduzioni della homepage
@@ -543,8 +543,40 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+  // ANCHOR: PAGINA PRIVACY
+  function translationPrivacy(translations) {
+    //crea un array con i dati per le traduzioni della homepage
+    const data = translations.map(item => {
+      return {
+        title: "Privacy",
+        locale: item.code,
+        path: item.code == "en_US" ? "/en" : "/",
+      }
+    })
+    return data
+  }
 
-  // ANCHOR: CREAZIONE PAGINE INTERNE
+  const privacy = {
+    translations: translationPrivacy(result.data.directus.languages),
+  }
+
+  privacy.translations.forEach(translation => {
+    createPage({
+      path: `/${translation.locale == "it_IT" ? "privacy" : langTag[translation.locale] + "/" + "privacy"
+        }`,
+      component: require.resolve("./src/templates/privacy.jsx"),
+      context: {
+        locale: translation.locale,
+        slug: translation.title.toLowerCase(),
+        title: translation.title,
+        listaApplicazioni: tassonomiaProdotti.applicazioni[translation.locale],
+        listaCategorie: tassonomiaProdotti.categorie[translation.locale],
+        pageName: translation.title.toLowerCase(),
+        allPagePath: privacy.translations,
+      },
+    })
+  })
+  // ANCHOR: CREAZIONE PAGINE INTERNE DA MENU
   function getTemplate(name) {
     switch (name) {
       case "News":

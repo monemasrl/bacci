@@ -5,6 +5,11 @@ import { Termini } from "../../data-translations";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const linkToPrivacy = {
+    it_IT: '/privacy',
+    en_US: '/en/privacy'
+}
+
 const FormFiere = ({ nomeEvento, lang }) => {
     const form = useForm({
         defaultValues: {
@@ -48,7 +53,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                 name="fiere"
                 netlify-honeypot="bot-field"
                 onSubmit={handleSubmit((data) => {
-
+                    console.log(data, 'data form fiere')
                     data.nomeEvento = nomeEvento
                     toast(Termini[lang].formSuccess)
                     fetch("/", {
@@ -63,8 +68,8 @@ const FormFiere = ({ nomeEvento, lang }) => {
                         .catch((error) => alert(error));
                 })
                 }>
-                <input style={{ display: 'none' }} type="text" id="nomeEvento" name="nomeEvento" value={nomeEvento} />
-                <input type="hidden" name="form-name" value="fiere" />
+                <input style={{ display: 'none' }} type="text" id="nomeEvento" name="nomeEvento" defaultValue={nomeEvento} />
+                <input type="hidden" name="form-name" defaultValue="fiere" />
 
                 <div className="box-form">
                     <label htmlFor="nome">
@@ -94,6 +99,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                             id="cognome"
                             {...register("cognome", {
                                 required: {
+
                                     value: true,
                                     message: Termini[lang].formRequired
                                 },
@@ -170,7 +176,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                                 })}
                             />
 
-                            <span>{Termini[lang].formPrivacy} <Link to="/privacy"> Privacy</Link></span>
+                            <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
                             {errors.privacy && <p>{errors.privacy?.message}</p>}
                         </label>
                     </div>
@@ -349,7 +355,7 @@ const FormContatti = ({ lang }) => {
                         })}
                     />
 
-                    <span>{Termini[lang].formPrivacy}<Link to="/privacy"> Privacy</Link></span>
+                    <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
                     {errors.contattiPrivacy && <p>{errors.contattiPrivacy?.message}</p>}
                 </label>
                 <div className="box-submit">
@@ -498,7 +504,7 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
                         })}
                     />
 
-                    <span>{Termini[lang].formPrivacy}<Link to="/privacy"> Privacy</Link></span>
+                    <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
                     {errors.catalogoRichiestePrivacy && <p>{errors.catalogoRichiestePrivacy?.message}</p>}
                 </label>
                 <div className="box-submit">
@@ -705,7 +711,7 @@ const FormCandidature = ({ lang, candidature }) => {
                                 },
                             })}
                         />
-                        <span>{Termini[lang].formPrivacyText1}<Link to="/privacy">{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
+                        <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
                         {errors.candidaturePrivacy && <p>{errors.candidaturePrivacy?.message}</p>}
                     </label>
                     <div className="box-submit">

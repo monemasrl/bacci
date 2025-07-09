@@ -41,7 +41,9 @@ const Fiere = ({ pageContext }) => {
 
           <section className="topfiera">
             <h2>{dataProdottoTranslated.sottotitolo}</h2>
-            <p className="description" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.description }} />
+            <p className="description">
+              {dataProdottoTranslated.description}
+            </p>
             {dataProdottoTranslated.call2action && <div className="call2action">
               <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.call2action }} />
               <FormFiere nomeEvento={title} lang={pageContext.locale} />

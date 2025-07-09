@@ -1811,3 +1811,21 @@ section.container.candidature {
 .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
   z-index: 1;
 }
+.wrapperPrivacy {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  h1 {
+    font-size: 36px;
+    font-family: $title;
+    text-transform: uppercase;
+    color: $grey;
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: $grey;
+    margin-bottom: 1rem;
+  }
+}

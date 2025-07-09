@@ -128,10 +128,7 @@ const CandidatureForm = ({ data, pageContext }) => {
         return new Date(b.date_created) - new Date(a.date_created)
     })
     const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
-    const linkToForm = {
-        it_IT: '/careers/candidature',
-        en_US: '/en/careers/job-applications'
-    }
+
 
     return (
         <>
@@ -148,7 +145,7 @@ const CandidatureForm = ({ data, pageContext }) => {
                     {content && <>
                         <div className={`box-sx`} >
                             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.main_content_titolo }} />
-                            <p dangerouslySetInnerHTML={{ __html: content.main_content }} />
+                            <div dangerouslySetInnerHTML={{ __html: content.main_content }} />
 
                             <FormCandidature lang={pageContext.locale} candidature={langFilterFiereSorted} />
 
