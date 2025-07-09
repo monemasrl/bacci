@@ -566,15 +566,15 @@ const FormCandidature = ({ lang, candidature }) => {
                     onSubmit={handleSubmit((data) => {
                         toast(Termini[lang].formSuccess)
                         console.log(data, 'data form candidature')
-                        fetch("/", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: encode({ "form-name": "candidature", ...data }),
-                        })
-                            .then(() => {
-                                reset()
-                            })
-                            .catch((error) => alert(error));
+                        /*              fetch("/", {
+                                         method: "POST",
+                                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                                         body: encode({ "form-name": "candidature", ...data }),
+                                     })
+                                         .then(() => {
+                                             reset()
+                                         })
+                                         .catch((error) => alert(error)); */
                     })
                     }>
                     <input type="hidden" name="form-name" value="candidature" />
@@ -706,7 +706,7 @@ const FormCandidature = ({ lang, candidature }) => {
                             placeholder="privacy"
                             name="privacy"
                             id="candidaturePrivacy"
-                            {...register("candidaturePrivacy", {
+                            {...register("privacy", {
                                 required: {
                                     value: true,
                                     message: Termini[lang].formPrivacy
