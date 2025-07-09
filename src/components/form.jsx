@@ -563,20 +563,7 @@ const FormCandidature = ({ lang, candidature }) => {
                     data-netlify="true"
                     name="candidature"
                     netlify-honeypot="bot-field"
-                    onSubmit={handleSubmit((data) => {
-                        toast(Termini[lang].formSuccess)
-                        console.log(data, 'data form candidature')
-                        /*              fetch("/", {
-                                         method: "POST",
-                                         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                                         body: encode({ "form-name": "candidature", ...data }),
-                                     })
-                                         .then(() => {
-                                             reset()
-                                         })
-                                         .catch((error) => alert(error)); */
-                    })
-                    }>
+                >
                     <input type="hidden" name="form-name" value="candidature" />
                     <div className="box-form">
                         <label htmlFor="candidatureNome">
