@@ -90,7 +90,7 @@ export const Termini = {
     formUpload: 'Formato del file non supportato',
     formUploadText: 'C.V. (in pdf)',
     formLinkedinError: 'Formato indirizzo errato',
-    formArea: 'Area di spezializzazione',
+    formArea: 'Area di specializzazione',
     formLinkedin: 'Profilo Linkedin',
     formTelefono: 'Telefono',
     formTelefonoError: 'Telefono non valido',

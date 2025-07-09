@@ -118,7 +118,7 @@ export const query = graphql`
 
 
 const CandidatureForm = ({ data, pageContext }) => {
-    console.log(pageContext, 'pageContext')
+
     const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
     const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
     const topArchivio = React.useRef()

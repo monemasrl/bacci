@@ -53,7 +53,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
                 name="fiere"
                 netlify-honeypot="bot-field"
                 onSubmit={handleSubmit((data) => {
-                    console.log(data, 'data form fiere')
+
                     data.nomeEvento = nomeEvento
                     toast(Termini[lang].formSuccess)
                     fetch("/", {
@@ -236,7 +236,7 @@ const FormContatti = ({ lang }) => {
                 name="contatti"
                 netlify-honeypot="bot-field"
                 onSubmit={handleSubmit((data) => {
-                    console.log(data, 'data form contatti')
+
                     toast(Termini[lang].formSuccess)
                     fetch("/", {
                         method: "POST",
@@ -523,13 +523,13 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
 const FormCandidature = ({ lang, candidature }) => {
     const form = useForm({
         defaultValues: {
-            candidatureNome: "",
-            candidatureCognome: "",
-            candidatureTelefono: "",
-            contattiEmail: "",
-            candidatureLinkedin: "",
-            candidatureCV: "",
-            candidaturePrivacy: false
+            nome: "",
+            cognome: "",
+            telefono: "",
+            email: "",
+            linkedin: "",
+            CV: "",
+            privacy: false
         }
     })
     const { register, handleSubmit, formState, reset } = form
@@ -565,6 +565,7 @@ const FormCandidature = ({ lang, candidature }) => {
                     netlify-honeypot="bot-field"
                     onSubmit={handleSubmit((data) => {
                         toast(Termini[lang].formSuccess)
+                        console.log(data, 'data form candidature')
                         fetch("/", {
                             method: "POST",
                             headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -584,7 +585,7 @@ const FormCandidature = ({ lang, candidature }) => {
                                 type="text"
                                 name="nome"
                                 id="candidatureNome"
-                                {...register("candidatureNome", {
+                                {...register("nome", {
                                     required: {
                                         value: true,
                                         message: Termini[lang].formRequired
@@ -595,15 +596,15 @@ const FormCandidature = ({ lang, candidature }) => {
                                     }
                                 })
                                 } />
-                            {errors.candidatureNome && <p>{errors.candidatureNome?.message}</p>}
+                            {errors.nome && <p>{errors.nome?.message}</p>}
                         </label>
-                        <label htmlFor="candidatureCognome">
+                        <label htmlFor="cognome">
                             <input
                                 placeholder={Termini[lang].cognome}
                                 type="text"
                                 name="cognome"
                                 id="candidatureCognome"
-                                {...register("candidatureCognome", {
+                                {...register("cognome", {
                                     required: {
                                         value: true,
                                         message: Termini[lang].formRequired
@@ -614,46 +615,47 @@ const FormCandidature = ({ lang, candidature }) => {
                                     }
                                 })
                                 } />
-                            {errors.candidatureCognome && <p>{errors.candidatureCognome?.message}</p>}
+                            {errors.cognome && <p>{errors.cognome?.message}</p>}
                         </label>
                     </div>
                     <div className="box-form">
 
-                        <label htmlFor="contattiEmail">
-                            <input placeholder="Email" type="text" name="email" id="contattiEmail" {...register("contattiEmail", {
-                                required: {
-                                    value: true,
-                                    message: Termini[lang].formRequired
-                                },
-                                pattern: {
-                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                    message: Termini[lang].formMail
-                                }
-                            })
-                            } />
-                            {errors.candidatureEmail && <p>{errors.candidatureEmail?.message}</p>}
+                        <label htmlFor="candidatureEmail">
+                            <input placeholder="Email" type="text" name="email" id="candidatureEmail"
+                                {...register("email", {
+                                    required: {
+                                        value: true,
+                                        message: Termini[lang].formRequired
+                                    },
+                                    pattern: {
+                                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                        message: Termini[lang].formMail
+                                    }
+                                })
+                                } />
+                            {errors.email && <p>{errors.email?.message}</p>}
                         </label>
                         <label htmlFor="candidatureTelefono">
                             <input placeholder={Termini[lang].formTelefono} type="text" name="telefono" id="candidatureTelefono"
-                                {...register("candidatureTelefono", {
+                                {...register("telefono", {
                                     pattern: {
                                         value: /^\+?[0-9\s\-()]{7,20}$/,
                                         message: Termini[lang].formTelefonoError
                                     }
                                 })
                                 } />
-                            {errors.candidatureTelefono && <p>{errors.candidatureTelefono?.message}</p>}
+                            {errors.telefono && <p>{errors.telefono?.message}</p>}
                         </label>
                     </div>
                     <div className="box-form " >
                         <label htmlFor="candidatureLinkedin">
-                            <input type="url" name="candidatureLinkedin" id="candidatureLinkedin" placeholder={Termini[lang].formLinkedin} {...register("candidatureLinkedin", {
+                            <input type="url" name="linkedin" id="candidatureLinkedin" placeholder={Termini[lang].formLinkedin} {...register("linkedin", {
                                 pattern: {
                                     value: /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?$/,
                                     message: Termini[lang].formLinkedinError
                                 }
                             })} />
-                            {errors.candidatureLinkedin && <p>{errors.candidatureLinkedin?.message}</p>}
+                            {errors.linkedin && <p>{errors.linkedin?.message}</p>}
                         </label>
                     </div>
 
@@ -661,8 +663,8 @@ const FormCandidature = ({ lang, candidature }) => {
                         <div className="wrapper">
                             <div>{Termini[lang].formUploadText}</div>
                             <div>
-                                <input type="file" id="candidatureCV" name="candidatureCV" accept=".pdf,.doc,.docx"
-                                    {...register("candidatureCV", {
+                                <input type="file" id="candidatureCV" name="CV" accept=".pdf,.doc,.docx"
+                                    {...register("CV", {
                                         validate: {
                                             fileSize: (value) => {
                                                 if (value[0] && value[0].size > 2000000) {
@@ -679,7 +681,7 @@ const FormCandidature = ({ lang, candidature }) => {
                                         }
                                     })
                                     } />
-                                {errors.candidatureCV && <p>{errors.candidatureCV?.message}</p>}
+                                {errors.CV && <p>{errors.CV?.message}</p>}
                             </div>
                         </div>
                     </label>
