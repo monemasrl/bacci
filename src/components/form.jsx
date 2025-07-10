@@ -191,34 +191,27 @@ const FormFiere = ({ nomeEvento, lang }) => {
     )
 
 }
-
 const FormContatti = ({ lang }) => {
-    const form = useForm({
-        defaultValues: {
-            nome: "",
-            cognome: "",
-            azienda: "",
-            email: "",
-            messaggio: "",
-            privacy: false
+    const formRef = React.useRef();
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = formRef.current;
+        const data = new FormData(form);
+
+        try {
+            await fetch("/", {
+                method: "POST",
+                body: data,
+            });
+            toast.success("Messaggio inviato con successo!");
+            form.reset();
+        } catch (error) {
+            toast.error("Errore nell'invio del messaggio.");
         }
-    })
-    const { register, handleSubmit, formState, reset } = form
-    const { errors } = formState
-
-
-    //Funzione per l'enconding dei dati del form
-
-    const encode = (data) => {
-        return Object.keys(data)
-            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-            .join("&");
-    }
-
-
-
+    };
     return (
-        <div className="wrapper-form" >
+        <div className="wrapper-form">
             <ToastContainer
                 position="bottom-center"
                 autoClose={5000}
@@ -229,147 +222,101 @@ const FormContatti = ({ lang }) => {
                 pauseOnFocusLoss
                 draggable={false}
                 pauseOnHover
-                theme="dark" />
+                theme="dark"
+            />
 
             <form
-                data-netlify="true"
+                ref={formRef}
                 name="contatti"
+                method="POST"
+                data-netlify="true"
                 netlify-honeypot="bot-field"
-                onSubmit={handleSubmit((data) => {
-
-                    toast(Termini[lang].formSuccess)
-                    fetch("/", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: encode({ "form-name": "contatti", ...data }),
-                    })
-                        .then(() => {
-                            reset()
-
-                        })
-                        .catch((error) => alert(error));
-                })
-                }>
-
+                onSubmit={handleSubmit}
+            >
                 <input type="hidden" name="form-name" value="contatti" />
+                <input type="hidden" name="bot-field" />
 
                 <div className="box-form">
                     <label htmlFor="contattiNome">
                         <input
                             placeholder={Termini[lang].nome}
                             type="text"
-
+                            name="nome"
                             id="contattiNome"
-                            {...register("nome", {
-                                required: {
-                                    value: true,
-                                    message: Termini[lang].formRequired
-                                },
-                                minLength: {
-                                    value: 3,
-                                    message: Termini[lang].formMinimoCaratteri
-                                }
-                            })
-                            } />
-                        {errors.nome && <p>{errors.nome?.message}</p>}
+                            minLength={3}
+                            required
+                        />
                     </label>
                     <label htmlFor="contattiCognome">
                         <input
                             placeholder={Termini[lang].cognome}
                             type="text"
-
+                            name="cognome"
                             id="contattiCognome"
-                            {...register("cognome", {
-                                required: {
-                                    value: true,
-                                    message: Termini[lang].formRequired
-                                },
-                                minLength: {
-                                    value: 3,
-                                    message: Termini[lang].formMinimoCaratteri
-                                }
-                            })
-                            } />
-                        {errors.cognome && <p>{errors.cognome?.message}</p>}
+                            minLength={3}
+                            required
+                        />
                     </label>
                 </div>
                 <div className="box-form">
                     <label htmlFor="contattiAzienda">
-                        <input placeholder={Termini[lang].azienda} type="text" id="contattiAzienda"
-                            {...register("azienda", {
-                                required: {
-                                    value: true,
-                                    message: Termini[lang].formRequired
-                                },
-                                minLength: {
-                                    value: 3,
-                                    message: Termini[lang].formMinimoCaratteri
-                                }
-                            })
-                            } />
-                        {errors.azienda && <p>{errors.azienda?.message}</p>}
+                        <input
+                            placeholder={Termini[lang].azienda}
+                            type="text"
+                            name="azienda"
+                            id="contattiAzienda"
+                            minLength={3}
+                            required
+                        />
                     </label>
                     <label htmlFor="contattiEmail">
-                        <input placeholder="email" type="text" id="contattiEmail" {...register("email", {
-                            required: {
-                                value: true,
-                                message: Termini[lang].formRequired
-                            },
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                message: Termini[lang].formMail
-                            }
-                        })
-                        } />
-                        {errors.email && <p>{errors.email?.message}</p>}
+                        <input
+                            placeholder="email"
+                            type="email"
+                            name="email"
+                            id="contattiEmail"
+                            pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"
+                            required
+                        />
                     </label>
                 </div>
                 <div className="box-form-message">
                     <label htmlFor="contattiMessaggio">
-                        <textarea rows={6} placeholder={Termini[lang].messaggio} id="contattiMessaggio" {...register("messaggio", {
-                            required: {
-                                value: true,
-                                message: Termini[lang].formRequired
-                            },
-                            minLength: {
-                                value: 3,
-                                message: Termini[lang].formMessaggio
-                            }
-                        })
-                        } />
-                        {errors.messaggio && <p>{errors.messaggio?.message}</p>}
+                        <textarea
+                            rows={6}
+                            placeholder={Termini[lang].messaggio}
+                            name="messaggio"
+                            id="contattiMessaggio"
+                            minLength={3}
+                            required
+                        />
                     </label>
                 </div>
                 <label className="privacy" htmlFor="contattiPrivacy">
                     <input
                         type="checkbox"
-                        placeholder="privacy"
-
+                        name="privacy"
                         id="contattiPrivacy"
-                        {...register("privacy", {
-                            required: {
-                                value: true,
-                                message: Termini[lang].formPrivacy
-                            },
-
-                        })}
+                        required
                     />
-
-                    <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
-                    {errors.privacy && <p>{errors.privacy?.message}</p>}
+                    <span>
+                        {Termini[lang].formPrivacy}
+                        <Link to="/privacy"> Privacy</Link>
+                    </span>
                 </label>
                 <div className="box-submit">
                     <label htmlFor="submit">
-                        <input className='button-sezione' type="submit" value={Termini[lang].invia} />
+                        <input
+                            className="button-sezione"
+                            type="submit"
+                            value={Termini[lang].invia}
+                        />
                     </label>
                 </div>
-
             </form>
-
         </div>
-    )
-
-}
+    );
+};
 
 
 const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
@@ -570,10 +517,10 @@ const FormCandidature = ({ lang, candidature }) => {
                         fetch("/", {
                             method: "POST",
                             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: encode({ "form-name": "richieste", ...data }),
+                            body: encode({ "form-name": "candidature", ...data }),
                         })
                             .then(() => {
-                                setIsCatalogoVisible(true)
+
                                 reset()
 
                             })
