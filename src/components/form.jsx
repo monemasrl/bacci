@@ -237,60 +237,62 @@ const FormContatti = ({ lang }) => {
                 <input type="hidden" name="bot-field" />
 
                 <div className="box-form">
-                    <label htmlFor="contattiNome">
-                        <input
-                            placeholder={Termini[lang].nome}
-                            type="text"
-                            name="nome"
-                            id="contattiNome"
-                            minLength={3}
-                            required
-                        />
-                    </label>
-                    <label htmlFor="contattiCognome">
-                        <input
-                            placeholder={Termini[lang].cognome}
-                            type="text"
-                            name="cognome"
-                            id="contattiCognome"
-                            minLength={3}
-                            required
-                        />
-                    </label>
+                    <label htmlFor="contattiNome" style={{ display: 'none' }}>nome</label>
+                    <input
+                        placeholder={Termini[lang].nome}
+                        type="text"
+                        name="nome"
+                        id="contattiNome"
+                        minLength={3}
+                        required
+                    />
+
+                    <label htmlFor="contattiCognome" style={{ display: 'none' }}> cognome </label>
+                    <input
+                        placeholder={Termini[lang].cognome}
+                        type="text"
+                        name="cognome"
+                        id="contattiCognome"
+                        minLength={3}
+                        required
+                    />
+
                 </div>
                 <div className="box-form">
-                    <label htmlFor="contattiAzienda">
-                        <input
-                            placeholder={Termini[lang].azienda}
-                            type="text"
-                            name="azienda"
-                            id="contattiAzienda"
-                            minLength={3}
-                            required
-                        />
-                    </label>
-                    <label htmlFor="contattiEmail">
-                        <input
-                            placeholder="email"
-                            type="email"
-                            name="email"
-                            id="contattiEmail"
-                            pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"
-                            required
-                        />
-                    </label>
+                    <label htmlFor="contattiAzienda" style={{ display: 'none' }}>azienda</label>
+                    <input
+                        placeholder={Termini[lang].azienda}
+                        type="text"
+                        name="azienda"
+                        id="contattiAzienda"
+                        minLength={3}
+                        required
+                    />
+
+                    <label htmlFor="contattiEmail" style={{ display: 'none' }}>email</label>
+                    <input
+                        placeholder="email"
+                        type="email"
+                        name="email"
+                        id="contattiEmail"
+                        pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"
+                        required
+                    />
+
                 </div>
                 <div className="box-form-message">
-                    <label htmlFor="contattiMessaggio">
-                        <textarea
-                            rows={6}
-                            placeholder={Termini[lang].messaggio}
-                            name="messaggio"
-                            id="contattiMessaggio"
-                            minLength={3}
-                            required
-                        />
+                    <label htmlFor="contattiMessaggio" style={{ display: 'none' }}>
+                        messaggio
                     </label>
+                    <textarea
+                        rows={6}
+                        placeholder={Termini[lang].messaggio}
+                        name="messaggio"
+                        id="contattiMessaggio"
+                        minLength={3}
+                        required
+                    />
+
                 </div>
                 <label className="privacy" htmlFor="contattiPrivacy">
                     <input

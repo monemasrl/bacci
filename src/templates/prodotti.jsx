@@ -208,7 +208,7 @@ const Prodotti = ({ data, location, pageContext }) => {
       setFiltersCat([...filterUnchecked])
     }
   }
-  console.log(filtersCat, 'filtersCat')
+
   // setta il valore dei filtri della applicazione nello stato filtersApp 
   const onChangeCheckboxApplicazioni = (evt) => {
     // se il filtro è check crea o aggiorna l'array 
