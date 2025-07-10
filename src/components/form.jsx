@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { Termini } from "../../data-translations";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { createDirectus, rest, createItem } from "@directus/sdk"
 
 const linkToPrivacy = {
     it_IT: '/privacy',
@@ -522,7 +521,7 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
 }
 
 const FormCandidature = ({ lang, candidature }) => {
-    const client = createDirectus('https://bacci-directus.monema.dev').with(rest());
+
     const form = useForm({
         defaultValues: {
             nome: "",
@@ -567,31 +566,18 @@ const FormCandidature = ({ lang, candidature }) => {
                     netlify-honeypot="bot-field"
                     onSubmit={handleSubmit((data) => {
                         toast(Termini[lang].formSuccess)
-                        const nome = data.nome;
-                        const cognome = data.cognome;
-                        const telefono = data.telefono;
-                        const email = data.email;
-                        const linkedin = data.linkedin;
-                        const CV = data.CV;
-                        const candidatura = data.candidature;
-                        async function name() {
-                            try {
-                                await client.request(
-                                    createItem('form_contatti', {
-                                        nome,
-                                        cognome,
-                                        telefono,
-                                        email,
-                                        linkedin,
 
+                        fetch("/", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                            body: encode({ "form-name": "richieste", ...data }),
+                        })
+                            .then(() => {
+                                setIsCatalogoVisible(true)
+                                reset()
 
-                                    })
-                                );
-                            } catch (error) {
-                                console.log(error);
-                            }
-                        }
-                        name()
+                            })
+                            .catch((error) => alert(error));
                     })
                     }>
                     <input type="hidden" name="form-name" value="candidature" />
