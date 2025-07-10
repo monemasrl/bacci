@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Termini } from "../../data-translations";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { createDirectus, rest, createItem } from "@directus/sdk"
 
 const linkToPrivacy = {
     it_IT: '/privacy',
@@ -195,12 +196,12 @@ const FormFiere = ({ nomeEvento, lang }) => {
 const FormContatti = ({ lang }) => {
     const form = useForm({
         defaultValues: {
-            contattiNome: "",
-            contattiCognome: "",
-            contattiAzienda: "",
-            contattiEmail: "",
-            contattiMessaggio: "",
-            contattiPrivacy: false
+            nome: "",
+            cognome: "",
+            azienda: "",
+            email: "",
+            messaggio: "",
+            privacy: false
         }
     })
     const { register, handleSubmit, formState, reset } = form
@@ -258,9 +259,9 @@ const FormContatti = ({ lang }) => {
                         <input
                             placeholder={Termini[lang].nome}
                             type="text"
-                            name="nome"
+
                             id="contattiNome"
-                            {...register("contattiNome", {
+                            {...register("nome", {
                                 required: {
                                     value: true,
                                     message: Termini[lang].formRequired
@@ -271,15 +272,15 @@ const FormContatti = ({ lang }) => {
                                 }
                             })
                             } />
-                        {errors.contattiNome && <p>{errors.contattiNome?.message}</p>}
+                        {errors.nome && <p>{errors.nome?.message}</p>}
                     </label>
                     <label htmlFor="contattiCognome">
                         <input
                             placeholder={Termini[lang].cognome}
                             type="text"
-                            name="cognome"
+
                             id="contattiCognome"
-                            {...register("contattiCognome", {
+                            {...register("cognome", {
                                 required: {
                                     value: true,
                                     message: Termini[lang].formRequired
@@ -290,13 +291,13 @@ const FormContatti = ({ lang }) => {
                                 }
                             })
                             } />
-                        {errors.contattiCognome && <p>{errors.contattiCognome?.message}</p>}
+                        {errors.cognome && <p>{errors.cognome?.message}</p>}
                     </label>
                 </div>
                 <div className="box-form">
                     <label htmlFor="contattiAzienda">
-                        <input placeholder={Termini[lang].azienda} type="text" name="azienda" id="contattiAzienda"
-                            {...register("contattiAzienda", {
+                        <input placeholder={Termini[lang].azienda} type="text" id="contattiAzienda"
+                            {...register("azienda", {
                                 required: {
                                     value: true,
                                     message: Termini[lang].formRequired
@@ -307,10 +308,10 @@ const FormContatti = ({ lang }) => {
                                 }
                             })
                             } />
-                        {errors.contattiAzienda && <p>{errors.contattiAzienda?.message}</p>}
+                        {errors.azienda && <p>{errors.azienda?.message}</p>}
                     </label>
                     <label htmlFor="contattiEmail">
-                        <input placeholder="email" type="text" name="email" id="contattiEmail" {...register("contattiEmail", {
+                        <input placeholder="email" type="text" id="contattiEmail" {...register("email", {
                             required: {
                                 value: true,
                                 message: Termini[lang].formRequired
@@ -321,12 +322,12 @@ const FormContatti = ({ lang }) => {
                             }
                         })
                         } />
-                        {errors.contattiEmail && <p>{errors.contattiEmail?.message}</p>}
+                        {errors.email && <p>{errors.email?.message}</p>}
                     </label>
                 </div>
                 <div className="box-form-message">
                     <label htmlFor="contattiMessaggio">
-                        <textarea rows={6} placeholder={Termini[lang].messaggio} name="messaggio" id="contattiMessaggio" {...register("contattiMessaggio", {
+                        <textarea rows={6} placeholder={Termini[lang].messaggio} id="contattiMessaggio" {...register("messaggio", {
                             required: {
                                 value: true,
                                 message: Termini[lang].formRequired
@@ -337,16 +338,16 @@ const FormContatti = ({ lang }) => {
                             }
                         })
                         } />
-                        {errors.contattiMessaggio && <p>{errors.contattiMessaggio?.message}</p>}
+                        {errors.messaggio && <p>{errors.messaggio?.message}</p>}
                     </label>
                 </div>
                 <label className="privacy" htmlFor="contattiPrivacy">
                     <input
                         type="checkbox"
                         placeholder="privacy"
-                        name="privacy"
+
                         id="contattiPrivacy"
-                        {...register("contattiPrivacy", {
+                        {...register("privacy", {
                             required: {
                                 value: true,
                                 message: Termini[lang].formPrivacy
@@ -356,7 +357,7 @@ const FormContatti = ({ lang }) => {
                     />
 
                     <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
-                    {errors.contattiPrivacy && <p>{errors.contattiPrivacy?.message}</p>}
+                    {errors.privacy && <p>{errors.privacy?.message}</p>}
                 </label>
                 <div className="box-submit">
                     <label htmlFor="submit">
@@ -521,6 +522,7 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
 }
 
 const FormCandidature = ({ lang, candidature }) => {
+    const client = createDirectus('https://bacci-directus.monema.dev').with(rest());
     const form = useForm({
         defaultValues: {
             nome: "",
@@ -565,17 +567,31 @@ const FormCandidature = ({ lang, candidature }) => {
                     netlify-honeypot="bot-field"
                     onSubmit={handleSubmit((data) => {
                         toast(Termini[lang].formSuccess)
-                        console.log(data, 'data form candidature')
-                        data["form-name"] = "candidature";
-                        fetch("/", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: new URLSearchParams(data).toString(),
-                        })
-                            .then(() => {
-                                reset()
-                            })
-                            .catch((error) => alert(error));
+                        const nome = data.nome;
+                        const cognome = data.cognome;
+                        const telefono = data.telefono;
+                        const email = data.email;
+                        const linkedin = data.linkedin;
+                        const CV = data.CV;
+                        const candidatura = data.candidature;
+                        async function name() {
+                            try {
+                                await client.request(
+                                    createItem('form_contatti', {
+                                        nome,
+                                        cognome,
+                                        telefono,
+                                        email,
+                                        linkedin,
+
+
+                                    })
+                                );
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        }
+                        name()
                     })
                     }>
                     <input type="hidden" name="form-name" value="candidature" />
