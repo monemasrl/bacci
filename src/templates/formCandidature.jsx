@@ -141,7 +141,7 @@ const CandidatureForm = ({ data, pageContext }) => {
                 seo={seoFilterLocale}
             >
 
-                <div className="mainContent">
+                <div className="mainContent candidature">
                     {content && <>
                         <div className={`box-sx`} >
                             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.main_content_titolo }} />

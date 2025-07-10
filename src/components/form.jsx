@@ -301,10 +301,9 @@ const FormContatti = ({ lang }) => {
                         id="contattiPrivacy"
                         required
                     />
-                    <span>
-                        {Termini[lang].formPrivacy}
-                        <Link to="/privacy"> Privacy</Link>
-                    </span>
+
+                    <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
+
                 </label>
                 <div className="box-submit">
                     <label htmlFor="submit">
@@ -382,61 +381,61 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
                 <input type="hidden" name="form-name" value="catalogoRichieste" />
 
                 <div className="box-form">
-                    <label htmlFor="catalogoRichiesteNome">
-                        <input
-                            placeholder={Termini[lang].nome}
-                            type="text"
-                            name="nome"
-                            id="catalogoRichiesteNome"
-                            {...register("catalogoRichiesteNome", {
-                                required: {
-                                    value: true,
-                                    message: Termini[lang].formRequired
-                                },
-                                minLength: {
-                                    value: 3,
-                                    message: Termini[lang].formMinimoCaratteri
-                                }
-                            })
-                            } />
-                        {errors.catalogoRichiesteNome && <p>{errors.catalogoRichiesteNome?.message}</p>}
-                    </label>
-                    <label htmlFor="catalogoRichiesteCognome">
-                        <input
-                            placeholder={Termini[lang].cognome}
-                            type="text"
-                            name="cognome"
-                            id="catalogoRichiesteCognome"
-                            {...register("catalogoRichiesteCognome", {
-                                required: {
-                                    value: true,
-                                    message: Termini[lang].formRequired
-                                },
-                                minLength: {
-                                    value: 3,
-                                    message: Termini[lang].formMinimoCaratteri
-                                }
-                            })
-                            } />
-                        {errors.catalogoRichiesteCognome && <p>{errors.catalogoRichiesteCognome?.message}</p>}
-                    </label>
-                </div>
-                <div className="box-form">
-
-                    <label htmlFor="catalogoRichiesteEmail">
-                        <input placeholder="email" type="text" name="email" id="catalogoRichiesteEmail" {...register("catalogoRichiesteEmail", {
+                    <label htmlFor="catalogoRichiesteNome" style={{ display: 'none' }}>nome</label>
+                    <input
+                        placeholder={Termini[lang].nome}
+                        type="text"
+                        name="nome"
+                        id="catalogoRichiesteNome"
+                        {...register("catalogoRichiesteNome", {
                             required: {
                                 value: true,
                                 message: Termini[lang].formRequired
                             },
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                message: Termini[lang].formMail
+                            minLength: {
+                                value: 3,
+                                message: Termini[lang].formMinimoCaratteri
                             }
                         })
                         } />
-                        {errors.catalogoRichiesteEmail && <p>{errors.catalogoRichiesteEmail?.message}</p>}
-                    </label>
+                    {errors.catalogoRichiesteNome && <p>{errors.catalogoRichiesteNome?.message}</p>}
+
+                    <label htmlFor="catalogoRichiesteCognome" style={{ display: 'none' }}>cognome</label>
+                    <input
+                        placeholder={Termini[lang].cognome}
+                        type="text"
+                        name="cognome"
+                        id="catalogoRichiesteCognome"
+                        {...register("catalogoRichiesteCognome", {
+                            required: {
+                                value: true,
+                                message: Termini[lang].formRequired
+                            },
+                            minLength: {
+                                value: 3,
+                                message: Termini[lang].formMinimoCaratteri
+                            }
+                        })
+                        } />
+                    {errors.catalogoRichiesteCognome && <p>{errors.catalogoRichiesteCognome?.message}</p>}
+
+                </div>
+                <div className="box-form">
+
+                    <label htmlFor="catalogoRichiesteEmail" style={{ display: 'none' }}>email</label>
+                    <input placeholder="email" type="text" name="email" id="catalogoRichiesteEmail" {...register("catalogoRichiesteEmail", {
+                        required: {
+                            value: true,
+                            message: Termini[lang].formRequired
+                        },
+                        pattern: {
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            message: Termini[lang].formMail
+                        }
+                    })
+                    } />
+                    {errors.catalogoRichiesteEmail && <p>{errors.catalogoRichiesteEmail?.message}</p>}
+
                 </div>
 
                 <label className="privacy" htmlFor="catalogoRichiestePrivacy">
@@ -529,9 +528,11 @@ const FormCandidature = ({ lang, candidature }) => {
                             .catch((error) => alert(error));
                     })
                     }>
+
                     <input type="hidden" name="form-name" value="candidature" />
                     <div className="box-form">
-                        <label htmlFor="candidatureNome">
+                        <div className="boxinput">
+                            <label htmlFor="candidatureNome" style={{ display: 'none' }}>nome</label>
                             <input
                                 placeholder={Termini[lang].nome}
                                 type="text"
@@ -549,13 +550,15 @@ const FormCandidature = ({ lang, candidature }) => {
                                 })
                                 } />
                             {errors.nome && <p>{errors.nome?.message}</p>}
-                        </label>
-                        <label htmlFor="cognome">
+                        </div>
+                        <div className="boxinput">
+
+                            <label htmlFor="cognome" style={{ display: 'none' }}>cognome</label>
                             <input
                                 placeholder={Termini[lang].cognome}
                                 type="text"
                                 name="cognome"
-                                id="candidatureCognome"
+                                id="cognome"
                                 {...register("cognome", {
                                     required: {
                                         value: true,
@@ -568,11 +571,13 @@ const FormCandidature = ({ lang, candidature }) => {
                                 })
                                 } />
                             {errors.cognome && <p>{errors.cognome?.message}</p>}
-                        </label>
+                        </div>
+
                     </div>
                     <div className="box-form">
 
-                        <label htmlFor="candidatureEmail">
+                        <div className="boxinput">
+                            <label htmlFor="candidatureEmail" style={{ display: 'none' }}>email</label>
                             <input placeholder="Email" type="text" name="email" id="candidatureEmail"
                                 {...register("email", {
                                     required: {
@@ -586,8 +591,10 @@ const FormCandidature = ({ lang, candidature }) => {
                                 })
                                 } />
                             {errors.email && <p>{errors.email?.message}</p>}
-                        </label>
-                        <label htmlFor="candidatureTelefono">
+                        </div>
+
+                        <div className="boxinput">
+                            <label htmlFor="candidatureTelefono" style={{ display: 'none' }}>telefono</label>
                             <input placeholder={Termini[lang].formTelefono} type="text" name="telefono" id="candidatureTelefono"
                                 {...register("telefono", {
                                     pattern: {
@@ -597,10 +604,12 @@ const FormCandidature = ({ lang, candidature }) => {
                                 })
                                 } />
                             {errors.telefono && <p>{errors.telefono?.message}</p>}
-                        </label>
+                        </div>
+
                     </div>
                     <div className="box-form " >
-                        <label htmlFor="candidatureLinkedin">
+                        <div className="boxinput linkedin">
+                            <label htmlFor="candidatureLinkedin" style={{ display: 'none' }}>linkedin</label>
                             <input type="url" name="linkedin" id="candidatureLinkedin" placeholder={Termini[lang].formLinkedin} {...register("linkedin", {
                                 pattern: {
                                     value: /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?$/,
@@ -608,38 +617,40 @@ const FormCandidature = ({ lang, candidature }) => {
                                 }
                             })} />
                             {errors.linkedin && <p>{errors.linkedin?.message}</p>}
-                        </label>
+                        </div>
                     </div>
-
-                    <label htmlFor="candidatureCV">
-                        <div className="wrapper">
-                            <div>{Termini[lang].formUploadText}</div>
-                            <div>
-                                <input type="file" id="candidatureCV" name="CV" accept=".pdf,.doc,.docx"
-                                    {...register("CV", {
-                                        validate: {
-                                            fileSize: (value) => {
-                                                if (value[0] && value[0].size > 2000000) {
-                                                    return Termini[lang].formUpload + " (max 2MB)";
+                    <div className="box-form">
+                        <div className="boxinput">
+                            <label htmlFor="candidatureCV" style={{ display: 'none' }}>cv</label>
+                            <div className="wrapper">
+                                <div>{Termini[lang].formUploadText}</div>
+                                <div>
+                                    <input type="file" id="candidatureCV" name="CV" accept=".pdf,.doc,.docx"
+                                        {...register("CV", {
+                                            validate: {
+                                                fileSize: (value) => {
+                                                    if (value[0] && value[0].size > 2000000) {
+                                                        return Termini[lang].formUpload + " (max 2MB)";
+                                                    }
+                                                    return true;
+                                                },
+                                                fileType: (value) => {
+                                                    if (value[0] && !["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"].includes(value[0].type)) {
+                                                        return Termini[lang].formUpload + " ( PDF, DOC, DOCX)";
+                                                    }
+                                                    return true;
                                                 }
-                                                return true;
-                                            },
-                                            fileType: (value) => {
-                                                if (value[0] && !["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"].includes(value[0].type)) {
-                                                    return Termini[lang].formUpload + " ( PDF, DOC, DOCX)";
-                                                }
-                                                return true;
                                             }
-                                        }
-                                    })
-                                    } />
-                                {errors.CV && <p>{errors.CV?.message}</p>}
+                                        })
+                                        } />
+                                    {errors.CV && <p>{errors.CV?.message}</p>}
+                                </div>
                             </div>
                         </div>
-                    </label>
-
+                    </div>
                     <div className="box-form">
-                        <label htmlFor="candidature">
+                        <div className="boxinput">
+                            <label htmlFor="candidature" style={{ display: 'none' }}>candidatura</label>
                             <div className="wrapper">
                                 <div>{Termini[lang].formArea}</div>
                                 <select name="candidature" id="candidature" {...register("candidature")} >
@@ -650,14 +661,16 @@ const FormCandidature = ({ lang, candidature }) => {
                                     })}
                                 </select>
                             </div>
-                        </label>
+                        </div>
+
                     </div>
-                    <label className="privacy" htmlFor="candidaturePrivacy">
+                    <div className="boxinput privacy">
+                        <label className="privacy" htmlFor="privacy" style={{ display: 'none' }}>privacy</label>
                         <input
                             type="checkbox"
                             placeholder="privacy"
                             name="privacy"
-                            id="candidaturePrivacy"
+                            id="privacy"
                             {...register("privacy", {
                                 required: {
                                     value: true,
@@ -667,7 +680,8 @@ const FormCandidature = ({ lang, candidature }) => {
                         />
                         <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
                         {errors.candidaturePrivacy && <p>{errors.candidaturePrivacy?.message}</p>}
-                    </label>
+                    </div>
+
                     <div className="box-submit">
                         <label htmlFor="submit">
                             <input className='button-sezione' type="submit" value={Termini[lang].invia} />
