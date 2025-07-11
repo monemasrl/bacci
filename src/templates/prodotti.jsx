@@ -274,7 +274,7 @@ const Prodotti = ({ data, location, pageContext }) => {
   }
 
   const topArchivio = React.useRef()
-  console.log(pageContext.allPagePath, 'locale prodotti')
+
   return (
     <>
       <Layout

@@ -283,9 +283,12 @@ const FormContatti = ({ lang }) => {
                     message: result.message,
                     formId: result.formId
                 });
+                toast(Termini[lang].formSuccess);
+                form.reset(); // Reset the form after successful submission
                 return { success: true, data: result };
             } else {
                 const errorData = await response.json();
+                toast.error(errorData.error || 'Errore sconosciuto');
                 setResponse({
                     success: false,
                     message: errorData.error || 'Errore sconosciuto'
