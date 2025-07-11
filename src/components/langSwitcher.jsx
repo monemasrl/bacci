@@ -4,12 +4,15 @@ import { langTag } from '../../data-translations';
 
 
 const LangSwitcher = (props) => {
+  const pathInOrdine = props.allPagePath.sort((item) => {
+    return item.locale === 'it_IT' ? -1 : 1;
+  });
 
   return (
     <>
       <div className='langbox' >
         <ul className="languages">
-          {props.allPagePath.map((item, index) => {
+          {pathInOrdine.map((item, index) => {
             if (item.locale && item.path) {
               if (item.locale === props.locale) {
                 return <li key={index} className='active' >{langTag[item.locale]}</li>

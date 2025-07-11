@@ -3,6 +3,7 @@ import { Link } from 'gatsby';
 import { useForm } from 'react-hook-form';
 import { Termini } from "../../data-translations";
 import { toast, ToastContainer } from 'react-toastify';
+import { useState } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
 const linkToPrivacy = {
@@ -13,25 +14,73 @@ const linkToPrivacy = {
 const FormFiere = ({ nomeEvento, lang }) => {
     const form = useForm({
         defaultValues: {
-            nome: "",
-            cognome: "",
-            azienda: "",
+            firstname: "",
+            lastname: "",
+            company: "",
             email: "",
-            messaggio: "",
+            message: "",
             privacy: false
         }
     })
     const { register, handleSubmit, formState, reset } = form
     const { errors } = formState
 
-
     //Funzione per l'enconding dei dati del form
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [response, setResponse] = useState(null);
+    const WORKERURL = 'https://cf-form2mail.sistemi-fdb.workers.dev'
+    /*     
+     
 
-    const encode = (data) => {
-        return Object.keys(data)
-            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-            .join("&");
-    }
+    firstname,lastname,company,message,email */
+    const formRef = React.useRef();
+
+    const formSubmit = async () => {
+        const formData = new FormData(formRef.current);
+
+        try {
+
+
+            // Aggiungi token Turnstile se presente
+            /*        if (turnstileToken) {
+                       data.append('cf-turnstile-response', turnstileToken);
+                   } */
+
+            // Invia richiesta
+            const response = await fetch(`${WORKERURL}/api/form/${'bacci-fiere'}`, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                setResponse({
+                    success: true,
+                    message: result.message,
+                    formId: result.formId
+                });
+                return { success: true, data: result };
+            } else {
+                const errorData = await response.json();
+                setResponse({
+                    success: false,
+                    message: errorData.error || 'Errore sconosciuto'
+                });
+                return { success: false, error: errorData.error };
+            }
+
+        } catch (error) {
+            const errorMessage = `Errore di rete: ${error.message}`;
+            setResponse({
+                success: false,
+                message: errorMessage
+            });
+            return { success: false, error: errorMessage };
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
 
 
     return (
@@ -49,23 +98,17 @@ const FormFiere = ({ nomeEvento, lang }) => {
                 theme="dark" />
 
             <form
-                data-netlify="true"
+                ref={formRef}
                 name="fiere"
-                netlify-honeypot="bot-field"
+
                 onSubmit={handleSubmit((data) => {
 
                     data.nomeEvento = nomeEvento
                     toast(Termini[lang].formSuccess)
-                    fetch("/", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: encode({ "form-name": "fiere", ...data }),
+                    formSubmit().then(() => {
+                        reset()
+                        toast(Termini[lang].formSuccess)
                     })
-                        .then(() => {
-                            reset()
-
-                        })
-                        .catch((error) => alert(error));
                 })
                 }>
                 <input style={{ display: 'none' }} type="text" id="nomeEvento" name="nomeEvento" defaultValue={nomeEvento} />
@@ -76,9 +119,10 @@ const FormFiere = ({ nomeEvento, lang }) => {
                         <input
                             placeholder={Termini[lang].nome}
                             type="text"
-                            name="nome"
+                            name="firstname"
                             id="nome"
-                            {...register("nome", {
+
+                            {...register("firstname", {
                                 required: {
                                     value: true,
                                     message: Termini[lang].formRequired
@@ -89,15 +133,15 @@ const FormFiere = ({ nomeEvento, lang }) => {
                                 }
                             })
                             } />
-                        {errors.nome && <p>{errors.nome?.message}</p>}
+                        {errors.firstname && <p>{errors.firstname?.message}</p>}
                     </label>
                     <label htmlFor="cognome">
                         <input
                             placeholder={Termini[lang].cognome}
                             type="text"
-                            name="cognome"
+                            name="lastname"
                             id="cognome"
-                            {...register("cognome", {
+                            {...register("lastname", {
                                 required: {
 
                                     value: true,
@@ -109,12 +153,12 @@ const FormFiere = ({ nomeEvento, lang }) => {
                                 }
                             })
                             } />
-                        {errors.cognome && <p>{errors.cognome?.message}</p>}
+                        {errors.lastname && <p>{errors.lastname?.message}</p>}
                     </label>
                 </div>
                 <div className="box-form">
                     <label htmlFor="azienda">
-                        <input {...register("azienda", {
+                        <input {...register("company", {
                             required: {
                                 value: true,
                                 message: Termini[lang].formRequired
@@ -124,8 +168,8 @@ const FormFiere = ({ nomeEvento, lang }) => {
                                 message: Termini[lang].formMinimoCaratteri
                             }
                         })
-                        } placeholder={Termini[lang].azienda} type="text" name="azienda" id="azienda" />
-                        {errors.azienda && <p>{errors.azienda?.message}</p>}
+                        } placeholder={Termini[lang].azienda} type="text" id="azienda" />
+                        {errors.company && <p>{errors.company?.message}</p>}
                     </label>
                     <label htmlFor="email">
                         <input {...register("email", {
@@ -138,13 +182,13 @@ const FormFiere = ({ nomeEvento, lang }) => {
                                 message: Termini[lang].formMail
                             }
                         })
-                        } placeholder="email" type="text" name="email" id="email" />
+                        } placeholder="email" type="text" id="email" />
                         {errors.email && <p>{errors.email?.message}</p>}
                     </label>
                 </div>
                 <div className="box-form-message">
                     <label htmlFor="messaggio">
-                        <textarea {...register("messaggio", {
+                        <textarea {...register("message", {
                             required: {
                                 value: true,
                                 message: Termini[lang].formRequired
@@ -154,8 +198,8 @@ const FormFiere = ({ nomeEvento, lang }) => {
                                 message: Termini[lang].formMessaggio
                             }
                         })
-                        } rows={6} placeholder={Termini[lang].messaggio} name="messaggio" id="messaggio" />
-                        {errors.messaggio && <p>{errors.messaggio?.message}</p>}
+                        } rows={6} placeholder={Termini[lang].messaggio} id="messaggio" />
+                        {errors.message && <p>{errors.message?.message}</p>}
                     </label>
                 </div>
 
@@ -192,6 +236,13 @@ const FormFiere = ({ nomeEvento, lang }) => {
 
 }
 const FormContatti = ({ lang }) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [response, setResponse] = useState(null);
+    const WORKERURL = 'https://cf-form2mail.sistemi-fdb.workers.dev'
+    /*     
+     
+
+    firstname,lastname,company,message,email */
     const formRef = React.useRef();
 
     const handleSubmit = async (e) => {
@@ -200,14 +251,57 @@ const FormContatti = ({ lang }) => {
         const data = new FormData(form);
 
         try {
-            await fetch("/", {
-                method: "POST",
+            // Crea FormData object
+
+            // Aggiungi tutti i campi del form
+            Object.entries(data).forEach(([key, value]) => {
+                if (value instanceof File) {
+                    data.append(key, value);
+                } else if (Array.isArray(value)) {
+                    // Per campi multipli (checkboxes)
+                    value.forEach(item => data.append(`${key}[]`, item));
+                } else if (value !== null && value !== undefined) {
+                    data.append(key, value.toString());
+                }
+            });
+
+            // Aggiungi token Turnstile se presente
+            /*        if (turnstileToken) {
+                       data.append('cf-turnstile-response', turnstileToken);
+                   } */
+
+            // Invia richiesta
+            const response = await fetch(`${WORKERURL}/api/form/${'bacci-contatti'}`, {
+                method: 'POST',
                 body: data,
             });
-            toast.success("Messaggio inviato con successo!");
-            form.reset();
+
+            if (response.ok) {
+                const result = await response.json();
+                setResponse({
+                    success: true,
+                    message: result.message,
+                    formId: result.formId
+                });
+                return { success: true, data: result };
+            } else {
+                const errorData = await response.json();
+                setResponse({
+                    success: false,
+                    message: errorData.error || 'Errore sconosciuto'
+                });
+                return { success: false, error: errorData.error };
+            }
+
         } catch (error) {
-            toast.error("Errore nell'invio del messaggio.");
+            const errorMessage = `Errore di rete: ${error.message}`;
+            setResponse({
+                success: false,
+                message: errorMessage
+            });
+            return { success: false, error: errorMessage };
+        } finally {
+            setIsSubmitting(false);
         }
     };
     return (
@@ -229,19 +323,17 @@ const FormContatti = ({ lang }) => {
                 ref={formRef}
                 name="contatti"
                 method="POST"
-                data-netlify="true"
-                netlify-honeypot="bot-field"
                 onSubmit={handleSubmit}
+                encType="multipart/form-data"
             >
-                <input type="hidden" name="form-name" value="contatti" />
-                <input type="hidden" name="bot-field" />
+
 
                 <div className="box-form">
                     <label htmlFor="contattiNome" style={{ display: 'none' }}>nome</label>
                     <input
                         placeholder={Termini[lang].nome}
                         type="text"
-                        name="nome"
+                        name="firstname"
                         id="contattiNome"
                         minLength={3}
                         required
@@ -251,7 +343,7 @@ const FormContatti = ({ lang }) => {
                     <input
                         placeholder={Termini[lang].cognome}
                         type="text"
-                        name="cognome"
+                        name="lastname"
                         id="contattiCognome"
                         minLength={3}
                         required
@@ -263,7 +355,7 @@ const FormContatti = ({ lang }) => {
                     <input
                         placeholder={Termini[lang].azienda}
                         type="text"
-                        name="azienda"
+                        name="company"
                         id="contattiAzienda"
                         minLength={3}
                         required
@@ -275,7 +367,7 @@ const FormContatti = ({ lang }) => {
                         type="email"
                         name="email"
                         id="contattiEmail"
-                        pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"
+
                         required
                     />
 
@@ -287,7 +379,7 @@ const FormContatti = ({ lang }) => {
                     <textarea
                         rows={6}
                         placeholder={Termini[lang].messaggio}
-                        name="messaggio"
+                        name="message"
                         id="contattiMessaggio"
                         minLength={3}
                         required
@@ -323,10 +415,10 @@ const FormContatti = ({ lang }) => {
 const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
     const form = useForm({
         defaultValues: {
-            catalogoRichiesteNome: "",
-            catalogoRichiesteCognome: "",
-            catalogoRichiesteEmail: "",
-            catalogoRichiestePrivacy: false
+            firstname: "",
+            lastname: "",
+            email: "",
+            privacy: false
         }
     })
 
@@ -334,14 +426,60 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
     const { errors } = formState
 
     //Funzione per l'enconding dei dati del form
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [response, setResponse] = useState(null);
+    const WORKERURL = 'https://cf-form2mail.sistemi-fdb.workers.dev'
+    /*     
+     
 
-    const encode = (data) => {
-        return Object.keys(data)
-            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-            .join("&");
-    }
+    firstname,lastname,company,message,email */
+    const formRef = React.useRef();
+
+    const formSubmit = async () => {
+        const formData = new FormData(formRef.current);
+
+        try {
 
 
+            // Aggiungi token Turnstile se presente
+            /*        if (turnstileToken) {
+                       data.append('cf-turnstile-response', turnstileToken);
+                   } */
+
+            // Invia richiesta
+            const response = await fetch(`${WORKERURL}/api/form/${'bacci-catalogo'}`, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                setResponse({
+                    success: true,
+                    message: result.message,
+                    formId: result.formId
+                });
+                return { success: true, data: result };
+            } else {
+                const errorData = await response.json();
+                setResponse({
+                    success: false,
+                    message: errorData.error || 'Errore sconosciuto'
+                });
+                return { success: false, error: errorData.error };
+            }
+
+        } catch (error) {
+            const errorMessage = `Errore di rete: ${error.message}`;
+            setResponse({
+                success: false,
+                message: errorMessage
+            });
+            return { success: false, error: errorMessage };
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <div className="wrapper-form downloadCatalogo" >
@@ -358,84 +496,81 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
                 theme="dark" />
 
             <form
-                data-netlify="true"
                 name="catalogoRichieste"
-                netlify-honeypot="bot-field"
-                onSubmit={handleSubmit((data) => {
+                ref={formRef}
+                onSubmit={handleSubmit(() => {
+                    formSubmit().then(() => {
+                        toast(Termini[lang].formSuccess);
+                        setIsCatalogoVisible(true);
+                        reset();
 
-                    toast(Termini[lang].formSuccess)
-                    fetch("/", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: encode({ "form-name": "catalogoRichieste", ...data }),
                     })
-                        .then(() => {
-                            setIsCatalogoVisible(true)
-                            reset()
-
-                        })
-                        .catch((error) => alert(error));
                 })
                 }>
 
                 <input type="hidden" name="form-name" value="catalogoRichieste" />
 
                 <div className="box-form">
-                    <label htmlFor="catalogoRichiesteNome" style={{ display: 'none' }}>nome</label>
-                    <input
-                        placeholder={Termini[lang].nome}
-                        type="text"
-                        name="nome"
-                        id="catalogoRichiesteNome"
-                        {...register("catalogoRichiesteNome", {
-                            required: {
-                                value: true,
-                                message: Termini[lang].formRequired
-                            },
-                            minLength: {
-                                value: 3,
-                                message: Termini[lang].formMinimoCaratteri
-                            }
-                        })
-                        } />
-                    {errors.catalogoRichiesteNome && <p>{errors.catalogoRichiesteNome?.message}</p>}
+                    <div className="boxinput">
+                        <label htmlFor="catalogoRichiesteNome" style={{ display: 'none' }}>nome</label>
+                        <input
+                            placeholder={Termini[lang].nome}
+                            type="text"
+                            name="firstname"
+                            id="catalogoRichiesteNome"
+                            {...register("firstname", {
+                                required: {
+                                    value: true,
+                                    message: Termini[lang].formRequired
+                                },
+                                minLength: {
+                                    value: 3,
+                                    message: Termini[lang].formMinimoCaratteri
+                                }
+                            })
+                            } />
+                        {errors.firstname && <p>{errors.firstname?.message}</p>}
+                    </div>
 
-                    <label htmlFor="catalogoRichiesteCognome" style={{ display: 'none' }}>cognome</label>
-                    <input
-                        placeholder={Termini[lang].cognome}
-                        type="text"
-                        name="cognome"
-                        id="catalogoRichiesteCognome"
-                        {...register("catalogoRichiesteCognome", {
-                            required: {
-                                value: true,
-                                message: Termini[lang].formRequired
-                            },
-                            minLength: {
-                                value: 3,
-                                message: Termini[lang].formMinimoCaratteri
-                            }
-                        })
-                        } />
-                    {errors.catalogoRichiesteCognome && <p>{errors.catalogoRichiesteCognome?.message}</p>}
+                    <div className="boxinput">
+                        <label htmlFor="catalogoRichiesteCognome" style={{ display: 'none' }}>cognome</label>
+                        <input
+                            placeholder={Termini[lang].cognome}
+                            type="text"
+                            name="lastname"
+                            id="catalogoRichiesteCognome"
+                            {...register("lastname", {
+                                required: {
+                                    value: true,
+                                    message: Termini[lang].formRequired
+                                },
+                                minLength: {
+                                    value: 3,
+                                    message: Termini[lang].formMinimoCaratteri
+                                }
+                            })
+                            } />
+                        {errors.lastname && <p>{errors.lastname?.message}</p>}
+                    </div>
 
                 </div>
                 <div className="box-form">
 
-                    <label htmlFor="catalogoRichiesteEmail" style={{ display: 'none' }}>email</label>
-                    <input placeholder="email" type="text" name="email" id="catalogoRichiesteEmail" {...register("catalogoRichiesteEmail", {
-                        required: {
-                            value: true,
-                            message: Termini[lang].formRequired
-                        },
-                        pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            message: Termini[lang].formMail
-                        }
-                    })
-                    } />
-                    {errors.catalogoRichiesteEmail && <p>{errors.catalogoRichiesteEmail?.message}</p>}
-
+                    <div className="boxinput">
+                        <label htmlFor="catalogoRichiesteEmail" style={{ display: 'none' }}>email</label>
+                        <input placeholder="email" type="text" name="email" id="catalogoRichiesteEmail" {...register("email", {
+                            required: {
+                                value: true,
+                                message: Termini[lang].formRequired
+                            },
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: Termini[lang].formMail
+                            }
+                        })
+                        } />
+                        {errors.email && <p>{errors.email?.message}</p>}
+                    </div>
                 </div>
 
                 <label className="privacy" htmlFor="catalogoRichiestePrivacy">
@@ -453,7 +588,7 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
                     />
 
                     <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
-                    {errors.catalogoRichiestePrivacy && <p>{errors.catalogoRichiestePrivacy?.message}</p>}
+                    {errors.privacy && <p>{errors.privacy?.message}</p>}
                 </label>
                 <div className="box-submit">
                     <label htmlFor="submit">
@@ -472,12 +607,12 @@ const FormCandidature = ({ lang, candidature }) => {
 
     const form = useForm({
         defaultValues: {
-            nome: "",
-            cognome: "",
-            telefono: "",
+            firstname: "",
+            lastname: "",
+            phone: "",
             email: "",
             linkedin: "",
-            CV: "",
+            cv: "",
             privacy: false
         }
     })
@@ -485,14 +620,60 @@ const FormCandidature = ({ lang, candidature }) => {
     const { errors } = formState
 
     //Funzione per l'enconding dei dati del form
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [response, setResponse] = useState(null);
+    const WORKERURL = 'https://cf-form2mail.sistemi-fdb.workers.dev'
+    /*     
+     
 
-    const encode = (data) => {
-        return Object.keys(data)
-            .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-            .join("&");
-    }
+    firstname,lastname,company,message,email */
+    const formRef = React.useRef();
+
+    const formSubmit = async () => {
+        const formData = new FormData(formRef.current);
+
+        try {
 
 
+            // Aggiungi token Turnstile se presente
+            /*        if (turnstileToken) {
+                       data.append('cf-turnstile-response', turnstileToken);
+                   } */
+
+            // Invia richiesta
+            const response = await fetch(`${WORKERURL}/api/form/${'bacci-candidature'}`, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                setResponse({
+                    success: true,
+                    message: result.message,
+                    formId: result.formId
+                });
+                return { success: true, data: result };
+            } else {
+                const errorData = await response.json();
+                setResponse({
+                    success: false,
+                    message: errorData.error || 'Errore sconosciuto'
+                });
+                return { success: false, error: errorData.error };
+            }
+
+        } catch (error) {
+            const errorMessage = `Errore di rete: ${error.message}`;
+            setResponse({
+                success: false,
+                message: errorMessage
+            });
+            return { success: false, error: errorMessage };
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <div className="wrapper-candidature">
@@ -509,36 +690,25 @@ const FormCandidature = ({ lang, candidature }) => {
                     pauseOnHover
                     theme="dark" />
                 <form
-                    data-netlify="true"
+                    encType="multipart/form-data"
                     name="candidature"
-                    netlify-honeypot="bot-field"
+                    ref={formRef}
                     onSubmit={handleSubmit((data) => {
                         toast(Termini[lang].formSuccess)
-
-                        fetch("/", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                            body: encode({ "form-name": "candidature", ...data }),
-                        })
-                            .then(() => {
-
-                                reset()
-
-                            })
-                            .catch((error) => alert(error));
+                        formSubmit(data)
                     })
                     }>
 
-                    <input type="hidden" name="form-name" value="candidature" />
+
                     <div className="box-form">
                         <div className="boxinput">
                             <label htmlFor="candidatureNome" style={{ display: 'none' }}>nome</label>
                             <input
                                 placeholder={Termini[lang].nome}
                                 type="text"
-                                name="nome"
                                 id="candidatureNome"
-                                {...register("nome", {
+                                required
+                                {...register("firstname", {
                                     required: {
                                         value: true,
                                         message: Termini[lang].formRequired
@@ -549,7 +719,7 @@ const FormCandidature = ({ lang, candidature }) => {
                                     }
                                 })
                                 } />
-                            {errors.nome && <p>{errors.nome?.message}</p>}
+                            {errors.firstname && <p>{errors.firstname?.message}</p>}
                         </div>
                         <div className="boxinput">
 
@@ -557,9 +727,8 @@ const FormCandidature = ({ lang, candidature }) => {
                             <input
                                 placeholder={Termini[lang].cognome}
                                 type="text"
-                                name="cognome"
                                 id="cognome"
-                                {...register("cognome", {
+                                {...register("lastname", {
                                     required: {
                                         value: true,
                                         message: Termini[lang].formRequired
@@ -570,7 +739,7 @@ const FormCandidature = ({ lang, candidature }) => {
                                     }
                                 })
                                 } />
-                            {errors.cognome && <p>{errors.cognome?.message}</p>}
+                            {errors.lastname && <p>{errors.lastname?.message}</p>}
                         </div>
 
                     </div>
@@ -578,7 +747,7 @@ const FormCandidature = ({ lang, candidature }) => {
 
                         <div className="boxinput">
                             <label htmlFor="candidatureEmail" style={{ display: 'none' }}>email</label>
-                            <input placeholder="Email" type="text" name="email" id="candidatureEmail"
+                            <input placeholder="Email" type="text" id="candidatureEmail"
                                 {...register("email", {
                                     required: {
                                         value: true,
@@ -595,15 +764,15 @@ const FormCandidature = ({ lang, candidature }) => {
 
                         <div className="boxinput">
                             <label htmlFor="candidatureTelefono" style={{ display: 'none' }}>telefono</label>
-                            <input placeholder={Termini[lang].formTelefono} type="text" name="telefono" id="candidatureTelefono"
-                                {...register("telefono", {
+                            <input placeholder={Termini[lang].formTelefono} type="text" id="candidatureTelefono"
+                                {...register("phone", {
                                     pattern: {
                                         value: /^\+?[0-9\s\-()]{7,20}$/,
                                         message: Termini[lang].formTelefonoError
                                     }
                                 })
                                 } />
-                            {errors.telefono && <p>{errors.telefono?.message}</p>}
+                            {errors.phone && <p>{errors.phone?.message}</p>}
                         </div>
 
                     </div>
@@ -625,25 +794,10 @@ const FormCandidature = ({ lang, candidature }) => {
                             <div className="wrapper">
                                 <div>{Termini[lang].formUploadText}</div>
                                 <div>
-                                    <input type="file" id="candidatureCV" name="CV" accept=".pdf,.doc,.docx"
-                                        {...register("CV", {
-                                            validate: {
-                                                fileSize: (value) => {
-                                                    if (value[0] && value[0].size > 2000000) {
-                                                        return Termini[lang].formUpload + " (max 2MB)";
-                                                    }
-                                                    return true;
-                                                },
-                                                fileType: (value) => {
-                                                    if (value[0] && !["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"].includes(value[0].type)) {
-                                                        return Termini[lang].formUpload + " ( PDF, DOC, DOCX)";
-                                                    }
-                                                    return true;
-                                                }
-                                            }
-                                        })
-                                        } />
-                                    {errors.CV && <p>{errors.CV?.message}</p>}
+                                    <input type="file" id="candidatureCV"
+                                        accept=".pdf,.doc,.docx"
+                                        name="cv" />
+                                    {errors.cv && <p>{errors.cv?.message}</p>}
                                 </div>
                             </div>
                         </div>
@@ -653,7 +807,7 @@ const FormCandidature = ({ lang, candidature }) => {
                             <label htmlFor="candidature" style={{ display: 'none' }}>candidatura</label>
                             <div className="wrapper">
                                 <div>{Termini[lang].formArea}</div>
-                                <select name="candidature" id="candidature" {...register("candidature")} >
+                                <select name="position" id="candidature" {...register("position")} >
                                     {candidature && candidature.map((item, index) => {
                                         return (
                                             <option key={index} value={item.titolo}>{item.titolo}</option>
@@ -679,7 +833,7 @@ const FormCandidature = ({ lang, candidature }) => {
                             })}
                         />
                         <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
-                        {errors.candidaturePrivacy && <p>{errors.candidaturePrivacy?.message}</p>}
+                        {errors.privacy && <p>{errors.privacy?.message}</p>}
                     </div>
 
                     <div className="box-submit">

@@ -49,6 +49,55 @@
         padding: 0.2rem 2rem;
       }
     }
+    form {
+      .box-form {
+        margin-bottom: 1rem;
+      }
+      .box-submit {
+        align-items: flex-start;
+      }
+      .boxinput {
+        flex: 1 1;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 40px;
+        &.linkedin {
+          max-width: 376px;
+        }
+        &.privacy {
+          display: flex;
+          align-items: center;
+          input {
+            max-width: 15px;
+          }
+        }
+        input:not([type="file"]) {
+          border: 1px solid black;
+          color: black;
+          height: 40px;
+          width: 100%;
+        }
+      }
+      label[for="submit"] {
+        text-align: left;
+        input {
+          background-color: #4a6c96;
+          color: white;
+          border: 0;
+        }
+      }
+      .privacy {
+        width: auto;
+        text-align: left;
+        font-size: 14px;
+        color: black;
+        a {
+          text-decoration: underline;
+          color: black;
+        }
+      }
+    }
     .privacy {
       margin-top: 1rem;
       display: block;
