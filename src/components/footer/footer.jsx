@@ -7,7 +7,6 @@ import { FormContatti } from '../form'
 import { Termini } from '../../../data-translations'
 
 
-
 const Footer = ({ locale, listaTipologia }) => {
 
     return (

@@ -23,6 +23,7 @@
       .gatsby-image-wrapper-constrained {
         display: inline-block;
         vertical-align: top;
+        height: 259px;
       }
       .button-sezione {
         display: block;
@@ -39,6 +40,9 @@
       p {
         font-size: 20px;
         line-height: 1.5rem;
+      }
+      img {
+        object-fit: contain !important;
       }
     }
   }

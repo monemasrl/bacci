@@ -9,42 +9,60 @@ import { GrLinkedin, GrYoutube } from "react-icons/gr";
 function FooterMenu({ locale, listaTipologia }) {
 
     const data = useStaticQuery(graphql`
-    query HeaderQuery {
-            directus{        
-                prodotto_categorie_translations{
-                            languages_code{
-                            code
-                            }
-                            nome
-                        }
-                menus{
+        query HeaderQuery {
+            directus {
+                sedi {
+                    tipo
+                    nome_sede
+                }
+                prodotto_categorie_translations {
+                    languages_code {
+                        code
+                    }
+                    nome
+                }
+                menus {
                     name
-                    items(filter: {_and:[{_or: [{name: {_eq: "Azienda"}},{name: {_eq: "Prodotti"}}, {name: {_eq: "Tecnologia"}}, {name: {_eq: "Filiali"}}, {name: {_eq: "Contatti"}}]}]}){
+                    items(
+                        filter: {
+                            _and: [
+                                {
+                                    _or: [
+                                        { name: { _eq: "Azienda" } }
+                                        { name: { _eq: "Prodotti" } }
+                                        { name: { _eq: "Tecnologia" } }
+                                        { name: { _eq: "Filiali" } }
+                                        { name: { _eq: "contatti" } }
+                                    ]
+                                }
+                            ]
+                        }
+                    ) {
                         name
-                        translations{
-                            languages_code{
-                            code
+                        translations {
+                            languages_code {
+                                code
                             }
                             slug
                             label
                         }
-                        sub_items{
-                        translations{
-                            languages_code{
-                            code
+                        sub_items {
+                            translations {
+                                languages_code {
+                                    code
+                                }
+                                slug
+                                label
                             }
-                            slug
-                            label
-                        }
                         }
                     }
                 }
-                social{
-                        social
-                        }
+                social {
+                    social
+                }
+            }
         }
-    }
-  `)
+    `)
     const vociMenu = () => {
         let arrayVociMenu = []
         data.directus.menus.forEach((item) => {
@@ -66,7 +84,7 @@ function FooterMenu({ locale, listaTipologia }) {
             if (item.name === 'Filiali') {
                 arrayOrdinatoVociMenu[3] = item
             }
-            if (item.name === 'Contatti') {
+            if (item.name === 'contatti') {
                 arrayOrdinatoVociMenu[4] = item
             }
         })
@@ -122,8 +140,26 @@ function FooterMenu({ locale, listaTipologia }) {
                 }
 
             }
-
-            if (item.name === 'Filiali' || item.name === 'Contatti') {
+            if (item.name === 'Filiali') {
+                const parentItemTranslated = findItemTranslated(item.translations, locale)
+                const sediTipo2 = data.directus.sedi.filter(sede => Number(sede.tipo) === 2)
+                console.log(parentItemTranslated, 'parenteitemecc')
+                if (parentItemTranslated && sediTipo2.length > 0) {
+                    return (
+                        <div key={index} className="footer-col">
+                            <ul>
+                                <li>{parentItemTranslated.label}</li>
+                                {sediTipo2.map((sede, idx) => (
+                                    <li key={idx}>
+                                        <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`}>{sede.nome_sede}</Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )
+                }
+            }
+            if (item.name === 'contatti') {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
                 if (parentItemTranslated) {
                     return (

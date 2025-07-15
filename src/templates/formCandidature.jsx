@@ -121,7 +121,6 @@ const CandidatureForm = ({ data, pageContext }) => {
 
     const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
     const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
-    const topArchivio = React.useRef()
     const content = data && data.directus.pages[0].translations[0]
     const featuredImage = data && data.directus.pages[0].featured_image && data.directus.pages[0].featured_image.imageFile && data.directus.pages[0].featured_image.imageFile.childImageSharp && data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData ? data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData : null
     const langFilterFiereSorted = data.directus.candidature.sort((a, b) => {
