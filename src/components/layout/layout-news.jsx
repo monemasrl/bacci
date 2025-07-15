@@ -11,7 +11,7 @@ import Header from "../header"
 import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
-import Gdpr from "../gdpr"
+
 
 const LayoutNews = ({ children, locale, pageTitle, tipo, allPagePath }) => {
 
@@ -30,7 +30,7 @@ const LayoutNews = ({ children, locale, pageTitle, tipo, allPagePath }) => {
 
       <Footer listaTipologia={listaCategorie} locale={locale} />
       <ScrollTo />
-      <Gdpr locale={locale} />
+
     </div>
   )
 }

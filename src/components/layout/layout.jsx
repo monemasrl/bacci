@@ -5,7 +5,7 @@ import Header from "../header"
 import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
-import Gdpr from "../gdpr"
+
 
 const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, allPagePath, listaApplicazioni, listaCategorie, parentPath, tipo }) => {
 
@@ -33,7 +33,7 @@ const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, allPage
       <Footer listaTipologia={listaCategorie} locale={locale} />
 
       <ScrollTo />
-      <Gdpr locale={locale} />
+
     </div>
   )
 }

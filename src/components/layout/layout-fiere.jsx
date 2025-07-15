@@ -12,7 +12,7 @@ import Header from "../header"
 import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
-import Gdpr from "../gdpr"
+
 let slugify = require('slugify')
 
 const LayoutFiere = ({ children, locale, pageTitle, pathName, tipo, allPagePath }) => {
@@ -33,7 +33,7 @@ const LayoutFiere = ({ children, locale, pageTitle, pathName, tipo, allPagePath 
 
       <Footer listaTipologia={listaCategorie} locale={locale} />
       <ScrollTo />
-      <Gdpr locale={locale} />
+
     </div>
   )
 }
