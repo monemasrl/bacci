@@ -27,7 +27,8 @@ const seoSettings = {
 export const query = graphql`
   query($locale: String!) {
   directus{
-    Prodotti(filter: {translations: {languages_code: {code: {_eq: $locale}}}, type: {_eq: "machinery"}}){
+    Prodotti(filter: {translations: {languages_code: {code: {_eq: $locale}}}, type: {_eq: "machinery"},status: {_eq: "published"}}
+) {
       id
       name
       date_created

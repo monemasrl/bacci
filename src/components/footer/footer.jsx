@@ -5,7 +5,7 @@ import './footer.scss'
 import FooterMenu from './footerMenu'
 import { FormContatti } from '../form'
 import { Termini } from '../../../data-translations'
-
+import { langTag } from '../../../data-translations'
 
 const Footer = ({ locale, listaTipologia }) => {
 
@@ -46,7 +46,7 @@ const Footer = ({ locale, listaTipologia }) => {
                         <ul>
                             <li>Cap. Sociale 1.500.000,00 i.v. <br /> Partita iva / codice fiscale 022456588996365</li>
                             <li>
-                                <Link to="/"> Privacy Policy</Link>	<Link to="/">Termini e condizioni</Link>	</li>
+                                <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}privacy`}>privacy and conditions</Link>	</li>
                         </ul>
                     </div>
                 </div>

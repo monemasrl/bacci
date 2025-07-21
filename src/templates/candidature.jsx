@@ -45,7 +45,7 @@ export const query = graphql`
         label
       }
       candidature(
-        filter: { translations: { languages_code: { code: { _eq: $locale } } } }
+        filter: { translations: { languages_code: { code: { _eq: $locale } } }, status: { _eq: "published" } }
       ) {
         translations {
           languages_code {

@@ -45,13 +45,10 @@ export const query = graphql`
                                 quality: 70
                                 placeholder: BLURRED
                                 breakpoints: [
-                                    360
-                                    460
-                                    720
-                                    1024
-                                    1200
-                                    1340
-                                    1620
+                                    360,
+                                    460,
+                                    1024,
+                                    1620,
                                     1920
                                 ]
                             )

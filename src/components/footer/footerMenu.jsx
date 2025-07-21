@@ -143,7 +143,7 @@ function FooterMenu({ locale, listaTipologia }) {
             if (item.name === 'Filiali') {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
                 const sediTipo2 = data.directus.sedi.filter(sede => Number(sede.tipo) === 2)
-                console.log(parentItemTranslated, 'parenteitemecc')
+
                 if (parentItemTranslated && sediTipo2.length > 0) {
                     return (
                         <div key={index} className="footer-col">

@@ -550,9 +550,10 @@ exports.createPages = async ({ graphql, actions }) => {
       return {
         title: "Privacy",
         locale: item.code,
-        path: item.code == "en_US" ? "/en" : "/",
+        path: item.code == "en_US" ? "/en/privacy" : "/privacy",
       }
     })
+
     return data
   }
 
@@ -561,6 +562,7 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   privacy.translations.forEach(translation => {
+
     createPage({
       path: `/${translation.locale == "it_IT" ? "privacy" : langTag[translation.locale] + "/" + "privacy"
         }`,

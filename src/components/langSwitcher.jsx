@@ -7,7 +7,7 @@ const LangSwitcher = (props) => {
   const pathInOrdine = props.allPagePath.sort((item) => {
     return item.locale === 'it_IT' ? -1 : 1;
   });
-
+  console.log(pathInOrdine, 'pathInOrdine');
   return (
     <>
       <div className='langbox' >

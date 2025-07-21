@@ -16,7 +16,7 @@ export const query = graphql`
       social
     }    
 
-    pages(filter: {translations: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}}) {
+    pages(filter: {translations: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}, status: {_eq: "published"}}){ 
       __typename
       id
       seo{
@@ -36,7 +36,7 @@ export const query = graphql`
         id
         childImageSharp{
           id
-          gatsbyImageData(formats: [WEBP, AVIF], quality: 70, placeholder: BLURRED, breakpoints: [ 360, 460, 720, 1024, 1200, 1340, 1620, 1920])
+          gatsbyImageData(formats: [WEBP, AVIF], quality: 70, placeholder: BLURRED, breakpoints: [ 360, 460,  1024, 1200, 1920])
         }
       }
     }
@@ -159,7 +159,8 @@ const Pagine = ({ data, pageContext }) => {
             </>}
           {(pageContext.pageName === "news" || pageContext.pageName === "home") &&
             <LastNews pageType={pageContext.pageName} locale={pageContext.locale} limiteVisualizzazione={3} />}
-          {pageContext.pageName === 'case-history' && <CaseHistory locale={pageContext.locale} />}
+
+          {pageContext.pageName === "case-history" && <CaseHistory locale={pageContext.locale} />}
           {!data.directus.pages[0] &&
             <h1>Non ci sono dati!</h1>
           }

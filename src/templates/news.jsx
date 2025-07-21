@@ -36,7 +36,7 @@ export const query = graphql`
       }
       label
     }
-    posts(filter: {translations: {languages_code: {code: {_eq: $locale}}}}){
+    posts(filter: {translations: {languages_code: {code: {_eq: $locale}}}, status: { _eq: "published" } }){
     id
     date_created
     translations{

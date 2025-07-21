@@ -38,7 +38,7 @@ export const query = graphql`
       }
       label
     }
-    Fiere(filter: {title_translations: {languages_code: {code: {_eq: $locale}}}}){
+    Fiere(filter: {title_translations: {languages_code: {code: {_eq: $locale}}}, status: { _eq: "published" } }){
     name
     from
     to

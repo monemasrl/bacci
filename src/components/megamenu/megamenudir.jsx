@@ -79,17 +79,20 @@ const MegamenuDirectus = ({
   `)
 
     const inEvidenza = dataMega.directus.Prodotti.filter(item => {
-        if (!item.featured) return false
+        if (!item.featured && item.status != 'published') return false
         return item.featured[0] === "true"
     })
 
     const inEvidenzaLocalizzato =
         inEvidenza.length && findItemTranslated(inEvidenza[0].translations, locale)
     const novita = dataMega.directus.Prodotti.sort(item => {
-        if (item.type === "machinery") {
-            return item.date_create
-        } else {
-            return item
+        {
+            if (item.status == 'published')
+                if (item.type === "machinery") {
+                    return item.date_create
+                } else {
+                    return item
+                }
         }
     })
     const novitaLocalizzato = findItemTranslated(
