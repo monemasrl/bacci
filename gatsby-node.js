@@ -216,7 +216,8 @@ exports.createPages = async ({ graphql, actions }) => {
                 id
                 imageFile {
                   childImageSharp {
-                    gatsbyImageData
+                    gatsbyImageData gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, 
+                  breakpoints: [ 360])
                   }
                 }
               }
@@ -236,7 +237,8 @@ exports.createPages = async ({ graphql, actions }) => {
               imageFile {
                 id
                 childImageSharp {
-                  gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440,  1024])
+                  gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, 
+                  breakpoints: [ 440,  900])
                 }
               }
             }
@@ -318,7 +320,8 @@ exports.createPages = async ({ graphql, actions }) => {
             imageFile {
               id
               childImageSharp {
-                gatsbyImageData
+                 gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440,  750])
+              }
               }
             }
           }
@@ -340,7 +343,7 @@ exports.createPages = async ({ graphql, actions }) => {
                       childImageSharp {
                         gatsbyImageData(
                           placeholder: BLURRED
-                          formats: [WEBP]
+                          formats: [WEBP],quality: 70, placeholder: BLURRED, breakpoints: [440,  750])
                         )
                       }
                     }
@@ -611,7 +614,7 @@ exports.createPages = async ({ graphql, actions }) => {
           createPage({
             path: `${urlBase}${translation.slug.toLowerCase()}`,
             component: getTemplate(item.name),
-            defer: true,
+
             context: {
               locale: translation.languages_code.code,
               title: translation.label,
@@ -718,7 +721,6 @@ exports.createPages = async ({ graphql, actions }) => {
       createPage({
         path: `${urlBase}${translation.title.toLowerCase()}`,
         component: require.resolve("./src/templates/prodotti.jsx"),
-        defer: true,
         context: {
           locale: translation.locale,
           slug: translation.title.toLowerCase(),
