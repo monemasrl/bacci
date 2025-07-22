@@ -819,6 +819,9 @@ section.container.repeater {
   .index-3 {
     .box-dx {
       flex: 1 1 750px;
+      @media #{$landscape} {
+        flex: 1 1 auto;
+      }
       .gatsby-image-wrapper img {
         object-fit: contain;
         flex: 1 1 auto;
