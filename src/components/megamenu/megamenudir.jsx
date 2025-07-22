@@ -39,7 +39,7 @@ const MegamenuDirectus = ({
                 gatsbyImageData(
                   width: 422
                   placeholder: BLURRED
-                  formats: [AUTO, WEBP, AVIF]
+                  formats: [WEBP]
                 )
               }
             }
