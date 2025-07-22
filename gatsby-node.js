@@ -611,6 +611,7 @@ exports.createPages = async ({ graphql, actions }) => {
           createPage({
             path: `${urlBase}${translation.slug.toLowerCase()}`,
             component: getTemplate(item.name),
+            defer: true,
             context: {
               locale: translation.languages_code.code,
               title: translation.label,
