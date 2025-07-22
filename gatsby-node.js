@@ -216,8 +216,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 id
                 imageFile {
                   childImageSharp {
-                    gatsbyImageData gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, 
-                  breakpoints: [ 360])
+                    gatsbyImageData
                   }
                 }
               }
@@ -238,7 +237,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 id
                 childImageSharp {
                   gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, 
-                  breakpoints: [ 440,  900])
+                  breakpoints: [ 440,  1024])
                 }
               }
             }
@@ -320,8 +319,7 @@ exports.createPages = async ({ graphql, actions }) => {
             imageFile {
               id
               childImageSharp {
-                 gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440,  750])
-              }
+                gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440,  700])
               }
             }
           }
@@ -343,7 +341,7 @@ exports.createPages = async ({ graphql, actions }) => {
                       childImageSharp {
                         gatsbyImageData(
                           placeholder: BLURRED
-                          formats: [WEBP],quality: 70, placeholder: BLURRED, breakpoints: [440,  750])
+                          formats: [WEBP]
                         )
                       }
                     }
@@ -355,10 +353,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   imageFile {
                     id
                     childImageSharp {
-                      gatsbyImageData(
-                        placeholder: BLURRED
-                        formats: [WEBP]
-                      )
+                      gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440,  700])
                     }
                   }
                 }
