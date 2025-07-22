@@ -40,7 +40,7 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "build": "gatsby build --graphql-tracing",
+    "build": "gatsby build",
     "develop": "gatsby clean && gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
     "start": "gatsby develop",
