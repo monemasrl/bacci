@@ -236,7 +236,7 @@ exports.createPages = async ({ graphql, actions }) => {
               imageFile {
                 id
                 childImageSharp {
-                  gatsbyImageData
+                  gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440,  1024])
                 }
               }
             }
@@ -298,7 +298,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   id
                   childImageSharp {
                     id
-                    gatsbyImageData
+                     gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED)
                   }
                 }
               }
@@ -309,7 +309,7 @@ exports.createPages = async ({ graphql, actions }) => {
             imageFile {
               id
               childImageSharp {
-                gatsbyImageData
+                 gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440,  1617])
               }
             }
           }
@@ -340,7 +340,7 @@ exports.createPages = async ({ graphql, actions }) => {
                       childImageSharp {
                         gatsbyImageData(
                           placeholder: BLURRED
-                          formats: [AUTO, WEBP, AVIF]
+                          formats: [WEBP]
                         )
                       }
                     }
@@ -354,7 +354,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     childImageSharp {
                       gatsbyImageData(
                         placeholder: BLURRED
-                        formats: [AUTO, WEBP, AVIF]
+                        formats: [WEBP]
                       )
                     }
                   }
