@@ -223,6 +223,8 @@ const Contatti = ({ data, pageContext }) => {
                                                     <Map address={item.indirizzo + ' ' + item.area} />
                                                 </div>
                                             </div>)
+                                        } else {
+                                            return null;
                                         }
                                     })}
                                 </div>

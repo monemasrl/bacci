@@ -7,47 +7,47 @@ import { Link } from "gatsby";
 import { findItemTranslated, summary } from "../../utils";
 
 const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione = 100, idProdotto, prodotti_correlati }) => {
-  const data = useStaticQuery(graphql`
-    query {
-          directus {
-            Prodotti{
-              id
-        
-                immagine{
-                  id
-              imageFile{
+  /*   const data = useStaticQuery(graphql`
+      query {
+            directus {
+              Prodotti{
                 id
-            childImageSharp{
-              gatsbyImageData
-              }
-              }
-                }
-                translations{
-                  languages_code{
-                    code
-                  }
-                  slug
-                  titolo
-                  sottotitolo
-                  testo_antemprima
-                  paragrafo
-                  
-                }
-        
-                categoria{
+          
+                  immagine{
+                    id
+                imageFile{
                   id
+              childImageSharp{
+                gatsbyImageData
+                }
+                }
+                  }
                   translations{
                     languages_code{
-                        code
-                      }
+                      code
+                    }
+                    slug
+                    titolo
+                    sottotitolo
+                    testo_antemprima
+                    paragrafo
+                    
+                  }
+          
+                  categoria{
                     id
-                    nome
+                    translations{
+                      languages_code{
+                          code
+                        }
+                      id
+                      nome
+                    }
                   }
                 }
-              }
+            }
           }
-        }
-   `)
+     `) */
 
   /*   const prodottiCorrelatiCategoria = categoriaProdotto && data.directus.Prodotti.filter((item, index) => {
   
