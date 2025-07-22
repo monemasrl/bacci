@@ -1,7 +1,0 @@
-# filepath: netlify.toml
-[build]
-  publish = "public"
-  command = "gatsby build"
-
-[[plugins]]
-  package = "@netlify/plugin-gatsby"
