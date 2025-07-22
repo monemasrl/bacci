@@ -9,25 +9,26 @@ import { langTag } from "../../../data-translations"
 function CaseHistory({ locale }) {
     const data = useStaticQuery(graphql`
     {
-        directus{
+        directus {
             case_history{
-                translations{
-                    languages_code{
-                    code
+                date_created
+                translations {
+                    languages_code {
+                        code
                     }
                     title
                     sottotitolo
-                main_content_titolo
+                    main_content_titolo
                     main_content
                     slug
                 }
-                featured_image{
+                featured_image {
                     id
-                    imageFile{
-                    id
-                    childImageSharp{
-                        gatsbyImageData
-                    }
+                    imageFile {
+                        id
+                        childImageSharp {
+                            gatsbyImageData
+                        }
                     }
                 }
             }
@@ -37,9 +38,10 @@ function CaseHistory({ locale }) {
     const dataCaseHistory = data.directus.case_history
 
     if (dataCaseHistory.length > 0) {
+        dataCaseHistory.sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
         return (
             <section className="widget-case container">
-                {dataCaseHistory.reverse().map((item, index) => {
+                {dataCaseHistory.map((item, index) => {
                     if (item) {
                         const translation = item.translations.find((item) => item.languages_code.code === locale)
                         if (translation) {
