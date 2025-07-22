@@ -165,6 +165,8 @@ const Contatti = ({ data, pageContext }) => {
                                                     </div>
                                                 </div>
                                             );
+                                        } else {
+                                            return null;
                                         }
                                     })}
                                 </div>

@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
 import { Termini, langTag } from "../../data-translations"
-import { findCategoryTranslated } from "../utils"
+
 
 const seoSettings = {
   seo: {

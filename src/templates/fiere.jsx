@@ -76,7 +76,7 @@ const Fiere = ({ data, pageContext }) => {
   const topArchivio = React.useRef()
   const langFilterFiereSorted = data.directus.Fiere.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
-  })
+  }).reverse()
   const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
 
   return (

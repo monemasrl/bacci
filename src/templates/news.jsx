@@ -69,7 +69,7 @@ const News = ({ data, pageContext }) => {
   const topArchivio = React.useRef()
   const langFilterProdottoSorted = data.directus.posts.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
-  })
+  }).reverse()
   const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
 
   return (

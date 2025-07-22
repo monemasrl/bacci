@@ -39,7 +39,7 @@ function CaseHistory({ locale }) {
     if (dataCaseHistory.length > 0) {
         return (
             <section className="widget-case container">
-                {dataCaseHistory.map((item, index) => {
+                {dataCaseHistory.reverse().map((item, index) => {
                     if (item) {
                         const translation = item.translations.find((item) => item.languages_code.code === locale)
                         if (translation) {

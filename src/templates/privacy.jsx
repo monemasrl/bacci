@@ -1,10 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
-import { Termini } from "../../data-translations";
-import { findItemsTranslated } from "../utils"
-import { Link } from "gatsby"
-import { langTag } from "../../data-translations"
+
 import 'moment/locale/it'
 
 const moment = require('moment')

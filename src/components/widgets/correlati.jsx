@@ -49,21 +49,20 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione = 100, idP
         }
    `)
 
-  const prodottiCorrelatiCategoria = categoriaProdotto && data.directus.Prodotti.filter((item, index) => {
-
-
-    if (item.id !== idProdotto && item.categoria != undefined) {
-
-      return item.categoria.translations.some((categoria) => {
-
-        if (categoria.languages_code.code === locale) {
-
-          return categoria.nome === categoriaProdotto
-        } else { return null }
-      })
-    } else { return null }
-  })
-
+  /*   const prodottiCorrelatiCategoria = categoriaProdotto && data.directus.Prodotti.filter((item, index) => {
+  
+      if (item.id !== idProdotto && item.categoria != undefined) {
+  
+        return item.categoria.translations.some((categoria) => {
+  
+          if (categoria.languages_code.code === locale) {
+  
+            return categoria.nome === categoriaProdotto
+          } else { return null }
+        })
+      } else { return null }
+    })
+   */
 
   function tipoCorrelazione() {
     if (prodotti_correlati?.length > 0) {
