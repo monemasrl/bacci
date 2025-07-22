@@ -62,7 +62,6 @@ const Privacy = ({ data, pageContext }) => {
 
 
   const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
-  console.log(pageContext.allPagePath, "allPagePath  ")
 
   return (
     <>
