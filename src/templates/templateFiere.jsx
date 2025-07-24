@@ -21,7 +21,8 @@ const Fiere = ({ pageContext }) => {
     title: dataProdottoTranslated.title,
     location: content.location,
   }
-  const seoFilterLocale = content.seo?.translations.find((item) => item.language_code.code === locale)
+
+  const seoFilterLocale = content.seo?.translations.find((item) => item.languages_code.code === locale)
 
   return (
     <>
