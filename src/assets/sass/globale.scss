@@ -1296,6 +1296,9 @@ section.container.candidature {
   }
   .topfiera {
     margin-top: 6rem;
+    h2 {
+      font-family: $title;
+    }
     .datafiera {
       color: #5f6062;
       font-size: 35px;
