@@ -148,9 +148,7 @@ const Prodotti = ({ data, location, pageContext }) => {
    */
 
   const termini = Termini[pageContext.locale]
-  const sortedData = data.directus.Prodotti.sort((a, b) => {
-    return a.name.localeCompare(b.name)
-  })
+  const sortedData = data.directus.Prodotti
 
   const langFilterProdotto = sortedData.filter((itema) => {
     return itema.translations.some((item) => {
@@ -236,42 +234,50 @@ const Prodotti = ({ data, location, pageContext }) => {
 
     // Se ci sono filtri per categorie filtra i prodotti per categorie
     let filteredCat = langFilterProdotto.filter((itema) => {
-
       return filtersCat.length > 0 && itema.tipologie.some((itemb) => {
-
         return itemb.tipologie_id.translations.some((itemc) => {
           if (itemc.nome !== null) { return filtersCat.includes(itemc.nome) } else { return false }
         })
       })
     })
 
-    // filtra prodotti per campo di ricerca
-    let campoRicerca = langFilterProdotto.filter((prodotto) => {
-      let filterResultSearch = prodotto.name.toLowerCase()
-      filterResultSearch = filterResultSearch.includes(filtersSearch)
-      return filterResultSearch && filterResultSearch
-    })
+    // Funzione helper per filtrare per ricerca
+    const filterBySearch = (products) => {
+      if (!filtersSearch || filtersSearch.length === 0) return products
 
-    // se i filtri sono vuoti renderizza tutti i prodotti altrimenti concatena i due array
-    // elimina gli elementi duplicati e ritorna l'array
-    if (campoRicerca.length > 0) {
-      // se il cammpo di ricerca ha un valore ritorna i prodotti filtrati
-      return campoRicerca
-    } else if (filtersApp.length === 0 && filtersCat.length === 0) {
-      // se non ci sono filtri ritorna tutti i prodotti
-      return langFilterProdotto
-    } else {
-      // concatena i due array di prodotti filtrati per categoria e applicazione e ritorna l'array
-
-      let concatArray = filteredCat.concat(filtersResultApp)
-
-      concatArray = concatArray.filter((thing, index, self) =>
-        index === self.findIndex((t) => (
-          t.name === thing.name
-        ))
-      )
-      return concatArray
+      return products.filter((prodotto) => {
+        return prodotto.translations.some((item) => {
+          return item.titolo?.toLowerCase().includes(filtersSearch[0].toLowerCase())
+        })
+      })
     }
+
+    // Se c'è solo il campo di ricerca (senza altri filtri)
+    if (filtersSearch && filtersSearch.length > 0 && filtersApp.length === 0 && filtersCat.length === 0) {
+      return filterBySearch(langFilterProdotto)
+    }
+
+    // Se non ci sono filtri ritorna tutti i prodotti
+    if (filtersApp.length === 0 && filtersCat.length === 0 && (!filtersSearch || filtersSearch.length === 0)) {
+      return langFilterProdotto
+    }
+
+    // Concatena i due array di prodotti filtrati per categoria e applicazione
+    let concatArray = filteredCat.concat(filtersResultApp)
+
+    // Rimuovi duplicati
+    concatArray = concatArray.filter((thing, index, self) =>
+      index === self.findIndex((t) => (
+        t.translations.find(item => item.languages_code.code === pageContext.locale).titolo === thing.translations.find(item => item.languages_code.code === pageContext.locale).titolo
+      ))
+    )
+
+    // **FIX: Se c'è anche il filtro di ricerca, applica il filtro di ricerca al concatArray**
+    if (filtersSearch && filtersSearch.length > 0) {
+      concatArray = filterBySearch(concatArray)
+    }
+
+    return concatArray
   }
 
   const topArchivio = React.useRef()

@@ -183,6 +183,7 @@ main {
       text-align: center;
       .thumb {
         height: 360px;
+        overflow: hidden;
         @media #{$landscape} {
           height: auto;
         }

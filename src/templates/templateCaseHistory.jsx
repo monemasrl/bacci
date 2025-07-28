@@ -5,7 +5,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import BlocksComponent from "../components/blocks/blocks"
 
 import { Link } from 'gatsby'
-import { Termini } from "../../data-translations";
+import { langTag, Termini } from "../../data-translations";
 import Correlati from "../components/widgets/correlati";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
@@ -108,7 +108,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                                 <ul>
                                     {content.related_machines.map((item, index) => {
                                         const translated = findItemTranslated(item.Prodotti_id.translations, locale)
-                                        if (translated) { return <li key={index}><Link to={`/${locale === 'it_IT' ? '' : locale + '/'}${Termini[locale].prodotti}/${translated.slug}`}>{translated.titolo}</Link></li> } else { return null }
+                                        if (translated) { return <li key={index}><Link to={`/${locale === 'it_IT' ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${translated.slug}`}>{translated.titolo}</Link></li> } else { return null }
                                     })}
                                 </ul>
                             </li>}
