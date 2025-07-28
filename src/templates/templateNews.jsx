@@ -34,7 +34,7 @@ const Prodotto = ({ pageContext }) => {
           <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.content }} />
 
         </div>
-        <LastNews locale={locale} limiteVisualizzazione={3} />
+        <LastNews locale={locale} limiteVisualizzazione={3} idCurrentNews={content.id} />
       </Layout>}
     </>
   )

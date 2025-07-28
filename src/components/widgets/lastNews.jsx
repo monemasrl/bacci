@@ -10,7 +10,7 @@ import 'moment/locale/it'
 
 const moment = require('moment')
 
-const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
+const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) => {
   const data = useStaticQuery(graphql`
     {
        directus{
@@ -42,7 +42,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
 
   const langFilterNews = data.directus.posts.filter((item) => {
     return item.translations.some((lang) => {
-      return lang.languages_code.code === locale
+      return lang.languages_code.code === locale && item.id !== idCurrentNews
     })
   })
   const langFilterNewsSorted = langFilterNews.sort((a, b) => {
@@ -51,7 +51,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType }) => {
 
   return (
     <>
-      {langFilterNewsSorted && <section className="widget-news">
+      {langFilterNewsSorted.length > 0 && <section className="widget-news">
         {pageType !== "home" ? <h2>{Termini[locale].newsCorrelate}</h2> : <h2>{Termini[locale].ultime_news}</h2>}
         {pageType !== "home" ? <p className="widget-news__sub">{Termini[locale].ultime_news_sub}</p> : ''}
         <div className="container">
