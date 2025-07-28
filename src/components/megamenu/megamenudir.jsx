@@ -172,7 +172,7 @@ const MegamenuDirectus = ({
                                 <div className="titolo-col-mega">
                                     {Termini[locale].in_evidenza}
                                 </div>
-                                {inEvidenzaLocalizzato && (
+                                {inEvidenzaLocalizzato.titolo && (
                                     <div className="content-mega">
                                         <div>
                                             <Link
