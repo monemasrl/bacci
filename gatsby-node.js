@@ -277,7 +277,7 @@ exports.createPages = async ({ graphql, actions }) => {
             main_content
             slug
           }
-          case_name
+
           customer
           city
           country

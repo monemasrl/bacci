@@ -3,7 +3,7 @@ import Layout from "../components/layout/layout";
 import { findItemTranslated } from "../utils";
 import { GatsbyImage } from "gatsby-plugin-image"
 import BlocksComponent from "../components/blocks/blocks"
-import { slugify } from "../utils";
+
 import { Link } from 'gatsby'
 import { Termini } from "../../data-translations";
 import Correlati from "../components/widgets/correlati";
@@ -18,7 +18,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
     const seoFilterLocale = content.seo?.translations.find((item) => item.languages_code.code === locale)
     const contentForBlocchiPagina = content.blocchi?.filter((blocco) => blocco.item.traduzioni.some((traduzione) => traduzione.languages_code?.code === locale))
 
-    const urlWithoutProtocol = new URL(content.website).host;
+    const urlWithoutProtocol = content.website && new URL(content.website).host;
 
     const iconSocial = {
         facebook: FaFacebook,
@@ -50,7 +50,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
         return arraySocial
 
     }
-
+    console.log(content.related_machines)
     return (
         <>
             {content && <Layout
@@ -65,7 +65,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                 seo={seoFilterLocale}
             >
 
-                <section id={`${slugify(content.case_name).toLowerCase()}`} className={`container-fluid sezione-3 main`}>
+                <section className={`container-fluid sezione-3 main`}>
                     {dataTranslated && <>
                         <div className={`box-sx `} >
                             <h2 dangerouslySetInnerHTML={{ __html: dataTranslated.title }} />
@@ -103,12 +103,12 @@ const TemplateCaseHistory = ({ pageContext }) => {
                                 <div className="titolo">Website</div>
                                 <a href={content.website} target="_blank" rel="noreferrer noopener">{urlWithoutProtocol}</a>
                             </li>}
-                            {(content.related_machines.length > 9) && <li className="macchine">
+                            {(content.related_machines?.length > 0) && <li className="macchine">
                                 <div className="titolo">Bacci Machines</div>
                                 <ul>
-                                    {content.related_machines.map((item) => {
+                                    {content.related_machines.map((item, index) => {
                                         const translated = findItemTranslated(item.Prodotti_id.translations, locale)
-                                        if (translated) { return <li><Link to={`/${locale === 'it_IT' ? '' : locale + '/'}${Termini[locale].prodotti}/${translated.slug}`}>{translated.titolo}</Link></li> } else { return null }
+                                        if (translated) { return <li key={index}><Link to={`/${locale === 'it_IT' ? '' : locale + '/'}${Termini[locale].prodotti}/${translated.slug}`}>{translated.titolo}</Link></li> } else { return null }
                                     })}
                                 </ul>
                             </li>}
@@ -119,7 +119,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                         </ul>
                     </div>
                     <div className="box-dx">
-                        <GatsbyImage image={content.secondary_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />
+                        {content.secondary_image && <GatsbyImage image={content.secondary_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
                     </div>
 
                 </section>
@@ -129,7 +129,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                         return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
                     })}
                 </section>
-                {(content.related_machines.length > 0) && <Correlati locale={locale} idProdotto={content.id} listaProdottiNoQuery={content.related_machines} limiteVisualizzazione={3} />}
+                {(content.related_machines?.length > 0) && <Correlati locale={locale} idProdotto={content.id} listaProdottiNoQuery={content.related_machines} limiteVisualizzazione={3} />}
             </Layout>}
         </>
 
