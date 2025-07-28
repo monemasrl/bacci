@@ -128,24 +128,24 @@ const MegamenuDirectus = ({
                             <div className="box-prodotto">
                                 <div className="titolo-col-mega">{Termini[locale].novita}</div>
                                 <div className="content-mega">
-                                    <>
-                                        {novitaLocalizzato && (
-                                            <div>
-                                                <Link
-                                                    to={`/${langTag[locale] === "it"
-                                                        ? ""
-                                                        : langTag[locale] + "/"
-                                                        }${Termini[locale].prodotti}/${novitaLocalizzato.slug
-                                                        }`}
-                                                >
-                                                    <h2>{novitaLocalizzato.titolo}</h2>
-                                                </Link>
-                                                <p>
-                                                    {novitaLocalizzato.sottotitolo &&
-                                                        summary(novitaLocalizzato.sottotitolo, 120)}
-                                                </p>
-                                            </div>
-                                        )}
+                                    {novitaLocalizzato.titolo && (<>
+
+                                        <div>
+                                            <Link
+                                                to={`/${langTag[locale] === "it"
+                                                    ? ""
+                                                    : langTag[locale] + "/"
+                                                    }${Termini[locale].prodotti}/${novitaLocalizzato.slug
+                                                    }`}
+                                            >
+                                                <h2>{novitaLocalizzato.titolo}</h2>
+                                            </Link>
+                                            <p>
+                                                {novitaLocalizzato.sottotitolo &&
+                                                    summary(novitaLocalizzato.sottotitolo, 120)}
+                                            </p>
+                                        </div>
+
                                         {novita[novita.length - 1].immagine?.imageFile && <GatsbyImage
                                             image={
                                                 novita[novita.length - 1].immagine.imageFile
@@ -153,7 +153,7 @@ const MegamenuDirectus = ({
                                             }
                                             alt={novita[0].titolo || 'titolo'}
                                         />}
-                                    </>
+                                    </>)}
                                 </div>
                             </div>
                         </motion.div>
