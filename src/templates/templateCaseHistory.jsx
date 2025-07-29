@@ -106,9 +106,10 @@ const TemplateCaseHistory = ({ pageContext }) => {
                             {(content.related_machines?.length > 0) && <li className="macchine">
                                 <div className="titolo">Bacci Machines</div>
                                 <ul>
-                                    {content.related_machines.map((item, index) => {
-                                        const translated = findItemTranslated(item.Prodotti_id.translations, locale)
-                                        if (translated.titolo && translated.slug) { return <li key={index}><Link to={`/${locale === 'it_IT' ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${translated.slug}`}>{translated.titolo}</Link></li> } else { return null }
+                                    {content.related_machines?.map((item, index) => {
+
+                                        const translated = item.Prodotti_id?.translations && findItemTranslated(item.Prodotti_id?.translations, locale)
+                                        if (translated?.titolo && translated?.slug) { return <li key={index}><Link to={`/${locale === 'it_IT' ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${translated.slug}`}>{translated.titolo}</Link></li> } else { return null }
                                     })}
                                 </ul>
                             </li>}
