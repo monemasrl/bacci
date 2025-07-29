@@ -139,7 +139,8 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-        Prodotti {
+        Prodotti(filter: {status: {_eq: "published"}}
+) {
           id
           video
           catalogo {
