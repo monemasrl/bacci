@@ -65,7 +65,7 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
             if (item && index < limiteVisualizzazione) {
               return (
                 <div key={index} className={`box-single-fiera ${item.type === 'event' ? 'evento' : ''}`}>
-                  <h2>{item.title}</h2>
+                  <h2>{getslug.title}</h2>
                   <div className="datafiera">
                     <span>{moment(dataFrom).locale(locale).format('DD')}</span> - &nbsp;
                     <span>{moment(dataTo).locale(locale).format('DD MMMM YYYY')}</span>
