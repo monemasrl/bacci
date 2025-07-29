@@ -27,10 +27,10 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                     <div className={`box-sx`} >
                         {content.item.novita && <div className="novita">Novità</div>}
                         <div className="heading">
-                            <h2 className="titoli" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />
-                            <h3 className="sottotitolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo }} />
+                            <h2 className="titoli" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo ? content.item.traduzioni[0].titolo : '' }} />
+                            <h3 className="sottotitolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo ? content.item.traduzioni[0].sotto_titolo : '' }} />
                         </div>
-                        <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo }} />
+                        <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo ? content.item.traduzioni[0].paragrafo : '' }} />
                         {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
                     </div>
                     {(content.item.images && content.item.images.length > 0) &&
@@ -58,15 +58,15 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
             } : { opacity: 0, y: 100 }}>
             {content.item.traduzioni.length > 0 && <>
                 <div className={`box-sx `} >
-                    <h2 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />
-                    {content.item.traduzioni[0].sotto_titolo && <h3 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo }} />}
+                    <h2 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo ? content.item.traduzioni[0].titolo : '' }} />
+                    {content.item.traduzioni[0].sotto_titolo && <h3 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo ? content.item.traduzioni[0].sotto_titolo : '' }} />}
 
                 </div>
                 <div className="box-immagine">
                     {content.item.immagine?.imageFile && <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.item.immagine.description || 'Bacci website image'} />}
                 </div>
                 <div className="box-dx">
-                    <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo }} />
+                    <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo ? content.item.traduzioni[0].paragrafo : '' }} />
                     {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
                 </div>
             </>}
@@ -86,12 +86,12 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                 <div className={`box-sx`} >
                     {content.item.novita && <div className="novita">Novità</div>}
                     {index === 0 &&
-                        <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />}
+                        <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo ? content.item.traduzioni[0].titolo : '' }} />}
                     <div className="heading">
-                        {index !== 0 && <h2 className="titoli" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo }} />}
-                        <h3 className="sottotitolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo }} />
+                        {index !== 0 && <h2 className="titoli" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo ? content.item.traduzioni[0].titolo : '' }} />}
+                        <h3 className="sottotitolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo ? content.item.traduzioni[0].sotto_titolo : '' }} />
                     </div>
-                    <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo }} />
+                    <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo ? content.item.traduzioni[0].paragrafo : '' }} />
                     {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
                 </div>
 

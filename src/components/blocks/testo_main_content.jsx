@@ -11,8 +11,8 @@ function TestoMainContent({ content, featuredImage }) {
         <section className={`mainContent`}>
             {content && <>
                 <div className={`box-sx`} >
-                    <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.main_content_titolo }} />
-                    <p dangerouslySetInnerHTML={{ __html: content.main_content }} />
+                    <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.main_content_titolo ? content.main_content_titolo : '' }} />
+                    <p dangerouslySetInnerHTML={{ __html: content.main_content ? content.main_content : '' }} />
                 </div>
 
                 {featuredImage && <div className="box-dx">
