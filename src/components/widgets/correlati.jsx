@@ -84,7 +84,7 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione = 100, idP
 
               const prodottoTradotto = findItemTranslated(item.translations, locale)
 
-              if (prodottoTradotto.titolo && index < limiteVisualizzazione) {
+              if (prodottoTradotto?.titolo && index < limiteVisualizzazione) {
                 return (
                   <div className="col-3" key={prodottoTradotto.titolo}>
                     <div className="box-correlati">
