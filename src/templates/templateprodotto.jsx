@@ -87,14 +87,14 @@ const Prodotto = ({ pageContext }) => {
                             <section className="container sezione-1 left" key={index}>
                                 <div className="box-sx">
                                     <div className="heading">
-                                        <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.titolo }} />
+                                        <h2 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated?.titolo && dataProdottoTranslated.titolo }} />
                                     </div>
 
-                                    <div className="content" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.paragrafo }} />
+                                    <div className="content" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated?.paragrafo && dataProdottoTranslated.paragrafo }} />
                                 </div>
                                 <div className="box-dx">
 
-                                    {item.immagine?.imageFile && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || dataProdottoTranslated.titolo} />}
+                                    {item.immagine?.imageFile && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || ''} />}
                                 </div>
 
                             </section>
