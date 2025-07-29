@@ -736,15 +736,17 @@ exports.createPages = async ({ graphql, actions }) => {
   function getAllPathProdotti(translations) {
     const allPath = []
     translations.forEach(item => {
-      const lang = item.languages_code.code
-      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
-      const path = baseLang + Termini[lang].prodotti + "/" + item.slug
-      const pathObj = {
-        path: path,
-        locale: lang,
-        title: item.titolo,
+      if (item.slug) {
+        const lang = item.languages_code.code
+        const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+        const path = baseLang + Termini[lang].prodotti + "/" + item.slug
+        const pathObj = {
+          path: path,
+          locale: lang,
+          title: item.titolo,
+        }
+        allPath.push(pathObj)
       }
-      allPath.push(pathObj)
     })
     return allPath
   }
