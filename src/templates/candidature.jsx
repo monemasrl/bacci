@@ -96,14 +96,16 @@ const Candidature = ({ data, pageContext }) => {
             moment.locale(langTag[item.lang])
             const translated = findItemsTranslated(item.translations, pageContext.locale)
             console.log(translated[0].testo, 'translated')
-            return (
-              <div className="candidatura" key={index}>
-                <div className="data">  {moment(item.data).format('DD.MM.YYYY')}</div>
-                <h2>{translated[0].candidatura && translated[0].candidatura}</h2>
-                <div className="testo" dangerouslySetInnerHTML={{ __html: translated[0].testo && translated[0].testo }} />
-                <Link className="button-sezione" to={linkToForm[pageContext.locale]}>{Termini[pageContext.locale].buttonCandidatura}</Link>
-              </div>
-            )
+            if (translated[0].candidatura && translated[0].testo) {
+              return (
+                <div className="candidatura" key={index}>
+                  <div className="data">  {moment(item.data).format('DD.MM.YYYY')}</div>
+                  <h2>{translated[0].candidatura && translated[0].candidatura}</h2>
+                  <div className="testo" dangerouslySetInnerHTML={{ __html: translated[0].testo && translated[0].testo }} />
+                  <Link className="button-sezione" to={linkToForm[pageContext.locale]}>{Termini[pageContext.locale].buttonCandidatura}</Link>
+                </div>
+              )
+            }
           }
           )}
 
