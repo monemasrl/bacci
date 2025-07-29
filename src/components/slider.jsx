@@ -115,7 +115,7 @@ function Slider({ locale }) {
                 }}
             >
 
-                {data.directus.slider.slides.map((item, index) => {
+                {data.directus.slider?.slides?.map((item, index) => {
 
                     /* Se non esiste una traduzione ritorna slide vuota */
                     if (translation.length === 0) return <div key={index}></div>

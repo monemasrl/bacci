@@ -35,7 +35,7 @@ function TestoImmagineHome({ index, allineamento, content }) {
             {content.item.traduzioni.length > 0 && <>
                 <div className={`box-sx `} >
                     <h2 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo ? content.item.traduzioni[0].titolo : '' }} />
-                    {content.item.immagine?.imageFile && <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
+                    {content.item.immagine?.imageFile && <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={'bacci website image'} />}
 
                 </div>
 

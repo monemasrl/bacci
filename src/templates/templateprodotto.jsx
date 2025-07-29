@@ -78,7 +78,7 @@ const Prodotto = ({ pageContext }) => {
                             </nav>
                         </div>
                         <div className="box-dx">
-                            {content.immagine?.imageFile && <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.immagine.description || dataProdottoTranslated.titolo} />}
+                            {content.immagine?.imageFile && <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.immagine.description || ''} />}
                         </div>
                     </section>
                     {content.sezioni_prodotto.map((item, index) => {
