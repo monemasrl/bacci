@@ -17,6 +17,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
          posts {
           id
           date_created
+          
           translations {
             languages_code {
               code
@@ -40,12 +41,12 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
     }
   `)
 
-  const langFilterNews = data.directus.posts.filter((item) => {
+  const langFilterNews = data.directus.posts?.filter((item) => {
     return item.translations.some((lang) => {
       if (lang.title) { return lang.languages_code.code === locale && item.id !== idCurrentNews }
     })
   })
-  const langFilterNewsSorted = langFilterNews.sort((a, b) => {
+  const langFilterNewsSorted = langFilterNews?.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
 

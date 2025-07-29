@@ -41,18 +41,19 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
         }
       }
     `)
-  const langFilterFiere = data.directus.Fiere.filter((item) => {
+
+  const langFilterFiere = data.directus.Fiere?.filter((item) => {
     return item.title_translations.some((lang) => {
       if (lang.title) { return lang.languages_code.code === locale }
     })
   })
-  const langFilterFiereSorted = langFilterFiere.sort((a, b) => {
+  const langFilterFiereSorted = langFilterFiere?.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
   console.log(langFilterFiereSorted, 'langFilterFiereSorted')
   return (
     <>
-      {langFilterFiereSorted.length > 0 && <section className="widget-fiere">
+      {langFilterFiereSorted?.length > 0 && <section className="widget-fiere">
         <h2>{Termini[locale].eventi}</h2>
         <div className="widget-fiere-wrapper container">
           {langFilterFiereSorted.map((item, index) => {

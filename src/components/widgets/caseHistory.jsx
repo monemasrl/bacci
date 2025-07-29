@@ -37,11 +37,11 @@ function CaseHistory({ locale }) {
   `)
     const dataCaseHistory = data.directus.case_history
 
-    if (dataCaseHistory.length > 0) {
+    if (dataCaseHistory?.length > 0) {
         dataCaseHistory.sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
         return (
             <section className="widget-case container">
-                {dataCaseHistory.map((item, index) => {
+                {dataCaseHistory?.map((item, index) => {
                     if (item) {
                         const translation = item.translations.find((item) => item.languages_code.code === locale)
                         if (translation) {
@@ -50,10 +50,10 @@ function CaseHistory({ locale }) {
                                 ? "/"
                                 : "/" + langTag[translation.languages_code.code] + "/"
                             return (
-                                translation && (
+                                translation.title && (
                                     <div key={index} className="widget-case__box">
                                         <h2>{translation.title}</h2>
-                                        <h3>{translation.sottotitolo}</h3>
+                                        <h3>{translation.sottotitolo && translation.sottotitolo}</h3>
                                         {item.featured_image?.imageFile && <GatsbyImage loading="eager" image={item.featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
                                         <Link className="button-sezione" to={`${urlBase}${Termini[locale].caseHistory}/${translation.slug}`}>{Termini[locale].scopri}</Link>
                                     </div>)

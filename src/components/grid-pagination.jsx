@@ -33,7 +33,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
     if (pageName === 'prodotti') {
         return (
             <>
-                {currentPosts ? currentPosts.map((item) => {
+                {currentPosts?.length ? currentPosts.map((item) => {
                     const translated = findItemTranslated(item.translations, lang)
                     if (translated.titolo) {
                         return (
@@ -64,7 +64,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
 
         return (
             <>
-                {currentPosts && currentPosts.map((item, index) => {
+                {currentPosts?.length && currentPosts.map((item, index) => {
                     const translated = findItemTranslated(item.translations, lang)
                     const data = new Date(Date.parse(item.date_created))
 
@@ -97,7 +97,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
 
         return (
             <>
-                {currentPosts && currentPosts.map((item, index) => {
+                {currentPosts?.length && currentPosts.map((item, index) => {
                     const titleTranslated = findItemTranslated(item.title_translations, lang)
                     const dataFrom = new Date(Date.parse(item.from))
                     const dataTo = new Date(Date.parse(item.to))
