@@ -44,9 +44,9 @@ export const query = graphql`
         }
         label
       }
-      candidature(
-        filter: { translations: { languages_code: { code: { _eq: $locale } } }, status: { _eq: "published" } }
-      ) {
+      
+      candidature(filter: {translations: {languages_code: {code: {_eq: $locale}}}, status: { _eq: "published" } }) {
+
         translations {
           languages_code {
             code
@@ -72,7 +72,9 @@ const Candidature = ({ data, pageContext }) => {
   const langFilterFiereSorted = data.directus.candidature.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
+
   const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
+
   const linkToForm = {
     it_IT: '/careers/candidature',
     en_US: '/en/careers/job-applications'
@@ -90,13 +92,15 @@ const Candidature = ({ data, pageContext }) => {
       >
         <section className="container candidature" ref={topArchivio}>
 
-          {langFilterFiereSorted && langFilterFiereSorted.map((item, index) => {
+          {langFilterFiereSorted?.length && langFilterFiereSorted.map((item, index) => {
             moment.locale(langTag[item.lang])
+            const translated = findItemsTranslated(item.translations, pageContext.locale)
+            console.log(translated[0].testo, 'translated')
             return (
               <div className="candidatura" key={index}>
                 <div className="data">  {moment(item.data).format('DD.MM.YYYY')}</div>
-                <h2>{item.translations[0].candidatura}</h2>
-                <div className="testo" dangerouslySetInnerHTML={{ __html: item.translations[0].testo }} />
+                <h2>{translated[0].candidatura && translated[0].candidatura}</h2>
+                <div className="testo" dangerouslySetInnerHTML={{ __html: translated[0].testo && translated[0].testo }} />
                 <Link className="button-sezione" to={linkToForm[pageContext.locale]}>{Termini[pageContext.locale].buttonCandidatura}</Link>
               </div>
             )
