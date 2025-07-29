@@ -68,7 +68,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                     const translated = findItemTranslated(item.translations, lang)
                     const data = new Date(Date.parse(item.date_created))
 
-                    if (translated) {
+                    if (translated?.title) {
                         return (
                             <div key={index} className="col-3">
                                 <div className="box-single-news">
@@ -78,7 +78,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                             {moment(data).locale(lang).format('DD.MM.YYYY')}
                                         </div>
                                         <h2>{translated.title}</h2>
-                                        <p dangerouslySetInnerHTML={{ __html: summary(translated.summary, 120) }} />
+                                        <p dangerouslySetInnerHTML={{ __html: translated.summary ? summary(translated.summary, 120) : '' }} />
                                         <Link to={`${langTag[translated.languages_code.code] === 'it' ? '/' : '/' + langTag[translated.languages_code.code] + '/'}${'news/'}${translated.slug}`}>leggi tutto</Link>
                                     </div>
                                 </div>
@@ -88,7 +88,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                     }
                 })}
                 <div className="break"></div>
-                {<Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} topArchivio={topArchivio} />}
+                {posts?.length && <Pagination postsPerPage={postsPerPage} totalPosts={posts?.length} paginate={paginate} topArchivio={topArchivio} />}
             </>
         )
 
@@ -102,7 +102,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                     const dataFrom = new Date(Date.parse(item.from))
                     const dataTo = new Date(Date.parse(item.to))
                     const pathTranslated = pagePath.find((item) => item.locale === lang)
-                    if (titleTranslated) {
+                    if (titleTranslated?.title) {
                         return (
                             <div className="col-3" key={index}>
                                 <div className={`box-single-fiera ${item.type === 'event' ? 'evento' : ''}`}>

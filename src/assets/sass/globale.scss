@@ -1399,12 +1399,6 @@ section.container.candidature {
   }
 }
 .bodyFiera {
-  p:has(img) {
-    display: flex;
-    @media #{$landscape} {
-      flex-direction: column;
-    }
-  }
   img {
     width: 100%;
     padding: 1rem;

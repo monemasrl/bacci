@@ -42,7 +42,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
 
   const langFilterNews = data.directus.posts.filter((item) => {
     return item.translations.some((lang) => {
-      return lang.languages_code.code === locale && item.id !== idCurrentNews
+      if (lang.title) { return lang.languages_code.code === locale && item.id !== idCurrentNews }
     })
   })
   const langFilterNewsSorted = langFilterNews.sort((a, b) => {
@@ -51,7 +51,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
 
   return (
     <>
-      {langFilterNewsSorted.length > 0 && <section className="widget-news">
+      {langFilterNewsSorted?.length > 0 && <section className="widget-news">
         {pageType !== "home" ? <h2>{Termini[locale].newsCorrelate}</h2> : <h2>{Termini[locale].ultime_news}</h2>}
         {pageType !== "home" ? <p className="widget-news__sub">{Termini[locale].ultime_news_sub}</p> : ''}
         <div className="container">
@@ -60,7 +60,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
             let date = new Date(Date.parse(item.date_created))
             date = moment(date).locale(locale).format('DD.MM.YYYY')
 
-            if (index < limiteVisualizzazione) {
+            if (index < limiteVisualizzazione && prodottoTradotto?.title) {
               return (
                 <div key={index} className="col-3">
                   <div className="box-news">
@@ -69,7 +69,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
 
                       <div className="date">{date}</div>
                       <h2>{prodottoTradotto.title}</h2>
-                      <p dangerouslySetInnerHTML={{ __html: summary(prodottoTradotto.summary, 120) }} />
+                      <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.summary ? summary(prodottoTradotto.summary, 120) : '' }} />
                       <Link to={`${locale === 'it_IT' ? "" : "/" + langTag[locale]}/${"news"}/${prodottoTradotto.slug}`} >Leggi tutto</Link>
                     </div>
                   </div>

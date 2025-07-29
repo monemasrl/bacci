@@ -785,15 +785,17 @@ exports.createPages = async ({ graphql, actions }) => {
   function getAllPathNews(translations) {
     const allPath = []
     translations.forEach(item => {
-      const lang = item.languages_code.code
-      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
-      const path = baseLang + "news" + "/" + item.slug
-      const pathObj = {
-        path: path,
-        locale: lang,
-        title: item.title,
+      if (item.slug) {
+        const lang = item.languages_code.code
+        const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+        const path = baseLang + "news" + "/" + item.slug
+        const pathObj = {
+          path: path,
+          locale: lang,
+          title: item.title,
+        }
+        allPath.push(pathObj)
       }
-      allPath.push(pathObj)
     })
     return allPath
   }
@@ -832,18 +834,20 @@ exports.createPages = async ({ graphql, actions }) => {
   function getAllPathFiere(translations) {
     const allPath = []
     translations.forEach(item => {
-      const parentPathFromMenu = paginaFiereMenuItem.translations.find(
-        itemb => item.languages_code.code === itemb.languages_code.code
-      )
-      const lang = item.languages_code.code
-      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
-      const path = baseLang + parentPathFromMenu.label + "/" + item.slug
-      const pathObj = {
-        path: path,
-        locale: lang,
-        title: item.title,
+      if (item.slug) {
+        const parentPathFromMenu = paginaFiereMenuItem.translations.find(
+          itemb => item.languages_code.code === itemb.languages_code.code
+        )
+        const lang = item.languages_code.code
+        const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+        const path = baseLang + parentPathFromMenu.label + "/" + item.slug
+        const pathObj = {
+          path: path,
+          locale: lang,
+          title: item.title,
+        }
+        allPath.push(pathObj)
       }
-      allPath.push(pathObj)
     })
     return allPath
   }
@@ -886,15 +890,17 @@ exports.createPages = async ({ graphql, actions }) => {
   function getAllPathCaseHistory(translations) {
     const allPath = []
     translations.forEach(item => {
-      const lang = item.languages_code.code
-      const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
-      const path = baseLang + Termini[lang].caseHistory + "/" + item.slug
-      const pathObj = {
-        path: path,
-        locale: lang,
-        title: item.titolo,
+      if (item.slug) {
+        const lang = item.languages_code.code
+        const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+        const path = baseLang + Termini[lang].caseHistory + "/" + item.slug
+        const pathObj = {
+          path: path,
+          locale: lang,
+          title: item.titolo,
+        }
+        allPath.push(pathObj)
       }
-      allPath.push(pathObj)
     })
     return allPath
   }

@@ -41,25 +41,31 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
         }
       }
     `)
-
-  const langFilterFiereSorted = data.directus.Fiere.sort((a, b) => {
+  const langFilterFiere = data.directus.Fiere.filter((item) => {
+    return item.title_translations.some((lang) => {
+      if (lang.title) { return lang.languages_code.code === locale }
+    })
+  })
+  const langFilterFiereSorted = langFilterFiere.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
-
+  console.log(langFilterFiereSorted, 'langFilterFiereSorted')
   return (
     <>
-      {langFilterFiereSorted && <section className="widget-fiere">
+      {langFilterFiereSorted.length > 0 && <section className="widget-fiere">
         <h2>{Termini[locale].eventi}</h2>
         <div className="widget-fiere-wrapper container">
           {langFilterFiereSorted.map((item, index) => {
 
-            const titleFiereTranslated = findItemTranslated(item.title_translations, locale)
+
+            const getslug = item.title_translations.find((lang) => lang.languages_code.code === locale)
+
             const dataFrom = new Date(Date.parse(item.from))
             const dataTo = new Date(Date.parse(item.to))
-            if (titleFiereTranslated && index < limiteVisualizzazione) {
+            if (item && index < limiteVisualizzazione) {
               return (
                 <div key={index} className={`box-single-fiera ${item.type === 'event' ? 'evento' : ''}`}>
-                  <h2>{titleFiereTranslated.title}</h2>
+                  <h2>{item.title}</h2>
                   <div className="datafiera">
                     <span>{moment(dataFrom).locale(locale).format('DD')}</span> - &nbsp;
                     <span>{moment(dataTo).locale(locale).format('DD MMMM YYYY')}</span>
@@ -67,7 +73,7 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
                   <div className="position">{item.position}</div>
                   <div className="luogo">{item.location}</div>
                   <a className="link" href={`https://${item.link_fiera}`} target="_blank" rel="noreferrer noopener" >{item.link_fiera}</a>
-                  {item.page && <Link className="buttonLink" to={`${locale === "it_IT" ? "" : "/" + langTag[locale]}/${Termini[locale].fiere}/${titleFiereTranslated.slug}`}>&#62;</Link>}
+                  {item.page && <Link className="buttonLink" to={`${locale === "it_IT" ? "" : "/" + langTag[locale]}/${Termini[locale].fiere}/${getslug.slug}`}>&#62;</Link>}
                 </div>
               )
             } else { return null }
