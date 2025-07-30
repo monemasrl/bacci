@@ -78,8 +78,8 @@ const News = ({ data, pageContext }) => {
         pageTitle={pageContext.title}
         locale={pageContext.locale}
         allPagePath={pageContext.allPagePath}
-        listaApplicazioni={listaApplicazioni}
-        listaCategorie={listaCategorie}
+        listaApplicazioni={pageContext.listaApplicazioni}
+        listaCategorie={pageContext.listaCategorie}
         seo={seoFilterLocale}
       >
         <section className="container news" ref={topArchivio}>

@@ -60,8 +60,8 @@ const TemplateCaseHistory = ({ pageContext }) => {
                 tipo='caseHistory'
                 allPagePath={allPagePath}
                 pathFromContext={pageContext}
-                listaApplicazioni={listaApplicazioni}
-                listaCategorie={listaCategorie}
+                listaApplicazioni={pageContext.listaApplicazioni}
+                listaCategorie={pageContext.listaCategorie}
                 seo={seoFilterLocale}
             >
 

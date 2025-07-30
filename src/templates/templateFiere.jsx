@@ -33,8 +33,8 @@ const Fiere = ({ pageContext }) => {
         tipo='fiera'
         allPagePath={allPagePath}
         pathFromContext={pageContext}
-        listaApplicazioni={listaApplicazioni}
-        listaCategorie={listaCategorie}
+        listaApplicazioni={pageContext.listaApplicazioni}
+        listaCategorie={pageContext.listaCategorie}
         dataBreadCrumbFiere={dataBreadCrumbFiere}
         seo={seoFilterLocale}
       >

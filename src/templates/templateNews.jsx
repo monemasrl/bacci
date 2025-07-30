@@ -22,8 +22,8 @@ const Prodotto = ({ pageContext }) => {
         tipo='news'
         allPagePath={allPagePath}
         pathFromContext={pageContext}
-        listaApplicazioni={listaApplicazioni}
-        listaCategorie={listaCategorie}
+        listaApplicazioni={pageContext.listaApplicazioni}
+        listaCategorie={pageContext.listaCategorie}
         seo={seoFilterLocale}
       >
         <div className="wrapper-news">

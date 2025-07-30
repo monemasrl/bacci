@@ -72,8 +72,8 @@ export const query = graphql`
 
 
 const Fiere = ({ data, pageContext }) => {
-  const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-  const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+  const listaApplicazioni = data.directus.applicazioni_translations.length > 0 && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
+  const listaCategorie = data.directus.prodotto_categorie_translations.length > 0 && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
   const topArchivio = React.useRef()
   const langFilterFiereSorted = [...data.directus.Fiere].sort((a, b) => new Date(b.date_created) - new Date(a.date_created))
 
@@ -85,12 +85,12 @@ const Fiere = ({ data, pageContext }) => {
         pageTitle={pageContext.title}
         locale={pageContext.locale}
         allPagePath={pageContext.allPagePath}
-        listaApplicazioni={listaApplicazioni}
-        listaCategorie={listaCategorie}
+        listaApplicazioni={pageContext.listaApplicazioni}
+        listaCategorie={pageContext.listaCategorie}
         seo={seoFilterLocale}
       >
         <section className="container fiere" ref={topArchivio}>
-          <GridPagination pagePath={pageContext.allPagePath} pageName="fiere" topArchivio={topArchivio} archivio={langFilterFiereSorted} lang={pageContext.locale} />
+          {langFilterFiereSorted && <GridPagination pagePath={pageContext.allPagePath} pageName="fiere" topArchivio={topArchivio} archivio={langFilterFiereSorted} lang={pageContext.locale} />}
         </section>
       </Layout>
     </>

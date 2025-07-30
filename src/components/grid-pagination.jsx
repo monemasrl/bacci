@@ -16,7 +16,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
     const [postsPerPage, setPostPerPage] = useState(postPerPage)
     const indexOfLastPost = currentPage * postsPerPage
     const indexOfFirsPost = indexOfLastPost - postsPerPage
-    const currentPosts = posts.slice(indexOfFirsPost, indexOfLastPost)
+    const currentPosts = posts?.slice(indexOfFirsPost, indexOfLastPost) || []
 
     moment.locale(langTag[lang])
 
