@@ -18,6 +18,7 @@ export const query = graphql`
 
     pages(filter: {translations: {languages_code: {code: {_eq: $locale}}, slug: {_eq: $slug}}, status: {_eq: "published"}}){ 
       __typename
+      page_name
       id
       seo{
       translations(filter: {languages_code: {code: {_eq: $locale}}}){
@@ -123,7 +124,6 @@ export const query = graphql`
 
 
 const Pagine = ({ data, pageContext }) => {
-
 
 
   return (

@@ -88,6 +88,13 @@ function Slider({ locale }) {
         return
     }
 
+
+    const slidesTranslated = translation
+        .map((item) => ({
+            ...item,
+            translations: item.translations.filter((trans) => trans.languages_code.code === locale)
+        }))
+        .filter((item) => item.translations[0]?.titolo);
     return (
         <>
             <Swiper
@@ -115,20 +122,22 @@ function Slider({ locale }) {
                 }}
             >
 
-                {data.directus.slider?.slides?.map((item, index) => {
+                {slidesTranslated?.map((item, index) => {
 
                     /* Se non esiste una traduzione ritorna slide vuota */
-                    if (translation.length === 0) return <div key={index}></div>
+                    if (translation?.length === 0) { return <div key={index}></div> }
 
-                    const translations = translation[index].translations[0]
+                    const translations = item.translations[0]
+
                     return (
                         <SwiperSlide key={index}>
+
                             {item.tipo === "immagine" && item.immagine?.imageFile ?
                                 <GatsbyImage className="background-slider" quality={100} image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translations.titolo ? translations.titolo : 'immagine slider'} /> :
-                                <div>test</div>}
+                                <div>no image</div>}
                             {translations.testo && <div className="sliderContent">
-                                <div className='sliderContent__box' dangerouslySetInnerHTML={{ __html: translations.testo }} />
-                                {translations.action_url && <a href={translations.action_url} title={translations.action_label} className="buttonLink">&#62;</a>}
+                                <div className='sliderContent__box' dangerouslySetInnerHTML={{ __html: translations.testo && translations.testo }} />
+                                {translations.action_url && <a href={translations.action_url} title={translations.action_label && translations.action_label} className="buttonLink">&#62;</a>}
                             </div>}
 
                         </SwiperSlide>
@@ -145,7 +154,7 @@ function Slider({ locale }) {
                 className="mySwiperNav"
 
             >
-                {data.directus.slider.slides.map((item, index) => {
+                {slidesTranslated.map((item, index) => {
 
                     /* Se non esiste una traduzione ritorna slide vuota */
                     if (translation.length === 0) return <div key={index}></div>

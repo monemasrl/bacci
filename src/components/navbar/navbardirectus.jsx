@@ -61,7 +61,10 @@ query datimenu{
             windowHeight > 200 ? setStickyClass('fixed') : setStickyClass('');
         }
     };
-
+    /* translations: translationProdottiPage(
+          result.data.directus.languages,
+          langTag
+        ), */
 
     return (
         <>
@@ -93,8 +96,8 @@ query datimenu{
                                                 itemTranslated.slug && (
                                                     <Link
                                                         to={`/${langTag[itemTranslated.languages_code.code] === 'it'
-                                                                ? ''
-                                                                : langTag[itemTranslated.languages_code.code] + '/'
+                                                            ? ''
+                                                            : langTag[itemTranslated.languages_code.code] + '/'
                                                             }${itemTranslated.slug.toLowerCase()}`}
                                                     >
                                                         {itemTranslated.label}
@@ -114,14 +117,14 @@ query datimenu{
                                                                 <li key={subItemTranslated.label}>
                                                                     <Link
                                                                         to={`${langTag[
-                                                                                subItemTranslated.languages_code.code
-                                                                            ] === 'it'
-                                                                                ? ''
-                                                                                : '/' +
-                                                                                langTag[
-                                                                                subItemTranslated
-                                                                                    .languages_code.code
-                                                                                ]
+                                                                            subItemTranslated.languages_code.code
+                                                                        ] === 'it'
+                                                                            ? ''
+                                                                            : '/' +
+                                                                            langTag[
+                                                                            subItemTranslated
+                                                                                .languages_code.code
+                                                                            ]
                                                                             }/${itemTranslated.slug.toLowerCase()}/${subItemTranslated.slug
                                                                             }`}
                                                                     >

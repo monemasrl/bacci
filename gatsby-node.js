@@ -515,6 +515,7 @@ exports.createPages = async ({ graphql, actions }) => {
   function translationHomePage(translations) {
     //crea un array con i dati per le traduzioni della homepage
     const data = translations.map(item => {
+
       return {
         title: "Home",
         locale: item.code,
@@ -523,6 +524,8 @@ exports.createPages = async ({ graphql, actions }) => {
     })
     return data
   }
+
+  //const datatranslationhome = result.data.directus.pages.find((item) => { return item.name.toLowerCase() == 'home' })
 
   const homePage = {
     translations: translationHomePage(result.data.directus.languages),

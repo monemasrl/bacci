@@ -1599,10 +1599,25 @@ section.container.candidature {
 }
 
 .mySwiper2 {
-  height: 80%;
+  height: 750px;
   width: 100%;
+  @media #{$desktop} {
+    height: 600px;
+  }
+  @media #{$phone} {
+    height: 300px;
+  }
 }
-
+.mySwiper2 .swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  opacity: 0 !important;
+}
+.mySwiper2 .swiper-slide.swiper-slide-visible {
+  opacity: 1 !important;
+}
 .mySwiper {
   height: 20%;
   box-sizing: border-box;
@@ -1659,11 +1674,15 @@ section.container.candidature {
   }
   &__box {
     font-family: $title;
-    color: white;
+    color: white !important;
     padding: 1rem;
+    h2 {
+      color: white;
+    }
     h3 {
       font-size: 2em;
       margin: 0;
+      color: white !important;
       @media #{$landscape} {
         font-size: 2em !important;
       }
@@ -1692,7 +1711,7 @@ section.container.candidature {
     p {
       max-width: 760px;
       font-size: 1.5em;
-      color: white;
+      color: white !important;
       text-transform: none;
       @media #{$phone} {
       }
@@ -1714,7 +1733,7 @@ section.container.candidature {
   position: relative;
   top: -60px;
 
-  @media #{$phone} {
+  @media #{$landscape} {
     display: none !important;
   }
   .swiper-wrapper {
