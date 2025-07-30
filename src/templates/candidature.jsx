@@ -95,7 +95,7 @@ const Candidature = ({ data, pageContext }) => {
           {langFilterFiereSorted?.length && langFilterFiereSorted.map((item, index) => {
             moment.locale(langTag[item.lang])
             const translated = findItemsTranslated(item.translations, pageContext.locale)
-            console.log(translated[0].testo, 'translated')
+
             if (translated[0].candidatura && translated[0].testo) {
               return (
                 <div className="candidatura" key={index}>

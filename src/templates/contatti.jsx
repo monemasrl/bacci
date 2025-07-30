@@ -117,11 +117,11 @@ const Contatti = ({ data, pageContext }) => {
             >
                 <div className="wrapper-contatti">
                     <section className="map-gruppo-bacci">
-                        {data.directus.pages[0].translations[0].main_content_sottotitolo && (
+                        {data.directus.pages[0]?.translations[0]?.main_content_sottotitolo && (
                             <h1 className="titolo" dangerouslySetInnerHTML={{ __html: data.directus.pages[0].translations[0].main_content_sottotitolo }} />
                         )}
 
-                        {data.directus.pages[0].featured_image.imageFile && (
+                        {data.directus.pages[0]?.featured_image?.imageFile && (
                             <GatsbyImage
                                 className="map-gruppo-bacci__image"
                                 image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData}
@@ -144,8 +144,8 @@ const Contatti = ({ data, pageContext }) => {
                                                 <div className="sede hq" key={index}>
                                                     <div className="sede-col">
                                                         <ul>
-                                                            <li>{item.indirizzo}</li>
-                                                            <li>{item.area}</li>
+                                                            <li>{item.indirizzo && item.indirizzo}</li>
+                                                            <li>{item.area && item.area}</li>
                                                             {item.telefono && <li>{Termini[locale].contattiPhone + ' ' + item.telefono}</li>}
                                                             {item.fax && <li>F.{item.fax}</li>}
                                                             {item.mail && <li><a href={"mailto:" + item.mail} target="_blank">{item.mail}</a> </li>}

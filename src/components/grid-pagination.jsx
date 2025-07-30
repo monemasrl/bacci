@@ -46,7 +46,6 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                 <Link className="button-sezione" lista to={`${(langTag[translated.languages_code.code] === 'it') ? "/" : "/" + langTag[translated.languages_code.code] + "/"}${Termini[translated.languages_code.code].prodotti + '/' + translated.slug}`} state={
                                     { applicazione: locationState.applicazione, categoria: locationState.categoria }
                                 }>
-
                                     {Termini[translated.languages_code.code].scopri}</Link>
                             </div>
                         )
@@ -111,9 +110,9 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                         <span>{moment(dataFrom).locale(lang).format('DD')}</span> - &nbsp;
                                         <span>{moment(dataTo).locale(lang).format('DD MMMM YYYY')}</span>
                                     </div>
-                                    <div className="position">{item.position}</div>
-                                    <div className="luogo">{item.location}</div>
-                                    <a className="link" href={`https://${item.link_fiera}`} target="_blank" rel="noreferrer noopener">{item.link_fiera}</a>
+                                    <div className="position">{item.position && item.position}</div>
+                                    <div className="luogo">{item.location && item.location}</div>
+                                    {item.link_fiera && <a className="link" href={`https://${item.link_fiera}`} target="_blank" rel="noreferrer noopener">{item.link_fiera}</a>}
                                     {item.page && <Link className="buttonLink" to={`${pathTranslated.path}/${titleTranslated.slug}`}>&#62;</Link>}
                                 </div>
 

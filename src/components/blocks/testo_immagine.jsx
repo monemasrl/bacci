@@ -82,7 +82,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
             } :
                 { opacity: 0, y: 100 }}>
 
-            {content.item.traduzioni.length > 0 && <>
+            {content.item.traduzioni?.length > 0 && <>
                 <div className={`box-sx`} >
                     {content.item.novita && <div className="novita">Novità</div>}
                     {index === 0 &&

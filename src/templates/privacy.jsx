@@ -72,7 +72,14 @@ const Privacy = ({ data, pageContext }) => {
         seo={seoFilterLocale}
       >
         <div className={`mainContent`}>
-          <section className="wrapperPrivacy" dangerouslySetInnerHTML={{ __html: data.directus.pages[0].translations[0].main_content }} />
+          {data.directus.pages[0]?.translations[0]?.main_content && (
+            <section
+              className="wrapperPrivacy"
+              dangerouslySetInnerHTML={{
+                __html: data.directus.pages[0].translations[0].main_content,
+              }}
+            />
+          )}
         </div>
 
       </Layout>

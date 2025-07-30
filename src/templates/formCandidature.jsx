@@ -140,8 +140,8 @@ const CandidatureForm = ({ data, pageContext }) => {
                 <div className="mainContent candidature">
                     {content && <>
                         <div className={`box-sx`} >
-                            <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.main_content_titolo }} />
-                            <div dangerouslySetInnerHTML={{ __html: content.main_content }} />
+                            <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.main_content_titolo && content.main_content_titolo }} />
+                            <div dangerouslySetInnerHTML={{ __html: content.main_content && content.main_content }} />
 
                             <FormCandidature lang={pageContext.locale} candidature={langFilterFiereSorted} />
 

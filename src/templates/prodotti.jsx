@@ -305,7 +305,7 @@ const Prodotti = ({ data, location, pageContext }) => {
                 <li>
                   <input type="checkbox" checked={filtersCat.length === 0} value={'reset'} name="categorie" readOnly id="categorie" />
                   <label htmlFor="categorie">{termini.tutti_prodotti}</label></li>
-                {pageContext.listaCategorie.map((item, index) => {
+                {pageContext?.listaCategorie?.map((item, index) => {
                   if (item !== null) {
                     return (
                       <li key={index}>
@@ -323,7 +323,7 @@ const Prodotti = ({ data, location, pageContext }) => {
                 <h3>{Termini[pageContext.locale].applicazione}</h3>
                 <button onClick={() => setFiltersApp([])}> {Termini[pageContext.locale].tutteApplicazioni}</button>
                 <ul>
-                  {pageContext.listaApplicazioni.map((item, index) => {
+                  {pageContext.listaApplicazioni?.map((item, index) => {
                     if (item !== null) {
                       return (
                         <li key={index}>
