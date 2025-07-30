@@ -165,7 +165,7 @@ function Slider({ locale }) {
                     return (
 
                         <SwiperSlide key={index} >
-                            <SliderName titolo={translations.titolo} isChangeSlider={isChangeSlider} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} currentIndex={index} />
+                            {translations.titolo && <SliderName titolo={translations.titolo} isChangeSlider={isChangeSlider} currentSlide={currentSlide} setCurrentSlide={setCurrentSlide} currentIndex={index} />}
                         </SwiperSlide>)
                 })}
 

@@ -56,7 +56,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
         {pageType !== "home" ? <h2>{Termini[locale].newsCorrelate}</h2> : <h2>{Termini[locale].ultime_news}</h2>}
         {pageType !== "home" ? <p className="widget-news__sub">{Termini[locale].ultime_news_sub}</p> : ''}
         <div className="container">
-          {langFilterNewsSorted.map((item, index) => {
+          {langFilterNewsSorted?.map((item, index) => {
             const prodottoTradotto = findItemTranslated(item.translations, locale)
             let date = new Date(Date.parse(item.date_created))
             date = moment(date).locale(locale).format('DD.MM.YYYY')
@@ -69,9 +69,9 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
                     <div className="box-correlati">
 
                       <div className="date">{date}</div>
-                      <h2>{prodottoTradotto.title}</h2>
+                      <h2>{prodottoTradotto?.title}</h2>
                       <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.summary ? summary(prodottoTradotto.summary, 120) : '' }} />
-                      <Link to={`${locale === 'it_IT' ? "" : "/" + langTag[locale]}/${"news"}/${prodottoTradotto.slug}`} >Leggi tutto</Link>
+                      <Link to={`${locale === 'it_IT' ? "" : "/" + langTag[locale]}/${"news"}/${prodottoTradotto?.slug}`} >Leggi tutto</Link>
                     </div>
                   </div>
                 </div>

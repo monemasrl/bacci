@@ -27,11 +27,11 @@ const Prodotto = ({ pageContext }) => {
         seo={seoFilterLocale}
       >
         <div className="wrapper-news">
-          {content.image && <GatsbyImage image={content.image.imageFile.childImageSharp.gatsbyImageData} alt={content.image.description || dataProdottoTranslated.title} />}
+          {content.image?.imageFile && <GatsbyImage image={content.image?.imageFile?.childImageSharp.gatsbyImageData} alt={content.image.description || dataProdottoTranslated.title} />}
 
           <span className="datanews"> {moment(date).locale(pageContext.locale).format('DD MM YYYY')}</span>
 
-          <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.content }} />
+          {dataProdottoTranslated?.content && <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated?.content }} />}
 
         </div>
         <LastNews locale={locale} limiteVisualizzazione={3} idCurrentNews={content.id} />

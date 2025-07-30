@@ -69,9 +69,9 @@ const Prodotto = ({ pageContext }) => {
                 <div className="container prodotto">
                     <section className="container sezione-1 mainProdotto">
                         <div className="box-sx">
-                            <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.titolo }} />
-                            <h2 dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.sottotitolo }} />
-                            <p dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.paragrafo }} />
+                            <h1 className="titolo" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.titolo && dataProdottoTranslated.titolo }} />
+                            <h2 dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.sottotitolo && dataProdottoTranslated.sottotitolo }} />
+                            <p dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.paragrafo && dataProdottoTranslated.paragrafo }} />
                             <nav>
                                 {content.catalogo?.filename_disk && <button className="button-sezione" onClick={() => setShowModale(true)} >download</button>}
                                 {content.video && <button className="button-sezione" onClick={() => setIsVideoVisible(true)} >video</button>}
