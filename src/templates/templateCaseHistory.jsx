@@ -87,23 +87,23 @@ const TemplateCaseHistory = ({ pageContext }) => {
                 <section className={`container sezione-1 customer`}>
                     <div className="box-sx">
                         <ul>
-                            {content.customer && <li className="customer">
+                            {content?.customer && <li className="customer">
                                 <div className="titolo">{Termini[locale].cliente}</div>
                                 {content.customer}
                             </li>}
-                            {content.country && <li className="nazione">
+                            {content?.country && <li className="nazione">
                                 <div className="titolo">{Termini[locale].nazione}</div>
                                 {content.country}
                             </li>}
-                            {content.city && <li className="citta">
+                            {content?.city && <li className="citta">
                                 <div className="titolo">{Termini[locale].citta}</div>
                                 {content.city}
                             </li>}
-                            {content.website && <li className="website">
+                            {content?.website && <li className="website">
                                 <div className="titolo">Website</div>
                                 <a href={content.website} target="_blank" rel="noreferrer noopener">{urlWithoutProtocol}</a>
                             </li>}
-                            {(content.related_machines?.length > 0) && <li className="macchine">
+                            {(content?.related_machines?.length > 0) && <li className="macchine">
                                 <div className="titolo">Bacci Machines</div>
                                 <ul>
                                     {content.related_machines?.map((item, index) => {
@@ -113,14 +113,14 @@ const TemplateCaseHistory = ({ pageContext }) => {
                                     })}
                                 </ul>
                             </li>}
-                            {content.social_shares && <li className="share">
+                            {content?.social_shares && <li className="share">
                                 <div className="titolo">Share</div>
                                 {socialShare(content.social_shares, iconSocial)}
                             </li>}
                         </ul>
                     </div>
                     <div className="box-dx">
-                        {content.secondary_image && <GatsbyImage image={content.secondary_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
+                        {content?.secondary_image && <GatsbyImage image={content.secondary_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
                     </div>
 
                 </section>
@@ -130,7 +130,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                         return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
                     })}
                 </section>
-                {(content.related_machines?.length > 0) && <Correlati locale={locale} idProdotto={content.id} listaProdottiNoQuery={content.related_machines} limiteVisualizzazione={3} />}
+                {(content?.related_machines?.length > 0) && <Correlati locale={locale} idProdotto={content.id} listaProdottiNoQuery={content.related_machines} limiteVisualizzazione={3} />}
             </Layout>}
         </>
 
