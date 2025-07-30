@@ -18,7 +18,7 @@ const Fiere = ({ pageContext }) => {
   const dataBreadCrumbFiere = {
     dataFrom: moment(dateFrom).format('DD'),
     dataTo: moment(dateTo).format('DD MMM YYYY'),
-    title: dataProdottoTranslated.title,
+    title: dataProdottoTranslated?.title || '',
     location: content.location,
   }
 
@@ -41,16 +41,16 @@ const Fiere = ({ pageContext }) => {
         <div className="wrapper-fiere">
 
           <section className="topfiera">
-            <h2>{dataProdottoTranslated.sottotitolo}</h2>
+            <h2>{dataProdottoTranslated?.sottotitolo && dataProdottoTranslated?.sottotitolo}</h2>
             <p className="description">
-              {dataProdottoTranslated.description}
+              {dataProdottoTranslated?.description && dataProdottoTranslated?.description}
             </p>
-            {dataProdottoTranslated.call2action && <div className="call2action">
-              <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.call2action }} />
+            {dataProdottoTranslated?.call2action && <div className="call2action">
+              <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated?.call2action && dataProdottoTranslated?.call2action }} />
               <FormFiere nomeEvento={title} lang={pageContext.locale} />
             </div>}
           </section>
-          <div className="bodyFiera" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated.body }} />
+          <div className="bodyFiera" dangerouslySetInnerHTML={{ __html: dataProdottoTranslated?.body && dataProdottoTranslated?.body }} />
           <div className="wrapperFormBottomFiere">
             <FormFiere nomeEvento={title} lang={pageContext.locale} />
           </div>
