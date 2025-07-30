@@ -95,6 +95,8 @@ function Slider({ locale }) {
             translations: item.translations.filter((trans) => trans.languages_code.code === locale)
         }))
         .filter((item) => item.translations[0]?.titolo);
+
+    console.log(slidesTranslated)
     return (
         <>
             <Swiper
@@ -159,7 +161,7 @@ function Slider({ locale }) {
                     /* Se non esiste una traduzione ritorna slide vuota */
                     if (translation.length === 0) return <div key={index}></div>
 
-                    const translations = translation[index].translations[0]
+                    const translations = item.translations[0]
                     return (
 
                         <SwiperSlide key={index} >
