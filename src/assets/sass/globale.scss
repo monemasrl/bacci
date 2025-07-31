@@ -1424,6 +1424,19 @@ section.container.candidature {
 }
 
 .caseHistory {
+  .blocchicase {
+    #sezione-2 {
+      flex-direction: column;
+      .image-gallery {
+        margin-top: 4rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+    }
+  }
   .image-gallery {
     display: flex;
     flex-direction: column;
@@ -1478,6 +1491,9 @@ section.container.candidature {
       font-weight: 400;
       font-family: $title;
       margin: 2rem auto 1rem auto;
+      @media #{$landscape} {
+        font-size: 40px;
+      }
     }
   }
   section#sezione-2 {

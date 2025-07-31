@@ -70,6 +70,16 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+menu_items{
+  name
+  translations{
+    languages_code{
+      code
+    }
+    label
+    slug
+  }
+}
         Fiere {
           seo {
             translations {
@@ -512,24 +522,39 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // ANCHOR: CREAZIONE HOMEPAGE
 
-  function translationHomePage(translations) {
-    //crea un array con i dati per le traduzioni della homepage
-    const data = translations.map(item => {
+  function translationHomePage(languages, homeMenuItem) {
+    // crea un array con i dati per le traduzioni della homepage solo se esiste la label nel menu
+    const data = []
 
-      return {
-        title: "Home",
-        locale: item.code,
-        path: item.code == "en_US" ? "/en" : "/",
+    languages.forEach(item => {
+      // Trova la traduzione corrispondente nel menu item "Home"
+      const menuTranslation = homeMenuItem?.translations.find(
+        translation => translation.languages_code.code === item.code
+      )
+
+      // Crea la traduzione solo se esiste la slug nel menu
+      if (menuTranslation && menuTranslation.slug) {
+        data.push({
+          title: "Home",
+          locale: item.code,
+          path: item.code == "en_US" ? "/en" : "/",
+        })
       }
     })
+
     return data
   }
 
-  //const datatranslationhome = result.data.directus.pages.find((item) => { return item.name.toLowerCase() == 'home' })
+  // Trova il menu item "Home" dalla collezione menuitem
+  const homeMenuItem = result.data.directus.menu_items.find(item =>
+    item.name?.toLowerCase() === "home"
+  )
 
   const homePage = {
-    translations: translationHomePage(result.data.directus.languages),
+    translations: translationHomePage(result.data.directus.languages, homeMenuItem),
   }
+
+  // allPagePath ora contiene solo i path delle homepage effettivamente create
   const allPagePath = homePage.translations
   homePage.translations.forEach(translation => {
     createPage({
@@ -543,7 +568,7 @@ exports.createPages = async ({ graphql, actions }) => {
         listaApplicazioni: tassonomiaProdotti.applicazioni[translation.locale],
         listaCategorie: tassonomiaProdotti.categorie[translation.locale],
         pageName: translation.title.toLowerCase(),
-        allPagePath: allPagePath,
+        allPagePath: allPagePath, // Ora contiene solo i path delle homepage effettivamente create
       },
     })
   })
@@ -612,24 +637,26 @@ exports.createPages = async ({ graphql, actions }) => {
               ? "/"
               : langTag[translation.languages_code.code] + "/"
 
-          createPage({
-            path: `${urlBase}${translation.slug.toLowerCase()}`,
-            component: getTemplate(item.name),
+          if (translation.slug) {
+            createPage({
+              path: `${urlBase}${translation.slug?.toLowerCase()}`,
+              component: getTemplate(item.name),
 
-            context: {
-              locale: translation.languages_code.code,
-              title: translation.label,
-              slug: translation.slug,
-              allPagePath: allPagePath,
-              pageName: slugify(item.name).toLowerCase(),
-              listaApplicazioni:
-                tassonomiaProdotti.applicazioni[
-                translation.languages_code.code
-                ],
-              listaCategorie:
-                tassonomiaProdotti.categorie[translation.languages_code.code],
-            },
-          })
+              context: {
+                locale: translation.languages_code.code,
+                title: translation.label,
+                slug: translation.slug,
+                allPagePath: allPagePath,
+                pageName: slugify(item.name).toLowerCase(),
+                listaApplicazioni:
+                  tassonomiaProdotti.applicazioni[
+                  translation.languages_code.code
+                  ],
+                listaCategorie:
+                  tassonomiaProdotti.categorie[translation.languages_code.code],
+              },
+            })
+          }
         })
       }
       // se ci sono elementi di secondo livello crea le pagine
@@ -690,35 +717,59 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // ANCHOR: PAGINA PRODOTTI
 
-  function translationProdottiPage(translations, langTag) {
-    //crea un array con i dati per le traduzioni della homepage
-    const data = translations.map(item => {
-      return {
-        title: item.code == "it_IT" ? "prodotti" : "products",
-        locale: item.code,
-        path:
-          item.code == "it_IT"
+  function translationProdottiPage(translations, langTag, prodottiMenuItem) {
+    //crea un array con i dati per le traduzioni della pagina prodotti solo se esiste la traduzione nel menu
+    const data = []
+
+    translations.forEach(item => {
+      // Trova la traduzione corrispondente nel menu item "Prodotti"
+      const menuTranslation = prodottiMenuItem?.translations.find(
+        translation => translation.languages_code.code === item.code && translation.label
+      )
+
+      // Crea la traduzione solo se esiste la traduzione nel menu
+      if (menuTranslation) {
+        data.push({
+          title: item.code == "it_IT" ? "prodotti" : "products",
+          locale: item.code,
+          path: item.code == "it_IT"
             ? "/prodotti"
             : "/" + langTag[item.code] + "/" + "products",
+        })
       }
     })
+
     return data
   }
+
+  // Trova il menu item "Prodotti" dalla collezione menu_items
+  const prodottiMenuItem = result.data.directus.menu_items.find(item =>
+    item.name?.toLowerCase() === "prodotti" ||
+    item.name?.toLowerCase() === "products"
+  )
 
   const paginaProdotto = {
     translations: translationProdottiPage(
       result.data.directus.languages,
-      langTag
+      langTag,
+      prodottiMenuItem
     ),
   }
 
+  // allPagePath ora contiene solo i path delle pagine prodotti effettivamente create
   paginaProdotto.translations.forEach(translation => {
     const urlBase =
       langTag[translation.locale] === "it"
         ? "/"
         : "/" + langTag[translation.locale] + "/"
 
-    if (translation.title) {
+    // Verifica che esista la traduzione nel menu per questa lingua
+    const menuTranslation = prodottiMenuItem?.translations.find(
+      menuTrans => menuTrans.languages_code.code === translation.locale && menuTrans.label
+    )
+
+    // Crea la pagina solo se esiste sia la traduzione che la voce di menu
+    if (translation.title && menuTranslation) {
       createPage({
         path: `${urlBase}${translation.title.toLowerCase()}`,
         component: require.resolve("./src/templates/prodotti.jsx"),
@@ -729,7 +780,7 @@ exports.createPages = async ({ graphql, actions }) => {
           listaApplicazioni:
             tassonomiaProdotti.applicazioni[translation.locale],
           listaCategorie: tassonomiaProdotti.categorie[translation.locale],
-          allPagePath: paginaProdotto.translations,
+          allPagePath: paginaProdotto.translations, // Ora contiene solo i path effettivamente creati
         },
       })
     }

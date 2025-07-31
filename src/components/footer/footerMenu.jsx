@@ -99,26 +99,28 @@ function FooterMenu({ locale, listaTipologia }) {
             if (item.name === 'Azienda' || item.name === 'Tecnologia') {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
 
-                return (
-                    <div key={index} className="footer-col">
-                        <ul>
-                            <li>{parentItemTranslated.label}</li>
-                            {item.sub_items.map((subitem, index) => {
-                                const itemTranslated = findItemTranslated(subitem.translations, locale)
-                                if (itemTranslated) {
-                                    return (
-                                        <li key={index}>
-                                            <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label.toLowerCase()}</Link>
-                                        </li>
-                                    )
-                                } else {
-                                    return null
-                                }
-                            })}
+                if (parentItemTranslated.slug && item.sub_items.length > 0) {
+                    return (
+                        <div key={index} className="footer-col">
+                            <ul>
+                                <li>{parentItemTranslated.label}</li>
+                                {item.sub_items.map((subitem, index) => {
+                                    const itemTranslated = findItemTranslated(subitem.translations, locale)
+                                    if (itemTranslated && itemTranslated.slug) {
+                                        return (
+                                            <li key={index}>
+                                                <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated?.label.toLowerCase() + "/" : ''}${itemTranslated?.slug.toLowerCase()}`}>{itemTranslated?.label.toLowerCase()}</Link>
+                                            </li>
+                                        )
+                                    } else {
+                                        return null
+                                    }
+                                })}
 
-                        </ul>
-                    </div>
-                )
+                            </ul>
+                        </div>
+                    )
+                }
 
             }
             if (item.name === 'Prodotti') {
@@ -128,13 +130,13 @@ function FooterMenu({ locale, listaTipologia }) {
                 if (parentItemTranslated) {
                     return (
                         <div key={index} className="footer-col">
-                            <ul>
+                            {parentItemTranslated.slug && < ul >
                                 <li>{parentItemTranslated.label}</li>
                                 {listaCategorieTranslated.map((subitem, index) => {
                                     if (subitem) { return <li key={index} ><Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`} state={{ categoria: subitem.nome }}>{subitem.nome}</Link></li> }
                                     else { return null }
                                 })}
-                            </ul>
+                            </ul>}
                         </div>
                     )
                 }
@@ -147,14 +149,14 @@ function FooterMenu({ locale, listaTipologia }) {
                 if (parentItemTranslated && sediTipo2.length > 0) {
                     return (
                         <div key={index} className="footer-col">
-                            <ul>
+                            {parentItemTranslated.label && <ul>
                                 <li>{parentItemTranslated.label}</li>
                                 {sediTipo2.map((sede, idx) => (
                                     <li key={idx}>
-                                        <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`}>{sede.nome_sede}</Link>
+                                        <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label?.toLowerCase() + "/" : ''}`}>{sede.nome_sede}</Link>
                                     </li>
                                 ))}
-                            </ul>
+                            </ul>}
                         </div>
                     )
                 }
@@ -181,13 +183,13 @@ function FooterMenu({ locale, listaTipologia }) {
                 <li>Follow us</li>
                 <li>
                     <ul className="social_list">
-                        {data.directus.social.social.map((item, index) => {
+                        {data.directus.social?.social?.map((item, index) => {
                             return (
                                 <li key={index}>
-                                    <a href={item.url} target="_blank" rel="noreferrer">
+                                    {item?.url && <a href={item.url} target="_blank" rel="noreferrer">
                                         {item.nome === 'Youtube' && <GrYoutube />}
                                         {item.nome === 'Linkedin' && <GrLinkedin />}
-                                    </a>
+                                    </a>}
                                 </li>
                             )
                         })}
@@ -197,7 +199,7 @@ function FooterMenu({ locale, listaTipologia }) {
         </div>
 
 
-    </section>)
+    </section >)
 }
 
 export default FooterMenu

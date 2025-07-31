@@ -72,7 +72,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                             {dataTranslated.sottotitolo && <h3 dangerouslySetInnerHTML={{ __html: dataTranslated.sottotitolo }} />}
                         </div>
                         <div className="box-immagine">
-                            {content.featured_image && <GatsbyImage image={content.featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
+                            {content.featured_image?.imageFile && <GatsbyImage image={content.featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'gatsby immagine case history'} />}
                         </div>
                         <div className="box-dx">
 
@@ -109,6 +109,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                                     {content.related_machines?.map((item, index) => {
 
                                         const translated = item.Prodotti_id?.translations && findItemTranslated(item.Prodotti_id?.translations, locale)
+
                                         if (translated?.titolo && translated?.slug) { return <li key={index}><Link to={`/${locale === 'it_IT' ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${translated.slug}`}>{translated.titolo}</Link></li> } else { return null }
                                     })}
                                 </ul>
@@ -120,11 +121,11 @@ const TemplateCaseHistory = ({ pageContext }) => {
                         </ul>
                     </div>
                     <div className="box-dx">
-                        {content?.secondary_image && <GatsbyImage image={content.secondary_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
+                        {content?.secondary_image?.imageFile && <GatsbyImage image={content.secondary_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
                     </div>
 
                 </section>
-                <section className={`container-fluid ${pageContext.pageName}`}>
+                <section className={`container-fluid blocchicase ${pageContext.title}`}>
                     {contentForBlocchiPagina?.map((blocco, index) => {
 
                         return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)

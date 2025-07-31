@@ -5,7 +5,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 function Hero({ content, pageName, index }) {
 
 
-    if (pageName === 'gruppo-bacci') return (
+    if (pageName === 'gruppo-bacci' && content.item.translations.length > 0) return (
         <section key={index} className="map-gruppo-bacci">
             {content.item.translations[0].titolo && <h2 className="map-gruppo-bacci__titolo">{content.item.translations[0].titolo}</h2>}
             {content.item.translations[0].headline && <div className="map-gruppo-bacci__lista" dangerouslySetInnerHTML={{ __html: content.item.translations[0].headline }} />}

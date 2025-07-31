@@ -68,8 +68,8 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
                     {item.image?.imageFile && <GatsbyImage className="immagine-widget" image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.title} />}
                     <div className="box-correlati">
 
-                      <div className="date">{date}</div>
-                      <h2>{prodottoTradotto?.title}</h2>
+                      <div className="date">{date || ''}</div>
+                      <h2>{prodottoTradotto?.title || ''}</h2>
                       <p dangerouslySetInnerHTML={{ __html: prodottoTradotto.summary ? summary(prodottoTradotto.summary, 120) : '' }} />
                       <Link to={`${locale === 'it_IT' ? "" : "/" + langTag[locale]}/${"news"}/${prodottoTradotto?.slug}`} >Leggi tutto</Link>
                     </div>

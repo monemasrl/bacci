@@ -60,8 +60,15 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                 <div className={`box-sx `} >
                     <h2 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo ? content.item.traduzioni[0].titolo : '' }} />
                     {content.item.traduzioni[0].sotto_titolo && <h3 dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo ? content.item.traduzioni[0].sotto_titolo : '' }} />}
-
                 </div>
+                {(content.item.images && content.item.images.length > 0) &&
+                    <div className="image-gallery">
+                        {content.item.images?.map((item, index) => {
+                            return <div key={index} className="boxImage">
+                                {item.directus_files_id?.imageFile && <GatsbyImage image={item.directus_files_id.imageFile.childImageSharp.gatsbyImageData} alt={item.description || 'Bacci website image'} />}
+                            </div>
+                        })}
+                    </div>}
                 <div className="box-immagine">
                     {content.item.immagine?.imageFile && <GatsbyImage image={content.item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.item.immagine.description || 'Bacci website image'} />}
                 </div>
@@ -69,6 +76,8 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
                     <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo ? content.item.traduzioni[0].paragrafo : '' }} />
                     {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
                 </div>
+
+
             </>}
         </motion.section>)
     }

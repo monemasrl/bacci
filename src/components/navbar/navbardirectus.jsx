@@ -10,38 +10,39 @@ import './navbar.scss'
 const NavBarDirectus = (props) => {
 
     const data = useStaticQuery(graphql`
-query datimenu{
-    directus{
-            menus{
-                name
-                items{
-                id
-                translations{
-                    languages_code{
-                        code
-                    }
-                    label
-                    slug
-                }
-                sub_items{
+    query datimenu{
+        directus{
+                menus{
+                    name
+                    items{
+           
                     id
                     translations{
-                    languages_code{
-                        code
+                        languages_code{
+                            code
+                        }
+                        label
+                        slug
                     }
-                    label
-                    slug
+                    sub_items{
+                        id
+                        translations{
+                        languages_code{
+                            code
+                        }
+                        label
+                        slug
+                        }
+                        parent_item{
+                        id
+                        }
                     }
-                    parent_item{
-                    id
                     }
                 }
                 }
-            }
-            }
 
-            }
-    `)
+                }
+        `)
 
 
     const terminiTraduzione = Termini[props.locale]
@@ -173,10 +174,10 @@ query datimenu{
                                 const itemTranslated = item.translations.find((lang) => {
                                     return langTag[lang.languages_code.code] === langTag[props.locale]
                                 })
-
+                                console.log(itemTranslated, 'item')
                                 return (
                                     <Fragment key={item.id} >
-                                        {item.id === '2' ?
+                                        {item.id === '2' && itemTranslated.label ?
                                             <li key={item.id} role="button" tabIndex={0} onClick={() => props.setMega(true)}
                                                 onMouseLeave={() => props.setMega(false)}>
                                                 <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a>{itemTranslated.label}</a><img src={icon} width="20" alt="iconamenu" />
@@ -194,7 +195,7 @@ query datimenu{
 
                                             </li> :
                                             <li role="button" tabIndex={0} onClick={() => setOpenSub(item.id)} onMouseLeave={() => setOpenSub(null)} key={item.id}>
-                                                {item.sub_items.length ? <a >{itemTranslated.label}<img src={icon} width="20" alt="iconamenu" /></a> :
+                                                {item.sub_items.length && itemTranslated.slug ? <a >{itemTranslated.label}<img src={icon} width="20" alt="iconamenu" /></a> :
                                                     itemTranslated.slug && <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul className={`${item.id === openSub ? 'open' : ''}`}>
                                                         {item.sub_items.map((subitem) => {
                                                             const subItemTranslated = subitem.translations.find((lang) => {
@@ -202,7 +203,7 @@ query datimenu{
                                                             })
                                                             if (subItemTranslated.slug) {
                                                                 return (
-                                                                    <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug.toLowerCase()}/${subItemTranslated.slug}`}>
+                                                                    <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug?.toLowerCase()}/${subItemTranslated.slug}`}>
                                                                         {subItemTranslated.label}
                                                                     </Link>
                                                                     </li>

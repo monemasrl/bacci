@@ -53,7 +53,7 @@ function CaseHistory({ locale }) {
                                 translation.title && (
                                     <div key={index} className="widget-case__box">
                                         <h2>{translation.title}</h2>
-                                        <h3>{translation.sottotitolo && translation.sottotitolo}</h3>
+                                        <h3>{translation.sottotitolo || ''}</h3>
                                         {item.featured_image?.imageFile && <GatsbyImage loading="eager" image={item.featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
                                         <Link className="button-sezione" to={`${urlBase}${Termini[locale].caseHistory}/${translation.slug}`}>{Termini[locale].scopri}</Link>
                                     </div>)
