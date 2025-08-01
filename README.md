@@ -6,6 +6,6 @@ su: /sitemap-index.xml si trova il link per i crawler
 ## TRADUZIONI
 
 Per disattivare una traduzione di pagine interne
-eliminare titolo e slug dalla voce di menu
+spuntare la casella nelle voci di menu
 
-Per disattivare una traduzione nei contenuti ()
+Per disattivare una traduzione nei contenuti eliminare titolo e slug del contenuto tradotto

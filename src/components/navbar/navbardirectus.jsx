@@ -10,39 +10,39 @@ import './navbar.scss'
 const NavBarDirectus = (props) => {
 
     const data = useStaticQuery(graphql`
-    query datimenu{
-        directus{
-                menus{
+        query datimenu {
+            directus {
+                menus {
                     name
-                    items{
-           
-                    id
-                    translations{
-                        languages_code{
-                            code
-                        }
-                        label
-                        slug
-                    }
-                    sub_items{
+                    items {
                         id
-                        translations{
-                        languages_code{
-                            code
+                        translations(filter: { creazione_pagina: { _eq: true } }) {
+                            languages_code {
+                                code
+                            }
+                            label
+                            slug
+                            creazione_pagina
                         }
-                        label
-                        slug
-                        }
-                        parent_item{
-                        id
+                        sub_items {
+                            id
+                            translations(filter: { creazione_pagina: { _eq: true } }) {
+                                languages_code {
+                                    code
+                                }
+                                label
+                                slug
+                                creazione_pagina
+                            }
+                            parent_item {
+                                id
+                            }
                         }
                     }
-                    }
                 }
-                }
-
-                }
-        `)
+            }
+        }
+    `)
 
 
     const terminiTraduzione = Termini[props.locale]
@@ -66,7 +66,7 @@ const NavBarDirectus = (props) => {
           result.data.directus.languages,
           langTag
         ), */
-
+    console.log(data.directus.menus, 'menus')
     return (
         <>
             <nav className="container-fluid top-menu">
@@ -76,9 +76,10 @@ const NavBarDirectus = (props) => {
                             {data.directus.menus[1].items.map((item) => {
 
                                 const itemTranslated = item.translations.find((lang) => {
-                                    return langTag[lang.languages_code.code] === langTag[props.locale]
+                                    return (langTag[lang.languages_code.code] === langTag[props.locale]) && lang.creazione_pagina
                                 })
-                                if (itemTranslated.slug) {
+
+                                if (itemTranslated?.slug && itemTranslated?.creazione_pagina) {
 
                                     return (
                                         <li
@@ -110,10 +111,11 @@ const NavBarDirectus = (props) => {
                                                     {item.sub_items.map((subitem) => {
                                                         const subItemTranslated = subitem.translations.find(
                                                             (lang) =>
-                                                                langTag[lang.languages_code.code] ===
-                                                                langTag[props.locale]
+                                                                (langTag[lang.languages_code.code] ===
+                                                                    langTag[props.locale]) && lang.creazione_pagina
                                                         );
-                                                        if (subItemTranslated.slug) {
+
+                                                        if (subItemTranslated?.slug) {
                                                             return (
                                                                 <li key={subItemTranslated.label}>
                                                                     <Link
@@ -172,12 +174,12 @@ const NavBarDirectus = (props) => {
                             {data.directus.menus[0].items.map((item) => {
 
                                 const itemTranslated = item.translations.find((lang) => {
-                                    return langTag[lang.languages_code.code] === langTag[props.locale]
+                                    return (langTag[lang.languages_code.code] === langTag[props.locale]) && lang.creazione_pagina
                                 })
-                                console.log(itemTranslated, 'item')
+
                                 return (
                                     <Fragment key={item.id} >
-                                        {item.id === '2' && itemTranslated.label ?
+                                        {item.id === '2' && itemTranslated ?
                                             <li key={item.id} role="button" tabIndex={0} onClick={() => props.setMega(true)}
                                                 onMouseLeave={() => props.setMega(false)}>
                                                 <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a>{itemTranslated.label}</a><img src={icon} width="20" alt="iconamenu" />
@@ -193,18 +195,18 @@ const NavBarDirectus = (props) => {
 
                                                 />
 
-                                            </li> :
+                                            </li> : (itemTranslated && itemTranslated.creazione_pagina) &&
                                             <li role="button" tabIndex={0} onClick={() => setOpenSub(item.id)} onMouseLeave={() => setOpenSub(null)} key={item.id}>
-                                                {item.sub_items.length && itemTranslated.slug ? <a >{itemTranslated.label}<img src={icon} width="20" alt="iconamenu" /></a> :
+                                                {item.sub_items.length && itemTranslated ? <a >{itemTranslated.label}<img src={icon} width="20" alt="iconamenu" /></a> :
                                                     itemTranslated.slug && <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul className={`${item.id === openSub ? 'open' : ''}`}>
                                                         {item.sub_items.map((subitem) => {
                                                             const subItemTranslated = subitem.translations.find((lang) => {
-                                                                return langTag[lang.languages_code.code] === langTag[props.locale]
+                                                                return (langTag[lang.languages_code.code] === langTag[props.locale]) && lang.creazione_pagina
                                                             })
-                                                            if (subItemTranslated.slug) {
+                                                            if (subItemTranslated?.slug) {
                                                                 return (
                                                                     <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug?.toLowerCase()}/${subItemTranslated.slug}`}>
-                                                                        {subItemTranslated.label}
+                                                                        {subItemTranslated.label || ''}
                                                                     </Link>
                                                                     </li>
                                                                 )

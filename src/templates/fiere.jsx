@@ -90,7 +90,8 @@ const Fiere = ({ data, pageContext }) => {
         seo={seoFilterLocale}
       >
         <section className="container fiere" ref={topArchivio}>
-          {langFilterFiereSorted && <GridPagination pagePath={pageContext.allPagePath} pageName="fiere" topArchivio={topArchivio} archivio={langFilterFiereSorted} lang={pageContext.locale} />}
+          {langFilterFiereSorted.length > 0 ? <GridPagination pagePath={pageContext.allPagePath} pageName="fiere" topArchivio={topArchivio} archivio={langFilterFiereSorted} lang={pageContext.locale} /> :
+            <div>No data</div>}
         </section>
       </Layout>
     </>

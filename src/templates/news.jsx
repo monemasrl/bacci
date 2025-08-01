@@ -64,14 +64,13 @@ export const query = graphql`
 
 
 const News = ({ data, pageContext }) => {
-  const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-  const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+
   const topArchivio = React.useRef()
   const langFilterProdottoSorted = data.directus.posts.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
   const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
-  console.log(data.directus.posts)
+
   return (
     <>
       <Layout
@@ -83,8 +82,11 @@ const News = ({ data, pageContext }) => {
         seo={seoFilterLocale}
       >
         <section className="container news" ref={topArchivio}>
-          {langFilterProdottoSorted &&
-            <GridPagination pagePath={'/news'} pageName="news" topArchivio={topArchivio} archivio={langFilterProdottoSorted} lang={pageContext.locale} />}
+          {langFilterProdottoSorted.length > 0 ? (
+            <GridPagination pagePath={'/news'} pageName="news" topArchivio={topArchivio} archivio={langFilterProdottoSorted} lang={pageContext.locale} />
+          ) : (
+            <p>No news </p>
+          )}
         </section>
       </Layout>
     </>

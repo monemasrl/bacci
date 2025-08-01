@@ -57,6 +57,7 @@ exports.createPages = async ({ graphql, actions }) => {
               }
               label
               slug
+              creazione_pagina
             }
             sub_items {
               name
@@ -66,20 +67,22 @@ exports.createPages = async ({ graphql, actions }) => {
                 }
                 label
                 slug
+                creazione_pagina
               }
             }
           }
         }
-menu_items{
-  name
-  translations{
-    languages_code{
-      code
-    }
-    label
-    slug
-  }
-}
+        menu_items{
+          name
+          translations{
+            languages_code{
+              code
+            }
+            label
+            slug
+            creazione_pagina
+          }
+        }
         Fiere {
           seo {
             translations {
@@ -474,7 +477,7 @@ menu_items{
         baseLang + (parentPath ? parentPath.parentPath : "") + item.slug
       const pathObj = {
         //solo se esiste uno slug in traduzione crea il path
-        path: item.slug && path,
+        path: item.creazione_pagina && path,
         locale: lang,
         title: item.label,
       }
@@ -532,8 +535,8 @@ menu_items{
         translation => translation.languages_code.code === item.code
       )
 
-      // Crea la traduzione solo se esiste la slug nel menu
-      if (menuTranslation && menuTranslation.slug) {
+      // Crea la traduzione solo se è abilitata la creazione nel menu
+      if (menuTranslation && menuTranslation.creazione_pagina) {
         data.push({
           title: "Home",
           locale: item.code,
@@ -637,7 +640,7 @@ menu_items{
               ? "/"
               : langTag[translation.languages_code.code] + "/"
 
-          if (translation.slug) {
+          if (translation.creazione_pagina) {
             createPage({
               path: `${urlBase}${translation.slug?.toLowerCase()}`,
               component: getTemplate(item.name),
@@ -687,7 +690,7 @@ menu_items{
                 ? "/"
                 : "/" + langTag[translation.languages_code.code] + "/"
 
-            if (translation.slug) {
+            if (translation.creazione_pagina) {
               createPage({
                 path: `${urlBase}${findParent.parentPath.toLowerCase()}${translation.slug.toLowerCase()}`,
                 component: getTemplate(subItem.name),
@@ -724,7 +727,7 @@ menu_items{
     translations.forEach(item => {
       // Trova la traduzione corrispondente nel menu item "Prodotti"
       const menuTranslation = prodottiMenuItem?.translations.find(
-        translation => translation.languages_code.code === item.code && translation.label
+        translation => translation.languages_code.code === item.code && translation.creazione_pagina
       )
 
       // Crea la traduzione solo se esiste la traduzione nel menu

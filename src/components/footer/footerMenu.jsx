@@ -39,20 +39,22 @@ function FooterMenu({ locale, listaTipologia }) {
                         }
                     ) {
                         name
-                        translations {
+                        translations(filter: { creazione_pagina: { _eq: true } }) {
                             languages_code {
                                 code
                             }
                             slug
                             label
+                            creazione_pagina
                         }
                         sub_items {
-                            translations {
+                            translations(filter: { creazione_pagina: { _eq: true } }) {
                                 languages_code {
                                     code
                                 }
                                 slug
                                 label
+                                creazione_pagina
                             }
                         }
                     }
@@ -99,14 +101,14 @@ function FooterMenu({ locale, listaTipologia }) {
             if (item.name === 'Azienda' || item.name === 'Tecnologia') {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
 
-                if (parentItemTranslated.slug && item.sub_items.length > 0) {
+                if (parentItemTranslated?.creazione_pagina && item.sub_items.length > 0) {
                     return (
                         <div key={index} className="footer-col">
                             <ul>
                                 <li>{parentItemTranslated.label}</li>
                                 {item.sub_items.map((subitem, index) => {
                                     const itemTranslated = findItemTranslated(subitem.translations, locale)
-                                    if (itemTranslated && itemTranslated.slug) {
+                                    if (itemTranslated && itemTranslated.creazione_pagina) {
                                         return (
                                             <li key={index}>
                                                 <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated?.label.toLowerCase() + "/" : ''}${itemTranslated?.slug.toLowerCase()}`}>{itemTranslated?.label.toLowerCase()}</Link>
@@ -130,7 +132,7 @@ function FooterMenu({ locale, listaTipologia }) {
                 if (parentItemTranslated) {
                     return (
                         <div key={index} className="footer-col">
-                            {parentItemTranslated.slug && < ul >
+                            {parentItemTranslated.creazione_pagina && < ul >
                                 <li>{parentItemTranslated.label}</li>
                                 {listaCategorieTranslated.map((subitem, index) => {
                                     if (subitem) { return <li key={index} ><Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label.toLowerCase() + "/" : ''}`} state={{ categoria: subitem.nome }}>{subitem.nome}</Link></li> }
@@ -149,11 +151,11 @@ function FooterMenu({ locale, listaTipologia }) {
                 if (parentItemTranslated && sediTipo2.length > 0) {
                     return (
                         <div key={index} className="footer-col">
-                            {parentItemTranslated.label && <ul>
-                                <li>{parentItemTranslated.label}</li>
-                                {sediTipo2.map((sede, idx) => (
+                            {parentItemTranslated.creazione_pagina && <ul>
+                                <li>{parentItemTranslated.label || ''}</li>
+                                {sediTipo2?.map((sede, idx) => (
                                     <li key={idx}>
-                                        <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label?.toLowerCase() + "/" : ''}`}>{sede.nome_sede}</Link>
+                                        <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}${parentItemTranslated ? parentItemTranslated.label?.toLowerCase() + "/" : ''}`}>{sede.nome_sede || ''}</Link>
                                     </li>
                                 ))}
                             </ul>}
@@ -163,7 +165,7 @@ function FooterMenu({ locale, listaTipologia }) {
             }
             if (item.name === 'contatti') {
                 const parentItemTranslated = findItemTranslated(item.translations, locale)
-                if (parentItemTranslated) {
+                if (parentItemTranslated.creazione_pagina) {
                     return (
                         <div key={index} className="footer-col">
                             <ul>
