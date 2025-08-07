@@ -15,7 +15,7 @@ function Cards({ content, index }) {
         <motion.section
             key={index}
             ref={card}
-            className={`container repeater cards ${alignCards(content.item.traduzioni[0].blocchi.length)}`}
+            className={`container repeater cards ${content.item.traduzioni[0]?.blocchi && alignCards(content.item.traduzioni[0]?.blocchi?.length)}`}
             animate={isInViewRight ? {
                 opacity: 1, y: 0,
                 transition: {
@@ -23,7 +23,7 @@ function Cards({ content, index }) {
                 }
             } : { opacity: 0, y: 100 }}
         >
-            {content.item.traduzioni[0].blocchi?.map((item, index) => {
+            {content.item.traduzioni[0]?.blocchi?.map((item, index) => {
                 return (
                     <div key={index} className='box-repeater'>
                         <h3>{item.Titolo && item.Titolo}</h3>

@@ -83,6 +83,21 @@ exports.createPages = async ({ graphql, actions }) => {
             creazione_pagina
           }
         }
+           pages(filter:{software: {_eq: true}, status:{_eq:"published"}} ) {
+            id
+            page_name
+            software
+            status
+          
+            translations{
+              languages_code{
+                code
+              }
+              slug
+              nome
+            }
+            
+        }
         Fiere {
           seo {
             translations {
@@ -610,7 +625,8 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
-  // ANCHOR: CREAZIONE PAGINE INTERNE DA MENU
+
+  //funzione che assegna il template al tipoi di dato
   function getTemplate(name) {
     switch (name) {
       case "News":
@@ -627,6 +643,10 @@ exports.createPages = async ({ graphql, actions }) => {
         return require.resolve("./src/templates/page.jsx")
     }
   }
+
+
+  // ANCHOR: CREAZIONE PAGINE INTERNE DA MENU
+
   await result.data.directus.menus.forEach(menu => {
     // Loop su tutti i menu
     menu.items.forEach(item => {
@@ -639,7 +659,7 @@ exports.createPages = async ({ graphql, actions }) => {
             langTag[translation.languages_code.code] === "it"
               ? "/"
               : langTag[translation.languages_code.code] + "/"
-
+          //crea la pagina solo se nel menu è sputata la casella di creazione
           if (translation.creazione_pagina) {
             createPage({
               path: `${urlBase}${translation.slug?.toLowerCase()}`,
@@ -817,7 +837,7 @@ exports.createPages = async ({ graphql, actions }) => {
           ? "/"
           : "/" + langTag[translation.languages_code.code] + "/"
 
-      if (translation.slug) {
+      if (translation.slug && entry.type === 'machinery') {
         createPage({
           path: `${urlBase}${Termini[translation.languages_code.code].prodotti
             }/${translation.slug.toLowerCase()}`,
@@ -992,6 +1012,54 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
+  // SOFTWARE
+  const software = await result.data.directus.pages
+  function getAllPathSoftware(translations) {
+    const allPath = []
+    translations.forEach(item => {
+      if (item.slug) {
+        const lang = item.languages_code.code
+        const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
+        const path = baseLang + Termini[lang].prodotti + "/software/" + item.slug
+        const pathObj = {
+          path: path,
+          locale: lang,
+          title: item.title,
+        }
+        allPath.push(pathObj)
+      }
+    })
+    return allPath
+  }
+  software.forEach(entry => {
+    const allPagePath = getAllPathSoftware(entry.translations)
+
+    entry.translations.forEach(translation => {
+      const urlBase =
+        langTag[translation.languages_code.code] === "it"
+          ? "/"
+          : "/" + langTag[translation.languages_code.code] + "/"
+
+      if (translation.slug) {
+        createPage({
+          path: `${urlBase}${Termini[translation.languages_code.code].prodotti
+            }/${"software"}/${translation.slug.toLowerCase()}`,
+          component: require.resolve("./src/templates/page.jsx"),
+          context: {
+
+            locale: translation.languages_code.code,
+            slug: translation.slug,
+            title: translation.nome,
+            allPagePath: allPagePath,
+            listaApplicazioni:
+              tassonomiaProdotti.applicazioni[translation.languages_code.code],
+            listaCategorie:
+              tassonomiaProdotti.categorie[translation.languages_code.code],
+          },
+        })
+      }
+    })
+  })
 
 }
 

@@ -74,6 +74,20 @@ const MegamenuDirectus = ({
             }
           }
         }
+    pages(filter:{software: {_eq: true}, status:{_eq:"published"}} ) {
+      id
+      page_name
+      software
+      status
+      translations{
+        languages_code{
+          code
+        }
+        slug
+        nome
+      }
+      
+    }
       }
     }
   `)
@@ -99,10 +113,8 @@ const MegamenuDirectus = ({
         novita[novita.length - 1].translations,
         locale
     )
-    const software = dataMega.directus.Prodotti.filter(
-        item => item.type === "software"
-    )
-
+    const software = dataMega.directus.pages
+    console.log(software, 'software')
     return (
         <AnimatePresence>
             {mega && (
@@ -271,8 +283,8 @@ const MegamenuDirectus = ({
                                             )
                                     )}
                             </ul>
-                            {software.length > 1 && <div className="titolo-col-mega software">Software</div>}
-                            {software.length > 1 &&
+                            {software.length > 0 && <div className="titolo-col-mega software">Software</div>}
+                            {software.length > 0 &&
                                 <ul className="mega-list">
                                     {software?.map((item, index) => {
                                         const traduzioni = findItemTranslated(
@@ -287,13 +299,10 @@ const MegamenuDirectus = ({
                                                         to={`${locale === "it_IT"
                                                             ? "/" + terminiTraduzione.prodotti
                                                             : "/" +
-                                                            language +
-                                                            "/" +
-                                                            terminiTraduzione.prodotti
-                                                            }/${traduzioni.slug}`}
+                                                            language}${"/software"}/${traduzioni.slug}`}
                                                         className="mega-item"
                                                     >
-                                                        {traduzioni.titolo}
+                                                        {traduzioni.nome}
                                                     </Link>
                                                 </li>
                                             )

@@ -13,6 +13,7 @@ function Hero({ content, pageName, index }) {
         </section>
     )
 
+
 }
 
 
