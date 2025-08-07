@@ -297,9 +297,9 @@ const MegamenuDirectus = ({
                                                 <li key={index}>
                                                     <Link
                                                         to={`${locale === "it_IT"
-                                                            ? "/" + terminiTraduzione.prodotti
+                                                            ? "/software/"
                                                             : "/" +
-                                                            language}${"/software"}/${traduzioni.slug}`}
+                                                            language + "/software/"}${traduzioni.slug}`}
                                                         className="mega-item"
                                                     >
                                                         {traduzioni.nome}

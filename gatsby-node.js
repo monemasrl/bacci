@@ -837,7 +837,7 @@ exports.createPages = async ({ graphql, actions }) => {
           ? "/"
           : "/" + langTag[translation.languages_code.code] + "/"
 
-      if (translation.slug && entry.type === 'machinery') {
+      if (translation.slug) {
         createPage({
           path: `${urlBase}${Termini[translation.languages_code.code].prodotti
             }/${translation.slug.toLowerCase()}`,
@@ -1020,7 +1020,7 @@ exports.createPages = async ({ graphql, actions }) => {
       if (item.slug) {
         const lang = item.languages_code.code
         const baseLang = langTag[lang] !== "it" ? "/" + langTag[lang] + "/" : "/"
-        const path = baseLang + Termini[lang].prodotti + "/software/" + item.slug
+        const path = baseLang + "software/" + item.slug
         const pathObj = {
           path: path,
           locale: lang,
@@ -1037,13 +1037,12 @@ exports.createPages = async ({ graphql, actions }) => {
     entry.translations.forEach(translation => {
       const urlBase =
         langTag[translation.languages_code.code] === "it"
-          ? "/"
-          : "/" + langTag[translation.languages_code.code] + "/"
+          ? "/software"
+          : "/" + langTag[translation.languages_code.code] + "/software"
 
       if (translation.slug) {
         createPage({
-          path: `${urlBase}${Termini[translation.languages_code.code].prodotti
-            }/${"software"}/${translation.slug.toLowerCase()}`,
+          path: `${urlBase}/${translation.slug.toLowerCase()}`,
           component: require.resolve("./src/templates/page.jsx"),
           context: {
 
