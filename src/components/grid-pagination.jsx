@@ -112,7 +112,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                     </div>
                                     <div className="position">{item.position && item.position}</div>
                                     <div className="luogo">{item.location && item.location}</div>
-                                    {item.link_fiera && <a className="link" href={`https://${item.link_fiera}`} target="_blank" rel="noreferrer noopener">{item.link_fiera}</a>}
+                                    {item.link_fiera && <a className="link" href={`${item.link_fiera}`} target="_blank" rel="noreferrer noopener">{item.link_fiera}</a>}
                                     {item.page && <Link className="buttonLink" to={`${pathTranslated.path}/${titleTranslated.slug}`}>&#62;</Link>}
                                 </div>
 
