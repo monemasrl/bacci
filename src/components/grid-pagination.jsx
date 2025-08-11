@@ -97,6 +97,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
         return (
             <>
                 {currentPosts?.length && currentPosts.map((item, index) => {
+                    const itemLinkNoHTTPS = item.link_fiera && item.link_fiera.replace(/^https?:\/\//, '');
                     const titleTranslated = findItemTranslated(item.title_translations, lang)
                     const dataFrom = new Date(Date.parse(item.from))
                     const dataTo = new Date(Date.parse(item.to))
@@ -112,7 +113,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                                     </div>
                                     <div className="position">{item.position && item.position}</div>
                                     <div className="luogo">{item.location && item.location}</div>
-                                    {item.link_fiera && <a className="link" href={`${item.link_fiera}`} target="_blank" rel="noreferrer noopener">{item.link_fiera}</a>}
+                                    {item.link_fiera && <a className="link" href={`${item.link_fiera}`} target="_blank" rel="noreferrer noopener">{itemLinkNoHTTPS}</a>}
                                     {item.page && <Link className="buttonLink" to={`${pathTranslated.path}/${titleTranslated.slug}`}>&#62;</Link>}
                                 </div>
 

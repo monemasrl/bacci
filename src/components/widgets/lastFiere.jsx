@@ -11,12 +11,14 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
       {
           directus{
   
-            Fiere{
+            Fiere(filter: {status: { _eq: "published" } }){
+              status
             name
             from
             to
             location
             position
+            date_created
             link_fiera
             type
             page
@@ -60,9 +62,9 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
 
 
             const getslug = item.title_translations.find((lang) => lang.languages_code.code === locale)
-
             const dataFrom = new Date(Date.parse(item.from))
             const dataTo = new Date(Date.parse(item.to))
+            const itemLinkNoHTTPS = item.link_fiera && item.link_fiera.replace(/^https?:\/\//, '');
             if (item && index < limiteVisualizzazione) {
               return (
                 <div key={index} className={`box-single-fiera ${item.type === 'event' ? 'evento' : ''}`}>
@@ -73,7 +75,7 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
                   </div>
                   <div className="position">{item.position || ''}</div>
                   <div className="luogo">{item.location || ''}</div>
-                  {item.link_fiera && <a className="link" href={`https://${item.link_fiera}`} target="_blank" rel="noreferrer noopener" >{item.link_fiera}</a>}
+                  {item.link_fiera && <a className="link" href={`${item.link_fiera}`} target="_blank" rel="noreferrer noopener" >{itemLinkNoHTTPS}</a>}
                   {item.page && <Link className="buttonLink" to={`${locale === "it_IT" ? "" : "/" + langTag[locale]}/${Termini[locale].fiere}/${getslug.slug}`}>&#62;</Link>}
                 </div>
               )
