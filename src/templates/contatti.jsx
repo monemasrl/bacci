@@ -160,9 +160,9 @@ const Contatti = ({ data, pageContext }) => {
                                                             {item.capitale_sociale && <li>Capitale Sociale: {item.capitale_sociale}</li>}
                                                         </ul>
                                                     </div>
-                                                    <div className="sede-col">
+                                                    {item.indirizzo && <div className="sede-col">
                                                         <Map address={item.indirizzo} />
-                                                    </div>
+                                                    </div>}
                                                 </div>
                                             );
                                         } else {
