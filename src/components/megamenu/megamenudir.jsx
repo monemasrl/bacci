@@ -93,7 +93,7 @@ const MegamenuDirectus = ({
   `)
 
     const inEvidenza = dataMega.directus.Prodotti.filter(item => {
-        if (!item.featured && item.status != 'published') return false
+        if (!item.featured && item.status !== 'published') return false
         return item.featured[0] === "true"
     })
 

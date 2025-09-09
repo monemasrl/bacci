@@ -78,6 +78,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
             return { success: false, error: errorMessage };
         } finally {
             setIsSubmitting(false);
+            console.log(isSubmitting, response)
         }
     };
 
@@ -239,10 +240,8 @@ const FormContatti = ({ lang }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [response, setResponse] = useState(null);
     const WORKERURL = 'https://cf-form2mail.sistemi-fdb.workers.dev'
-    /*     
-     
-
-    firstname,lastname,company,message,email */
+    /*     firstname,lastname,company,message,email */
+    console.log(isSubmitting, response)
     const formRef = React.useRef();
 
     const handleSubmit = async (e) => {
@@ -432,6 +431,7 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [response, setResponse] = useState(null);
     const WORKERURL = 'https://cf-form2mail.sistemi-fdb.workers.dev'
+    console.log(isSubmitting, response)
     /*     
      
 
@@ -619,13 +619,14 @@ const FormCandidature = ({ lang, candidature }) => {
             privacy: false
         }
     })
-    const { register, handleSubmit, formState, reset } = form
+    const { register, handleSubmit, formState } = form
     const { errors } = formState
 
     //Funzione per l'enconding dei dati del form
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [response, setResponse] = useState(null);
     const WORKERURL = 'https://cf-form2mail.sistemi-fdb.workers.dev'
+    console.log(isSubmitting, response)
     /*     
      
 
