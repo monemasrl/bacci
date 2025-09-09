@@ -94,8 +94,7 @@ const Contatti = ({ data, pageContext }) => {
         parentPath,
         title,
         allPagePath,
-        listaApplicazioni,
-        listaCategorie,
+
     } = pageContext;
     moment.locale(langTag[pageContext.locale]);
 
@@ -161,7 +160,7 @@ const Contatti = ({ data, pageContext }) => {
                                                         </ul>
                                                     </div>
                                                     {item.indirizzo && <div className="sede-col">
-                                                        <Map address={item.indirizzo} />
+                                                        <Map address={item.indirizzo + ', ' + item.area} />
                                                     </div>}
                                                 </div>
                                             );
