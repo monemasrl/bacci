@@ -100,14 +100,15 @@ const MegamenuDirectus = ({
     const inEvidenzaLocalizzato =
         inEvidenza.length && findItemTranslated(inEvidenza[0].translations, locale)
     const novita = dataMega.directus.Prodotti.sort(item => {
-        {
-            if (item.status == 'published')
-                if (item.type === "machinery") {
-                    return item.date_create
-                } else {
-                    return item
-                }
-        }
+
+        if (item.status === 'published') {
+            if (item.type === "machinery") {
+                return item.date_create
+            } else {
+                return item
+            }
+        } else { return null }
+
     })
     const novitaLocalizzato = findItemTranslated(
         novita[novita.length - 1].translations,

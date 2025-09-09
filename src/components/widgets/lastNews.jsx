@@ -43,7 +43,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
 
   const langFilterNews = data.directus.posts?.filter((item) => {
     return item.translations.some((lang) => {
-      if (lang.title) { return lang.languages_code.code === locale && item.id !== idCurrentNews }
+      if (lang.title) { return lang.languages_code.code === locale && item.id !== idCurrentNews } else { return false }
     })
   })
   const langFilterNewsSorted = langFilterNews?.sort((a, b) => {

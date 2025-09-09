@@ -147,7 +147,7 @@ const Contatti = ({ data, pageContext }) => {
                                                             <li>{item.area && item.area}</li>
                                                             {item.telefono && <li>{Termini[locale].contattiPhone + ' ' + item.telefono}</li>}
                                                             {item.fax && <li>F.{item.fax}</li>}
-                                                            {item.mail && <li><a href={"mailto:" + item.mail} target="_blank">{item.mail}</a> </li>}
+                                                            {item.mail && <li><a href={"mailto:" + item.mail} target="_blank" rel="noreferrer">{item.mail}</a> </li>}
                                                         </ul>
                                                     </div>
                                                     <div className="sede-col">
@@ -186,7 +186,7 @@ const Contatti = ({ data, pageContext }) => {
                                                         <li>{item.area}</li>
                                                         {item.telefono && <li>{Termini[locale].contattiPhone + ' ' + item.telefono}</li>}
                                                         {item.fax && <li>F.{item.fax}</li>}
-                                                        {item.mail && <li><a href={"mailto:" + item.mail} target="_blank">{item.mail}</a> </li>}
+                                                        {item.mail && <li><a href={"mailto:" + item.mail} target="_blank" rel="noreferrer">{item.mail}</a> </li>}
                                                     </ul>
                                                 </div>
 
@@ -194,6 +194,8 @@ const Contatti = ({ data, pageContext }) => {
                                                     <Map address={item.indirizzo + ' ' + item.area} />
                                                 </div>
                                             </div>)
+                                        } else {
+                                            return null;
                                         }
                                     })}
                                 </div>
@@ -214,12 +216,12 @@ const Contatti = ({ data, pageContext }) => {
                                                         <li>{item.area}</li>
                                                         {item.telefono && <li>{Termini[locale].contattiPhone + ' ' + item.telefono}</li>}
                                                         {item.fax && <li>F.{item.fax}</li>}
-                                                        {item.mail && <li><a href={"mailto:" + item.mail} target="_blank">{item.mail}</a> </li>}
+                                                        {item.mail && <li><a href={"mailto:" + item.mail} target="_blank" rel="noreferrer">{item.mail}</a> </li>}
                                                     </ul>
                                                 </div>
 
                                                 <div className="sede-col">
-                                                    <Map address={item.indirizzo + ' ' + item.area} />
+                                                    <Map address={item.indirizzo + ' , ' + item.area} />
                                                 </div>
                                             </div>)
                                         } else {

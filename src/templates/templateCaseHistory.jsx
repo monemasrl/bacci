@@ -13,7 +13,7 @@ import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const TemplateCaseHistory = ({ pageContext }) => {
 
-    const { locale, parentPath, content, title, allPagePath, listaApplicazioni, listaCategorie } = pageContext
+    const { locale, parentPath, content, title, allPagePath } = pageContext
     const dataTranslated = content && findItemTranslated(content.translations, locale)
     const seoFilterLocale = content.seo?.translations.find((item) => item.languages_code.code === locale)
     const contentForBlocchiPagina = content.blocchi?.filter((blocco) => blocco.item.traduzioni.some((traduzione) => traduzione.languages_code?.code === locale))
@@ -50,7 +50,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
         return arraySocial
 
     }
-    console.log(content.related_machines)
+
     return (
         <>
             {content && <Layout

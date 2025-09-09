@@ -90,7 +90,7 @@ const NavBarMobile = (props) => {
                                             key={item.id + 'main'}
                                         >
                                             {
-                                                item.sub_items.length == 0 && itemTranslated?.slug && (
+                                                item.sub_items.length === 0 && itemTranslated?.slug && (
                                                     <>
                                                         <Link
                                                             to={`/${langTag[itemTranslated.languages_code.code] === 'it'

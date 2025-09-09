@@ -1,11 +1,10 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
-import { findItemsTranslated } from "../utils"
+
 import 'moment/locale/it'
 import { FormCandidature } from "../components/form";
 import { GatsbyImage } from "gatsby-plugin-image";
-const moment = require('moment')
 
 const seoSettings = {
     seo: {
@@ -116,8 +115,7 @@ export const query = graphql`
 
 const CandidatureForm = ({ data, pageContext }) => {
 
-    const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-    const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+
     const content = data && data.directus.pages[0].translations[0]
     const featuredImage = data && data.directus.pages[0].featured_image && data.directus.pages[0].featured_image.imageFile && data.directus.pages[0].featured_image.imageFile.childImageSharp && data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData ? data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData : null
     const langFilterFiereSorted = data.directus.candidature.sort((a, b) => {

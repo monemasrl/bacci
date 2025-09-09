@@ -8,7 +8,7 @@ const moment = require('moment')
 
 const Prodotto = ({ pageContext }) => {
 
-  const { locale, parentPath, content, title, allPagePath, listaApplicazioni, listaCategorie } = pageContext
+  const { locale, parentPath, content, title, allPagePath } = pageContext
   const dataProdottoTranslated = content && findItemTranslated(content.translations, locale)
   const seoFilterLocale = content.seo?.translations.find((item) => item.languages_code.code === locale)
 

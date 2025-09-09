@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { Termini, langTag } from "../../../data-translations";
 import './lastFiere.scss'
 import { Link } from "gatsby";
-import { findItemTranslated } from "../../utils";
+
 const moment = require('moment')
 
 const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
@@ -46,7 +46,7 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
 
   const langFilterFiere = data.directus.Fiere?.filter((item) => {
     return item.title_translations.some((lang) => {
-      if (lang.title) { return lang.languages_code.code === locale }
+      if (lang.title) { return lang.languages_code.code === locale } else { return false }
     })
   })
   const langFilterFiereSorted = langFilterFiere?.sort((a, b) => {

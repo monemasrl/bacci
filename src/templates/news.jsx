@@ -2,7 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
-import { findItemsTranslated } from "../utils"
+
 const seoSettings = {
   seo: {
     translations: [{

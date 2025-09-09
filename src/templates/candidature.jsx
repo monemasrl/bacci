@@ -65,8 +65,7 @@ export const query = graphql`
 
 const Candidature = ({ data, pageContext }) => {
 
-  const listaApplicazioni = data && findItemsTranslated(data.directus.applicazioni_translations, pageContext.locale)
-  const listaCategorie = data && findItemsTranslated(data.directus.prodotto_categorie_translations, pageContext.locale)
+
   const topArchivio = React.useRef()
 
   const langFilterFiereSorted = data.directus.candidature.sort((a, b) => {
@@ -105,6 +104,8 @@ const Candidature = ({ data, pageContext }) => {
                   <Link className="button-sezione" to={linkToForm[pageContext.locale]}>{Termini[pageContext.locale].buttonCandidatura}</Link>
                 </div>
               )
+            } else {
+              return null
             }
           }
           )}
