@@ -4,8 +4,9 @@ import { GatsbyImage } from "gatsby-plugin-image"
 import { slugify } from "../../utils"
 import { useRef } from 'react'
 import { useInView, motion } from 'framer-motion'
+import { Termini, langTag } from "../../../data-translations"
 
-function TestoImmagine({ index, allineamento, content, pageName }) {
+function TestoImmagine({ index, allineamento, content, pageName, locale }) {
     const left = useRef(null)
     const center = useRef(null)
     const right = useRef(null)
@@ -25,7 +26,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
             >
                 {content.item.traduzioni.length > 0 && <>
                     <div className={`box-sx`} >
-                        {content.item.novita && <div className="novita">Novità</div>}
+                        {content.item.novita && <div className="novita">{Termini[locale].novita}</div>}
                         <div className="heading">
                             <h2 className="titoli" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo ? content.item.traduzioni[0].titolo : '' }} />
                             <h3 className="sottotitolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].sotto_titolo ? content.item.traduzioni[0].sotto_titolo : '' }} />
@@ -93,7 +94,7 @@ function TestoImmagine({ index, allineamento, content, pageName }) {
 
             {content.item.traduzioni?.length > 0 && <>
                 <div className={`box-sx`} >
-                    {content.item.novita && <div className="novita">Novità</div>}
+                    {content.item.novita && <div className="novita">{Termini[locale].novita}</div>}
                     {index === 0 &&
                         <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].titolo ? content.item.traduzioni[0].titolo : '' }} />}
                     <div className="heading">

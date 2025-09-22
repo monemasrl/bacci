@@ -125,7 +125,6 @@ export const query = graphql`
 
 const Pagine = ({ data, pageContext }) => {
 
-
   return (
     <>
       {pageContext && data ?
@@ -153,7 +152,7 @@ const Pagine = ({ data, pageContext }) => {
 
               <div className={`container-fluid ${pageContext.pageName}`}>
                 {data.directus.pages[0].blocchi?.map((blocco, index) => {
-                  return <React.Fragment key={index}>{BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)}</React.Fragment>
+                  return <React.Fragment key={index}>{BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName, pageContext.locale)}</React.Fragment>
                 })}
               </div>
               {(pageContext.pageName === "news" || pageContext.pageName === "home") &&

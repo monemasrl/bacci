@@ -128,7 +128,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                 <section className={`container-fluid blocchicase ${pageContext.title}`}>
                     {contentForBlocchiPagina?.map((blocco, index) => {
 
-                        return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName)
+                        return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName, pageContext.locale)
                     })}
                 </section>
                 {(content?.related_machines?.length > 0) && <Correlati locale={locale} idProdotto={content.id} listaProdottiNoQuery={content.related_machines} limiteVisualizzazione={3} />}

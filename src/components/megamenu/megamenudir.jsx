@@ -115,7 +115,7 @@ const MegamenuDirectus = ({
         locale
     )
     const software = dataMega.directus.pages
-    console.log(software, 'software')
+
     return (
         <AnimatePresence>
             {mega && (

@@ -8,14 +8,16 @@ const Components = {
     Blocchi: Cards
 }
 
-const BlocksComponent = (component, index, allineamento, content, pageName) => {
+const BlocksComponent = (component, index, allineamento, content, pageName, locale) => {
 
     if (typeof Components[component] !== "undefined") {
         return React.createElement(Components[component], {
             index: index,
             allineamento: allineamento,
             content: content,
-            pageName: pageName
+            pageName: pageName,
+            locale: locale
+
         });
     }
 }

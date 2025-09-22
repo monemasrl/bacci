@@ -66,7 +66,7 @@ const NavBarDirectus = (props) => {
           result.data.directus.languages,
           langTag
         ), */
-    console.log(data.directus.menus, 'menus')
+
     return (
         <>
             <nav className="container-fluid top-menu">

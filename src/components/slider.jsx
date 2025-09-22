@@ -96,7 +96,7 @@ function Slider({ locale }) {
         }))
         .filter((item) => item.translations[0]?.titolo);
 
-    console.log(slidesTranslated)
+
     return (
         <>
             <Swiper

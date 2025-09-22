@@ -77,7 +77,7 @@ const Fiere = ({ data, pageContext }) => {
   const langFilterFiereSorted = [...data.directus.Fiere].sort((a, b) => new Date(b.date_created) - new Date(a.date_created))
 
   const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code === pageContext.locale })
-  console.log(data.directus.Fiere)
+
   return (
     <>
       <Layout
