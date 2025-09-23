@@ -1864,7 +1864,9 @@ section.container.candidature {
     }
   }
 }
-
+.box-dx .gatsby-image-wrapper img {
+  height: auto;
+}
 .leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
   z-index: 1;
 }
