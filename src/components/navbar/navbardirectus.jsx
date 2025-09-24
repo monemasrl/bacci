@@ -16,12 +16,13 @@ const NavBarDirectus = (props) => {
                     name
                     items {
                         id
-                        translations(filter: { creazione_pagina: { _eq: true } }) {
+                        translations {
                             languages_code {
                                 code
                             }
                             label
                             slug
+                            path
                             creazione_pagina
                         }
                         sub_items {
@@ -32,6 +33,7 @@ const NavBarDirectus = (props) => {
                                 }
                                 label
                                 slug
+                                path
                                 creazione_pagina
                             }
                             parent_item {
@@ -76,11 +78,11 @@ const NavBarDirectus = (props) => {
                             {data.directus.menus[1].items.map((item) => {
 
                                 const itemTranslated = item.translations.find((lang) => {
-                                    return (langTag[lang.languages_code.code] === langTag[props.locale]) && lang.creazione_pagina
+                                    return (langTag[lang.languages_code.code] === langTag[props.locale])
                                 })
 
                                 if (itemTranslated?.slug && itemTranslated?.creazione_pagina) {
-
+                                    console.log(itemTranslated.creazione_pagina)
                                     return (
                                         <li
                                             role="button"
@@ -146,7 +148,13 @@ const NavBarDirectus = (props) => {
                                         </li>
                                     );
                                 } else {
-                                    return null
+
+
+                                    if (itemTranslated?.path && !itemTranslated?.creazione_pagina) return (
+                                        <a href={itemTranslated.path} target="_blank" rel="noreferrer">
+                                            {itemTranslated.label}
+                                        </a>)
+                                    else return null
                                 }
                             })
 
