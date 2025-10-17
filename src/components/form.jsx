@@ -400,13 +400,14 @@ const FormContatti = ({ lang }) => {
 
                 </label>
                 <div className="box-submit">
-                    <input
-                        id="submit"
-                        className="button-sezione"
-                        type="submit"
-                        value={Termini[lang].invia}
-                        aria-label={Termini[lang].invia}
-                    />
+                    <label htmlFor="submit">
+                        <span className="sr-only">{Termini[lang].invia}</span>
+                        <input
+                            className="button-sezione"
+                            type="submit"
+                            value={Termini[lang].invia}
+                        />
+                    </label>
                 </div>
             </form>
         </div>
@@ -594,13 +595,10 @@ const FormDownloadCatalogo = ({ lang, setIsCatalogoVisible }) => {
                     {errors.privacy && <p>{errors.privacy?.message}</p>}
                 </label>
                 <div className="box-submit">
-                    <input
-                        id="submit"
-                        className='button-sezione'
-                        type="submit"
-                        value={Termini[lang].invia}
-                        aria-label={Termini[lang].invia}
-                    />
+                    <label htmlFor="submit">
+                        <span className="sr-only">{Termini[lang].invia}</span>
+                        <input className='button-sezione' type="submit" value={Termini[lang].invia} id="submit" />
+                    </label>
                 </div>
 
             </form>
@@ -845,13 +843,10 @@ const FormCandidature = ({ lang, candidature }) => {
                     </div>
 
                     <div className="box-submit">
-                        <input
-                            id="submit"
-                            className='button-sezione'
-                            type="submit"
-                            value={Termini[lang].invia}
-                            aria-label={Termini[lang].invia}
-                        />
+                        <label htmlFor="submit">
+                            <span className="sr-only">{Termini[lang].invia}</span>
+                            <input className='button-sezione' type="submit" value={Termini[lang].invia} />
+                        </label>
                     </div>
                 </form>
             </div>
