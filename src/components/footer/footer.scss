@@ -145,6 +145,8 @@ footer {
         }
 
         .box-form-message {
+          display: flex;
+          flex-direction: column;
           @media #{$large} {
             max-width: 680px;
             margin: 0 auto;
