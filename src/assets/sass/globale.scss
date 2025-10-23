@@ -1221,6 +1221,7 @@ section.container.candidature {
       }
       .box-form {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         width: 100%;
         @media #{$landscape} {
@@ -1251,6 +1252,8 @@ section.container.candidature {
       }
       .box-form-message {
         margin: 10px 0;
+        display: flex;
+        flex-direction: column;
       }
       input[type="checkbox"] {
         height: 20px;
@@ -1346,8 +1349,12 @@ section.container.candidature {
     form {
       .box-form {
         margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
       }
       .box-submit {
+        display: flex;
+        flex-direction: column;
         align-items: flex-start;
       }
       .boxinput {
@@ -1394,6 +1401,8 @@ section.container.candidature {
     }
   }
   .box-form {
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
   }
   #candidatureCV {
