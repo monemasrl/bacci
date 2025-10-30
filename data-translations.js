@@ -13,7 +13,7 @@ export const Termini = {
     cognome: "Last name",
     messaggio: "message",
     footerForm:
-      "<h2>EN Hai bisogno di <strong>informazioni?</strong></h2><p>Se desideri avere maggiori informazioni sulla nostra Azienda e sui nostri prodotti, scrivici compilando il form. il nostro Staff ti risponderà presto!</p>",
+      "<h2>Do you need <strong>information?</strong></h2><p>If you'd like more information about our company and our products, please fill out the form. Our staff will get back to you shortly!</p>",
     tastoRicerca: "Search for model",
     formMessaggio: "Minimum 15 characters",
     formSuccess: "Form sent successfully",
