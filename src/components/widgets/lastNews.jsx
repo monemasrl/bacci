@@ -17,7 +17,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
          posts {
           id
           date_created
-          
+          inHome
           translations {
             languages_code {
               code
@@ -49,10 +49,22 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
   const langFilterNewsSorted = langFilterNews?.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
+  const langFilteredForHome = langFilterNewsSorted?.filter((item) => item.inHome === true)
+
+  function dataSwitch() {
+    if (pageType === "home" && langFilteredForHome?.length > 0) {
+      return langFilteredForHome;
+    } else if (pageType !== "home" && langFilterNewsSorted?.length > 0) {
+      return langFilterNewsSorted;
+    } else {
+      return [];
+    }
+
+  }
 
   return (
     <>
-      {langFilterNewsSorted?.length > 0 && <section className="widget-news">
+      {dataSwitch().length > 0 && <section className="widget-news">
         {pageType !== "home" ? <h2>{Termini[locale].newsCorrelate}</h2> : <h2>{Termini[locale].ultime_news}</h2>}
         {pageType !== "home" ? <p className="widget-news__sub">{Termini[locale].ultime_news_sub}</p> : ''}
         <div className="container">

@@ -12,6 +12,7 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
           directus{
   
             Fiere(filter: {status: { _eq: "published" } }){
+              inHome
               status
             name
             from
@@ -53,12 +54,14 @@ const LastFiere = ({ locale, limiteVisualizzazione = 3 }) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
 
+  const langFilteredForHome = langFilterFiereSorted?.filter((item) => item.inHome === true)
+
   return (
     <>
-      {langFilterFiereSorted?.length > 0 && <section className="widget-fiere">
+      {langFilteredForHome?.length > 0 && <section className="widget-fiere">
         <h2>{Termini[locale].eventi}</h2>
         <div className="widget-fiere-wrapper container">
-          {langFilterFiereSorted.map((item, index) => {
+          {langFilteredForHome.map((item, index) => {
 
 
             const getslug = item.title_translations.find((lang) => lang.languages_code.code === locale)

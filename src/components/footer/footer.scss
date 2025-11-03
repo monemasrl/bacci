@@ -113,7 +113,8 @@ footer {
           }
         }
 
-        input {
+        input,
+        select {
           width: 376px;
           margin: 5px;
           height: 50px;
@@ -150,7 +151,9 @@ footer {
             margin: 0 auto;
           }
         }
-
+        .countrySelect {
+          color: $grey;
+        }
         .box-submit {
           text-align: right;
           margin: 2rem 0 0 0;
@@ -260,6 +263,13 @@ footer {
         &:first-child {
           font-weight: bold;
         }
+        &.fse {
+          font-weight: normal;
+          font-size: 18px;
+          margin-bottom: 10px;
+          border: 1px dotted #ffffff63;
+          padding: 10px;
+        }
       }
     }
 
@@ -275,7 +285,13 @@ footer {
   .box-form {
     display: flex;
     justify-content: space-between;
-
+    &.nazione-select {
+      display: flex;
+      justify-content: flex-end;
+      #contattiNazione {
+        border-radius: 0;
+      }
+    }
     @media #{$large} {
       justify-content: center;
       flex-direction: column;

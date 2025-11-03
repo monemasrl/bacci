@@ -4,12 +4,15 @@ import { useForm } from 'react-hook-form';
 import { Termini } from "../../data-translations";
 import { toast, ToastContainer } from 'react-toastify';
 import { useState } from 'react';
+import countryList from '../countries.json'
 import 'react-toastify/dist/ReactToastify.css';
 
 const linkToPrivacy = {
     it_IT: '/privacy',
     en_US: '/en/privacy'
 }
+
+
 
 const FormFiere = ({ nomeEvento, lang }) => {
     const form = useForm({
@@ -253,17 +256,11 @@ const FormContatti = ({ lang }) => {
             // Crea FormData object
 
             // Aggiungi tutti i campi del form
-            Object.entries(data).forEach(([key, value]) => {
-                if (value instanceof File) {
-                    data.append(key, value);
-                } else if (Array.isArray(value)) {
-                    // Per campi multipli (checkboxes)
-                    value.forEach(item => data.append(`${key}[]`, item));
-                } else if (value !== null && value !== undefined) {
-                    data.append(key, value.toString());
-                }
-            });
 
+            console.log('Form data entries:');
+            for (let [key, value] of data.entries()) {
+                console.log(key, value);
+            }
             // Aggiungi token Turnstile se presente
             /*        if (turnstileToken) {
                        data.append('cf-turnstile-response', turnstileToken);
@@ -369,10 +366,21 @@ const FormContatti = ({ lang }) => {
                         type="email"
                         name="email"
                         id="contattiEmail"
-
                         required
                     />
 
+
+                </div>
+                <div className="box-form nazione-select">
+                    <label htmlFor="contattiNazione" style={{ display: 'none' }}>nazione</label>
+                    <select className="countrySelect" name="country" id="contattiNazione" required>
+                        <option value="">{lang === 'it_IT' ? 'Seleziona nazione' : 'Select country'}</option>
+                        {countryList.map((country) => (
+                            <option key={country.value} value={country.value}>
+                                {country.title}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <div className="box-form-message">
                     <label htmlFor="contattiMessaggio" style={{ display: 'none' }}>
@@ -614,6 +622,7 @@ const FormCandidature = ({ lang, candidature }) => {
             lastname: "",
             phone: "",
             email: "",
+            commenti: "",
             linkedin: "",
             cv: "",
             privacy: false
@@ -711,7 +720,7 @@ const FormCandidature = ({ lang, candidature }) => {
                                 placeholder={Termini[lang].nome}
                                 type="text"
                                 id="candidatureNome"
-                                required
+
                                 {...register("firstname", {
                                     required: {
                                         value: true,
@@ -770,6 +779,9 @@ const FormCandidature = ({ lang, candidature }) => {
                             <label htmlFor="candidatureTelefono" style={{ display: 'none' }}>telefono</label>
                             <input placeholder={Termini[lang].formTelefono} type="text" id="candidatureTelefono"
                                 {...register("phone", {
+                                    required: {
+                                        value: false
+                                    },
                                     pattern: {
                                         value: /^\+?[0-9\s\-()]{7,20}$/,
                                         message: Termini[lang].formTelefonoError
@@ -779,6 +791,19 @@ const FormCandidature = ({ lang, candidature }) => {
                             {errors.phone && <p>{errors.phone?.message}</p>}
                         </div>
 
+                    </div>
+                    <div className="box-form">
+                        <label htmlFor="commenti" className="commenti" style={{ display: 'none' }}>Commenti</label>
+                        <textarea style={{ height: '100px' }} rows={6} id="commenti" placeholder={Termini[lang].formCommenti} {...register("commenti",
+                            {
+                                required: { value: false },
+                                minLength: {
+                                    value: 10,
+                                    message: Termini[lang].formMessageMinimoCaratteri
+                                }
+                            }
+                        )} />
+                        {errors.commenti && <p>{errors.commenti?.message}</p>}
                     </div>
                     <div className="box-form " >
                         <div className="boxinput linkedin">

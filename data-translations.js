@@ -31,6 +31,8 @@ export const Termini = {
     formLinkedin: 'Linkedin url',
     formTelefono: 'Phone',
     formTelefonoError: 'Phone number not valid',
+    formCommenti: ' Comments ',
+    formMessageMinimoCaratteri: 'Minimum 10 characters',
     azienda: "company",
     prodotti: "products",
     tutti_prodotti: "all products",
@@ -66,6 +68,7 @@ export const Termini = {
     sediItalia: 'Italian offices',
     filialiEstere: 'foreign branches',
     contattiPhone: 'P.',
+    footerFse: "Company receiving FSE+ contributions for youth employment"
   },
   it_IT: {
     cookieTesto:
@@ -82,6 +85,8 @@ export const Termini = {
     formSuccess: "Form inviato con successo",
     formRequired: "campo obbligatorio",
     formMinimoCaratteri: "Minimo 3 caratteri",
+    formCommenti: "Dubbi o commenti",
+    formMessageMinimoCaratteri: " Minimo 10 caratteri ",
     formMail: "Inserisci una mail valida",
     formPrivacy: "Accetta la privacy",
     formPrivacyText1: "Confermo di aver letto",
@@ -128,5 +133,6 @@ export const Termini = {
     sediItalia: 'sedi Italia',
     filialiEstere: 'filiali estere',
     contattiPhone: 'T.',
+    footerFse: "Azienda beneficiaria di contributi FSE+ per l’occupazione giovanile"
   },
 }

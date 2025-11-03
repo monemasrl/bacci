@@ -1371,6 +1371,12 @@ section.container.candidature {
           width: 100%;
         }
       }
+      textarea {
+        border: 1px solid black;
+        color: black;
+        height: 40px;
+        width: 100%;
+      }
       label[for="submit"] {
         text-align: left;
         input {

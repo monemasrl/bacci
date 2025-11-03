@@ -44,6 +44,7 @@ const Footer = ({ locale, listaTipologia }) => {
                     </div>
                     <div className="footer-col">
                         <ul>
+                            <li className='fse'>{Termini[locale].footerFse}</li>
                             <li>Cap. Sociale 1.500.000,00 i.v. <br /> Partita iva / codice fiscale 022456588996365</li>
                             <li>
                                 <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}privacy`}>privacy and conditions</Link>	</li>
