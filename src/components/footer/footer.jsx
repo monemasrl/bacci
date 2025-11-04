@@ -14,19 +14,15 @@ const Footer = ({ locale, listaTipologia }) => {
             <section className='container-fuid footer1 '>
                 <div className='container'>
                     <div className="box-sx" dangerouslySetInnerHTML={{ __html: Termini[locale].footerForm }} />
-
                     <div className="box-dx">
                         <div className="form-contatti">
-
                             <FormContatti lang={locale} />
                         </div>
-
                     </div>
                 </div>
             </section>
             <FooterMenu locale={locale} listaTipologia={listaTipologia} />
             <section className='container-fluid footer3'>
-
                 <div className="container">
                     <div className="footer-col">
                         <StaticImage
@@ -40,6 +36,12 @@ const Footer = ({ locale, listaTipologia }) => {
                             <li>Paolino Bacci S.r.l.</li>
                             <li>VIA PALERMO, 32, 56021, Cascina, Pisa - ITALY</li>
                             <li>Tel. + 39 050 252525</li>
+                            <li>          <StaticImage
+                                className='italyX'
+                                placeholder="blurred"
+                                width={300}
+                                height={195}
+                                src="../../images/italyxsmall.png" al t="ItalyX" /></li>
                         </ul>
                     </div>
                     <div className="footer-col">

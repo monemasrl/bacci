@@ -151,6 +151,7 @@ footer {
             margin: 0 auto;
           }
         }
+
         .countrySelect {
           color: $grey;
         }
@@ -244,6 +245,10 @@ footer {
     background-color: $lightBrown;
     padding: 2rem 0;
     .gatsby-image-wrapper-constrained {
+      height: auto;
+    }
+    .italyX {
+      width: 170px;
       height: auto;
     }
     a {
