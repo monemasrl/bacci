@@ -12,7 +12,7 @@ const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, allPage
   return (
     <div className={`mainwrapper ${tipo}`}>
 
-      <Seo lang={locale} title={pageTitle} seo={seo} />
+      <Seo lang={locale} title={pageTitle} seo={seo} allPagePath={allPagePath} />
 
       <div className={`container-fluid ${tipo}`}  >
         <Header

@@ -10,12 +10,13 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import { langTag } from "../../data-translations"
-function Seo({ description, lang, meta, title, seo }) {
+function Seo({ description, lang, meta, title, seo, allPagePath }) {
   const { site } = useStaticQuery(
     graphql`
       query {
         site {
           siteMetadata {
+            siteUrl
             title
             description
             author
@@ -25,8 +26,13 @@ function Seo({ description, lang, meta, title, seo }) {
     `
   )
 
+  const localePath = allPagePath.find((item) => {
+    return item.locale === lang
+  })
+
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+
   function getDataSeoOpenGraph(seo) {
     const arrSeo = []
     if (seo) {
@@ -61,7 +67,7 @@ function Seo({ description, lang, meta, title, seo }) {
         content={seo?.meta_description || metaDescription}
       />
       <meta name="author" content={site.siteMetadata.author} />
-      <meta name="keywords" content={seo?.keywords} />
+      <link rel="canonical" href={localePath?.path} />
       {seo &&
         getDataSeoOpenGraph(seo).map((item, index) => {
           return <meta key={index} property={index} {...item} />
