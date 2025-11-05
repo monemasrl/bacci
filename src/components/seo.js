@@ -26,20 +26,21 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
     `
   )
 
-  const localePath = allPagePath.find((item) => {
+  const localePath = allPagePath?.find((item) => {
     return item.locale === lang
   })
 
   const metaDescription = description || site.siteMetadata.description
   const defaultTitle = site.siteMetadata?.title
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": seo?.title || title || defaultTitle,
     "description": seo?.meta_description || metaDescription,
-    "url": site.siteMetadata.siteUrl + localePath?.path,
+    "url": localePath?.path ? site.siteMetadata.siteUrl + localePath.path : site.siteMetadata.siteUrl,
     "inLanguage": langTag[lang],
-    "image": seoImage && site.siteMetadata.siteUrl + seoImage
+    "image": seoImage ? site.siteMetadata.siteUrl + seoImage : undefined
   }
   function getDataSeoOpenGraph(seo) {
     const arrSeo = []
@@ -87,11 +88,11 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
         content={seo?.meta_description || metaDescription}
       />
       <meta name="author" content={site.siteMetadata.author} />
-      <link rel="canonical" href={site.siteMetadata.siteUrl + localePath?.path} />
+      <link rel="canonical" href={localePath?.path ? site.siteMetadata.siteUrl + localePath.path : site.siteMetadata.siteUrl} />
       <link
         rel="alternate"
         hrefLang="x-default"
-        href={site.siteMetadata.siteUrl + localePath?.path}
+        href={localePath?.path ? site.siteMetadata.siteUrl + localePath.path : site.siteMetadata.siteUrl}
       />
       {allPagePath && allPagePath.map((item, idx) => (
         <link
@@ -121,6 +122,8 @@ Seo.propTypes = {
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
+  allPagePath: PropTypes.array,  // aggiungi questa
+  seoImage: PropTypes.string,    // aggiungi questa
 }
 
 export default Seo

@@ -90,12 +90,23 @@ exports.createPages = async ({ graphql, actions }) => {
         }
 
         Fiere {
-          seo {
+                 seo {
             translations {
               languages_code { code }
               title
               meta_description
               keywords
+            }
+            og_image {
+              id
+              imageFile {
+                id
+                publicURL
+                childImageSharp {
+                  id
+                  gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [440, 1200])
+                }
+              }
             }
           }
           name
@@ -159,12 +170,23 @@ exports.createPages = async ({ graphql, actions }) => {
             filename_disk
             folder { name }
           }
-          seo {
+    seo {
             translations {
               languages_code { code }
               title
               meta_description
               keywords
+            }
+            og_image {
+              id
+              imageFile {
+                id
+                publicURL
+                childImageSharp {
+                  id
+                  gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [440, 1200])
+                }
+              }
             }
           }
           name

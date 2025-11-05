@@ -25,7 +25,7 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-sitemap`,
-      resolveSiteUrl: () => siteUrl,
+      resolveSiteUrl: () => `https://bacci.com/`,
       output: "/",
     },
     {

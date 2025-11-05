@@ -54,6 +54,7 @@ const Prodotto = ({ pageContext }) => {
                 listaApplicazioni={listaApplicazioni}
                 listaCategorie={listaCategorie}
                 seo={seoFilterLocale}
+                seoImage={content.seo?.og_image?.imageFile?.publicURL && content.seo?.og_image?.imageFile?.publicURL}
             >
                 {content.catalogo?.filename_disk && <Modale show={showModale} close={() => setShowModale(false)}>
                     <div className="titoloModale">

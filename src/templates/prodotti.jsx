@@ -5,28 +5,44 @@ import GridPagination from "../components/grid-pagination"
 import { Termini, langTag } from "../../data-translations"
 
 
-const seoSettings = {
-  seo: {
-    translations: [{
-      languages_code: {
-        code: "it_IT"
-      },
-      title: 'prodotti',
-      meta_description: 'tutti i nostri prodotti'
-    }, {
-      languages_code: {
-        code: "en_US"
-      },
-      title: 'products',
-      meta_description: 'our products'
-    },
-    ]
-  }
-}
 
 export const query = graphql`
   query($locale: String!) {
   directus{
+             pages(
+        filter: {
+          status: { _eq: "published" }
+          page_name: { _eq: "prodotti" }
+          translations: { languages_code: { code: { _eq: $locale } } }
+        }
+      ) {
+        seo {
+          translations(filter: { languages_code: { code: { _eq: $locale } } }) {
+            languages_code {
+              code
+            }
+            title
+            meta_description
+            keywords
+          }
+          og_image {
+            id
+            imageFile {
+              id
+              publicURL
+              childImageSharp {
+                id
+                gatsbyImageData(
+                  formats: [WEBP]
+                  quality: 70
+                  placeholder: BLURRED
+                  breakpoints: [440, 1200]
+                )
+              }
+            }
+          }
+        }
+      }
     Prodotti(filter: {translations: {languages_code: {code: {_eq: $locale}}}, type: {_eq: "machinery"},status: {_eq: "published"}}
 ) {
       id
@@ -124,9 +140,9 @@ export const query = graphql`
 
 const Prodotti = ({ data, location, pageContext }) => {
 
-  const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
 
-  /**
+
+  /**`
    * Description placeholder
    * @date 12/11/2023 - 12:12:36
    * @var data - data from graphql query
@@ -290,7 +306,8 @@ const Prodotti = ({ data, location, pageContext }) => {
         allPagePath={pageContext.allPagePath}
         listaApplicazioni={pageContext.listaApplicazioni}
         listaCategorie={pageContext.listaCategorie}
-        seo={seoFilterLocale}
+        seo={data.directus.pages[0]?.seo.translations[0]}
+        seoImage={data.directus.pages[0]?.seo?.og_image?.imageFile?.publicURL && data.directus.pages[0]?.seo?.og_image?.imageFile?.publicURL}
       >
         <div className="container prodotti" ref={topArchivio}>
           <div className="col-sx">

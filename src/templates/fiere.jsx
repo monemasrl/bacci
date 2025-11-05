@@ -29,7 +29,7 @@ export const query = graphql`
           pages(
         filter: {
           status: { _eq: "published" }
-          page_name: { _eq: "news" }
+          page_name: { _eq: "fiere" }
           translations: { languages_code: { code: { _eq: $locale } } }
         }
       ) {

@@ -33,10 +33,11 @@ const Fiere = ({ pageContext }) => {
         tipo='fiera'
         allPagePath={allPagePath}
         pathFromContext={pageContext}
-        listaApplicazioni={pageContext.listaApplicazioni}
-        listaCategorie={pageContext.listaCategorie}
+        listaApplicazioni={listaApplicazioni}
+        listaCategorie={listaCategorie}
         dataBreadCrumbFiere={dataBreadCrumbFiere}
         seo={seoFilterLocale}
+        seoImage={content.seo?.og_image?.imageFile?.publicURL && content.seo?.og_image?.imageFile?.publicURL}
       >
         <div className="wrapper-fiere">
 
