@@ -7,6 +7,10 @@
 /**
  * @type {import('gatsby').GatsbySSR['onRenderBody']}
  */
-exports.onRenderBody = ({ setHtmlAttributes }) => {
-  setHtmlAttributes({ lang: `en` })
+exports.onRenderBody = ({ setHtmlAttributes, pathname, pageContext }) => {
+  let lang = "it";
+  if (pageContext && pageContext.locale) {
+    lang = pageContext.locale === "en_US" ? "en" : "it";
+  }
+  setHtmlAttributes({ lang });
 }

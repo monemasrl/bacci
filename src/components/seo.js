@@ -53,7 +53,7 @@ function Seo({ description, lang, meta, title, seo }) {
   }
 
   return (
-    <Helmet>
+    <Helmet >
       <html lang={langTag[lang]} />
       <title>{seo?.title || title || defaultTitle}</title>
       <meta

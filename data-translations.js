@@ -1,8 +1,8 @@
 export const langTag = {
-  en_US: "en",
   it_IT: "it",
-  "en-US": "en",
+  en_US: "en",
   "it-IT": "it",
+  "en-US": "en"
 }
 export const Termini = {
   en_US: {
