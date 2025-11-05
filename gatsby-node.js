@@ -22,39 +22,35 @@ exports.createPages = async ({ graphql, actions }) => {
         languages {
           code
         }
+
         prodotto_categorie {
           translations {
-            languages_code {
-              code
-            }
+            languages_code { code }
             nome
           }
         }
+
         tipologie {
           translations {
-            languages_code {
-              code
-            }
+            languages_code { code }
             nome
           }
         }
+
         applicazioni {
           translations {
-            languages_code {
-              code
-            }
+            languages_code { code }
             label
           }
         }
+
         menus {
           name
           id
           items {
             name
             translations {
-              languages_code {
-                code
-              }
+              languages_code { code }
               label
               slug
               creazione_pagina
@@ -62,9 +58,7 @@ exports.createPages = async ({ graphql, actions }) => {
             sub_items {
               name
               translations {
-                languages_code {
-                  code
-                }
+                languages_code { code }
                 label
                 slug
                 creazione_pagina
@@ -72,38 +66,33 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-        menu_items{
+
+        menu_items {
           name
-          translations{
-            languages_code{
-              code
-            }
+          translations {
+            languages_code { code }
             label
             slug
             creazione_pagina
           }
         }
-           pages(filter:{software: {_eq: true}, status:{_eq:"published"}} ) {
-            id
-            page_name
-            software
-            status
-          
-            translations{
-              languages_code{
-                code
-              }
-              slug
-              nome
-            }
-            
+
+        pages(filter: { software: { _eq: true }, status: { _eq: "published" } }) {
+          id
+          page_name
+          software
+          status
+          translations {
+            languages_code { code }
+            slug
+            nome
+          }
         }
+
         Fiere {
           seo {
             translations {
-              languages_code {
-                code
-              }
+              languages_code { code }
               title
               meta_description
               keywords
@@ -118,28 +107,23 @@ exports.createPages = async ({ graphql, actions }) => {
           location
           position
           title_translations {
-            languages_code {
-              code
-            }
+            languages_code { code }
             title
             slug
           }
           translations {
-            languages_code {
-              code
-            }
+            languages_code { code }
             sottotitolo
             description
             call2action
             body
           }
         }
+
         posts {
           seo {
             translations {
-              languages_code {
-                code
-              }
+              languages_code { code }
               title
               keywords
               meta_description
@@ -148,9 +132,7 @@ exports.createPages = async ({ graphql, actions }) => {
           id
           date_created
           translations {
-            languages_code {
-              code
-            }
+            languages_code { code }
             title
             slug
             summary
@@ -167,23 +149,19 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-        Prodotti(filter: {status: {_eq: "published"}}
-) {
+
+        Prodotti(filter: { status: { _eq: "published" } }) {
           id
           video
           catalogo {
             title
             filename_download
             filename_disk
-            folder {
-              name
-            }
+            folder { name }
           }
           seo {
             translations {
-              languages_code {
-                code
-              }
+              languages_code { code }
               title
               meta_description
               keywords
@@ -204,9 +182,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
           featured
           translations {
-            languages_code {
-              code
-            }
+            languages_code { code }
             slug
             titolo
             sottotitolo
@@ -234,9 +210,7 @@ exports.createPages = async ({ graphql, actions }) => {
           categoria {
             id
             translations {
-              languages_code {
-                code
-              }
+              languages_code { code }
               id
               nome
             }
@@ -252,9 +226,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 }
               }
               translations {
-                languages_code {
-                  code
-                }
+                languages_code { code }
                 titolo
                 slug
               }
@@ -267,46 +239,57 @@ exports.createPages = async ({ graphql, actions }) => {
               imageFile {
                 id
                 childImageSharp {
-                  gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, 
-                  breakpoints: [ 440,  1024])
+                  gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [440, 1024])
                 }
               }
             }
-            prodotto_id {
-              id
-            }
+            prodotto_id { id }
             translations {
-              languages_code {
-                code
-              }
+              languages_code { code }
               titolo
               paragrafo
             }
           }
         }
+
         candidature {
           translations {
-            languages_code {
-              code
-            }
+            languages_code { code }
             candidatura
             testo
           }
           titolo
           data
         }
+
         case_history {
-          translations {
-            languages_code {
-              code
+          seo {
+            translations {
+              languages_code { code }
+              title
+              meta_description
+              keywords
             }
+            og_image {
+              id
+              imageFile {
+                id
+                publicURL
+                childImageSharp {
+                  id
+                  gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [440, 1200])
+                }
+              }
+            }
+          }
+          translations {
+            languages_code { code }
             title
             sottotitolo
             main_content_titolo
             main_content
             slug
           }
-
           customer
           city
           country
@@ -315,9 +298,7 @@ exports.createPages = async ({ graphql, actions }) => {
           related_machines {
             Prodotti_id {
               translations {
-                languages_code {
-                  code
-                }
+                languages_code { code }
                 titolo
                 sottotitolo
                 testo_antemprima
@@ -330,7 +311,7 @@ exports.createPages = async ({ graphql, actions }) => {
                   id
                   childImageSharp {
                     id
-                     gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED)
+                    gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED)
                   }
                 }
               }
@@ -341,7 +322,7 @@ exports.createPages = async ({ graphql, actions }) => {
             imageFile {
               id
               childImageSharp {
-                 gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440,  1617])
+                gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [440, 1617])
               }
             }
           }
@@ -350,7 +331,7 @@ exports.createPages = async ({ graphql, actions }) => {
             imageFile {
               id
               childImageSharp {
-                gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440,  700])
+                gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [440, 700])
               }
             }
           }
@@ -370,10 +351,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     imageFile {
                       id
                       childImageSharp {
-                        gatsbyImageData(
-                          placeholder: BLURRED
-                          formats: [WEBP]
-                        )
+                        gatsbyImageData(placeholder: BLURRED, formats: [WEBP])
                       }
                     }
                   }
@@ -384,15 +362,13 @@ exports.createPages = async ({ graphql, actions }) => {
                   imageFile {
                     id
                     childImageSharp {
-                      gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440,  700])
+                      gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [440, 700])
                     }
                   }
                 }
                 nome
                 traduzioni {
-                  languages_code {
-                    code
-                  }
+                  languages_code { code }
                   titolo
                   sotto_titolo
                   paragrafo
@@ -402,9 +378,7 @@ exports.createPages = async ({ graphql, actions }) => {
               }
               ... on DirectusData_Blocchi {
                 traduzioni {
-                  languages_code {
-                    code
-                  }
+                  languages_code { code }
                   blocchi
                 }
               }
@@ -597,7 +571,7 @@ exports.createPages = async ({ graphql, actions }) => {
       return {
         title: "Privacy",
         locale: item.code,
-        path: item.code == "en_US" ? "/en/privacy" : "/privacy",
+        path: item.code === "en_US" ? "/en/privacy" : "/privacy",
       }
     })
 
@@ -963,7 +937,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  //SINGOLO CASE HISTORY
+  //ANCHOR: SINGOLO CASE HISTORY
   const caseHistory = await result.data.directus.case_history
   function getAllPathCaseHistory(translations) {
     const allPath = []

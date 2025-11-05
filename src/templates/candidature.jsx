@@ -9,28 +9,33 @@ import 'moment/locale/it'
 
 const moment = require('moment')
 
-const seoSettings = {
-  seo: {
-    translations: [{
-      languages_code: {
-        code: "it_IT"
-      },
-      title: 'Posizioni aperte',
-      meta_description: 'Posizioni aperte e candidature'
-    }, {
-      languages_code: {
-        code: "en_US"
-      },
-      title: 'Open positions',
-      meta_description: 'Open positions and applications'
-    },
-    ]
-  }
-}
 
 export const query = graphql`
   query ($locale: String!) {
     directus {
+     pages(filter: {status: {_eq: "published"}, page_name: {_eq: "Careers"}, translations: {languages_code: {code: {_eq: $locale}}}}) {
+            seo{
+      translations(filter: {languages_code: {code: {_eq: $locale}}}){
+        languages_code{
+          code
+        }
+        title
+        meta_description
+        keywords
+      }
+      og_image{  
+        id
+          imageFile{
+            id
+            publicURL
+            childImageSharp{
+          id
+          gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440, 1200])
+        }}
+        }
+    }
+     }
+
       prodotto_categorie_translations {
         languages_code {
           code
@@ -71,7 +76,6 @@ const Candidature = ({ data, pageContext }) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
 
-  const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
 
   const linkToForm = {
     it_IT: '/careers/candidature',
@@ -86,7 +90,8 @@ const Candidature = ({ data, pageContext }) => {
         allPagePath={pageContext.allPagePath}
         listaApplicazioni={pageContext.listaApplicazioni}
         listaCategorie={pageContext.listaCategorie}
-        seo={seoFilterLocale}
+        seo={data.directus.pages[0]?.seo.translations[0]}
+        seoImage={data.directus.pages[0]?.seo?.og_image?.imageFile?.publicURL && data.directus.pages[0]?.seo?.og_image?.imageFile?.publicURL}
       >
         <section className="container candidature" ref={topArchivio}>
 

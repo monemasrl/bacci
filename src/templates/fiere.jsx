@@ -26,6 +26,40 @@ const seoSettings = {
 export const query = graphql`
   query($locale: String!) {
   directus{
+          pages(
+        filter: {
+          status: { _eq: "published" }
+          page_name: { _eq: "news" }
+          translations: { languages_code: { code: { _eq: $locale } } }
+        }
+      ) {
+        seo {
+          translations(filter: { languages_code: { code: { _eq: $locale } } }) {
+            languages_code {
+              code
+            }
+            title
+            meta_description
+            keywords
+          }
+          og_image {
+            id
+            imageFile {
+              id
+              publicURL
+              childImageSharp {
+                id
+                gatsbyImageData(
+                  formats: [WEBP]
+                  quality: 70
+                  placeholder: BLURRED
+                  breakpoints: [440, 1200]
+                )
+              }
+            }
+          }
+        }
+      }
     prodotto_categorie_translations{
     languages_code{
       code
@@ -76,7 +110,6 @@ const Fiere = ({ data, pageContext }) => {
   const topArchivio = React.useRef()
   const langFilterFiereSorted = [...data.directus.Fiere].sort((a, b) => new Date(b.date_created) - new Date(a.date_created))
 
-  const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code === pageContext.locale })
 
   return (
     <>
@@ -86,7 +119,8 @@ const Fiere = ({ data, pageContext }) => {
         allPagePath={pageContext.allPagePath}
         listaApplicazioni={pageContext.listaApplicazioni}
         listaCategorie={pageContext.listaCategorie}
-        seo={seoFilterLocale}
+        seo={data.directus.pages[0]?.seo.translations[0]}
+        seoImage={data.directus.pages[0]?.seo.og_image?.imageFile?.publicURL}
       >
         <section className="container fiere" ref={topArchivio}>
           {langFilterFiereSorted.length > 0 ? <GridPagination pagePath={pageContext.allPagePath} pageName="fiere" topArchivio={topArchivio} archivio={langFilterFiereSorted} lang={pageContext.locale} /> :

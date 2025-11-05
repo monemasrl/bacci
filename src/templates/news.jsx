@@ -3,64 +3,89 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
 import GridPagination from "../components/grid-pagination"
 
-const seoSettings = {
-  seo: {
-    translations: [{
-      languages_code: {
-        code: "it_IT"
-      },
-      title: 'News',
-      meta_description: 'Le ultime dal mondo Bacci'
-    }, {
-      languages_code: {
-        code: "en_US"
-      },
-      title: 'News',
-      meta_description: 'Lastest news from Bacci world'
-    },
-    ]
-  }
-}
+
 export const query = graphql`
   query($locale: String!) {
-  directus{
-    prodotto_categorie_translations{
-    languages_code{
-      code
-    }
-    nome
-  }
-  applicazioni_translations{
-      languages_code{
-        code
+    directus {
+      pages(
+        filter: {
+          status: { _eq: "published" }
+          page_name: { _eq: "news" }
+          translations: { languages_code: { code: { _eq: $locale } } }
+        }
+      ) {
+        seo {
+          translations(filter: { languages_code: { code: { _eq: $locale } } }) {
+            languages_code {
+              code
+            }
+            title
+            meta_description
+            keywords
+          }
+          og_image {
+            id
+            imageFile {
+              id
+              publicURL
+              childImageSharp {
+                id
+                gatsbyImageData(
+                  formats: [WEBP]
+                  quality: 70
+                  placeholder: BLURRED
+                  breakpoints: [440, 1200]
+                )
+              }
+            }
+          }
+        }
       }
-      label
-    }
-    posts(filter: {translations: {languages_code: {code: {_eq: $locale}}}, status: { _eq: "published" } }){
-    id
-    date_created
-    translations{
-      languages_code{
-        code
+
+      prodotto_categorie_translations {
+        languages_code {
+          code
+        }
+        nome
       }
-      
-      title
-    	slug
-      summary
-    }
-    image{
-      id
-      description
-      imageFile{
+
+      applicazioni_translations {
+        languages_code {
+          code
+        }
+        label
+      }
+
+      posts(
+        filter: {
+          translations: { languages_code: { code: { _eq: $locale } } }
+          status: { _eq: "published" }
+        }
+      ) {
         id
-        childImageSharp{
-          gatsbyImageData
+        date_created
+        translations {
+          languages_code {
+            code
+          }
+          title
+          slug
+          summary
+        }
+        image {
+          id
+          description
+          imageFile {
+            id
+            childImageSharp {
+              gatsbyImageData
+            }
+          }
         }
       }
     }
   }
-}
-  }`
+`
 
 
 const News = ({ data, pageContext }) => {
@@ -69,7 +94,6 @@ const News = ({ data, pageContext }) => {
   const langFilterProdottoSorted = data.directus.posts.sort((a, b) => {
     return new Date(b.date_created) - new Date(a.date_created)
   })
-  const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
 
   return (
     <>
@@ -79,7 +103,8 @@ const News = ({ data, pageContext }) => {
         allPagePath={pageContext.allPagePath}
         listaApplicazioni={pageContext.listaApplicazioni}
         listaCategorie={pageContext.listaCategorie}
-        seo={seoFilterLocale}
+        seo={data.directus.pages[0]?.seo.translations[0]}
+        seoImage={data.directus.pages[0]?.seo?.og_image?.imageFile?.publicURL && data.directus.pages[0]?.seo?.og_image?.imageFile?.publicURL}
       >
         <section className="container news" ref={topArchivio}>
           {langFilterProdottoSorted.length > 0 ? (

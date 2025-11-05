@@ -39,7 +39,7 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
     "description": seo?.meta_description || metaDescription,
     "url": site.siteMetadata.siteUrl + localePath?.path,
     "inLanguage": langTag[lang],
-    "image": site.siteMetadata.siteUrl + seoImage || undefined
+    "image": seoImage && site.siteMetadata.siteUrl + seoImage
   }
   function getDataSeoOpenGraph(seo) {
     const arrSeo = []
@@ -65,7 +65,7 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
       if (localePath?.path) {
         arrSeo.push({
           property: `og:url`,
-          content: site.siteMetadata.siteUrl + localePath?.path,
+          content: site.siteMetadata.siteUrl + localePath?.path || '',
         })
       }
 
@@ -77,7 +77,7 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
     }
     return arrSeo
   }
-  console.log(seoImage, 'test')
+
   return (
     <Helmet >
       <html lang={langTag[lang]} />

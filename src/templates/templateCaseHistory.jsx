@@ -63,6 +63,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                 listaApplicazioni={pageContext.listaApplicazioni}
                 listaCategorie={pageContext.listaCategorie}
                 seo={seoFilterLocale}
+                seoImage={content.seo?.og_image?.imageFile?.publicURL && content.seo?.og_image?.imageFile?.publicURL}
             >
 
                 <section className={`container-fluid sezione-3 main`}>

@@ -6,29 +6,12 @@ import 'moment/locale/it'
 import { FormCandidature } from "../components/form";
 import { GatsbyImage } from "gatsby-plugin-image";
 
-const seoSettings = {
-    seo: {
-        translations: [{
-            languages_code: {
-                code: "it_IT"
-            },
-            title: 'Posizioni aperte',
-            meta_description: 'Posizioni aperte e candidature'
-        }, {
-            languages_code: {
-                code: "en_US"
-            },
-            title: 'Open positions',
-            meta_description: 'Open positions and applications'
 
-        },
-        ]
-    }
-}
 
 export const query = graphql`
     query ($locale: String! ) {
         directus {
+   
             prodotto_categorie_translations {
                 languages_code {
                     code
@@ -64,18 +47,26 @@ export const query = graphql`
         ) {
             __typename
             id
-            seo {
-                translations(
-                    filter: { languages_code: { code: { _eq: $locale } } }
-                ) {
-                    languages_code {
-                        code
-                    }
-                    title
-                    meta_description
-                    keywords
-                }
-            }
+        seo{
+      translations(filter: {languages_code: {code: {_eq: $locale}}}){
+        languages_code{
+          code
+        }
+        title
+        meta_description
+        keywords
+      }
+      og_image{  
+        id
+          imageFile{
+            id
+            publicURL
+            childImageSharp{
+          id
+          gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440, 1200])
+        }}
+        }
+    }
             featured_image {
                 id
                 description
@@ -121,7 +112,7 @@ const CandidatureForm = ({ data, pageContext }) => {
     const langFilterFiereSorted = data.directus.candidature.sort((a, b) => {
         return new Date(b.date_created) - new Date(a.date_created)
     })
-    const seoFilterLocale = seoSettings.seo.translations.find((item) => { return item.languages_code.code = pageContext.locale })
+
 
 
     return (
@@ -132,7 +123,8 @@ const CandidatureForm = ({ data, pageContext }) => {
                 allPagePath={pageContext.allPagePath}
                 listaApplicazioni={pageContext.listaApplicazioni}
                 listaCategorie={pageContext.listaCategorie}
-                seo={seoFilterLocale}
+                seo={data.directus.pages[0]?.seo.translations[0]}
+                seoImage={data.directus.pages[0]?.seo.og_image?.imageFile?.publicURL}
             >
 
                 <div className="mainContent candidature">
