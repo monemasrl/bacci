@@ -7,12 +7,12 @@ import Seo from "../seo"
 import ScrollTo from "../scrollTo"
 
 
-const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, allPagePath, listaApplicazioni, listaCategorie, parentPath, tipo }) => {
+const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, seoImage, allPagePath, listaApplicazioni, listaCategorie, parentPath, tipo }) => {
 
   return (
     <div className={`mainwrapper ${tipo}`}>
 
-      <Seo lang={locale} title={pageTitle} seo={seo} allPagePath={allPagePath} />
+      <Seo lang={locale} title={pageTitle} seo={seo} allPagePath={allPagePath} seoImage={seoImage} />
 
       <div className={`container-fluid ${tipo}`}  >
         <Header

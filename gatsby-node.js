@@ -555,7 +555,7 @@ exports.createPages = async ({ graphql, actions }) => {
         data.push({
           title: "Home",
           locale: item.code,
-          path: item.code == "en_US" ? "/en" : "/",
+          path: item.code === "en_US" ? "/en" : "/",
         })
       }
     })

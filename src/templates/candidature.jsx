@@ -23,7 +23,6 @@ const seoSettings = {
       },
       title: 'Open positions',
       meta_description: 'Open positions and applications'
-
     },
     ]
   }

@@ -29,6 +29,16 @@ export const query = graphql`
         meta_description
         keywords
       }
+      og_image{  
+        id
+          imageFile{
+            id
+            publicURL
+            childImageSharp{
+          id
+          gatsbyImageData(formats: [WEBP], quality: 70, placeholder: BLURRED, breakpoints: [ 440, 1200])
+        }}
+        }
     }
       featured_image{
       id
@@ -136,6 +146,7 @@ const Pagine = ({ data, pageContext }) => {
           listaCategorie={pageContext.listaCategorie}
           parentPath={pageContext.parentPath}
           seo={data.directus.pages[0]?.seo.translations[0]}
+          seoImage={data.directus.pages[0]?.seo?.og_image?.imageFile?.publicURL && data.directus.pages[0]?.seo?.og_image?.imageFile?.publicURL}
         >
 
           {/* PAGINE INTERNE */}
