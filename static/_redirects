@@ -1,0 +1,5 @@
+# Redirect 404 errors to the custom 404 page
+/*    /404/   404
+
+# If you have multilingual support, add specific redirects for English pages
+/en/*    /en/404/   404
