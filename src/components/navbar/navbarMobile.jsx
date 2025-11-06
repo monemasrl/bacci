@@ -202,7 +202,7 @@ const NavBarMobile = (props) => {
                                                         </Link>
                                                     )}
 
-                                                    {item.sub_items && itemTranslated?.slug && (
+                                                    {item.sub_items?.length > 0 && itemTranslated?.slug && (
                                                         <ul role="menu" aria-label={`Sottomenu di ${itemTranslated.label}`}>
                                                             {item.sub_items.map((subitem, subIndex) => {
                                                                 const subItemTranslated = subitem.translations.find((lang) => {
