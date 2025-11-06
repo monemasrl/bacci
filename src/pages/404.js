@@ -1,16 +1,19 @@
 import * as React from "react"
-
+import { StaticImage } from "gatsby-plugin-image"
 const NotFoundPage = ({ pageContext }) => {
-  const defaultPagePath = [
-    { path: '/', locale: 'it_IT', title: 'Home' },
-    { path: '/en/', locale: 'en_US', title: 'Home' }
-  ]
+
   return (
 
     <div class="mainwrapper">
       <main>
         <div className="container">
           <div className="page404">
+            <StaticImage
+              placeholder="none"
+              width={362}
+              src="../../images/logo_scuro.jpg"
+              alt="Logo Bacci"
+            />
             <h1>404: Not Found</h1>
             <p>Ci dispiace, la pagina che hai richiesto non esiste!</p>
             <a href="/">Torna alla home</a>
