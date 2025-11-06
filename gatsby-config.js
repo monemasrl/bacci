@@ -40,15 +40,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-netlify`,
       options: {
-        headers: {},
-        allPageHeaders: [],
-        mergeSecurityHeaders: true,
-        mergeLinkHeaders: true,
-        mergeCachingHeaders: true,
-        generateMatchPathRewrites: true,
-        transformHeaders: (headers, path) => headers,
-        // Forza la generazione di 404.html
-        redirects: [],
+        redirects: [
+          {
+            from: "/*",
+            to: "/404.html",
+            status: 404,
+          },
+        ],
       },
     },
     {
