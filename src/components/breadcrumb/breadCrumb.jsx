@@ -10,7 +10,7 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
 
     function breadCrumbTitle(pageTitle, termini) {
         if (pageTitle === 'News') {
-            return 'Bacci News'
+            return 'News'
         }
         else if (pageTitle === 'Fiere' || pageTitle === 'Exhibitions') {
             return termini[locale].eventi
@@ -41,7 +41,7 @@ const Breadcrumb = ({ dataBreadCrumbFiere, pageTitle, pathName, nodeType, locale
                             tabIndex="0"
                             aria-label={`Vai a ${Termini[locale][tipo]}`}
                         >
-                            &#47;{Termini[locale][tipo]}<br />
+                            &#47;{Termini[locale][tipo]}&#47;<br />
                         </span>
                         <span aria-current="page">{pageTitle}</span>
                     </h2>
