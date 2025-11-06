@@ -159,7 +159,9 @@ const Pagine = ({ data, pageContext }) => {
                   {/*  <GatsbyImage loading="eager" className="jumbo-image" image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} /> */}
                 </section>}
               {pageContext.pageName !== "home" &&
-                <TestoMainContent content={data.directus.pages[0]?.translations[0]} featuredImage={data.directus.pages[0].featured_image?.imageFile?.childImageSharp.gatsbyImageData || ''} />}
+                <TestoMainContent content={data.directus.pages[0]?.translations[0]} featuredImage={data.directus.pages[0].featured_image?.imageFile?.childImageSharp.gatsbyImageData || ''}
+                  altImage={data.directus.pages[0].featured_image?.description || 'Bacci website image'}
+                />}
 
               <div className={`container-fluid ${pageContext.pageName}`}>
                 {data.directus.pages[0].blocchi?.map((blocco, index) => {

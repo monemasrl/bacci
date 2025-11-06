@@ -4,7 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image"
 
 
 
-function TestoMainContent({ content, featuredImage }) {
+function TestoMainContent({ content, featuredImage, altImage }) {
 
 
     return (
@@ -12,11 +12,11 @@ function TestoMainContent({ content, featuredImage }) {
             {content && <>
                 <div className={`box-sx`} >
                     <h1 className="titolo" dangerouslySetInnerHTML={{ __html: content.main_content_titolo ? content.main_content_titolo : '' }} />
-                    <p dangerouslySetInnerHTML={{ __html: content.main_content ? content.main_content : '' }} />
+                    <div dangerouslySetInnerHTML={{ __html: content.main_content ? content.main_content : '' }} />
                 </div>
 
                 {featuredImage && <div className="box-dx">
-                    <GatsbyImage image={featuredImage} alt={content.main_content_titolo || 'Bacci website image'} />
+                    <GatsbyImage image={featuredImage} alt={altImage || 'Bacci website image'} />
                 </div>}</>}
         </section>
     )

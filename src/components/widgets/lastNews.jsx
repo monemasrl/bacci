@@ -29,6 +29,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
           }
           image {
             id
+            description
             imageFile {
               id
               childImageSharp {
@@ -77,7 +78,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
               return (
                 <div key={index} className="col-3">
                   <div className="box-news">
-                    {item.image?.imageFile && <GatsbyImage className="immagine-widget" image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={prodottoTradotto.title} />}
+                    {item.image?.imageFile && <GatsbyImage className="immagine-widget" image={item.image.imageFile.childImageSharp.gatsbyImageData} alt={item.image.description || 'Bacci website image'} />}
                     <div className="box-correlati">
 
                       <div className="date">{date || ''}</div>

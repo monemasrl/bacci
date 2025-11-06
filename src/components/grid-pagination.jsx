@@ -36,10 +36,11 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                 {currentPosts?.length ? currentPosts.map((item) => {
                     const translated = findItemTranslated(item.translations, lang)
                     if (translated.titolo) {
+                        console.log(item.immagine)
                         return (
                             <div key={translated.titolo} className="box-prodotto">
                                 {item.immagine?.imageFile && <div className="thumb">
-                                    <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={translated.titolo} />
+                                    <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || 'Bacci website image'} />
                                 </div>}
                                 <h2>{translated.titolo}</h2>
                                 <p>{translated.testo_antemprima && summary(translated.testo_antemprima, 120)}</p>

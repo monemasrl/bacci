@@ -6,8 +6,6 @@ import 'moment/locale/it'
 import { FormCandidature } from "../components/form";
 import { GatsbyImage } from "gatsby-plugin-image";
 
-
-
 export const query = graphql`
     query ($locale: String! ) {
         directus {
@@ -137,7 +135,7 @@ const CandidatureForm = ({ data, pageContext }) => {
 
                         </div>
                         {featuredImage && <div className="box-dx">
-                            <GatsbyImage image={featuredImage} alt={content.main_content_titolo || 'Bacci website image'} />
+                            <GatsbyImage image={featuredImage} alt={data.directus.pages[0]?.featured_image?.description || 'Bacci website image'} />
                         </div>}</>}
                 </div>
 

@@ -20,7 +20,7 @@ const Personale = ({ personale, locale }) => {
                                     <div className="box-personale">
                                         <div className="sx">
 
-                                            {item.personale.immagine?.localFile && <GatsbyImage image={item.personale.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.personale.immagine.altText} />}
+                                            {item.personale.immagine?.localFile && <GatsbyImage image={item.personale.immagine.localFile.childImageSharp.gatsbyImageData} alt={item.personale.immagine.description || 'Bacci website image'} />}
                                         </div>
                                         <div className="dx">
                                             {item.personale.link && <div className="linkedin">

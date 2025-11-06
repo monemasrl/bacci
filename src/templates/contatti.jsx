@@ -34,6 +34,7 @@ export const query = graphql`
             id
             imageFile {
               id
+      
               publicURL
               childImageSharp {
                 id
@@ -138,7 +139,7 @@ const Contatti = ({ data, pageContext }) => {
                             <GatsbyImage
                                 className="map-gruppo-bacci__image"
                                 image={data.directus.pages[0].featured_image.imageFile.childImageSharp.gatsbyImageData}
-                                alt={"map"}
+                                alt={data.directus.pages[0].featured_image.description || 'Bacci website image'}
                             />
                         )}
                     </section>

@@ -73,7 +73,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                             {dataTranslated.sottotitolo && <h3 dangerouslySetInnerHTML={{ __html: dataTranslated.sottotitolo }} />}
                         </div>
                         <div className="box-immagine">
-                            {content.featured_image?.imageFile && <GatsbyImage image={content.featured_image.imageFile.childImageSharp.gatsbyImageData} alt={'gatsby immagine case history'} />}
+                            {content.featured_image?.imageFile && <GatsbyImage image={content.featured_image.imageFile.childImageSharp.gatsbyImageData} alt={content.featured_image.description || 'Bacci website image'} />}
                         </div>
                         <div className="box-dx">
 
@@ -122,7 +122,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                         </ul>
                     </div>
                     <div className="box-dx">
-                        {content?.secondary_image?.imageFile && <GatsbyImage image={content.secondary_image.imageFile.childImageSharp.gatsbyImageData} alt={'test'} />}
+                        {content?.secondary_image?.imageFile && <GatsbyImage image={content.secondary_image.imageFile.childImageSharp.gatsbyImageData} alt={content.secondary_image.description || 'Bacci website image'} />}
                     </div>
 
                 </section>

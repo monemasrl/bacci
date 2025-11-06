@@ -39,7 +39,7 @@ function TestoImmagineHome({ index, allineamento, content }) {
                 </div>
 
                 <div className="box-dx">
-                    <p dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo ? content.item.traduzioni[0].paragrafo : '' }} />
+                    <div dangerouslySetInnerHTML={{ __html: content.item.traduzioni[0].paragrafo ? content.item.traduzioni[0].paragrafo : '' }} />
 
                     {content.item.traduzioni[0].url && <Link className="button-sezione" to={content.item.traduzioni[0].url}>{content.item.traduzioni[0].link_label}</Link>}
 

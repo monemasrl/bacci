@@ -79,7 +79,7 @@ const Prodotto = ({ pageContext }) => {
                             </nav>
                         </div>
                         <div className="box-dx">
-                            {content.immagine?.imageFile && <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.immagine.description || ''} />}
+                            {content.immagine?.imageFile && <GatsbyImage className="mainprodotto" image={content.immagine.imageFile.childImageSharp.gatsbyImageData} alt={content.immagine.description || 'Bacci website image'} />}
                         </div>
                     </section>
                     {content.sezioni_prodotto.map((item, index) => {
@@ -95,7 +95,7 @@ const Prodotto = ({ pageContext }) => {
                                 </div>
                                 <div className="box-dx">
 
-                                    {item.immagine?.imageFile && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || ''} />}
+                                    {item.immagine?.imageFile && <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || 'Bacci website image'} />}
                                 </div>
 
                             </section>

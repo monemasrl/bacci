@@ -50,6 +50,7 @@ export const query = graphql`
       date_created
       type
       immagine{
+        description
         id
     imageFile{
       id

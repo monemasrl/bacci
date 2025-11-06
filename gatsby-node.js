@@ -240,6 +240,7 @@ exports.createPages = async ({ graphql, actions }) => {
           prodotti_correlati {
             related_Prodotti_id {
               immagine {
+                description
                 id
                 imageFile {
                   childImageSharp {
@@ -340,6 +341,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
           featured_image {
+            description
             id
             imageFile {
               id
@@ -350,6 +352,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
           secondary_image {
             id
+            description
             imageFile {
               id
               childImageSharp {
@@ -369,6 +372,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 images {
                   id
                   directus_files_id {
+                    description
                     id
                     imageFile {
                       id

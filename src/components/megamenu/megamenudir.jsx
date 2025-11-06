@@ -33,6 +33,7 @@ const MegamenuDirectus = ({
           date_created
           immagine {
             id
+            description
             imageFile {
               id
               childImageSharp {
@@ -164,7 +165,7 @@ const MegamenuDirectus = ({
                                                 novita[novita.length - 1].immagine.imageFile
                                                     .childImageSharp.gatsbyImageData
                                             }
-                                            alt={novita[0].titolo || 'titolo'}
+                                            alt={novita[novita.length - 1].immagine?.description || 'titolo'}
                                         />}
                                     </>)}
                                 </div>
