@@ -13,7 +13,7 @@ const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, seoImag
     <div className={`mainwrapper ${tipo}`}>
 
       <Seo lang={locale} title={pageTitle} seo={seo} allPagePath={allPagePath} seoImage={seoImage} />
-      {/*  <Gdpr locale={locale} /> */}
+      <Gdpr locale={locale} />
       <div className={`container-fluid ${tipo}`}  >
         <Header
           locale={locale}

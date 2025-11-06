@@ -1,7 +1,7 @@
 import React from "react";
 import CookieConsent from "react-cookie-consent";
 import { Link } from "gatsby"
-import { Termini } from "../../data-translations";
+import { Termini, langTag } from "../../data-translations";
 
 function Gdpr({ locale }) {
     return <CookieConsent
@@ -13,7 +13,7 @@ function Gdpr({ locale }) {
         expires={150}
     >
         <p style={{ color: "white", fontSize: "1rem", marginBottom: "2rem" }}>{Termini[locale].cookieTesto}</p>
-        <Link style={{ color: "white", border: "1px solid white", padding: ".5rem" }} to={`/${locale}/privacy-policy/`}>privacy-policy</Link>
+        <Link style={{ color: "white", border: "1px solid white", padding: ".5rem" }} to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + '/'}privacy-policy/`}>privacy-policy</Link>
     </CookieConsent>
 }
 

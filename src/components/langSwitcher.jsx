@@ -4,6 +4,9 @@ import { langTag } from '../../data-translations';
 
 
 const LangSwitcher = (props) => {
+  if (!props.allPagePath || !Array.isArray(props.allPagePath)) {
+    return null; // Non renderizzare nulla se i dati non sono disponibili
+  }
   const pathInOrdine = props.allPagePath.sort((item) => {
     return item.locale === 'it_IT' ? -1 : 1;
   });
