@@ -39,15 +39,7 @@ module.exports = {
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-plugin-netlify`,
-      options: {
-        redirects: [
-          {
-            from: "/*",
-            to: "/404.html",
-            status: 404,
-          },
-        ],
-      },
+
     },
     {
       resolve: `gatsby-source-filesystem`,
