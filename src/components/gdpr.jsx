@@ -11,7 +11,7 @@ function Gdpr({ locale }) {
     useEffect(() => {
         // Controlla se il consenso è già stato dato
         if (typeof window !== 'undefined') {
-            const consent = localStorage.getItem('myAwesomeCookieName2');
+            const consent = localStorage.getItem('bacciCookie');
             if (consent === 'true') {
                 setHasConsent(true);
             }
@@ -21,7 +21,7 @@ function Gdpr({ locale }) {
     const handleAccept = () => {
         setHasConsent(true);
         // Salva il consenso
-        localStorage.setItem('myAwesomeCookieName2', 'true');
+        localStorage.setItem('bacciCookie', 'true');
 
         // Event tracking per GTM (opzionale)
         if (window.dataLayer) {
@@ -34,7 +34,7 @@ function Gdpr({ locale }) {
 
     const handleDecline = () => {
         setHasConsent(false);
-        localStorage.setItem('myAwesomeCookieName2', 'false');
+        localStorage.setItem('bacciCookie', 'false');
         removeGTM();
     };
 
@@ -44,7 +44,7 @@ function Gdpr({ locale }) {
             buttonText={Termini[locale].cookieButton}
             declineButtonText="Rifiuta"
             enableDeclineButton={true}
-            cookieName="myAwesomeCookieName2"
+            cookieName="bacciCookie"
             style={{
                 background: "#0e294b",
                 padding: "1rem 1rem",

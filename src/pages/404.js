@@ -1,5 +1,7 @@
 import * as React from "react"
 import { StaticImage } from "gatsby-plugin-image"
+import "../assets/sass/globale.scss"
+
 const NotFoundPage = ({ pageContext }) => {
 
   return (
@@ -10,9 +12,10 @@ const NotFoundPage = ({ pageContext }) => {
           <div className="page404">
             <StaticImage
               placeholder="none"
-              width={362}
-              src="../../images/logo_scuro.jpg"
+
+              src="../images/logo_scuro.jpg"
               alt="Logo Bacci"
+              style={{ width: '380px', height: '80px' }}
             />
             <h1>404: Not Found</h1>
             <p>Ci dispiace, la pagina che hai richiesto non esiste!</p>
