@@ -112,7 +112,7 @@ const NavBarDirectus = (props) => {
 
                                                 >
                                                     {itemTranslated.label}
-                                                    <img src={icon} width="20" alt="" aria-hidden="true" />
+                                                    <img src={icon} width="20" alt="icon" aria-hidden="true" />
                                                 </button>
                                             ) : (
                                                 itemTranslated.slug && (
@@ -220,7 +220,7 @@ const NavBarDirectus = (props) => {
 
                                                 >
                                                     {itemTranslated.label}
-                                                    <img src={icon} width="20" alt="" aria-hidden="true" />
+                                                    <img src={icon} width="20" alt="icon" aria-hidden="true" />
                                                 </button>
 
                                                 <MegamenuDirectus
@@ -251,7 +251,7 @@ const NavBarDirectus = (props) => {
 
                                                     >
                                                         {itemTranslated.label}
-                                                        <img src={icon} width="20" alt="" aria-hidden="true" />
+                                                        <img src={icon} width="20" alt="icon" aria-hidden="true" />
                                                     </button>
                                                 ) : itemTranslated.slug && (
                                                     <Link

@@ -74,5 +74,6 @@ module.exports = {
         url: `https://bacci-directus.monema.dev`, // Fill with your Directus instance address
       },
     },
+
   ],
 }

@@ -89,7 +89,7 @@ const NavBarMobile = (props) => {
                             placeholder="none"
                             width={30}
                             src="../../images/mobile.svg"
-                            alt=""
+                            alt="menu mobile icon"
                             aria-hidden="true"
                         />
                     </button>

@@ -41,7 +41,7 @@ const Footer = ({ locale, listaTipologia }) => {
                                 placeholder="blurred"
                                 width={300}
                                 height={195}
-                                src="../../images/italyxsmall.png" al t="ItalyX" /></li>
+                                src="../../images/italyxsmall.png" alt="ItalyX" /></li>
                         </ul>
                     </div>
                     <div className="footer-col">
