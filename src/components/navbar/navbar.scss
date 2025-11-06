@@ -8,7 +8,20 @@
   @media #{$landscape} {
     display: none;
   }
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    text-transform: uppercase;
 
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   .container {
     max-width: $container;
     margin: 0 auto;
@@ -127,6 +140,20 @@
   @media #{$landscape} {
     display: none;
   }
+  button {
+    color: #4a6c96;
+    text-transform: uppercase;
+    font-size: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      color: $brown;
+    }
+  }
   a:not(.mega-item) {
     color: $brown;
     text-transform: uppercase;
@@ -169,9 +196,6 @@
       &:hover {
         text-decoration: none;
       }
-    }
-    &:hover {
-      color: white;
     }
 
     &.open {

@@ -67,36 +67,57 @@ const NavBarDirectus = (props) => {
           langTag
         ), */
 
+    const handleKeyDown = (event, callback) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            callback();
+        }
+    };
+
+    const handleMouseEnter = (itemId) => {
+        setOpenSub(itemId);
+    };
+
+    const handleMouseLeave = () => {
+        setOpenSub(null);
+    };
+
     return (
         <>
-            <nav className="container-fluid top-menu">
+            <nav className="container-fluid top-menu" role="navigation" aria-label="Menu secondario">
                 <div className="container">
                     {data.directus.menus &&
-                        <ul>
+                        <ul role="menubar">
                             {data.directus.menus[1].items.map((item) => {
-
                                 const itemTranslated = item.translations.find((lang) => {
                                     return (langTag[lang.languages_code.code] === langTag[props.locale]) && lang.creazione_pagina
                                 })
 
                                 if (itemTranslated?.slug && itemTranslated?.creazione_pagina) {
-
                                     return (
                                         <li
-                                            role="button"
-                                            tabIndex={item.id}
-                                            onClick={() => setOpenSub(item.id)}
-                                            onMouseLeave={() => setOpenSub(null)}
+                                            role="none"
                                             key={item.id + 'main'}
+
+                                            onMouseLeave={handleMouseLeave}
                                         >
                                             {item.sub_items.length ? (
-                                                <a>
+                                                <button
+                                                    type="button"
+                                                    role="menuitem"
+                                                    aria-haspopup="true"
+                                                    aria-expanded={item.id === openSub}
+                                                    onClick={() => setOpenSub(item.id === openSub ? null : item.id)}
+                                                    onKeyDown={(e) => handleKeyDown(e, () => setOpenSub(item.id === openSub ? null : item.id))}
+
+                                                >
                                                     {itemTranslated.label}
-                                                    <img src={icon} width="20" alt="iconamenu" />
-                                                </a>
+                                                    <img src={icon} width="20" alt="" aria-hidden="true" />
+                                                </button>
                                             ) : (
                                                 itemTranslated.slug && (
                                                     <Link
+                                                        role="menuitem"
                                                         to={`/${langTag[itemTranslated.languages_code.code] === 'it'
                                                             ? ''
                                                             : langTag[itemTranslated.languages_code.code] + '/'
@@ -107,7 +128,11 @@ const NavBarDirectus = (props) => {
                                                 )
                                             )}
                                             {item.sub_items.length ? (
-                                                <ul className={`${item.id === openSub ? 'open' : ''}`}>
+                                                <ul
+                                                    className={`${item.id === openSub ? 'open' : ''}`}
+                                                    role="menu"
+                                                    aria-label={`Sottomenu di ${itemTranslated.label}`}
+                                                >
                                                     {item.sub_items.map((subitem) => {
                                                         const subItemTranslated = subitem.translations.find(
                                                             (lang) =>
@@ -117,8 +142,9 @@ const NavBarDirectus = (props) => {
 
                                                         if (subItemTranslated?.slug) {
                                                             return (
-                                                                <li key={subItemTranslated.label}>
+                                                                <li key={subItemTranslated.label} role="none">
                                                                     <Link
+                                                                        role="menuitem"
                                                                         to={`${langTag[
                                                                             subItemTranslated.languages_code.code
                                                                         ] === 'it'
@@ -140,82 +166,131 @@ const NavBarDirectus = (props) => {
                                                         }
                                                     })}
                                                 </ul>
-                                            ) : (
-                                                ''
-                                            )}
+                                            ) : null}
                                         </li>
                                     );
                                 } else {
                                     return null
                                 }
-                            })
-
-                            }
+                            })}
                         </ul>}
 
                     <LangSwitcher allPagePath={props.allPagePath} locale={props.locale} pathName={props.pathName} />
-
                 </div>
-
             </nav>
-            <nav className={`container-fluid mainmenu ${stickyClass}`}>
+
+            <nav className={`container-fluid mainmenu ${stickyClass}`} role="navigation" aria-label="Menu principale">
                 <div className="container">
                     <div className="main-logo">
-                        <Link to={`${langTag[props.locale] === 'it' ? '/' : '/' + langTag[props.locale] + '/'}`}>
+                        <Link
+                            to={`${langTag[props.locale] === 'it' ? '/' : '/' + langTag[props.locale] + '/'}`}
+                            aria-label="Vai alla homepage di Bacci"
+                        >
                             <img
                                 width={362}
-                                src={logo} alt="Bacci logo" />
+                                src={logo}
+                                alt="Logo Bacci"
+                            />
                         </Link>
-
                     </div>
+
                     {data.directus.menus[0] &&
-
-                        <ul>
+                        <ul role="menubar">
                             {data.directus.menus[0].items.map((item) => {
-
                                 const itemTranslated = item.translations.find((lang) => {
                                     return (langTag[lang.languages_code.code] === langTag[props.locale]) && lang.creazione_pagina
                                 })
 
                                 return (
-                                    <Fragment key={item.id} >
-                                        {item.id === '2' && itemTranslated ?
-                                            <li key={item.id} role="button" tabIndex={0} onClick={() => props.setMega(true)}
-                                                onMouseLeave={() => props.setMega(false)}>
-                                                <div className={`main-mega  ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`} ><a>{itemTranslated.label}</a><img src={icon} width="20" alt="iconamenu" />
-                                                </div>
+                                    <Fragment key={item.id}>
+                                        {item.id === '2' && itemTranslated ? (
+                                            <li
+                                                role="none"
+
+                                                onMouseLeave={() => props.setMega(false)}
+                                            >
+                                                <button
+                                                    type="button"
+                                                    role="menuitem"
+                                                    aria-haspopup="true"
+                                                    aria-expanded={props.mega}
+                                                    className={`main-mega ${props.mega ? 'open' : ''}${props.currentPath === itemTranslated.slug ? 'active' : ''}`}
+                                                    onClick={() => props.setMega(!props.mega)}
+                                                    onKeyDown={(e) => handleKeyDown(e, () => props.setMega(!props.mega))}
+
+                                                >
+                                                    {itemTranslated.label}
+                                                    <img src={icon} width="20" alt="" aria-hidden="true" />
+                                                </button>
 
                                                 <MegamenuDirectus
-                                                    terminiTraduzione={terminiTraduzione} mega={props.mega}
+                                                    terminiTraduzione={terminiTraduzione}
+                                                    mega={props.mega}
                                                     setMega={props.setMega}
                                                     locale={props.locale}
                                                     language={langTag[itemTranslated.languages_code.code]}
                                                     listaApplicazioni={props.listaApplicazioni}
                                                     listaCategorie={props.listaCategorie}
-
                                                 />
+                                            </li>
+                                        ) : (itemTranslated && itemTranslated.creazione_pagina) && (
+                                            <li
+                                                role="none"
+                                                key={item.id}
 
-                                            </li> : (itemTranslated && itemTranslated.creazione_pagina) &&
-                                            <li role="button" tabIndex={0} onClick={() => setOpenSub(item.id)} onMouseLeave={() => setOpenSub(null)} key={item.id}>
-                                                {item.sub_items.length && itemTranslated ? <a >{itemTranslated.label}<img src={icon} width="20" alt="iconamenu" /></a> :
-                                                    itemTranslated.slug && <Link to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}>{itemTranslated.label}</Link>} {item.sub_items ? <ul className={`${item.id === openSub ? 'open' : ''}`}>
+                                                onMouseLeave={handleMouseLeave}
+                                            >
+                                                {item.sub_items.length && itemTranslated ? (
+                                                    <button
+                                                        type="button"
+                                                        role="menuitem"
+                                                        aria-haspopup="true"
+                                                        aria-expanded={item.id === openSub}
+                                                        onClick={() => setOpenSub(item.id === openSub ? null : item.id)}
+                                                        onKeyDown={(e) => handleKeyDown(e, () => setOpenSub(item.id === openSub ? null : item.id))}
+
+                                                    >
+                                                        {itemTranslated.label}
+                                                        <img src={icon} width="20" alt="" aria-hidden="true" />
+                                                    </button>
+                                                ) : itemTranslated.slug && (
+                                                    <Link
+                                                        role="menuitem"
+                                                        to={`/${langTag[itemTranslated.languages_code.code] === 'it' ? '' : langTag[itemTranslated.languages_code.code] + '/'}${itemTranslated.slug.toLowerCase()}`}
+                                                    >
+                                                        {itemTranslated.label}
+                                                    </Link>
+                                                )}
+
+                                                {item.sub_items ? (
+                                                    <ul
+                                                        className={`${item.id === openSub ? 'open' : ''}`}
+                                                        role="menu"
+                                                        aria-label={`Sottomenu di ${itemTranslated?.label || ''}`}
+                                                    >
                                                         {item.sub_items.map((subitem) => {
                                                             const subItemTranslated = subitem.translations.find((lang) => {
                                                                 return (langTag[lang.languages_code.code] === langTag[props.locale]) && lang.creazione_pagina
                                                             })
                                                             if (subItemTranslated?.slug) {
                                                                 return (
-                                                                    <li key={subItemTranslated.label}><Link to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug?.toLowerCase()}/${subItemTranslated.slug}`}>
-                                                                        {subItemTranslated.label || ''}
-                                                                    </Link>
+                                                                    <li key={subItemTranslated.label} role="none">
+                                                                        <Link
+                                                                            role="menuitem"
+                                                                            to={`${langTag[subItemTranslated.languages_code.code] === 'it' ? '' : '/' + langTag[subItemTranslated.languages_code.code]}/${itemTranslated.slug?.toLowerCase()}/${subItemTranslated.slug}`}
+                                                                        >
+                                                                            {subItemTranslated.label || ''}
+                                                                        </Link>
                                                                     </li>
                                                                 )
                                                             } else {
                                                                 return null
                                                             }
-
                                                         })}
-                                                    </ul> : ''}</li>}
+                                                    </ul>
+                                                ) : null}
+                                            </li>
+                                        )}
                                     </Fragment>
                                 )
                             })}
