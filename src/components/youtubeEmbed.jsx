@@ -171,6 +171,15 @@ const YoutubeEmbed = ({
         );
     }
 
+    // Aggiungi una funzione dedicata per l'attivazione:
+    const handleActivation = () => {
+        console.log('Attivando video...'); // Debug
+        setActivated(true);
+        if (!hasConsent) {
+            setHasConsent(true);
+        }
+    };
+
     // Placeholder se manca consenso o non ancora attivato
     if (!hasConsent || !activated) {
         return (
@@ -181,25 +190,35 @@ const YoutubeEmbed = ({
                     overflow: "hidden",
                     paddingBottom: aspectRatio,
                     height: 0,
-                    background: "#000",
-                    color: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer"
+                    background: "#000"
                 }}
-                onClick={() => setActivated(true)}
             >
-                <div style={{
-                    background: "#ffffff",
-                    color: "#000",
-                    border: "none",
-                    padding: "0.75rem 1rem",
-                    fontSize: "0.9rem",
-                    borderRadius: "4px"
-                }}>
+                <button
+                    type="button"
+                    onClick={handleActivation}
+                    style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        background: "#ffffff",
+                        color: "#000",
+                        border: "2px solid #ccc",
+                        padding: "0.75rem 1rem",
+                        fontSize: "0.9rem",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        transition: "all 0.2s ease"
+                    }}
+                    onMouseOver={(e) => {
+                        e.target.style.background = "#f0f0f0";
+                    }}
+                    onMouseOut={(e) => {
+                        e.target.style.background = "#ffffff";
+                    }}
+                >
                     {placeholderText}
-                </div>
+                </button>
             </div>
         );
     }
