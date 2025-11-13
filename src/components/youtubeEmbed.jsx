@@ -63,9 +63,7 @@ const YoutubeEmbed = ({
         );
     }
 
-    const srcBase = useNoCookieDomain
-        ? "https://www.youtube-nocookie.com/embed/"
-        : "https://www.youtube.com/embed/";
+    const srcBase = "https://www.youtube.com/embed/";
 
     const iframeSrc = `${srcBase}${finalId}`;
 
