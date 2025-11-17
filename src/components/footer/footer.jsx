@@ -43,13 +43,14 @@ const Footer = ({ locale, listaTipologia }) => {
                                     width={300}
                                     height={195}
                                     src="../../images/italyxsmall.png" alt="ItalyX" />
-                            </a><a href="https://www.unioncamere.gov.it/imprese-storiche/paolino-bacci-srl" target="_blank" rel="noreferrer noopener">
+                            </a>
+                                <a href="https://www.unioncamere.gov.it/imprese-storiche/paolino-bacci-srl" target="_blank" rel="noreferrer noopener">
                                     <StaticImage
                                         className='italyX'
                                         placeholder="blurred"
                                         width={197}
                                         height={139}
-                                        src="../../images/impresastorica.png" alt="ItalyX" />
+                                        src="../../images/impresastorica.png" alt="impresastorica" />
                                 </a></li>
 
                         </ul>
