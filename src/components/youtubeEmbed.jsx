@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { useState, useEffect, useRef } from "react";
+import { Termini } from "../../data-translations"; // Import your translations
 
 // Estrae l'ID da vari formati possibili
 function extractYouTubeId(raw) {
@@ -25,11 +27,11 @@ function extractYouTubeId(raw) {
 
 const YoutubeEmbed = ({
     embedId,
-    title = "Video YouTube",
+    locale = "it_IT", // Add locale prop
     consentRequired = true,
     cookieName = "myAwesomeCookieName2",
     aspectRatio = "56.25%",
-    placeholderText = "Clicca per abilitare il video",
+    placeholderText, // Will be set from translations if not provided
     className = ""
 }) => {
     const [hasConsent, setHasConsent] = useState(!consentRequired);
@@ -40,6 +42,12 @@ const YoutubeEmbed = ({
     const [error, setError] = useState(null);
     const containerRef = useRef(null);
     const playerRef = useRef(null);
+
+    // Get translations for current locale
+    const t = Termini[locale] || Termini.it_IT;
+
+    // Set default placeholder text if not provided
+    const defaultPlaceholderText = placeholderText || t.videoPlaceholder || "Clicca per abilitare il video";
 
     // Carica YouTube IFrame API
     useEffect(() => {
@@ -109,7 +117,7 @@ const YoutubeEmbed = ({
                     },
                     onError: (event) => {
                         console.error('YouTube player error:', event.data);
-                        setError(`Errore player: ${event.data}`);
+                        setError(t.videoError || `Errore player: ${event.data}`);
                     }
                 }
             });
@@ -118,9 +126,9 @@ const YoutubeEmbed = ({
             playerRef.current = newPlayer;
         } catch (err) {
             console.error('Errore creazione player YouTube:', err);
-            setError('Impossibile creare il player video');
+            setError(t.videoErrorGeneric || 'Impossibile creare il player video');
         }
-    }, [isAPIReady, finalId, activated, hasConsent, player]);
+    }, [isAPIReady, finalId, activated, hasConsent, player, t]);
 
     // Cleanup
     useEffect(() => {
@@ -140,7 +148,7 @@ const YoutubeEmbed = ({
         return (
             <div className={`video-wrapper ${className}`}>
                 <div style={{ padding: "1rem", background: "#eee", fontSize: ".9rem" }}>
-                    Video non disponibile
+                    {t.videoNotAvailable || "Video non disponibile"}
                 </div>
             </div>
         );
@@ -164,7 +172,7 @@ const YoutubeEmbed = ({
                         rel="noopener noreferrer"
                         style={{ color: "#fff", textDecoration: "underline" }}
                     >
-                        Apri su YouTube
+                        {t.videoOpenYouTube || "Apri su YouTube"}
                     </a>
                 </div>
             </div>
@@ -217,7 +225,7 @@ const YoutubeEmbed = ({
                         e.target.style.background = "#ffffff";
                     }}
                 >
-                    {placeholderText}
+                    {defaultPlaceholderText}
                 </button>
             </div>
         );
@@ -254,7 +262,7 @@ const YoutubeEmbed = ({
                     color: "#fff",
                     fontSize: ".9rem"
                 }}>
-                    Caricamento video...
+                    {t.videoLoading || "Caricamento video..."}
                 </div>
             )}
         </div>

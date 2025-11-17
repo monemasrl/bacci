@@ -68,7 +68,15 @@ export const Termini = {
     sediItalia: 'Italian offices',
     filialiEstere: 'foreign branches',
     contattiPhone: 'P.',
-    footerFse: "Company receiving FSE+ contributions for youth employment"
+    footerFse: "Company receiving FSE+ contributions for youth employment",
+
+    // Video component translations
+    videoPlaceholder: "Click to enable video",
+    videoNotAvailable: "Video not available",
+    videoError: "Error loading video",
+    videoErrorGeneric: "Unable to create video player",
+    videoOpenYouTube: "Open on YouTube",
+    videoLoading: "Loading video..."
   },
   it_IT: {
     cookieTesto:
@@ -133,6 +141,14 @@ export const Termini = {
     sediItalia: 'sedi Italia',
     filialiEstere: 'filiali estere',
     contattiPhone: 'T.',
-    footerFse: "Azienda beneficiaria di contributi FSE+ per l’occupazione giovanile"
+    footerFse: "Azienda beneficiaria di contributi FSE+ per l’occupazione giovanile",
+
+    // Video component translations
+    videoPlaceholder: "Clicca per abilitare il video",
+    videoNotAvailable: "Video non disponibile",
+    videoError: "Errore nel caricamento del video",
+    videoErrorGeneric: "Impossibile creare il player video",
+    videoOpenYouTube: "Apri su YouTube",
+    videoLoading: "Caricamento video..."
   },
 }

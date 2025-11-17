@@ -64,7 +64,10 @@ const Prodotto = ({ pageContext }) => {
                     <div className={`boxDownloadCatalogo ${isCatalogoVisible ? 'visible' : ''}`}><a target="_blank" rel="noreferrer noopener" href={`https://bacci-directus.monema.dev/assets/${content.catalogo.filename_disk}`}><GrDocumentPdf />&nbsp;Catalogo</a></div>
                 </Modale>}
                 {content.video && <Modale show={isVideoVisible} close={() => setIsVideoVisible(false)}>
-                    <YoutubeEmbed embedId={content.video} />
+                    <YoutubeEmbed
+                        embedId={content.video}
+                        locale={locale}
+                        consentRequired={true} />
                 </Modale>}
 
                 <div className="container prodotto">
