@@ -64,6 +64,7 @@ export const query = graphql`
       ) {
         id
         date_created
+        date_published
         translations {
           languages_code {
             code
@@ -92,7 +93,7 @@ const News = ({ data, pageContext }) => {
 
   const topArchivio = React.useRef()
   const langFilterProdottoSorted = data.directus.posts.sort((a, b) => {
-    return new Date(b.date_created) - new Date(a.date_created)
+    return new Date(b.date_published) - new Date(a.date_published)
   })
 
   return (

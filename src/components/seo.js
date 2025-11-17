@@ -44,41 +44,34 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
   const siteUrlClean = site.siteMetadata.siteUrl.replace(/\/$/, '')
 
   // Dati strutturati corretti
-  const structuredData = [
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization", // Cambiato da WebSite
-      "@id": `${siteUrlClean}/#organization`,
-      "name": "Bacci",
-      "url": siteUrlClean,
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${siteUrlClean}/favicon-32x32.png`,
-        "width": 32,
-        "height": 32
-      },
-      "description": metaDescription,
-      "foundingDate": "1924",
-      "industry": "Wood Processing Machinery",
-    }
-  ]
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${siteUrlClean}/#organization`,
+    "name": "Bacci",
+    "url": siteUrlClean,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteUrlClean}/favicon-32x32.png`,
+      "width": 32,
+      "height": 32
+    },
+    "description": metaDescription,
+    "foundingDate": "1924",
+    "industry": "Wood Processing Machinery"
+  }
 
-  // Aggiungi immagine se presente
+  // Aggiungi immagine se presente - FIX: aggiungi all'oggetto principale, non all'array
   if (seoImage) {
     const imageUrl = seoImage.startsWith('http')
       ? seoImage
       : `${site.siteMetadata.siteUrl}${seoImage}`
 
-    structuredData[1].image = {
+    structuredData.image = {
       "@type": "ImageObject",
       "url": imageUrl,
       "width": 1200,
       "height": 630
-    }
-
-    structuredData[1].primaryImageOfPage = {
-      "@type": "ImageObject",
-      "url": imageUrl
     }
   }
 
@@ -129,6 +122,7 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
       <title>{pageTitle}</title>
       <meta name="description" content={metaDescription} />
       <meta name="author" content={site.siteMetadata.author} />
+      <meta name="robots" content="index, follow" />
 
       {/* Canonical */}
       <link rel="canonical" href={canonicalUrl} />

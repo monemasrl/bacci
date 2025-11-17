@@ -108,7 +108,7 @@ export const query = graphql`
 const Fiere = ({ data, pageContext }) => {
 
   const topArchivio = React.useRef()
-  const langFilterFiereSorted = [...data.directus.Fiere].sort((a, b) => new Date(b.date_created) - new Date(a.date_created))
+  const langFilterFiereSorted = [...data.directus.Fiere].sort((a, b) => new Date(b.from) - new Date(a.from))
 
 
   return (

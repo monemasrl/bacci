@@ -36,12 +36,22 @@ const Footer = ({ locale, listaTipologia }) => {
                             <li>Paolino Bacci S.r.l.</li>
                             <li>VIA PALERMO, 32, 56021, Cascina, Pisa - ITALY</li>
                             <li>Tel. + 39 050 252525</li>
-                            <li>          <StaticImage
-                                className='italyX'
-                                placeholder="blurred"
-                                width={300}
-                                height={195}
-                                src="../../images/italyxsmall.png" alt="ItalyX" /></li>
+                            <li className="certifications">          <a href="https://italy-x.ilsole24ore.com/azienda-certificata/paolino-bacci-srl/" target="_blank" rel="noreferrer noopener">
+                                <StaticImage
+                                    className='italyX'
+                                    placeholder="blurred"
+                                    width={300}
+                                    height={195}
+                                    src="../../images/italyxsmall.png" alt="ItalyX" />
+                            </a><a href="https://www.unioncamere.gov.it/imprese-storiche/paolino-bacci-srl" target="_blank" rel="noreferrer noopener">
+                                    <StaticImage
+                                        className='italyX'
+                                        placeholder="blurred"
+                                        width={197}
+                                        height={139}
+                                        src="../../images/impresastorica.png" alt="ItalyX" />
+                                </a></li>
+
                         </ul>
                     </div>
                     <div className="footer-col">

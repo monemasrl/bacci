@@ -10,7 +10,7 @@ import 'moment/locale/it'
 const moment = require('moment')
 
 
-const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 6, locationState = {} }) => {
+const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 10, locationState = {} }) => {
     const [posts, setPosts] = useState(archivio)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostPerPage] = useState(postPerPage)
@@ -36,7 +36,7 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                 {currentPosts?.length ? currentPosts.map((item) => {
                     const translated = findItemTranslated(item.translations, lang)
                     if (translated.titolo) {
-                        console.log(item.immagine)
+
                         return (
                             <div key={translated.titolo} className="box-prodotto">
                                 {item.immagine?.imageFile && <div className="thumb">
@@ -66,8 +66,8 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
             <>
                 {currentPosts?.length && currentPosts.map((item, index) => {
                     const translated = findItemTranslated(item.translations, lang)
-                    const data = new Date(Date.parse(item.date_created))
-
+                    const data = new Date(Date.parse(item.date_published))
+                    console.log('data news', item)
                     if (translated?.title) {
                         return (
                             <div key={index} className="col-3">

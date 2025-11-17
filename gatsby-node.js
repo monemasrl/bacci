@@ -142,6 +142,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
           id
           date_created
+          date_published
           translations {
             languages_code { code }
             title

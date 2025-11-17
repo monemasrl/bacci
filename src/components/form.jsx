@@ -372,6 +372,8 @@ const FormContatti = ({ lang }) => {
 
                 </div>
                 <div className="box-form nazione-select">
+                    <label htmlFor="telefono" style={{ display: 'none' }}>telefono</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder={Termini[lang].formTelefono} />
                     <label htmlFor="contattiNazione" style={{ display: 'none' }}>nazione</label>
                     <select className="countrySelect" name="country" id="contattiNazione" required>
                         <option value="">{lang === 'it_IT' ? 'Seleziona nazione' : 'Select country'}</option>

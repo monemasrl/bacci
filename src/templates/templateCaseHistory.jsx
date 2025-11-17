@@ -116,7 +116,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                                 </ul>
                             </li>}
                             {content?.social_shares && <li className="share">
-                                <div className="titolo">Share</div>
+                                <div className="titolo">Social</div>
                                 {socialShare(content.social_shares, iconSocial)}
                             </li>}
                         </ul>

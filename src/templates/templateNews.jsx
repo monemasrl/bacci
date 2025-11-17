@@ -12,7 +12,7 @@ const Prodotto = ({ pageContext }) => {
   const dataProdottoTranslated = content && findItemTranslated(content.translations, locale)
   const seoFilterLocale = content.seo?.translations.find((item) => item.languages_code.code === locale)
 
-  const date = new Date(Date.parse(content.date_created))
+  const date = new Date(Date.parse(content.date_published))
   return (
     <>
       {content && <Layout
