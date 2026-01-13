@@ -33,7 +33,7 @@ module.exports = {
       options: {
         host: "https://bacci.com",
         sitemap: "https://bacci.com/sitemap.xml",
-        policy: [{ userAgent: "*", allow: "/", disallow: "/en" }],
+        policy: [{ userAgent: "*", disallow: "/" }],
       },
     },
     `gatsby-plugin-image`,
