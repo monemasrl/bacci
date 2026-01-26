@@ -35,7 +35,7 @@ const Footer = ({ locale, listaTipologia }) => {
                         <ul>
                             <li>Paolino Bacci S.r.l.</li>
                             <li>VIA PALERMO, 32, 56021, Cascina, Pisa - ITALY</li>
-                            <li>Tel. + 39 050 252525</li>
+                            <li>Tel. + 39 050 75491</li>
                             <li className="certifications">          <a href="https://italy-x.ilsole24ore.com/azienda-certificata/paolino-bacci-srl/" target="_blank" rel="noreferrer noopener">
                                 <StaticImage
                                     className='italyX'
@@ -58,7 +58,7 @@ const Footer = ({ locale, listaTipologia }) => {
                     <div className="footer-col">
                         <ul>
                             <li className='fse'>{Termini[locale].footerFse}</li>
-                            <li>Cap. Sociale 1.500.000,00 i.v. <br /> Partita iva / codice fiscale 022456588996365</li>
+                            <li>Partita iva / codice fiscale 01591860505</li>
                             <li>
                                 <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}privacy`}>privacy and conditions</Link>	</li>
                         </ul>
