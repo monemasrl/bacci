@@ -7,7 +7,7 @@ export const langTag = {
 export const Termini = {
   en_US: {
     cookieTesto:
-      "This site uses cookies to improve the browsing experience of users and to collect information on the use of the site itself. We use both technical cookies and third-party cookies to send promotional messages based on user behavior. You can know the details by consulting our privacy policy here. By continuing to browse, you accept the use of cookies; otherwise it is possible to leave the site.",
+      "This site uses Google Analytics to analyze traffic and improve user experience. You can choose to accept or decline the use of analytics cookies. For more information, please consult our privacy policy.",
     cookieButton: "Accept",
     nome: "Name",
     cognome: "Last name",
@@ -80,7 +80,7 @@ export const Termini = {
   },
   it_IT: {
     cookieTesto:
-      "Questo sito utilizza cookie per migliorare l'esperienza di navigazione degli utenti e per raccogliere informazioni sull'utilizzo del sito stesso. Utilizziamo sia cookie tecnici sia cookie di parti terze per inviare messaggi promozionali sulla base dei comportamenti degli utenti. Può conoscere i dettagli consultando la nostra privacy policy qui. Proseguendo nella navigazione si accetta l'uso dei cookie; in caso contrario è possibile abbandonare il sito.",
+      "Questo sito utilizza Google Analytics per analizzare il traffico e migliorare l'esperienza utente. Puoi scegliere di accettare o rifiutare l'utilizzo dei cookie analitici. Per maggiori informazioni consulta la nostra privacy policy.",
     cookieButton: "Accetto",
     nome: "Nome",
     cognome: "Cognome",
