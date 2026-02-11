@@ -17,7 +17,11 @@ const TemplateCaseHistory = ({ pageContext }) => {
     const dataTranslated = content && findItemTranslated(content.translations, locale)
     const seoFilterLocale = content.seo?.translations.find((item) => item.languages_code.code === locale)
     const contentForBlocchiPagina = content.blocchi?.filter((blocco) => blocco.item.traduzioni.some((traduzione) => traduzione.languages_code?.code === locale))
-
+    const blocchitradotti = contentForBlocchiPagina?.map((blocco) => {
+        const traduzione = blocco.item.traduzioni.find((trad) => trad.languages_code.code === locale)
+        return { ...blocco, item: { ...blocco.item, traduzioni: [traduzione] } }
+    })
+    console.log(contentForBlocchiPagina, 'contentForBlocchiPagina')
     const urlWithoutProtocol = content.website && new URL(content.website).host;
 
     const iconSocial = {
@@ -27,17 +31,17 @@ const TemplateCaseHistory = ({ pageContext }) => {
     }
 
     function socialShare(socials, icons) {
-        const arraySocial = socials.map((social) => {
+        const arraySocial = socials.map((social, index) => {
 
             switch (social.social) {
                 case 'facebook': {
-                    return <a href={social.link} target="_blank" rel="noreferrer noopener"><icons.facebook /></a>
+                    return <a key={index} href={social.link} target="_blank" rel="noreferrer noopener"><icons.facebook /></a>
                 }
                 case 'instagram': {
-                    return <a href={social.link} target="_blank" rel="noreferrer noopener"><icons.instagram /></a>
+                    return <a key={index} href={social.link} target="_blank" rel="noreferrer noopener"><icons.instagram /></a>
                 }
                 case 'linkedin': {
-                    return <a href={social.link} target="_blank" rel="noreferrer noopener"><icons.linkedin /></a>
+                    return <a key={index} href={social.link} target="_blank" rel="noreferrer noopener"><icons.linkedin /></a>
                 }
                 default: {
                     return null
@@ -127,9 +131,8 @@ const TemplateCaseHistory = ({ pageContext }) => {
 
                 </section>
                 <section className={`container-fluid blocchicase ${pageContext.title}`}>
-                    {contentForBlocchiPagina?.map((blocco, index) => {
-
-                        return BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName, pageContext.locale)
+                    {blocchitradotti?.map((blocco, index) => {
+                        return <React.Fragment key={index}> {BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName, locale)}</React.Fragment>
                     })}
                 </section>
                 {(content?.related_machines?.length > 0) && <Correlati locale={locale} idProdotto={content.id} listaProdottiNoQuery={content.related_machines} limiteVisualizzazione={3} />}

@@ -134,7 +134,7 @@ export const query = graphql`
 
 
 const Pagine = ({ data, pageContext }) => {
-
+  console.log(data.directus.pages[0].blocchi, 'data pagina')
   return (
     <>
       {pageContext && data ?
