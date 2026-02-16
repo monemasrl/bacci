@@ -17,6 +17,7 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
          posts {
           id
           date_created
+          date_published
           inHome
           translations {
             languages_code {
@@ -70,8 +71,9 @@ const LastNews = ({ locale, limiteVisualizzazione, pageType, idCurrentNews }) =>
         {pageType !== "home" ? <p className="widget-news__sub">{Termini[locale].ultime_news_sub}</p> : ''}
         <div className="container">
           {dataSwitch().map((item, index) => {
+
             const prodottoTradotto = findItemTranslated(item.translations, locale)
-            let date = new Date(Date.parse(item.date_created))
+            let date = new Date(Date.parse(item.date_published))
             date = moment(date).locale(locale).format('DD.MM.YYYY')
 
             if (index < limiteVisualizzazione && prodottoTradotto?.title) {

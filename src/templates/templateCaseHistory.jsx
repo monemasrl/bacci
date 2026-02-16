@@ -21,7 +21,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
         const traduzione = blocco.item.traduzioni.find((trad) => trad.languages_code.code === locale)
         return { ...blocco, item: { ...blocco.item, traduzioni: [traduzione] } }
     })
-    console.log(contentForBlocchiPagina, 'contentForBlocchiPagina')
+
     const urlWithoutProtocol = content.website && new URL(content.website).host;
 
     const iconSocial = {

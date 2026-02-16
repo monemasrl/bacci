@@ -1774,17 +1774,20 @@ section.container.candidature {
 .wrapper-contatti {
   max-width: 1560px;
   h1 {
-    font-size: 36px;
-    max-width: 900px;
+    font-size: 58px;
+    max-width: 970px;
     position: absolute;
     z-index: 1;
-    top: 31%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    line-height: 1.1;
+    text-align: center;
     @media #{$landscape} {
-      top: 20%;
       font-size: 24px;
     }
     @media #{$phone} {
-      top: 0%;
       font-size: 20px;
     }
   }
