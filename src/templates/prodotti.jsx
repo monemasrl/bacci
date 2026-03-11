@@ -294,7 +294,10 @@ const Prodotti = ({ data, location, pageContext }) => {
       concatArray = filterBySearch(concatArray)
     }
 
-    return concatArray
+
+    return concatArray.sort((a, b) => {
+      return a.sort - b.sort
+    })
   }
 
   const topArchivio = React.useRef()
