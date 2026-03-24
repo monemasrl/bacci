@@ -362,7 +362,7 @@ const Prodotti = ({ data, location, pageContext }) => {
 
           </div>
           <div className=" col-dx">
-            {resultFromFilters().length ? <GridPagination pageName={'prodotti'} archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} locationState={{ applicazione: filtersApp, categoria: filtersCat }} /> : <div>Non ci sono prodotti per il filtro selezionato</div>}
+            {resultFromFilters().length ? <GridPagination progressiveLoading={true} pageName={'prodotti'} archivio={resultFromFilters()} lang={pageContext.locale} loading={false} topArchivio={topArchivio} locationState={{ applicazione: filtersApp, categoria: filtersCat }} /> : <div>Non ci sono prodotti per il filtro selezionato</div>}
           </div>
         </div>
       </Layout>

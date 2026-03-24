@@ -170,7 +170,8 @@ main {
     flex: 1 0 900px;
     justify-content: flex-start;
     margin-top: 2rem;
-    gap: 5rem;
+    column-gap: 5rem;
+    row-gap: 2rem;
     flex-wrap: wrap;
     @media #{$landscape} {
       flex-direction: column;
@@ -1895,5 +1896,25 @@ section.container.candidature {
     line-height: 1.6;
     color: $grey;
     margin-bottom: 1rem;
+  }
+}
+.WrapperLoadMore {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  .button-sezione {
+    border: 1px solid #4a6c96;
+    border-radius: 30px;
+    background-color: #4a6c96;
+    color: white;
+    display: inline-block;
+    font-size: 19px;
+    line-height: 34px;
+    margin-top: 0;
+    padding: 0.2rem 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
   }
 }

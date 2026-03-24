@@ -10,7 +10,7 @@ import 'moment/locale/it'
 const moment = require('moment')
 
 
-const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postPerPage = 10, locationState = {} }) => {
+const GridPagination = ({ pagePath, pageName, progressiveLoading, archivio, topArchivio, lang, postPerPage = 10, locationState = {} }) => {
     const [posts, setPosts] = useState(archivio)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setPostPerPage] = useState(postPerPage)
@@ -29,11 +29,17 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
         setCurrentPage(1)
     }, [archivio])
 
-
+    function prodottiToLoad() {
+        if (progressiveLoading) {
+            return archivio.slice(0, postsPerPage)
+        }
+        return currentPosts
+    }
+    console.log(posts.length, postPerPage, archivio.slice(0, postsPerPage), 'posts length e post per page')
     if (pageName === 'prodotti') {
         return (
             <>
-                {currentPosts?.length ? currentPosts.map((item) => {
+                {prodottiToLoad()?.length ? prodottiToLoad().map((item) => {
                     const translated = findItemTranslated(item.translations, lang)
                     if (translated.titolo) {
 
@@ -55,7 +61,9 @@ const GridPagination = ({ pagePath, pageName, archivio, topArchivio, lang, postP
                     }
                 }) : <div>Loading...</div>}
 
-                {(posts.length > postPerPage) && <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} topArchivio={topArchivio} />}
+                {(posts.length > postPerPage && !progressiveLoading) && <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} topArchivio={topArchivio} />}
+
+                {progressiveLoading && prodottiToLoad()?.length < posts.length && <div className="WrapperLoadMore"><button className="button-sezione" onClick={() => setPostPerPage(postsPerPage + 10)}>Load more</button></div>}
             </>
         )
     }
