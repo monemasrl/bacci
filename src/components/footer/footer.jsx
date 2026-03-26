@@ -6,9 +6,17 @@ import FooterMenu from './footerMenu'
 import { FormContatti } from '../form'
 import { Termini } from '../../../data-translations'
 import { langTag } from '../../../data-translations'
-
+import { useStaticQuery, graphql } from "gatsby"
 const Footer = ({ locale, listaTipologia }) => {
-
+    const machines = useStaticQuery(graphql`
+    {
+       directus{
+         Prodotti {
+       name
+        }
+       }
+    }
+  `)
     return (
         <footer>
             <section className='container-fuid footer1 '>
@@ -16,7 +24,7 @@ const Footer = ({ locale, listaTipologia }) => {
                     <div className="box-sx" dangerouslySetInnerHTML={{ __html: Termini[locale].footerForm }} />
                     <div className="box-dx">
                         <div className="form-contatti">
-                            <FormContatti lang={locale} />
+                            <FormContatti lang={locale} machines={machines.directus.Prodotti} />
                         </div>
                     </div>
                 </div>

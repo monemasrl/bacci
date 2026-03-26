@@ -239,7 +239,7 @@ const FormFiere = ({ nomeEvento, lang }) => {
     )
 
 }
-const FormContatti = ({ lang }) => {
+const FormContatti = ({ lang, machines }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [response, setResponse] = useState(null);
     const WORKERURL = 'https://cf-form2mail.sistemi-fdb.workers.dev'
@@ -383,6 +383,19 @@ const FormContatti = ({ lang }) => {
                             </option>
                         ))}
                     </select>
+                </div>
+                <div className="box-form">
+                    {machines && machines.length && <>
+                        <label htmlFor="contattiOggetto" style={{ display: 'none' }}>oggetto</label>
+                        <select name="subject" id="contattiOggetto" required>
+                            <option value="">{Termini[lang].formListaMacchine}</option>
+                            {machines?.length > 0 && machines.map((machine, index) => (
+                                <option key={index} value={machine.name}>{machine.name}</option>
+                            ))}
+                        </select>
+                    </>}
+                    <label htmlFor="website" style={{ display: 'none' }}>Website</label>
+                    <input type="tel" id="website" name="website" placeholder={Termini[lang].formSite} />
                 </div>
                 <div className="box-form-message">
                     <label htmlFor="contattiMessaggio" style={{ display: 'none' }}>

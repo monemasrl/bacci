@@ -98,6 +98,7 @@ export const query = graphql`
                 data_iscr
                 rea
                 capitale_sociale
+                googlemap
             }
         }
     }
@@ -174,9 +175,8 @@ const Contatti = ({ data, pageContext }) => {
                                                             {item.capitale_sociale && <li>Capitale Sociale: {item.capitale_sociale}</li>}
                                                         </ul>
                                                     </div>
-                                                    {item.indirizzo && <div className="sede-col">
-                                                        <Map address={item.indirizzo + ', ' + item.area} />
-                                                    </div>}
+                                                    {item.googlemap && <div className="sede-col" dangerouslySetInnerHTML={{ __html: item.googlemap }} />
+                                                    }
                                                 </div>
                                             );
                                         } else {
@@ -205,9 +205,8 @@ const Contatti = ({ data, pageContext }) => {
                                                     </ul>
                                                 </div>
 
-                                                <div className="sede-col">
-                                                    <Map address={item.indirizzo + ' ' + item.area} />
-                                                </div>
+                                                {item.googlemap && <div className="sede-col" dangerouslySetInnerHTML={{ __html: item.googlemap }} />
+                                                }
                                             </div>)
                                         } else {
                                             return null;
@@ -235,9 +234,8 @@ const Contatti = ({ data, pageContext }) => {
                                                     </ul>
                                                 </div>
 
-                                                <div className="sede-col">
-                                                    <Map address={item.indirizzo + ' , ' + item.area} />
-                                                </div>
+                                                {item.googlemap && <div className="sede-col" dangerouslySetInnerHTML={{ __html: item.googlemap }} />
+                                                }
                                             </div>)
                                         } else {
                                             return null;
