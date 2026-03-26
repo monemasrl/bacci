@@ -6,6 +6,7 @@ export const langTag = {
 }
 export const Termini = {
   en_US: {
+    accessibilita: 'Dichiarazione di accessibilità',
     cookieTesto:
       "This site uses Google Analytics to analyze traffic and improve user experience. You can choose to accept or decline the use of analytics cookies. For more information, please consult our privacy policy.",
     cookieButton: "Accept",
@@ -81,6 +82,7 @@ export const Termini = {
     videoLoading: "Loading video..."
   },
   it_IT: {
+    accessibilita: 'Dichiarazione di accessibilità',
     cookieTesto:
       "Questo sito utilizza Google Analytics per analizzare il traffico e migliorare l'esperienza utente. Puoi scegliere di accettare o rifiutare l'utilizzo dei cookie analitici. Per maggiori informazioni consulta la nostra privacy policy.",
     cookieButton: "Accetto",

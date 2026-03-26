@@ -8,15 +8,27 @@ import { Termini } from '../../../data-translations'
 import { langTag } from '../../../data-translations'
 import { useStaticQuery, graphql } from "gatsby"
 const Footer = ({ locale, listaTipologia }) => {
-    const machines = useStaticQuery(graphql`
+    const data = useStaticQuery(graphql`
     {
        directus{
          Prodotti {
        name
         }
+        configuration{
+            accessibilita_it{
+                filename_download
+                filename_disk
+            }
+            accessiblita_eng{
+                filename_download
+                filename_disk
+            }
+     
+        }
        }
     }
   `)
+
     return (
         <footer>
             <section className='container-fuid footer1 '>
@@ -24,7 +36,7 @@ const Footer = ({ locale, listaTipologia }) => {
                     <div className="box-sx" dangerouslySetInnerHTML={{ __html: Termini[locale].footerForm }} />
                     <div className="box-dx">
                         <div className="form-contatti">
-                            <FormContatti lang={locale} machines={machines.directus.Prodotti} />
+                            <FormContatti lang={locale} machines={data.directus.Prodotti} />
                         </div>
                     </div>
                 </div>
@@ -69,6 +81,9 @@ const Footer = ({ locale, listaTipologia }) => {
                             <li>Partita iva / codice fiscale 01591860505</li>
                             <li>
                                 <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}privacy`}>privacy and conditions</Link>	</li>
+
+                            {data.directus.configuration && data.directus.configuration.accessibilita_it && locale === 'it_IT' && <li><a href={'https://bacci-directus.monema.dev/assets/' + data.directus.configuration.accessibilita_it.filename_disk} target="_blank" rel="noreferrer noopener">{Termini[locale].accessibilita}</a></li>}
+                            {data.directus.configuration && data.directus.configuration.accessiblita_eng && locale === 'en_US' && <li><a href={'https://bacci-directus.monema.dev/assets/' + data.directus.configuration.accessiblita_eng.filename_disk} target="_blank" rel="noreferrer noopener">{Termini[locale].accessibilita}</a></li>}
                         </ul>
                     </div>
                 </div>

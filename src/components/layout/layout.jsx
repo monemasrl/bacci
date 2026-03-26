@@ -5,7 +5,7 @@ import Header from "../header"
 import Footer from "../footer/footer"
 import Seo from "../seo"
 import ScrollTo from "../scrollTo"
-import Gdpr from "../gdpr"
+/* import Gdpr from "../gdpr" */
 
 const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, seoImage, allPagePath, listaApplicazioni, listaCategorie, parentPath, tipo }) => {
 
@@ -13,7 +13,7 @@ const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, seoImag
     <div className={`mainwrapper ${tipo}`}>
 
       <Seo lang={locale} title={pageTitle} seo={seo} allPagePath={allPagePath} seoImage={seoImage} />
-      <Gdpr locale={locale} />
+      {/*    <Gdpr locale={locale} /> */}
       <div className={`container-fluid ${tipo}`}  >
         <Header
           locale={locale}
