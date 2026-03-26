@@ -6,7 +6,7 @@ export const langTag = {
 }
 export const Termini = {
   en_US: {
-    accessibilita: 'Dichiarazione di accessibilità',
+    accessibilita: 'Accessibility',
     cookieTesto:
       "This site uses Google Analytics to analyze traffic and improve user experience. You can choose to accept or decline the use of analytics cookies. For more information, please consult our privacy policy.",
     cookieButton: "Accept",
