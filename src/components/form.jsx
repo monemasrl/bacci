@@ -254,7 +254,6 @@ const FormContatti = ({ lang, machines }) => {
 
         try {
             // Crea FormData object
-
             // Aggiungi tutti i campi del form
 
             console.log('Form data entries:');
@@ -387,7 +386,7 @@ const FormContatti = ({ lang, machines }) => {
                 <div className="box-form">
                     {machines && machines.length && <>
                         <label htmlFor="contattiOggetto" style={{ display: 'none' }}>oggetto</label>
-                        <select name="subject" id="contattiOggetto" required>
+                        <select name="macchine" id="contattiOggetto" required>
                             <option value="">{Termini[lang].formListaMacchine}</option>
                             {machines?.length > 0 && machines.map((machine, index) => (
                                 <option key={index} value={machine.name}>{machine.name}</option>

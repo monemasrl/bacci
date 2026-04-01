@@ -63,7 +63,7 @@ const GridPagination = ({ pagePath, pageName, progressiveLoading, archivio, topA
 
                 {(posts.length > postPerPage && !progressiveLoading) && <Pagination postsPerPage={postsPerPage} totalPosts={posts.length} paginate={paginate} topArchivio={topArchivio} />}
 
-                {progressiveLoading && prodottiToLoad()?.length < posts.length && <div className="WrapperLoadMore"><button className="button-sezione" onClick={() => setPostPerPage(postsPerPage + 10)}>Load more</button></div>}
+                {progressiveLoading && prodottiToLoad()?.length < posts.length && <div className="WrapperLoadMore"><button className="button-sezione" onClick={() => setPostPerPage(postsPerPage + 10)}>{Termini[lang].load_more}</button></div>}
             </>
         )
     }

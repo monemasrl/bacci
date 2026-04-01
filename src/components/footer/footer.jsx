@@ -80,7 +80,7 @@ const Footer = ({ locale, listaTipologia }) => {
                             <li className='fse'>{Termini[locale].footerFse}</li>
                             <li>Partita iva / codice fiscale 01591860505</li>
                             <li>
-                                <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}privacy`}>privacy and conditions</Link>	</li>
+                                <Link to={`/${langTag[locale] === 'it' ? '' : langTag[locale] + "/"}privacy`}>Privacy and conditions</Link>	</li>
 
                             {data.directus.configuration && data.directus.configuration.accessibilita_it && locale === 'it_IT' && <li><a href={'https://bacci-directus.monema.dev/assets/' + data.directus.configuration.accessibilita_it.filename_disk} target="_blank" rel="noreferrer noopener">{Termini[locale].accessibilita}</a></li>}
                             {data.directus.configuration && data.directus.configuration.accessiblita_eng && locale === 'en_US' && <li><a href={'https://bacci-directus.monema.dev/assets/' + data.directus.configuration.accessiblita_eng.filename_disk} target="_blank" rel="noreferrer noopener">{Termini[locale].accessibilita}</a></li>}
