@@ -12,7 +12,7 @@ module.exports = {
     title: `Bacci.com`,
     description: `Bacci descrizione`,
     author: `Bacci.com`,
-    siteUrl: `https://bacci.com/`,
+    siteUrl: `https://www.bacci.com/`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -25,14 +25,14 @@ module.exports = {
     },
     {
       resolve: `gatsby-plugin-sitemap`,
-      resolveSiteUrl: () => `https://bacci.com/`,
+      resolveSiteUrl: () => `https://www.bacci.com/`,
       output: "/",
     },
     {
       resolve: `gatsby-plugin-robots-txt`,
       options: {
-        host: "https://bacci.com",
-        sitemap: "https://bacci.com/sitemap-index.xml",
+        host: "https://www.bacci.com",
+        sitemap: "https://www.bacci.com/sitemap-index.xml",
         policy: [{ userAgent: "*", allow: "/" }],
       },
     },
