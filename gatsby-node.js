@@ -1071,54 +1071,15 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   })
 }
 
-// Modifica l'attributo lang negli HTML generati
+// Copia sitemap-index.xml a sitemap.xml per compatibilità
 exports.onPostBuild = async ({ reporter }) => {
   const fs = require("fs");
   const path = require("path");
 
-  // Funzione ricorsiva per trovare tutti i file in una directory
-  const walkDir = (dir, callback) => {
-    fs.readdirSync(dir).forEach(file => {
-      const filePath = path.join(dir, file);
-      const stat = fs.statSync(filePath);
-
-      if (stat.isDirectory()) {
-        walkDir(filePath, callback);
-      } else if (file === "index.html") {
-        callback(filePath);
-      }
-    });
-  }
-
   try {
     const publicDir = path.join(process.cwd(), "public");
 
-    // Cammina ricorsivamente la directory public per aggiornare lang attributes
-    walkDir(publicDir, (filePath) => {
-      // Leggi il contenuto del file
-      let content = fs.readFileSync(filePath, "utf-8");
-
-      // Determina la lingua dal percorso del file
-      // Se contiene /en/ è inglese, altrimenti italiano
-      const isEnglish = filePath.includes("/en/");
-      const lang = isEnglish ? "en" : "it";
-
-      // Sostituisci solo l'attributo lang senza toccare gli altri attributi
-      if (/<html[^>]*lang="[^"]*"/.test(content)) {
-        // lang già presente: sostituisci solo il valore
-        content = content.replace(/(<html[^>]*)lang="[^"]*"/g, `$1lang="${lang}"`);
-      } else {
-        // lang assente: aggiungilo subito dopo <html
-        content = content.replace('<html ', `<html lang="${lang}" `);
-      }
-
-      // Scrivi il file modificato
-      fs.writeFileSync(filePath, content, "utf-8");
-    });
-
-    reporter.info("✅ Lang attributes aggiornati in tutti i file HTML");
-
-    // Copia sitemap-index.xml a sitemap.xml per compatibilità
+    // Copia sitemap-index.xml a sitemap.xml
     const sitemapIndexPath = path.join(publicDir, "sitemap-index.xml");
     const sitemapPath = path.join(publicDir, "sitemap.xml");
 

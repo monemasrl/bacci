@@ -18,6 +18,12 @@ export const onClientEntry = () => {
 
 // Traccia i cambi di rotta
 export const onRouteUpdate = ({ location, prevLocation }) => {
+    // Aggiorna l'attributo lang dell'HTML in base alla lingua corrente (navigazione client-side)
+    if (typeof document !== 'undefined') {
+        const lang = location.pathname.startsWith('/en/') || location.pathname === '/en' ? 'en' : 'it';
+        document.documentElement.setAttribute('lang', lang);
+    }
+
     if (typeof window !== 'undefined' && window.dataLayer) {
         // Aspetta un po' per essere sicuri che la pagina sia caricata
         setTimeout(() => {
