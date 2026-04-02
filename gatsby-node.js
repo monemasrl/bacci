@@ -1070,3 +1070,54 @@ exports.onCreateWebpackConfig = ({ actions }) => {
     devtool: "cheap-module-source-map",
   })
 }
+
+// Modifica l'attributo lang negli HTML generati
+exports.onPostBuild = async ({ reporter }) => {
+  const fs = require("fs");
+  const path = require("path");
+
+  // Funzione ricorsiva per trovare tutti i file in una directory
+  const walkDir = (dir, callback) => {
+    fs.readdirSync(dir).forEach(file => {
+      const filePath = path.join(dir, file);
+      const stat = fs.statSync(filePath);
+
+      if (stat.isDirectory()) {
+        walkDir(filePath, callback);
+      } else if (file === "index.html") {
+        callback(filePath);
+      }
+    });
+  }
+
+  try {
+    const publicDir = path.join(process.cwd(), "public");
+
+    // Cammina ricorsivamente la directory public
+    walkDir(publicDir, (filePath) => {
+      // Leggi il contenuto del file
+      let content = fs.readFileSync(filePath, "utf-8");
+
+      // Determina la lingua dal percorso del file
+      // Se contiene /en/ è inglese, altrimenti italiano
+      const isEnglish = filePath.includes("/en/");
+      const lang = isEnglish ? "en" : "it";
+
+      // Sostituisci solo l'attributo lang senza toccare gli altri attributi
+      if (/<html[^>]*lang="[^"]*"/.test(content)) {
+        // lang già presente: sostituisci solo il valore
+        content = content.replace(/(<html[^>]*)lang="[^"]*"/g, `$1lang="${lang}"`);
+      } else {
+        // lang assente: aggiungilo subito dopo <html
+        content = content.replace('<html ', `<html lang="${lang}" `);
+      }
+
+      // Scrivi il file modificato
+      fs.writeFileSync(filePath, content, "utf-8");
+    });
+
+    reporter.info("✅ Lang attributes aggiornati in tutti i file HTML");
+  } catch (error) {
+    reporter.warn("⚠️ Errore nell'aggiornamento dei lang attributes: " + error.message);
+  }
+}

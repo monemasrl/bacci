@@ -9,13 +9,21 @@ const React = require("react");
 /**
  * @type {import('gatsby').GatsbySSR['onRenderBody']}
  */
-exports.onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents, pageContext }) => {
-  // Imposta la lingua
-  let lang = "it";
-  if (pageContext && pageContext.locale) {
-    lang = pageContext.locale === "en_US" ? "en" : "it";
+exports.onRenderBody = ({ setHtmlAttributes, setHeadComponents, setPreBodyComponents, pathname, loadPageDataSync }) => {
+  let lang = "it"
+  try {
+    const pageData = loadPageDataSync(pathname)
+    const locale = pageData?.result?.pageContext?.locale
+    if (locale) {
+      lang = locale.startsWith("en") ? "en" : "it"
+    } else {
+      lang = (pathname || "").startsWith("/en/") ? "en" : "it"
+    }
+  } catch (e) {
+    lang = (pathname || "").startsWith("/en/") ? "en" : "it"
   }
-  setHtmlAttributes({ lang });
+  setHtmlAttributes({ lang })
+
 
   const GTM_ID = "GTM-KRXXTL5G";
 

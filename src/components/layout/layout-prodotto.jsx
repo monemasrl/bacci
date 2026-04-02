@@ -5,13 +5,13 @@ import Footer from "../footer/footer"
 import ScrollTo from "../scrollTo"
 
 import Seo from "../seo"
-const LayoutProdotto = ({ listaApplicazioni, listaCategorie, children, locale, pageTitle, pathName, tipo, allPagePath, seo }) => {
+const LayoutProdotto = ({ listaApplicazioni, listaCategorie, children, locale, pageTitle, pathName, tipo, allPagePath, seo, seoImage }) => {
 
 
   return (
     <div className="mainwrapper">
       <div className="container-fluid " >
-        <Seo lang={locale} title={pageTitle} seo={seo} />
+        <Seo lang={locale} title={pageTitle} seo={seo} allPagePath={allPagePath} seoImage={seoImage} />
         <Header
           locale={locale}
           pageTitle={pageTitle}

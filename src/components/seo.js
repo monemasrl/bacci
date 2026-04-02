@@ -27,6 +27,27 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
     `
   )
 
+  // Normalizza il locale in tutte le possibili forme
+  const normalizeLocale = (locale) => {
+    if (!locale) return "it"
+
+    // Mappa di conversione per tutti i formati possibili
+    const localeMap = {
+      "it_IT": "it",
+      "en_US": "en",
+      "it-IT": "it",
+      "en-US": "en",
+      "it": "it",
+      "en": "en",
+      "IT": "it",
+      "EN": "en"
+    }
+
+    return localeMap[locale] || "it"
+  }
+
+  const htmlLang = normalizeLocale(lang)
+
   const localePath = allPagePath?.find((item) => {
     return item.locale === lang
   })
@@ -42,6 +63,46 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
 
   // Rimuovi trailing slash per consistency
   const siteUrlClean = site.siteMetadata.siteUrl.replace(/\/$/, '')
+
+  // Genera gli hreflang links
+  const generateHreflangLinks = () => {
+    const links = []
+
+    if (allPagePath && allPagePath.length > 0) {
+      // x-default punta alla versione IT se disponibile, altrimenti alla homepage
+      const itVersion = allPagePath.find(item => item.locale === 'it_IT' || item.locale === 'it')
+      const xDefaultUrl = itVersion ? `${site.siteMetadata.siteUrl}${itVersion.path}` : site.siteMetadata.siteUrl
+
+      links.push({
+        rel: 'alternate',
+        hrefLang: 'x-default',
+        href: xDefaultUrl
+      })
+
+      // Genera hreflang per tutte le varianti linguistiche
+      allPagePath.forEach(item => {
+        const hrefLangCode = langTag[item.locale] || "it"
+        const itemUrl = `${site.siteMetadata.siteUrl}${item.path}`
+
+        links.push({
+          rel: 'alternate',
+          hrefLang: hrefLangCode,
+          href: itemUrl
+        })
+      })
+    } else {
+      // Fallback per pagine senza allPagePath
+      links.push({
+        rel: 'alternate',
+        hrefLang: 'x-default',
+        href: site.siteMetadata.siteUrl
+      })
+    }
+
+    return links
+  }
+
+  const hreflangLinks = generateHreflangLinks()
 
   // Dati strutturati corretti
   const structuredData = {
@@ -118,7 +179,6 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
 
   return (
     <Helmet>
-      <html lang={langTag[lang] || "it"} />
       <title>{pageTitle}</title>
       <meta name="description" content={metaDescription} />
       <meta name="author" content={site.siteMetadata.author} />
@@ -128,25 +188,14 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
       <link rel="canonical" href={canonicalUrl} />
 
       {/* Hreflang */}
-      <link
-        rel="alternate"
-        hrefLang="x-default"
-        href={site.siteMetadata.siteUrl}
-      />
-
-      {allPagePath && allPagePath.map((item) => {
-        const hrefLangCode = langTag[item.locale] || "it"
-        const itemUrl = `${site.siteMetadata.siteUrl}${item.path}`
-
-        return (
-          <link
-            key={item.locale}
-            rel="alternate"
-            hrefLang={hrefLangCode}
-            href={itemUrl}
-          />
-        )
-      })}
+      {hreflangLinks.map((link, index) => (
+        <link
+          key={`hreflang-${index}`}
+          rel={link.rel}
+          hrefLang={link.hrefLang}
+          href={link.href}
+        />
+      ))}
 
       {/* OpenGraph tags */}
       {seo && getDataSeoOpenGraph(seo).map((item, index) => (
