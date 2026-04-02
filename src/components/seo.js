@@ -188,42 +188,64 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage, pageT
 
   function getDataSeoOpenGraph(seo) {
     const arrSeo = []
-    if (seo) {
-      if (seo.title) {
-        arrSeo.push({
-          property: `og:title`,
-          content: seo.title,
-        })
-      }
-      if (seo.meta_description) {
-        arrSeo.push({
-          property: `og:description`,
-          content: seo.meta_description,
-        })
-      }
+    
+    // og:title - sempre presente, usa il fallback se necessario
+    arrSeo.push({
+      property: `og:title`,
+      content: seo?.title || pageTitle || defaultTitle,
+    })
 
-      // Fix locale format per Facebook
-      const ogLocale = langTag[lang] === 'it' ? 'it_IT' : 'en_US'
+    // og:description - sempre presente, usa il fallback
+    arrSeo.push({
+      property: `og:description`,
+      content: metaDescription,
+    })
+
+    // og:url - sempre coerente con canonical
+    arrSeo.push({
+      property: `og:url`,
+      content: canonicalUrl,
+    })
+
+    // og:image - se disponibile
+    if (seoImage) {
+      const imageUrl = seoImage.startsWith('http')
+        ? seoImage
+        : `${site.siteMetadata.siteUrl}${seoImage}`
       arrSeo.push({
-        property: `og:locale`,
-        content: ogLocale,
+        property: `og:image`,
+        content: imageUrl,
       })
-
+      // Aggiungi anche dimensioni standard per og:image
       arrSeo.push({
-        property: `og:url`,
-        content: canonicalUrl,
+        property: `og:image:width`,
+        content: '1200',
       })
-
       arrSeo.push({
-        property: `og:site_name`,
-        content: 'Bacci',
-      })
-
-      arrSeo.push({
-        property: `og:type`,
-        content: 'website',
+        property: `og:image:height`,
+        content: '630',
       })
     }
+
+    // og:locale - formato Facebook
+    const ogLocale = langTag[lang] === 'it' ? 'it_IT' : 'en_US'
+    arrSeo.push({
+      property: `og:locale`,
+      content: ogLocale,
+    })
+
+    // og:site_name
+    arrSeo.push({
+      property: `og:site_name`,
+      content: 'Bacci',
+    })
+
+    // og:type
+    arrSeo.push({
+      property: `og:type`,
+      content: 'website',
+    })
+
     return arrSeo
   }
 
@@ -247,18 +269,10 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage, pageT
         />
       ))}
 
-      {/* OpenGraph tags */}
-      {seo && getDataSeoOpenGraph(seo).map((item, index) => (
+      {/* OpenGraph tags - generati sempre con fallback intelligenti */}
+      {getDataSeoOpenGraph(seo).map((item, index) => (
         <meta key={`og-${index}`} property={item.property} content={item.content} />
       ))}
-
-      {/* OG Image */}
-      {seoImage && (
-        <meta
-          property="og:image"
-          content={seoImage.startsWith('http') ? seoImage : `${site.siteMetadata.siteUrl}${seoImage}`}
-        />
-      )}
 
       {/* JSON-LD Structured Data */}
       <script type="application/ld+json">
