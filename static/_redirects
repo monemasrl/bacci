@@ -1,3 +1,6 @@
+# Sitemap redirect - route /sitemap.xml to /sitemap-index.xml
+/sitemap.xml /sitemap-index.xml 301
+
 # Redirect all 404 errors to the main 404 page
 /*    /404/   404
 /en/company/				/en/company/about-us/		

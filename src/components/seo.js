@@ -188,7 +188,7 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage, pageT
 
   function getDataSeoOpenGraph(seo) {
     const arrSeo = []
-    
+
     // og:title - sempre presente, usa il fallback se necessario
     arrSeo.push({
       property: `og:title`,

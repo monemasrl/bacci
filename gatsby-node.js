@@ -1093,7 +1093,7 @@ exports.onPostBuild = async ({ reporter }) => {
   try {
     const publicDir = path.join(process.cwd(), "public");
 
-    // Cammina ricorsivamente la directory public
+    // Cammina ricorsivamente la directory public per aggiornare lang attributes
     walkDir(publicDir, (filePath) => {
       // Leggi il contenuto del file
       let content = fs.readFileSync(filePath, "utf-8");
@@ -1117,7 +1117,17 @@ exports.onPostBuild = async ({ reporter }) => {
     });
 
     reporter.info("✅ Lang attributes aggiornati in tutti i file HTML");
+
+    // Copia sitemap-index.xml a sitemap.xml per compatibilità
+    const sitemapIndexPath = path.join(publicDir, "sitemap-index.xml");
+    const sitemapPath = path.join(publicDir, "sitemap.xml");
+
+    if (fs.existsSync(sitemapIndexPath)) {
+      const sitemapContent = fs.readFileSync(sitemapIndexPath, "utf-8");
+      fs.writeFileSync(sitemapPath, sitemapContent, "utf-8");
+      reporter.info("✅ Sitemap.xml creata da sitemap-index.xml");
+    }
   } catch (error) {
-    reporter.warn("⚠️ Errore nell'aggiornamento dei lang attributes: " + error.message);
+    reporter.warn("⚠️ Errore nel post-build: " + error.message);
   }
 }
