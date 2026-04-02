@@ -18,7 +18,7 @@ const LayoutNews = ({ children, locale, pageTitle, tipo, allPagePath }) => {
 
   return (
     <div className="mainwrapper">
-      <Seo lang={locale} title={pageTitle} seo={langFilter.seo} />
+      <Seo lang={locale} title={pageTitle} seo={langFilter.seo} pageType="news" />
       <div className="container-fluid " >
         <Header allPagePath={allPagePath} tipo={tipo} locale={locale} pageTitle={pageTitle} nodeType={langFilter.nodeType} />
       </div>

@@ -11,7 +11,7 @@ import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import { langTag } from "../../data-translations"
 
-function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
+function Seo({ description, lang, meta, title, seo, allPagePath, seoImage, pageType }) {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -52,7 +52,57 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage }) {
     return item.locale === lang
   })
 
-  const metaDescription = seo?.meta_description || description || site.siteMetadata.description
+  // Fallback intelligenti per descrizione basati sul tipo di pagina
+  const getFallbackDescription = () => {
+    // Evita placeholder scartando valori comuni non significativi
+    const isPlaceholder = (str) => {
+      if (!str) return true
+      const lowerStr = str.toLowerCase()
+      return (
+        lowerStr.includes("descrizione") ||
+        lowerStr.includes("meta") ||
+        lowerStr.includes("placeholder") ||
+        lowerStr === "bacci" ||
+        str.length < 10
+      )
+    }
+
+    // Se il seo.meta_description esiste e non è placeholder, usalo
+    if (seo?.meta_description && !isPlaceholder(seo.meta_description)) {
+      return seo.meta_description
+    }
+
+    // Se è passato un description personalizzato, usalo
+    if (description && !isPlaceholder(description)) {
+      return description
+    }
+
+    // Fallback intelligente basato sul tipo di pagina
+    const fallbacksByPageType = {
+      prodotto: lang === "en_US"
+        ? "Industrial wood processing machinery - CNC cutting, optimization and finishing solutions."
+        : "Macchine e soluzioni per la lavorazione industriale del legno.",
+      prodotti: lang === "en_US"
+        ? "Browse our complete range of wood processing machinery and solutions."
+        : "Scopri la gamma completa di macchine per la lavorazione del legno.",
+      news: lang === "en_US"
+        ? "Latest news and updates from Bacci - innovating in wood processing technology."
+        : "Ultime notizie e aggiornamenti da Bacci - innovazione nella lavorazione del legno.",
+      fiere: lang === "en_US"
+        ? "Bacci at fairs and exhibitions worldwide. Meet us to discover our solutions."
+        : "Bacci alle fiere e mostre internazionali. Vieni a scoprire le nostre soluzioni.",
+      contatti: lang === "en_US"
+        ? "Contact Bacci for information about our wood processing machinery."
+        : "Contatta Bacci per informazioni sulle nostre macchine.",
+      azienda: lang === "en_US"
+        ? "Learn about Bacci: A leader in wood processing machinery since 1924."
+        : "Scopri Bacci: Leader nella lavorazione del legno dal 1924.",
+    }
+
+    return fallbacksByPageType[pageType] || site.siteMetadata.description
+  }
+
+  const metaDescription = getFallbackDescription()
   const defaultTitle = site.siteMetadata?.title
   const pageTitle = seo?.title || title || defaultTitle
 
@@ -225,6 +275,7 @@ Seo.propTypes = {
   title: PropTypes.string.isRequired,
   allPagePath: PropTypes.array,
   seoImage: PropTypes.string,
+  pageType: PropTypes.string,
 }
 
 export default Seo

@@ -9,8 +9,8 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Bacci.com`,
-    description: `Bacci descrizione`,
+    title: `Bacci - Macchine per la Lavorazione del Legno`,
+    description: `Bacci: Produttore di macchine CNC per la lavorazione del legno dal 1924. Soluzioni innovative per l'industria del legno.`,
     author: `Bacci.com`,
     siteUrl: `https://www.bacci.com/`,
   },

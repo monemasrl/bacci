@@ -11,7 +11,7 @@ const LayoutProdotto = ({ listaApplicazioni, listaCategorie, children, locale, p
   return (
     <div className="mainwrapper">
       <div className="container-fluid " >
-        <Seo lang={locale} title={pageTitle} seo={seo} allPagePath={allPagePath} seoImage={seoImage} />
+        <Seo lang={locale} title={pageTitle} seo={seo} allPagePath={allPagePath} seoImage={seoImage} pageType="prodotto" />
         <Header
           locale={locale}
           pageTitle={pageTitle}

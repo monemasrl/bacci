@@ -15,12 +15,12 @@ import ScrollTo from "../scrollTo"
 
 let slugify = require('slugify')
 
-const LayoutFiere = ({ children, locale, pageTitle, pathName, tipo, allPagePath }) => {
+const LayoutFiere = ({ children, locale, pageTitle, pathName, tipo, allPagePath, seo, seoImage }) => {
 
 
   return (
     <div className="mainwrapper">
-
+      <Seo lang={locale} title={pageTitle} seo={seo} allPagePath={allPagePath} seoImage={seoImage} pageType="fiere" />
       <div className="container-fluid " >
         <Header allPagePath={allPagePath} locale={locale} pageTitle={pageTitle} pathName={pathName} tipo={tipo} />
       </div>
