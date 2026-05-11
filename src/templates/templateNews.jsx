@@ -3,6 +3,7 @@ import Layout from "../components/layout/layout";
 import { findItemTranslated } from "../utils";
 import { GatsbyImage } from "gatsby-plugin-image"
 import LastNews from "../components/widgets/lastNews";
+import Faq from "../components/widgets/faq";
 
 const moment = require('moment')
 
@@ -32,7 +33,7 @@ const Prodotto = ({ pageContext }) => {
           <span className="datanews"> {moment(date).locale(pageContext.locale).format('DD MM YYYY')}</span>
 
           {dataProdottoTranslated?.content && <div dangerouslySetInnerHTML={{ __html: dataProdottoTranslated?.content }} />}
-
+        <Faq items={dataProdottoTranslated?.faq} />
         </div>
         <LastNews locale={locale} limiteVisualizzazione={3} idCurrentNews={content.id} />
       </Layout>}

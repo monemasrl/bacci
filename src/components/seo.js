@@ -154,6 +154,28 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage, pageT
 
   const hreflangLinks = generateHreflangLinks()
 
+  const parseJsonLd = (value) => {
+    if (!value) {
+      return null
+    }
+
+    if (typeof value === "string") {
+      try {
+        return JSON.parse(value)
+      } catch (error) {
+        return null
+      }
+    }
+
+    if (typeof value === "object") {
+      return value
+    }
+
+    return null
+  }
+
+  const extraStructuredData = parseJsonLd(seo?.jsonld)
+
   // Dati strutturati corretti
   const structuredData = {
     "@context": "https://schema.org",
@@ -251,6 +273,7 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage, pageT
 
   return (
     <Helmet>
+      <html lang={htmlLang} />
       <title>{pageTitle}</title>
       <meta name="description" content={metaDescription} />
       <meta name="author" content={site.siteMetadata.author} />
@@ -278,6 +301,11 @@ function Seo({ description, lang, meta, title, seo, allPagePath, seoImage, pageT
       <script type="application/ld+json">
         {JSON.stringify(structuredData)}
       </script>
+
+     {extraStructuredData ? 
+      <script type="application/ld+json">
+        {JSON.stringify(extraStructuredData)}
+      </script> : ''}
     </Helmet>
   )
 }

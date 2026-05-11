@@ -8,7 +8,7 @@ import ScrollTo from "../scrollTo"
 /* import Gdpr from "../gdpr" */
 
 const Layout = ({ dataBreadCrumbFiere, children, locale, pageTitle, seo, seoImage, allPagePath, listaApplicazioni, listaCategorie, parentPath, tipo }) => {
-
+console.log('seo',seo)
   return (
     <div className={`mainwrapper ${tipo}`}>
 

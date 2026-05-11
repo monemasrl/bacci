@@ -8,6 +8,7 @@ import { Link } from 'gatsby'
 import { langTag, Termini } from "../../data-translations";
 import Correlati from "../components/widgets/correlati";
 import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import Faq from "../components/widgets/faq";
 
 
 
@@ -16,6 +17,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
     const { locale, parentPath, content, title, allPagePath } = pageContext
     const dataTranslated = content && findItemTranslated(content.translations, locale)
     const seoFilterLocale = content.seo?.translations.find((item) => item.languages_code.code === locale)
+
     const contentForBlocchiPagina = content.blocchi?.filter((blocco) => blocco.item.traduzioni.some((traduzione) => traduzione.languages_code?.code === locale))
     const blocchitradotti = contentForBlocchiPagina?.map((blocco) => {
         const traduzione = blocco.item.traduzioni.find((trad) => trad.languages_code.code === locale)
@@ -46,10 +48,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                 default: {
                     return null
                 }
-
             }
-
-
         })
         return arraySocial
 
@@ -73,7 +72,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                 <section className={`container-fluid sezione-3 main`}>
                     {dataTranslated && <>
                         <div className={`box-sx `} >
-                            <h2 dangerouslySetInnerHTML={{ __html: dataTranslated.title }} />
+                            <h1 dangerouslySetInnerHTML={{ __html: dataTranslated.title }} />
                             {dataTranslated.sottotitolo && <h3 dangerouslySetInnerHTML={{ __html: dataTranslated.sottotitolo }} />}
                         </div>
                         <div className="box-immagine">
@@ -135,6 +134,7 @@ const TemplateCaseHistory = ({ pageContext }) => {
                         return <React.Fragment key={index}> {BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName, locale)}</React.Fragment>
                     })}
                 </section>
+                <Faq items={dataTranslated?.faq} />
                 {(content?.related_machines?.length > 0) && <Correlati locale={locale} idProdotto={content.id} listaProdottiNoQuery={content.related_machines} limiteVisualizzazione={3} />}
             </Layout>}
         </>

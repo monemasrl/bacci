@@ -96,6 +96,7 @@ exports.createPages = async ({ graphql, actions }) => {
               title
               meta_description
               keywords
+              jsonld
             }
             og_image {
               id
@@ -138,6 +139,7 @@ exports.createPages = async ({ graphql, actions }) => {
               title
               keywords
               meta_description
+              jsonld
             }
           }
           id
@@ -149,6 +151,7 @@ exports.createPages = async ({ graphql, actions }) => {
             slug
             summary
             content
+            faq
           }
           image {
             description
@@ -171,12 +174,13 @@ exports.createPages = async ({ graphql, actions }) => {
             filename_disk
             folder { name }
           }
-    seo {
+      seo {
             translations {
               languages_code { code }
               title
               meta_description
               keywords
+              jsonld
             }
             og_image {
               id
@@ -211,6 +215,7 @@ exports.createPages = async ({ graphql, actions }) => {
             sottotitolo
             testo_antemprima
             paragrafo
+            faq
           }
           tipologie {
             tipologie_id {
@@ -293,6 +298,7 @@ exports.createPages = async ({ graphql, actions }) => {
               title
               meta_description
               keywords
+              jsonld
             }
             og_image {
               id
@@ -313,6 +319,7 @@ exports.createPages = async ({ graphql, actions }) => {
             main_content_titolo
             main_content
             slug
+            faq
           }
           customer
           city

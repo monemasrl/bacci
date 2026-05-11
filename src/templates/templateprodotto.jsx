@@ -8,7 +8,7 @@ import { FormDownloadCatalogo } from "../components/form";
 import { Termini } from "../../data-translations";
 import { GrDocumentPdf } from "react-icons/gr";
 import YoutubeEmbed from "../components/youtubeEmbed";
-
+import Faq from "../components/widgets/faq";
 
 const Prodotto = ({ pageContext }) => {
 
@@ -104,6 +104,7 @@ const Prodotto = ({ pageContext }) => {
                             </section>
                         )
                     })}
+                    <Faq items={dataProdottoTranslated?.faq} />
                     {/*{softwareData ?
                         <section className="container sezione-3 center">
                             <h2 className="titolo">Software</h2>

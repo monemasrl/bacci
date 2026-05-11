@@ -6,6 +6,7 @@ import LastNews from "../components/widgets/lastNews"
 import TestoMainContent from "../components/blocks/testo_main_content"
 import LastFiere from "../components/widgets/lastFiere"
 import CaseHistory from "../components/widgets/caseHistory"
+import Faq from "../components/widgets/faq"
 import Slider from "../components/slider"
 
 export const query = graphql`
@@ -28,6 +29,7 @@ export const query = graphql`
         title
         meta_description
         keywords
+        jsonld
       }
       og_image{  
         id
@@ -58,6 +60,7 @@ export const query = graphql`
         main_content
         main_content_titolo
         main_content_sottotitolo
+         faq
       }
    
       blocchi {
@@ -168,6 +171,7 @@ const Pagine = ({ data, pageContext }) => {
                   return <React.Fragment key={index}>{BlocksComponent(blocco.collection, index, blocco.item.allineamento, blocco, pageContext.pageName, pageContext.locale)}</React.Fragment>
                 })}
               </div>
+              <Faq items={data.directus.pages[0]?.translations?.[0]?.faq} />
               {(pageContext.pageName === "news" || pageContext.pageName === "home") &&
                 <LastFiere pageType={pageContext.pageName} locale={pageContext.locale} limiteVisualizzazione={3} />}
             </>}
