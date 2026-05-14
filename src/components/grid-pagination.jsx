@@ -45,9 +45,11 @@ const GridPagination = ({ pagePath, pageName, progressiveLoading, archivio, topA
 
                         return (
                             <div key={translated.titolo} className="box-prodotto">
-                                {item.immagine?.imageFile && <div className="thumb">
+                                {item.immagine?.imageFile && <Link lista to={`${(langTag[translated.languages_code.code] === 'it') ? "/" : "/" + langTag[translated.languages_code.code] + "/"}${Termini[translated.languages_code.code].prodotti + '/' + translated.slug}`} state={
+                                    { applicazione: locationState.applicazione, categoria: locationState.categoria }
+                                }><div className="thumb">
                                     <GatsbyImage image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine.description || 'Bacci website image'} />
-                                </div>}
+                                </div></Link>}
                                 <h2>{translated.titolo}</h2>
                                 <p>{translated.testo_antemprima && summary(translated.testo_antemprima, 120)}</p>
                                 <Link className="button-sezione" lista to={`${(langTag[translated.languages_code.code] === 'it') ? "/" : "/" + langTag[translated.languages_code.code] + "/"}${Termini[translated.languages_code.code].prodotti + '/' + translated.slug}`} state={

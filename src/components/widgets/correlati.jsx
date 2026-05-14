@@ -85,14 +85,16 @@ const Correlati = ({ categoriaProdotto, locale, limiteVisualizzazione = 100, idP
 
               if (prodottoTradotto?.titolo && index < limiteVisualizzazione) {
                 return (
+               
                   <div className="col-3" key={prodottoTradotto.titolo}>
                     <div className="box-correlati">
-                      {item.immagine?.imageFile && <GatsbyImage imgStyle={{ objectFit: 'contain' }} className="immagine-widget" image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine?.description || 'Bacci website image'} />}
+                      {item.immagine?.imageFile &&    <Link to={`/${(locale === 'it_IT') ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${prodottoTradotto.slug}`} ><GatsbyImage imgStyle={{ objectFit: 'contain' }} className="immagine-widget" image={item.immagine.imageFile.childImageSharp.gatsbyImageData} alt={item.immagine?.description || 'Bacci website image'} /> </Link>}
                       {prodottoTradotto.titolo && <h2>{prodottoTradotto.titolo}</h2>}
                       {prodottoTradotto.testo_antemprima && <p dangerouslySetInnerHTML={{ __html: summary(prodottoTradotto.testo_antemprima, 120) }} />}
                       {prodottoTradotto.slug && <Link to={`/${(locale === 'it_IT') ? '' : langTag[locale] + '/'}${Termini[locale].prodotti}/${prodottoTradotto.slug}`} className="button-sezione">scopri</Link>}
                     </div>
                   </div>
+                 
                 )
               } else { return null }
             })}
