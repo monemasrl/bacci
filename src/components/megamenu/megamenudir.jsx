@@ -160,13 +160,19 @@ const MegamenuDirectus = ({
                                             </p>
                                         </div>
 
-                                        {novita[novita.length - 1].immagine?.imageFile && <GatsbyImage
+                                        {novita[novita.length - 1].immagine?.imageFile && <Link
+                                                to={`/${langTag[locale] === "it"
+                                                    ? ""
+                                                    : langTag[locale] + "/"
+                                                    }${Termini[locale].prodotti}/${novitaLocalizzato.slug
+                                                    }`}
+                                            ><GatsbyImage
                                             image={
                                                 novita[novita.length - 1].immagine.imageFile
                                                     .childImageSharp.gatsbyImageData
                                             }
                                             alt={novita[novita.length - 1].immagine?.description || 'titolo'}
-                                        />}
+                                        /></Link>}
                                     </>)}
                                 </div>
                             </div>
@@ -201,13 +207,17 @@ const MegamenuDirectus = ({
                                                     summary(inEvidenzaLocalizzato.sottotitolo, 120)}
                                             </p>
                                         </div>
-                                        {inEvidenza[0].immagine?.imageFile && <GatsbyImage
+                                        {inEvidenza[0].immagine?.imageFile &&  <Link
+                                                to={`/${langTag[locale] === "it" ? "" : langTag[locale] + "/"
+                                                    }${Termini[locale].prodotti}/${inEvidenzaLocalizzato.slug
+                                                    }`}
+                                            ><GatsbyImage
                                             image={
                                                 inEvidenza[0].immagine.imageFile.childImageSharp
                                                     .gatsbyImageData
                                             }
                                             alt={inEvidenzaLocalizzato.titolo || 'titolo'}
-                                        />}
+                                        /></Link>}
                                     </div>
                                 )}
                             </div>
