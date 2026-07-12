@@ -27,16 +27,25 @@ function extractYouTubeId(raw) {
 
 const YoutubeEmbed = ({
     embedId,
-    locale = "it_IT", // Add locale prop
+    locale = "it_IT",
     consentRequired = true,
     cookieName = "myAwesomeCookieName2",
     aspectRatio = "56.25%",
-    placeholderText, // Will be set from translations if not provided
-    className = ""
+    placeholderText,
+    className = "",
+    autoplay = false,
+    loop = false,
+    background = false,   // 👈 NUOVO: autoplay + loop + muto + niente controlli, non interattivo
+    isHomePage = false
 }) => {
-    const [hasConsent, setHasConsent] = useState(!consentRequired);
+    // In modalità background forziamo autoplay, loop e niente consenso/placeholder
+    const autoPlay = autoplay || background;
+    const loopPlay = loop || background;
+    const requiresConsent = consentRequired && !background;
+
+    const [hasConsent, setHasConsent] = useState(!requiresConsent);
     const [finalId, setFinalId] = useState(null);
-    const [activated, setActivated] = useState(false);
+    const [activated, setActivated] = useState(!requiresConsent);
     const [isAPIReady, setIsAPIReady] = useState(false);
     const [player, setPlayer] = useState(null);
     const [error, setError] = useState(null);
@@ -78,14 +87,14 @@ const YoutubeEmbed = ({
     }, []);
 
     useEffect(() => {
-        // Legge consenso cookie
-        if (consentRequired && typeof window !== "undefined") {
+        // Legge consenso cookie (saltato in modalità background)
+        if (requiresConsent && typeof window !== "undefined") {
             const stored = window.localStorage.getItem(cookieName);
             if (stored === "true") {
                 setHasConsent(true);
             }
         }
-    }, [consentRequired, cookieName]);
+    }, [requiresConsent, cookieName]);
 
     useEffect(() => {
         setFinalId(extractYouTubeId(embedId));
@@ -101,19 +110,35 @@ const YoutubeEmbed = ({
             const newPlayer = new window.YT.Player(containerRef.current, {
                 videoId: finalId,
                 playerVars: {
-                    autoplay: 0,
-                    controls: 1,
+                    autoplay: autoPlay ? 1 : 0,
+                    controls: autoPlay ? 0 : 1,   // niente barra controlli in autoplay/background
                     modestbranding: 1,
                     rel: 0,
                     playsinline: 1,
+                    mute: autoPlay || loopPlay ? 1 : 0,  // muto obbligatorio per l'autoplay
+                    loop: loopPlay ? 1 : 0,
+                    playlist: loopPlay ? finalId : undefined,  // necessario perché il loop funzioni
+                    disablekb: background ? 1 : 0,   // niente tastiera in background
+                    fs: background ? 0 : 1,          // niente bottone fullscreen in background
+                    iv_load_policy: 3,               // niente annotazioni
                     origin: window.location.origin
                 },
                 events: {
                     onReady: (event) => {
-                        console.log('YouTube player ready');
+                        // in background assicura muto + play (alcuni browser lo richiedono)
+                        if (background) {
+                            try {
+                                event.target.mute();
+                                event.target.playVideo();
+                            } catch (e) { /* noop */ }
+                        }
                     },
                     onStateChange: (event) => {
-                        console.log('YouTube state change:', event.data);
+                        // fallback loop: se il video finisce, ricomincia
+                        if (loopPlay && event.data === window.YT.PlayerState.ENDED) {
+                            event.target.seekTo(0);
+                            event.target.playVideo();
+                        }
                     },
                     onError: (event) => {
                         console.error('YouTube player error:', event.data);
@@ -128,7 +153,7 @@ const YoutubeEmbed = ({
             console.error('Errore creazione player YouTube:', err);
             setError(t.videoErrorGeneric || 'Impossibile creare il player video');
         }
-    }, [isAPIReady, finalId, activated, hasConsent, player, t]);
+    }, [isAPIReady, finalId, activated, hasConsent, player, t, autoPlay, loopPlay, background]);
 
     // Cleanup
     useEffect(() => {
@@ -179,54 +204,61 @@ const YoutubeEmbed = ({
         );
     }
 
-    // Aggiungi una funzione dedicata per l'attivazione:
     const handleActivation = () => {
-        console.log('Attivando video...'); // Debug
+        console.log('Attivando video...');
         setActivated(true);
         if (!hasConsent) {
             setHasConsent(true);
         }
     };
 
-    // Placeholder se manca consenso o non ancora attivato
+    // Placeholder: tutta l'area è cliccabile, niente più bottone
+    // (saltato in background perché requiresConsent è false)
     if (!hasConsent || !activated) {
         return (
             <div
                 className={`video-responsive ${className}`}
+                onClick={handleActivation}
+                role="button"
+                tabIndex={0}
+                aria-label={defaultPlaceholderText}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleActivation();
+                    }
+                }}
                 style={{
                     position: "relative",
                     overflow: "hidden",
                     paddingBottom: aspectRatio,
-                    height: 0,
-                    background: "#000"
+                    height: isHomePage ? "100%" : 0,
+                    width: "100%",
+                    maxWidth: isHomePage ? "100%" : "1500px",
+                    margin: "0 auto",
+                    background: `#000 url(https://img.youtube.com/vi/${finalId}/maxresdefault.jpg) center / cover no-repeat`,
+                    cursor: "pointer"
                 }}
             >
-                <button
-                    type="button"
-                    onClick={handleActivation}
+                {/* icona play stile YouTube al centro */}
+                <svg
+                    height="48"
+                    viewBox="0 0 68 48"
+                    width="68"
                     style={{
                         position: "absolute",
                         top: "50%",
                         left: "50%",
                         transform: "translate(-50%, -50%)",
-                        background: "#ffffff",
-                        color: "#000",
-                        border: "2px solid #ccc",
-                        padding: "0.75rem 1rem",
-                        fontSize: "0.9rem",
-                        borderRadius: "4px",
-                        cursor: "pointer",
-                        transition: "all 0.2s ease"
-                    }}
-                    onMouseOver={(e) => {
-                        e.target.style.background = "#f0f0f0";
-                    }}
-                    onMouseOut={(e) => {
-                        e.target.style.background = "#ffffff";
+                        pointerEvents: "none"
                     }}
                 >
-                    {defaultPlaceholderText}
-                </button>
+                    <path
+                        d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z"
+                        fill="#f00"
+                    />
+                    <path d="M 45 24 L 27 14 L 27 34 Z" fill="#fff" />
+                </svg>
             </div>
         );
     }
@@ -239,7 +271,10 @@ const YoutubeEmbed = ({
                 position: "relative",
                 overflow: "hidden",
                 paddingBottom: aspectRatio,
-                height: 0,
+                height: isHomePage ? "100%" : 0,
+                width: "100%",
+                maxWidth: isHomePage ? "100%" : "1500px",
+                margin: "0 auto",
                 background: "#000"
             }}
         >
@@ -253,6 +288,20 @@ const YoutubeEmbed = ({
                     height: "100%"
                 }}
             />
+
+            {/* overlay trasparente: in background blocca hover/click sul player
+                così non compaiono controlli YouTube e non si può mettere in pausa */}
+            {background && (
+                <div
+                    style={{
+                        position: "absolute",
+                        inset: 0,
+                        zIndex: 2,
+                        cursor: "default"
+                    }}
+                />
+            )}
+
             {!player && isAPIReady && (
                 <div style={{
                     position: "absolute",

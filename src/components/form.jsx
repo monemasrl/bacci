@@ -372,7 +372,7 @@ const FormContatti = ({ lang, machines }) => {
                 </div>
                 <div className="box-form nazione-select">
                     <label htmlFor="telefono" style={{ display: 'none' }}>telefono</label>
-                    <input type="tel" id="telefono" name="telefono" placeholder={Termini[lang].formTelefono} />
+                    <input type="tel" id="telefono" name="telefono" placeholder={Termini[lang].formTelefono} required />
                     <label htmlFor="contattiNazione" style={{ display: 'none' }}>nazione</label>
                     <select className="countrySelect" name="country" id="contattiNazione" required>
                         <option value="">{lang === 'it_IT' ? 'Seleziona nazione' : 'Select country'}</option>
@@ -410,15 +410,27 @@ const FormContatti = ({ lang, machines }) => {
                     />
 
                 </div>
-                <label className="privacy" htmlFor="contattiPrivacy">
+        
+                <label className="privacy" htmlFor="marketing">
                     <input
                         type="checkbox"
-                        name="privacy"
-                        id="contattiPrivacy"
+                        name="marketing"
+                        id="marketing"
                         required
                     />
 
-                    <span>{Termini[lang].formPrivacyText1}<Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link>{Termini[lang].formPrivacyText3}</span>
+                    <span>{Termini[lang].formMarketing} - <Link to={`${linkToPrivacy[lang]}`}>{Termini[lang].formPrivacyText2}</Link></span>
+
+                </label>
+                        <label className="privacy" htmlFor="customer">
+                    <input
+                        type="checkbox"
+                        name="customer"
+                        id="customer"
+                        required
+                    />
+
+                    <span>{Termini[lang].formCustomer} - <Link to={`${linkToPrivacy[lang]}`}> {Termini[lang].formPrivacyText2}</Link></span>
 
                 </label>
                 <div className="box-submit">

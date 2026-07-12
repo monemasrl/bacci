@@ -894,10 +894,23 @@ section.container.repeater {
 
 /* ANCHOR: NEWS */
 section.container.news {
-  margin-top: 4rem;
+  max-width: 1540px;
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(280px, 460px));
+  gap: 1rem;
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(2, minmax(280px, 460px));
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 .news {
   gap: 2rem;
+
+  /* rimossi: flex, min-width, margin-top */
   .widget-news {
     &__sub {
       text-align: center;
@@ -913,9 +926,10 @@ section.container.news {
   }
   .col-3 {
     margin-top: 1rem;
-    border: 1px solid $grey;
-    max-width: 460px;
-    width: 100%;
+    border: 1px solid #59616e;
+    align-self: self-start;
+    height: 100%;
+
     .box-single-news {
       display: flex;
       flex-direction: column;
@@ -984,6 +998,7 @@ section.container.candidature {
   width: 100%;
   display: flex;
   justify-content: center;
+  grid-column: 1 / -1;
   li {
     background-color: $lightBrown;
     color: #fff;
@@ -1676,6 +1691,7 @@ section.container.candidature {
   width: 100%;
   font-size: 1rem;
   text-transform: uppercase;
+  pointer-events: none;
   @media #{$landscape} {
     font-size: 0.7rem;
   }
@@ -1694,6 +1710,7 @@ section.container.candidature {
     margin-top: 2rem;
     position: relative;
     font-size: 1.7rem;
+    pointer-events: auto;
   }
   &__box {
     font-family: $title;

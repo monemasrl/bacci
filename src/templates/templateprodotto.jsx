@@ -67,7 +67,7 @@ const Prodotto = ({ pageContext }) => {
                     <YoutubeEmbed
                         embedId={content.video}
                         locale={locale}
-                        consentRequired={true} />
+                        consentRequired={false} />
                 </Modale>}
 
                 <div className="container prodotto">
