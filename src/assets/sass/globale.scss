@@ -1655,6 +1655,9 @@ section.container.candidature {
 }
 .mySwiper2 .swiper-slide.swiper-slide-visible {
   opacity: 1 !important;
+  .sliderContent .buttonLink {
+    pointer-events: auto;
+  }
 }
 .mySwiper {
   height: 20%;
@@ -1710,7 +1713,7 @@ section.container.candidature {
     margin-top: 2rem;
     position: relative;
     font-size: 1.7rem;
-    pointer-events: auto;
+    pointer-events: none;
   }
   &__box {
     font-family: $title;

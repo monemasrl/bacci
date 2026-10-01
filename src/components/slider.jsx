@@ -111,7 +111,7 @@ function Slider({ locale }) {
         setIsPaused(false)
     }
 
-
+console.log('slidesTranslated', slidesTranslated)
     return (
         <>
             <div
